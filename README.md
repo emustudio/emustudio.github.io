@@ -20,17 +20,17 @@ are maintained separately, in files:
 - `_documentation/user/Gemfile`  
 - `_documentation/developer/Gemfile`
 
-It is good to have installed `bundler` application on your machine. Then, run the following command in each location
+It is good to have installed `bundle` application on your machine. Then, run the following command in each location
 where `Gemfile` is present:
 
 ```bash
-bundler install
+bundle install
 ```
 
 After successful execution, the website can be served locally with command:
 
 ```bash
-bundler exec jekyll s
+bundle exec jekyll s
 ``` 
 
 Then, navigate the browser to http://localhost:4000/.
