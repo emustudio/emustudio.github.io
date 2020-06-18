@@ -27,9 +27,6 @@ permalink: /roadmap/
 
 Most of the future plans of emuStudio are represented either by issues [at GitHub](https://github.com/vbmacher/emuStudio/issues),
 or they are kind-of ad-hoc. All Issues <em>should be</em> collected into [milestones](https://github.com/vbmacher/emuStudio/milestones).
- 
-Release dates are not set for any of the milestones. The reason is that it's still a hobby project and the time
-allocated for the project is quite low. Contribution is welcome.
 
 # 5 Latest activities
 
@@ -39,7 +36,7 @@ The following list shows 5 latest activities in emuStudio overall.
 
 <script>
   GitHubActivity.feed({
-    username: "vbmacher",
+    username: "emustudio",
     repo: "emuStudio",
     selector: "#feed",
     limit: 5, // optional

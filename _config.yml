@@ -7,7 +7,7 @@ data_dir:    ./_data
 
 # Serving
 baseurl: ""
-url: http://www.net.emustudio.net/
+url: https://www.emustudio.net/
 detach:  false
 port:    4000
 host:    0.0.0.0
@@ -33,7 +33,7 @@ future:      true
 unpublished: false
 
 # Plugins
-plugins:   [jekyll-sitemap]
+plugins:   [jekyll-sitemap, jekyll-octicons]
 repository: emustudio/emuStudio
 
 google_analytics_id: UA-3492956-5

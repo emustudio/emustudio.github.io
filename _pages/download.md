@@ -5,6 +5,49 @@ permalink: /download/
 ---
 
 <div class="jumbotron">
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Select version
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="#">0.40 (new)</a></li>
+      <li><a href="#">0.39</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Very first</a></li>
+    </ul>
+  </div>
+  
+  <div class="dropdown">
+    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown trigger
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dLabel">
+      ...
+    </div>
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table borderless">
+      <tr><th>Version:</th><td>0.40</td></tr>
+      <tr><th>Java requirements:</th><td><a href="https://jdk.java.net/archive/" target="_blank">Java 11</a></td></tr>
+      <tr><th>Release date:</th><td>TBD 2020</td></tr>
+      <tr><th>Release notes:</th><td><a href="">Release notes</a></td></tr>
+      <tr><th>Download:</th><td>
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                <a href="https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.zip" 
+                   class="button btn-link btn-lg"
+                   role="button"
+                   target="_blank">emuStudio-0.40.zip</a>
+                <a href="https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.tar" 
+                   class="button btn-link btn-lg"
+                   role="button"
+                   target="_blank">emuStudio-0.40.tar</a>
+      </td></tr>
+    </table>
+  </div>
+  
+  
   <div class="table-responsive">
     <table class="table borderless">
       <tr>

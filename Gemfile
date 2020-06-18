@@ -12,5 +12,6 @@ group :jekyll_plugins do
   gem 'jekyll', versions['jekyll']
   gem 'jekyll-sitemap', versions['jekyll-sitemap']
   gem 'jekyll-asciidoc', '2.1.1'
+  gem 'jekyll-octicons'
   gem 'asciidoctor-diagram'
 end
