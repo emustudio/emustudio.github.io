@@ -8,7 +8,12 @@ permalink: /plugin_basics/context
 
 # Plugin contexts
 
-Plugin contexts are answer to the question "how plugins communicate?". Plugin root classes are seen by emuStudio, but not by plugins. Instead, plugins can register their own custom objects (called "contexts") in the [ContextPool][contextPool]{:target="_blank"} object during plugin [instantiation][instantiation] (in the constructor). [ContextPool][contextPool]{:target="_blank"} is a shared container of all plugin contexts. Plugins can also obtain contexts of other plugins, during plugin [initialization][initialization]. Then, plugin communicate by calling regular Java methods on the plugin context objects, obtained from context pool.
+Plugin contexts are answer to the question "how plugins communicate?". Plugin root classes are seen by emuStudio,
+but not by plugins. Instead, plugins can register custom objects (called "contexts") in
+the [ContextPool][contextPool]{:target="_blank"} object during plugin [instantiation][instantiation]
+(in the constructor). [ContextPool][contextPool]{:target="_blank"} is a shared container of all plugin contexts.
+Plugins can also obtain contexts of other plugins, during plugin [initialization][initialization]. Then, plugin
+communicate by calling regular Java methods on the plugin context objects, obtained from context pool.
 
 [ContextPool][contextPool]{:target="_blank"} is not thread-safe, so all operations on it should be performed in the same thread which called method [Plugin.initialize()][pluginInitialize]{:target="_blank"}.
     
@@ -75,7 +80,9 @@ public class SampleDevice implements Device {
 }
 ```
 
-If the requested context could not be found, or the plugins were not connected, an exception is thrown. If it is vital for the plugin to obtain the context, it should let it pass to the caller, otherwise it should be catched.
+If the requested context could not be found, or the plugins were not connected, an exception is thrown.
+If the plugin needs to obtain the context, the plugin should let the exception propagate to the caller,
+otherwise it should be catched.
 
 
 [instantiation]: {{ site.baseurl }}/plugin_basics/loading.html#plugin-instantiation

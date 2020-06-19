@@ -104,7 +104,9 @@ Labels are optional. Instructions and pseudo-instructions and register names are
 Operands must be separated with comma (`,`). There exist several operand types, which represent so-called "address modes". Allowed address modes depend on the instruction. The possibilities are:
 
 - Implicit addressing: instructions do not have operands. They are implicit.
-- Register addressing: operands are registers. 8-bit general-purpose register names are: `A`, `B`, `C`, `D`, `E`, `H`, `L`. Register pairs have names: `BC`, `DE`, `HL`. Stack pointer is defined as `SP`, and program status word (used by `push` / `pop` instructions) as `AF`. Another 16-bit registers are defined as `IX`, `IY`.
+- Register addressing: operands are registers. 8-bit general-purpose register names are: `A`, `B`, `C`, `D`, `E`, `H`, `L`.
+  Register pairs have names: `BC`, `DE`, `HL`. The stack pointer is defined as `SP`, and program status word (used by `push` / `pop` instructions) as `AF`.
+  Other 16-bit registers are defined as `IX`, `IY`.
 - Register indirect addressing: for example, loading a memory value at address in `HL` pair: `LD A, (HL)`.
 - Immediate addressing: operand is the 8-bit constant. It can be also one character, enclosed in double-quotes.
 - Direct addressing: operand is either 8-bit or 16-bit constant, which is understood as the memory location (address). For example: `LD (1234h), HL`.
@@ -125,8 +127,8 @@ Immediate data or addresses can be defined in various ways:
 
 ## Expressions
 
-An expression is a combination of the data constants and operators. Expressions are evaluated in compile-time. Given any two expressions, they must not be defined in circular way.
-Expressions can be used anywhere a constant is expected.
+An expression is a combination of the data constants and operators. Expressions are evaluated in compile-time. Given
+any two expressions, they must not be defined circularly. Expressions can be used anywhere a constant is expected.
 
 There exist several operators, such as:
 
@@ -167,7 +169,8 @@ Operator priorities are as follows:
 | 7       | `\|`, `~`   | Binary
 |---
 
-All operators work with its arguments as if they were 16-bit. Their results are always 16-bit numbers. If there is expected 8-bit number, the result is automatically "cut" using operation `result AND 0FFh`. This may be unwanted behavior and might lead to bugs, but it is often useful so the programmer must ensure the correctness.
+All operators work with their arguments as if they were 16-bit. Their results are always 16-bit numbers.
+If there is expected an 8-bit number, the result is automatically "cut" using operation `result AND 0FFh`. This may be unwanted behavior and might lead to bugs, but it is often useful so the programmer must ensure the correctness.
 
 ## Defining data
 
@@ -198,13 +201,15 @@ The following table describes all possible data definition pseudo-instructions:
 
 ## Including other source files
 
-It is both useful and good practice to write modular programs. According to the [DRY][dry]{:target="_blank"} principle the repetitive parts of the program should be refactored out into functions or modules. Functionally similar groups of these functions or modules can be put into a library, reusable in other programs.
+It is both useful and good practice to write modular programs. According to the [DRY][dry]{:target="_blank"} principle,
+the repetitive parts of the program should be refactored out into functions or modules. Functionally similar groups of these functions or modules can be put into a library, reusable in other programs.
 
 The pseudo-instruction `include` exists for the purpose of including already written source code into the current program. The pseudo-instruction is defined as follows:
 
         INCLUDE "[filename]"
 
-where `[filename]` is a relative or absolute path to the file which will be included, enclosed in double-quotes. The file can include other files, but there must not be defined circular includes (compiler will complain).
+where `[filename]` is a relative or absolute path to the file which will be included, enclosed in double-quotes.
+The file can include other files, but there must not be defined circular includes (the compiler will complain).
 
 The current compilation address (denoted by `$` variable) after the include will be updated about the binary size of the included file.
 
@@ -228,7 +233,9 @@ Then compiling `b.asm` will result in:
 
 Syntax: `ORG [expression]`
 
-Sets the value to the `$` variable. It means that from now on, the following instructions will be placed at the address given by the `[expression]`. Effectively, it is the same as using `DS` pseudo-instruction, but instead of defining number of skipped bytes, we define concrete memory location (address).
+Sets the value to the `$` variable. It means that from now on, the following instructions will be placed at the address
+given by the `[expression]`. Effectively, it is the same as using `DS` pseudo-instruction, but instead of defining
+the number of skipped bytes, we define concrete memory location (address).
 
 The following two code snippets are equal:
 
@@ -250,7 +257,7 @@ Define a constant. The `[identifier]` is a mandatory name of the constant.
 
 `[expression]` is the 16-bit expression.
 
-The pseudo-instruction will define a constant - assign a name to given expression. The name of the constant then can be used anywhere where the constant is expected and the compiler will replace it with the expression.
+The pseudo-instruction will define a constant - assign a name to the given expression. The name of the constant then can be used anywhere where the constant is expected and the compiler will replace it with the expression.
 
 It is not possible to redefine a constant.
 
@@ -262,9 +269,9 @@ Define or re-define a variable. The `[identifier]` is a mandatory name of the co
 
 `[expression]` is the 16-bit expression.
 
-The pseudo-instruction will define a variable - assign a name to given expression. Then, the name of the variable can be used anywhere where the constant is expected.
+The pseudo-instruction will define a variable - assign a name to the given expression. Then, the name of the variable can be used anywhere where the constant is expected.
 
-It is possible to redefine a variable, which effectively means to reassign new expression to the same name and forgetting the old one. The reassignment is aware of locality, i.e. before it the old value will be used, after it the new value will be used.
+It is possible to redefine a variable, which effectively means to reassign a new expression to the same name and forgetting the old one. The reassignment is aware of locality, i.e. before it the old value will be used, after it the new value will be used.
 
 ## Conditional assembly
 
@@ -289,7 +296,8 @@ The `[identifier]` is a mandatory name of the macro.
 
 The `[operands]` part is a list of identifiers, separated by commas (`,`). Inside the macro, operands act as constants. If the macro does not use any operands, this part can be omitted.
 
-The namespace of the operand identifiers is macro-local, ie. the operand names will not be visible outside the macro. Also, the operand names can hide variables, labels or constants defined in the outer scope.
+The namespace of the operand identifiers is macro-local, ie. the operand names will not be visible outside the macro.
+Also, the operand names can hide variables, labels, or constants defined in the outer scope.
 
 The macros can be understood as "templates" which will be expanded in the place where they are "called". The call syntax is as follows:
 
@@ -297,9 +305,10 @@ The macros can be understood as "templates" which will be expanded in the place 
         [macro name] [arguments]
 
 
-where `[macro name]` is the macro name as defined above. Then, `[arguments]` are comma-separated expressions, in the order as the original operands are defined. The number of arguments must be the same as number of macro operands.
+where `[macro name]` is the macro name as defined above. Then, `[arguments]` are comma-separated expressions, in the
+order as the original operands are defined. The number of arguments must be the same as the number of macro operands.
 
-The macro can be defined anywhere in the program, even in some included file. Also, it does not matter in which place is called - above or below the macro definition.
+The macro can be defined anywhere in the program, even in any included file. Also, it does not matter in which place is called - above or below the macro definition.
 
 ### Examples
 

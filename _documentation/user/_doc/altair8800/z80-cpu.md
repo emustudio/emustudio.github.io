@@ -8,18 +8,21 @@ permalink: /altair8800/z80-cpu
 
 # Zilog Z80 CPU emulator
 
-It was possible to upgrade your Altair 8800 computer with a "better" 8-bit processor [Zilog Z80][z80]{:target="_blank"}. The processor was probably the most used 8-bit processor in 80's. It was backward compatible with 8080, and brought many enhancements. It was originally targeted for embedded systems, but very soon it become very popular and used for all kinds of computers - including desktop computers, arcade games, etc. Today the CPU is still used in some MP3 players, see e.g. [S1 MP3 Player][mp3]{:target="_blank"}.
+It was possible to upgrade your Altair 8800 computer with a "better" 8-bit processor [Zilog Z80][z80]{:target="_blank"}.
+The processor was probably the most used 8-bit processor in the '80s. It was backward compatible with 8080 and brought
+many enhancements. It was originally targeted for embedded systems, but it became popular very soon. Z80 was used for all
+kinds of computers - including desktop computers, arcade games, etc. Today the CPU is still used in some MP3 players, see e.g. [S1 MP3 Player][mp3]{:target="_blank"}.
 
 Main features of the emulator include:
 
-* Interpretation as emulation technique,
+* Interpretation as an emulation technique,
 * Correct real timing of instructions,
 * Ability to set clock frequency manually at run-time,
 * Emulation of all instructions including interrupts,
 * Disassembler implementation,
 * Ability to "dump" instruction history to console at run-time,
 * Support of breakpoints,
-* Ability of communication with up to 256 I/O devices,
+* The ability of communication with up to 256 I/O devices,
 * Status window shows all registers, flags, and run-time frequency.
 
 ## Configuration file
@@ -35,14 +38,16 @@ The following table shows all the possible settings of Zilog Z80 CPU plugin:
 
 ## Dumping executed instructions
 
-The CPU offers a quite unique feature, which is the ability to dump executed instructions as a sequence to the console. When enabled, then each executed instruction - together with content of flags and registers values after the execution are printed. This feature might be extremely useful in two cases:
+The CPU offers a unique feature, which is the ability to dump executed instructions as a sequence to the console.
+When enabled, then each executed instruction - together with the content of flags and register values after the
+execution is printed. This feature might be extremely useful in two cases:
 
 1. Reverse engineering of some unknown software
-2. It allows to build tools for automatic checking of register values during the emulation, when performing automatic emulation.
+2. It allows us to build tools for automatic checking of register values during the emulation when performing automatic emulation.
 
-In order to enable this feature, please see the section "Configuration file".
+To enable this feature, please see the section "Configuration file".
 
-For example, let's take one of the examples which computes a reverse text:
+For example, let's take an example which computes a reverse text:
 
 ```
 ; Print reversed text
@@ -185,7 +190,9 @@ output:
 8687 | PC=041b |            halt |        76  || regs=04 b1 00 b8 04 a5 00 61  IX=0000 IY=0000 IFF=0 I=00 R=34 | flags= ZH N  | SP=ffff | PC=041c
 ```
 
-The dump format consists of lines, each line represents one instruction execution. The line is separated by `|` chars, splitting it into so-called sections. Sections before the sequence `||` represent state *before* instruction execution, and sections after it represent the state *after* instruction execution. Particular sections are described in the following table.
+The dump format consists of lines, each line represents one instruction execution. The line is separated by `|` chars,
+splitting it into so-called sections. Sections before the sequence `||` represent the state *before* instruction execution,
+and sections after it represent the state *after* instruction execution. Particular sections are described in the following table.
 
 |---
 |Column | Description

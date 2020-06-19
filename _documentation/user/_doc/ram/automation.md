@@ -8,7 +8,7 @@ permalink: /ram/automation
 
 # Automation
 
-RAM is one of computers which supports automatic emulation. In general, automatic emulation can be interactive, or not interactive. In case of the RAM emulator, only non-interactive emulation is useful. It is because during emulation it is not possible to interact (e.g. pass new input to the input tape) in any way.
+RAM is one of the computers which supports automatic emulation. In general, automatic emulation can be interactive, or not interactive. In the case of the RAM emulator, only non-interactive emulation is useful. It is because during emulation it is not possible to interact (e.g. pass new input to the input tape) in any way.
 
 Changes to any abstract tapes are written to the corresponding output file (see abstract tape documentation for more information). 
 

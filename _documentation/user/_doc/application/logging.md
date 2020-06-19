@@ -8,10 +8,11 @@ permalink: /application/logging
 
 # Logging
 
-No software is bug-free in these days, and not a person is perfect. Sometimes it might happen that emuStudio is not working as expected, either it does not start (with weird message on screen), or it fails while running.
+No software is bug-free in these days, and not a person is perfect. Sometimes it might happen that emuStudio is not
+working as expected, either it does not start (with a weird message on screen), or it fails while running.
 
 For that purpose, everything important is being logged. If you encounter some problem and either want to fix it or report it, the logs, except steps to reproduce are the most important thing.
-By default, logging is written to the standard output (console). In case of a problem it is a good practice to enable file logging.
+By default, logging is written to the standard output (console). In case of a problem, it is a good practice to enable file logging.
  
 To enable file logging, open `logback.xml` file located in the root directory of emuStudio. Find a section named `<root ..>`, and change `appender-ref` from `STDOUT` to `FILE` as follows:
 

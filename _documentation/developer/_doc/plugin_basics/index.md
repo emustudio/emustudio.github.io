@@ -8,7 +8,7 @@ permalink: /plugin_basics/
 
 # Plugin basics
 
-Each plug-in is a separate Java module (source code can be in any JVM language however!), compiled into single JAR file.
+Each plugin is a separate Java module (source code can be written in any JVM language), compiled into a single JAR file.
 The JAR file is then placed in the proper directory (e.g. `compiler/`, `cpu/`, `memory/`, and `device/`) in emuStudio
 installation.
 
@@ -16,8 +16,8 @@ In the source code, plugins are located in `plugins/` subdirectory, then branche
 
 ## Naming conventions
 
-Plug-in names are derived from JAR file names. A name should be picked by a convention, different by plugin type.
-General idea is that from the JAR file name it should be clear what the plugin is about.
+Plugin names are derived from JAR file names. A naming convention defines how the name should be picked. Each plugin
+type has a different naming convention. General idea is that the JAR file name should say clearly what the plugin is about.
  
 A plugin JAR file name should be in the form of: 
 
@@ -27,7 +27,7 @@ A plugin JAR file name should be in the form of:
 
 where `[specific abbreviation]` means some custom abbreviation of the real world "device" the plugin emulates or is part of,
 optionally preceded with the manufacturer (e.g. `intel-8080`, `lsi-adm-3A`, etc.).
-Then `[plugin type]` follows, but in a form as it is shown in the following table:
+Then `[plugin type]` follows, but in a form, as it is shown in the following table:
 
 {:.table-responsive}
 {:.table .table-stripped}
@@ -44,13 +44,13 @@ Then `[plugin type]` follows, but in a form as it is shown in the following tabl
 |===
 
 
-Plug-in names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
+Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
 just for word separation (e.g. `zilogZ80`).
 
 ## Plugin structure
 
 A plugin must contain a public class which is considered as _plugin root_. The plugin root is automatically found, then
-instantiated by emuStudio, then assigned into virtual computer and used.
+instantiated by emuStudio, then assigned into a virtual computer and used.
 
 A class which is to be plugin root, must:
 
@@ -72,12 +72,12 @@ public class SamplePlugin implements CPU {
 }
 ```
 
-If there are more classes which implements some plugin interface, just one of them has to be annotated with `PluginRoot`.
+If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
 If there are more classes like this, the plugin might not work correctly.  
 
 The constructor parameters have the following meaning:
 
-- `pluginId` is a unique plugin identification, assigned by emuStudio. Some operations require it as input argument.
+- `pluginId` is a unique plugin identification, assigned by emuStudio. Some operations require it as an input argument.
 - `emustudio` is a runtime API implementation, provided by emuStudio application, to be used by plugins.
 - `settings` are plugin's settings. A plugin can use it for reading/writing its custom or emuStudio settings.
   Updated settings are saved immediately in the configuration file, in the same thread.
@@ -85,7 +85,7 @@ The constructor parameters have the following meaning:
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either
-bundled with the plugin, or the location should be present in `Class-Path` attribute in the plugin's `Manifest` file.
+bundled with the plugin, or the location should be present in the `Class-Path` attribute in the plugin's `Manifest` file.
 
 Some libraries are pre-loaded by emuStudio and those shouldn't be included in plugin JAR file:
 
@@ -94,15 +94,18 @@ Some libraries are pre-loaded by emuStudio and those shouldn't be included in pl
 - [SLF4J logging][slf4j]{:target="_blank"}
 - [args4j][args4j]{:target="_blank"} for command-line parsing
 
-Plugins which want to use the dependencies above, should specify them as "provided" in the project.
+Plugins that want to use the dependencies above should specify them as "provided" in the project.
 
 ## Incorporating a plugin in emuStudio
 
-New plugin is another Gradle submodule, which should be "registered" in `settings.gradle` file.
+A new plugin is another Gradle submodule, which should be "registered" in `settings.gradle` file.
 
-If a plugin is part of a new computer, the new configuration should be created (in [TOML][toml]{:target="_blank"} format) and put in `application/src/main/files/config` directory.
+If a plugin is part of a new computer, the new configuration should be created (in [TOML][toml]{:target="_blank"} format)
+and put in `application/src/main/files/config` directory.
 
-Plugin can have static example files, or shell scripts. Plugin must copy them into build directory, e.g. `plugins/compiler/as-8080/build/libs/examples` or `plugins/compiler/as-8080/build/libs/scripts`. Then, in `application/build.gradle` are sections marked with `// Examples` or `// Scripts` comments:
+Plugin can have static example files, or shell scripts. Plugin must copy them into build directory,
+e.g. `plugins/compiler/as-8080/build/libs/examples` or `plugins/compiler/as-8080/build/libs/scripts`.
+Then, in `application/build.gradle` are sections marked with `// Examples` or `// Scripts` comments:
 
 ```groovy
 ...

@@ -8,9 +8,9 @@ permalink: /rasp/rasp-cpu
 
 # CPU "rasp-cpu"
 
-RASP CPU is the core of the RASP virtual computer. Its purpose is to execute RASP program composed of RASP instructions which is stored in the RASP memory. The CPU is therefore connected with the memory. 
+RASP CPU is the core of the RASP virtual computer. Its purpose is to execute the RASP program composed of RASP instructions which are stored in the RASP memory. The CPU is therefore connected with the memory. 
 
-To run 'interactive' RASP programs (programs reading user input and writing something to the output), input and output tapes are needed. They are included there in default RASP configuration.
+To run 'interactive' RASP programs (programs reading user input and writing something to the output), input and output tapes are needed. They are included in the default RASP configuration.
 
 ## Supported instructions
 
@@ -43,11 +43,11 @@ RASP CPU emulator supports the following instructions:
 
 There is a simple GUI window provided for the RASP CPU. It displays the two most important values: 
 
-- current value of the accumulator (`R0` register)
-- current value of the instruction pointer (`IP`) which points to current position within the executed program 
+- the current value of the accumulator (`R0` register)
+- the current value of the instruction pointer (`IP`) which points to the current position within the executed program 
 
 Also, information about the current RUNNING STATUS is displayed.
 
-Following figure shows a screenshot:
+The following figure shows a screenshot:
 
 ![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/statusPanel.png)

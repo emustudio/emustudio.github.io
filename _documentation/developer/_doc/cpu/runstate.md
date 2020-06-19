@@ -12,7 +12,7 @@ Emulator "life" is a state machine. A state machine reacts on asynchronous event
 
 The state machine, how it should work, can be seen in the following diagram:
 
-![runstate]({{ site.baseurl }}/cpu/images/runstate.svg)
+![runstate]({{ site.baseurl }}/assets/runstate.svg)
 
 The states of the state machine are encoded into an enum [CPU.RunState][runstate]{:target="_blank"} in emuLib:
 

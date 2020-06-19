@@ -8,8 +8,8 @@ permalink: /ssem/as-ssem
 
 # Assembler "as-ssem"
 
-Assembler "as-ssem" is a simple language which compiles SSEM instructions into binary output and SSEM memory.
-Source code has `.ssem` file extension, and binary form has `.bin` file extension.
+Assembler "as-ssem" is a simple language that compiles SSEM instructions into binary output and SSEM memory.
+Source code has `.ssem` file extension, and binary form has a `.bin` file extension.
 
 The instructions table follows (modified from [Wikipedia][programming]{:target="_blank"}):
 
@@ -38,24 +38,24 @@ The instruction format is as follows:
 
 
 where bits `LLLLL` denote a "line", which is basically the memory address - index of a memory cell. It can be understood
-as instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).
+as an instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).
 
 ## Language syntax
 
 ### New-lines
 
-New-line character (LF, CR, or CRLF) are delimiters of instructions, and the last character of the program.
+New-line character (LF, CR, or CRLF) are delimiters of instructions and the last character of the program.
 Successive empty new-line characters will be ignored.
 
 ### Instructions
 
-Assembler will support all forms of instructions. All instructions must start with a line number. For example:
+Assembler supports all forms of instructions. All instructions must start with a line number. For example:
 
     01 LDN 20
 
 ### Literals / constants
 
-Raw number constants can be defined in separate lines using special preprocessor keywords. The first one is `NUM xxx`, where `xxx` is a number in either decimal or hexadecimal form. Hexadecimal format must start with prefix `0x`. For example:
+Raw number constants can be defined in separate lines using special preprocessor keywords. The first one is `NUM xxx`, where `xxx` is a number in either decimal or hexadecimal form. The hexadecimal format must start with prefix `0x`. For example:
 
     00 NUM 0x20
     01 NUM 1207943145
@@ -72,7 +72,7 @@ For all constants, the following rules hold. Only integral constants are support
 
 ### Comments
 
-Only one-line comments will be supported, but of various forms. Generally, comment will be everything starting with some prefix until the end of the line. Comment prefixes are:
+One-line comments are supported in various forms. Generally, the comment is everything starting with some prefix until the end of the line. Comment prefixes are:
 
 - Double-slash (`//`)
 - Semi-colon (`;`)

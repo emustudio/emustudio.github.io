@@ -8,11 +8,15 @@ permalink: /plugin_basics/loading
 
 # Loading and initialization
 
-Instantiating and initializing plugins is done by emuStudio application in one thread. All plugins share one class-loader, which creates a potential risk of naming conflicts. Therefore, each classes and resources should be put in packages with unique name.  
+Instantiating and initializing plugins is done by emuStudio application in one thread. All plugins share one class-loader,
+which creates a potential risk of naming conflicts. Therefore, each class and resource should be put in packages with
+a unique name.  
 
 ## Plugin instantiation
 
-Plugin JAR files are unzipped and loaded into memory as one bunch mixed together. The class loader will recognize all found classes and resources. Dependencies explicitly specified in manifest files are recognized and loaded as well. In case of circular dependencies, plugins loading will fail.
+Plugin JAR files are unzipped and loaded into memory as one mixed bunch. The class loader will recognize all found
+classes and resources. Dependencies explicitly specified in manifest files are recognized and loaded as well. In case
+of circular dependencies, plugins loading will fail.
 
 This process happens just once in the beginning, so adding another plugin at run-time is not possible. The result of this phase is that all plugin classes are loaded in memory and all plugin roots are instantiated.
 
@@ -24,7 +28,7 @@ Another chapter talks about plugin contexts in more detail.
 
 ## Plugin initialization
 
-After plugins are instantiated, they are being "initialized". In fact, it means just that emuStudio will call [Plugin.initialize()][pluginInitialize]{:target="_blank"} method on each plugin. The plugin initializations are ordered by plugin type:
+After plugins are instantiated, they are being "initialized". It means just that emuStudio will call [Plugin.initialize()][pluginInitialize]{:target="_blank"} method on each plugin. The plugin initializations are ordered by plugin type:
 
 1. Compiler
 2. CPU

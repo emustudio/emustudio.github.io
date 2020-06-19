@@ -8,7 +8,9 @@ permalink: /altair8800/software
 
 # Original software for Altair8800
 
-Since Altair8800 virtual computer emulates a real machine, it's possible to use real software written for the computer. Several operating systems and programs can be run on Altair. There are many disk and memory images of those systems available online, but only some were tested and proved to work. Some of the available online sites are:
+Since Altair8800 virtual computer emulates a real machine, it's possible to use real software written for the computer.
+Several operating systems and programs can be run on Altair. There are many disk and memory images of those systems
+available online, but only some were tested and proved to work. Some of the available online sites are:
 
 - [Peter Schorn][schorn]{:target="_blank"}
 - [Altair clone][aclone]{:target="_blank"}
@@ -17,7 +19,8 @@ Since Altair8800 virtual computer emulates a real machine, it's possible to use 
 
 If you want to manipulate with disk images, please follow this [link][cpmtools]{:target="_blank"}.
 
-Most of the disk images were borrowed from great [simh][simh]{:target="_blank"} emulator. It's obvious that some images were modified for simh. On the other hand, it's not that obvious if the original images would actually work at all.
+Most of the disk images were borrowed from great [simh][simh]{:target="_blank"} emulator. Some of them were modified for simh.
+On the other hand, it's not that obvious if the original images worked at all.
 
 Tested and fully-functional images were:
 
@@ -50,7 +53,7 @@ The combination of CP/M and computers with S-100 bus (8-bit computers sharing so
 
 Tested image has name `altcpm.dsk`. It can be downloaded at [this link][altsw]{:target="_blank"}.
 
-In order to run CP/M, please follow these steps:
+To run CP/M, please follow these steps:
 
 1. Mount `altcpm.dsk` to drive `A:` in MITS 88-DISK.
 2. In emuStudio jump to location `0xFF00`
@@ -134,7 +137,7 @@ In this section will be presented how to boot MITS BASIC version 4.1. There is p
 
 As it is written in [simh][simh]{:target="_blank"} manual: MITS BASIC 4.1 was the commonly used software for serious users of the Altair computer. It is a powerful (but slow) BASIC with some extended commands to allow it to access and manage the disk. There was no operating system it ran under.
 
-After boot, you must mount the disk with `MOUNT 0`. Then, command `FILES` will show all files on the disk. In order to run a file, run command `RUN "file"`. Manual can be found at [this link][basic]{:target="_blank"}.
+After boot, you must mount the disk with `MOUNT 0`. Then, command `FILES` will show all files on the disk. To run a file, run command `RUN "file"`. Manual can be found at [this link][basic]{:target="_blank"}.
 
 It is assumed you have either `examples/altair8800/boot.bin` or `examples/altair8800/mboot.bin` mounted in the operating memory.
 

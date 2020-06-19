@@ -8,40 +8,22 @@ permalink: /getting_started/documenting
 
 # Documenting
 
-There are two types of documentation - user and developer. Each version of emuStudio uses separate Jekyll static
-site project, for each documentation type. The structure of the documentation is as follows:
+There are two types of documentation - user and developer. Only the current version of the documentation is maintained.
+Older versions can be accessed from git. Both types of documentation use separate Jekyll static
+site project. The structure of the documentation is as follows:
 
 ```
 _documentation
   |
   + developer
-  |  |
-  |  + 0.39
-  |  |  |
-  |  |  + ... jekyll static site ...
-  |  |
-  |  + 0.40
-  |  |  |
-  |  |  + ... jekyll static site ...
-  |  |
-  |  + ... etc.
-  |  
+  |  + ... jekyll static site ...
   + user
-     |
-     + 0.39
-     |  |
-     |  + ... jekyll static site ...
-     |
-     + 0.40
-     |  |
-     |  + ... jekyll static site ...
-     |
-     + ... etc.
+     + ... jekyll static site ...
 ```
 
-Based on which version and documentation type, you can navigate to the right place where to contribute. The documentation
-is built manually, not by GitHub pages. The reason for having different jekylls is that the documentation uses different
-template than the main web site, and those cannot be combined easily.
+Based on the type of documentation, you can navigate to the right place where to contribute. The documentation
+is built manually, not by GitHub pages. The reason for having separate Jekyll projects is that the documentation
+uses a different template than the main web site, and those cannot be combined easily.
 
 When you update the documentation, please run script:
 
@@ -55,7 +37,7 @@ rendered documentation as well.
 ## User documentation
 
 Plugins are usually part of virtual computers. Therefore, virtual computers are "chapters" in the documentation in a
-separate directory (e.g. `_documentation/user/0.40/altair8800`, and plugins are described there, in separate file (e.g.
+separate directory (e.g. `_documentation/user/0.40/altair8800`, and plugins are described there, in a separate file (e.g.
 `standard-mem.md`). The documentation of virtual computer should document all possible configurations, and all possible
 plugins, even if their use is optional (which should be documented as well).
 
@@ -64,9 +46,9 @@ of what's going under the hood. Keep the information useful. Do not bloat text w
  
 ### Structure 
  
-Virtual computer documentation should start with short introduction:
+Virtual computer documentation should start with a short introduction:
 
-- How the computer is related to the computer history?
+- How the computer is related to computer history?
 - Is it abstract or real?
 - The purpose of the computer
 - Possible computer configurations
@@ -79,12 +61,16 @@ Then, every plug-in should be described, in a separate file, in the following or
 - memory
 - devices
 
-Last chapters should be devoted to emulation automation and debugging problems (e.g. how to do some analysis when something doesn't work).
+The last chapters should be devoted to emulation automation and debugging problems (e.g. how to do some analysis when
+something doesn't work).
 
 ## Developer's documentation
 
-Developer documentation (as you read this one) focuses on introducing new contributors to emuStudio internals and plugin development. You can contribute by fixing or extending existing one. 
+Developer documentation (as you read this one) focuses on introducing new contributors to emuStudio internals and plugin
+development. You can contribute by fixing or extending the existing plugin. 
 
-Developer documentation of particular plugin is however optional. Specific plugin documentation will not be published online. It is up to the plugin author to choose the documentation format.
-As for advice, only technical details should be explained, not code structure. Majority of things which the documentation should include are the "why"s instead
-of "how"s.
+Developer documentation of a particular plugin is optional. The reason is that plugin documentation will not be
+published separately, just as part of the documentation of the whole computer.
+ 
+In the developer documentation, only technical details should be explained, not the structure of the plugin code. Majority
+of things which the documentation should include are the "why"s instead of "how"s.

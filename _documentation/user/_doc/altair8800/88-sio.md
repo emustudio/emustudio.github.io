@@ -62,7 +62,8 @@ Usually, attached devices were:
 - line printer
 - paper tape reader/punch
 
-In current implementation of Altair 8800 emulator, the only suitable device which can be attached to the board is terminal ADM-3A from Lear Siegler, Inc and which is described in its own section.
+In current implementation of Altair 8800 emulator, the only suitable device which can be attached to the board is
+terminal ADM-3A from Lear Siegler, Inc and which is described in the particular section.
 
 ## Configuration file
 

@@ -8,9 +8,9 @@ permalink: /ssem/ssem-cpu
 
 # SSEM CPU emulator
 
-SSEM is one of the first implementations of the von-Neumann design of a computer. It contained control unit, arithmetic-logic unit and I/O subsystem (CRT display).
+SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit, arithmetic-logic unit, and I/O subsystem (CRT display).
 
-Speed of CPU is around 700 instructions per second.
+The speed of CPU is around 700 instructions per second.
 
 The architecture of our SSEM CPU emulator will look as follows (below is Display and Memory just to show how it is connected in overall):
 
@@ -18,7 +18,7 @@ The architecture of our SSEM CPU emulator will look as follows (below is Display
 
 ## Status panel
 
-The status panel is the interaction point between CPU and the user. With it, the user can be allowed to modify or view the internal status of the CPU emulator. This is very handy when learning or checking how it works, what the registers' values really are (and compare them with those shown on a display), etc. The status panel shows the following:
+The status panel is the interaction point between the CPU and the user. With it, the user can be allowed to modify or view the internal status of the CPU emulator. This is very handy when learning or checking how it works, what the registers' values are (and compare them with those shown on a display), etc. The status panel shows the following:
 
 - CPU run state
 - Internal state: registers or possibly portion of memory
@@ -30,9 +30,9 @@ SSEM CPU status panel looks as follows:
 
 ## Automatic emulation
 
-The optional step is to change a behavior slightly when user runs the automatic emulation. The memory content is important enough to be put in a file in case of automatic emulation. It has just 32 rows. It can be useful to see the content of the accumulator and CI register after the emulation finishes as well. 
+The optional step is to change a behavior slightly when the user runs the automatic emulation. The memory content is important enough to be put in a file in case of automatic emulation. It has just 32 rows. It can be useful to see the content of the accumulator and CI register after the emulation finishes as well. 
 
-After each emulation "stop" - no matter the reason of stopping, if before the emulation was running, a "snapshot" of the emulator state is performed - registers `Acc`, `CI` and memory content are saved to the file, called `ssem.out`.
+After each emulation "stop" - no matter the reason for stopping, if before the emulation was running, a "snapshot" of the emulator state is performed - registers `Acc`, `CI`, and memory content is saved to the file, called `ssem.out`.
 
 
 The emulator automation can be run as follows:

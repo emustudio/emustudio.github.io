@@ -8,15 +8,15 @@ permalink: /getting_started/contributing
 
 # How to contribute
 
-There are basically two options how to contribute. Either you fix or enhance the application or plugins, or
-you implement completely new computer which can be used with emuStudio. The latter does not really mean to contribute,
+There are two options on how to contribute. Either you fix or enhance the application or plugins, or
+you implement a completely new computer which can be used with emuStudio. The latter is not a contribution
 unless it is included in the original emuStudio repository.
 
-Each contribution "topic" should have a separate issue on GitHub, where can be held discussions. Contributors
-should fork the repository, and derive their feature branches from `development` branch. 
+Each contribution topic should have a separate issue on GitHub, where discussions can be held. Contributors
+should fork the repository, and derive their feature branches from the `development` branch. 
 
 When you are satisfied with your work, make a [pull request][pull-requests]{:target="_blank"} to
-the main repository, into branch `development`. Then, some reviewer will take a look on the PR, and can suggest some
+the main repository, into branch `development`. Then, some reviewers will take a look at the PR, and can suggest some
 changes, or will merge it.
 
 Commit messages should be in the form of:
@@ -25,18 +25,20 @@ Commit messages should be in the form of:
 [#XXX] Description of commit
 ``` 
 
-where `#XXX` represents the issue number. Then, the commit will be shown as a comment in the issue and can be properly
-tracked.
+where `#XXX` represents the issue number. Then, the commit will appear as a comment in the issue, so it can be
+properly tracked.
 
 ## Code style
 
-Code should be "clean", in terms of sticking to various good practices and principles (e.g. [SOLID][solid]{:target="_blank"}, [GRASP][grasp]{:target="_blank"}, [YAGNI][yagni]{:target="_blank"}, [KISS][kiss]{:target="_blank"}, [DRY][dry]{:target="_blank"}, etc.).
+Code should be "clean", in terms of sticking to various good practices and principles (e.g. [SOLID][solid]{:target="_blank"},
+[GRASP][grasp]{:target="_blank"}, [YAGNI][yagni]{:target="_blank"}, [KISS][kiss]{:target="_blank"},
+[DRY][dry]{:target="_blank"}, etc.).
 
 Code use 4 spaces.
 
 ## Definition of DONE
 
-There are some requirements which need to be fulfilled before we can say that the contribution is "done" and can be
+Some requirements need to be fulfilled before we can say that the contribution is "done" and can be
 accepted or released. The list is very simple:
 
 - Code should be clean, conforming to the code style

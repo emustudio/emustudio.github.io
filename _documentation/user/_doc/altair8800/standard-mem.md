@@ -10,13 +10,13 @@ permalink: /altair8800/standard-mem
 
 This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can benefit from the following basic properties:
 
-- A memory cell has size of 1 byte (8 bits)
+- A memory cell has a size of 1 byte (8 bits)
 - Memory cells are linearly ordered (sequential)
-- Each memory cell is accessible by unique address, representing the index of the memory cell, if the memory is imagined as an array of cells
+- Each memory cell is accessible by a unique address, representing the index of the memory cell if the memory is imagined as an array of cells
 
 Besides, the memory supports these additional features:
 
-- Setting up ROM (read only memory) ranges
+- Setting up ROM (read-only memory) ranges
 - Changing memory size; by default it is 64kB
 - Support of bank switching
 
@@ -26,7 +26,8 @@ There are also some "interactive" features:
 - Ability to automatically load a memory image at startup
 - Intuitive control using keystrokes, and nice visual presentation of the data
 
-This operating memory is (for now) used only in 8-bit emulator of MITS Altair8800. However it is possible to develop an emulator which can benefit from it.
+This operating memory is (for now) used only in an 8-bit emulator of MITS Altair8800. However, it is possible to develop
+an emulator that can benefit from it.
 
 ## GUI overview
 
@@ -45,8 +46,9 @@ To open the memory GUI (graphical user interface), click at the right-most icon 
 - *I*: If the memory has set up <<STANDARD-MEM_BANKS,memory banks>>, it is possible to change the view to different bank. Switching in here has no effect on the emulator and on the active bank.
 - *J*: Displays the data of the selected cell in various forms.
 
-Generally, it is possible to move around the cells using keystrokes (arrows). If user presses some other letter/number key, a small text field appears allowing to edit the current value. When editing
-is finished, user can press ENTER key to confirm it, or ESC key to discard the editing.
+Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
+letter/number key, a small text field appears allowing to edit the current value. When editing
+is finished, the user can press ENTER key to confirm it, or ESC key to discard the editing.
 
 ## Memory settings
 
@@ -64,17 +66,19 @@ ROM areas and memory bank-switching is explained in the following sections.
 
 ### ROM areas
 
-Some "controllers" - used as embedded devices - usually logically organize memory into areas, some of which are read only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to specific addresses, so the programmer can access them.
+Some "controllers" - used as embedded devices - usually logically organize memory into areas, some of which are read-only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to specific addresses, so the programmer can access them.
 
-Standard operating memory plugin emulates this behavior. It allows to define ROM areas which represent read only memory. There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in ROM area cannot be changed from software running on the emulator. All writes to the memory will be ignored.
+The standard operating memory plugin emulates this behavior. It allows us to define ROM areas that represent read-only memory.
+There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area cannot be changed from software running on the emulator. All writes to the memory will be ignored.
 
-Manually, as a user it is possible to change the values, but only by loading new memory image. Editing the value will not work.
+Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing the value will not work.
 
 If a ROM range is defined, it is possible to remove only a part of it, effectively splitting the range and correcting their boundaries. For example, if there is defined a ROM range from `0x0A - 0x64` (see the image above), then it is possible to remove a range e.g. `0x32 - 0x46`, which is the part of defined ROM area. Then, the original ROM area is split into two parts - first will be a range from `0x0A - 0x31`, and the second from `0x47 - 0x64`.
 
 ### Memory bank-switching
 
-This technique was invented as a workaround for a problem when the address space of a processor was smaller than memory size. In order to overcome this issue, memory was logically split into many regions of size equal to the processor address space. These regions are called "banks".
+This technique was invented as a workaround for a problem when the address space of a processor was smaller than memory size.
+To overcome this issue, memory was logically split into many regions of size equal to the processor address space. These regions are called "banks".
 
 Physically, banks could refer to the same memory, but they could be also different memories (e.g. external cartridges), and the bank-switching involved switching the active memory.
 
@@ -106,7 +110,8 @@ The following table shows all the possible settings of Standard operating memory
 
 ## Using memory in custom computers
 
-This section is for developers of emulators. If you do not plan to create custom virtual computers, you can safely skip this section. In order to get started with developing plugins for emuStudio, please read tutorial "Developing emuStudio Plugins".
+This section is for developers of emulators. If you do not plan to create custom virtual computers, you can safely skip this section.
+To get started with developing plugins for emuStudio, please read [developer documentation][developerDoc]{:target="_blank"}.
 
 As it was mentioned in the earlier sections, the Standard operating memory plugin can be used in other computers, too. Besides standard operations which are provided by `net.emustudio.emulib.plugins.memory.MemoryContext` interface, it provides custom context API, enabling to use more features - e.g. bank-switching.
 
@@ -210,3 +215,4 @@ public interface StandardMemoryContext extends MemoryContext<Short> {
 ```
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
+[developerDoc]: /documentation/developer/introduction/

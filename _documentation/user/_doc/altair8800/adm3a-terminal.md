@@ -20,7 +20,8 @@ Besides, the emulator uses custom font colored green, with anti-aliasing support
 
 ## Keyboard
 
-Terminal could generate always 128 ASCII characters (upper-case, lower-case, punctuation and numbers). Besides, it could generate special control characters which had effect on the current cursor position and were not sent to CPU.
+Terminal could generate always 128 ASCII characters (upper-case, lower-case, punctuation and numbers). Besides, it could
+generate special control characters which affected current position of the cursor and were not sent to CPU.
 
 Emulated device allows to generate almost anything what your host keyboard can give. It is only up to font which characters it can display. The font cannot display any special non-US characters used in various languages. Just classic ASCII.
 

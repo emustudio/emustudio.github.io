@@ -6,7 +6,7 @@ permalink: /introduction/
 
 # Introduction
 
-This guide shall help you, the developer, to write your own virtual computer for emuStudio. API is designed for simplicity and tries to save the developer from solving the most common problems. Created emulators can mimic either real or abstract computers. I hope you will have fun!
+This guide shall help you, the developer, to write your virtual computer for emuStudio. API is designed for simplicity and tries to save the developer from solving the most common problems. Created emulators can mimic either real or abstract computers. I hope you will have fun!
 
 There exist some sister projects, which will be used by the developer during your programming journey. The following
 section will provide more information. 
@@ -20,7 +20,7 @@ Javadoc can be opened [here][emulib]{:target="_blank"}.
 ## edigen
 
 Edigen is CPU instruction decoder and disassembler generator. It takes the burden of the common disassembling/decoding
-code from the developer when programming emulator. The project website, which includes documentation,
+code from the developer when programming an emulator. The project website, which includes documentation,
 is [here][edigen]{:target="_blank"}. 
 
 ## Other documentation

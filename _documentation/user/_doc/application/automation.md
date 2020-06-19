@@ -25,8 +25,8 @@ Argument `--waitmax 5000` tells emuStudio that the emulation should not last for
 
 ## Analyzing the results
 
-An important part of the analysis of result of the automatic emulation is the log saying what happened. By default, each run of automatic emulation creates (overwrites) a log file called
+An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default, each run of automatic emulation creates (overwrites) a log file called
 `automation.log`, located in `logs/` directory.
 
-The log file is in plaintext format and contains messages which appeared in log during the emulation.
+The log file is in plaintext format and contains messages which appeared in the log during the emulation.
 The log file format can be customized, see "Logging" chapter for more details. 

@@ -8,7 +8,9 @@ permalink: /altair8800/88-disk
 
 # Disk controller "88-disk"
 
-Altair Disk offered the advantage of fixed memory including relatively fast access to data. The speed of data transfer was 250 Kb/s (The plugin does not emulate this). Disk was connected with disk controller (or board), and the data were transferred in serial fashion, bit after bit.
+Altair Disk offered the advantage of fixed memory including relatively fast access to data. The speed of data transfer
+was 250 Kb/s (The plugin does not emulate this). Disk was connected with disk controller (or board), and the data were
+transferred serially, bit after bit.
 
 Disk controller, on the other hand communicated with CPU. It transformed these serial data into 8-bit words which were stored/read by CPU into/from operating memory.
 
@@ -73,7 +75,7 @@ The following table shows all the possible settings of MITS 88-DISK plugin:
 
 ## Programming
 
-Data are written onto or read from disk in a serial fashion. The position in the floppy disk is uniquely set by the track number, sector number and the offset in the sector. It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
+Data are written onto/read from a disk serially. The position in the floppy disk is uniquely set by the track number, sector number and the offset in the sector. It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
 
 In Altair8800, drive `Pertec FD400` used 8" diskettes. Each had 77 tracks. The track had 32 sectors with 137 bytes long. Capacity was therefore `77 * 32 * 137 = 337568 B = 330 kB`. Software used less capacity, because 9 bytes from each sector were used for the integrity checksum.
 

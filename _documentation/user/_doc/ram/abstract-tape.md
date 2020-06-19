@@ -8,17 +8,17 @@ permalink: /ram/abstract-tape
 
 # Abstract tape
 
-Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine and RASP machine. plugin of the abstract tape for emuStudio is called `abstractTape-ram`.
+Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstractTape-ram`.
 
 There are several properties which an abstract tape might have:
 
 - Bounded, one-side bounded or unbounded
-- Random access (allowing to move head in both directions) or linear access (allowing to move head only in one direction)
+- Random access (allowing to move the head in both directions) or linear access (allowing to move head only in one direction)
 - Specific or any cell content type (e.g. cells are integers, or strings, or can be any value?)
-- Read only, or read-write cells
+- Read-only, or read-write cells
 - Purpose of the tape (title)
 
-This plugin allows to set up such properties, but those are set up by the virtual computer which uses it, not by
+This plugin allows us to set up such properties, but those are set up by the virtual computer which uses it, not by
 the user. For more information, please see the programming section.
 
 Currently, there are just two virtual computers utilizing this plugin:
@@ -31,28 +31,28 @@ is set in run time.
 
 ## Graphical user interface (GUI)
 
-The graphical user interface of the abstract tape is very simple. In order to open it, select the tape in the peripheral devices list in the Emulator panel. Then, click on the "Show" button.
+The graphical user interface of the abstract tape is very simple. To open it, select the tape in the peripheral devices list in the Emulator panel. Then, click on the "Show" button.
 
 ![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/abstractTape-ram.png)
 
-The symbol, highlighted with the blue color is the current head position, in this case. In order to manipulate with particular symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
+The symbol, highlighted with the blue color is the current head position, in this case. To manipulate with particular symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
 
 ![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/abstractTape-ram-selection.png)
 
-- *A*: If the tape allows it, one can add new symbol before the selected one in the tape. In the image, the tape does not allow it.
+- *A*: If the tape allows it, one can add a new symbol before the selected one in the tape. In the image, the tape does not allow it.
 - *B*: The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by the symbol itself.
-- *C*: If the tape allows it, one can add new symbol after the last one in the tape. In the image, the tape allows it.
-- *D*: Removes selected symbol from the tape.
+- *C*: If the tape allows it, one can add a new symbol after the last one in the tape. In the image, the tape allows it.
+- *D*: Removes the selected symbol from the tape.
 - *E*: Edits the tape symbol. The symbol must be selected.
 - *F*: Clears the tape content
 
 ## Settings
 
-The tape allows to edit some settings from the graphical mode; to open the settings window click on the "Settings" button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
+The tape allows us to edit some settings from the graphical mode; to open the settings window click on the "Settings" button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
 
 ![Abstract tape settings]({{ site.baseurl }}/assets/ram/abstractTape-ram-settings.png)
 
-- *A*: Do not allow the tape to fall behind other window
+- *A*: Do not allow the tape to fall behind another window
 - *B*: Show the tape right after emuStudio start
 
 
@@ -69,10 +69,10 @@ The following table shows all the possible settings of Abstract tape plugin:
 
 ## Automatic emulation
 
-Abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file name is devised from the title of the tape, by the following algorithm:
+The abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file name is devised from the title of the tape, by the following algorithm:
 
-- At first, all spaces in the title are replaced with underscore (`_`)
-- Then, all "unwanted" characters are also replaced with underscore
+- At first, all spaces in the title are replaced with an underscore (`_`)
+- Then, all "unwanted" characters are also replaced with an underscore
 - Every character is converted to lower-case
 - Finally, the `.out` extension is added at the end.
 
