@@ -8,12 +8,25 @@ layout: default
             <img class="img-responsive" src="{{ base }}files/images/logo-1.svg" alt="emuStudio-logo"/>
         </div>
         <div class="col-md-8 col-lg-8">
-            <h1>Welcome!</h1>
-            <p>
-                emuStudio is free, cross-platform toy-computer emulation platform and framework.
-                It targets the "academic" sphere to help students gaining the "know how" and
-                experiment with how computers work.
+            <h1>Welcome to emuStudio!</h1>
+            <p class="lead">
+                emuStudio is a free, cross-platform toy-computer emulation platform and framework. It targets the
+                "academic" sphere to help students gaining the "know-how" and experiment with how computers work.
             </p>
+            <p>
+                <strong>Platform</strong>, because it supports full emulation "life-cycle" of a computer.
+                From writing and compiling programs for the emulated machine, to running and debugging.
+                Examples of real computer emulators are <a href="{{ base }}documentation/user/altair8800">MITS Altair8800</a>,
+                <a href="{{ base }}documentation/user/ssem">SSEM (a.k.a. "Baby")</a>. Abstract computers are included,
+                too: <a href="{{ base }}documentation/user/ram">RAM</a>, <a href="{{ base }}documentation/user/rasp">RASP</a>, and
+                <a href="{{ base }}documentation/user/brainduck">Brainfuck "emulator"</a>.
+            </p>
+            <p>
+                <strong>Framework</strong>, because it includes API and supporting back-end, enabling developing new computer emulators.
+                Good <a href="{{ base }}/documentation/developer/introduction">developer documentation</a> is a matter of course.
+                As in real computers, emuStudio allows reusing existing components resulting in different computer configurations.
+            </p>
+
             <a class="github-button"
                href="https://github.com/{{ site.repository }}"
                data-style="mega"
@@ -24,36 +37,12 @@ layout: default
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-5 col-xs-offset-1">
-        <h3>Platform,</h3>
-        <p>because it supports full emulation "life-cycle". From writing and compiling programs for emulated
-            machine, to running and debugging. Some real computer emulators are provided, like:
-            <a href="{{ base }}documentation/user/altair8800">MITS Altair8800</a>,
-            <a href="{{ base }}documentation/user/ssem">SSEM (a.k.a. "Baby")</a>. Also, some
-            abstract computers are included, too: <a href="{{ base }}documentation/user/ram">RAM</a>,
-            <a href="{{ base }}documentation/user/rasp">RASP</a>, and
-            <a href="{{ base }}documentation/user/brainduck">Brainfuck "emulator"</a>.
-        </p>
-    </div>
-    <div class="col-xs-5 col-xs-offset-0">
-        <h3>Framework,</h3>
-        <p>because it provides good
-            <a href="{{ base }}/documentation/developer/introduction">documentation</a>
-            which encourages implementing your custom toy-computer, either real or abstract. Computer components are plain
-            Java JARs. As in real computers, emuStudio allows to reuse existing components resulting in different
-            computer configurations.
-        </p>
-    </div>
-</div>
-
 
 <h1>Getting started</h1>
-
 <p>
-    Programming computer emulators can be fun, because it's a process of building a working "machine" in software. More
+    Programming computer emulators can be fun because it's a process of building a working "machine" in software. More
     specifically, emulators mimic the behavior of real computers in software. Emulator abilities are often strong
-    enough to execute already existing software written long time ago for real computer, which is now emulated.
+    enough to execute already existing software written a long time ago for a real computer, which is now emulated.
 </p>
 <p class="well">In order to install emuStudio, please follow to <a href="{{ base }}download/index">Download</a> page.
 </p>

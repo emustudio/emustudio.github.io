@@ -1,0 +1,59 @@
+<div id="accordion">
+    {% for emustudio in site.data.downloads.downloads %}
+
+    <div id="version{{ emustudio.versionid }}" class="collapse {% if forloop.first == true %}show{% endif %}" data-parent="#accordion">
+        {% for download in emustudio.downloads %}
+        <a href="{{ download.href }}" class="btn btn-info btn-lg">
+            {% for glyph in download.glyphs %}
+            <i class="fab {{ glyph }}"></i>
+            {% endfor %}
+            {{ download.filename }}
+        </a>
+        {% endfor %}
+        <p></p>
+
+        <div class="table-responsive">
+            <table class="table table-borderless table-sm">
+                <tr>
+                    <th scope="row">Version:</th>
+                    <td>{{ emustudio.version }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Operating systems:</th>
+                    <td><i class="fab fa-windows"></i> <i class="fab fa-linux"></i></td>
+                </tr>
+                <tr>
+                    <th scope="row">Java requirements:</th>
+                    <td><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">Release date:</th>
+                    <td>{{ emustudio.release.date }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Release notes:</th>
+                    <td>
+                        {% if emustudio.release.href == '' %}
+                        N/A
+                        {% else %}
+                        <a href="{{ emustudio.release.href }}" target="_blank">Release notes</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr/>
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Or select another version...
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for emustudio in site.data.downloads.downloads %}
+        <a class="dropdown-item" href="#" data-target="#version{{ emustudio.versionid }}" data-toggle="collapse">{{ emustudio.version }}{% if forloop.first == true %} (newest){% endif %}</a>
+        {% endfor %}
+    </div>
+</div>

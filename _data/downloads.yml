@@ -1,0 +1,101 @@
+downloads:
+  - {
+    versionid: '040',
+    version: '0.40',
+    java: {
+      href: 'https://jdk.java.net/archive/',
+      name: 'Java 11'
+    },
+    release: {
+      date: 'TBD 2020',
+      href: ''
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-0.40.zip',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.zip',
+      glyphs: ['fa-windows']
+    },
+    {
+      filename: 'emuStudio-0.40.tar',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.tar',
+      glyphs: ['fa-linux']
+    }
+    ]
+  }
+  - {
+    versionid: '039',
+    version: '0.39',
+    java: {
+      href: 'http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html',
+      name: 'Java 8'
+    },
+    release: {
+      date: '2017-03-20',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.39/changelog-0.39.md'
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-0.39.zip',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.39/emuStudio-0.39.zip',
+      glyphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }
+  - {
+    versionid: '038',
+    version: '0.38b',
+    java: {
+      href: '',
+      name: 'Java 1.6'
+    },
+    release: {
+      date: '2011-10-24',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.38.0/changelog-0.38.txt'
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-0.38b.zip',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.38.0/emuStudio-0.38b.zip',
+      glyphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }
+  - {
+    versionid: '037',
+    version: '0.37b',
+    java: {
+      href: '',
+      name: 'Java 1.4'
+    },
+    release: {
+      date: '2010-08-26',
+      href: ''
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-0.37b.zip',
+      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.37.0/emuStudio-0.37b.zip',
+      glyphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }
+  - {
+    versionid: '001',
+    version: '0.1',
+    java: {
+      href: '',
+      name: 'Java 1.4'
+    },
+    release: {
+      date: '2007',
+      href: ''
+    },
+    downloads: [
+    {
+      filename: 'emu8-very-first.zip',
+      href: '{{ site.baseurl }}/files/emu8-very-first.zip',
+      glyphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }

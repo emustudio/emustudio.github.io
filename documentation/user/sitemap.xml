@@ -46,6 +46,9 @@
 <loc>/documentation/user/brainduck/terminal</loc>
 </url>
 <url>
+<loc>/documentation/user/brainduck/examples</loc>
+</url>
+<url>
 <loc>/documentation/user/altair8800/</loc>
 </url>
 <url>
@@ -104,6 +107,9 @@
 </url>
 <url>
 <loc>/documentation/user/altair8800/software</loc>
+</url>
+<url>
+<loc>/documentation/user/ssem/software</loc>
 </url>
 <url>
 <loc>/documentation/user/ssem/ssem-cpu</loc>

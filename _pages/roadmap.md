@@ -5,19 +5,20 @@ permalink: /roadmap/
 ---
 
 <div class="jumbotron">
+<h1>Roadmap</h1>
 <div class="table-responsive">
   <table class="table">
     <tr>
       <td>Next milestone:</td><th>{{ site.data.global.next_milestone }}</th>
     </tr>
     <tr>
-      <td>Open issues:</td><td><span id="issuesOpen" /></td>
+      <td>Open issues:</td><td><span id="issuesOpen"></span></td>
     </tr>
     <tr>
-      <td>Closed issues:</td><td><span id="issuesClosed"/></td>
+      <td>Closed issues:</td><td><span id="issuesClosed"></span></td>
     </tr>
     <tr>
-      <td>All issues:</td><td><span id="issuesAll" /></td>
+      <td>All issues:</td><td><span id="issuesAll"></span></td>
     </tr>
   </table>
 </div>
