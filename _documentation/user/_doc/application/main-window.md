@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Main window
-nav_order: 6
+nav_order: 4
 parent: emuStudio Application
 permalink: /application/main-window
 ---

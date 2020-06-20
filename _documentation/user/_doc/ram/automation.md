@@ -1,54 +1,54 @@
 ---
 layout: default
 title: Automation
-nav_order: 1
+nav_order: 6
 parent: RAM
 permalink: /ram/automation
 ---
 
 # Automation
 
-RAM is one of the computers which supports automatic emulation. In general, automatic emulation can be interactive, or not interactive. In the case of the RAM emulator, only non-interactive emulation is useful. It is because during emulation it is not possible to interact (e.g. pass new input to the input tape) in any way.
+RAM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
+each abstract tape is redirected to a file. The format of the files is described in [abstract tape documentation]({{ site.baseurl}}/ram/abstract-tape).
 
-Changes to any abstract tapes are written to the corresponding output file (see abstract tape documentation for more information). 
+## Example
 
 Command line for starting non-interactive automatic emulation:
 
-    ./emuStudio --config config/RAM.toml --input examples/ramc-ram/factorial.ram --auto --nogui
+    ./emuStudio --config config/RandomAccessMachineRAM.toml --input examples/ramc-ram/factorial.ram --auto --nogui
 
-- configuration `config/RAM.toml` will be loaded
+- configuration `config/RandomAccessMachineRAM.toml` will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation mode will be performed
-- (`--nogui`) non-interactive version will be set
+- (`--auto`) automatic emulation will be performed
+- (`--nogui`) non-interactive mode will be set
 
 After the run, the following output on the stdout can be expected:
 
 ```
-[INFO] Loading virtual computer: RAM
-[INFO] All plugins were loaded successfully.
+[INFO] Loading virtual computer: config/RandomAccessMachineRAM.toml
 [INFO] Being verbose. Writing to file:registers_(storage_tape).out
 [INFO] Being verbose. Writing to file:input_tape.out
 [INFO] Being verbose. Writing to file:output_tape.out
-[INFO] Starting emulation automatization...
-[INFO] Compiler: RAM Compiler
-[INFO] CPU: Random Access Machine (RAM)
-[INFO] Memory: RAM Program Tape
+[INFO] Starting emulation automation...
+[INFO] Compiler: RAM Compiler, version 0.40-SNAPSHOT
+[INFO] CPU: Random Access Machine (RAM), version 0.40-SNAPSHOT
+[INFO] Memory: RAM Program Tape, version 0.40-SNAPSHOT
 [INFO] Memory size: 0
-[INFO] Device #00: Abstract tape
-[INFO] Device #01: Abstract tape
-[INFO] Device #02: Abstract tape
+[INFO] Device: Registers (storage tape), version 0.40-SNAPSHOT
+[INFO] Device: Input tape, version 0.40-SNAPSHOT
+[INFO] Device: Output tape, version 0.40-SNAPSHOT
 [INFO] Compiling input file: examples/ramc-ram/factorial.ram
 [INFO] Compiler started working.
-[INFO] [Info    (000)] RAM Compiler, version 0.39-SNAPSHOT
-[INFO] [Info    (000)] Compile was successful.
-[INFO] [Info    (000)] Compiled file was loaded into operating memory.
-[INFO] [Info    (000)] Compilation was saved to the file: factorial.ro
-[INFO] Compiler finished successfully.
+[INFO] [Info   ] RAM Compiler, version 0.40-SNAPSHOT
+[INFO] [Info   ] Compile was successful.
+[INFO] [Info   ] Compiled file was loaded into program memory.
+[INFO] [Info   ] Compilation was saved to the file: /home/vbmacher/emuStudio/examples/ramc-ram/factorial.bram
+[INFO] Compilation finished.
 [INFO] Program start address: 0000h
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction position = 0011h
+[INFO] Instruction location = 0011h
 [INFO] Emulation completed
 ```
 
@@ -57,5 +57,3 @@ Then, in the current working directory, there will be created three new files:
 - `input_tape.out`
 - `registers_(storage_tape).out`
 - `output_tape.out`
-
-The format of the files is described in abstract tape documentation.

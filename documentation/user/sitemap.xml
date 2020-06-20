@@ -25,6 +25,9 @@
 <loc>/documentation/user/altair8800/as-z80</loc>
 </url>
 <url>
+<loc>/documentation/user/altair8800/automation</loc>
+</url>
+<url>
 <loc>/documentation/user/application/automation</loc>
 </url>
 <url>
@@ -32,6 +35,12 @@
 </url>
 <url>
 <loc>/documentation/user/ram/automation</loc>
+</url>
+<url>
+<loc>/documentation/user/rasp/automation</loc>
+</url>
+<url>
+<loc>/documentation/user/ssem/automation</loc>
 </url>
 <url>
 <loc>/documentation/user/brainduck/compiler</loc>

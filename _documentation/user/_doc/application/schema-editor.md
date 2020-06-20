@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Computer schema
-nav_order: 5
+nav_order: 3
 parent: emuStudio Application
 permalink: /application/computer-schema
 ---
