@@ -12,14 +12,14 @@ Automation, or automatic emulation, is a feature in which the user can run the e
 It is useful for example in school enabling automatic processing of assignments, or when working on custom projects
 and we are curious just about the emulator or the emulation output. 
 
-Automatic emulation can be interactive, or non-interactive. In case of interactive emulation, during the process all
-device GUIs are shown automatically, allowing the user to interact with the emulated computer. User however has no
-access to the source code, debugger or memory content.
+Automatic emulation can be interactive, or non-interactive. In the case of interactive emulation, during the process all
+device GUIs are shown automatically, allowing the user to interact with the emulated computer. The user however has no
+access to the source code, debugger, or memory content.
 
-Non-interactive mode of the automatic emulation is even more "quiet" - it does not show any GUIs. Output of the emulation
+Non-interactive mode of the automatic emulation is even more "quiet" - it does not show any GUIs. The output of the emulation
 is usually redirected to one or more files. The specific behavior is plugin-based.
 
-Automatic emulation requires a source code to be present. The source code is called the "input". It will be compiled
+Automatic emulation requires source code to be present. The source code is called the "input". It will be compiled
 before the emulation is executed.
 
 More specific information about automation can be found in any section devoted to an emulated computer.
