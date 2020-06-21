@@ -32,7 +32,7 @@ Before running, [Java 11][java11]{:target="_blank"} or later must be installed. 
 
 NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it might work to some extent.
 
-## Command-line interface
+## Command-line arguments
 
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 

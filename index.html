@@ -44,109 +44,66 @@ layout: default
 </div>
 
 <h1>Getting started</h1>
-<p>
-    Programming computer emulators can be fun because it's a process of building a working "machine" in software. More
-    specifically, emulators mimic the behavior of real computers in software. Emulator abilities are often strong
-    enough to execute already existing software written a long time ago for a real computer, which is now emulated.
-</p>
-<p class="well">In order to install emuStudio, please follow to <a href="{{ base }}download/index">Download</a> page.
-</p>
 
-<div class="row page-header">
-    <div class="col-md-5 col-lg-5">
-        <a href="{{ base }}files/images/open-dialog.png" class="thumbnail">
-            <p>Opening a computer</p>
-            <img src="{{ base }}files/images/open-dialog.png" alt="Terminal" style="width:300px;height:253px">
-        </a>
-    </div>
-    <div class="col-md-5 col-lg-5">
-        <p>
-            Right after emuStudio is executed, the "Open computer" dialog shows up. In the dialog, users can select
-            a predefined computer. New computers can be created or existing computers modified
-            using abstract schema editor, which is accessible from this dialog.
-        </p>
-        <p>
-            emuStudio comes with a few predefined computers. Some real ones (MITS Altair 8800), but also abstract
-            ones (e.g. Random Access Machine). By opening the computer, emuStudio main window shows up.
-        </p>
+<p>The following options might help you getting started with emuStudio.</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <i class="far fa-image fa-5x"></i>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">I want to see something first</h5>
+                <p class="card-text">If you are curious how emuStudio looks before installing it, we have some screenshots prepared.</p>
+                <a href="{{ base }}screenshots/" class="btn btn-primary">See Screenshots</a>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row page-header">
-    <div class="col-md-5 col-lg-5">
-        <a href="{{ base }}files/images/source-code.png" class="thumbnail">
-            <p>Source code editor</p>
-            <img src="{{ base }}files/images/source-code.png" alt="Source code editor" style="width:300px;height:253px">
-        </a>
-    </div>
-    <div class="col-md-5 col-lg-5">
-        <p>
-            When a virtual computer is opened, emuStudio becomes an IDE for developing and running programs for the
-            emulated computer. The source code editor supports syntax highlighting. A compiler will translate the
-            source code into a binary form and automatically loads it in the emulated memory.
-        </p>
-        <p>
-            For real computers, the source code editor recognizes mostly assembly language, but different compilers
-            for different programming languages can be provided.
-        </p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <i class="far fa-file-archive fa-5x"></i>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">Installation & run</h5>
+                <p class="card-text">The first step is to install emuStudio.</p>
+                <a href="{{ base }}download/" class="btn btn-primary">Go to Download page</a>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row page-header">
-    <div class="col-md-5 col-lg-5">
-        <a href="{{ base }}files/images/emulator.png" class="thumbnail">
-            <p>Debugger</p>
-            <img src="{{ base }}files/images/emulator.png" alt="Emulator panel" style="width:300px;height:253px">
-        </a>
-    </div>
-    <div class="col-md-5 col-lg-5">
-        <p>
-            In the emulator panel users can debug the program, or watch the CPU internals and access virtual devices.
-            There can be seen three parts - debugger on the left, CPU panel on the right and devices list at the
-            left-bottom.
-        </p>
-        <p>
-            The basic functionality of the debugger is controlling the emulation life-cycle. Users can run, pause
-            or stop the CPU emulation, as well as to perform single step or run timed-steps. All provided computers
-            support breakpoints capability.
-        </p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <i class="far fa-list-alt fa-5x"></i>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">What can I do as a user?</h5>
+                <p class="card-text">emuStudio is easy to use. Still, a guidance to advanced user experience might be
+                    interesting.</p>
+                <a href="{{ base }}documentation/user/introduction" class="btn btn-primary">See User documentation</a>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row page-header">
-    <div class="col-md-5 col-lg-5">
-        <a href="{{ base }}files/images/cpm22.png" class="thumbnail">
-            <p>Computer-user interaction</p>
-            <img src="{{ base }}files/images/cpm22.png" alt="Terminal" style="width:300px;height:253px">
-        </a>
-    </div>
-    <div class="col-md-5 col-lg-5">
-        <p>
-            Users can interact with emulated computer using virtual devices. For example, a terminal. Devices can
-            have their own capabilities, to mimic the behavior of real-world devices. There can exist plenty of
-            various devices connected to the computer, like virtual disk, serial board, and so on.
-        </p>
-        <p>
-            Besides, devices can be used for loading already prepared program images, without needing the program
-            source code. The screenshot at the left shows an example - running CP/M operating system.
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-5 col-lg-5">
-        <a href="{{ base }}files/images/automation.gif" class="thumbnail">
-            <p>Emulation automation</p>
-            <img src="{{ base }}files/images/automation.gif" alt="Terminal" style="width:300px;height:253px">
-        </a>
-    </div>
-    <div class="col-md-5 col-lg-5">
-        <p>
-            When students are encouraged to write assignments in emuStudio, teachers can automate their
-            checking. emuStudio can be run in a non-GUI mode, without any interaction. Compiled source code will
-            be automatically loaded into memory, then run by CPU. Input and output from/to devices is redirected
-            to files. After the emulation finishes, teachers can prepare their own tools for checking the content
-            of the output files.
-        </p>
-        <p>
-            In addition, emuStudio will generate a log file, which contains the emulation progress;
-            it can be used for debugging if something went wrong.
-        </p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <i class="far fa-list-alt fa-5x"></i>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">I'm a developer</h5>
+                <p class="card-text">Developers and enthusiasts might try writing a custom emulator.</p>
+                <a href="{{ base }}documentation/developer/introduction" class="btn btn-primary">See Developer documentation</a>
+            </div>
+        </div>
     </div>
 </div>

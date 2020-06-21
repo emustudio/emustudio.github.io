@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Opening a computer
-nav_order: 2
+nav_order: 3
 parent: emuStudio Application
 permalink: /application/opening-computer
 ---
