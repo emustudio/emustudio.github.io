@@ -1,16 +1,15 @@
-snapshots:
+screenshots:
   - {
     title: 'Open a computer',
     id: 'OpenComputer',
     alt: 'Open a computer',
     thumbnail: '/files/images/open-computer.png',
     image: '/files/images/open-computer.png',
-    html: >
-      <p>
+    html: '<p>
       Right after emuStudio is executed, the "Open computer" dialog shows up. In the dialog, users can select
       a predefined computer. The dialog also enables creating new computers, editing, renaming, or removing existing ones.
       The default installation already contains all available computers.
-      </p>
+      </p>'
   }
   - {
     title: 'Building a computer',
@@ -18,12 +17,12 @@ snapshots:
     alt: 'Edit a computer',
     thumbnail: '/files/images/edit-computer.png',
     image: '/files/images/edit-computer.png',
-    html: >
+    html: '
       <p>
       Sometimes either the default computer configuration is not suitable, or you might want to try to plug in your
       new computer component or build a completely new computer. This is enabled with a computer configuration editor,
       accessible from the "Open computer" dialog.
-      </p>
+      </p>'
   }
   - {
     title: 'Programming in emuStudio',
@@ -31,13 +30,13 @@ snapshots:
     alt: 'Source code editor',
     thumbnail: '/files/images/source-code.png',
     image: '/files/images/source-code.png',
-    html: >
+    html: '
       <p>
       When a computer is opened, emuStudio becomes an IDE for developing and running programs.
       The source code editor supports syntax highlighting and other tools that provide some writing comfort.
       A compiler, if provided by the computer, will translate the source code into a binary form which is
       automatically loaded in the operating memory of the computer.
-      </p>
+      </p>'
   }
   - {
     title: 'Debugger',
@@ -45,13 +44,13 @@ snapshots:
     alt: 'Emulator panel',
     thumbnail: '/files/images/emulator.png',
     image: '/files/images/emulator.png',
-    html: >
+    html: '
       <p>
       When the program is compiled, it can be emulated. Debugger, in the emulator panel, is to help with
       controlling the emulation life-cycle. It shows the internals of emulated components. CPU emulation can be
       run, paused, or stopped. Users can execute just a single step or run the emulation in timed-steps.
       All provided computers support breakpoints capability.
-      </p>
+      </p>'
   }
   - {
     title: 'Computer-user interaction',
@@ -59,7 +58,7 @@ snapshots:
     alt: 'CP/M 2.2',
     thumbnail: '/files/images/cpm22-thumbnail.png',
     image: '/files/images/cpm22.png',
-    html: >
+    html: '
       <p>
       Users can interact with the emulated computer using virtual devices. For example, a terminal. Devices
       have custom capabilities, for trying to mimic the behavior of real-world devices.
@@ -67,7 +66,7 @@ snapshots:
       <p>
       For example, a disk device in MITS Altair8800 can be used for loading already prepared software images,
       without needing the source code.
-      </p>
+      </p>'
   }
   - {
     title: 'Emulation automation',
@@ -75,7 +74,7 @@ snapshots:
     alt: 'Automation',
     thumbnail: '/files/images/automation.gif',
     image: '/files/images/automation.gif',
-    html: >
+    html: '
       <p>
       emuStudio can be run without GUI from command line. It can be useful when we want to see output of
       the emulated program instead of having to interact with emuStudio. Compiled source code will
@@ -85,5 +84,5 @@ snapshots:
       <p>
       The emulation output is also a log file containing the progress of the emulation;
       it can be used for debugging.
-      </p>
+      </p>'
   }

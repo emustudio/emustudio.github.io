@@ -8,4 +8,4 @@ permalink: /screenshots/
 
 What you can do with emuStudio? Is it interesting for you? This section shows some answers.  
 
-{% include snapshots.html %}
+{% include screenshots.html %}
