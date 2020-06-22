@@ -28,17 +28,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Release date:</th>
-                    <td>{{ emustudio.release.date }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Release notes:</th>
-                    <td>
-                        {% if emustudio.release.href == '' %}
-                        N/A
-                        {% else %}
-                        <a href="{{ emustudio.release.href }}" target="_blank">Release notes</a>
-                        {% endif %}
-                    </td>
+                    <td>{{ emustudio.releasedate }}</td>
                 </tr>
             </table>
         </div>
