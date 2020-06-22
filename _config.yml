@@ -22,9 +22,10 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - _documentation
-keep_files: [documentation, images, .git, files]
+  - artwork
+keep_files: [documentation, images, .git, files, artwork]
 encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+markdown_ext: "markdown,md"
 
 # Filtering Content
 show_drafts: null
