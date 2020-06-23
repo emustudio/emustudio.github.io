@@ -67,6 +67,10 @@ The following table shows control codes (`CTRL` plus some key combinations). The
 |`CTRL+^`  | `RS`    | Home cursor
 |---
 
+
+
+
+
 ### Absolute cursor position from the keyboard
 
 Terminal allows to set the absolute cursor position, when in "Cursor control Mode". ADM-3A emulator does not have such mode, but `ESC + '=' + [X] + [Y]` combination allows to set the cursor position. By pressing `ESC` key, it initiates the "load cursor" operation. If the user then presses `=` key, the terminal expects another two keystrokes, and translates them into `[X]` and `[Y]` coordinates for the new position of the cursor. The following table shows the key-to-coordinate translation table.

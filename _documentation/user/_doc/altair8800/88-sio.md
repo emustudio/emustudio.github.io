@@ -45,10 +45,10 @@ These numbers can be changed in the Settings window:
 - *C*: Attach Data SIO port to some new CPU port. The CPU port must be unique among both Status and Data ports attachments.
 - *D*: Detach Data SIO port from selected CPU port.
 - *E*: List of CPU ports to which the Status SIO port is attached
-- *F*: Clear the current attachements of the Status SIO port and attach it to default CPU ports
+- *F*: Clear the current attachments of the Status SIO port and attach it to default CPU ports
 - *G*: List of CPU ports to which the Data SIO port is attached
-- *H*: Clear the current attachements of the Data SIO port and attach it to default CPU ports
-- *I*: When selected, clicking on `OK` button will save the settings and will be applied at next emuStudio start.
+- *H*: Clear the current attachments of the Data SIO port and attach it to default CPU ports
+- *I*: Save the settings and close the dialog
 
 ## Connecting devices
 
