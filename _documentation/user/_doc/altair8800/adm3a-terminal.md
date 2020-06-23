@@ -12,6 +12,11 @@ Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nick nam
 
 Maintenance manual can be downloaded at [this link][manual1]{:target="_blank"}, operator's manual [here][manual2]{:target="_blank"}.
 
+GUI can be seen here:
+
+![GUI of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/cpm22.png)
+
+
 ## Display
 
 Terminal could display 128 ASCII characters (upper-case and lower-case letters, punctuation and numbers). Original ADM-3 could display only 64 (only capital-letters and some other). For saving very expensive RAM the terminal offered size 12 rows x 80 columns, with optional extension to 24 rows x 80 columns. The size used in the emulator is hardcoded to 80 columns x 24 rows.

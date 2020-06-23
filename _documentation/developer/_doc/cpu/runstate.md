@@ -16,7 +16,7 @@ The state machine, how it should work, can be seen in the following diagram:
 
 The states of the state machine are encoded into an enum [CPU.RunState][runstate]{:target="_blank"} in emuLib:
 
-
+{:.code-example}
 ```java
 public static enum RunState {
     STATE_STOPPED_NORMAL("stopped"),

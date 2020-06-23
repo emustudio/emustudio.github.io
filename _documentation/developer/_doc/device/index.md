@@ -19,6 +19,7 @@ Communication with devices is realized through device contexts. A device, as any
 
 Sample implementation of a device root class might look as follows:
 
+{:.code-example}
 ```java
 @PluginRoot(
     type = PLUGIN_TYPE.DEVICE,

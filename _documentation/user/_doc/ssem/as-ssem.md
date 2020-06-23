@@ -51,18 +51,27 @@ Successive empty new-line characters will be ignored.
 
 Assembler supports all forms of instructions. All instructions must start with a line number. For example:
 
+{:.code-example}
+```
     01 LDN 20
+```
 
 ### Literals / constants
 
 Raw number constants can be defined in separate lines using special preprocessor keywords. The first one is `NUM xxx`, where `xxx` is a number in either decimal or hexadecimal form. The hexadecimal format must start with prefix `0x`. For example:
 
-    00 NUM 0x20
-    01 NUM 1207943145
+{:.code-example}
+```
+00 NUM 0x20
+01 NUM 1207943145
+```
 
 Another keyword is `BNUM xxx`, where `xxx` can be only a binary number. For example:
 
-    01 BNUM 10011011111000101111110000111111
+{:.code-example}
+```
+01 BNUM 10011011111000101111110000111111
+```
 
 It means that the number will be stored untouched to the memory in the format as it appears in the binary form.
 
@@ -82,16 +91,19 @@ One-line comments are supported in various forms. Generally, the comment is ever
 
 For example, simple `5+3` addition can be implemented as follows:
 
-    0 LDN 7 // load negative X into the accumulator
-    1 SUB 8 // subtract Y from the value in the accumulator
-    2 STO 9 // store the sum at address 7
-    3 LDN 9 // A = -(-Sum)
-    4 STO 9 // store sum
-    5 HLT
+{:.code-example}
+```
+0 LDN 7 // load negative X into the accumulator
+1 SUB 8 // subtract Y from the value in the accumulator
+2 STO 9 // store the sum at address 7
+3 LDN 9 // A = -(-Sum)
+4 STO 9 // store sum
+5 HLT
 
-    7 NUM 3 // X
-    8 NUM 5 // Y
-    9       // here will be the result
+7 NUM 3 // X
+8 NUM 5 // Y
+9       // here will be the result
+```
 
 The accumulator should now contain value `8`, as well as memory cell at index 9.
 

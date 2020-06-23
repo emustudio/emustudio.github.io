@@ -31,11 +31,16 @@ The features include:
 
 Interrupts are not supported yet.
 
+GUI can be seen here:
+
+![GUI of 88-DISK]({{ site.baseurl }}/assets/altair8800/88-disk-gui.png)
+
+
 ## Mounting disk images
 
 In order to mount DISK images to the device, please open device settings:
 
-![Settings window of 88-DISK]({{ site.baseurl }}/assets/altair8800/88-disk-01.png)
+![Settings window of 88-DISK]({{ site.baseurl }}/assets/altair8800/88-disk-images.png)
 
 - *A*: Select drive (A - P)
 - *B*: Choosing the image file
@@ -54,7 +59,7 @@ MITS 88-DISK board communicates with CPU using its ports. There are three ports 
 
 These numbers can be changed in the Settings window, tab "CPU Ports":
 
-![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-disk-02.png)
+![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-disk-ports.png)
 
 ## Configuration file
 
@@ -168,7 +173,7 @@ In this section, an example is presented showing how to read/write data from/to 
 
 The program uses 3 procedures (in assembler for Intel 8080) for setting the disk position (`ltrack` for loading the track number, `lsector` for loading the sector number, and `loffset` for loading the offset within the sector) and two more for data reading (`read`) and writing (`write`).
 
-
+{:.code-example}
 ```
 disk0  equ 0    ; disk number
 track  equ 1    ; track number

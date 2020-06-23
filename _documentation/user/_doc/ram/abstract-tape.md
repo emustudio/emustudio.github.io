@@ -86,6 +86,7 @@ The Abstract tape plugin can be used in various computers. Besides standard oper
 
 Usually, the tapes are used by CPU plugins, but it is of course possible to use it in any other plugin. You can obtain the context during the [Plugin.initialize()][pluginInitialize]{:target="_blank"} method of the plugin root class. The context is named `net.emustudio.plugins.device.abstracttape.api.AbstractTapeContext`:
 
+{:.code-example}
 ```java
 @PluginRoot(...)
 public class YourPlugin {
@@ -103,6 +104,7 @@ public class YourPlugin {
 
 The tape context interface has the following content:
 
+{:.code-example}
 ```java
 package net.emustudio.plugins.device.abstracttape.api;
 

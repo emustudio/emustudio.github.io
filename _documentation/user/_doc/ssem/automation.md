@@ -26,6 +26,7 @@ The emulator automation can be run as follows:
 
 The console will contain information about emulation progress:
 
+{:.code-example}
 ```
 [INFO] Loading virtual computer: config/SSEMBaby.toml
 [INFO] Starting emulation automation...
@@ -50,6 +51,7 @@ The console will contain information about emulation progress:
 
 the emulation will run without user interaction, and file `ssem.out` will be created with the following content:
 
+{:.code-example}
 ```
 ACC=0x3bfffe2
 CI=0x58

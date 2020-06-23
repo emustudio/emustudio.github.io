@@ -27,6 +27,11 @@ The plugin emulates only basic functionality of the board. It has the following 
 
 Interrupts are not supported yet.
 
+GUI can be seen here:
+
+![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio-gui.png)
+
+
 ## CPU Ports settings
 
 MITS 88-SIO board is attached to CPU using multiple ports. By default, the used CPU ports are:
@@ -145,6 +150,7 @@ In this section it will be shown a small "How to" program terminal using 88-SIO 
 
 In emuStudio, it is enough to write data to Port 2, e.g.:
 
+{:.code-example}
 ```
 mvi a, 'H'
 out 11h
@@ -156,6 +162,7 @@ out 11h
 
 For writing strings, it is more practical to have a procedure.
 
+{:.code-example}
 ```
 lxi h, text  ; load address of 'text' label to HL
 call print   ; print text
@@ -178,6 +185,7 @@ print:
 
 For reading a character, it is required to read the Port 1 until the character is not ready. Then we can read it from Port 2.
 
+{:.code-example}
 ```
 ; Procedure will read a single character from terminal
 ; Input: none
@@ -194,6 +202,7 @@ getchar:
 
 Now follows an example, which will read a whole line of characters into memory starting at address in `DE` pair. The procedure will interpret some control keys, like: backspace and ENTER keys.
 
+{:.code-example}
 ```
 lxi h, text        ; load address of 'text' label to HL
 xchg               ; DE <-> HL

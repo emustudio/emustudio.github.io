@@ -24,6 +24,7 @@ Command line for starting non-interactive automatic emulation:
 
 After the run, the following output on the stdout can be expected:
 
+{:.code-example}
 ```
 [INFO] Loading virtual computer: config/RandomAccessMachineRAM.toml
 [INFO] Being verbose. Writing to file:registers_(storage_tape).out

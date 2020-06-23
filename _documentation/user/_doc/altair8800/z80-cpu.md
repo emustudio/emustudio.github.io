@@ -49,6 +49,7 @@ To enable this feature, please see the section "Configuration file".
 
 For example, let's take an example which computes a reverse text:
 
+{:.code-example}
 ```
 ; Print reversed text
 
@@ -110,6 +111,7 @@ input: ds 30
 When the program is being run, and the dump instructions feature is turned on, on console you can see the following
 output:
 
+{:.code-example}
 ```
 0000 | PC=03e8 |          dec SP |        3B  || regs=00 00 00 00 00 00 00 00  IX=0000 IY=0000 IFF=0 I=00 R=01 | flags=       | SP=ffff | PC=03e9
 0001 | PC=03e9 |      ld HL, 485 |  21 85 04  || regs=00 00 00 00 04 85 00 00  IX=0000 IY=0000 IFF=0 I=00 R=02 | flags=       | SP=ffff | PC=03ec

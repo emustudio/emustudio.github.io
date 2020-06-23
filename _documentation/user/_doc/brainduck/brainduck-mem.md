@@ -24,6 +24,6 @@ In the following screenshot, it is possible to see GUI of `brainduck-mem`.
 
 ![BrainDuck memory window]({{ site.baseurl }}/assets/brainduck/brainduck-mem.png)
 
-- *A*: Shows currently displayed page. Can be edited manually by entering a number and pressing the ENTER key
+- *A*: Shows currently displayed page. Can be edited manually by entering a number and pressing the <kbd>ENTER</kbd> key
 - *B*: By double-clicking on a memory cell, the cell editor is enabled and the user can overwrite the content of the cell. Supported number formats are decimal or hexadecimal. The hexadecimal number must begin with `0x` prefix.
 - *C*: By clicking on button `Page down`, the page number is increased; button `Page up` decreases the page number.

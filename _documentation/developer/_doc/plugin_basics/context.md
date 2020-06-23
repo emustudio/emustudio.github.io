@@ -24,6 +24,7 @@ Plugin context objects are registered in [ContextPool][contextPool]{:target="_bl
 
 Sample custom context might be created like this:
 
+{:.code-example}
 ```java
 @PluginContext
 public interface SampleContext extends CpuContext {
@@ -34,6 +35,7 @@ public interface SampleContext extends CpuContext {
 
 And the context class might look as follows:
 
+{:.code-example}
 ```java
 public class SampleContextImpl implements SampleContext {
 
@@ -43,6 +45,7 @@ public class SampleContextImpl implements SampleContext {
 
 Registration of this context might look as follows:
 
+{:.code-example}
 ```java
 @PluginRoot(type = PLUGIN_TYPE.CPU, title = "Sample CPU emulator")
 public class SamplePlugin implements CPU {
@@ -61,6 +64,7 @@ public class SamplePlugin implements CPU {
 
 If another plugin wants to obtain the context, it should do it in the [Plugin.initialize()][pluginInitialize]{:target="_blank"} method:
 
+{:.code-example}
 ```java
 @PluginRoot(type = PLUGIN_TYPE.DEVICE, title = "Sample device")
 public class SampleDevice implements Device {

@@ -20,7 +20,10 @@ As with the other emuStudio compilers, you start the compilation by the "Compile
 
 As RASP is a von-Neumann computer, both the program and the data reside in the same memory module. Therefore, we need to specify, where the program start address is as CPU must know where to start emulation. We do so by the `org` directive followed by a positive integer. The program start definition *must* be the *first line* of the source code. Please, *do not* place any *empty lines* before it. Here, an example follows:
 
-`org 5`
+{:.code-example}
+```
+org 5
+```
 
 WARNING: If you do not specify the program start address, or if you set it to `0` (`org 0`), the default value will be used, which is `20`. The compiler will warn you about this, so do not worry. Setting program start to `0` is not allowed as register `R0` is used as the *accumulator* and therefore any instruction written here would be overwritten sooner or later.
 
@@ -40,20 +43,25 @@ A single line of code consists of *instruction* followed by its *operand*. The l
 
 Example (`WRITE 2` can be on a separate line):
 
-`*labelName:* WRITE 2`
+{:.code-example}
+```
+*labelName:* WRITE 2
+```
 
 ### Comments
 
 RASP compiler supports one-line comments. You start them with a semicolon (`;`):
 
-`;this is a comment`
+{:.code-example}
+```
+;this is a comment
+```
 
 You can append a comment to an existing line, e.g.
 
-`write 2 _;comment_`
+{:.code-example}
+```
+write 2 _;comment_
+```
 
 or put it on a completely new line.
-
-
-
-

@@ -16,32 +16,41 @@ Z80 or 8080 programs communicate with the SIMH pseudo device via port `0xfe`. Pr
 
 1. For commands that do not require parameters and do not return results:
 
-        ld  a,<cmd>
-        out (0feh),a
+{:.code-example}
+```
+ld  a,<cmd>
+out (0feh),a
+```
 
    Special case is the reset command which needs to be send 128 times to make
    sure that the internal state is properly reset.
 
 2. For commands that require parameters and do not return results:
 
-        ld  a,<cmd>
-        out (0feh),a
-        ld  a,<p1>
-        out (0feh),a
-        ld  a,<p2>
-        out (0feh),a
-        ...
+{:.code-example}
+```
+ld  a,<cmd>
+out (0feh),a
+ld  a,<p1>
+out (0feh),a
+ld  a,<p2>
+out (0feh),a
+...
+```
 
    Note: The calling program must send all parameter bytes. Otherwise
    the pseudo device is left in an undefined state.
 
 3. For commands that do not require parameters and return results:
 
-        ld  a,<cmd>
-        out (0feh),a
-        in  a,(0feh)    ; <A> contains first byte of result
-        in  a,(0feh)    ; <A> contains second byte of result
-        ...
+{:.code-example}
+```
+ld  a,<cmd>
+out (0feh),a
+in  a,(0feh)    ; <A> contains first byte of result
+in  a,(0feh)    ; <A> contains second byte of result
+...
+```
 
    Note: The calling program must request all bytes of the result. Otherwise
    the pseudo device is left in an undefined state.

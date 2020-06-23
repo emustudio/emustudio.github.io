@@ -12,6 +12,7 @@ There are two types of documentation - user and developer. Only the current vers
 Older versions can be accessed from git. Both types of documentation use separate Jekyll static
 site project. The structure of the documentation is as follows:
 
+{:.code-example}
 ```
 _documentation
   |
@@ -27,6 +28,7 @@ uses a different template than the main web site, and those cannot be combined e
 
 When you update the documentation, please run script:
 
+{:.code-example}
 ```
 _documentation/build.sh
 ```

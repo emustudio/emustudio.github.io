@@ -11,6 +11,7 @@ A compiler plugin must either implement [Compiler][compiler]{:target="_blank"} i
 
 Sample implementation of a compiler might look as follows (just some methods are implemented):
 
+{:.code-example}
 ```java
 public class CompilerImpl extends AbstractCompiler {
     private final static List<SourceFileExtension> SOURCE_FILE_EXTENSIONS = List.of(

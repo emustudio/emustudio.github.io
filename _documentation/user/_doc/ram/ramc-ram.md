@@ -14,21 +14,29 @@ RAM has a very simple assembler-like language, consisting of direct and indirect
 
 The program written for this compiler consists of two sections:
 
-
-    INPUT section
-    INSTRUCTIONS section
+{:.code-example}
+```
+INPUT section
+INSTRUCTIONS section
+```
 
 ### Input section
 
 The `INPUT` section contains definitions the content of input tape - one or more lines in the form:
 
-    <input> ITEMS
+{:.code-example}
+```
+<input> ITEMS
+```
 
 where `ITEMS` is a space-separated list of inputs. Each input is one word - it might be any number or string. By default, every cell in the input tape is a string, and it is not interpreted as some data type. It is only in a time when it is used - the instruction which works with the cell defines of which "type" it should be.
 
 For example, the input section might be:
 
+{:.code-example}
+```
     <input> 1 2 3 hello world!
+```
 
 In this case, there are five inputs: numbers 1,2,3, then word "hello" and the last one is "world!".
 
@@ -40,7 +48,10 @@ For this reason, the instructions format or the whole vocabulary might be differ
 
 Instructions should follow the Input section, but the sections can be mixed. It is just good practice to have input separated from the code. Each instruction must be on a separate line, in the form:
 
+{:.code-example}
+```
     [LABEL:] INSTRUCTION [; optional comment]
+```
 
 Each instruction position can be optionally labeled with some identifier (`LABEL` field), followed by a colon (`:`) character. The labels can be then referred to in other instructions.
 
@@ -76,6 +87,7 @@ The table describes also the behavior of each instruction. The compiler does not
 
 For example, this is a valid program:
 
+{:.code-example}
 ```
 ; COPY(X,Y)
 ;

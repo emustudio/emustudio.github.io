@@ -48,7 +48,7 @@ To open the memory GUI (graphical user interface), click at the right-most icon 
 
 Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
 letter/number key, a small text field appears allowing to edit the current value. When editing
-is finished, the user can press ENTER key to confirm it, or ESC key to discard the editing.
+is finished, the user can press <kbd>ENTER</kbd> key to confirm it, or <kbd>ESC</kbd> key to discard the editing.
 
 ## Memory settings
 
@@ -117,6 +117,7 @@ As it was mentioned in the earlier sections, the Standard operating memory plugi
 
 You can obtain the context in [Plugin.initialize()][pluginInitialize]{:target="_blank"} method. The context is named `net.emustudio.plugins.memory.standard.api.StandardMemoryContext`:
 
+{:.code-example}
 ```java
 ...
 
@@ -128,6 +129,7 @@ public void initialize(SettingsManager settings) {
 
 The memory context has the following content:
 
+{:.code-example}
 ```java
 package net.emustudio.plugins.memory.standard.api;
 

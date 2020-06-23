@@ -63,7 +63,7 @@ To run CP/M, please follow these steps:
 
 When the steps are completed, CP/M should start (an informational message appears) and command line prompt will be displayed:
 
-![Operating system CP/M 2.2]({{ site.baseurl}}/assets/altair8800/cpm22.png)
+![Operating system CP/M 2.2]({{ site.baseurl}}/assets/altair8800/cpm22.gif){:style="max-width:737px"}
 
 Command `dir` is working, `ls` is better `dir`. More information about CP/M commands can be found at [this link][cpm22]{:target="_blank"}.
 
@@ -102,7 +102,7 @@ Specific steps how to boot CP/M 3 in emuStudio follow:
 
 The following image shows the look right after the boot:
 
-![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/cpm3.png)
+![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/cpm3.gif){:style="max-width:737px"}
 
 ## Altair DOS v1.0
 
@@ -129,7 +129,7 @@ If you want AltairDOS being able to automatically detect how much memory is inst
 
 The following image shows how it looks like:
 
-![Operating system Altair DOS 1.0]({{ site.baseurl }}/assets/altair8800/altairdos.gif)
+![Operating system Altair DOS 1.0]({{ site.baseurl }}/assets/altair8800/altairdos.gif){:style="max-width:737px"}
 
 ## BASIC
 
@@ -151,7 +151,7 @@ Steps for booting BASIC follow:
 
 The following image shows the look right after the boot:
 
-![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/mbasic.png)
+![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/mbasic.gif){:style="max-width:737px"}
 
 
 [schorn]: http://schorn.ch/altair_4.php

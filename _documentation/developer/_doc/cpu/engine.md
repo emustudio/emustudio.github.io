@@ -13,6 +13,7 @@ involves four basic steps: fetch, decode and execute, and store, executed in ord
 
 A pseudo-algorithm for emulator engine can look as follows:
 
+{:.code-example}
 ```java
 public class EmulatorEngine {
     private final CPU cpu;

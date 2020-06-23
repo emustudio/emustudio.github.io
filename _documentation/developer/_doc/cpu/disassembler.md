@@ -15,6 +15,7 @@ instructions. You can create a disassembler by implementing interface [Disassemb
 
 Specification files have `.eds` file extension. A [SSEM][ssem]{:target="_blank"} CPU specification file looks as follows:
 
+{:.code-example}
 ```
 # Decoder section
 

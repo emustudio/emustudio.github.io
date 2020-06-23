@@ -19,6 +19,7 @@ In case of the non-interactive mode (`--nogui` flag set in the command line), th
 In this example we will run a non-interactive automatic emulation. Input for the terminal will be stored in a file
 `adm3A-terminal.in`. The content of the file must be prepared in the advance, e.g.:
 
+{:.code-example}
 ```
 Hello, world!
 
@@ -37,6 +38,7 @@ The following command will emulate the computer and run "reverse text" program o
 
 After the program finishes, emuStudio is closed. The program output will be in the file `adm3A-terminal.out`:
 
+{:.code-example}
 ```
 Reversed text ...
 Enter text: Hello, world!
@@ -45,6 +47,7 @@ Enter text: Hello, world!
  
 Console will contain additional information about the emulation progress:
 
+{:.code-example}
 ```
 [INFO] Loading virtual computer: config/MITSAltair8800.toml
 [INFO] [device=LSI ADM-3A Terminal] Device was attached to 88-SIO

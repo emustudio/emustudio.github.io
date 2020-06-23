@@ -80,8 +80,10 @@ However, they must not equal to any keyword.
 
 The program is basically a sequence of instructions. The instructions are separated by a new line. The instruction have optional and mandatory parts, e.g.:
 
-    LABEL: CODE OPERANDS ; COMMENT
-
+{:.code-example}
+```
+LABEL: CODE OPERANDS ; COMMENT
+```
 
 |---
 | Part | Required | Notes
@@ -94,10 +96,12 @@ The program is basically a sequence of instructions. The instructions are separa
 
 Fields `CODE` and `OPERANDS` must be separated by at least one space. For example:
 
+{:.code-example}
+```
     HERE:   LD C, 0  ; Put 0 into C register
             DB 3Ah   ; Data constant of size 1 byte
     LOOP:   JP LOOP  ; Infinite loop
-
+```
 
 Labels are optional. Instructions and pseudo-instructions and register names are reserved for assembler and cannot be used as labels. Also, there cannot be more definitions of the same label.
 
@@ -120,6 +124,7 @@ Immediate data or addresses can be defined in various ways:
 - Labels. For example: `JP THERE` will jump to the label `THERE`.
 - Variables. For example:
 
+{:.code-example}
 ```
     VALUE VAR 'A'
     LD A, VALUE
@@ -189,15 +194,18 @@ The following table describes all possible data definition pseudo-instructions:
 
 ### Examples
 
-        HERE:  DB 0A3H          ; A3
-        W0RD1: DB 5*2, 2FH-0AH  ; 0A25
-        W0RD2: DB 5ABCH SHR 8   ; 5A
-        STR:   DB "STRINGSpl"   ; 535452494E472031
-        MINUS: DB -03H          ; FD
+{:.code-example}
+```
+HERE:  DB 0A3H          ; A3
+W0RD1: DB 5*2, 2FH-0AH  ; 0A25
+W0RD2: DB 5ABCH SHR 8   ; 5A
+STR:   DB "STRINGSpl"   ; 535452494E472031
+MINUS: DB -03H          ; FD
 
-        ADD1: dw COMP          ; 1C3B  (assume COMP is 3B1CH)
-        ADD2: dw FILL          ; B43E (assume FILL is 3EB4H)
-        ADD3: dw 3C01H, 3CAEH  ; 013CAE3C
+ADD1: dw COMP          ; 1C3B  (assume COMP is 3B1CH)
+ADD2: dw FILL          ; B43E (assume FILL is 3EB4H)
+ADD3: dw 3C01H, 3CAEH  ; 013CAE3C
+```
 
 ## Including other source files
 
@@ -206,7 +214,10 @@ the repetitive parts of the program should be refactored out into functions or m
 
 The pseudo-instruction `include` exists for the purpose of including already written source code into the current program. The pseudo-instruction is defined as follows:
 
-        INCLUDE "[filename]"
+{:.code-example}
+```
+INCLUDE "[filename]"
+```
 
 where `[filename]` is a relative or absolute path to the file which will be included, enclosed in double-quotes.
 The file can include other files, but there must not be defined circular includes (the compiler will complain).
@@ -219,15 +230,24 @@ The namespace of the current program and the included file is *shared*. It means
 
 Let `a.asm` contains:
 
-        ld b, 80h
+{:.code-example}
+```
+ld b, 80h
+```
 
 Let `b.asm` contains:
 
-        include "a.asm"
+{:.code-example}
+```
+include "a.asm"
+```
 
 Then compiling `b.asm` will result in:
 
-        06 80     ; ld b, 80h
+{:.code-example}
+```
+06 80     ; ld b, 80h
+```
 
 ## Origin address
 
@@ -277,9 +297,12 @@ It is possible to redefine a variable, which effectively means to reassign a new
 
 Syntax:
 
-        if [expression]
-            i n s t r u c t i o n s
-        endif
+{:.code-example}
+```
+if [expression]
+    i n s t r u c t i o n s
+endif
+```
 
 At first, the compiler evaluates the `[expression]`. If the result is 0, instructions between `if` and `endif` will be ignored. Otherwise they will be included in the source code.
 
@@ -287,10 +310,12 @@ At first, the compiler evaluates the `[expression]`. If the result is 0, instruc
 
 Syntax:
 
-        [identifier] macro [operands]
-            i n s t r u c t i o n s
-        endm
-
+{:.code-example}
+```
+[identifier] macro [operands]
+    i n s t r u c t i o n s
+endm
+```
 
 The `[identifier]` is a mandatory name of the macro.
 
@@ -301,9 +326,10 @@ Also, the operand names can hide variables, labels, or constants defined in the 
 
 The macros can be understood as "templates" which will be expanded in the place where they are "called". The call syntax is as follows:
 
-
-        [macro name] [arguments]
-
+{:.code-example}
+```
+[macro name] [arguments]
+```
 
 where `[macro name]` is the macro name as defined above. Then, `[arguments]` are comma-separated expressions, in the
 order as the original operands are defined. The number of arguments must be the same as the number of macro operands.
@@ -312,35 +338,47 @@ The macro can be defined anywhere in the program, even in any included file. Als
 
 ### Examples
 
-        SHV MACRO
-        LOOP: RRCA        ; Right rotate with carry
-              AND 7FH     ; Clear MSB of accumulator
-              DEC D       ; Decrement rotation counter - register D
-              JP NZ, LOOP ; Jump to next rotation
-        ENDM
+{:.code-example}
+```
+SHV MACRO
+LOOP: RRCA        ; Right rotate with carry
+      AND 7FH     ; Clear MSB of accumulator
+      DEC D       ; Decrement rotation counter - register D
+      JP NZ, LOOP ; Jump to next rotation
+ENDM
+```
 
 The macro `SHV` can be used as follows:
 
-        LD A, (TEMP)
-        LD D,3  ; 3 rotations
-        SHV
-        LD (TEMP), A
+{:.code-example}
+```
+LD A, (TEMP)
+LD D,3  ; 3 rotations
+SHV
+LD (TEMP), A
+```
 
 Or another definition:
 
-        SHV MACRO AMT
-              LD D,AMT   ; Number of rotations
-        LOOP: RRCA
-              AND 7FH
-              DEC D
-              JP NZ, LOOP
-        ENDM
+{:.code-example}
+```
+SHV MACRO AMT
+      LD D,AMT   ; Number of rotations
+LOOP: RRCA
+      AND 7FH
+      DEC D
+      JP NZ, LOOP
+ENDM
+```
 
 And usage:
 
-        LD A, (TEMP)
-        SHV 5
-        LD (TEMP), A
+{:.code-example}
+```
+LD A, (TEMP)
+SHV 5
+LD (TEMP), A
+```
 
 Which has the same effect as the previous example.
 

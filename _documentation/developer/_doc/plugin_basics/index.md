@@ -21,6 +21,7 @@ type has a different naming convention. General idea is that the JAR file name s
  
 A plugin JAR file name should be in the form of: 
 
+{:.code-example}
 ```
 [specific abbreviation]-[plugin type].jar
 ```
@@ -60,6 +61,7 @@ A class which is to be plugin root, must:
 
 A sample plugin root class might look like this: 
 
+{:.code-example}
 ```java
 @PluginRoot(type = PLUGIN_TYPE.CPU, title = "Sample CPU emulator")
 public class SamplePlugin implements CPU {
@@ -107,6 +109,7 @@ Plugin can have static example files, or shell scripts. Plugin must copy them in
 e.g. `plugins/compiler/as-8080/build/libs/examples` or `plugins/compiler/as-8080/build/libs/scripts`.
 Then, in `application/build.gradle` are sections marked with `// Examples` or `// Scripts` comments:
 
+{:.code-example}
 ```groovy
 ...
       // Examples

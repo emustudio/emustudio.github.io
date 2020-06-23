@@ -18,6 +18,7 @@ A CPU plugin root class must implement either a [CPU][cpu]{:target="_blank"} int
 
 Sample implementation follows (only core methods are implemented):
 
+{:.code-example}
 ```java
 @PluginRoot(
     type = PLUGIN_TYPE.CPU,

@@ -21,6 +21,7 @@ changes, or will merge it.
 
 Commit messages should be in the form of:
 
+{:.code-example}
 ```
 [#XXX] Description of commit
 ``` 

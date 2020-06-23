@@ -35,6 +35,7 @@ Command line for starting non-interactive automatic emulation:
 This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain
 additional information about the emulation progress:
 
+{:.code-example}
 ```
 [INFO] Starting emulation automation...
 [INFO] Compiler: BrainDuck Compiler, version 0.40-SNAPSHOT
