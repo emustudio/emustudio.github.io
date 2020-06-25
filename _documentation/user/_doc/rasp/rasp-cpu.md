@@ -50,4 +50,4 @@ Also, information about the current RUNNING STATUS is displayed.
 
 The following figure shows a screenshot:
 
-![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/statusPanel.png)
+![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-status.png)
