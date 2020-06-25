@@ -33,11 +33,11 @@ is set in run time.
 
 The graphical user interface of the abstract tape is very simple. To open it, select the tape in the peripheral devices list in the Emulator panel. Then, click on the "Show" button.
 
-![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/abstractTape-ram.png)
+![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png)
 
-The symbol, highlighted with the blue color is the current head position, in this case. To manipulate with particular symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
+The symbol, highlighted with the red color is the current head position, in this case. To manipulate with particular symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
 
-![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/abstractTape-ram-selection.png)
+![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png)
 
 - *A*: If the tape allows it, one can add a new symbol before the selected one in the tape. In the image, the tape does not allow it.
 - *B*: The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by the symbol itself.
@@ -50,7 +50,7 @@ The symbol, highlighted with the blue color is the current head position, in thi
 
 The tape allows us to edit some settings from the graphical mode; to open the settings window click on the "Settings" button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
 
-![Abstract tape settings]({{ site.baseurl }}/assets/ram/abstractTape-ram-settings.png)
+![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png)
 
 - *A*: Do not allow the tape to fall behind another window
 - *B*: Show the tape right after emuStudio start

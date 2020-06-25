@@ -15,3 +15,8 @@ The following links point to some software for SSEM (either original or created 
 - [http://www.historicsimulations.com/ssem.html](http://www.historicsimulations.com/ssem.html){:target="_blank"}
 - [https://github.com/jcla1/gobaby/tree/master/examples](https://github.com/jcla1/gobaby/tree/master/examples){:target="_blank"}
 
+The following animation shows running example [nightmare.ssem](https://github.com/emustudio/emuStudio/blob/develop/plugins/compiler/as-ssem/src/main/examples/nightmare.ssem):
+
+
+![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-nightmare.gif){:style="max-width:459"}
+

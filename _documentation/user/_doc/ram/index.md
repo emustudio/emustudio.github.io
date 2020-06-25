@@ -13,7 +13,7 @@ Random Access Machine (RAM) is the abstract machine, invented to study algorithm
 RAM machine consists of several parts: input tape (read-only), output tape (write-only), program memory,
 data memory or registers (read/write) and a control unit ("engine"), as can be seen in the following image:
 
-![RAM machine]({{ site.baseurl }}/assets/ram/ram-machine.svg){:.img-responsive width="85%"}
+![RAM machine]({{ site.baseurl }}/assets/ram/ram-machine.svg){: width="85%"}
 
 Input tape acts as a water-tap; the input data can be read from it, causing the input head to move to the next unread symbol. The head can never return to a previously read symbol.
 
@@ -42,7 +42,7 @@ The RAM virtual machine in emuStudio consists of the following plugins:
 
 To use RAM, there must exist the abstract schema of the "computer", saved in the configuration file. Abstract schemas are drawn in the schema editor in emuStudio (please see emuStudio main module documentation for more details). The following image shows the schema of RAM machine simulator:
 
-![RAM abstract schema]({{ site.baseurl }}/assets/ram/ram-schema.png){:.img-responsive width="405px"}
+![RAM abstract schema]({{ site.baseurl }}/assets/ram/ram-schema.png){:style="max-width:419"}
 
 The "->" arrows are in direction of dependency. So for example `ramc-ram` depends on `ram-mem`, because compiled programs are directly loaded into memory.
 

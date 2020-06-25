@@ -32,9 +32,9 @@ The solution is spread across the plugins, as you can see in the parentheses. Ch
 
 In order to use BrainDuck, there must be drawn the abstract schema, saved in the configuration file. Abstract schemas are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The following image shows the schema of BrainDuck computer:
 
-![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/schema.png){:class="img-responsive" width="308px"}
+![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/brainduck-schema.png){:style="max-width:326"}
 
-The "->" arrows are in direction of dependency. So for example `brainc-brainduck` depends on `brainduck-mem`, because compiled programs are directly loaded into memory.
+The "-->" arrows are in a direction of dependency. So for example `brainc-brainduck` depends on `brainduck-mem`, because compiled programs are directly loaded into memory.
 
 Between `brainduck-cpu` and `brainduck-terminal` exists bidirectional dependency, because input gained from a terminal is passed to the CPU, and output is pushed from CPU to the terminal.
 

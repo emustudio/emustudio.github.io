@@ -20,7 +20,7 @@ It it very simple computer, which can run only 7 instructions.
 
 In emuStudio, SSEM computer is composed of a compiler, memory, CRT display and CPU. Abstract schema follows:
 
-![Abstract schema of SSEM]({{ site.baseurl }}/assets/ssem/schema.png){:class="img-responsive" width="260px"}
+![Abstract schema of SSEM]({{ site.baseurl }}/assets/ssem/ssem-schema.png){:style="max-width:261"}
 
 
 

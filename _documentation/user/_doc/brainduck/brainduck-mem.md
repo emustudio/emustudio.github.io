@@ -22,7 +22,7 @@ Memory plugin contains a simple graphical window, a GUI, which provides a set of
 
 In the following screenshot, it is possible to see GUI of `brainduck-mem`.
 
-![BrainDuck memory window]({{ site.baseurl }}/assets/brainduck/brainduck-mem.png)
+![BrainDuck memory window]({{ site.baseurl }}/assets/brainduck/brainduck-mem.png){:style="max-width:722"}
 
 - *A*: Shows currently displayed page. Can be edited manually by entering a number and pressing the <kbd>ENTER</kbd> key
 - *B*: By double-clicking on a memory cell, the cell editor is enabled and the user can overwrite the content of the cell. Supported number formats are decimal or hexadecimal. The hexadecimal number must begin with `0x` prefix.

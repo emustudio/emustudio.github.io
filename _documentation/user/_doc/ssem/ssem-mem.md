@@ -18,7 +18,7 @@ SSEM had 32 so-called "lines", which represented cells in memory. Each line, or 
 
 Since emuStudio is interactive application, GUIs are a natural thing. The memory GUI looks as follows:
 
-![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png)
+![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){:style="max-width:969px"}
 
 As you can see in the picture, a row represents single SSEM memory cell - 32 scattered bits and the last few columns show both the number the bits represent and a raw ASCII value of the 4-byte sequence of data.
 

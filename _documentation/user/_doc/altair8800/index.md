@@ -40,11 +40,11 @@ Basic configuration of MITS Altair 8800 was:
 
 In emuStudio, there exist two variants of the computer, varying in CPU. Either Intel 8080 CPU, or Zilog Z80 CPU is used. Some behavior was inspired by [simh] emulator. Abstract schema for emuStudio (Intel 8080):
 
-![Abstract schema of MITS Altair8800 (with Intel 8080)]({{ site.baseurl }}/assets/altair8800/altairscheme.png){:class="img-responsive" width="400px"}
+![Abstract schema of MITS Altair8800 (with Intel 8080)]({{ site.baseurl }}/assets/altair8800/altair-8080-schema.png){:style="max-width:402"}
 
 Abstract schema for emuStudio (Zilog Z80):
 
-![Abstract schema of MITS Altair8800 (with Zilog Z80)]({{ site.baseurl }}/assets/altair8800/altairz80.png){:class="img-responsive" width="526px"}
+![Abstract schema of MITS Altair8800 (with Zilog Z80)]({{ site.baseurl }}/assets/altair8800/altair-z80-schema.png){:style="max-width:543"}
 
 Each plugin is described in further sections.
 

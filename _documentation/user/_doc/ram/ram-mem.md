@@ -21,7 +21,7 @@ The memory plugin contains a simple graphical window, a GUI, which provides a se
 
 The memory GUI can be seen in the following picture.
 
-![RAM memory window]({{ site.baseurl }}/assets/ram/ram-mem.png)
+![RAM memory window]({{ site.baseurl }}/assets/ram/ram-memory.png){:style="max-width:728"}
 
 - *A*: Opens already compiled program into memory. The previous program will be dismissed.
 - *B*: Clears memory.

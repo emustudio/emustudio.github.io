@@ -16,18 +16,12 @@ After compilation of a RASP source code file, the compiled program is loaded int
 
 During the emulation, user can view the current content of the operating memory in a simple GUI window:
 
-![Memory GUI window]({{ site.baseurl }}/assets/rasp/memory_window.png)
+![Memory GUI window]({{ site.baseurl }}/assets/rasp/rasp-memory.png)
 
-It is also possible to load a compiled memory image from a file by clicking on the OPEN icon:
+It is also possible to load a compiled memory image from a file by clicking on the ![OPEN icon]({{ site.baseurl }}/assets/rasp/document-open.png) icon. Then you can choose the binary file you want to load.
 
-![OPEN icon]({{ site.baseurl }}/assets/rasp/document-open.png)
+By clicking on the ![CLEAN icon]({{ site.baseurl }}/assets/rasp/edit-delete.png) icon, you can clean the entire memory content.
 
-After that, you can choose the binary file you want to load.
-
-By clicking on the CLEAN icon, you can clean the entire memory content:
-
-![CLEAN icon]({{ site.baseurl }}/assets/rasp/edit-delete.png)
-
-The table with memory content is editable. By double-clicking on a row you can simply edit the value. You confirm your changes by the ENTER key. 
+The table with memory content is editable. By double-clicking on a row you can simply edit the value. You confirm your changes by the `ENTER` key. 
  
 WARNING: If you edit a cell that contains an instruction, you edit its operation code, e.g. if a cell contains the `ADD =` instruction (operation code 7) and you change the cell to 9, the operation code will be overwritten. As a result, the instruction changes to `SUB =`. It means that you cannot write number 9 as a data item here, only as an operation code.
