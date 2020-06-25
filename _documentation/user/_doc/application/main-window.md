@@ -15,7 +15,7 @@ emulation.
 
 ## Source code editor
 
-![Source code tab]({{ site.baseurl }}/assets/application/source-code.png)
+![Source code tab]({{ site.baseurl }}/assets/application/source-code.png){:style="max-width:760px"}
 
 In the source code editor, users can write programs for the emulated computer. However, the most important tool which
 allows translation of the source code into a binary program readable by emulated CPU is a compiler. Therefore, users must use the right compiler.
@@ -39,7 +39,7 @@ content is left unchanged.
 
 *Emulator tab* is shown in the following image. It is currently open with MITS Altair8800 computer with Intel 8080 CPU, and several devices:
 
-![Emulator tab]({{ site.baseurl}}/assets/application/emulator.png)
+![Emulator tab]({{ site.baseurl}}/assets/application/emulator.png){:style="max-width:760px"}
 
 The tab contains three main parts. The first one is very useful - listing of operating memory disassembled into instructions.
 This part is called a debugger window, or "debugger". The other part, below the debugger window, is a list of all computer
@@ -66,11 +66,11 @@ If you hover over those icons, a help text is displayed on how to use the icon.
 - *B*: Set the next instruction position to 0. CPU will perform the next instruction from there.
 - *C*: Set the next instruction position to the `(current - 1)`. This action can completely change the displaying of
   instructions since the new instruction position does not have to be correct in terms of executing the current program.
-- *D*: Stop emulation (which is either running or paused).
-- *E*: Pause emulation (which is running).
-- *F*: Run emulation (which is paused).
-- *G*: Run emulation with a timer (which is paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval.
-- *H*: Step emulation (which is paused). CPU will execute only one - the very next - instruction.
+- *D*: Stop emulation (which was either running or paused).
+- *E*: Pause emulation (which was running).
+- *F*: Run emulation (which was paused).
+- *G*: Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval.
+- *H*: Step emulation (which was paused). CPU will execute only one - the very next - instruction.
 - *I*: Jump to location. The user will manually specify a location (address in memory) for the next instruction to execute.
 - *J*: Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches
   the breakpoint, it will pause there, waiting for the next user action.
@@ -99,7 +99,7 @@ one. This set of instructions is called an "instructions window". The instructio
 offset in memory. It is possible to move the window to forwards or backward, in a per-page fashion. A toolbar below
 the instructions list contains controls to control the instruction window pages.
    
-![Controlling instructions window]({{ site.baseurl }}/assets/application/instructions-panel.png)
+![Controlling instructions window]({{ site.baseurl }}/assets/application/pages.png)
 
 - *A*: Go to the first page. The very first row corresponds to instruction position 0.
 - *B*: Go backward. The user will specify the number of pages for going back.
@@ -107,4 +107,3 @@ the instructions list contains controls to control the instruction window pages.
 - *D*: Go to the page where the current instruction position is.
 - *E*: Go to the next page.
 - *F*: Go forwards. The user will specify the number of pages for going forward.
-- *G*: Go to the last page. This can be a slow operation and can cause displaying the instructions incorrectly.

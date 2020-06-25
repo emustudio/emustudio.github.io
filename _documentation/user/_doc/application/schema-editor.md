@@ -12,7 +12,7 @@ Computer schema represents a real configuration of the emulated computer. They a
 Users pick plugins that appear as "boxes" or elements on the screen. Then using connection lines those elements can be
 connected together to express a relation (that they can "see" each other).
 
-![Computer schema editor]({{ site.baseurl }}/assets/application/schema-editor.png)
+![Computer schema editor]({{ site.baseurl }}/assets/application/schema-editor.png){:style="max-width:669"}
 
 Description of the control panel follows.
 

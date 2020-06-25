@@ -78,91 +78,57 @@ The following table shows control codes (`CTRL` plus some key combinations). The
 
 ### Absolute cursor position from the keyboard
 
-Terminal allows to set the absolute cursor position, when in "Cursor control Mode". ADM-3A emulator does not have such mode, but `ESC + '=' + [X] + [Y]` combination allows to set the cursor position. By pressing `ESC` key, it initiates the "load cursor" operation. If the user then presses `=` key, the terminal expects another two keystrokes, and translates them into `[X]` and `[Y]` coordinates for the new position of the cursor. The following table shows the key-to-coordinate translation table.
+Terminal allows to set the absolute cursor position, when in "Cursor control Mode" or using "load cursor" operation.
+Emulated terminal does not support the "Cursor control Mode", but "load cursor" is supported.
+
+The "load cursor" operation can be activated by pressing `ESC` key followed by `=` key. Then the terminal expects
+another two keypresses, one representing X, and the other one the Y position of the cursor.  
+
+X and Y corridnates are translated from the key presses. The following table shows the key-to-coordinate translation table.
 
 |---
-| Key  | Number
-|-|-
-|`' '` | 0
-|`!`   | 1
-|`"`   | 2
-|`#`   | 3
-|`$`   | 4
-|`%`   | 5
-|`&`   | 6
-|`'`   | 7
-|`(`   | 8
-|`)`   | 9
-|`*`   | 10
-|`+`   | 11
-|`,`   | 12
-|`-`   | 13
-|`.`   | 14
-|`/`   | 15
-|`0`   | 16
-|`1`   | 17
-|`2`   | 18
-|`3`   | 19
-|`4`   | 20
-|`5`   | 21
-|`6`   | 22
-|`7`   | 23
-|`8`   | 24
-|`9`   | 25
-|`:`   | 26
-|`;`   | 27
-|`<`   | 28
-|`=`   | 29
-|`>`   | 30
-|`?`   | 31
-|`@`   | 32
-|`A`   | 33
-|`B`   | 34
-|`C`   | 35
-|`D`   | 36
-|`E`   | 37
-|`F`   | 38
-|`G`   | 39
-|`H`   | 40
-|`I`   | 41
-|`J`   | 42
-|`K`   | 43
-|`L`   | 44
-|`M`   | 45
-|`N`   | 46
-|`O`   | 47
-|`P`   | 48
-|`Q`   | 49
-|`R`   | 50
-|`S`   | 51
-|`T`   | 52
-|`U`   | 53
-|`V`   | 54
-|`W`   | 55
-|`X`   | 56
-|`Y`   | 57
-|`Z`   | 58
-|`[`   | 59
-|`\`   | 60
-|`]`   | 61
-|`^`   | 62
-|`_`   | 63
-|```   | 64
-|`a`   | 65
-|`b`   | 66
-|`c`   | 67
-|`d`   | 68
-|`e`   | 69
-|`f`   | 70
-|`g`   | 71
-|`h`   | 72
-|`i`   | 73
-|`j`   | 74
-|`k`   | 75
-|`l`   | 76
-|`m`   | 77
-|`n`   | 78
-|`o`   | 79
+| Key  | Number | Key | Number
+|-|-|-|-
+|`' '` (space) | 0      |`H`   | 40   
+|`!`   | 1      |`I`   | 41   
+|`"`   | 2      |`J`   | 42   
+|`#`   | 3      |`K`   | 43   
+|`$`   | 4      |`L`   | 44   
+|`%`   | 5      |`M`   | 45   
+|`&`   | 6      |`N`   | 46   
+|`'`   | 7      |`O`   | 47   
+|`(`   | 8      |`P`   | 48   
+|`)`   | 9      |`Q`   | 49   
+|`*`   | 10     |`R`   | 50   
+|`+`   | 11     |`S`   | 51   
+|`,`   | 12     |`T`   | 52   
+|`-`   | 13     |`U`   | 53   
+|`.`   | 14     |`V`   | 54   
+|`/`   | 15     |`W`   | 55   
+|`0`   | 16     |`X`   | 56   
+|`1`   | 17     |`Y`   | 57   
+|`2`   | 18     |`Z`   | 58   
+|`3`   | 19     |`[`   | 59   
+|`4`   | 20     |`\`   | 60   
+|`5`   | 21     |`]`   | 61   
+|`6`   | 22     |`^`   | 62   
+|`7`   | 23     |`_`   | 63   
+|`8`   | 24     | `` ` `` (backtick)  | 64   
+|`9`   | 25     |`a`   | 65   
+|`:`   | 26     |`b`   | 66   
+|`;`   | 27     |`c`   | 67   
+|`<`   | 28     |`d`   | 68   
+|`=`   | 29     |`e`   | 69   
+|`>`   | 30     |`f`   | 70   
+|`?`   | 31     |`g`   | 71   
+|`@`   | 32     |`h`   | 72   
+|`A`   | 33     |`i`   | 73   
+|`B`   | 34     |`j`   | 74   
+|`C`   | 35     |`k`   | 75   
+|`D`   | 36     |`l`   | 76   
+|`E`   | 37     |`m`   | 77   
+|`F`   | 38     |`n`   | 78   
+|`G`   | 39     |`o`   | 79   
 |---
 
 ## ADM-3A Settings

@@ -8,7 +8,7 @@ Logo was developed using MetaPost. In order to "compile" the logo, run:
 mpost logo.mp
 ```
 
-I wrote a [blogpost](http://www.mojkod.sk/logo-v-metaposte/) about creating the logo, however it's just in Slovak language.
+There is a [blogpost](http://www.mojkod.sk/logo-v-metaposte/) about how emuStudio logo was created, however it's just in Slovak language.
 
 ## Animated gif of terminal
 
@@ -26,3 +26,7 @@ Thumbnails have width 300px. Using `ImageMagick`:
 ```
 mogrify -resize 300 -filter catrom -quality 100 -normalize -unsharp 10x1+1 *.png
 ```
+
+## Animated gif of any GUI
+
+Install [peek](https://github.com/phw/peek).

@@ -33,7 +33,7 @@ an emulator that can benefit from it.
 
 To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator panel. The window is shown, as in the following image:
 
-![Standard operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png)
+![Standard operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png){:style="max-width:779"}
 
 - *A*: Open a memory image. Current memory content, if it does not interfere with the loaded data will be kept.
 - *B*: Dump (save) whole memory content into a file.
@@ -54,7 +54,7 @@ is finished, the user can press <kbd>ENTER</kbd> key to confirm it, or <kbd>ESC<
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
 
-![Memory settings]({{ site.baseurl }}/assets/altair8800/standard-mem-settings.png)
+![Memory settings]({{ site.baseurl }}/assets/altair8800/standard-mem-settings.png){:style="max-width:659"}
 
 - *A*: Settings for memory bank-switching
 - *B*: Settings for ROM areas
