@@ -11,7 +11,7 @@ permalink: /ram/ram-cpu
 This plugin is the core of the emulation/simulation. Even if we're supposed to talk about the RAM simulator, because emulation is connected more with imitation of real hardware than the abstract machine, there is a plugin that calls itself a RAM CPU. It is really not accurate, but CPU nowadays means something as the
 main or core engine of the computation which the machine does. So the name got stuck rather with this convention.
 
-The plugin strictly requires a `ram-mem`, and three instances of `abstractTape-ram` plugins, representing the tapes. After boot, the CPU assigns the specific meaning to each tape.
+The plugin strictly requires a `ram-mem`, and three instances of `abstract-tape` plugins, representing the tapes. After boot, the CPU assigns the specific meaning to each tape.
 
 ## Status panel
 

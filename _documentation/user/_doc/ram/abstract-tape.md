@@ -8,7 +8,7 @@ permalink: /ram/abstract-tape
 
 # Abstract tape
 
-Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstractTape-ram`.
+Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstract-tape`.
 
 There are several properties which an abstract tape might have:
 

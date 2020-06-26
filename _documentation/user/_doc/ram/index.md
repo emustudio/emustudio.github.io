@@ -35,8 +35,8 @@ The RAM virtual machine in emuStudio consists of the following plugins:
 - `ramc-ram`: Compiler of the RAM language, very simple "assembler"-like language
 - `ram-cpu`: RAM simulator engine
 - `ram-mem`: Program memory
-- `abstractTape-ram`: Device which represents the "tape" used in RAM, other than program memory. The abstract schema
-                      must define three instances of this device, representing register, input, and output tapes.
+- `abstract-tape`: Device which represents the "tape" used in RAM, other than program memory. The abstract schema
+                   must define three instances of this device, representing register, input, and output tapes.
 
 ## RAM in emuStudio
 
