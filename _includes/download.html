@@ -4,7 +4,7 @@
     <div id="version{{ emustudio.versionid }}" class="collapse {% if forloop.first == true %}show{% endif %}"
          data-parent="#accordion">
         {% for download in emustudio.downloads %}
-        <a href="{{ download.href }}" class="btn btn-info btn-lg mr-3">
+        <a href="{{ download.href }}" class="btn btn-info btn-lg mr-3" onclick="gtag('event', 'download', { event_category: '{{ emustudio.version }}', event_action: '{{ download.filename }}'});">
             {% for glyph in download.glyphs %}
             <i class="fab {{ glyph }}"></i>
             {% endfor %}
@@ -17,7 +17,7 @@
             <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></li>
 
             {% if emustudio.release.href != '' %}
-            <li class="list-group-item">See the <a href="{{ emustudio.release.href }}" target="_blank">release notes</a></li>
+            <li class="list-group-item">See the <a href="{{ emustudio.release.href }}" target="_blank" onclick="gtag('event', 'release_notes', { event_category: '{{ emustudio.version }}', event_action: ''});">release notes</a></li>
             {% endif %}
         </ul>
         </p>
