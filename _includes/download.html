@@ -13,9 +13,12 @@
         {% endfor %}
         <p>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Released {{ emustudio.releasedate }}</li>
+            <li class="list-group-item">Released {{ emustudio.release.date }}</li>
             <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></li>
-            <li class="list-group-item">See the <a href="https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md" target="_blank">release notes</a></li>
+
+            {% if emustudio.release.href != '' %}
+            <li class="list-group-item">See the <a href="{{ emustudio.release.href }}" target="_blank">release notes</a></li>
+            {% endif %}
         </ul>
         </p>
     </div>

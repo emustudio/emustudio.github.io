@@ -23,10 +23,15 @@ allows translation of the source code into a binary program readable by emulated
 The input language of a compiler is not limited, it can be either a kind of assembler or even C or Pascal language. It depends on the compiler implementation, there can be many. The only restriction
 is that compiler must have an output that is compatible with CPU which is currently being emulated. This cannot be checked automatically, users must take care of this.
 
-The source code editor supports only the basic features, such as line numbering and syntax highlighting. Also, there is a
-possibility to search/replace text.
+The source code editor supports the following features:
 
-The Compilation must be run manually. The compiler output window shows all messages which compiler produces. The content is dependant on the used compiler, but most likely it will contain compilation success or
+- line numbering & syntax highlighting
+- undo/redo capability
+- search/replace text
+- cut/copy/paste text
+- `CTRL+{mouse wheel}` changes font size
+
+The compilation must be run manually. The compiler output window shows all messages which compiler produces. The content is dependant on the used compiler, but most likely it will contain compilation success or
 error messages.
 
 Compiled source code can produce an output binary file (for example a HEX file), and it's automatically loaded into the operating memory. If the emulation is

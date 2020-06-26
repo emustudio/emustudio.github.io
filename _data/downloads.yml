@@ -6,7 +6,10 @@ downloads:
       href: 'https://jdk.java.net/archive/',
       name: 'Java 11'
     },
-    releasedate: 'in 2020',
+    release: {
+      date: 'in 2020',
+      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-040'
+    },
     downloads: [
     {
       filename: 'emuStudio-0.40.zip',
@@ -27,7 +30,10 @@ downloads:
       href: 'http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html',
       name: 'Java 8'
     },
-    releasedate: 'on 2017-03-20',
+    release: {
+      date: 'on 2017-03-20',
+      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-039'
+    },
     downloads: [
     {
       filename: 'emuStudio-0.39.zip',
@@ -43,7 +49,10 @@ downloads:
       href: '',
       name: 'Java 1.6'
     },
-    releasedate: ' on 2011-10-24',
+    release: {
+      date: 'on 2011-10-24',
+      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-038b'
+    },
     downloads: [
     {
       filename: 'emuStudio-0.38b.zip',
@@ -59,7 +68,10 @@ downloads:
       href: '',
       name: 'Java 1.4'
     },
-    releasedate: 'on 2010-08-26',
+    release: {
+      date: 'on 2010-08-26',
+      href: ''
+    },
     downloads: [
     {
       filename: 'emuStudio-0.37b.zip',
@@ -75,7 +87,10 @@ downloads:
       href: '',
       name: 'Java 1.4'
     },
-    releasedate: 'in 2007',
+    release: {
+      date: 'in 2007',
+      href: ''
+    },
     downloads: [
     {
       filename: 'emu8-very-first.zip',
