@@ -37,15 +37,16 @@ NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it mi
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 
 	$ ./emuStudio --help
-	 --auto            : run the emulation automation (default: false)
-     --config filename : load configuration with file name
-     --help            : output this message (default: true)
-     --input filename  : use the source code given by the file name
-     --nogui           : try to not show GUI in automation (default: false)
-     --waitmax X       : wait for emulation finish max X milliseconds (default: -1)
+	 -a (--auto)            : run the emulation automation (default: false)
+     -c (--config) filename : load configuration with file name
+     -h (--help)            : output this message (default: true)
+     -i (--input) filename  : use the source code given by the file name
+     -n (--nogui)           : try to not show GUI in automation (default: false)
+     -s (--programStart) X  : set program start address (default: 0)
+     -w (--waitmax) X       : wait for emulation finish max X milliseconds (default: -1)
 
 
-Most of these arguments are self-explanatory. Some of them have meaning only when emulation automation is turned on (`--nogui`, `--waitmax`).
+Most of these arguments are self-explanatory. Some of them have meaning only when emulation automation is turned on (`--nogui`, `--waitmax`, `--programStart`).
 
 
 [java11]: https://jdk.java.net/archive/
