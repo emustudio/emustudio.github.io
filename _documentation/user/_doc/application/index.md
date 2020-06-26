@@ -6,6 +6,8 @@ has_children: true
 permalink: /application/
 ---
 
+{% include analytics.html category="Application" %}
+
 # emuStudio Application
 
 emuStudio is a desktop application which allows emulation of various computers. Besides emulation, it contains source code editor, which can be used to write and then compile programs then to be instantly emulated. Virtual computers, as the emulators are called, are represented by plugins of various type (compiler, memory, CPU and device), combined in a comuter configuration. The computer configuration can be opened during startup.

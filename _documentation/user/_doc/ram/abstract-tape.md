@@ -6,6 +6,8 @@ parent: RAM
 permalink: /ram/abstract-tape
 ---
 
+{% include analytics.html category="RAM" %}
+
 # Abstract tape
 
 Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstract-tape`.

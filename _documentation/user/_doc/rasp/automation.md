@@ -6,6 +6,8 @@ parent: RASP
 permalink: /rasp/automation
 ---
 
+{% include analytics.html category="RASP" %}
+
 # Automation
 
 RASP computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),

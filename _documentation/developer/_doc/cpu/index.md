@@ -6,6 +6,8 @@ has_children: true
 permalink: /cpu/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Writing a CPU
 
 CPU plugins in emuStudio are not just plain emulators. They must cooperate with emuStudio and provide capabilities allowing debugging and some interaction.

@@ -4,6 +4,8 @@ title: About
 permalink: /about/
 ---
 
+{% include analytics.html category="root" %}
+
 # Why another emulator?
 
 {:.lead}

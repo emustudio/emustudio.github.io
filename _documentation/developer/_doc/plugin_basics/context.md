@@ -6,6 +6,8 @@ parent: Plugin basics
 permalink: /plugin_basics/context
 ---
 
+{% include analytics.html category="developer" %}
+
 # Plugin contexts
 
 Plugin contexts are answer to the question "how plugins communicate?". Plugin root classes are seen by emuStudio,

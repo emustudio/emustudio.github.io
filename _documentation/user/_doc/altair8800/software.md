@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/software
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Original software for Altair8800
 
 Since Altair8800 virtual computer emulates a real machine, it's possible to use real software written for the computer.

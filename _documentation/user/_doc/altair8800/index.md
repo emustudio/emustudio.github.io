@@ -6,6 +6,8 @@ has_children: true
 permalink: /altair8800/
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # MITS Altair8800
 
 Computer MITS Altair 8800 was named after a planet in one of the first episodes of Star Trek series. Having Intel 8080 CPU inside, with 256 bytes of memory, no display and keyboard is this computer, when comparing to the present era, absolutely ridiculous. His author, Ed Roberts, called the invention "personal computer", which is now very common term. As Wikipedia states:

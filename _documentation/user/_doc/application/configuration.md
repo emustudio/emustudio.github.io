@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/configuration-file
 ---
 
+{% include analytics.html category="Application" %}
+
 # Configuration file
 
 emuStudio uses a configuration file called `emuStudio.toml`. It can be found in the root directory of emuStudio installation.

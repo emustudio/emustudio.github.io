@@ -6,6 +6,8 @@ parent: Getting started
 permalink: /getting_started/contributing
 ---
 
+{% include analytics.html category="developer" %}
+
 # How to contribute
 
 There are two options on how to contribute. Either you fix or enhance the application or plugins, or

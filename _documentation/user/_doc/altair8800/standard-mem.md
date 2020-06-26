@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/standard-mem
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Operating memory "standard-mem"
 
 This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can benefit from the following basic properties:

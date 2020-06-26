@@ -6,6 +6,8 @@ parent: RASP
 permalink: /rasp/rasp-cpu
 ---
 
+{% include analytics.html category="RASP" %}
+
 # CPU "rasp-cpu"
 
 RASP CPU is the core of the RASP virtual computer. Its purpose is to execute the RASP program composed of RASP instructions which are stored in the RASP memory. The CPU is therefore connected with the memory. 

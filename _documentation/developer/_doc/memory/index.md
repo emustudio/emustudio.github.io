@@ -5,6 +5,8 @@ nav_order: 5
 permalink: /memory/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Writing a memory
 
 In emuStudio, plugin root class must either implement [Memory][memory]{:target="_blank"} interface, or can extend more bloat-free [AbstractMemory][abstractMemory]{:target="_blank"} class.

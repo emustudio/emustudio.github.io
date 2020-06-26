@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/ssem-cpu
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # SSEM CPU emulator
 
 SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit, arithmetic-logic unit, and I/O subsystem (CRT display).

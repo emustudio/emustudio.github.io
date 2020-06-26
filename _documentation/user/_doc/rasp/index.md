@@ -6,6 +6,8 @@ has_children: true
 permalink: /rasp/
 ---
 
+{% include analytics.html category="RASP" %}
+
 # Random-Access Stored Program (RASP)
 
 Random Access Stored Program machine (RASP) is an abstract von-Neumann computer. It means it does not represent a physical device, but rather it is intended to work as a model to study von-Neumann architecture, without the need to care about specific manufacturer's hardware details. 

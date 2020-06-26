@@ -6,6 +6,8 @@ parent: BrainDuck
 permalink: /brainduck/automation
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # Automation
 
 BrainDuck computer will recognize if automatic emulation is executed.

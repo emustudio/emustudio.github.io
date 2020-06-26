@@ -5,6 +5,8 @@ nav_order: 3
 permalink: /compiler/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Writing a compiler
 
 A compiler plugin must either implement [Compiler][compiler]{:target="_blank"} interface, or extend more bloat-free [AbstractCompiler][abstractCompiler]{:target="_blank"} class. Common practice is to utilize [JFLex][jflex]{:target="_blank"} and [Java Cup][jcup]{:target="_blank"} parser generators, which has direct runtime support in emuStudio.

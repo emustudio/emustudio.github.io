@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/logging
 ---
 
+{% include analytics.html category="Application" %}
+
 # Logging
 
 No software is bug-free in these days, and not a person is perfect. Sometimes it might happen that emuStudio is not

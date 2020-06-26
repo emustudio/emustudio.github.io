@@ -6,6 +6,8 @@ parent: RAM
 permalink: /ram/ramc-ram
 ---
 
+{% include analytics.html category="RAM" %}
+
 # Compiler "ramc-ram"
 
 RAM has a very simple assembler-like language, consisting of direct and indirect reading/writing from/to registers or input/output tape. Also, there are three control-flow instructions.

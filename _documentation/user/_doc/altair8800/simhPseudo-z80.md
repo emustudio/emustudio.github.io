@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/simhPseudo-z80
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Virtual device "simhPseudo-z80"
 
 Virtual device partially reimplemented from [simh][simh]{:target="_blank"} emulator. This device is used mainly for communication between CP/M 3 operating system for `simh` and emuStudio. Most of the original functionality is not implemented, but it is crucial for support of memory bank-switching.

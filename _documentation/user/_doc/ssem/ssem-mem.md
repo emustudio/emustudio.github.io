@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/ssem-mem
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # Memory "ssem-mem"
 
 SSEM used the world's first random-access memory called Williams or [Williams-Kilburn][tube]{:target="_blank"} tube. The used principle was the same as in standard Cathode-Ray-Tubes (CRTs). Original [EDSAC][edsac]{:target="_blank"} computer (which introduced the von Neumann architecture) did not have random-access memory.

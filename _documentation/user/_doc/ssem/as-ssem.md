@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/as-ssem
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # Assembler "as-ssem"
 
 Assembler "as-ssem" is a simple language that compiles SSEM instructions into binary output and SSEM memory.

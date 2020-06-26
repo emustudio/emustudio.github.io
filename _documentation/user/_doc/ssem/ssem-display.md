@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/ssem-display
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # SSEM Display
 
 SSEM computer used CRT "display", which displayed the SSEM memory content. emuStudio plugin does not mimic the real display interface with switches and everything, but it is just a display of the memory content. [Here][crt]{:target="_blank"} can be seen how the original display looked like.

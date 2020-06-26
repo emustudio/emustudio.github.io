@@ -6,6 +6,8 @@ parent: Getting started
 permalink: /getting_started/documenting
 ---
 
+{% include analytics.html category="developer" %}
+
 # Documenting
 
 There are two types of documentation - user and developer. Only the current version of the documentation is maintained.

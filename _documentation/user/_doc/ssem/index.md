@@ -6,6 +6,8 @@ has_children: true
 permalink: /ssem/
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # Small Scale Experimental Machine (SSEM)
 
 Small Scale Experimental Machine, also known as [SSEM][ssem]{:target="_blank"}, was the world's very first stored-program computer, nicknamed "Baby". It was a predecessor of [Manchester Mark 1][mark1]{:target="_blank"} which led to [Ferranti Mark 1][fmark1]{:target="_blank"}, the world's first commercially available general-purpose computer.

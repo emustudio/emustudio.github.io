@@ -6,6 +6,8 @@ parent: Getting started
 permalink: /getting_started/gitflow
 ---
 
+{% include analytics.html category="developer" %}
+
 # Git workflow
 
 Since emuStudio is available at GitHub, it using `git` as the version control system (VCS).

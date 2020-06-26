@@ -6,6 +6,8 @@ parent: Writing a CPU
 permalink: /cpu/engine
 ---
 
+{% include analytics.html category="developer" %}
+
 # Emulator engine
 
 Emulator engine is the core of the emulator. It interprets binary-encoded instructions stored in a memory (emuStudio assumes it's a von-Neumann-like CPU). Execution of one instruction

@@ -6,6 +6,8 @@ has_children: true
 permalink: /plugin_basics/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Plugin basics
 
 Each plugin is a separate Java module (source code can be written in any JVM language), compiled into a single JAR file.

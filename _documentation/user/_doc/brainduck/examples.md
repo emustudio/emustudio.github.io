@@ -6,6 +6,8 @@ parent: BrainDuck
 permalink: /brainduck/examples
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # Example code
 
 emuStudio provides a few brainf*ck code examples. If seeking for more, the following links might help:

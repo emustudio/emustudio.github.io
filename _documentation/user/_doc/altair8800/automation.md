@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/automation
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Automation
 
 MITS Altair8800 computer will recognize if automatic emulation is executed. The automation can operate in the interactive

@@ -6,6 +6,8 @@ has_children: true
 permalink: /ram/
 ---
 
+{% include analytics.html category="RAM" %}
+
 # Random Access Machine (RAM)
 
 Random Access Machine (RAM) is the abstract machine, invented to study algorithmic complexity of programs written on register-based computers. It is equivalent to the Turing machine and has a close relationship with a so-called [Harvard computer architecture][harvard]{:target="_blank"}, which has separated storage for program and data. The model implies that it is not possible to modify instructions.

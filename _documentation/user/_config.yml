@@ -8,6 +8,7 @@ baseurl: "/documentation/user" # the subpath of your site, e.g. /blog
 url: "" 
 github_username:  emustudio
 ga_tracking: UA-3492956-5
+ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true by default)
 
 include:
   - _doc

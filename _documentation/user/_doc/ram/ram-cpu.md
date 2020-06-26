@@ -6,6 +6,8 @@ parent: RAM
 permalink: /ram/ram-cpu
 ---
 
+{% include analytics.html category="RAM" %}
+
 # CPU "ram-cpu"
 
 This plugin is the core of the emulation/simulation. Even if we're supposed to talk about the RAM simulator, because emulation is connected more with imitation of real hardware than the abstract machine, there is a plugin that calls itself a RAM CPU. It is really not accurate, but CPU nowadays means something as the

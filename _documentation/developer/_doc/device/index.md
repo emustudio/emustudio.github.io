@@ -5,6 +5,8 @@ nav_order: 6
 permalink: /device/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Writing a device
 
 In emuStudio, plugin root class must either implement [Device][device]{:target="_blank"} interface, or can extend more bloat-free [AbstractDevice][abstractDevice]{:target="_blank"} class.

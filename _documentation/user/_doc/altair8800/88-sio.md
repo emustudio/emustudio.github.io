@@ -5,6 +5,7 @@ nav_order: 7
 parent: MITS Altair8800
 permalink: /altair8800/88-sio
 ---
+{% include analytics.html category="Altair8800" %}
 
 # Serial board "88-sio"
 

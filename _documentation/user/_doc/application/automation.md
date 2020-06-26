@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/automation
 ---
 
+{% include analytics.html category="Application" %}
+
 # Automation
 
 Automation, or automatic emulation, is a feature in which the user can run the emulation without manual steps.

@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/z80-cpu
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Zilog Z80 CPU emulator
 
 It was possible to upgrade your Altair 8800 computer with a "better" 8-bit processor [Zilog Z80][z80]{:target="_blank"}.

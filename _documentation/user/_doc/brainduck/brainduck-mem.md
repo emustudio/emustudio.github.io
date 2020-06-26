@@ -6,6 +6,8 @@ parent: BrainDuck
 permalink: /brainduck/mem
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # Memory "brainduck-mem"
 
 BrainDuck memory is used as a part of BrainDuck computer, which acts as the operating memory, holding both of brainfuck program and data.

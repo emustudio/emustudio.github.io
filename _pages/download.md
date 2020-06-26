@@ -4,6 +4,8 @@ title: Download
 permalink: /download/
 ---
 
+{% include analytics.html category="root" %}
+
 <div class="jumbotron">
   <h1>Download</h1>
   <p>

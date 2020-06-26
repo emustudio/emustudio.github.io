@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/main-window
 ---
 
+{% include analytics.html category="Application" %}
+
 # Main window
 
 The main window is the core part of the emuStudio application. Users usually spend there most of the time while working with emuStudio.

@@ -6,6 +6,8 @@ parent: Writing a CPU
 permalink: /cpu/rootclass
 ---
 
+{% include analytics.html category="developer" %}
+
 # Plugin root class
 
 A CPU plugin root class must implement either a [CPU][cpu]{:target="_blank"} interface, or extend [AbstractCPU][abstractCPU]{:target="_blank"} class.

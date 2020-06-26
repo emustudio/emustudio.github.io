@@ -6,6 +6,8 @@ has_children: true
 permalink: /brainduck/
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # BrainDuck
 
 BrainDuck is an abstract computer for emuStudio, which mimics [brainfuck][brainfuck]{:target="_blank"} programming language. Originally, brainfuck was developed by [Urban Miller][miller]{:target="_blank"} and it is well-known fact that the language has a minimalistic compiler and it's eight instructions don't prevent it to be Turing complete. Also, there exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of that can be read at Wikipedia or at other sources.

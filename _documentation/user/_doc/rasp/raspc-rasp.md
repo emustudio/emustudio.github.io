@@ -6,6 +6,8 @@ parent: RASP
 permalink: /rasp/raspc-rasp
 ---
 
+{% include analytics.html category="RASP" %}
+
 # Compiler "raspc-rasp"
 
 RASP compiler is included in the architecture of the RASP virtual computer in emuStudio. Its purpose is to translate the source code of a RASP program into the form executable by the RASP CPU emulator. 

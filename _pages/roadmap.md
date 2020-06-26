@@ -4,6 +4,8 @@ title: Roadmap
 permalink: /roadmap/
 ---
 
+{% include analytics.html category="root" %}
+
 <div class="jumbotron">
 <h1>Roadmap</h1>
 <div class="table-responsive">

@@ -6,6 +6,8 @@ has_children: true
 permalink: /getting_started/
 ---
 
+{% include analytics.html category="developer" %}
+
 # Getting started
 
 emuStudio is a Java Swing application that implements an editor of virtual computer configuration, source code editor,

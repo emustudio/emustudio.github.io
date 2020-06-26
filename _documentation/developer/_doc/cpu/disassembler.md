@@ -6,6 +6,8 @@ parent: Writing a CPU
 permalink: /cpu/disassembler
 ---
 
+{% include analytics.html category="developer" %}
+
 # Disassembler
 
 Disassembler is not needed for the emulation itself. It is needed for emuStudio to be able to visually show the

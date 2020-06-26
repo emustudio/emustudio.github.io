@@ -6,6 +6,8 @@ parent: RAM
 permalink: /ram/ram-mem
 ---
 
+{% include analytics.html category="RAM" %}
+
 # Program memory ("ram-mem")
 
 RAM memory is used as a part of RAM simulator, which acts as the "program memory", holding just the program.

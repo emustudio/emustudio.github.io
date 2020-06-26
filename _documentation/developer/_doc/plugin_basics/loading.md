@@ -6,6 +6,8 @@ parent: Plugin basics
 permalink: /plugin_basics/loading
 ---
 
+{% include analytics.html category="developer" %}
+
 # Loading and initialization
 
 Instantiating and initializing plugins is done by emuStudio application in one thread. All plugins share one class-loader,

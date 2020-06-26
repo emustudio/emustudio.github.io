@@ -6,6 +6,8 @@ parent: RASP
 permalink: /rasp/rasp-mem
 ---
 
+{% include analytics.html category="RASP" %}
+
 # Memory "rasp-mem"
 
 RASP memory plug-in serves as the main store (operating memory) for the RASP virtual computer. As already mentioned in the introduction of this manual, RASP is an example of von-Neumann architecture, which implies that both program and data reside in the same memory module.

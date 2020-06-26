@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/as-z80
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Assembler "as-z80"
 
 The assembler syntax is inspired by `as-8080` assembler, and by instruction set described [here][asz80]{:target="_blank"}. The assembler supports the following features:

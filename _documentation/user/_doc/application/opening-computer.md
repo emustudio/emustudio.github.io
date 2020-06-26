@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/opening-computer
 ---
 
+{% include analytics.html category="Application" %}
+
 # Opening a computer
 
 The first action that emuStudio does is loading a computer to be emulated. Virtual computers are described in abstract schemas, which are stored in configuration files.

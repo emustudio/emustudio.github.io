@@ -6,6 +6,8 @@ parent: Writing a CPU
 permalink: /cpu/runstate
 ---
 
+{% include analytics.html category="developer" %}
+
 # Run states
 
 Emulator "life" is a state machine. A state machine reacts on asynchronous events, which make the machine to transition the current state to another state. In emuStudio, whole emulation "state" depends on CPU run state. The run state is a name for the following states: `breakpoint` (starting state), `running`, `stopped` (more variants).

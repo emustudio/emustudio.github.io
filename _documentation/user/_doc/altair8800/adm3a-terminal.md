@@ -6,6 +6,8 @@ parent: MITS Altair8800
 permalink: /altair8800/adm3a-terminal
 ---
 
+{% include analytics.html category="Altair8800" %}
+
 # Terminal LSI ADM-3A
 
 Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nick name 'Dumb Terminal'. In the time (1974), due to its cheapness and speed capabilities required in that time, it became de facto standard in the industry. Often it was used in connection with MITS Altair 8800 computer, so the decision of which terminal to emulate was clear.

@@ -6,6 +6,8 @@ parent: BrainDuck
 permalink: /brainduck/cpu
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # CPU "brainduck-cpu"
 
 BrainDuck CPU is used as a part of BrainDuck computer, which acts as the interpreter of BrainDuck instructions. Those instructions correspond with brainfuck language.

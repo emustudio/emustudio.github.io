@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/software
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # Software for SSEM
 
 The following links point to some software for SSEM (either original or created later) which can be run on emuStudio
@@ -19,4 +21,3 @@ The following animation shows running example [nightmare.ssem](https://github.co
 
 
 ![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-nightmare.gif){:style="max-width:459"}
-

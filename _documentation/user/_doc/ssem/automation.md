@@ -6,6 +6,8 @@ parent: SSEM
 permalink: /ssem/automation
 ---
 
+{% include analytics.html category="SSEM" %}
+
 # Automation
 
 SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
@@ -90,4 +92,3 @@ CI=0x58
 30   * * * *   * * * * *       *   * * * * * *         * * * * * * 
 31         *   * *   * *                                         * 
 ```
-

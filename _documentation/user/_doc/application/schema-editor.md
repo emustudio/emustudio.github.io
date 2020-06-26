@@ -6,6 +6,8 @@ parent: emuStudio Application
 permalink: /application/computer-schema
 ---
 
+{% include analytics.html category="Application" %}
+
 # Computer schema
 
 Computer schema represents a real configuration of the emulated computer. They are "drawn" in a computer schema editor.

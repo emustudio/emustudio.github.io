@@ -5,6 +5,7 @@ nav_order: 6
 parent: MITS Altair8800
 permalink: /altair8800/88-disk
 ---
+{% include analytics.html category="Altair8800" %}
 
 # Disk controller "88-disk"
 

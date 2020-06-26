@@ -6,6 +6,8 @@ parent: RAM
 permalink: /ram/automation
 ---
 
+{% include analytics.html category="RAM" %}
+
 # Automation
 
 RAM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),

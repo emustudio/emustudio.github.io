@@ -6,6 +6,8 @@ parent: BrainDuck
 permalink: /brainduck/compiler
 ---
 
+{% include analytics.html category="BrainDuck" %}
+
 # Compiler "brainc-brainduck"
 
 BrainDuck compiler is used as a part of BrainDuck computer, which acts as a translator of *brainfuck* "human-readable" language into binary form, used by BrainDuck CPU. Those instructions and their binary codes have no relation with brainfuck itself, therefore the computer is not called *brainfuck computer*, because it is **not** brainfuck. But it does not mean you cannot write and run brainfuck programs in it :)
