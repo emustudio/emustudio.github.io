@@ -11,7 +11,6 @@ permalink: /download/
      <a href="https://github.com/emustudio/emuStudio/releases" target="_blank">GitHub</a>.
     Supported platform for all versions is only PC.     
   </p>
-  <p>Release notes are available <a href="https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md">here</a>.</p>
   {% include download.html %}
 </div>
 

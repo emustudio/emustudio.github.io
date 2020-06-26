@@ -6,12 +6,18 @@ permalink: /about/
 
 # Why another emulator?
 
+{:.lead}
 A long time ago at [Technical University of Košice][tuke]{:target="_blank"} ([Slovakia][tukesk]{:target="_blank"}) far,
 far away...
 
 During initial lessons of assembly language, my classmates and I were introduced to vintage computers. We had to
-create simple programs for Intel 8080, but we had to do it by hand on paper! There weren't good emulators that
+create simple programs for Intel 8080, but we had to do it by hand on a paper! There weren't good emulators that
 allowed simple 'compile-load-emulate' workflows.
+
+Project _emuStudio_ started in 2006 as a school project, then a master thesis, created by [Peter Jakubčo][peterj]{:target="_blank"}. I had continued to work on it afterward, giving it my limited free time.
+
+Supervisor of the school project was [Slavomír Šimoňák][slavos]{:target="_blank"}, who could be understood as the first "product owner". I remember the times with nostalgia. Lots of good ideas came from discussions between us.
+
 
 The gaps which emuStudio want to fill up are as follows.
 
@@ -33,22 +39,16 @@ which allowed them to enjoy their guilty pleasure? It is one of goals of emuStud
 write some new piece of vintage software or a game. With emuStudio, it should be easy to execute the software on modern
 devices.  
 
-## History
-
-Project _emuStudio_ started in 2006 as a school project, then a master thesis, created by [Peter Jakubčo][peterj]{:target="_blank"}. I had continued to work on it afterward, giving it my limited free time.
-
-Supervisor of the school project was [Slavomír Šimoňák][slavos]{:target="_blank"}, who could be understood as the first "product owner". I remember the times with nostalgia. Lots of good ideas came from discussions between us.
-
-## Contributing
+# Contributing
 
 Everybody *please* contribute. Statistics show that students are the main contributors, but from time-to-time,
 some unknown contributor appears. 
 
 How can you contribute? It's simpler than you think:
 
-- Provide a feedback to [the author](mailto:pjakubco@gmail.com)
-- Fill an [issue/bug on GitHub](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=bug_report.md&title=)
-- Request a [feature](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=feature_request.md&title=)
+- Provide a feedback to [the author](mailto:pjakubco@gmail.com) or the [developer group](mailto:emustudio@googlegroups.com)
+- Fill an [issue/bug on GitHub](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=bug_report.md&title=){:target="_blank"}
+- Request a [feature](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=feature_request.md&title=){:target="_blank"}
 - Fix a bug
 - Implement a feature
 - Implement emulator of a new computer
@@ -57,7 +57,7 @@ How can you contribute? It's simpler than you think:
 ## Getting help
 
 If you are seeking for a help with emuStudio, you have two options. The preferred way is to raise
-an [issue at GitHub](https://github.com/emustudio/emuStudio/issues).
+an [issue at GitHub](https://github.com/emustudio/emuStudio/issues/new/choose){:target="_blank"}.
 The second option is to write an email to the [developer group](mailto:emustudio@googlegroups.com).
 
 Responses to the issues/emails might be slow, as this project is still mostly a one-person show, and it's a
@@ -67,7 +67,7 @@ hobby project. Thank you for understanding.
 
 emuStudio is free software: you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
+the Free Software Foundation, either [version 3][gpl3]{:target="_blank"} of the License, or
 (at your option) any later version.
 
 emuStudio is distributed in the hope that it will be useful,
@@ -83,3 +83,4 @@ GNU General Public License for more details.
 [slavos]: https://kpi.fei.tuke.sk/sk/person/slavomir-simonak
 [tuke]: https://www.tuke.sk
 [tukesk]: https://goo.gl/maps/9hoGFpr5q17GxF9M6
+[gpl3]: https://www.gnu.org/licenses/gpl-3.0.html

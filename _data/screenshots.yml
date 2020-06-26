@@ -5,10 +5,9 @@ screenshots:
     alt: 'Open a computer',
     thumbnail: '/files/images/open-computer.png',
     image: '/files/images/open-computer.png',
-    html: '<p>
-      Right after emuStudio is executed, the "Open computer" dialog shows up. In the dialog, users can select
-      a predefined computer. The dialog also enables creating new computers, editing, renaming, or removing existing ones.
-      The default installation already contains all available computers.
+    html: '<p class="lead">
+      On startup, the default action is to select a computer, which will be emulated. Users can either select
+      a predefined computer, or they can "build" a new one (see below).
       </p>'
   }
   - {
@@ -18,10 +17,11 @@ screenshots:
     thumbnail: '/files/images/edit-computer.png',
     image: '/files/images/edit-computer.png',
     html: '
-      <p>
-      Sometimes either the default computer configuration is not suitable, or you might want to try to plug in your
-      new computer component or build a completely new computer. This is enabled with a computer configuration editor,
-      accessible from the "Open computer" dialog.
+      <p class="lead">
+      Computers used in emuStudio must be "built" before they can be used. It means a user must select computer components
+      and connect them together in a <a href="/documentation/user/application/computer-schema">schema</a>.
+      Computer components are plugins placed in appropriate location in emuStudio
+      installation. A computer then consists of the schema and configuration, specific for this computer.
       </p>'
   }
   - {
@@ -31,7 +31,7 @@ screenshots:
     thumbnail: '/files/images/source-code.png',
     image: '/files/images/source-code.png',
     html: '
-      <p>
+      <p class="lead">
       When a computer is opened, emuStudio becomes an IDE for developing and running programs.
       The source code editor supports syntax highlighting and other tools that provide some writing comfort.
       A compiler, if provided by the computer, will translate the source code into a binary form which is
@@ -45,7 +45,7 @@ screenshots:
     thumbnail: '/files/images/emulator.png',
     image: '/files/images/emulator.png',
     html: '
-      <p>
+      <p class="lead">
       When the program is compiled, it can be emulated. Debugger, in the emulator panel, is to help with
       controlling the emulation life-cycle. It shows the internals of emulated components. CPU emulation can be
       run, paused, or stopped. Users can execute just a single step or run the emulation in timed-steps.
@@ -59,13 +59,13 @@ screenshots:
     thumbnail: '/files/images/cpm22-thumbnail.png',
     image: '/files/images/cpm22.png',
     html: '
-      <p>
+      <p class="lead">
       Users can interact with the emulated computer using virtual devices. For example, a terminal. Devices
-      have custom capabilities, for trying to mimic the behavior of real-world devices.
+      have custom capabilities, for trying to mimic the behavior of a real-world.
       </p>
-      <p>
-      For example, a disk device in MITS Altair8800 can be used for loading already prepared software images,
-      without needing the source code.
+      <p class="lead">
+      Take an example - <a href="/documentation/user/altair8800/88-disk">88-DISK device</a> in MITS Altair8800 computer.
+      This device can be used for loading disk images containing files of some original vintage software.
       </p>'
   }
   - {
@@ -75,14 +75,10 @@ screenshots:
     thumbnail: '/files/images/automation.gif',
     image: '/files/images/automation.gif',
     html: '
-      <p>
-      emuStudio can be run without GUI from command line. It can be useful when we want to see output of
-      the emulated program instead of having to interact with emuStudio. Compiled source code will
-      be automatically loaded into memory, then run by CPU. Input and output from/to devices is redirected
-      to files.
+      <p class="lead">
+      emuStudio can be run also from command line. This can be useful when we want to see just the output of
+      a program being emulated instead of having to manually interact with emuStudio. Or if we want to run our
+      favourite vintage operating system without boring manual setup.
       </p>
-      <p>
-      The emulation output is also a log file containing the progress of the emulation;
-      it can be used for debugging.
-      </p>'
+      <p class="lead">If the GUI is disabled, inputs and outputs are redirected to files.</p>'
   }

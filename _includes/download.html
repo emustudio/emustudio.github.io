@@ -1,49 +1,50 @@
 <div id="accordion">
     {% for emustudio in site.data.downloads.downloads %}
 
-    <div id="version{{ emustudio.versionid }}" class="collapse {% if forloop.first == true %}show{% endif %}" data-parent="#accordion">
+    <div id="version{{ emustudio.versionid }}" class="collapse {% if forloop.first == true %}show{% endif %}"
+         data-parent="#accordion">
         {% for download in emustudio.downloads %}
-        <a href="{{ download.href }}" class="btn btn-info btn-lg">
+        <a href="{{ download.href }}" class="btn btn-info btn-lg mr-3">
             {% for glyph in download.glyphs %}
             <i class="fab {{ glyph }}"></i>
             {% endfor %}
             {{ download.filename }}
         </a>
         {% endfor %}
-        <p></p>
-
-        <div class="table-responsive">
-            <table class="table table-borderless table-sm">
-                <tr>
-                    <th scope="row">Version:</th>
-                    <td>{{ emustudio.version }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Operating systems:</th>
-                    <td><i class="fab fa-windows"></i> <i class="fab fa-linux"></i></td>
-                </tr>
-                <tr>
-                    <th scope="row">Java requirements:</th>
-                    <td><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Release date:</th>
-                    <td>{{ emustudio.releasedate }}</td>
-                </tr>
-            </table>
-        </div>
+        <p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Released {{ emustudio.releasedate }}</li>
+            <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></li>
+            <li class="list-group-item">See the <a href="https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md" target="_blank">release notes</a></li>
+        </ul>
+        </p>
     </div>
     {% endfor %}
 </div>
 
 <hr/>
 <div class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
         Or select another version...
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         {% for emustudio in site.data.downloads.downloads %}
-        <a class="dropdown-item" href="#" data-target="#version{{ emustudio.versionid }}" data-toggle="collapse">{{ emustudio.version }}{% if forloop.first == true %} (newest){% endif %}</a>
+        <a class="dropdown-item" href="#" data-target="#version{{ emustudio.versionid }}" data-toggle="collapse">
+            {{ emustudio.version }}{% if forloop.first == true %} (latest){% endif %}
+        </a>
         {% endfor %}
     </div>
 </div>
+
+<script type="text/javascript">
+// the current open accordion will not be able to close itself
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('#accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            e.stopPropagation();
+        }
+    }
+});
+</script>
