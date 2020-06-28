@@ -7,7 +7,7 @@ downloads:
       name: 'Java 11'
     },
     release: {
-      date: 'in 2020',
+      date: 'on 2020-06-26',
       href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-040'
     },
     downloads: [
