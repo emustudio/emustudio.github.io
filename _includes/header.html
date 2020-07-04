@@ -11,9 +11,9 @@
 
     <title>
         {% if page.title %}
-          {{ page.title }} &diams; {{ site.data.global.title }}
+          {{ page.title }} | {{ site.data.global.title }}
         {% elsif post.title %}
-          {{ post.title }} &diams; {{ site.data.global.title }}
+          {{ post.title }} | {{ site.data.global.title }}
         {% else %}
           {{ site.data.global.title }}
         {% endif %}
@@ -32,13 +32,13 @@
 
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml"
-          title="{{ site.data.global.title }} &diams; {{ site.data.global.description }}" href="{{ base }}feed.xml">
+          title="{{ site.data.global.title }} | {{ site.data.global.description }}" href="{{ base }}feed.xml">
     <link rel="alternate" type="application/atom+xml"
-          title="{{ site.data.global.title }} &diams; {{ site.data.global.description }}" href="{{ base }}atom.xml">
+          title="{{ site.data.global.title }} | {{ site.data.global.description }}" href="{{ base }}atom.xml">
 
     <!-- Favicons -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ base }}favicon.ico?">
-    <meta name="application-name" content="{{ site.data.global.title }} &diams; {{ site.data.global.description }}">
+    <meta name="application-name" content="{{ site.data.global.title }} | {{ site.data.global.description }}">
     <meta name="msapplication-TileColor" content="#ffffff">
 
     <!-- Fonts -->
