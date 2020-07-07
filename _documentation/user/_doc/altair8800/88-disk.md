@@ -7,39 +7,44 @@ permalink: /altair8800/88-disk
 ---
 {% include analytics.html category="Altair8800" %}
 
-# Disk controller "88-disk"
+# Altair Disk - "88-disk"
 
-Altair Disk offered the advantage of fixed memory including relatively fast access to data. The speed of data transfer
-was 250 Kb/s (The plugin does not emulate this). Disk was connected with disk controller (or board), and the data were
-transferred serially, bit after bit.
+[Altair Disk][disk]{:target="_blank"} offered the advantage of fixed memory including relatively fast access to data.
+The speed of data transfer was 250 Kb/s (The plugin does not emulate this). Data transfer was serial, bit after bit.
 
-Disk controller, on the other hand communicated with CPU. It transformed these serial data into 8-bit words which were stored/read by CPU into/from operating memory.
+![Altair disk]({{ site.baseurl }}/assets/altair8800/altair-disk.jpg)
 
-MITS 88-DISK offered to connect up to 16 disk devices (one can be seen in the front image in the Introduction section).
+(The image was borrowed from [deramp.com][deramp]{:target="_blank"}).
 
-Original manual can be downloaded at [this link][manual]{:target="_blank"}.
+The hardware contained three parts:
 
-## Features
+- disk drive (initially Pertec FD400), able to store ~330 kB of data
+- two controller boards inserted in S-100 bus
+    - the first one performed communication operations with the bus (and CPU)
+    - the second one performed communication with disk drives (up to 16) 
 
-A plugin emulates basic functionality of the whole disk system for Altair 8800 computer. It is not only disk controller, but also the disk drive.
+Original manuals can be downloaded at [www.virtualaltair.com][manual]{:target="_blank"}.
+ 
+## Features of the plugin
 
-The features include:
+The 88-disk plugin emulates basic functionality of the whole disk system for Altair 8800 computer.
+It is not only disk controller, but also includes 16 disk drives.
 
-- allows to mount up to 16 disk images
-- CPU ports can be set manually
-- images can be saved for automatic mount at startup
-- GUI
+Feature highlights are:
 
-Interrupts are not supported yet.
+- [x] Up to 16 disk images can be mounted, optionally mounted automatically on startup
+- [x] CPU ports can be set manually
+- [x] GUI
+- [ ] Interrupts are not supported yet.
 
-GUI can be seen here:
+GUI can be seen in the following image:
 
 ![GUI of 88-DISK]({{ site.baseurl }}/assets/altair8800/88-disk-gui.png)
 
 
 ## Mounting disk images
 
-In order to mount DISK images to the device, please open device settings:
+In order to mount disk images to the device, please open device settings:
 
 ![Settings window of 88-DISK]({{ site.baseurl }}/assets/altair8800/88-disk-images.png)
 
@@ -52,48 +57,47 @@ In order to mount DISK images to the device, please open device settings:
 
 ## CPU Ports settings
 
-MITS 88-DISK board communicates with CPU using its ports. There are three ports overall, each for different function. By default, the ports used by 88-DISK are:
+A control board of Altair disk communicated with CPU through its ports. There are three ports overall, each for different function. By default, the port mapping to CPU port numbers is as follows:
 
-- port 1: `0x08`
-- port 2: `0x09`
-- port 3: `0x0A`
+- Port 1: `0x08` - in: disk status information, out: select disk 
+- Port 2: `0x09` - in: get number of sector, out: disk settings
+- Port 3: `0x0A` - in: read data, out: write data
 
-These numbers can be changed in the Settings window, tab "CPU Ports":
+Port mapping can be changed in the Settings window, tab "CPU Ports":
 
 ![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-disk-ports.png)
 
-## Configuration file
-
-The following table shows all the possible settings of MITS 88-DISK plugin:
-
-|---
-|Name              | Default value | Valid values         | Description
-|-|-|-|-
-|`port1CPU`        | 0x08          | > 0 and < 256        | Number of Port 1
-|`port2CPU`        | 0x09          | > 0 and < 256        | Number of Port 2
-|`port3CPU`        | 0x0A          | > 0 and < 256        | Number of Port 3
-|`sectorsPerTrack` | 32            | > 0                  | Count of sectors in a disk image
-|`sectorLength`    | 137           | > 0                  | Size of one sector in bytes
-|`image0`          | N/A           | Path to existing file| File name to mount on disk A (0)
-| ...              | ...           | ...                  | ...
-|`image15`         | N/A           | Path to existing file| File name to mount on disk P (15)
-|---
-
 ## Programming
 
-Data are written onto/read from a disk serially. The position in the floppy disk is uniquely set by the track number, sector number and the offset in the sector. It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
+The basic idea is to programmatically select a drive, then set a "position". After that data can be either read or
+written.
 
-In Altair8800, drive `Pertec FD400` used 8" diskettes. Each had 77 tracks. The track had 32 sectors with 137 bytes long. Capacity was therefore `77 * 32 * 137 = 337568 B = 330 kB`. Software used less capacity, because 9 bytes from each sector were used for the integrity checksum.
+The "position" in the floppy disk is determined by a track number, sector number and the offset within the sector.
+It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
+
+In Altair8800, drive `Pertec FD400` used 8" diskettes. Each had 77 tracks. The track had 32 sectors with 137 bytes long.
+The capacity of a diskette was therefore `77 * 32 * 137 = 337568 B = 330 kB`. Software used less capacity, because
+9 bytes of each sector were used for the integrity checksum.
 
 ### Setting the position
 
-Track number and sector number can be set only incrementally, not directly. Setting the offset within the sector is more challenging.
+In the original device, the position was changing automatically by the diskette rotation inside the disk drive. Since
+CPU was much faster than a rotation, the idea was to probe the current drive position (track and sector number) from
+the CPU and when the position matched the requested one, data could be read or written.
 
-After track and sector were set, programmer must "poll" the status port which tells him when the disk position is set to the beginning of the sector. Then, programmer must read data until he gets to the position where he wanted.
+emuStudio plugin does this in a more predictable way. Instead of automatic changing the position asynchronously,
+it is changed in time when a programmer actually performs the probing. For example, to set the sector number to - say - 5,
+the programmer must probe the sector 5 times.  
+
+Setting the offset within a sector is more challenging.
+After the track and sector are set, programmer must - again - probe the status port telling if current disk position
+is actually set at the beginning of the sector. If so, then a programmer must read the data until which increments
+the position, until the position is as requested.
 
 ### CPU Ports
 
-Controller communicates with CPU using three I/O ports at addresses (by default) 0x08, 0x09 and 0x0A. The following table shows the CPU ports and how they are used.
+In the real world, two controller boards communicated with CPU using three I/O ports. The plugin utilizes the ports the
+same way as the real device. The following table shows the CPU ports and how they are used.
 
 |---
 |Port     | Address   | Input                      | Output
@@ -141,6 +145,7 @@ Initial values of the bits are: `11100111`.
 
 Control the disk head, and other settings if a disk drive is selected.
 
+- `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to manual the write sequence holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence period, it is deactivated only when the end of the sector is reached. In addition each first byte and the last byte of a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or end of a sector. However, the plugin does not require it. 
 - `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to manual the write sequence holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence period, it is deactivated only when the end of the sector is reached. In addition each first byte and the last byte of a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or end of a sector. However, the plugin does not require it. 
 - `D6` : _Head Current Switch_. On real disks the bit should be set to 1 when a program is writting data to tracks from 43-76. The plugin the bit is ignored.
 - `D5` : _Interrupt Disable_. Setting is ignored sicne plugin does not support interrupts.
@@ -284,6 +289,24 @@ org 200h
 readdata: db 0
 ```
 
+## Configuration file
+
+The following table shows all the possible file configurations of the plugin:
+
+|---
+|Name              | Default value | Valid values         | Description
+|-|-|-|-
+|`port1CPU`        | 0x08          | > 0 and < 256        | Number of Port 1
+|`port2CPU`        | 0x09          | > 0 and < 256        | Number of Port 2
+|`port3CPU`        | 0x0A          | > 0 and < 256        | Number of Port 3
+|`sectorsPerTrack` | 32            | > 0                  | Count of sectors in a disk image
+|`sectorLength`    | 137           | > 0                  | Size of one sector in bytes
+|`image0`          | N/A           | Path to existing file| File name to mount on disk A (0)
+| ...              | ...           | ...                  | ...
+|`image15`         | N/A           | Path to existing file| File name to mount on disk P (15)
+|---
 
 [manual]: http://www.virtualaltair.com/virtualaltair.com/PDF/88dsk%20manual%20v2.pdf
 [simh]: http://simh.trailing-edge.com/
+[deramp]: https://deramp.com/altair.html
+[disk]: http://vtda.org/docs/computing/MITS/MITS_AltairFloppyDisk88-DCDD_Specs.pdf
