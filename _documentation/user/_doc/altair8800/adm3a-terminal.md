@@ -16,8 +16,8 @@ Maintenance manual can be downloaded at [this link][manual1]{:target="_blank"}, 
 
 GUI can be seen here:
 
-![GUI of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/cpm22.png)
-
+![GUI of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a.jpg)
+(Image borrowed from [Wikipedia][gui]{:target="_blank"})
 
 ## Display
 
@@ -173,3 +173,4 @@ The following table shows all the possible settings of ADM-3A plugin:
 
 [manual1]: http://www.mirrorservice.org/sites/www.bitsavers.org/pdf/learSiegler/ADM3A_Maint.pdf
 [manual2]: http://maben.homeip.net/static/s100/learSiegler/terminal/Lear%20Siegler%20ADM3A%20operators%20manual.pdf
+[gui]: https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg
