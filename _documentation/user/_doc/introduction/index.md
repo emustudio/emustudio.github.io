@@ -1,8 +1,12 @@
 ---
-layout: page
+layout: default
 title: Introduction
+nav_order: 1
+has_children: true
 permalink: /introduction/
 ---
+
+{% include analytics.html category="Introduction" %}
 
 # Introduction
 

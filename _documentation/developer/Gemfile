@@ -7,6 +7,7 @@ versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 gem 'asciidoctor'
 gem 'pygments.rb'
 gem 'just-the-docs'
+gem 'jekyll', '3.9.0'
 
 group :jekyll_plugins do
   gem 'github-pages', versions['github-pages']
