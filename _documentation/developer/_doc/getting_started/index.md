@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Getting started
-nav_order: 1
+nav_order: 2
 has_children: true
 permalink: /getting_started/
 ---
 
-{% include analytics.html category="developer" %}
+{% include analytics.html category="developer_getting_started" %}
 
 # Getting started
 

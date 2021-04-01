@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Writing a CPU
-nav_order: 4
+nav_order: 5
 has_children: true
 permalink: /cpu/
 ---
 
-{% include analytics.html category="developer" %}
+{% include analytics.html category="developer_cpu" %}
 
 # Writing a CPU
 

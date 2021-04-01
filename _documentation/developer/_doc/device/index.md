@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Writing a device
-nav_order: 6
+nav_order: 7
 permalink: /device/
 ---
 
-{% include analytics.html category="developer" %}
+{% include analytics.html category="developer_device" %}
 
 # Writing a device
 

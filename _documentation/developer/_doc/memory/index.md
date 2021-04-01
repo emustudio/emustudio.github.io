@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Writing a memory
-nav_order: 5
+nav_order: 6
 permalink: /memory/
 ---
 
-{% include analytics.html category="developer" %}
+{% include analytics.html category="developer_memory" %}
 
 # Writing a memory
 

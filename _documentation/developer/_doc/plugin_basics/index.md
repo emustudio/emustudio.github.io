@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Plugin basics
-nav_order: 2
+nav_order: 3
 has_children: true
 permalink: /plugin_basics/
 ---
 
-{% include analytics.html category="developer" %}
+{% include analytics.html category="developer_basics" %}
 
 # Plugin basics
 
