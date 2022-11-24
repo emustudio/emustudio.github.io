@@ -94,7 +94,7 @@ downloads:
     downloads: [
     {
       filename: 'emuStudio-3.6b1.zip',
-      href: '{{ site.baseurl }}/files/emuStudio-3.6b1.zip',
+      href: '/files/emuStudio-3.6b1.zip',
       glyphs: ['fa-windows', 'fa-linux']
     }
     ]
@@ -113,7 +113,7 @@ downloads:
     downloads: [
     {
       filename: 'emuStudio-3.5b1.zip',
-      href: '{{ site.baseurl }}/files/emuStudio-3.5b1.zip',
+      href: '/files/emuStudio-3.5b1.zip',
       gluphs: ['fa-windows', 'fa-linux']
     }
     ]
@@ -132,7 +132,7 @@ downloads:
     downloads: [
     {
       filename: 'emu8-very-first.zip',
-      href: '{{ site.baseurl }}/files/emu8-very-first.zip',
+      href: '/files/emu8-very-first.zip',
       glyphs: ['fa-windows', 'fa-linux']
     }
     ]

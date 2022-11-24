@@ -68,8 +68,8 @@ For reference, here are provided some published papers, mostly for some older em
 [edigen]: https://github.com/emustudio/cpu-testsuite
 [atmega-2020]: https://www.researchgate.net/publication/349929732_Development_of_ATmega_328P_micro-controller_emulator_for_educational_purposes
 [rasp-2017]: https://www.researchgate.net/publication/320277321_RASP_ABSTRACT_MACHINE_EMULATOR_-_EXTENDING_THE_EMUSTUDIO_PLATFORM
-[edigen-2012]: http://people.tuke.sk/dusan.medved/APVV/clanky/Bena4.pdf
+[edigen-2012]: https://dusan.medved.website.tuke.sk/APVV/APVV-0385-07/clanky/Bena4.pdf
 [standard-2010]: https://ieeexplore.ieee.org/document/5423733
 [model-2010]: https://www.researchgate.net/publication/220482121_Communication_model_of_emuStudio_emulation_platform
 [emulation-2008]: http://www.aei.tuke.sk/papers/2008/4/08_Simonak.pdf
-[cse-2010]: {{ site.baseurl }}/../../../files/speed_final_en.pdf
+[cse-2010]: {{ site.baseurl }}/assets/published/preserving-speed.pdf
