@@ -228,10 +228,10 @@
     "relUrl": "/introduction/#edigen"
   },"38": {
     "doc": "Introduction",
-    "title": "Other documentation",
-    "content": "For reference, here are provided some documents for some older emuStudio versions. | Version | Year | Document or paper | . |   | 2017 | RASP Abstract Machine Emulator — Extending the emuStudio Platform | . |   | 2012 | An instruction decoder and disassembler generator for EmuStudio platform - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6 | . |   | 2010 | Preserving host independent emulation speed | . |   | 2010 | Standardization of computer emulation | . |   | 2010 | Communication model of emuStuio emulation platform | . | 0.37b | 2009 | User manual (in Slovak) | . | 0.37b | 2009 | Plugins’ vade-mecum (in Slovak) | . |   | 2008 | Software-based CPU emulation | . ",
-    "url": "/documentation/developer/introduction/#other-documentation",
-    "relUrl": "/introduction/#other-documentation"
+    "title": "Publications",
+    "content": "For reference, here are provided some published papers, mostly for some older emuStudio versions. | Version | Year | Document or paper | . |   | 2017 | RASP Abstract Machine Emulator — Extending the emuStudio Platform | . |   | 2012 | An instruction decoder and disassembler generator for EmuStudio platform - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6 | . |   | 2010 | Preserving host independent emulation speed | . |   | 2010 | Standardization of computer emulation | . |   | 2010 | Communication model of emuStudio emulation platform | . |   | 2008 | Software-based CPU emulation | . ",
+    "url": "/documentation/developer/introduction/#publications",
+    "relUrl": "/introduction/#publications"
   },"39": {
     "doc": "Introduction",
     "title": "Introduction",
