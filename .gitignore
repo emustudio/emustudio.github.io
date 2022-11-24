@@ -15,6 +15,7 @@ modules.xml
 _site/
 .sass-cache/
 .jekyll-metadata
+.jekyll-cache
 
 ### Sass ###
 *.css.map

@@ -187,7 +187,7 @@
   },"31": {
     "doc": "Assembler as-8080",
     "title": "Assembler “as-8080”",
-    "content": "emuStudio version of assembler for Intel 8080 CPU is very similar to Intel assembler, but has some little differences. Features include: . | macro support (unlimited nesting) | include files support | data definition | relative addressing using labels | literals and expressions in various radixes (bin, dec, hex, oct) | compiler output is in Intel HEX format | . The features are very similar to those in “as-z80” assembler. ",
+    "content": "emuStudio version of assembler for Intel 8080 CPU is very similar to Intel assembler, but has some little differences. Features include: . | macros (unlimited nesting) | include files support | data definition | relative addressing using labels | literals and expressions in various radixes (bin, dec, hex, oct) | compiler output is in Intel HEX format | . The features are very similar to those in “as-z80” assembler. ",
     "url": "/documentation/user/altair8800/as-8080#assembler-as-8080",
     "relUrl": "/altair8800/as-8080#assembler-as-8080"
   },"32": {
@@ -199,7 +199,7 @@
   },"33": {
     "doc": "Assembler as-8080",
     "title": "Lexical symbols",
-    "content": "The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows: . | Type | Description | . | Keywords | instruction names; preprocessor directives (org, equ, set, macro, endm, include, if, endif); data definitions (db, dw, ds); CPU registers | . | Identifiers | ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]* except keywords | . | Labels |   | . | Constants | strings or integers | . | Operators | +, -, *, /, =, mod, and, or, not, xor, shl, shr | . | Comments | semi-colon (;) with text after it until the end of the line | . Constants . Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written using regexes: . | binary numbers: [0-1]+[bB] | decimal numbers: [0-9]+[dD]? | octal numbers: [0-7]+[oOqQ] | hexadecimal numbers: [0-9][0-9a-fA-F]*[hH] | . Characters or strings must be enclosed in single-quotes, e,g,: MVI E, '*' . Identifiers . Identifiers must fit to the following regex: ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]*. It means, that it has to start with a letter a-z (or A-Z) or the at-sign (@). Then, it can be followed by letters, at-sign, or numbers. However, they must not equal to any keyword. ",
+    "content": "The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows: . | Type | Description | . | Keywords | instruction names; preprocessor directives (org, equ, set, macro, endm, include, if, endif); data definitions (db, dw, ds); CPU registers | . | Identifiers | ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]* except keywords | . | Labels |   | . | Constants | strings or integers | . | Operators | +, -, *, /, =, mod, and, or, not, xor, shl, shr | . | Comments | semi-colon (;) with text after it until the end of the line | . Constants . Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written using regexes: . | binary numbers: [0-1]+[bB] | decimal numbers: [0-9]+[dD]? | octal numbers: [0-7]+[oOqQ] | hexadecimal numbers: [0-9][0-9a-fA-F]*[hH] or 0[xX][0-9a-fA-F]+ | . Characters or strings must be enclosed in single-quotes, e,g,: MVI E, '*' . Identifiers . Identifiers must fit to the following regex: ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]*. It means, that it has to start with a letter a-z (or A-Z) or the at-sign (@). Then, it can be followed by letters, at-sign, or numbers. However, they must not equal to any keyword. ",
     "url": "/documentation/user/altair8800/as-8080#lexical-symbols",
     "relUrl": "/altair8800/as-8080#lexical-symbols"
   },"34": {
@@ -247,7 +247,7 @@
   },"41": {
     "doc": "Assembler as-8080",
     "title": "Conditional assembly",
-    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, instructions between if and endif will be ignored. Otherwise they will be included in the source code. ",
+    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: stax b endif label1: hlt . ",
     "url": "/documentation/user/altair8800/as-8080#conditional-assembly",
     "relUrl": "/altair8800/as-8080#conditional-assembly"
   },"42": {
@@ -289,19 +289,19 @@
   },"48": {
     "doc": "Assembler as-z80",
     "title": "Assembler “as-z80”",
-    "content": "The assembler syntax is inspired by as-8080 assembler, and by instruction set described here. The assembler supports the following features: . | macro support (unlimited nesting) | include other files support | conditional assembly | data definition | relative addressing using labels | literals and expressions in various radixes (bin, dec, hex, oct) | output is in Intel HEX format | . ",
+    "content": "The assembler syntax is similar to as-8080 assembler. Z80 instructions described here. Assembler supports the following features: . | macros (unlimited nesting) | include other files support | conditional assembly | data definition | relative addressing using labels | literals and expressions in various radixes (bin, dec, hex, oct) | output is in Intel HEX format | . ",
     "url": "/documentation/user/altair8800/as-z80#assembler-as-z80",
     "relUrl": "/altair8800/as-z80#assembler-as-z80"
   },"49": {
     "doc": "Assembler as-z80",
-    "title": "Running from command line",
+    "title": "Running from the command line",
     "content": "The assembler is provided as part of emuStudio, and usually it is run from GUI. But it can be run also from the command line, as follows: . | on Linux: &gt; bin/as-z80 [--output output_file.hex] [source_file.asm] . | on Windows: &gt; bin\\as-z80.bat [--output output_file.hex] [source_file.asm] . | . All command line options include: . Options: --output, -o file: name of the output file --version, -v : print version --help, -h : this help . ",
-    "url": "/documentation/user/altair8800/as-z80#running-from-command-line",
-    "relUrl": "/altair8800/as-z80#running-from-command-line"
+    "url": "/documentation/user/altair8800/as-z80#running-from-the-command-line",
+    "relUrl": "/altair8800/as-z80#running-from-the-command-line"
   },"50": {
     "doc": "Assembler as-z80",
     "title": "Lexical symbols",
-    "content": "The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows: . | Type | Description | . | Keywords | instruction names; preprocessor directives (org, equ, var, macro, endm, include, if, endif); data definitions (db, dw, ds); CPU registers | . | Identifiers | ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]* except keywords | . | Labels |   | . | Constants | strings or integers | . | Operators | +, -, *, /, =, %, &amp;, \\|, !, ~, &lt;&lt;, &gt;&gt;, &gt;, &lt;, &gt;=, &lt;= | . | Comments | semi-colon (;) with text after it until the end of the line | . Constants . Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written using regexes: . | binary numbers: [0-1]+[bB] | decimal numbers: [0-9]+[dD]? | octal numbers: [0-7]+[oOqQ] | hexadecimal numbers: [0-9][0-9a-fA-F]*[hH] | . Characters or strings must be enclosed in double-quotes, e,g,: LD E, \"*\" . Identifiers . Identifiers must fit to the following regex: ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]*. It means, that it has to start with a letter a-z (or A-Z) or the at-sign (@). Then, it can be followed by letters, at-sign, or numbers. However, they must not equal to any keyword. ",
+    "content": "The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows: . | Type | Description | . | Keywords | instruction names; preprocessor directives (org, equ, var, macro, endm, include, if, endif); data definitions (db, dw, ds); CPU registers | . | Identifiers | ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]* except keywords | . | Labels |   | . | Constants | strings or integers | . | Operators | +, -, *, /, =, %, &amp;, \\|, !, ~, &lt;&lt;, &gt;&gt;, &gt;, &lt;, &gt;=, &lt;= | . | Comments | semi-colon (;) with text after it until the end of the line | . Constants . Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written using regexes: . | binary numbers: [0-1]+[bB] | decimal numbers: [0-9]+[dD]? | octal numbers: [0-7]+[oOqQ] | hexadecimal numbers: [0-9][0-9a-fA-F]*[hH] or 0[xX][0-9a-fA-F]+ | . Characters or strings must be enclosed in double-quotes, e,g,: LD E, \"*\" . Identifiers . Identifiers must fit to the following regex: ([a-zA-Z_\\?@])[a-zA-Z_\\?@0-9]*. It means, that it has to start with a letter a-z (or A-Z) or the at-sign (@). Then, it can be followed by letters, at-sign, or numbers. However, they must not equal to any keyword. ",
     "url": "/documentation/user/altair8800/as-z80#lexical-symbols",
     "relUrl": "/altair8800/as-z80#lexical-symbols"
   },"51": {
@@ -349,7 +349,7 @@
   },"58": {
     "doc": "Assembler as-z80",
     "title": "Conditional assembly",
-    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, instructions between if and endif will be ignored. Otherwise they will be included in the source code. ",
+    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: stax b endif label1: hlt . ",
     "url": "/documentation/user/altair8800/as-z80#conditional-assembly",
     "relUrl": "/altair8800/as-z80#conditional-assembly"
   },"59": {
