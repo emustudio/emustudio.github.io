@@ -78,8 +78,15 @@ The following table shows all the possible settings of MITS 88-SIO plugin:
 |---
 |Name                | Default value | Valid values                          | Description
 |-|-|-|-
-|`statusPortNumberX` | `0x10`        | > 0 and < 256; X range from 0 upwards | X-th Number of Status Port
-|`dataPortNumberX`   | `0x11`        | > 0 and < 256; X range from 0 upwards | X-th Number of Data Port
+|`statusPorts` | `"0x10, 0x14, 0x16, 0x18"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to status port of 88-sio
+|`dataPorts`   | `"0x11, 0x15, 0x17, 0x19"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to data port of 88-sio
+|`clearInputBit8`   | `false` | `true`/`false` | Whether to clear 8th bit of the input written to 88-sio
+|`clearOutputBit8`  | `false` | `true`/`false` | Whether to clear 8th bit of the output, read from 88-sio
+|`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
+|`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE". 
+|`mapBackspaceChar` | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "BACKSPACE" input key/character to given value. For example, if user presses "BACKSPACE" the 88-sio can map it as if user pressed "DEL".
+|`inputInterruptVector`  | `7` | 0-7 | Set input interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the input (e.g. a key press) if input interrupts are enabled    
+|`outputInterruptVector` | `7` | 0-7 | Set output interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the output (e.g. on displaying a char) if output interrupts are enabled
 |---
 
 As can be seen; the `X` represents a number, it's a way how two SIO ports can be attached to multiple CPU ports.
@@ -95,7 +102,7 @@ Whole communication between the board (and attached device) and CPU is controlle
 |---
 |Port     | Address | Input                      | Output
 |-|-|-|-
-|1        | `0x10`  | Read board status          | Not used. Originally used for enabling/disabling interrupts.
+|1        | `0x10`  | Read board status          | Used for enabling/disabling input/output interrupts.
 |2        | `0x11`  | Read data                  | Write data
 |---
 
@@ -107,14 +114,21 @@ where `D7` is the most significant bit, and `D0` the least significant bit.
 
 ### Port 1 ("Control" port)
 
-Default addresses: `0x03`, `0x10`, `0x14`, `0x16`, `0x18` (preferred is `0x10`)
+Default interrupt addresses: `0x03`, `0x10`, `0x14`, `0x16`, `0x18` (preferred is `0x10`)
 
 *WRITE*:
 
-Controls input/output interrupts enable. If both interrupts are set to be enabled, it only empties transmitter buffer in the device, which was a post-step after interrupts being enabled. However, the plugin does not implement interrupts support.
+Controls input/output interrupts enable.
 
 - `D7 D6 D5 D4 D3 D2` : unused bits
-- `D1 D0`             : Used for enabling/disabling interrupts. Not used in emuStudio.
+- `D1`                : Enable/disable _output_ interrupts (0 - disable, 1 - enable) 
+- `D0`                : Enable/disable _input_ interrupts (0 - disable, 1 - enable) 
+
+Interrupts (both input and output) are signalled to the CPU as `RST` instruction with the interrupt vector value
+used from the 88-SIO plugin settings (by default, `RST 7` is signalled).
+
+Input interrupt is triggered when a device connected to 88-SIO sends data to it, so CPU will be notified to read it.
+Output interrupt is triggered when CPU sends data to 88-SIO, which effectively calls CPU again.
 
 *READ*:
 
@@ -272,6 +286,16 @@ getline_ret:       ; end of input
     stax d         ; store the char
     ret            ; return
 ```
+
+#### Get notified when a key is pressed
+
+```
+
+
+
+```
+
+
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
 [manual]: http://maben.homeip.net/static/s100/altair/cards/Altair%2088-SIO%20serial%20IO.pdf
