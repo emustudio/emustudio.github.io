@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 require 'json'
 require 'open-uri'
-versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+versions = JSON.parse(URI('https://pages.github.com/versions.json').read)
 
 gem 'asciidoctor'
 gem 'pygments.rb'
@@ -13,5 +13,8 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap', versions['jekyll-sitemap']
   gem 'jekyll-asciidoc', '2.1.1'
   gem 'jekyll-octicons'
+  gem 'jekyll-commonmark-ghpages', versions['jekyll-commonmark-ghpages']
   gem 'asciidoctor-diagram'
 end
+
+gem "webrick", "~> 1.7"

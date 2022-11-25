@@ -59,7 +59,7 @@ Console will contain additional information about the emulation progress:
 [INFO] CPU: Intel 8080 CPU, version 0.40-SNAPSHOT
 [INFO] Memory: Standard operating memory, version 0.40-SNAPSHOT
 [INFO] Memory size: 65536
-[INFO] Device: MITS 88-DISK device, version 0.40-SNAPSHOT
+[INFO] Device: MITS 88-DCDD device, version 0.40-SNAPSHOT
 [INFO] Device: MITS 88-SIO serial board, version 0.40-SNAPSHOT
 [INFO] Device: LSI ADM-3A terminal, version 0.40-SNAPSHOT
 [INFO] Compiling input file: examples/as-8080/reverse.asm

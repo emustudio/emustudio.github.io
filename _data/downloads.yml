@@ -81,6 +81,44 @@ downloads:
     ]
   }
   - {
+    versionid: '36b1',
+    version: '3.6b1',
+    java: {
+      href: '',
+      name: 'Java 1.4'
+    },
+    release: {
+      date: 'on 2009-06-10',
+      href: ''
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-3.6b1.zip',
+      href: '/files/emuStudio-3.6b1.zip',
+      glyphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }
+  - {
+    versionid: '35b1',
+    version: '3.5b1',
+    java: {
+      href: '',
+      name: 'Java 1.4'
+    },
+    release: {
+      date: 'on 2009-02-13',
+      href: ''
+    },
+    downloads: [
+    {
+      filename: 'emuStudio-3.5b1.zip',
+      href: '/files/emuStudio-3.5b1.zip',
+      gluphs: ['fa-windows', 'fa-linux']
+    }
+    ]
+  }
+  - {
     versionid: '001',
     version: '0.1',
     java: {
@@ -94,7 +132,7 @@ downloads:
     downloads: [
     {
       filename: 'emu8-very-first.zip',
-      href: '{{ site.baseurl }}/files/emu8-very-first.zip',
+      href: '/files/emu8-very-first.zip',
       glyphs: ['fa-windows', 'fa-linux']
     }
     ]
