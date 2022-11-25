@@ -33,19 +33,19 @@ Tested and fully-functional images were:
 Disk / memory images for software for Altair8800 are available on many online sites, such as [here][asw1]{:target="_blank"} or [here][asw2]{:target="_blank"}.
 Some manuals can be found e.g. [here][manuals]{:target="_blank"}.
 
-The following subsections describe in short how to boot some of those systems, along with screenshots how it looks.
+The following subsections describe in short how to boot some of those systems, along with screen-shots how it looks.
 
 ## Boot ROM
 
-Booting operating systems on Altair requires special ROM image to be loaded in operating memory. The purpose of a boot ROM is to load specific block of data from a device and then run it as if it was code. The code block is often called 'bootloader'. It is very small program which just loads either the whole or part of the operating system into memory and then jumps to it.
+Booting operating systems on Altair requires special ROM image to be loaded in operating memory. The purpose of a boot ROM is to load specific block of data from a device and then run it as if it was code. The code block is often called 'boot loader'. It is very small program which just loads either the whole or part of the operating system into memory and then jumps to it.
 
-Originally, more boot ROMs existed. Different boot ROMs were used to load the code from different devices. In current implementation of emuStudio, there is only one boot ROM supported - so called 'disk bootloader' (or DBL), which loads operating system from MITS 88-DCDD (through CPU ports).
+Originally, more boot ROMs existed. Different boot ROMs were used to load the code from different devices. In current implementation of emuStudio, there is only one boot ROM supported - so called 'disk boot loader' (or DBL), which loads operating system from MITS 88-DISK (through CPU ports).
 
-The bootloader is already available in a file `examples/altair8800/boot.bin` of emuStudio installation.
+The boot loader is already available in a file `examples/altair8800/boot.bin` of emuStudio installation.
 
 Boot ROM must be loaded into memory at address `0xFF00` (hexadecimal). It is safe to jump to this address manually when operating system image file is mounted.
 
-NOTE: All subsequent sections assume that the bootloader has been loaded in the operating memory.
+NOTE: All subsequent sections assume that the boot loader has been loaded in the operating memory.
 
 ## CP/M 2.2
 
@@ -57,7 +57,7 @@ Tested image has name `altcpm.dsk`. It can be downloaded at [this link][altsw]{:
 
 To run CP/M, please follow these steps:
 
-1. Mount `altcpm.dsk` to drive `A:` in MITS 88-DCDD.
+1. Mount `altcpm.dsk` to drive `A:` in MITS 88-DISK.
 2. In emuStudio jump to location `0xFF00`
 3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
 4. Before starting emulation, show ADM-3A terminal
@@ -71,7 +71,7 @@ Command `dir` is working, `ls` is better `dir`. More information about CP/M comm
 
 ## CP/M 3
 
-Steps for running CP/M 3 operating systems are not that different from CP/M 2. The disk image file is called `cpm3.dsk` and can be downloaded at [this link][cpm3]{:target="_blank"}. CP/M 3 came with two versions: banked and non-banked. The image is the banked version of CP/M. Also, [simh][simh]{:target="_blank"} authors provided custom BIOS and custom bootloader.
+Steps for running CP/M 3 operating systems are not that different from CP/M 2. The disk image file is called `cpm3.dsk` and can be downloaded at [this link][cpm3]{:target="_blank"}. CP/M 3 came with two versions: banked and non-banked. The image is the banked version of CP/M. Also, [simh][simh]{:target="_blank"} authors provided custom BIOS and custom boot loader.
 
 Manual of CP/M 3 can be found at [this link][cpm3manual]{:target="_blank"}. For more information about [simh][simh]{:target="_blank"} version of Altair8800 and CP/M 3, click [here][simhmanual]{:target="_blank"}.
 
@@ -90,13 +90,13 @@ Also, the operating memory needs to be set for memory banks. The following param
 
 ### Boot ROM
 
-There exist specific version of bootloader (modified probably by [simh][simh]{:target="_blank"} authors) to load CP/M into banked memory. It is available in `examples/altair8800/mboot.bin` in your emuStudio installation. Before other steps, please load this image into operating memory at address `0xFF00` (hexadecimal).
+There exist specific version of boot loader (modified probably by [simh][simh]{:target="_blank"} authors) to load CP/M into banked memory. It is available in `examples/altair8800/mboot.bin` in your emuStudio installation. Before other steps, please load this image into operating memory at address `0xFF00` (hexadecimal).
 
 ### Steps for booting CP/M 3
 
 Specific steps how to boot CP/M 3 in emuStudio follow:
 
-1. Mount `cpm3.dsk` to drive `A:` in MITS 88-DCDD.
+1. Mount `cpm3.dsk` to drive `A:` in MITS 88-DISK.
 2. In emuStudio jump to location `0xFF00`
 3. Optionally, you can set CPU frequency to 2500 kHz, which was Zilog Z80 original frequency.
 4. Before starting emulation, show ADM-3A terminal
@@ -110,7 +110,7 @@ The following image shows the look right after the boot:
 
 Steps for booting Altair DOS v1.0 follow:
 
-1. Mount `altdos.dsk` to drive `A:` in MITS 88-DCDD.
+1. Mount `altdos.dsk` to drive `A:` in MITS 88-DISK.
 2. In emuStudio jump to location `0xFF00`
 3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
 4. Before starting emulation, show ADM-3A terminal
@@ -145,7 +145,7 @@ It is assumed you have either `examples/altair8800/boot.bin` or `examples/altair
 
 Steps for booting BASIC follow:
 
-1. Mount `mbasic.dsk` to drive `A:` in MITS 88-DCDD.
+1. Mount `mbasic.dsk` to drive `A:` in MITS 88-DISK.
 2. In emuStudio jump to location `0xFF00`
 3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
 4. Before starting emulation, show ADM-3A terminal

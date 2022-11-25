@@ -43,7 +43,7 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 |---
 | Memory | `[some feature]-mem`, or `[computer type]-mem` | `standard-mem`, `ram-mem`, `brainduck-mem`
 |---
-| Device | `[device model]-[device type]` | `88-dcdd`, `adm3a-terminal`, `simh-pseudo`
+| Device | `[device model]-[device type]` | `88-disk`, `adm3a-terminal`, `simh-pseudo`
 |===
 
 
@@ -127,7 +127,7 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
           into "bin"
         }
       }
-      ["88-dcdd"].collect { device ->
+      ["88-disk"].collect { device ->
         from(scripts(":plugins:device:$device")) {
           into "bin"
         }

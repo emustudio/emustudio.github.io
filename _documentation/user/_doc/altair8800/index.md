@@ -30,7 +30,7 @@ Basic configuration of MITS Altair 8800 was:
 |Speed            | 2 MHz
 |RAM              | from 256 bytes to 64 kB
 |ROM              | optional; usually EPROM Intel 1702 with 256 bytes (They were used for various bootloaders)
-|Storage          | optional; paper tapes, cassette tapes or 5.25" or 8" floppy disks (MITS 88-DCDD)
+|Storage          | optional; paper tapes, cassette tapes or 5.25" or 8" floppy disks (MITS 88-DISK)
 |Extensions       | at first 16 slots, later 18 slots
 |Bus              | famous [S-100][s100]{:target="_blank"}
 |Video            | none
