@@ -10,10 +10,9 @@ permalink: /altair8800/as-z80
 
 # Assembler "as-z80"
 
-The assembler syntax is similar to `as-8080` assembler. Z80 instructions described [here][asz80]{:target="_blank"}.
-Assembler supports the following features:
+The assembler syntax is inspired by `as-8080` assembler, and by instruction set described [here][asz80]{:target="_blank"}. The assembler supports the following features:
 
-- macros (unlimited nesting)
+- macro support (unlimited nesting)
 - include other files support
 - conditional assembly
 - data definition
@@ -21,7 +20,7 @@ Assembler supports the following features:
 - literals and expressions in various radixes (bin, dec, hex, oct)
 - output is in [Intel HEX][intelhex]{:target="_blank"} format
 
-## Running from the command line
+## Running from command line
 
 The assembler is provided as part of emuStudio, and usually it is run from GUI. But it can be run also from the command line, as follows:
 
@@ -49,6 +48,8 @@ Options:
 
 The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows:
 
+
+
 |---
 |Type      | Description
 |-|-
@@ -67,7 +68,7 @@ Numeric constants can be only integers, encoded with one of several number radix
 - binary numbers: `[0-1]+[bB]`
 - decimal numbers: `[0-9]+[dD]?`
 - octal numbers: `[0-7]+[oOqQ]`
-- hexadecimal numbers: `[0-9][0-9a-fA-F]*[hH]` or `0[xX][0-9a-fA-F]+`
+- hexadecimal numbers: `[0-9][0-9a-fA-F]*[hH]`
 
 Characters or strings must be enclosed in double-quotes, e,g,: `LD E, "*"`
 
@@ -305,17 +306,7 @@ if [expression]
 endif
 ```
 
-At first, the compiler evaluates the `[expression]`. If the result is 0, statements between `if` and `endif` are ignored.
-
-Labels defined inside the `if` block occupy the namespace even if the if-expression evaluates to 0. Hence, the following
-code yields an error (`Label already defined`):
-
-```
-if 0
-  label1: stax b
-endif
-label1: hlt 
-```
+At first, the compiler evaluates the `[expression]`. If the result is 0, instructions between `if` and `endif` will be ignored. Otherwise they will be included in the source code.
 
 ## Defining and using macros
 

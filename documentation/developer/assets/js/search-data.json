@@ -211,70 +211,76 @@
   },"35": {
     "doc": "Introduction",
     "title": "Introduction",
-    "content": "This guide shall help you, the developer, to write your virtual computer for emuStudio. API is designed for simplicity and tries to save the developer from solving the most common problems. Created emulators can mimic either real or abstract computers. I hope you will have fun! . ",
+    "content": "This guide shall help you, the developer, to write your virtual computer for emuStudio. API is designed for simplicity and tries to save the developer from solving the most common problems. Created emulators can mimic either real or abstract computers. I hope you will have fun! . There exist some sister projects, which will be used by the developer during your programming journey. The following section will provide more information. ",
     "url": "/documentation/developer/introduction/#introduction",
     "relUrl": "/introduction/#introduction"
   },"36": {
     "doc": "Introduction",
-    "title": "Sister projects",
-    "content": "There exist some sister projects, which will be used by the developer during your programming journey. This section will provide more information. emuLib . emuLib is a run-time library used by emuStudio and plugins; it represents the core communication bridge between the application and virtual computer. Thus, it is mandatory to use it while developing any plugin for emuStudio. Javadoc can be opened here. edigen . Edigen is CPU instruction decoder and disassembler generator using a binary specification file. It removes the burden of writing a boilerplate disassembling code from the developer. It is however optional for using. Project website with documentation is located here. cpu-testsuite . General unit-testing framework intended for testing emuStudio CPU plug-ins. More specifically, it allows to test correctness of the implementation of CPU instructions one by one. Tests are specified in a declarative way; specific test cases are generated based on the declarative specification. Project website with documentation is located here. ",
-    "url": "/documentation/developer/introduction/#sister-projects",
-    "relUrl": "/introduction/#sister-projects"
+    "title": "emuLib",
+    "content": "emuLib is a run-time library used by emuStudio and plugins. It also provides the API to be implemented by plug-ins. Javadoc can be opened here. ",
+    "url": "/documentation/developer/introduction/#emulib",
+    "relUrl": "/introduction/#emulib"
   },"37": {
     "doc": "Introduction",
-    "title": "Publications",
-    "content": "For reference, here are provided some published papers, mostly for some older emuStudio versions. | Version | Year | Document or paper | . |   | 2020 | Development of ATmega 328P micro-controller emulator for educational purposes | . |   | 2017 | RASP Abstract Machine Emulator — Extending the emuStudio Platform | . |   | 2012 | An instruction decoder and disassembler generator for EmuStudio platform - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6 | . |   | 2010 | Preserving host independent emulation speed | . |   | 2010 | Standardization of computer emulation | . |   | 2010 | Communication model of emuStudio emulation platform | . |   | 2008 | Software-based CPU emulation | . ",
-    "url": "/documentation/developer/introduction/#publications",
-    "relUrl": "/introduction/#publications"
+    "title": "edigen",
+    "content": "Edigen is CPU instruction decoder and disassembler generator. It takes the burden of the common disassembling/decoding code from the developer when programming an emulator. The project website, which includes documentation, is here. ",
+    "url": "/documentation/developer/introduction/#edigen",
+    "relUrl": "/introduction/#edigen"
   },"38": {
+    "doc": "Introduction",
+    "title": "Other documentation",
+    "content": "For reference, here are provided some documents for some older emuStudio versions. | Version | Year | Document or paper | . |   | 2017 | RASP Abstract Machine Emulator — Extending the emuStudio Platform | . |   | 2012 | An instruction decoder and disassembler generator for EmuStudio platform - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6 | . |   | 2010 | Preserving host independent emulation speed | . |   | 2010 | Standardization of computer emulation | . |   | 2010 | Communication model of emuStuio emulation platform | . | 0.37b | 2009 | User manual (in Slovak) | . | 0.37b | 2009 | Plugins’ vade-mecum (in Slovak) | . |   | 2008 | Software-based CPU emulation | . ",
+    "url": "/documentation/developer/introduction/#other-documentation",
+    "relUrl": "/introduction/#other-documentation"
+  },"39": {
     "doc": "Introduction",
     "title": "Introduction",
     "content": " ",
     "url": "/documentation/developer/introduction/",
     "relUrl": "/introduction/"
-  },"39": {
+  },"40": {
     "doc": "Loading and initialization",
     "title": "Loading and initialization",
     "content": "Instantiating and initializing plugins is done by emuStudio application in one thread. All plugins share one class-loader, which creates a potential risk of naming conflicts. Therefore, each class and resource should be put in packages with a unique name. ",
     "url": "/documentation/developer/plugin_basics/loading#loading-and-initialization",
     "relUrl": "/plugin_basics/loading#loading-and-initialization"
-  },"40": {
+  },"41": {
     "doc": "Loading and initialization",
     "title": "Plugin instantiation",
     "content": "Plugin JAR files are unzipped and loaded into memory as one mixed bunch. The class loader will recognize all found classes and resources. Dependencies explicitly specified in manifest files are recognized and loaded as well. In case of circular dependencies, plugins loading will fail. This process happens just once in the beginning, so adding another plugin at run-time is not possible. The result of this phase is that all plugin classes are loaded in memory and all plugin roots are instantiated. What should plugin do in the constructor . Plugin constructor has three arguments - plugin ID, emuStudio API and plugin settings. Here, plugin can for example read its settings, or instantiate some final objects used later. But the most important operation here is to register so-called “plugin contexts” (if a plugin has some) into ContextPool, obtainable from emuStudio API. Note that plugin contexts of connected plugins must NOT be obtained here - in constructor. Another chapter talks about plugin contexts in more detail. ",
     "url": "/documentation/developer/plugin_basics/loading#plugin-instantiation",
     "relUrl": "/plugin_basics/loading#plugin-instantiation"
-  },"41": {
+  },"42": {
     "doc": "Loading and initialization",
     "title": "Plugin initialization",
     "content": "After plugins are instantiated, they are being “initialized”. It means just that emuStudio will call Plugin.initialize() method on each plugin. The plugin initializations are ordered by plugin type: . | Compiler | CPU | Memory | Devices in the order as they are defined in the virtual computer configuration | . What should plugin do here . The most important operation what a plugin should do in the Plugin.initialize() method is to obtain “plugin contexts” of another connected plugins. Plugin contexts can be obtained from already mentioned ContextPool class, obtainable from emuStudio API. ",
     "url": "/documentation/developer/plugin_basics/loading#plugin-initialization",
     "relUrl": "/plugin_basics/loading#plugin-initialization"
-  },"42": {
+  },"43": {
     "doc": "Loading and initialization",
     "title": "Loading and initialization",
     "content": " ",
     "url": "/documentation/developer/plugin_basics/loading",
     "relUrl": "/plugin_basics/loading"
-  },"43": {
+  },"44": {
     "doc": "Plugin Root",
     "title": "Plugin root class",
     "content": "A CPU plugin root class must implement either a CPU interface, or extend AbstractCPU class. AbstractCPU implements several mechanisms which save developer time, like: . | emulation control methods (run, step, stop, pause, reset) are queued for execution in the same thread, and implements run state notification. It means that it is possible to call them from any other thread (e.g. also from Swing Event dispatch thread) | implements notification of run states (see next chapter) | implements breakpoints management | . Sample implementation follows (only core methods are implemented): . @PluginRoot( type = PLUGIN_TYPE.CPU, title = \"Sample CPU emulator\" ) @SuppressWarnings(\"unused\") public class CpuImpl extends AbstractCPU { private final ContextImpl context = new ContextImpl(); private EmulatorEngine engine; private Disassembler disassembler; private StatusPanel statusPanel; public CpuImpl(long pluginID, ApplicationApi applicationApi, PluginSettings settings) { super(pluginID, applicationApi, settings); try { applicationApi.getContextPool().register(pluginID, context, ExtendedContext.class); } catch (InvalidContextException | ContextAlreadyRegisteredException e) { LOGGER.error(\"Could not register CPU context\", e); applicationApi.getDialogs().showError( \"Could not register CPU Context. Please see log file for details.\", super.getTitle() ); } } @Override public void initialize() throws PluginInitializationException { MemoryContext&lt;Short&gt; memory = contextPool.getMemoryContext(pluginId, MemoryContext.class); if (memory.getDataType() != Short.class) { throw new InvalidContextException( \"Unexpected memory cell type. Expected Short but was: \" + memory.getDataType() ); } // create disassembler and debug columns this.disassembler = new DisassemblerImpl(memory, new DecoderImpl(memory)); this.engine = new EmulatorEngine(memory, context); } @Override protected void destroyInternal() { context.clearDevices(); } @Override public void resetInternal(int location) { engine.reset(location); } @Override protected RunState stepInternal() throws Exception { return engine.step(); } @Override public JPanel getStatusPanel() { if (statusPanel == null) { statusPanel = new StatusPanel(engine, context); } return statusPanel; } @Override public RunState call() { return engine.run(this); } @Override public Disassembler getDisassembler() { return disassembler; } @Override public int getInstructionLocation() { return engine.PC; } @Override public boolean setInstructionLocation(int position) { if (position &lt; 0) { return false; } engine.PC = position &amp; 0xFFFF; return true; } } . What can be noticed here is: . | this CPU register custom context in constructor. The context is custom, because it will allow attaching devices to specific CPU “ports”. | obtaining MemoryContext is vital. If it is not successful, the PluginInitializationException will be propagated to the caller. | actual CPU emulation is implemented in EmulatorEngine class, which requires a memory and CPU context. | classes DisassemblerImpl and DecoderImpl are generated by Edigen | . ",
     "url": "/documentation/developer/cpu/rootclass#plugin-root-class",
     "relUrl": "/cpu/rootclass#plugin-root-class"
-  },"44": {
+  },"45": {
     "doc": "Plugin Root",
     "title": "Plugin Root",
     "content": " ",
     "url": "/documentation/developer/cpu/rootclass",
     "relUrl": "/cpu/rootclass"
-  },"45": {
+  },"46": {
     "doc": "Run states",
     "title": "Run states",
     "content": "Emulator “life” is a state machine. A state machine reacts on asynchronous events, which make the machine to transition the current state to another state. In emuStudio, whole emulation “state” depends on CPU run state. The run state is a name for the following states: breakpoint (starting state), running, stopped (more variants). The state machine, how it should work, can be seen in the following diagram: . The states of the state machine are encoded into an enum CPU.RunState in emuLib: . public static enum RunState { STATE_STOPPED_NORMAL(\"stopped\"), STATE_STOPPED_BREAK(\"breakpoint\"), STATE_STOPPED_ADDR_FALLOUT(\"stopped (address fallout)\"), STATE_STOPPED_BAD_INSTR(\"stopped (instruction fallout)\"), STATE_RUNNING(\"running\"); ... } . Implementation of the state machine is a sole responsibility of CPU plugin. emuStudio has some expectations of it, like: . | initial run state should be STATE_STOPPED_BREAK | calling reset() should set the run state to STATE_STOPPED_BREAK | calling pause() if the current state is not one of STATE_STOPPED_(how) variant, it should set the run state to STATE_STOPPED_BREAK. Otherwise, do nothing. | calling step() if the current state is one of STATE_STOPPED_(how) (except STATE_STOPPED_BREAK), it should do nothing. Otherwise, it should set the run state to: . | STATE_STOPPED_BREAK, if the execution of the current instruction did not cause error, or it wasn’t a “halt” instruction. | STATE_STOPPED_(how) state, where (how) should be replaced by: . | BAD_INSTR - if unknown instruction was encountered | ADDR_FALLOUT - if instruction pointed to unknown or forbidden memory location | NORMAL - if the instruction was “halt” causing CPU to “halt” | . | . | calling run() should set the state to STATE_RUNNING and run instructions “infinitely”, upon external event or some error, in which case it should set the state to: . | STATE_STOPPED_BREAK - if external call pause() method | STATE_STOPPED_(how) state, where (how) should be replaced by: . | BAD_INSTR - if unknown instruction was encountered | ADDR_FALLOUT - if instruction pointed to unknown or forbidden memory location | NORMAL - if the instruction was “halt” causing CPU to “halt” | . | . | calling stop() if the current state is one of STATE_STOPPED_(how) (except STATE_STOPPED_BREAK), it should do nothing. Otherwise it should set the state to STATE_STOPPED_NORMAL. | . If the CPU plugin root class implements CPU interface, it is its responsibility to notify CPU run state changes and manage run state “listeners”. But if the plugin root class extends AbstractCPU, it does not have care about listeners and run state notifications, because the class implements it. ",
     "url": "/documentation/developer/cpu/runstate#run-states",
     "relUrl": "/cpu/runstate#run-states"
-  },"46": {
+  },"47": {
     "doc": "Run states",
     "title": "Run states",
     "content": " ",
