@@ -12,43 +12,28 @@ permalink: /introduction/
 
 This guide shall help you, the developer, to write your virtual computer for emuStudio. API is designed for simplicity and tries to save the developer from solving the most common problems. Created emulators can mimic either real or abstract computers. I hope you will have fun!
 
-## Sister projects
-
-There exist some sister projects, which will be used by the developer during your programming journey. This
+There exist some sister projects, which will be used by the developer during your programming journey. The following
 section will provide more information.
 
-### emuLib
 
-emuLib is a run-time library used by emuStudio and plugins; it represents the core communication bridge between the
-application and virtual computer. Thus, it is mandatory to use it while developing any plugin for
-emuStudio. 
+## emuLib
 
+emuLib is a run-time library used by emuStudio and plugins. It also provides the API to be implemented by plug-ins.
 Javadoc can be opened [here][emulib]{:target="_blank"}.
 
-### edigen
+## edigen
 
-Edigen is CPU instruction decoder and disassembler generator using a binary specification file. It removes the burden of writing a boilerplate
-disassembling code from the developer. It is however optional for using.
+Edigen is CPU instruction decoder and disassembler generator. It takes the burden of the common disassembling/decoding
+code from the developer when programming an emulator. The project website, which includes documentation,
+is [here][edigen]{:target="_blank"}.
 
-Project website with documentation is located [here][edigen]{:target="_blank"}.
+## Other documentation
 
-### cpu-testsuite
-
-General unit-testing framework intended for testing emuStudio CPU plug-ins. More specifically,
-it allows to test correctness of the implementation of CPU instructions one by one. Tests are
-specified in a declarative way; specific test cases are generated based on the declarative specification.
-
-Project website with documentation is located [here][edigen]{:target="_blank"}.
-
-## Publications
-
-For reference, here are provided some published papers, mostly for some older emuStudio versions.
+For reference, here are provided some documents for some older emuStudio versions.
 
 |---
 | Version | Year | Document or paper
 |-|-|-
-|  | 2020 | [Development of ATmega 328P micro-controller emulator for educational purposes][atmega-2020]{:target="_blank"}
-|---
 |  | 2017 | [RASP Abstract Machine Emulator — Extending the emuStudio Platform][rasp-2017]{:target="_blank"}
 |---
 |  | 2012 | [An instruction decoder and disassembler generator for EmuStudio platform][edigen-2012]{:target="_blank"} - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6
@@ -57,7 +42,11 @@ For reference, here are provided some published papers, mostly for some older em
 |---
 |  | 2010 | [Standardization of computer emulation][standard-2010]{:target="_blank"}
 |---
-|  | 2010 | [Communication model of emuStudio emulation platform][model-2010]{:target="_blank"}
+|  | 2010 | [Communication model of emuStuio emulation platform][model-2010]{:target="_blank"}
+|---
+| 0.37b | 2009 | [User manual (in Slovak)][manual-2009]{:target="_blank"}
+|---
+| 0.37b | 2009 | [Plugins' vade-mecum (in Slovak)][vademecum-2009]{:target="_blank"}
 |---
 |  | 2008 | [Software-based CPU emulation][emulation-2008]{:target="_blank"}
 |===
@@ -65,11 +54,11 @@ For reference, here are provided some published papers, mostly for some older em
 
 [emulib]: {{ site.baseurl }}/emulib_javadoc/
 [edigen]: https://github.com/emustudio/edigen
-[edigen]: https://github.com/emustudio/cpu-testsuite
-[atmega-2020]: https://www.researchgate.net/publication/349929732_Development_of_ATmega_328P_micro-controller_emulator_for_educational_purposes
 [rasp-2017]: https://www.researchgate.net/publication/320277321_RASP_ABSTRACT_MACHINE_EMULATOR_-_EXTENDING_THE_EMUSTUDIO_PLATFORM
-[edigen-2012]: https://dusan.medved.website.tuke.sk/APVV/APVV-0385-07/clanky/Bena4.pdf
+[edigen-2012]: http://people.tuke.sk/dusan.medved/APVV/clanky/Bena4.pdf
 [standard-2010]: https://ieeexplore.ieee.org/document/5423733
 [model-2010]: https://www.researchgate.net/publication/220482121_Communication_model_of_emuStudio_emulation_platform
+[manual-2009]: {{ site.baseurl }}/../../../files/manual-0.37b-draft.pdf
+[vademecum-2009]: {{ site.baseurl }}/../../../files/plugins-vademecum-old.pdf
 [emulation-2008]: http://www.aei.tuke.sk/papers/2008/4/08_Simonak.pdf
-[cse-2010]: {{ site.baseurl }}/assets/published/preserving-speed.pdf
+[cse-2010]: {{ site.baseurl }}/../../../files/speed_final_en.pdf
