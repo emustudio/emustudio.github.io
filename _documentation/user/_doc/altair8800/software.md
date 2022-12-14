@@ -12,26 +12,29 @@ permalink: /altair8800/software
 
 Since Altair8800 virtual computer emulates a real machine, it's possible to use real software written for the computer.
 Several operating systems and programs can be run on Altair. There are many disk and memory images of those systems
-available online, but only some were tested and proved to work. Some of the available online sites are:
+available online, but only some were tested and proved to work. Some available online sites are:
 
-- [Peter Schorn][schorn]{:target="_blank"}
+- Peter Schorn: [operating systems][schorn-os]{:target="_blank"}, [other operating systems][schorn-os2]{:target="_blank"},
+  [original software][schorn-software]{:target="_blank"}, [programming languages][schorn-langs]{:target="_blank"},
+  [office applications][schorn-office]{:target="_blank"}, [games and tools][schorn-games]{:target="_blank"},
+- SIMH [CP/M and DOS][ceo-altair]{:target="_blank"}, [updated kit][ps-altair]{:target="_blank"} with 4K Basic, 8K Basic,
+  Prolog, and CP/M 3
 - [Altair clone][aclone]{:target="_blank"}
-- [SIMH][simhf]{:target="_blank"}
 - [DeRamp][deramp]{:target="_blank"}
 
-If you want to manipulate with disk images, please follow this [link][cpmtools]{:target="_blank"}.
+In order to manipulate with CP/M disk images, there are several options:
+- please look at 88-dcdd page "Experimental CP/M support"
+- you can try [cpmtools][cpmtools]{:target="_blank"}.
+- [SIMH emulator][simh]{:target="_blank"} supports run-time reading and writing files using utilities `HDIR.COM` (lists files on host computer),
+  `R.COM` (reads file from host into CP/M disk image) and `W.COM` (writes a file in CP/M disk image to host)
 
-Most of the disk images were borrowed from great [simh][simh]{:target="_blank"} emulator. Some of them were modified for simh.
-On the other hand, it's not that obvious if the original images worked at all.
-
-Tested and fully-functional images were:
+Tested and fully-functional images in emuStudio are:
 
 - Operating system CP/M v2.2 and 3
 - Altair DOS v1.0
 - BASIC programming language in various versions
 
-Disk / memory images for software for Altair8800 are available on many online sites, such as [here][asw1]{:target="_blank"} or [here][asw2]{:target="_blank"}.
-Some manuals can be found e.g. [here][manuals]{:target="_blank"}.
+Some software manuals can be found e.g. [here][manuals]{:target="_blank"}.
 
 The following subsections describe in short how to boot some of those systems, along with screenshots how it looks.
 
@@ -53,7 +56,7 @@ During Altair8800 computer era, many operating systems, applications and program
 
 The combination of CP/M and computers with S-100 bus (8-bit computers sharing some similarities with Altair 8800) was big "industry standard", widely spread in 70's up to 80's years of twentieth century. The operating system took the burden of programming abilities from user, and this was one of the reasons why the demand for hardware and software was rapidly increased.
 
-Tested image has name `altcpm.dsk`. It can be downloaded at [this link][altsw]{:target="_blank"}.
+Tested image has name `altcpm.dsk`. It can be downloaded at [this link][ceo-altair]{:target="_blank"}.
 
 To run CP/M, please follow these steps:
 
@@ -71,7 +74,7 @@ Command `dir` is working, `ls` is better `dir`. More information about CP/M comm
 
 ## CP/M 3
 
-Steps for running CP/M 3 operating systems are not that different from CP/M 2. The disk image file is called `cpm3.dsk` and can be downloaded at [this link][cpm3]{:target="_blank"}. CP/M 3 came with two versions: banked and non-banked. The image is the banked version of CP/M. Also, [simh][simh]{:target="_blank"} authors provided custom BIOS and custom bootloader.
+Steps for running CP/M 3 operating systems are not that different from CP/M 2. The disk image file is called `cpm3.dsk` and can be downloaded at [this link][ps-altair]{:target="_blank"}. CP/M 3 came with two versions: banked and non-banked. The image is the banked version of CP/M. Also, [simh][simh]{:target="_blank"} authors provided custom BIOS and custom bootloader.
 
 Manual of CP/M 3 can be found at [this link][cpm3manual]{:target="_blank"}. For more information about [simh][simh]{:target="_blank"} version of Altair8800 and CP/M 3, click [here][simhmanual]{:target="_blank"}.
 
@@ -156,19 +159,22 @@ The following image shows the look right after the boot:
 ![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/mbasic.gif){:style="max-width:737px"}
 
 
-[schorn]: http://schorn.ch/altair_4.php
+[schorn-os]: http://schorn.ch/altair_4.php
+[schorn-os2]: https://schorn.ch/altair_5.php
+[schorn-software]: https://schorn.ch/altair_3.php
+[schorn-langs]: https://schorn.ch/altair_6.php
+[schorn-office]: https://schorn.ch/altair_7.php
+[schorn-games]: https://schorn.ch/altair_8.php
+[ceo-altair]: http://simh.trailing-edge.com/kits/ceoaltair.zip
+[ps-altair]: http://simh.trailing-edge.com/kits/psaltair.zip
 [aclone]: http://altairclone.com/support.htm
-[simhf]: http://www.classiccmp.org/cpmarchives/cpm/mirrors/www.schorn.ch/cpm/intro.php
 [deramp]: https://deramp.com/downloads/altair/
 [simh]: http://simh.trailing-edge.com/
-[altsw]: http://schorn.ch/cpm/zip/altsw.zip
+[cpmtools]: http://www.autometer.de/unix4fun/z80pack/
+
 [cpm22]: http://www.classiccmp.org/dunfield/r/cpm22.pdf
-[cpm3]: http://schorn.ch/cpm/zip/cpm3.zip
 [cpm3manual]: http://www.cpm.z80.de/manuals/cpm3-usr.pdf
 [simhmanual]: http://simh.trailing-edge.com/pdf/altairz80_doc.pdf
 [altairmanual]: http://altairclone.com/downloads/manuals/Altair%20DOS%20User's%20Manual.pdf
 [basic]: http://bitsavers.informatik.uni-stuttgart.de/pdf/mits/Altair_8800_BASIC_4.1_Reference_Jul77.pdf
-[cpmtools]: http://www.autometer.de/unix4fun/z80pack/
-[asw1]: http://schorn.ch/altair.html
-[asw2]: http://www.classiccmp.org/cpmarchives/cpm/mirrors/www.schorn.ch/cpm/intro.php
 [manuals]: http://altairclone.com/altair_manuals.htm

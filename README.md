@@ -52,3 +52,10 @@ If you like to generate just user/developer documentation, run separate build sc
 
 Both documentations are generated into `documentation` directory. This directory must be committed to git, since
 the documentation won't be processed by GitHub pages, just the website. 
+
+## Tools
+
+- Logo: MetaPost
+- Screenshot editing: Annotator
+- Animated gif: peek, terminalizer
+- Thumbnails: imagemagick
