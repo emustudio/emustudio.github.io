@@ -56,6 +56,6 @@ the documentation won't be processed by GitHub pages, just the website.
 ## Tools
 
 - Logo: MetaPost
-- Screenshot editing: Annotator
+- Screenshot editing (markup): Shutter
 - Animated gif: peek, terminalizer
 - Thumbnails: imagemagick

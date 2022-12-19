@@ -9,58 +9,10 @@ permalink: /altair8800/88-sio
 
 # Serial board "88-sio"
 
-Altair 8800 computer was equipped with serial board called [88-SIO][sio]{:target="_blank"}, or 88-2 SIO. It was a device which allowed connecting other devices using RS-232 interface. From one side it was attached to CPU on at least two ports (most commonly 0x10 and 0x11). The other side was ended with one or two physical ports (allowing to connect one or two devices). Real board supported both hardware and software interrupts.
-
-The following image shows MITS 88-SIO-2 board.
-
-![Serial board MITS 88-SIO-2]({{ site.baseurl }}/assets/altair8800/88-sio-2.png)
-
-Original manual of MITS 88-SIO serial board can be downloaded at [this link][manual]{:target="_blank"}.
-
-## Features
-
-The plugin emulates only basic functionality of the board. It has the following features:
-
-- allows to connect one device only
-- CPU ports can be set manually
-- setting of transfer speed, parity, number of stop bits is not supported
-- GUI
-
-Interrupts are not supported yet.
-
-GUI can be seen here:
-
-![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio-gui.png)
-
-
-## CPU Ports settings
-
-MITS 88-SIO board is attached to CPU using multiple ports. By default, the used CPU ports are:
-
-- Status port: `0x03`, `0x10`, `0x14`, `0x16`, `0x18` (preferred: `0x10`)
-- Data port: `0x02`, `0x11`, `0x15`, `0x17`, `0x19` (preferred: `0x11`)
-
-The reason why there are multiple "bindings" is that there existed various software which expected specific bindings. The presented default values are the most common ones.
-
-These numbers can be changed in the Settings window:
-
-![Settings window]({{ site.baseurl }}/assets/altair8800/88-sio-ports.png)
-
-- *A*: Attach Status SIO port to some new CPU port. The CPU port must be unique among both Status and Data ports attachments.
-- *B*: Detach Status SIO port from selected CPU port.
-- *C*: Attach Data SIO port to some new CPU port. The CPU port must be unique among both Status and Data ports attachments.
-- *D*: Detach Data SIO port from selected CPU port.
-- *E*: List of CPU ports to which the Status SIO port is attached
-- *F*: Clear the current attachments of the Status SIO port and attach it to default CPU ports
-- *G*: List of CPU ports to which the Data SIO port is attached
-- *H*: Clear the current attachments of the Data SIO port and attach it to default CPU ports
-- *I*: Save the settings and close the dialog
-
-## Connecting devices
-
-MITS 88-SIO board as emuStudio plugin is a device which does nothing really useful. It just listens (and understands) commands coming from CPU through the I/O ports. The command is either a request for reading or request for writing to the attached device.
-
-Theoretically any device which supports the basic I/O (reading/writing), can be attached to the board. More about plugin internals can be found in programmer's manual of emuStudio, which is not part of the user documentation.
+Altair 8800 computer was equipped with serial board called [88-SIO][sio]{:target="_blank"}, or 88-2SIO. It was a device
+which allowed connecting other devices using RS-232 interface. From one side it was attached to CPU on at least two
+ports (most commonly `0x10` and `0x11` for terminal). The other side ended with one physical port allowing to
+connect one device. A variant called 88-2SIO allowed to connect two devices at the same time.
 
 Usually, attached devices were:
 
@@ -68,8 +20,95 @@ Usually, attached devices were:
 - line printer
 - paper tape reader/punch
 
-In current implementation of Altair 8800 emulator, the only suitable device which can be attached to the board is
-terminal ADM-3A from Lear Siegler, Inc and which is described in the particular section.
+The following image shows MITS 88-2SIO board.
+
+![Serial board MITS 88-SIO-2]({{ site.baseurl }}/assets/altair8800/88-sio-2.png)
+
+Original manual of MITS 88-SIO serial board can be found [here][manual]{:target="_blank"}, [here][manual-2]{:target="_blank"} or
+[here][manual-deramp]{:target="_blank"}.
+
+## Features
+
+The plugin emulates only basic functionality of the board (e.g. it does not emulate transfer rate). It has the following
+features:
+
+- allows to connect one device
+- CPU ports are configurable
+- supports input/output interrupts
+- has a GUI
+
+GUI can be seen here:
+
+![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio.png)
+
+The window shows attached device, control channel and data buffer. 
+
+- *1*: Attached device name
+- *2*: Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The
+  displayed value shows the status. For details see the 88-sio manual.
+- *3*: 88-sio has internal buffer used for caching one byte coming from the connected device. If the CPU is not fast
+  enough to read it, the data can be overwritten by new data coming from the device. However, the buffer is not used
+  when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from 
+  device.
+- *4*: Clear internal data buffer
+
+## Settings
+
+88-sio plugin has a separate settings window with three sections, described below.
+
+### General settings
+
+The 88-sio plugin support various behaviors of the data transfer, which in reality was the behavior of connected devices
+and not 88-sio. The reason for supporting these features here is to allow some versatility, regardless of which
+device is connected. These general settings can be seen in the Settings window:
+
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-1.png)
+
+- *1*: TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On
+  ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
+- *2*: Converts input data to upper-case (the byte coming from device).
+- *3*: Maps input/output data Backspace or Delete character to some other character. Possibilities are: Backspace,
+  Delete, Unchanged.
+
+### CPU Ports settings
+
+MITS 88-SIO board in emuStudio is attached to CPU through several ports. In order to support various Altair8800 configurations
+and thus using wider variety of original software, the device control and data channels are connected to multiple CPU ports.
+This makes effectively an impression as if there existed multiple 88-sio cards connected to the same device.
+
+By default, used CPU port allocation is:
+
+- Control channel (or "status port"): `0x10`, `0x14`, `0x16`, `0x18` (most commonly used: `0x10` for terminal)
+- Data channel (or "data port"): `0x11`, `0x15`, `0x17`, `0x19` (most commonly used: `0x11` for terminal)
+
+A side note: there existed various additional boards which supported RS-232 communication besides 88-SIO (or 88-2SIO).
+These boards were compatible with S100 system board, thus they were usable for original Altair8800 computers as well
+as its clones. For example: [CompuPro Support Board][compupro-1]{:target="_blank"} (status port `0x5C`, data port `0x5D`),
+[CompuPro Interfacer][compupro-if4]{:target="_blank"} (manual [here][compupro-if4-manual]{:target="_blank"}, consuming 8 CPU ports),
+[Cromemco TU-ART board][cromemco]{:target="_blank"}, [IMS C00480 4-line board][ims-c00480]{:target="_blank"},
+[IMS I/O board][ims-io-board]{:target="_blank"}, [IMSAI SIO Board][imsai-sio]{:target="_blank"},
+[Intersystems 6-SIO][intersystems-6-sio]{:target="_blank"}, etc.
+
+But back to 88-sio. The port numbers allocation can be changed in the Settings window:
+
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-2.png)
+
+- *1*: Attach/detach control channel ("status port") to/from CPU port
+- *2*: Reset control channel CPU ports to default ones (`0x10`, `0x14`, `0x16`, `0x18`)
+- *3*: Attach/detach data channel ("data port") to/from CPU port
+- *4*: Reset data channel CPU ports to default ones (`0x11`, `0x15`, `0x17`, `0x19`)
+
+### Interrupts settings
+
+88-sio supports input and output interrupts. If enabled, input interrupt is signalled to CPU when a data becomes available
+from the connected device. An output interrupt is signalled when data is sent to device. Interrupts support can be generally
+enabled or disabled, along with interrupt vector configuration in Settings window:
+
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-3.png)
+
+- *1*: Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled
+  in software (see "Port 1" section below).
+- *2*: Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7` instruction)
 
 ## Configuration file
 
@@ -85,11 +124,10 @@ The following table shows all the possible settings of MITS 88-SIO plugin:
 |`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
 |`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE". 
 |`mapBackspaceChar` | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "BACKSPACE" input key/character to given value. For example, if user presses "BACKSPACE" the 88-sio can map it as if user pressed "DEL".
+|`interruptsSupported`| `true` | `true`/`false` | Whether interrupts are supported in general. When disabled, they cannot be enabled in software.
 |`inputInterruptVector`  | `7` | 0-7 | Set input interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the input (e.g. a key press) if input interrupts are enabled    
 |`outputInterruptVector` | `7` | 0-7 | Set output interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the output (e.g. on displaying a char) if output interrupts are enabled
 |---
-
-As can be seen; the `X` represents a number, it's a way how two SIO ports can be attached to multiple CPU ports.
 
 ## Programming
 
@@ -100,10 +138,10 @@ In order to show something useful, let's assume that a terminal LSI ADM-3A is at
 Whole communication between the board (and attached device) and CPU is controlled by programming the two ports: Status port and Data port. The following table shows the ports and how they are used.
 
 |---
-|Port     | Address | Input                      | Output
+|Channel          | Address                         | Input                      | Output
 |-|-|-|-
-|1        | `0x10`  | Read board status          | Used for enabling/disabling input/output interrupts.
-|2        | `0x11`  | Read data                  | Write data
+|Control (port 1) | `0x10`, `0x14`, `0x16`, `0x18`  | Read board status          | Used for enabling/disabling input/output interrupts.
+|Data (port 2)    | `0x11`, `0x15`, `0x17`, `0x19`  | Read data                  | Write data
 |---
 
 Now, detailed description of the ports follow. Bits are ordered in a byte as follows:
@@ -113,8 +151,6 @@ Now, detailed description of the ports follow. Bits are ordered in a byte as fol
 where `D7` is the most significant bit, and `D0` the least significant bit.
 
 ### Port 1 ("Control" port)
-
-Default interrupt addresses: `0x03`, `0x10`, `0x14`, `0x16`, `0x18` (preferred is `0x10`)
 
 *WRITE*:
 
@@ -144,8 +180,6 @@ Read status of the device.
 - `D0` : _Input device ready_. Value 1 means that the CPU can write data to the SIO (that the board is ready). Always 1 in the emulator.
 
 ### Port 2 ("Data" port)
-
-Default addresses: `0x02`, `0x11`, `0x15`, `0x17`, `0x19` (preferred is `0x11`)
 
 *WRITE*:
 
@@ -289,13 +323,49 @@ getline_ret:       ; end of input
 
 #### Get notified when a key is pressed
 
+In this example, an interrupt is signalled when user presses a key on keyboard.
+
+{:.code-example}
 ```
+; Tests signalling interrupts on input
+mvi a, 1      ; 88-SIO: input interrupts enable
+out 0x10
 
+ei            ; enable CPU interrupts
+loop:
+jmp loop      ; do this forever (or until...)
 
+; interrupt handler
+org 0x38      ; assuming interrupt vector is set to 7
+in 0x11       ; read char from 88-SIO (and ignore it)
+lxi h, key    ; load address of 'key' label to HL
+call print    ; print "key pressed"
+ret           ; return from the interrupt
 
+key: db 'Key pressed!',10,13,0
+
+; Procedure for printing text to terminal.
+; Input: pair HL must contain the address of the ASCIIZ string
+print:
+    mov a, m  ; load character from HL
+    inx h     ; increment HL
+    cpi 0     ; is the character = 0?
+    rz        ; yes; quit
+    out 11h   ; otherwise; show it
+    jmp print ; and repeat from the beginning
 ```
 
 
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
 [manual]: http://maben.homeip.net/static/s100/altair/cards/Altair%2088-SIO%20serial%20IO.pdf
+[manual-2]: https://usermanual.wiki/Document/MITSAltair88sioSerialIOCardManual.407144693/view
+[manual-deramp]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/10-MITS%20S100%20Boards/88-2SIO%20Dual%20Serial%20Board/MITS_Altair_88-2SIO_Searial_Board_Manual_1975.pdf
+[compupro-1]: http://www.s100computers.com/Hardware%20Manuals/CompuPro/CompuPro%20System%20Support%201%20Manual.pdf
+[compupro-if4]: http://www.s100computers.com/Hardware%20Folder/CompuPro/Interfacer%204/Interfacer%204.htm
+[compupro-if4-manual]: http://www.s100computers.com/Hardware%20Manuals/CompuPro/CompuPro%20Interface%204%20Manual.pdf
+[cromemco]: http://www.s100computers.com/Hardware%20Folder/Cromemco/TU-ART/TU-ART.htm
+[ims-c00480]: http://www.s100computers.com/Hardware%20Folder/IMS/4%20Line%20Serial/4%20Line%20(480)%20Serial%20Board.htm
+[ims-io-board]: http://www.s100computers.com/Hardware%20Folder/IMS/IO%20Board/IO%20Board.htm
+[imsai-sio]: http://www.s100computers.com/Hardware%20Folder/IMSAI/SIO/SIO.htm
+[intersystems-6-sio]: http://www.s100computers.com/Hardware%20Folder/Intersystems/6SIO/6-SIO.htm
