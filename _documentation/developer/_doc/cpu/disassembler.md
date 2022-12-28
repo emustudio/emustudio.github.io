@@ -11,11 +11,16 @@ permalink: /cpu/disassembler
 # Disassembler
 
 Disassembler is not needed for the emulation itself. It is needed for emuStudio to be able to visually show the
-instructions. You can create a disassembler by implementing interface [Disassembler][disassembler]{:target="_blank"} from emuLib. Or you can use [Edigen][edigen]{:target="_blank"}, a disassembler generator for emuStudio. 
+instructions. You can create a disassembler by implementing interface [Disassembler][disassembler]{:target="_blank"}
+from emuLib. Or you can use [Edigen][edigen]{:target="_blank"}, a disassembler generator for emuStudio.
 
-[Edigen][edigen]{:target="_blank"} works similarly as parser generator: developer writes a specification file. Then, [Edigen][edigen]{:target="_blank"} (either from the command line or using [Gradle][edigen-gradle]{:target="_blank"}) generates disassembler and decoder of the source code, using predefined templates, bundled in [Edigen][edigen]{:target="_blank"}.
+[Edigen][edigen]{:target="_blank"} works similarly as parser generator: developer writes a specification file.
+Then, [Edigen][edigen]{:target="_blank"} (either from the command line or using
+[Gradle][edigen-gradle]{:target="_blank"}) generates disassembler and decoder of the source code, using predefined
+templates, bundled in [Edigen][edigen]{:target="_blank"}.
 
-Specification files have `.eds` file extension. A [SSEM][ssem]{:target="_blank"} CPU specification file looks as follows:
+Specification files have `.eds` file extension. A [SSEM][ssem]{:target="_blank"} CPU specification file looks as
+follows:
 
 {:.code-example}
 ```
@@ -45,10 +50,11 @@ ignore16 = arg: arg(16);
 
 The specification file might look a bit cryptic at first sight, but it's quite easy. The content is divided into
 two sections (_decoder_ and _disassembler_), separated with two `%%` chars on a separate line.
- 
+
 ## Decoder section
 
-The decoder section contains rules which are used for parsing the instruction binary codes and assign labels to the codes.
+The decoder section contains rules which are used for parsing the instruction binary codes and assign labels to the
+codes.
 
 Decoding always starts with the first rule (in this case, `instruction`).
 Each rule has one or more variants. A variant consists of a mixture of constants and subrules.
@@ -74,8 +80,10 @@ The final result is {instruction: "sub", dst_reg: "Y", immediate: 3}.
 
 The disassembler section specifies the disassembled string formats for particular rules.
 
-More precisely, disassembler part matches a set of rules (on the right side of `=`) to a formatting string (on the left side).
-The first set of rules which is a subset of the result rule-set is selected. The corresponding formatting string is used,
+More precisely, disassembler part matches a set of rules (on the right side of `=`) to a formatting string (on the left
+side).
+The first set of rules which is a subset of the result rule-set is selected. The corresponding formatting string is
+used,
 substituting the formats with concrete values.
 
 In our example, the first rule-set cannot be used, since our result does not contain `src_reg`. However, our result
@@ -83,26 +91,27 @@ contains all rules specified in the second rule-set (`instruction dst_reg immedi
 is "sub Y, 3".
 
 By default, these format specifiers are available:
- * `%c` - one character, in the platform's default charset
- * `%d` - arbitrarily long signed integer, decimal
- * `%f` - a 4-byte of 8-byte floating point number
- * `%s` - a string (typically used for string constants returned from variants)
- * `%x` - arbitrarily long unsigned integer, hexadecimal, lowercase
- * `%X` - arbitrarily long unsigned integer, hexadecimal, uppercase
- * `%%` - a percent sign
- 
- The rule-set on the right side of `=` can take decoding strategy as a parameter in brackets `()`. The following
- decoding strategies are available:
- 
- * `bit_reverse` - reverses the bits
- * `big_endian` - decodes the bits as they are stored in big-endian format
- * `little_endian` - decodes the bits as they are stored in little-endian format
- * `absolute` - decodes the bits as stored in 2's complement if they are negative; the negative sign is then thrown away
- * `shift_left` - shifts the number to the left by 1 bit. Does it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
-   will result in `[0] = 2, [1] = 4`
- * `shift_right` - shifts the number to the right by 1 bit. Dies it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
-   will result in `[0] = 0, [1] = 0x81`   
- 
+
+* `%c` - one character, in the platform's default charset
+* `%d` - arbitrarily long signed integer, decimal
+* `%f` - a 4-byte of 8-byte floating point number
+* `%s` - a string (typically used for string constants returned from variants)
+* `%x` - arbitrarily long unsigned integer, hexadecimal, lowercase
+* `%X` - arbitrarily long unsigned integer, hexadecimal, uppercase
+* `%%` - a percent sign
+
+The rule-set on the right side of `=` can take decoding strategy as a parameter in brackets `()`. The following
+decoding strategies are available:
+
+* `bit_reverse` - reverses the bits
+* `big_endian` - decodes the bits as they are stored in big-endian format
+* `little_endian` - decodes the bits as they are stored in little-endian format
+* `absolute` - decodes the bits as stored in 2's complement if they are negative; the negative sign is then thrown away
+* `shift_left` - shifts the number to the left by 1 bit. Does it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
+  will result in `[0] = 2, [1] = 4`
+* `shift_right` - shifts the number to the right by 1 bit. Dies it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
+  will result in `[0] = 0, [1] = 0x81`
+
 The strategies can be combined. Multiple strategies will be applied in the left-to-right order.
 
 

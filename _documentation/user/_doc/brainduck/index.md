@@ -10,7 +10,11 @@ permalink: /brainduck/
 
 # BrainDuck
 
-BrainDuck is an abstract computer for emuStudio, which mimics [brainfuck][brainfuck]{:target="_blank"} programming language. Originally, brainfuck was developed by [Urban Miller][miller]{:target="_blank"} and it is well-known fact that the language has a minimalistic compiler and it's eight instructions don't prevent it to be Turing complete. Also, there exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of that can be read at Wikipedia or at other sources.
+BrainDuck is an abstract computer for emuStudio, which mimics [brainfuck][brainfuck]{:target="_blank"} programming
+language. Originally, brainfuck was developed by [Urban Miller][miller]{:target="_blank"} and it is well-known fact that
+the language has a minimalistic compiler, and it's eight instructions don't prevent it to be Turing complete. Also, there
+exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of
+that can be read at Wikipedia or at other sources.
 
 BrainDuck architecture is just a name for virtual computer in emuStudio, and consists of these plugins:
 
@@ -19,26 +23,33 @@ BrainDuck architecture is just a name for virtual computer in emuStudio, and con
 - `brainduck-mem`: Virtual operating memory which holds both compiled brainfuck program and data
 - `brainduck-terminal`: Virtual terminal for displaying the output and requesting for input.
 
-BrainDuck is implemented as [von Neumann] computer. It means that the program and data are shared in the same memory. This is not a common approach to implementing brainfuck interpreters, and it might be changed in the future.
+BrainDuck is implemented as [von Neumann] computer. It means that the program and data are shared in the same memory.
+This is not a common approach to implementing brainfuck interpreters, and it might be changed in the future.
 
-As implementing a brainfuck interpreter, one must deal with several [portability issues][portability]{:target="_blank"}, which include:
+As implementing a brainfuck interpreter, one must deal with several [portability issues][portability]{:target="_blank"},
+which include:
 
 - Memory cell size (solved in `brainduck-memory` and `brainduck-cpu`)
 - Memory size (number of memory cells) (solved in `brainduck-memory`)
 - End-of-line code (solved in `brainduck-terminal`)
 - End-of-file behavior (solved in `brainduck-cpu` and `brainduck-terminal`)
 
-The solution is spread across the plugins, as you can see in the parentheses. Chapters devoted to plugin's description contain specific information.
+The solution is spread across the plugins, as you can see in the parentheses. Chapters devoted to plugin's description
+contain specific information.
 
 ## BrainDuck for emuStudio
 
-In order to use BrainDuck, there must be drawn the abstract schema, saved in the configuration file. Abstract schemas are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The following image shows the schema of BrainDuck computer:
+In order to use BrainDuck, there must be drawn the abstract schema, saved in the configuration file. Abstract schemas
+are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The
+following image shows the schema of BrainDuck computer:
 
 ![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/brainduck-schema.png){:style="max-width:326"}
 
-The "-->" arrows are in a direction of dependency. So for example `brainc-brainduck` depends on `brainduck-mem`, because compiled programs are directly loaded into memory.
+The "-->" arrows are in a direction of dependency. So for example `brainc-brainduck` depends on `brainduck-mem`, because
+compiled programs are directly loaded into memory.
 
-Between `brainduck-cpu` and `brainduck-terminal` exists bidirectional dependency, because input gained from a terminal is passed to the CPU, and output is pushed from CPU to the terminal.
+Between `brainduck-cpu` and `brainduck-terminal` exists bidirectional dependency, because input gained from a terminal
+is passed to the CPU, and output is pushed from CPU to the terminal.
 
 plugin `brainduck-cpu` also depends on `brainduck-mem`, because memory is a place where program and data are stored.
 

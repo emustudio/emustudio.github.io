@@ -12,8 +12,10 @@ permalink: /altair8800/z80-cpu
 
 It was possible to upgrade your Altair 8800 computer with a "better" 8-bit processor [Zilog Z80][z80]{:target="_blank"}.
 The processor was probably the most used 8-bit processor in the '80s. It was backward compatible with 8080 and brought
-many enhancements. It was originally targeted for embedded systems, but it became popular very soon. Z80 was used for all
-kinds of computers - including desktop computers, arcade games, etc. Today the CPU is still used in some MP3 players, see e.g. [S1 MP3 Player][mp3]{:target="_blank"}.
+many enhancements. It was originally targeted for embedded systems, but it became popular very soon. Z80 was used for
+all
+kinds of computers - including desktop computers, arcade games, etc. Today the CPU is still used in some MP3 players,
+see e.g. [S1 MP3 Player][mp3]{:target="_blank"}.
 
 Main features of the emulator include:
 
@@ -32,10 +34,10 @@ Main features of the emulator include:
 The following table shows all the possible settings of Zilog Z80 CPU plugin:
 
 |---
-|Name              | Default value        | Valid values          | Description
+|Name | Default value | Valid values | Description
 |-|-|-|-
-|`printCode`       | false                | true / false          | Whether the emulator should print executed instructions, and its internal state to console (dump)
-|`printCodeUseCache`| false               | true / false          | If `printCode` is set to `true`, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops
+|`printCode`       | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump)
+|`printCodeUseCache`| false | true / false | If `printCode` is set to `true`, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops
 |---
 
 ## Dumping executed instructions
@@ -45,7 +47,8 @@ When enabled, then each executed instruction - together with the content of flag
 execution is printed. This feature might be extremely useful in two cases:
 
 1. Reverse engineering of some unknown software
-2. It allows us to build tools for automatic checking of register values during the emulation when performing automatic emulation.
+2. It allows us to build tools for automatic checking of register values during the emulation when performing automatic
+   emulation.
 
 To enable this feature, please see the section "Configuration file".
 
@@ -195,21 +198,23 @@ output:
 ```
 
 The dump format consists of lines, each line represents one instruction execution. The line is separated by `|` chars,
-splitting it into so-called sections. Sections before the sequence `||` represent the state *before* instruction execution,
-and sections after it represent the state *after* instruction execution. Particular sections are described in the following table.
+splitting it into so-called sections. Sections before the sequence `||` represent the state *before* instruction
+execution,
+and sections after it represent the state *after* instruction execution. Particular sections are described in the
+following table.
 
 |---
 |Column | Description
 |-|-
-| 1     | Timestamp from program start (seconds)
-| 2     | Program counter before instruction execution
-| 3     | Disassembled instruction
-| 4     | Instruction opcodes
-|       | Now follows the state *after* instruction execution
-| 5     | Register values (`B`, `C`, `D`, `E`, `H`, `L`, reserved (always 0), `A`)
-| 6     | Flags
-| 7     | Stack pointer register (`SP`)
-| 8     | Program counter after instruction execution
+| 1 | Timestamp from program start (seconds)
+| 2 | Program counter before instruction execution
+| 3 | Disassembled instruction
+| 4 | Instruction opcodes
+| | Now follows the state *after* instruction execution
+| 5 | Register values (`B`, `C`, `D`, `E`, `H`, `L`, reserved (always 0), `A`)
+| 6 | Flags
+| 7 | Stack pointer register (`SP`)
+| 8 | Program counter after instruction execution
 |---
 
 

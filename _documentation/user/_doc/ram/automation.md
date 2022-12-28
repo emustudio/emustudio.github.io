@@ -11,7 +11,8 @@ permalink: /ram/automation
 # Automation
 
 RAM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
-each abstract tape is redirected to a file. The format of the files is described in [abstract tape documentation]({{ site.baseurl}}/ram/abstract-tape).
+each abstract tape is redirected to a file. The format of the files is described in 
+[abstract tape documentation]({{site.baseurl}}/ram/abstract-tape).
 
 ## Example
 

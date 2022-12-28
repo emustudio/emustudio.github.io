@@ -11,16 +11,16 @@ downloads:
       href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-040'
     },
     downloads: [
-    {
-      filename: 'emuStudio-0.40.zip',
-      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.zip',
-      glyphs: ['fa-windows']
-    },
-    {
-      filename: 'emuStudio-0.40.tar',
-      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.tar',
-      glyphs: ['fa-linux']
-    }
+      {
+        filename: 'emuStudio-0.40.zip',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.zip',
+        glyphs: [ 'fa-windows' ]
+      },
+      {
+        filename: 'emuStudio-0.40.tar',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.40/emuStudio-0.40.tar',
+        glyphs: [ 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -35,11 +35,11 @@ downloads:
       href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-039'
     },
     downloads: [
-    {
-      filename: 'emuStudio-0.39.zip',
-      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.39/emuStudio-0.39.zip',
-      glyphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emuStudio-0.39.zip',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.39/emuStudio-0.39.zip',
+        glyphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -54,11 +54,11 @@ downloads:
       href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-038b'
     },
     downloads: [
-    {
-      filename: 'emuStudio-0.38b.zip',
-      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.38.0/emuStudio-0.38b.zip',
-      glyphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emuStudio-0.38b.zip',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.38.0/emuStudio-0.38b.zip',
+        glyphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -73,11 +73,11 @@ downloads:
       href: ''
     },
     downloads: [
-    {
-      filename: 'emuStudio-0.37b.zip',
-      href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.37.0/emuStudio-0.37b.zip',
-      glyphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emuStudio-0.37b.zip',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.37.0/emuStudio-0.37b.zip',
+        glyphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -92,11 +92,11 @@ downloads:
       href: ''
     },
     downloads: [
-    {
-      filename: 'emuStudio-3.6b1.zip',
-      href: '/files/emuStudio-3.6b1.zip',
-      glyphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emuStudio-3.6b1.zip',
+        href: '/files/emuStudio-3.6b1.zip',
+        glyphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -111,11 +111,11 @@ downloads:
       href: ''
     },
     downloads: [
-    {
-      filename: 'emuStudio-3.5b1.zip',
-      href: '/files/emuStudio-3.5b1.zip',
-      gluphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emuStudio-3.5b1.zip',
+        href: '/files/emuStudio-3.5b1.zip',
+        gluphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }
   - {
@@ -130,10 +130,10 @@ downloads:
       href: ''
     },
     downloads: [
-    {
-      filename: 'emu8-very-first.zip',
-      href: '/files/emu8-very-first.zip',
-      glyphs: ['fa-windows', 'fa-linux']
-    }
+      {
+        filename: 'emu8-very-first.zip',
+        href: '/files/emu8-very-first.zip',
+        glyphs: [ 'fa-windows', 'fa-linux' ]
+      }
     ]
   }

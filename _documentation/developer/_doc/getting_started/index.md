@@ -10,38 +10,64 @@ permalink: /getting_started/
 
 # Getting started
 
-emuStudio is a Java Swing application that implements an editor of virtual computer configuration, source code editor,
+emuStudio is a Java Swing application that implements editor of virtual computer, source code editor,
 and emulation "controller" (sometimes known as "debugger"). The emulation controller is used for controlling the
-emulation, and also supports the interaction in the application GUI. Under the hood, it operates with an instance
-of the so-called "virtual computer". The virtual computer - or computer emulator - is loaded from the computer
-configuration, selected by the user in the beginning.
+emulation, and also supports interaction in application GUI. Under the hood, it operates with an instance
+of the so-called "virtual computer". The virtual computer - or a computer emulator - is loaded from the computer
+configuration, selected by the user on the application startup.
 
-A virtual computer is composed of plugin instances, which can be interconnected, as the computer configuration defines.
-Each plugin is a single, almost self-contained, JAR file. It means that almost all dependencies the plugin uses should be
-present in the JAR file, except the following, which are bundled with emuStudio and will always be available on the class-path:
+Virtual computer is assembled from plugin object instances, possibly interconnected, according to the definition of
+given computer configuration. Each plugin is a single, almost a self-contained JAR file. It means almost all
+dependencies the plugin uses are present in the JAR file, except the following, which are bundled with emuStudio and
+will always be available in the class-path:
 
 - [emuLib][emulib]{:target="_blank"}
-- [java cup runtime][java-cup]{:target="_blank"}
+- [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
-- [args4j][args4j]{:target="_blank"} for command-line parsing
+- [Picoli][picoli]{:target="_blank"} for command-line parsing
 
-The application, besides, provides also:
+The application provides also:
 
-- plugin configuration management - implementation of [PluginSettings][pluginSettings]{:target="_blank"}
-- and runtime API for the communication between plugins and the application - implementation of [ApplicationApi][applicationApi]{:target="_blank"}
+- plugin configuration management - implementation of [PluginSettings][pluginSettings]{:target="_blank"} allowing
+  plugins
+  to register themselves or get instances of other registered plugins
+- runtime API for the communication between plugins and emuStudio application - implementation
+  of [ApplicationApi][applicationApi]{:target="_blank"}
 
 Plugins get those objects in the constructor. Details are provided in further chapters, but here can be revealed just
-this: there are four types of plugins. A virtual computer can contain a compiler (which produces code loadable in the
-emulated computer), one CPU emulator, one operating memory, and none, one or more virtual devices. The core concept of
+this: there are four types of plugins: a **compiler** (which can produce code loadable in the
+emulated memory), one **CPU** emulator, one operating **memory**, and none, one or more virtual **devices**. The core
+concept of
 a virtual computer is inspired by the [von Neumann model][vonNeumann]{:target="_blank"}.
 
-Each plugin implements API from emuLib, following some predefined rules. Then a plugin is compiled to a JAR file
-and put into a proper subdirectory in emuStudio installation.
+Each plugin implements API from emuLib, following some predefined rules. Plugin physically is compiled into a JAR file
+and copied into particular subdirectory in emuStudio installation.
+
+## GitHub repositories
+
+From architecture perspective, emuStudio is a family of [GitHub repositories][github-emustudio-all]{:target="_blank"}, a
+combination of multiple sister projects:
+
+- [emuStudio][github-emustudio]{:target="_blank"} - application and plugins
+- [emuLib][github-emulib]{:target="_blank"} - a shared run-time library used by emuStudio and plugins. Javadoc is [here][emulib]{:target="_blank"}.
+- [Edigen][github-edigen]{:target="_blank"} - CPU instruction decoder and disassembler generator based on a specification file.
+- [Edigen Gradle plugin][github-edigen-gradle]{:target="_blank"}
+- [CPU testing suite][github-cpu-testsuite]{:target="_blank"} - a general unit-testing framework for testing CPU plug-ins. Tests are
+  specified in a declarative way.
+- [emuStudio website][github-website]{:target="_blank"}
+
 
 [emulib]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
-[java-cup]: https://mvnrepository.com/artifact/com.github.vbmacher/java-cup-runtime/11b-20160615
+[antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
-[args4j]: https://mvnrepository.com/artifact/args4j/args4j/2.33
+[picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [vonNeumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
+[github-emustudio-all]: https://github.com/orgs/emustudio/repositories
+[github-emustudio]: https://github.com/emustudio/emuStudio
+[github-emulib]: https://github.com/emustudio/emuLib
+[github-edigen]: https://github.com/emustudio/edigen
+[github-edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
+[github-cpu-testsuite]: https://github.com/emustudio/cpu-testsuite
+[github-website]: https://github.com/emustudio/emustudio.github.io

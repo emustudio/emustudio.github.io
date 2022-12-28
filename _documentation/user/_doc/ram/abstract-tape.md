@@ -10,12 +10,14 @@ permalink: /ram/abstract-tape
 
 # Abstract tape
 
-Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstract-tape`.
+Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM
+machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstract-tape`.
 
 There are several properties which an abstract tape might have:
 
 - Bounded, one-side bounded or unbounded
-- Random access (allowing to move the head in both directions) or linear access (allowing to move head only in one direction)
+- Random access (allowing to move the head in both directions) or linear access (allowing to move head only in one
+  direction)
 - Specific or any cell content type (e.g. cells are integers, or strings, or can be any value?)
 - Read-only, or read-write cells
 - Purpose of the tape (title)
@@ -33,16 +35,20 @@ is set in run time.
 
 ## Graphical user interface (GUI)
 
-The graphical user interface of the abstract tape is very simple. To open it, select the tape in the peripheral devices list in the Emulator panel. Then, click on the "Show" button.
+The graphical user interface of the abstract tape is very simple. To open it, select the tape in the peripheral devices
+list in the Emulator panel. Then, click on the "Show" button.
 
 ![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png)
 
-The symbol, highlighted with the red color is the current head position, in this case. To manipulate with particular symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
+The symbol, highlighted with the red color is the current head position, in this case. To manipulate with particular
+symbols, one must _select_ the symbol, which appears in *bold*, as in the following image:
 
 ![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png)
 
-- *A*: If the tape allows it, one can add a new symbol before the selected one in the tape. In the image, the tape does not allow it.
-- *B*: The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by the symbol itself.
+- *A*: If the tape allows it, one can add a new symbol before the selected one in the tape. In the image, the tape does
+  not allow it.
+- *B*: The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by
+  the symbol itself.
 - *C*: If the tape allows it, one can add a new symbol after the last one in the tape. In the image, the tape allows it.
 - *D*: Removes the selected symbol from the tape.
 - *E*: Edits the tape symbol. The symbol must be selected.
@@ -50,43 +56,48 @@ The symbol, highlighted with the red color is the current head position, in this
 
 ## Settings
 
-The tape allows us to edit some settings from the graphical mode; to open the settings window click on the "Settings" button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
+The tape allows us to edit some settings from the graphical mode; to open the settings window click on the "Settings"
+button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
 
 ![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png)
 
 - *A*: Do not allow the tape to fall behind another window
 - *B*: Show the tape right after emuStudio start
 
-
 ## Configuration file
 
 The following table shows all the possible settings of Abstract tape plugin:
 
 |---
-|Name              | Default value        | Valid values          | Description
+|Name | Default value | Valid values | Description
 |-|-|-|-
-|`showAtStartup`   | false                | true, false           | If the tape should be shown automatically after emuStudio is started
-|`alwaysOnTop`     | false                | true, false           | Whether the tape GUI should not allow to fall behind other windows
+|`showAtStartup`   | false | true, false | If the tape should be shown automatically after emuStudio is started
+|`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
 |---
 
 ## Automatic emulation
 
-The abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file name is devised from the title of the tape, by the following algorithm:
+The abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file
+name is devised from the title of the tape, by the following algorithm:
 
 - At first, all spaces in the title are replaced with an underscore (`_`)
 - Then, all "unwanted" characters are also replaced with an underscore
 - Every character is converted to lower-case
 - Finally, the `.out` extension is added at the end.
 
-Unwanted characters are the following: `*`, `.`, `#`, `%`, `&`, `+`, `!`, `~`, `/`, `?`, `<`, `>`, `,`, `|`, `{`, `}`, `[`, `]`, `"`, ```, `=`
+Unwanted characters are the following: `*`, `.`, `#`, `%`, `&`, `+`, `!`, `~`, `/`, `?`, `<`, `>`, `,`, `|`, `{`, `}`
+, `[`, `]`, `"`, ```, `=`
 
 ## Using abstract tapes in your emulator
 
 NOTE: This section is for developers of emulators.
 
-The Abstract tape plugin can be used in various computers. Besides standard operations which are provided by `net.emustudio.emulib.plugins.device.DeviceContext` interface, it provides custom context API.
+The Abstract tape plugin can be used in various computers. Besides standard operations which are provided
+by `net.emustudio.emulib.plugins.device.DeviceContext` interface, it provides custom context API.
 
-Usually, the tapes are used by CPU plugins, but it is of course possible to use it in any other plugin. You can obtain the context during the [Plugin.initialize()][pluginInitialize]{:target="_blank"} method of the plugin root class. The context is named `net.emustudio.plugins.device.abstracttape.api.AbstractTapeContext`:
+Usually, the tapes are used by CPU plugins, but it is of course possible to use it in any other plugin. You can obtain
+the context during the [Plugin.initialize()][pluginInitialize]{:target="_blank"} method of the plugin root class. The
+context is named `net.emustudio.plugins.device.abstracttape.api.AbstractTapeContext`:
 
 {:.code-example}
 ```java
@@ -246,6 +257,5 @@ public interface AbstractTapeContext extends DeviceContext<String> {
 
 }
 ```
-
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()

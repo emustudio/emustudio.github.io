@@ -10,11 +10,13 @@ permalink: /altair8800/standard-mem
 
 # Operating memory "standard-mem"
 
-This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can benefit from the following basic properties:
+This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can
+benefit from the following basic properties:
 
 - A memory cell has a size of 1 byte (8 bits)
 - Memory cells are linearly ordered (sequential)
-- Each memory cell is accessible by a unique address, representing the index of the memory cell if the memory is imagined as an array of cells
+- Each memory cell is accessible by a unique address, representing the index of the memory cell if the memory is
+  imagined as an array of cells
 
 Besides, the memory supports these additional features:
 
@@ -33,7 +35,8 @@ an emulator that can benefit from it.
 
 ## GUI overview
 
-To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator panel. The window is shown, as in the following image:
+To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator
+panel. The window is shown, as in the following image:
 
 ![Standard operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png){:style="max-width:779"}
 
@@ -43,9 +46,12 @@ To open the memory GUI (graphical user interface), click at the right-most icon 
 - *D*: Find a sequence. A dialog shows up where user can find either a plain text or sequence of bytes in the memory.
 - *E*: Erases all memory content.
 - *F*: Shows memory settings
-- *G*: By double-clicking on the memory cell it is possible to edit it and change its value. The value format is the same as the input to "go to address" dialog (see *C*).
-- *H*: Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large (64 kB by default), so it was divided into pages.
-- *I*: If the memory has set up <<STANDARD-MEM_BANKS,memory banks>>, it is possible to change the view to different bank. Switching in here has no effect on the emulator and on the active bank.
+- *G*: By double-clicking on the memory cell it is possible to edit it and change its value. The value format is the
+  same as the input to "go to address" dialog (see *C*).
+- *H*: Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large (64 kB
+  by default), so it was divided into pages.
+- *I*: If the memory has set up [memory banks][memoryBanks], it is possible to change the view to different
+  bank. Switching in here has no effect on the emulator and on the active bank.
 - *J*: Displays the data of the selected cell in various forms.
 
 Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
@@ -68,27 +74,45 @@ ROM areas and memory bank-switching is explained in the following sections.
 
 ### ROM areas
 
-Some "controllers" - used as embedded devices - usually logically organize memory into areas, some of which are read-only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to specific addresses, so the programmer can access them.
+Some "controllers" - used as embedded devices - usually logically organize memory into areas, some of which are
+read-only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to
+specific addresses, so the programmer can access them.
 
-The standard operating memory plugin emulates this behavior. It allows us to define ROM areas that represent read-only memory.
-There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area cannot be changed from software running on the emulator. All writes to the memory will be ignored.
+The standard operating memory plugin emulates this behavior. It allows us to define ROM areas that represent read-only
+memory.
+There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area
+cannot be changed from software running on the emulator. All writes to the memory will be ignored.
 
-Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing the value will not work.
+Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing the value will
+not work.
 
-If a ROM range is defined, it is possible to remove only a part of it, effectively splitting the range and correcting their boundaries. For example, if there is defined a ROM range from `0x0A - 0x64` (see the image above), then it is possible to remove a range e.g. `0x32 - 0x46`, which is the part of defined ROM area. Then, the original ROM area is split into two parts - first will be a range from `0x0A - 0x31`, and the second from `0x47 - 0x64`.
+If a ROM range is defined, it is possible to remove only a part of it, effectively splitting the range and correcting
+their boundaries. For example, if there is defined a ROM range from `0x0A - 0x64` (see the image above), then it is
+possible to remove a range e.g. `0x32 - 0x46`, which is the part of defined ROM area. Then, the original ROM area is
+split into two parts - first will be a range from `0x0A - 0x31`, and the second from `0x47 - 0x64`.
 
 ### Memory bank-switching
 
-This technique was invented as a workaround for a problem when the address space of a processor was smaller than memory size.
-To overcome this issue, memory was logically split into many regions of size equal to the processor address space. These regions are called "banks".
+This technique was invented as a workaround for a problem when the address space of a processor was smaller than memory
+size.
+To overcome this issue, memory was logically split into many regions of size equal to the processor address space. These
+regions are called "banks".
 
-Physically, banks could refer to the same memory, but they could be also different memories (e.g. external cartridges), and the bank-switching involved switching the active memory.
+Physically, banks could refer to the same memory, but they could be also different memories (e.g. external cartridges),
+and the bank-switching involved switching the active memory.
 
-Selecting a bank from a programming perspective was usually done by writing some code to some I/O port using some I/O instruction of a CPU. But it can be implemented in various ways, e.g. some memory addresses can be used for selecting a bank.
+Selecting a bank from a programming perspective was usually done by writing some code to some I/O port using some I/O
+instruction of a CPU. But it can be implemented in various ways, e.g. some memory addresses can be used for selecting a
+bank.
 
-Also, it was very common that some part of the address space still kept some common memory part which was never switched out. This part is called a "common" part. In emuStudio, common part starts with the `Common` address (as it can be seen in the Settings dialog image above) and ends till the rest of the CPU address space (or memory end).
+Also, it was very common that some part of the address space still kept some common memory part which was never switched
+out. This part is called a "common" part. In emuStudio, common part starts with the `Common` address (as it can be seen
+in the Settings dialog image above) and ends till the rest of the CPU address space (or memory end).
 
-To summarize, let's consider an example. If a CPU is 8-bit, it means it has address space of size 2^8 - i.e. it can access memory from address 0 to (2^8 - 1). If the memory was larger, CPU just doesn't allow to access higher memory cells. So memory bank-switching is coming for the rescue. If the memory has 2 MB, we require `2^log2(2MB) = 2^21` addresses. So, if we won't have any common address space, we require `ceil(21 / 8) = 3` banks:
+To summarize, let's consider an example. If a CPU is 8-bit, it means it has address space of size 2^8 - i.e. it can
+access memory from address 0 to (2^8 - 1). If the memory was larger, CPU just doesn't allow to access higher memory
+cells. So memory bank-switching is coming for the rescue. If the memory has 2 MB, we require `2^log2(2MB) = 2^21`
+addresses. So, if we won't have any common address space, we require `ceil(21 / 8) = 3` banks:
 
 - bank 0: maps from 0 - (2^8 - 1)
 - bank 1: maps from 2^8 - (2^16 - 1)
@@ -99,34 +123,38 @@ To summarize, let's consider an example. If a CPU is 8-bit, it means it has addr
 The following table shows all the possible settings of Standard operating memory plugin:
 
 |---
-|Name              | Default value        | Valid values          | Description
+|Name | Default value | Valid values | Description
 |-|-|-|-
-|`banksCount`      | 0                    | >= 0                  | Number of memory banks
-|`commonBoundary`  | 0                    | >= 0 and < mem size   | Address from which the banks are shared
-|`memorySize`      | 65536                | > 0                   | Memory size in bytes
-|`ROMfrom`(i)      | N/A                  | >= 0 and < mem size   | Start of the i-th ROM area
-|`ROMto`(i)        | N/A                  | >= `ROMfrom`(i) and < mem size   | End of the i-th ROM area
-|`imageName`(i)    | N/A                  | file path             | The i-th memory image file name. If it ends with `.hex` suffix, it will be loaded as Intel HEX format, otherwise as binary
-|`imageAddress`(i) | N/A                  | >= 0 and < mem size   | The i-th memory image load address
+|`banksCount`      | 0 | >= 0 | Number of memory banks
+|`commonBoundary`  | 0 | >= 0 and < mem size | Address from which the banks are shared
+|`memorySize`      | 65536 | > 0 | Memory size in bytes
+|`ROMfrom`(i)      | N/A | >= 0 and < mem size | Start of the i-th ROM area
+|`ROMto`(i)        | N/A | >= `ROMfrom`(i) and < mem size | End of the i-th ROM area
+|`imageName`(i)    | N/A | file path | The i-th memory image file name. If it ends with `.hex` suffix, it will be loaded as Intel HEX format, otherwise as binary
+|`imageAddress`(i) | N/A | >= 0 and < mem size | The i-th memory image load address
 |---
 
 ## Using memory in custom computers
 
-This section is for developers of emulators. If you do not plan to create custom virtual computers, you can safely skip this section.
+This section is for developers of emulators. If you do not plan to create custom virtual computers, you can safely skip
+this section.
 To get started with developing plugins for emuStudio, please read [developer documentation][developerDoc]{:target="_blank"}.
 
-As it was mentioned in the earlier sections, the Standard operating memory plugin can be used in other computers, too. Besides standard operations which are provided by `net.emustudio.emulib.plugins.memory.MemoryContext` interface, it provides custom context API, enabling to use more features - e.g. bank-switching.
+As it was mentioned in the earlier sections, the Standard operating memory plugin can be used in other computers, too.
+Besides standard operations which are provided by `net.emustudio.emulib.plugins.memory.MemoryContext` interface, it
+provides custom context API, enabling to use more features - e.g. bank-switching.
 
-You can obtain the context in [Plugin.initialize()][pluginInitialize]{:target="_blank"} method. The context is named `net.emustudio.plugins.memory.standard.api.StandardMemoryContext`:
+You can obtain the context in [Plugin.initialize()][pluginInitialize]{:target="_blank"} method. The context is
+named `net.emustudio.plugins.memory.standard.api.StandardMemoryContext`:
 
 {:.code-example}
 ```java
 ...
 
-public void initialize(SettingsManager settings) {
-    StandardMemoryContext mem = contextPoolImpl.getMemoryContext(pluginID, StandardMemoryContext.class);
-    ...
-}
+public void initialize(SettingsManager settings){
+        StandardMemoryContext mem=contextPoolImpl.getMemoryContext(pluginID,StandardMemoryContext.class);
+        ...
+        }
 ```
 
 The memory context has the following content:
@@ -220,3 +248,4 @@ public interface StandardMemoryContext extends MemoryContext<Short> {
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [developerDoc]: /documentation/developer/introduction/
+[memoryBanks]: {{ site.baseurl }}/altair8800/standard-mem#memory-bank-switching

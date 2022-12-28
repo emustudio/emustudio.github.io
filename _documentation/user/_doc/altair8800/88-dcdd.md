@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Device 88-DCDD
+title: Device 88-dcdd
 nav_order: 6
 parent: MITS Altair8800
 permalink: /altair8800/88-dcdd
@@ -10,7 +10,7 @@ permalink: /altair8800/88-dcdd
 # Altair Floppy Disk (88-DCDD)
 
 [Altair floppy disk][disk]{:target="_blank"} (88-DCDD) offered the advantage of permanent store including relatively
-fast access to data. The speed of data transfer was 250 Kbit/s (The plugin does not emulate this). Data transfer was 
+fast access to data. The speed of data transfer was 250 Kbit/s (The plugin does not emulate this). Data transfer was
 serial, byte after byte.
 
 ![Altair disk]({{ site.baseurl }}/assets/altair8800/altair-disk.jpg)
@@ -19,18 +19,18 @@ serial, byte after byte.
 
 The 88-DCDD hardware contained three parts:
 
-- disk drive (initially [Pertec FD400][pertec]), able to store ~330 kB of data on 8" diskette
+- disk drive (initially [Pertec FD400][pertec]{:target="_blank"}), able to store ~330 kB of data on 8" diskette
 - two boards connected to S-100 bus
     - the first one performed communication operations between the bus and CPU
     - the second one performed communication with the disk drives
 
-Original manual can be downloaded at [deramp.com][manual]{:target="_blank"} or [www.virtualaltair.com][manual2]{:
-target="_blank"}.
+Original manual can be found at [deramp.com][manual]{:target="_blank"} or 
+[www.virtualaltair.com][manual2]{:target="_blank"}.
 
 ## Diskette formats
 
-A diskette was introduced by [IBM in 1971][diskette-history] for being able to load programs into IBM mainframes.
-Soon a revolution in personal computers brought diskettes into the world of microcomputers.
+A diskette was introduced by [IBM in 1971][diskette-history]{:target="_blank"} for being able to load programs into IBM
+mainframes. Soon a revolution in personal computers brought diskettes into the world of microcomputers.
 
 ![IBM diskette]({{ site.baseurl }}/assets/altair8800/altair-diskette.png)
 
@@ -38,15 +38,16 @@ Standard Altair 8" diskette had the following parameters:
 
 {:.table-responsive}
 {:.table .table-stripped}
-| Description        | Value                                     |
+| Description | Value |
 |--------------------|-------------------------------------------|
-| Maximum capacity   | 330 kB                                    |
-| Recording density  | 6331 bits per radian (3268 bits per inch) | 
-| Tracks             | 77                                        | 
-| Sectors per track  | 32                                        | 
-| Sector size        | 137 bytes                                 | 
+| Maximum capacity | 330 kB |
+| Recording density | 6331 bits per radian (3268 bits per inch) |
+| Tracks | 77 |
+| Sectors per track | 32 |
+| Sector size | 137 bytes |
 
-(info from [Pertec FD400][pertec] manual, [this blogpost][programming-history] and [simh][simh-disk] emulator)
+(info from [Pertec FD400][pertec]{:target="_blank"} manual, [this blogpost][programming-history]{:target="_blank"} and
+[simh][simh-disk]{:target="_blank"} emulator)
 
 ## Features of the plugin
 
@@ -62,27 +63,41 @@ Feature highlights are:
 
 GUI can be seen in the following image:
 
-![GUI of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-disk-gui.png)
+![GUI of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-dcdd.png)
+
+The window shows runtime status of virtual disk drives. By clicking on a drive button, its details are revealed below.
+Port1 is showing 88-dcdd status, ordered from the MSB to LSB, and instead of showing 1 and 0s, every bit is mapped
+to a letter:
+
+- `R` (bit 7): "New read data" available - indicates that one byte of data is available to be read from port 2
+- `Z` (bit 6): Indicates when head is on outermost track (track 0)
+- `I` (bit 5): Indicates interrupts enabled (value=0) or disabled (value=1)
+- `H` (bit 2): Head status (loaded: value=0, unloaded: value=1)
+- `M` (bit 1): Indicates head movement allowed (allowed: value=0, disallowed: value=1)
+- `W` (bit 0): "Enter new write data" - indicates new byte of data can be written to port 2
+
+You might notice on "true" condition the bit value of Port 1 is 0. Also, the drive button icon color reflects the head
+status: green means head is loaded, red means head is unloaded. See [88-dcdd manual][manual]{:target="_blank"} for more
+details.
 
 ## Mounting disk images
 
 In order to mount disk images to the device, please open device settings:
 
-![Settings window of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-disk-images.png)
+![Settings window of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings1.png)
 
-- *A*: Select drive (A - P)
-- *B*: Choosing the image file
-- *C*: Set sectors count and sector length for the current drive. (NOTE: Be cautious with the settings. Incorrect values
-  can result in disk image file damage. Default values are used for classic Altair8800 image files used by [simh][simh]{:target="_blank"}).
-- *D*: Set default values for sector count and sector length for the current drive.
-- *E*: Mount/unmount the image file onto/from the selected drive. Mount operation: If there is any disk mounted already,
-  the new image will be re-mounted.
-- *F*: Check box for saving the settings into the computer configuration file. If checked, the settings will be loaded
-  after start.
+- *1*: Select drive (A - P)
+- *2*: Choose the image file and click on "Mount". If there is a disk mounted already, it will be re-mounted with the
+  new file.
+- *3*: If you want to un-mount all disk drives, click on "Umount all" button
+- *4*: Set sectors per track and sector size for the current drive. (NOTE: Be cautious with the settings. Incorrect
+  values can result in disk image file damage. Existing default values were chosen from disk image files used by
+  [simh][simh]{:target="_blank"} emulator).
+- *5*: Set default values for sectors per track and sector size for the current drive.
 
 ## CPU Ports settings
 
-A control board of Altair disk communicated with CPU through its ports. There are three ports overall, each for
+A control board of Altair disk communicates with CPU through its ports. There are three ports overall, each for
 different function. By default, the port mapping to CPU port numbers is as follows:
 
 - Port 1: `0x08` - in: disk status information, out: select disk
@@ -91,12 +106,18 @@ different function. By default, the port mapping to CPU port numbers is as follo
 
 Port mapping can be changed in the Settings window, tab "CPU Ports":
 
-![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-disk-ports.png)
+![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings2.png)
+
+- *1*: Set CPU port number value for the three 88-dcdd ports
+- *2*: Set used CPU interrupt vector and whether interrupts are actually supported by 88-dcdd. Interrupt vector is
+  used when interrupt is signalled to the CPU which is implemented as equivalent to executing an instruction `RST`.
+  When interrupts are globally disabled here, enabling them in runtime won't work.
+- *3*: Setting default interrupt vector (which is 7).
 
 ## Programming
 
 The basic idea is to programmatically select a drive, then set a "position". After that data can be either read or
-written. For nice introduction with historical context see [this nice blog post][programming-history].
+written. For nice introduction with historical context see [this nice blog post][programming-history]{:target="_blank"}.
 
 The "position" in the floppy disk is determined by a track number, sector number and the offset within the sector.
 It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
@@ -139,7 +160,7 @@ Now, detailed description of the ports follow. Bits are ordered in a byte as fol
 
 where `D7` is the most significant bit, and `D0` the least significant bit.
 
-#### Port 1 (default address: 0x08)
+### Port 1 (default address: 0x08)
 
 *WRITE*:
 
@@ -170,29 +191,33 @@ Read disk status of the selected drive.
 
 Initial values of the bits are: `11100111`.
 
-#### Port 2 (default address: 0x09)
+### Port 2 (default address: 0x09)
 
 *WRITE*:
 
 Control the disk head, and other settings if a disk drive is selected.
 
 - `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector
-  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing sequence
+  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing
+  sequence
   holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence
-  period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte of
+  period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte
+  of
   a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or
   end of a sector. However, the plugin does not require it.
 - `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector
-  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing sequence
+  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing
+  sequence
   holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence
-  period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte of
+  period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte
+  of
   a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or
   end of a sector. However, the plugin does not require it.
 - `D6` : _Head Current Switch_. On real disks the bit should be set to 1 when a program is writing data to tracks from
   43-76. The plugin the bit is ignored.
 - `D5` : _Interrupt Disable_. If set to 1, interrupts support will be disabled.
-- `D4` : _Interrupt Enable_. If set to 1, interrupts support will be enabled. Interrupt will be signalled to CPU on 
-  "sector true" event. This effectively means on every other position reading (see *READ* part below). The device will 
+- `D4` : _Interrupt Enable_. If set to 1, interrupts support will be enabled. Interrupt will be signalled to CPU on
+  "sector true" event. This effectively means on every other position reading (see *READ* part below). The device will
   emit interrupt vector equivalent to executing an `RST` instruction. The interrupt vector number is set up globally  
   in the plugin settings.
 - `D3` : _Head unload_. Removes head from the disk surface. Reading sector number will now become invalid. In addition,
@@ -216,7 +241,7 @@ at the disk surface (by setting the bit `D2`).
   again. It could be made in time easily, because CPU was much faster than disk itself. plugin does not limit the
   period. The value is 0 practically all the time, until first byte is written.
 
-#### Port 3 (default address: 0x0A)
+### Port 3 (default address: 0x0A)
 
 *WRITE*:
 
@@ -351,7 +376,8 @@ readdata: db 0
 
 ## Experimental CP/M support
 
-88-dcdd plugin adds **highly experimental** support of handling files on a CP/M filesystem. It is now possible to create disk images,
+88-dcdd plugin adds **highly experimental** support of handling files on a CP/M filesystem. It is now possible to create
+disk images,
 and read/write files from/to a disk image using CP/M filesystem.
 
 The CP/M tool can be accessed from command-line:
@@ -517,51 +543,57 @@ ofs = 6
 ```
 
 The diskette format contains two sections: `[[format]]`, which is the main (root) section, and `[format.dpb]` which
-is a subsection with disk-parameters-block (DPB). 
+is a subsection with disk-parameters-block (DPB).
 
 The main section supports the following parameters:
 
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`id`        |   | any string without spaces | Disk format ID
-|`sectorSize`        |  | > 0 | Raw sector size in bytes
+|`id`        | | any string without spaces | Disk format ID
+|`sectorSize`        | | > 0 | Raw sector size in bytes
 |`sectorSkew`        | 1 | optional; > 0 | Sector skew in bytes. It is not required to provide, if a sector skew table is provided. Used if `sectorSkewTable` is not provided.
-|`sectorSkewTable`   |   | optional; array of sectors-per-track items (see `driveSpt` below) | Sector skew table. Used if `sectorSkew` is not provided.
+|`sectorSkewTable`   | | optional; array of sectors-per-track items (see `driveSpt` below) | Sector skew table. Used if `sectorSkew` is not provided.
 |`sectorOps`         | `dummy` | `altair-floppy-mits`, `altair-floppy-deramp`, `altair-minidisk-deramp`, `dummy` | Sector operations - how to extract data from raw sector when reading, or how to encode data to raw sector when writing. See below for more information.
 |`bcInterpretsAsUnused`| false | true/false | `BC` is a value in a CP/M file record saying number of used bytes in the last data record for the file (`false`) or number of unused bytes in the record (`true`).
-|`dateFormat`        | `NOT_USED` | `NOT_USED`, `NATIVE`, `NATIVE2`, `DATE_STAMPER` | What type of date format this CP/M filesystem uses. See a description below.  
-
+|`dateFormat`        | `NOT_USED` | `NOT_USED`, `NATIVE`, `NATIVE2`, `DATE_STAMPER` | What type of date format this CP/M filesystem uses. See a description below.
 |`sectorsPerTrack0` ... `sectorsPerTrack15` | 32 | > 0 | Count of sectors in a disk image, on disk A (0) up to P (15)
 |`sectorSize0` ... `sectorSize15`           | 137 | > 0 | Size of one sector in bytes on disk A (0) up to P (15)
 |`image0` ... `image15`                     | N/A | Path to existing file| File name to mount on disk A (0) up to P (15)
 |`imageMounted0` ... `imageMounted15`       | false | true/false | Whether disk image is mounted on start
-|`interruptVector`                          | 7   | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
-|`interruptsSupported`                      | true | true/false  | Whether interrupts are supported (independent on Port 2 runtime settings)
+|`interruptVector`                          | 7 | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
+|`interruptsSupported`                      | true | true/false | Whether interrupts are supported (independent on Port 2 runtime settings)
 |---
 
 ### Sector operations (`sectorOps`)
 
 In CP/M, data records are usually prefixed and/or appended with additional data like checksum in order to obtain full
-sector. A CP/M data record has 128 bytes (this is fixed for all CP/M versions). But standard Altair 8" diskette had capacity
+sector. A CP/M data record has 128 bytes (this is fixed for all CP/M versions). But standard Altair 8" diskette had
+capacity
 of 137 bytes, thus still having available space of 9 bytes.
 
 On reading, these data/checksums were usually checked before the data is extracted. Various CP/M versions used
-different sector operations - meaning data records might be placed on various different positions (different offsets) 
+different sector operations - meaning data records might be placed on various different positions (different offsets)
 in the raw sector.
 
 This section will describe sector operations supported in 88-dcdd CP/M tool. There are more possibilities of sector
 arrangement, but currently only the following are supported.
 
-#### `dummy`
+**Dummy**
+
+Value: `dummy`
 
 Record is not manipulated at all. Sector size is respected, so the 128-byte record is placed in the beginning
 of the sector, padding the rest of available sector space with 0.
 
-#### `altair-floppy-mits`
+**Altair Floppy: MITS**
 
-This sector ops are used in [simh][altair-schorn] Altair8800 disk images, assuming standard 8" Altair diskette. 
-Here the sector size is hardcoded to 137 bytes, regardless of what is in the settings. The sector is arranged as follows:
+Value: `altair-floppy-mits`
+
+This sector ops are used in [simh][altair-schorn]{:target="_blank"} Altair8800 disk images, assuming standard 8" Altair
+diskette.
+Here the sector size is hardcoded to 137 bytes, regardless of what is in the settings. The sector is arranged as
+follows:
 
 |---
 |Byte | Description
@@ -577,7 +609,9 @@ Here the sector size is hardcoded to 137 bytes, regardless of what is in the set
 |136| 0
 |---
 
-#### `altair-floppy-deramp`
+**Altair Floppy: DeRamp**
+
+Value: `altair-floppy-deramp`
 
 This sector ops is described in DeRamp CP/M BIOS, assuming standard 8" Altair diskette. The sector size is hardcoded
 to 137 bytes, regardless of what is in the settings.
@@ -609,12 +643,14 @@ For tracks 5-76, the arrangement is:
 |3| 0
 |4| 0
 |5| 0
-|6 - 134| Data 
+|6 - 134| Data
 |135| 0xFF ("stop byte")
 |136| data checksum (sum of bytes 6-134)
 |---
 
-#### `altair-minidisk-deramp`
+**Altair Minidisk: DeRamp**
+
+Value: `altair-minidisk-deramp`
 
 This sector ops is described in DeRamp CP/M BIOS, assuming 5.25" Altair Minidisk. The sector size is hardcoded to 137
 bytes, regardless of what is in the settings.
@@ -653,18 +689,21 @@ For tracks 4-34, the arrangement is:
 
 ### Date formats (`dateFormat`)
 
-Date formats are partially described in various manuals: [CP/M tools manual][cpm-tools],
-[BDOS replacements for CP/M 2 and 3][bdos-replacements], [CP/M 2.2 file format][cpm-2.2], [CP/M 3.1 file format][cpm-3.1]
-and [CP/M 4.1 file format][cpm-4.1].
+Date formats are partially described in various manuals: [CP/M tools manual][cpm-tools]{:target="_blank"},
+[BDOS replacements for CP/M 2 and 3][bdos-replacements]{:target="_blank"}, 
+[CP/M 2.2 file format][cpm-2.2]{:target="_blank"},
+[CP/M 3.1 file format][cpm-3.1]{:target="_blank"} and [CP/M 4.1 file format][cpm-4.1]{:target="_blank"}.
 
-#### `NATIVE`
+**Naive 1**
+
+Value: `NATIVE`
 
 Used in CP/M 2.2 in various BDOS replacements: Z80DOS, DOS+, P2DOS and CP/M Plus. Every 4th entry of a directory is
 considered to be a datestamp record. The structure of the record is as follows:
 
     21 00 C1 C1 M1 M1 M1 M1 A1 A1 A1 A1 C2 C2 M2 M2
     M2 M2 A2 A2 A2 A2 C3 C3 M3 M3 M3 M3 A3 A3 A3 A3
-     
+
 - `C1` = File 1 Create date
 - `M1` = File 1 Modify date/time
 - `A1` = File 1 Access date/time
@@ -675,11 +714,13 @@ considered to be a datestamp record. The structure of the record is as follows:
 - `M3` = File 3 Modify date/time
 - `A3` = File 3 Access date/time
 
-#### `NATIVE2`
+**Native 2**
 
-This file format is described only on single place ([here][cpm-tools2]) and Im not sure if it really existed. If yes,
-it's possible to use it. The source claims the format was used in P2DOS or CP/M Plus BDOSes. Every 4th entry of a directory is
-considered to be a datestamp record. The structure is as follows:
+Value: `NATIVE2`
+
+This file format is described only on single place ([here][cpm-tools2]{:target="_blank"}) and Im not sure if it really
+existed. If yes, it's possible to use it. The source claims the format was used in P2DOS or CP/M Plus BDOSes. Every 4th
+entry of a directory is considered to be a datestamp record. The structure is as follows:
 
     21 C1 C1 C1 C1 M1 M1 M1 M1 00 00 C2 C2 C2 C2 M2
     M2 M2 M2 00 00 C3 C3 C3 C3 M3 M3 M3 M3 00 00 00
@@ -691,7 +732,7 @@ considered to be a datestamp record. The structure is as follows:
 - `C3` = File 3 Create date
 - `M3` = File 3 Modify date/time
 
-The source further says: CP/M Plus further allows optionally to record the access instead of creation date as first 
+The source further says: CP/M Plus further allows optionally to record the access instead of creation date as first
 time stamp.
 
 - 2 bytes (little-endian) days starting with 1 at 01-01-1978
@@ -700,14 +741,19 @@ time stamp.
 
 This is however not supported in this date format.
 
-#### `DATE_STAMPER`
+**Date stamper**
 
-File date/times are saved in a special file called `!!!TIME&.DAT` in the CP/M filesystem. The file during CP/M runtime 
-is managed by the special software called DateStamper, which must be installed to BDOS manually (described [here][cpm-tools2],
-[here][cpm-filesystem] and [here][zsdos-pdf]).
+Value: `DATE_STAMPER`
 
-88-dcdd CP/M tool does not support this type of date formats for now. Since the file `!!!TIME&.DAT` has special requirements
-(it must be allocated as the first record in directory entry), the setting `DATE_STAMPER` only makes sure the first directory
+File date/times are saved in a special file called `!!!TIME&.DAT` in the CP/M filesystem. The file during CP/M runtime
+is managed by the special software called DateStamper, which must be installed to BDOS manually (
+described [here][cpm-tools2]{:target="_blank"},
+[here][cpm-filesystem]{:target="_blank"} and [here][zsdos-pdf]{:target="_blank"}).
+
+88-dcdd CP/M tool does not support this type of date formats for now. Since the file `!!!TIME&.DAT` has special
+requirements
+(it must be allocated as the first record in directory entry), the setting `DATE_STAMPER` only makes sure the first
+directory
 is ignored during entry allocation when writing files to disk image.
 
 ## Configuration file
@@ -724,8 +770,8 @@ The following table shows all the possible file configurations of the plugin:
 |`sectorSize0` ... `sectorSize15`           | 137 | > 0 | Size of one sector in bytes on disk A (0) up to P (15)
 |`image0` ... `image15`                     | N/A | Path to existing file| File name to mount on disk A (0) up to P (15)
 |`imageMounted0` ... `imageMounted15`       | false | true/false | Whether disk image is mounted on start
-|`interruptVector`                          | 7   | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
-|`interruptsSupported`                      | true | true/false  | Whether interrupts are supported (independent on Port 2 runtime settings) 
+|`interruptVector`                          | 7 | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
+|`interruptsSupported`                      | true | true/false | Whether interrupts are supported (independent on Port 2 runtime settings)
 |---
 
 

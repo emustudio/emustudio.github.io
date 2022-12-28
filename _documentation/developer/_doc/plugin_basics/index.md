@@ -19,9 +19,10 @@ In the source code, plugins are located in `plugins/` subdirectory, then branche
 ## Naming conventions
 
 Plugin names are derived from JAR file names. A naming convention defines how the name should be picked. Each plugin
-type has a different naming convention. General idea is that the JAR file name should say clearly what the plugin is about.
- 
-A plugin JAR file name should be in the form of: 
+type has a different naming convention. General idea is that the JAR file name should say clearly what the plugin is
+about.
+
+A plugin JAR file name should be in the form of:
 
 {:.code-example}
 ```
@@ -46,7 +47,6 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 | Device | `[device model]-[device type]` | `88-dcdd`, `adm3a-terminal`, `simh-pseudo`
 |===
 
-
 Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
 just for word separation (e.g. `zilogZ80`).
 
@@ -58,10 +58,10 @@ instantiated by emuStudio, then assigned into a virtual computer and used.
 A class which is to be plugin root, must:
 
 - implement some plugin interface (i.e. [CPU][cpu]{:target="_blank"}, [Device][device]{:target="_blank"}, [Memory][memory]{:target="_blank"} or [Compiler][compiler]{:target="_blank"})
-- annotate the class with [PluginRoot][pluginRoot]{:target="_blank"} annotation  
+- annotate the class with [PluginRoot][pluginRoot]{:target="_blank"} annotation
 - implement a public constructor with three arguments of types (`long`, [ApplicationApi][applicationApi]{:target="_blank"}, [PluginSettings][pluginSettings]{:target="_blank"})
 
-A sample plugin root class might look like this: 
+A sample plugin root class might look like this:
 
 {:.code-example}
 ```java
@@ -77,7 +77,7 @@ public class SamplePlugin implements CPU {
 ```
 
 If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
-If there are more classes like this, the plugin might not work correctly.  
+If there are more classes like this, the plugin might not work correctly.
 
 The constructor parameters have the following meaning:
 
@@ -89,9 +89,10 @@ The constructor parameters have the following meaning:
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either
-bundled with the plugin, or the location should be present in the `Class-Path` attribute in the plugin's `Manifest` file.
+bundled with the plugin, or the location should be present in the `Class-Path` attribute in the plugin's `Manifest`
+file.
 
-Some libraries are pre-loaded by emuStudio and those shouldn't be included in plugin JAR file:
+Some libraries are preloaded by emuStudio and those shouldn't be included in plugin JAR file:
 
 - [emuLib][emulib]{:target="_blank"}
 - [java cup runtime][java-cup]{:target="_blank"}
@@ -114,24 +115,24 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
 {:.code-example}
 ```groovy
 ...
-      // Examples
-      ["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
-        from(examples(":plugins:compiler:$compiler")) {
-          into "examples/$compiler"
-        }
-      }
+// Examples
+["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
+    from(examples(":plugins:compiler:$compiler")) {
+        into "examples/$compiler"
+    }
+}
 
-      // Scripts
-      ["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
-        from(scripts(":plugins:compiler:$compiler")) {
-          into "bin"
-        }
-      }
-      ["88-dcdd"].collect { device ->
-        from(scripts(":plugins:device:$device")) {
-          into "bin"
-        }
-      }
+// Scripts
+["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
+    from(scripts(":plugins:compiler:$compiler")) {
+        into "bin"
+    }
+}
+["88-dcdd"].collect { device ->
+    from(scripts(":plugins:device:$device")) {
+        into "bin"
+    }
+}
 ...
 ```
 

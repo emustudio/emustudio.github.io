@@ -5,28 +5,29 @@
 <div class="container mb-4">
     <div class="row">
         <div class="col-md-4">
-            <a href="#modal{{ screenshot.id }}" data-toggle="modal" class="thumbnail">
-                <img src="{{ screenshot.thumbnail }}" alt="{{ screenshot.alt }}" style="width:300px">
+            <a class="thumbnail" data-toggle="modal" href="#modal{{ screenshot.id }}">
+                <img alt="{{ screenshot.alt }}" src="{{ screenshot.thumbnail }}" style="width:300px">
             </a>
         </div>
         <div class="col">{{ screenshot.html }}</div>
     </div>
 </div>
 
-<div class="modal fade" id="modal{{ screenshot.id }}" tabindex="-1" role="dialog" aria-labelledby="modal{{ screenshot.id }}Title" aria-hidden="true">
+<div aria-hidden="true" aria-labelledby="modal{{ screenshot.id }}Title" class="modal fade" id="modal{{ screenshot.id }}"
+     role="dialog" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal{{ screenshot.id }}Title">{{ screenshot.title }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img src="{{ screenshot.image }}" alt="{{ screenshot.alt }}">
+                <img alt="{{ screenshot.alt }}" src="{{ screenshot.image }}">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
             </div>
         </div>
     </div>

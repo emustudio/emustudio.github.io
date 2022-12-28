@@ -11,18 +11,22 @@ permalink: /brainduck/automation
 # Automation
 
 BrainDuck computer will recognize if automatic emulation is executed.
- 
+
 ## Non-interactive mode
- 
+
 If a `--nogui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
 
-The input file is called `brainduck-terminal.in` and must be placed in the directory from which emuStudio was executed. If the file does not exist, emuStudio will not run.
+The input file is called `brainduck-terminal.in` and must be placed in the directory from which emuStudio was executed.
+If the file does not exist, emuStudio will not run.
 
-The output file is called `brainduck-terminal.out` and it will be created automatically or appended when it exists in the location from which emuStudio was executed.
+The output file is called `brainduck-terminal.out` and it will be created automatically or appended when it exists in
+the location from which emuStudio was executed.
 
 ## Be careful of EOLs
 
-Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII code 10. plugin `brainduck-terminal` interprets ENTER key in the interactive mode as Unix-like EOL. In the non-interactive mode, EOL may be of any-like type.
+Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII
+code 10. plugin `brainduck-terminal` interprets ENTER key in the interactive mode as Unix-like EOL. In the
+non-interactive mode, EOL may be of any-like type.
 
 ## Example
 

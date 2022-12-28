@@ -10,11 +10,13 @@ permalink: /altair8800/automation
 
 # Automation
 
-MITS Altair8800 computer will recognize if automatic emulation is executed. The automation can operate in the interactive
-or non-interactive mode.
+MITS Altair8800 computer will recognize if automatic emulation is executed. The automation can operate in the
+interactive or non-interactive mode.
 
-In case of the non-interactive mode (`--nogui` flag set in the command line), the input and output of the terminal ADM-3A will be redirected to files, instead of terminal GUI. The input/output file names are configurable, please refer to
-[ADM-3A terminal documentation]({{ site.baseurl }}/altair8800/adm3a-terminal#configuration-file). 
+In case of the non-interactive mode (`--nogui` flag set in the command line), the input and output of the terminal
+ADM-3A will be redirected to files, instead of terminal GUI. The input/output file names are configurable, please refer
+to
+[ADM-3A terminal documentation]({{ site.baseurl }}/altair8800/adm3a-terminal#configuration-file).
 
 ## Example
 
@@ -35,7 +37,7 @@ The following command will emulate the computer and run "reverse text" program o
 
 - computer configuration `config/MITSAltair8800.toml` will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be performed    
+- (`--auto`) automatic emulation will be performed
 - (`--nogui`) non-interactive mode will be set
 
 After the program finishes, emuStudio is closed. The program output will be in the file `adm3A-terminal.out`:
@@ -46,7 +48,7 @@ Reversed text ...
 Enter text: Hello, world!
 !dlrow ,olleH
 ```
- 
+
 Console will contain additional information about the emulation progress:
 
 {:.code-example}
