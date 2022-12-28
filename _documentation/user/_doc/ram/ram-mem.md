@@ -12,7 +12,8 @@ permalink: /ram/ram-mem
 
 RAM memory is used as a part of RAM simulator, which acts as the "program memory", holding just the program.
 
-RAM CPU reads instructions from this memory. The instructions can be written here only by compiling the source code or loading an already compiled binary image.
+RAM CPU reads instructions from this memory. The instructions can be written here only by compiling the source code or
+loading an already compiled binary image.
 
 The memory plugin contains a simple graphical window, a GUI, which provides a set of the following features:
 
@@ -30,4 +31,5 @@ The memory GUI can be seen in the following picture.
 - *C*: Shows uniform time complexity for the actual program.
 - *D*: Shows uniform space complexity for the actual program.
 
-Uniform time complexity means the maximum number of instructions based on the input `N`. Uniform space complexity means the maximum number of used registers.
+Uniform time complexity means the maximum number of instructions based on the input `N`. Uniform space complexity means
+the maximum number of used registers.

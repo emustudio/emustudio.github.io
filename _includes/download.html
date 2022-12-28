@@ -1,10 +1,11 @@
 <div id="accordion">
     {% for emustudio in site.data.downloads.downloads %}
 
-    <div id="version{{ emustudio.versionid }}" class="collapse {% if forloop.first == true %}show{% endif %}"
-         data-parent="#accordion">
+    <div class="collapse {% if forloop.first == true %}show{% endif %}" data-parent="#accordion"
+         id="version{{ emustudio.versionid }}">
         {% for download in emustudio.downloads %}
-        <a href="{{ download.href }}" class="btn btn-info btn-lg mr-3" onclick="gtag('event', 'download', { event_category: '{{ emustudio.version }}', event_action: '{{ download.filename }}'});">
+        <a class="btn btn-info btn-lg mr-3" href="{{ download.href }}"
+           onclick="gtag('event', 'download', { event_category: '{{ emustudio.version }}', event_action: '{{ download.filename }}'});">
             {% for glyph in download.glyphs %}
             <i class="fab {{ glyph }}"></i>
             {% endfor %}
@@ -14,10 +15,14 @@
         <p>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Released {{ emustudio.release.date }}</li>
-            <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}" target="_blank">{{ emustudio.java.name }}</a></li>
+            <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}"
+                                                                                 target="_blank">{{ emustudio.java.name
+                }}</a></li>
 
             {% if emustudio.release.href != '' %}
-            <li class="list-group-item">See the <a href="{{ emustudio.release.href }}" target="_blank" onclick="gtag('event', 'release_notes', { event_category: '{{ emustudio.version }}', event_action: ''});">release notes</a></li>
+            <li class="list-group-item">See the <a href="{{ emustudio.release.href }}" onclick="gtag('event', 'release_notes', { event_category: '{{ emustudio.version }}', event_action: ''});"
+                                                   target="_blank">release
+                notes</a></li>
             {% endif %}
         </ul>
         </p>
@@ -27,13 +32,13 @@
 
 <hr/>
 <div class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-       aria-haspopup="true" aria-expanded="false">
+    <a aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#"
+       id="dropdownMenuLink" role="button">
         Or select another version...
     </a>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <div aria-labelledby="dropdownMenuLink" class="dropdown-menu">
         {% for emustudio in site.data.downloads.downloads %}
-        <a class="dropdown-item" href="#" data-target="#version{{ emustudio.versionid }}" data-toggle="collapse">
+        <a class="dropdown-item" data-target="#version{{ emustudio.versionid }}" data-toggle="collapse" href="#">
             {{ emustudio.version }}{% if forloop.first == true %} (latest){% endif %}
         </a>
         {% endfor %}
@@ -42,13 +47,13 @@
 </div>
 
 <script type="text/javascript">
-// the current open accordion will not be able to close itself
-$('[data-toggle="collapse"]').on('click',function(e){
-    if ( $(this).parents('#accordion').find('.collapse.show') ){
-        var idx = $(this).index('[data-toggle="collapse"]');
-        if (idx == $('.collapse.show').index('.collapse')) {
-            e.stopPropagation();
+    // the current open accordion will not be able to close itself
+    $('[data-toggle="collapse"]').on('click', function (e) {
+        if ($(this).parents('#accordion').find('.collapse.show')) {
+            var idx = $(this).index('[data-toggle="collapse"]');
+            if (idx == $('.collapse.show').index('.collapse')) {
+                e.stopPropagation();
+            }
         }
-    }
-});
+    });
 </script>

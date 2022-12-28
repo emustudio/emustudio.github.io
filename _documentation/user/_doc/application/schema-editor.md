@@ -26,12 +26,14 @@ Description of the control panel follows.
 - *D*: Select a memory.
 - *E*: Select a device.
 - *F*: Use a connection line. The line is bidirectional by default.
-- *G*: Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element.
+- *G*: Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is
+  the first clicked element and the target direction is the second clicked element.
 - *H*: Remove an element from the schema.
 - *I*: This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons
   `B`, `C`, `D`, and `E`. Those names are plugin JAR file names.
-- *J*: Use / do not use a grid in the editor. Elements are "snapped" to the grid if it is used and it's easier to draw
-  the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in the
+- *J*: Use / do not use a grid in the editor. Elements are "snapped" to the grid if it is used, and it's easier to draw
+  the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in
+  the
   configuration file of the edited computer.
 
 Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have
@@ -39,12 +41,14 @@ a CPU and memory. Optionally one or more devices, and optionally a compiler.
 
 ## Connection lines
 
-The connection line represents a virtual "connection" between computer components. For the computer schema, it's not important how the connection is realized. It's safe to say that the connection is similar
+The connection line represents a virtual "connection" between computer components. For the computer schema, it's not
+important how the connection is realized. It's safe to say that the connection is similar
 as if we say that a component "sees" the other component, in the direction of the arrow:
 
 ![CPU "sees" operating memory, but not vice-versa]({{ site.baseurl }}/assets/application/connection.png)
 
-In the previous image, a CPU "sees" the memory, but not vice-versa. It means, CPU can read/write from/to memory, but memory is not seeing it, it can just answer to CPU requests. This connection makes
+In the previous image, a CPU "sees" the memory, but not vice-versa. It means, CPU can read/write from/to memory, but
+memory is not seeing it, it can just answer to CPU requests. This connection makes
 sense in real-world computers.
 
 Drawing connection lines is very easy. The connection line always connects exactly two elements in the schema.

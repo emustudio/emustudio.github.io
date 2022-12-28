@@ -11,9 +11,9 @@ permalink: /ssem/automation
 # Automation
 
 SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
-the memory final "snapshot" along with additional information is written to a file named `ssem.out`. 
+the memory final "snapshot" along with additional information is written to a file named `ssem.out`.
 
-The file is overwritten after each emulation "stop". 
+The file is overwritten after each emulation "stop".
 
 ## Example
 
@@ -49,7 +49,6 @@ The console will contain information about emulation progress:
 [INFO] Instruction location = 005Ch
 [INFO] Emulation completed
 ```
-
 
 the emulation will run without user interaction, and file `ssem.out` will be created with the following content:
 

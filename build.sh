@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Tests before build
+echo "Checking {:target=\"_blank\"} ..."
+find _documentation/ -type f -name "*.md" -print0 | xargs -0 grep -e "\s\[[^]]*\]\[[^]]*\][^{]" | grep -v "\\[instantiation\\]" | grep -v "\\[initialization\\]" | grep -v "\\[memoryBanks\\]"
+if [[ "$?" -eq 0 ]]; then
+  echo "  Problem"
+  exit 1
+fi
+
+# Build
 echo Deleting generated sites
 rm -rf ./documentation/
 bundle exec jekyll clean
@@ -11,11 +20,9 @@ cd ..
 
 JEKYLL_ENV=production bundle exec jekyll build --verbose
 
-
-# Tests
-
+# Tests after build
 echo Checking images...
-find documentation/ -type f -regex ".*\.\(html\)" -print0 | xargs -0 grep "{imagepath}"
+find documentation/ -type f -name "*.html" -print0 | xargs -0 grep "{imagepath}"
 if [[ "$?" -eq 0 ]]; then
   echo "  Problem"
   exit 1

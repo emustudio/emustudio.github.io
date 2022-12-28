@@ -9,7 +9,10 @@ permalink: /compiler/
 
 # Writing a compiler
 
-A compiler plugin must either implement [Compiler][compiler]{:target="_blank"} interface, or extend more bloat-free [AbstractCompiler][abstractCompiler]{:target="_blank"} class. Common practice is to utilize [JFLex][jflex]{:target="_blank"} and [Java Cup][jcup]{:target="_blank"} parser generators, which has direct runtime support in emuStudio.
+A compiler plugin must either implement [Compiler][compiler]{:target="_blank"} interface, or extend more
+bloat-free [AbstractCompiler][abstractCompiler]{:target="_blank"} class. Common practice is to utilize
+[ANTLR][antlr]{:target="_blank"} parser generator, which has a direct runtime support in
+emuStudio.
 
 Sample implementation of a compiler might look as follows (just some methods are implemented):
 
@@ -17,8 +20,8 @@ Sample implementation of a compiler might look as follows (just some methods are
 ```java
 public class CompilerImpl extends AbstractCompiler {
     private final static List<SourceFileExtension> SOURCE_FILE_EXTENSIONS = List.of(
-        new SourceFileExtension("asm", "Assembler source file"),
-    );
+            new SourceFileExtension("asm", "Assembler source file")
+            );
 
     private final LexerImpl lexer;
     private final ParserImpl parser;
@@ -39,7 +42,7 @@ public class CompilerImpl extends AbstractCompiler {
             memory = pool.getMemoryContext(pluginID, MemoryContext.class);
             if (memory.getDataType() != Short.class) {
                 throw new InvalidContextException(
-                    "Unexpected memory cell type. Expected Short but was: " + memory.getDataType()
+                        "Unexpected memory cell type. Expected Short but was: " + memory.getDataType()
                 );
             }
         } catch (ContextNotFoundException | InvalidContextException e) {
@@ -96,15 +99,14 @@ public class CompilerImpl extends AbstractCompiler {
 The compiler does not register any context, but when initialized it obtains optional memory context. If the memory
 is available, it means that after compilation the program will be loaded in there, otherwise not.
 
-Lexer and parser are not shown here, but they are created using mentioned [JFlex][jflex]{:target="_blank"} and [Java cup][jcup]{:target="_blank"} tools.
+Lexer and parser are not shown here, but they are created using mentioned [ANTLR][antlr]{:target="_blank"}
+tool.
 
-The compiler utilizes a helper class [IntelHEX][intelhex]{:target="_blank"} from emuLib, which generates Intel HEX files.
+The compiler utilizes a helper class [IntelHEX][intelhex]{:target="_blank"} from emuLib for generating output files.
 
-For more information, see the code of some existing compilers. 
-
+For more information, see the code of some existing compilers.
 
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
 [abstractCompiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/AbstractCompiler.html
-[jflex]: https://www.jflex.de/
-[jcup]: http://www2.cs.tum.edu/projects/cup/
 [intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/IntelHEX.html
+[antlr]: https://www.antlr.org/

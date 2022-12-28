@@ -16,15 +16,15 @@ Source code has `.ssem` file extension, and binary form has a `.bin` file extens
 The instructions table follows (modified from [Wikipedia][programming]{:target="_blank"}):
 
 |---
-|Binary code |Mnemonic        |Action            |Operation
+|Binary code |Mnemonic |Action |Operation
 |-|-|-|-
-|000         |JMP S           | S(L) -> CI       |Jump to the instruction at the address obtained from the specified memory address `S(L)` (absolute unconditional jump)
-|100         |JRP / JPR / JMR S | CI + S(L) -> CI |Jump to the instruction at the program counter (`CI`) plus the relative value obtained from the specified memory address `S(L)` (relative unconditional jump)
-|010         |LDN S           |-S(L) -> A       |Take the number from the specified memory address `S(L)`, negate it, and load it into the accumulator
-|110         |STO S           |A -> S(L)        |Store the number in the accumulator to the specified memory address `S(L)`
-|001 or 101  |SUB S           |A - S(L) -> A    |Subtract the number at the specified memory address `S(L)` from the value in accumulator, and store the result in the accumulator
-|011         |CMP / SKN       |if A<0 then CI+1->CI |Skip next instruction if the accumulator contains a negative value
-|111         |STP  / HLT      |Stop              |
+|000 |JMP S | S(L) -> CI |Jump to the instruction at the address obtained from the specified memory address `S(L)` (absolute unconditional jump)
+|100 |JRP / JPR / JMR S | CI + S(L) -> CI |Jump to the instruction at the program counter (`CI`) plus the relative value obtained from the specified memory address `S(L)` (relative unconditional jump)
+|010 |LDN S |-S(L) -> A |Take the number from the specified memory address `S(L)`, negate it, and load it into the accumulator
+|110 |STO S |A -> S(L)        |Store the number in the accumulator to the specified memory address `S(L)`
+|001 or 101 |SUB S |A - S(L) -> A |Subtract the number at the specified memory address `S(L)` from the value in accumulator, and store the result in the accumulator
+|011 |CMP / SKN |if A<0 then CI+1->CI |Skip next instruction if the accumulator contains a negative value
+|111 |STP / HLT |Stop |
 |---
 
 The instructions are stored in a memory, which had 32 cells. Each cell was 32 bits long, and each instruction fit into
@@ -34,10 +34,9 @@ was in SSEM represented as `110`.
 
 The instruction format is as follows:
 
-| *Bit:*  | 00  | 01 | 02 | 03 | 04 | ... | 13 | 14 | 15 | ... | 31
-| *Use:*  | L   | L  | L  | L  | L  |  0  | I  | I  | I  | 0   | 0
-| *Value:*| 2^0 |    |    |    |    |     |    |    |    |     | 2^31
-
+| *Bit:*  | 00 | 01 | 02 | 03 | 04 | ... | 13 | 14 | 15 | ... | 31
+| *Use:*  | L | L | L | L | L | 0 | I | I | I | 0 | 0
+| *Value:*| 2^0 | | | | | | | | | | 2^31
 
 where bits `LLLLL` denote a "line", which is basically the memory address - index of a memory cell. It can be understood
 as an instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).
@@ -60,7 +59,9 @@ Assembler supports all forms of instructions. All instructions must start with a
 
 ### Literals / constants
 
-Raw number constants can be defined in separate lines using special preprocessor keywords. The first one is `NUM xxx`, where `xxx` is a number in either decimal or hexadecimal form. The hexadecimal format must start with prefix `0x`. For example:
+Raw number constants can be defined in separate lines using special preprocessor keywords. The first one is `NUM xxx`,
+where `xxx` is a number in either decimal or hexadecimal form. The hexadecimal format must start with prefix `0x`. For
+example:
 
 {:.code-example}
 ```
@@ -79,11 +80,12 @@ It means that the number will be stored untouched to the memory in the format as
 
 There exists also a third keyword, `BINS xxx`, with the exact meaning as `BNUM`.
 
-For all constants, the following rules hold. Only integral constants are supported, and the allowed range is from 0 - 31 (maximum is 2^5).
+For all constants, the following rules hold. Only integral constants are supported, and the allowed range is from 0-31 (maximum is 2^5).
 
 ### Comments
 
-One-line comments are supported in various forms. Generally, the comment is everything starting with some prefix until the end of the line. Comment prefixes are:
+One-line comments are supported in various forms. Generally, the comment is everything starting with some prefix until
+the end of the line. Comment prefixes are:
 
 - Double-slash (`//`)
 - Semi-colon (`;`)

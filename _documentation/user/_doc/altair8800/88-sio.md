@@ -7,7 +7,7 @@ permalink: /altair8800/88-sio
 ---
 {% include analytics.html category="Altair8800" %}
 
-# Serial board "88-sio"
+# Serial board 88-SIO
 
 Altair 8800 computer was equipped with serial board called [88-SIO][sio]{:target="_blank"}, or 88-2SIO. It was a device
 which allowed connecting other devices using RS-232 interface. From one side it was attached to CPU on at least two
@@ -24,8 +24,8 @@ The following image shows MITS 88-2SIO board.
 
 ![Serial board MITS 88-SIO-2]({{ site.baseurl }}/assets/altair8800/88-sio-2.png)
 
-Original manual of MITS 88-SIO serial board can be found [here][manual]{:target="_blank"}, [here][manual-2]{:target="_blank"} or
-[here][manual-deramp]{:target="_blank"}.
+Original manual of MITS 88-SIO serial board can be found [here][manual]{:target="_blank"}, 
+[here][manual-2]{:target="_blank"} or [here][manual-deramp]{:target="_blank"}.
 
 ## Features
 
@@ -41,14 +41,14 @@ GUI can be seen here:
 
 ![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio.png)
 
-The window shows attached device, control channel and data buffer. 
+The window shows attached device, control channel and data buffer.
 
 - *1*: Attached device name
 - *2*: Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The
   displayed value shows the status. For details see the 88-sio manual.
 - *3*: 88-sio has internal buffer used for caching one byte coming from the connected device. If the CPU is not fast
   enough to read it, the data can be overwritten by new data coming from the device. However, the buffer is not used
-  when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from 
+  when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from
   device.
 - *4*: Clear internal data buffer
 
@@ -62,7 +62,7 @@ The 88-sio plugin support various behaviors of the data transfer, which in reali
 and not 88-sio. The reason for supporting these features here is to allow some versatility, regardless of which
 device is connected. These general settings can be seen in the Settings window:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-1.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings1.png)
 
 - *1*: TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On
   ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
@@ -72,8 +72,10 @@ device is connected. These general settings can be seen in the Settings window:
 
 ### CPU Ports settings
 
-MITS 88-SIO board in emuStudio is attached to CPU through several ports. In order to support various Altair8800 configurations
-and thus using wider variety of original software, the device control and data channels are connected to multiple CPU ports.
+MITS 88-SIO board in emuStudio is attached to CPU through several ports. In order to support various Altair8800
+configurations
+and thus using wider variety of original software, the device control and data channels are connected to multiple CPU
+ports.
 This makes effectively an impression as if there existed multiple 88-sio cards connected to the same device.
 
 By default, used CPU port allocation is:
@@ -83,15 +85,17 @@ By default, used CPU port allocation is:
 
 A side note: there existed various additional boards which supported RS-232 communication besides 88-SIO (or 88-2SIO).
 These boards were compatible with S100 system board, thus they were usable for original Altair8800 computers as well
-as its clones. For example: [CompuPro Support Board][compupro-1]{:target="_blank"} (status port `0x5C`, data port `0x5D`),
-[CompuPro Interfacer][compupro-if4]{:target="_blank"} (manual [here][compupro-if4-manual]{:target="_blank"}, consuming 8 CPU ports),
+as its clones. For example: [CompuPro Support Board][compupro-1]{:target="_blank"} (status port `0x5C`, data
+port `0x5D`),
+[CompuPro Interfacer][compupro-if4]{:target="_blank"} (manual [here][compupro-if4-manual]{:target="_blank"}, consuming 8
+CPU ports),
 [Cromemco TU-ART board][cromemco]{:target="_blank"}, [IMS C00480 4-line board][ims-c00480]{:target="_blank"},
 [IMS I/O board][ims-io-board]{:target="_blank"}, [IMSAI SIO Board][imsai-sio]{:target="_blank"},
 [Intersystems 6-SIO][intersystems-6-sio]{:target="_blank"}, etc.
 
 But back to 88-sio. The port numbers allocation can be changed in the Settings window:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-2.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings2.png)
 
 - *1*: Attach/detach control channel ("status port") to/from CPU port
 - *2*: Reset control channel CPU ports to default ones (`0x10`, `0x14`, `0x16`, `0x18`)
@@ -100,29 +104,32 @@ But back to 88-sio. The port numbers allocation can be changed in the Settings w
 
 ### Interrupts settings
 
-88-sio supports input and output interrupts. If enabled, input interrupt is signalled to CPU when a data becomes available
-from the connected device. An output interrupt is signalled when data is sent to device. Interrupts support can be generally
+88-sio supports input and output interrupts. If enabled, input interrupt is signalled to CPU when a data becomes
+available
+from the connected device. An output interrupt is signalled when data is sent to device. Interrupts support can be
+generally
 enabled or disabled, along with interrupt vector configuration in Settings window:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings-3.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings3.png)
 
 - *1*: Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled
   in software (see "Port 1" section below).
-- *2*: Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7` instruction)
+- *2*: Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7`
+  instruction)
 
 ## Configuration file
 
 The following table shows all the possible settings of MITS 88-SIO plugin:
 
 |---
-|Name                | Default value | Valid values                          | Description
+|Name | Default value | Valid values | Description
 |-|-|-|-
 |`statusPorts` | `"0x10, 0x14, 0x16, 0x18"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to status port of 88-sio
 |`dataPorts`   | `"0x11, 0x15, 0x17, 0x19"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to data port of 88-sio
 |`clearInputBit8`   | `false` | `true`/`false` | Whether to clear 8th bit of the input written to 88-sio
 |`clearOutputBit8`  | `false` | `true`/`false` | Whether to clear 8th bit of the output, read from 88-sio
 |`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
-|`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE". 
+|`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE".
 |`mapBackspaceChar` | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "BACKSPACE" input key/character to given value. For example, if user presses "BACKSPACE" the 88-sio can map it as if user pressed "DEL".
 |`interruptsSupported`| `true` | `true`/`false` | Whether interrupts are supported in general. When disabled, they cannot be enabled in software.
 |`inputInterruptVector`  | `7` | 0-7 | Set input interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the input (e.g. a key press) if input interrupts are enabled    
@@ -131,17 +138,19 @@ The following table shows all the possible settings of MITS 88-SIO plugin:
 
 ## Programming
 
-In order to show something useful, let's assume that a terminal LSI ADM-3A is attached to the board. Remember, the board only mediates the communication, it does not interpret any of the sent/received characters.
+In order to show something useful, let's assume that a terminal LSI ADM-3A is attached to the board. Remember, the board
+only mediates the communication, it does not interpret any of the sent/received characters.
 
 ### CPU Ports
 
-Whole communication between the board (and attached device) and CPU is controlled by programming the two ports: Status port and Data port. The following table shows the ports and how they are used.
+Whole communication between the board (and attached device) and CPU is controlled by programming the two ports: Status
+port and Data port. The following table shows the ports and how they are used.
 
 |---
-|Channel          | Address                         | Input                      | Output
+|Channel | Address | Input | Output
 |-|-|-|-
-|Control (port 1) | `0x10`, `0x14`, `0x16`, `0x18`  | Read board status          | Used for enabling/disabling input/output interrupts.
-|Data (port 2)    | `0x11`, `0x15`, `0x17`, `0x19`  | Read data                  | Write data
+|Control (port 1) | `0x10`, `0x14`, `0x16`, `0x18`  | Read board status | Used for enabling/disabling input/output interrupts.
+|Data (port 2)    | `0x11`, `0x15`, `0x17`, `0x19`  | Read data | Write data
 |---
 
 Now, detailed description of the ports follow. Bits are ordered in a byte as follows:
@@ -150,15 +159,15 @@ Now, detailed description of the ports follow. Bits are ordered in a byte as fol
 
 where `D7` is the most significant bit, and `D0` the least significant bit.
 
-### Port 1 ("Control" port)
+### Control channel (port 1)
 
 *WRITE*:
 
 Controls input/output interrupts enable.
 
 - `D7 D6 D5 D4 D3 D2` : unused bits
-- `D1`                : Enable/disable _output_ interrupts (0 - disable, 1 - enable) 
-- `D0`                : Enable/disable _input_ interrupts (0 - disable, 1 - enable) 
+- `D1`                : Enable/disable _output_ interrupts (0 - disable, 1 - enable)
+- `D0`                : Enable/disable _input_ interrupts (0 - disable, 1 - enable)
 
 Interrupts (both input and output) are signalled to the CPU as `RST` instruction with the interrupt vector value
 used from the 88-SIO plugin settings (by default, `RST 7` is signalled).
@@ -172,14 +181,19 @@ Read status of the device.
 
 - `D7` : _Output device ready_. Always 0 in the emulator.
 - `D6` : Not used (always 0).
-- `D5` : _Data available (for writing to the attached device)_. Always 0 in the emulator, meaning that no data is pending to be written. Data are written immediately after `OUT` instruction.
-- `D4` : _Data overflow_. Value 1 means a new word of data has been received before the previous word was inputted to the accumulator. In emuStudio, this never happens.
+- `D5` : _Data available (for writing to the attached device)_. Always 0 in the emulator, meaning that no data is
+  pending to be written. Data are written immediately after `OUT` instruction.
+- `D4` : _Data overflow_. Value 1 means a new word of data has been received before the previous word was inputted to
+  the accumulator. In emuStudio, this never happens.
 - `D3` : _Framing error_. Value 1 means that data bit has no valid stop bit. In emuStudio, this never happens.
-- `D2` : _Parity error_. Value 1 means that received parity does not agree with selected parity. In emuStudio, this never happens.
-- `D1` : _Transmitter buffer empty_. Value 1 means that the data word has been received from the attached device and it's available for reading (from the Data port).
-- `D0` : _Input device ready_. Value 1 means that the CPU can write data to the SIO (that the board is ready). Always 1 in the emulator.
+- `D2` : _Parity error_. Value 1 means that received parity does not agree with selected parity. In emuStudio, this
+  never happens.
+- `D1` : _Transmitter buffer empty_. Value 1 means that the data word has been received from the attached device and
+  it's available for reading (from the Data port).
+- `D0` : _Input device ready_. Value 1 means that the CPU can write data to the SIO (that the board is ready). Always 1
+  in the emulator.
 
-### Port 2 ("Data" port)
+### Data channel (port 2)
 
 *WRITE*:
 
@@ -189,7 +203,8 @@ Write data to the attached device.
 
 Read data from the attached device.
 
-If the attached device sends asynchronously multiple data, the emulated board stores all in a buffer (queue) with unlimited capacity, so no data should be lost and can be read anytime.
+If the attached device sends asynchronously multiple data, the emulated board stores all in a buffer (queue) with
+unlimited capacity, so no data should be lost and can be read anytime.
 
 ### Program example
 
@@ -232,7 +247,8 @@ print:
 
 #### Reading character from keyboard
 
-For reading a character, it is required to read the Port 1 until the character is not ready. Then we can read it from Port 2.
+For reading a character, it is required to read the Port 1 until the character is not ready. Then we can read it from
+Port 2.
 
 {:.code-example}
 ```
@@ -249,7 +265,8 @@ getchar:
 
 #### Reading text from keyboard
 
-Now follows an example, which will read a whole line of characters into memory starting at address in `DE` pair. The procedure will interpret some control keys, like: backspace and ENTER keys.
+Now follows an example, which will read a whole line of characters into memory starting at address in `DE` pair. The
+procedure will interpret some control keys, like: backspace and ENTER keys.
 
 {:.code-example}
 ```
@@ -354,8 +371,6 @@ print:
     out 11h   ; otherwise; show it
     jmp print ; and repeat from the beginning
 ```
-
-
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
 [manual]: http://maben.homeip.net/static/s100/altair/cards/Altair%2088-SIO%20serial%20IO.pdf

@@ -10,12 +10,15 @@ permalink: /cpu/
 
 # Writing a CPU
 
-CPU plugins in emuStudio are not just plain emulators. They must cooperate with emuStudio and provide capabilities allowing debugging and some interaction.
+CPU plugins in emuStudio are not just plain emulators. They must cooperate with emuStudio and provide capabilities
+allowing debugging and some interaction.
 
 A CPU plugin must implement:
 
 Emulation "engine"
-: It is the CPU emulator itself, and it should be implemented using some emulation technique. In Java there are not many options, so usually either interpretation or threaded dispatch are used, both described e.g. [here][interpretation]{:target="_blank"} or [here][bario]{:target="_blank"}.
+: It is the CPU emulator itself, and it should be implemented using some emulation technique. In Java there are not many
+options, so usually either interpretation or threaded dispatch are used, both described e.g.
+[here][interpretation]{:target="_blank"} or [here][bario]{:target="_blank"}.
 
 Disassembler
 : It will be used by emuStudio for creating the list of instructions in the debugger panel.
@@ -23,12 +26,15 @@ Disassembler
 Java Swing GUI panel
 : It should implement the visualization of CPU registers, possibly current frequency and CPU run state.
 
-Both disassembler and GUI panel should be instantiated just once. It is good practice to instantiate disassembler during plugin [instantiation][instantiation] or [initialization][initialization], and GUI in the [CPU.getStatusPanel()][getStatusPanel]{:target="_blank"} method call. emuStudio application will call the method just once from Swing [Event dispatch thread][swingthread]{:target="_blank"}.
+Both disassembler and GUI panel should be instantiated just once. It is good practice to instantiate disassembler during
+plugin [instantiation][instantiation] or [initialization][initialization], and GUI in
+the [CPU.getStatusPanel()][getStatusPanel]{:target="_blank"} method call. emuStudio application will call the method
+just once from Swing [Event dispatch thread][swingthread]{:target="_blank"}.
 
-Programming a disassembler might be tedious and error-prone. Therefore we encourage to use a tool which can generate the disassembler from a specification file. The tool is called [Edigen][edigen]{:target="_blank"}, an abbreviation for _Emulator DIsassembler GENerator_. It can be nicely incorporated into Gradle build using [edigen-gradle-plugin][edigen-gradle]{:target="_blank"}.
-
-
-
+Programming a disassembler might be tedious and error-prone. That's why we encourage to use a tool which can generate
+the disassembler from a specification file. The tool is called [Edigen][edigen]{:target="_blank"}, an abbreviation
+for _Emulator DIsassembler GENerator_. It can be nicely incorporated into Gradle build
+using [edigen-gradle-plugin][edigen-gradle]{:target="_blank"}.
 
 
 [bario]: http://www.xsim.com/papers/Bario.2001.emubook.pdf

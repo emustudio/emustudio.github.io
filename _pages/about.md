@@ -16,14 +16,15 @@ During initial lessons of assembly language, my classmates and I were introduced
 create simple programs for Intel 8080, but we had to do it by hand on a paper! There weren't good emulators that
 allowed simple 'compile-load-emulate' workflows.
 
-Project _emuStudio_ started in 2006 as a school project, then a master thesis, created by [Peter Jakubčo][peterj]{:target="_blank"}. I had continued to work on it afterward, giving it my limited free time.
+Project _emuStudio_ started in 2006 as a school project, then a master thesis, created by
+[Peter Jakubčo][peterj]{:target="_blank"}. I had continued to work on it afterward, giving it my limited free time.
 
-Supervisor of the school project was [Slavomír Šimoňák][slavos]{:target="_blank"}, who could be understood as the first "product owner". I remember the times with nostalgia. Lots of good ideas came from discussions between us.
-
+Supervisor of the school project was [Slavomír Šimoňák][slavos]{:target="_blank"}, who could be understood as the
+first "product owner". I remember the times with nostalgia. Lots of good ideas came from discussions between us.
 
 The gaps which emuStudio want to fill up are as follows.
 
-### Support academic process 
+### Support academic process
 
 emuStudio can be used as a tool used in classes at schools. Teachers can use it for presenting vintage computers, or
 demonstrating working code running on emulated computers.
@@ -39,22 +40,25 @@ extending existing ones.
 I know some guys who know how to program Z80, and they are missing it! Wouldn't it be wonderful if they had a platform
 which allowed them to enjoy their guilty pleasure? It is one of goals of emuStudio - be able to realize a desire to
 write some new piece of vintage software or a game. With emuStudio, it should be easy to execute the software on modern
-devices.  
+devices.
 
 # Contributing
 
 Everybody *please* contribute. Statistics show that students are the main contributors, but from time-to-time,
-some unknown contributor appears. 
+some unknown contributor appears.
 
 How can you contribute? It's simpler than you think:
 
-- Provide a feedback to [the author](mailto:pjakubco@gmail.com) or the [developer group](mailto:emustudio@googlegroups.com)
-- Fill an [issue/bug on GitHub](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=bug_report.md&title=){:target="_blank"}
-- Request a [feature](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=feature_request.md&title=){:target="_blank"}
+- Provide a feedback to [the author](mailto:pjakubco@gmail.com) or
+  the [developer group](mailto:emustudio@googlegroups.com)
+- Fill
+  an [issue/bug on GitHub](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=bug_report.md&title=){:target="_blank"}
+- Request
+  a [feature](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=feature_request.md&title=){:target="_blank"}
 - Fix a bug
 - Implement a feature
 - Implement emulator of a new computer
-- Support the project by buying me a <a href="https://www.buymeacoffee.com/vbmacher" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me A Coffee" style="height: 51px !important;" ></a> (it's a free time project)
+- Support the project [financially](https://github.com/sponsors/vbmacher){:target="_blank"} (it's a free time project)
 
 ## Getting help
 
@@ -67,16 +71,15 @@ hobby project. Thank you for understanding.
 
 ## Important note
 
-emuStudio is free software: you can redistribute it and/or modify 
+emuStudio is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either [version 3][gpl3]{:target="_blank"} of the License, or
 (at your option) any later version.
 
 emuStudio is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
-
 
 
 [mame]: https://www.mamedev.org/
