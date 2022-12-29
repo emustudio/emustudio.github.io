@@ -182,9 +182,11 @@ The following table shows all the possible settings of ADM-3A plugin:
 |-|-|-|-
 |`inputFileName`   | `adm3A-terminal.in`  | Path to existing file | File for reading input (when redirected)
 |`outputFileName`  | `adm3A-terminal.out` | Path to existing file | File for writing output (when redirected)
-|`inputReadDelay`  | 0 | > 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
-|`antiAliasing`    | false | true / false | Whether the display should use anti-aliasing.
-|`halfDuplex`      | false | true / false | Whether every keystroke will also cause to display it.
+|`inputReadDelay`  | 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
+|`halfDuplex`      | false                | true / false | Whether every keystroke will also cause to display it
+|`alwaysOnTop`     | false                | true / false | Whether terminal GUI should be always-on-top of other windows
+|`deviceIndex`     | 0                    | >= 0 | Index of connected device, if this terminal is connected to multiple devices in the schema (nonstandard, advanced use)
+|`font`            | `original`           | `original`, `modern` | Terminal font
 |---
 
 
