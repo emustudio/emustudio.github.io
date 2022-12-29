@@ -149,7 +149,7 @@ table.
 |`G`   | 39 |`o`   | 79   
 |---
 
-## ADM-3A Settings
+## Terminal Settings
 
 It is possible to configure the terminal either from GUI or manually modifying configuration settings. Modification of
 settings requires restarting emuStudio.
@@ -158,22 +158,20 @@ The "settings" window is shown in the following image:
 
 ![Settings window of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a-settings.png)
 
-- *A*: File for reading input (when redirected)
-- *B*: File for writing output (when redirected)
-- *C*: In automatic mode, how long the terminal should wait until it reads next input character from the file
+- *1*: File name used for reading input (when redirected - in "no GUI" mode)
+- *2*: File name used for writing output (when redirected - in "no GUI" mode)
+- *3*: In automatic mode, how long the terminal should wait until it reads next input character from the file
   (in milliseconds)
-- *D*: Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back
+- *4*: Set terminal font. Original font has reduced character range to 256 characters; modern one supports full unicode.
+- *5*: Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back
   to the screen.
-- *E*: Whether terminal GUI should be always-on-top of other windows
-- *F*: Whether the display should use anti-aliasing.
-- *G*: Clears the screen.
-- *H*: Rolls the screen down by 1 line
-- *I*: If checked, then by pressing OK the settings will be saved to the configuration file. If not, they will be not
-  saved. In any case, the effect of the settings will be visible immediately.
+- *6*: Whether terminal GUI should be always-on-top of other windows
+- *7*: Save settings and dispose the dialog
 
-Terminal behaves differently when emuStudio is run in automatic (or "no GUI") mode. At that moment, input is redirected
-to be read from a file, and also output is redirected to be written to another file. File names are configurable in the
-computer config file. Using redirection in GUI mode is currently not possible.
+Terminal behaves differently when emuStudio is run in automatic with "no GUI" mode. At that moment, input is redirected
+to be read from a file (instead of keyboard), and also output is redirected to be written to a file. File names are
+configurable in the computer config file (and they are not allowed to point to the same file).
+Using redirection in GUI mode (whether in automatic mode or not) is not possible. 
 
 ## Configuration file
 
