@@ -30,7 +30,7 @@ A plugin JAR file name should be in the form of:
 ```
 
 where `[specific abbreviation]` means some custom abbreviation of the real world "device" the plugin emulates or is part of,
-optionally preceded with the manufacturer (e.g. `intel-8080`, `lsi-adm-3A`, etc.).
+optionally preceded with the manufacturer (e.g. `intel-8080`, `adm-3A`, etc.).
 Then `[plugin type]` follows, but in a form, as it is shown in the following table:
 
 {:.table-responsive}
@@ -95,9 +95,9 @@ file.
 Some libraries are preloaded by emuStudio and those shouldn't be included in plugin JAR file:
 
 - [emuLib][emulib]{:target="_blank"}
-- [java cup runtime][java-cup]{:target="_blank"}
+- [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
-- [args4j][args4j]{:target="_blank"} for command-line parsing
+- [Picoli][picoli]{:target="_blank"} for command-line parsing
 
 Plugins that want to use the dependencies above should specify them as "provided" in the project.
 
@@ -139,9 +139,10 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
 It is necessary to put your plugin name in the particular collection.
 
 [emulib]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
-[java-cup]: https://mvnrepository.com/artifact/com.github.vbmacher/java-cup-runtime/11b-20160615
+[antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
-[args4j]: https://mvnrepository.com/artifact/args4j/args4j/2.33
+[picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
+
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [cpu]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html

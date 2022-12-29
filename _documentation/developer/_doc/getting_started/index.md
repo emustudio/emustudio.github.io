@@ -21,7 +21,7 @@ given computer configuration. Each plugin is a single, almost a self-contained J
 dependencies the plugin uses are present in the JAR file, except the following, which are bundled with emuStudio and
 will always be available in the class-path:
 
-- [emuLib][emulib]{:target="_blank"}
+- [emuLib][emulib-github]{:target="_blank"} (Maven [here][emulib-maven]{:target="_blank"})
 - [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
 - [Picoli][picoli]{:target="_blank"} for command-line parsing
@@ -45,29 +45,31 @@ and copied into particular subdirectory in emuStudio installation.
 
 ## GitHub repositories
 
-From architecture perspective, emuStudio is a family of [GitHub repositories][github-emustudio-all]{:target="_blank"}, a
+From architecture perspective, emuStudio is a family of [GitHub repositories][emustudio-github-all]{:target="_blank"}, a
 combination of multiple sister projects:
 
-- [emuStudio][github-emustudio]{:target="_blank"} - application and plugins
-- [emuLib][github-emulib]{:target="_blank"} - a shared run-time library used by emuStudio and plugins. Javadoc is [here][emulib]{:target="_blank"}.
-- [Edigen][github-edigen]{:target="_blank"} - CPU instruction decoder and disassembler generator based on a specification file.
-- [Edigen Gradle plugin][github-edigen-gradle]{:target="_blank"}
-- [CPU testing suite][github-cpu-testsuite]{:target="_blank"} - a general unit-testing framework for testing CPU plug-ins. Tests are
+- [emuStudio][emustudio-github]{:target="_blank"} - application and plugins
+- [emuLib][emulib-github]{:target="_blank"} - a shared run-time library used by emuStudio and plugins. Javadoc is [here][emulib-javadoc]{:target="_blank"}.
+- [Edigen][edigen-github]{:target="_blank"} - CPU instruction decoder and disassembler generator based on a specification file.
+- [Edigen Gradle plugin][edigen-github-gradle]{:target="_blank"}
+- [CPU testing suite][cpu-testsuite-github]{:target="_blank"} - a general unit-testing framework for testing CPU plug-ins. Tests are
   specified in a declarative way.
-- [emuStudio website][github-website]{:target="_blank"}
+- [emuStudio website][website-github]{:target="_blank"}
 
 
-[emulib]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
 [antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
 [picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [vonNeumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
-[github-emustudio-all]: https://github.com/orgs/emustudio/repositories
-[github-emustudio]: https://github.com/emustudio/emuStudio
-[github-emulib]: https://github.com/emustudio/emuLib
-[github-edigen]: https://github.com/emustudio/edigen
-[github-edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
-[github-cpu-testsuite]: https://github.com/emustudio/cpu-testsuite
-[github-website]: https://github.com/emustudio/emustudio.github.io
+
+[emulib-maven]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
+[emulib-github]: https://github.com/emustudio/emuLib
+[emulib-javadoc]: {{ site.baseurl }}/emulib_javadoc/
+[emustudio-github-all]: https://github.com/orgs/emustudio/repositories
+[emustudio-github]: https://github.com/emustudio/emuStudio
+[edigen-github]: https://github.com/emustudio/edigen
+[edigen-github-gradle]: https://github.com/emustudio/edigen-gradle-plugin
+[cpu-testsuite-github]: https://github.com/emustudio/cpu-testsuite
+[website-github]: https://github.com/emustudio/emustudio.github.io

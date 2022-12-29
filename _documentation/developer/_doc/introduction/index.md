@@ -14,39 +14,59 @@ This guide shall help you, the developer, to write your virtual computer for emu
 and tries to save the developer from solving the most common problems. Created emulators can mimic either real or
 abstract computers. I hope you will have fun!
 
-## References
+## Project references
 
-For reference, here are provided some published papers, and known online references of emuStudio.
+emuStudio is a collection of repositories. Plugins and the application share a runtime library, CPU disassembler might
+be generated using a sister project edigen, and instructions tested using cpu-testsuite framework. Here you can find
+documentation references for these sister projects.
 
 |---
-| Year | Reference
+|Project reference | Purpose
 |-|-
-| 2022 | [emuStudio on Reddit](https://www.reddit.com/r/asm/comments/t7e5ug/emustudio_8080z80_emulator_ide_and_framework/){:target="_blank"}
+| [emuLib][emulib]{:target="_blank"} | Shared runtime library. Mandatory use.
 |---
-| 2022 | [Twirling bar animation](https://www.youtube.com/watch?v=uxn-sF07_xY){:target="_blank"}
+| [Edigen][edigen]{:target="_blank"} | CPU instruction decoder and disassembler generator. Optional use for CPU plugins.
 |---
-| 2022 | [emuStudio on 8bitnews](https://8bitnews.io/archive/2022-02-25/basic-in-js){:target="_blank"}
-|---
-| 2022 | [emuStudio on Gametech wiki](https://emulation.gametechwiki.com/index.php/Altair_8800){:target="_blank"}
-|---
-| 2020 | [Development of ATmega 328P micro-controller emulator for educational purposes][atmega-2020]{:target="_blank"}
-|---
-| 2017 | [RASP Abstract Machine Emulator — Extending the emuStudio Platform][rasp-2017]{:target="_blank"}
-|---
-| 2012 | [An instruction decoder and disassembler generator for EmuStudio platform][edigen-2012]{:target="_blank"} - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6
-|---
-| 2010 | [Preserving host independent emulation speed][cse-2010]{:target="_blank"}
-|---
-| 2010 | [Standardization of computer emulation][standard-2010]{:target="_blank"}
-|---
-| 2010 | [Communication model of emuStudio emulation platform][model-2010]{:target="_blank"}
-|---
-| 2008 | [Software-based CPU emulation][emulation-2008]{:target="_blank"}
+| [CPU testing suite][cputestsuite]{:target="_blank"} | General unit-testing framework for testing CPU plug-ins. Optional use for CPU plugins.
 |===
 
+## Publications
+
+There have been a few published papers about emuStudio. Here I present listing of those:
+
+|---
+| emuStudio version | Year | Reference
+|-|-|-
+| 0.40 | 2022 | [emuStudio on Reddit][reddit]{:target="_blank"}
+|---
+| 0.40 | 2022 | [Twirling bar animation][twirl]{:target="_blank"}
+|---
+| 0.40 | 2022 | [emuStudio on 8bitnews][8bitnews]{:target="_blank"}
+|---
+| 0.40 | 2022 | [emuStudio on Gametech wiki][gametechwiki]{:target="_blank"}
+|---
+| 0.40 | 2020 | [Development of ATmega 328P micro-controller emulator for educational purposes][atmega-2020]{:target="_blank"}
+|---
+| 0.39 | 2017 | [RASP Abstract Machine Emulator — Extending the emuStudio Platform][rasp-2017]{:target="_blank"}
+|---
+| 0.38 | 2012 | [An instruction decoder and disassembler generator for EmuStudio platform][edigen-2012]{:target="_blank"} - Proceeding of the Faculty of Electrical Engineering and Informatics of the Technical University of Košice. Page 660-663. ISBN 978-80-553-0890-6
+|---
+| 0.36-rc1 | 2010 | [Preserving host independent emulation speed][cse-2010]{:target="_blank"}
+|---
+| 0.36-rc1 | 2010 | [Standardization of computer emulation][standard-2010]{:target="_blank"}
+|---
+| 0.36-rc1 | 2010 | [Communication model of emuStudio emulation platform][model-2010]{:target="_blank"}
+|---
+| 3.6b1 | 2008 | [Software-based CPU emulation][emulation-2008]{:target="_blank"}
+|===
+
+[gametechwiki]: https://emulation.gametechwiki.com/index.php/Altair_8800
+[8bitnews]: https://8bitnews.io/archive/2022-02-25/basic-in-js
+[twirl]: https://www.youtube.com/watch?v=uxn-sF07_xY
+[reddit]: https://www.reddit.com/r/asm/comments/t7e5ug/emustudio_8080z80_emulator_ide_and_framework/
 [emulib]: {{ site.baseurl }}/emulib_javadoc/
 [edigen]: https://github.com/emustudio/edigen
-[edigen]: https://github.com/emustudio/cpu-testsuite
+[cputestsuite]: https://github.com/emustudio/cpu-testsuite
 [atmega-2020]: https://www.researchgate.net/publication/349929732_Development_of_ATmega_328P_micro-controller_emulator_for_educational_purposes
 [rasp-2017]: https://www.researchgate.net/publication/320277321_RASP_ABSTRACT_MACHINE_EMULATOR_-_EXTENDING_THE_EMUSTUDIO_PLATFORM
 [edigen-2012]: https://dusan.medved.website.tuke.sk/APVV/APVV-0385-07/clanky/Bena4.pdf
