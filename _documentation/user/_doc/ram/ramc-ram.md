@@ -71,26 +71,26 @@ Instructions consist of the operation code and optional operand, separated with 
 
 Operation code is expressed as an abbreviation of corresponding operation (e.g. `SUB` for SUBtraction). An operand can
 be one of three types: constant (`=i`), direct operand (`i`), where `i` specifies the register index on tape and
-indirect operand (`*i`), where the address of operand specified is stored in register _R~i~_.
+indirect operand (`*i`), where the address of operand specified is stored in register _R<sub>i</sub>_.
 
 The following table describes all possible instructions, usable in the RAM simulator:
 
 |---
 | Instruction | Constant (`=i`)        | Direct (`i`)              | Indirect (`*i`)
 |-|-|-|-
-| `READ`      | | _R~i~_ <- next input |
-| `WRITE`     | output <- _i_          | output <- _R~i~_          | output <- _M<R~i~>_
-| `LOAD`      | _R~0~_ <- _i_          | _R~0~_ <- _R~i~_          | _R~0~_ <- _M<R~i~>_
-| `STORE`     | | _R~i~_ <- _R~0~_          | _M<R~i~>_ <- _R~0~_
+| `READ`      | | _R<sub>i</sub>_ &larr; next input |
+| `WRITE`     | output &larr; _i_          | output &larr; _R<sub>i</sub>_          | output &larr; _M[R<sub>i</sub>]_
+| `LOAD`      | _R<sub>0</sub>_ &larr; _i_          | _R<sub>0</sub>_ &larr; _R<sub>i</sub>_          | _R<sub>0</sub>_ &larr; _M[R<sub>i</sub>]_
+| `STORE`     | | _R<sub>i</sub>_ &larr; _R<sub>0</sub>_          | _M[R<sub>i</sub>]_ &larr; _R<sub>0</sub>_
 |---
-| `ADD`       | _R~0~_ <- _R~0~_ + _i_ | _R~0~_ <- _R~0~_ + _R~i~_ | _R~0~_ <- _R~0~_ + _M<R~i~>_
-| `SUB`       | _R~0~_ <- _R~0~_ - _i_ | _R~0~_ <- _R~0~_ - _R~i~_ | _R~0~_ <- _R~0~_ - _M<R~i~>_
-| `MUL`       | _R~0~_ <- _R~0~_ * _i_ | _R~0~_ <- _R~0~_ * _R~i~_ | _R~0~_ <- _R~0~_ * _M<R~i~>_
-| `DIV`       | _R~0~_ <- _R~0~_ / _i_ | _R~0~_ <- _R~0~_ / _R~i~_ | _R~0~_ <- _R~0~_ / _M<R~i~>_
+| `ADD`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ + _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ + _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ + _M[R<sub>i</sub>]_
+| `SUB`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ - _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ - _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ - _M[R<sub>i</sub>]_
+| `MUL`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _M[R<sub>i</sub>]_
+| `DIV`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _M[R<sub>i</sub>]_
 |---
-| `JMP`       | | _IP_ <- _i_               |
-| `JZ`        | | *if* _R~0~_ == 0 *then* _IP_ <- _i_ |
-| `JGTZ`      | | *if* _R~0~_ > 0 *then* _IP_ <- _i_  |
+| `JMP`       | | _IP_ &larr; _i_               |
+| `JZ`        | | *if* _R<sub>0</sub>_ == 0 *then* _IP_ &larr; _i_ |
+| `JGTZ`      | | *if* _R<sub>0</sub>_ > 0 *then* _IP_ &larr; _i_  |
 |---
 | `HALT`      | | halts the simulation |
 |---
