@@ -342,10 +342,24 @@ code yields an error (`Label already defined`):
 
 ```
 if 0
-  label1: stax b
+  label1: ld (bc), a
 endif
 label1: hlt 
 ```
+
+Evaluation of the expression in the `if` statement must not use forward references. For example, the following code is
+not valid (will produce an error):
+
+```
+if variable
+  ld (bc), a
+endif
+variable set $
+```
+
+In this case, variable is about to be set to current address, which would be 0 if the `if` statement evaluates to `false`.
+Otherwise, it evaluates to `1`. Both options would be semantically correct, and the compiler cannot know what was the
+programmer's intention.
 
 ## Defining and using macros
 

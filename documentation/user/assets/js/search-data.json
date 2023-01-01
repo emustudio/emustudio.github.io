@@ -253,7 +253,7 @@
   },"42": {
     "doc": "Assembler as-8080",
     "title": "Conditional assembly",
-    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: stax b endif label1: hlt . ",
+    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: stax b endif label1: hlt . Evaluation of the expression in the if statement must not use forward references. For example, the following code is not valid (will produce an error): . if variable stax b endif variable set $ . In this case, variable is about to be set to current address, which would be 0 if the if statement evaluates to false. Otherwise, it evaluates to 1. Both options would be semantically correct, and the compiler cannot know what was the programmer’s intention. ",
     "url": "/documentation/user/altair8800/as-8080#conditional-assembly",
     "relUrl": "/altair8800/as-8080#conditional-assembly"
   },"43": {
@@ -355,7 +355,7 @@
   },"59": {
     "doc": "Assembler as-z80",
     "title": "Conditional assembly",
-    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: stax b endif label1: hlt . ",
+    "content": "Syntax: . if [expression] i n s t r u c t i o n s endif . At first, the compiler evaluates the [expression]. If the result is 0, statements between if and endif are ignored. Labels defined inside the if block occupy the namespace even if the if-expression evaluates to 0. Hence, the following code yields an error (Label already defined): . if 0 label1: ld (bc), a endif label1: hlt . Evaluation of the expression in the if statement must not use forward references. For example, the following code is not valid (will produce an error): . if variable ld (bc), a endif variable set $ . In this case, variable is about to be set to current address, which would be 0 if the if statement evaluates to false. Otherwise, it evaluates to 1. Both options would be semantically correct, and the compiler cannot know what was the programmer’s intention. ",
     "url": "/documentation/user/altair8800/as-z80#conditional-assembly",
     "relUrl": "/altair8800/as-z80#conditional-assembly"
   },"60": {
