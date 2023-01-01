@@ -80,7 +80,7 @@ letter a-z (or A-Z) or the at-sign (`@`). Then, it can be followed by letters, a
 
 However, they must not equal to any keyword.
 
-Also, if an identifier is used for one kind of definition (label, variable, or constant), it cannot be used for definition
+Also, if an identifier is used for one kind of definition (label, variable, constant, or macro), it cannot be used for definition
 of another kind. For example, the following code is not valid
 
 ```
