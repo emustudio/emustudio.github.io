@@ -12,7 +12,7 @@ permalink: /memory/
 In emuStudio, plugin root class must either implement [Memory][memory]{:target="_blank"} interface, or can extend more
 bloat-free [AbstractMemory][abstractMemory]{:target="_blank"} class.
 
-Generally, a memory in an emulator is usually implemented as an array of integers. Indexes to the array represent
+Generally, a memory in an emulator is usually implemented as an array of bytes. Indexes to the array represent
 addresses, and values are the memory cell values. In emuStudio, this kind of implementation is reflected by memory
 context. Memory context should be a class which either implements [MemoryContext][memoryContext]{:target="_blank"}
 interface, or extends [AbstractMemoryContext][abstractMemoryContext]{:target="_blank"} class. The latter provide
