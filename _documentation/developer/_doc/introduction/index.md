@@ -32,19 +32,12 @@ documentation references for these sister projects.
 
 ## Publications
 
-There have been a few published papers about emuStudio. Here I present listing of those:
+There have been a few published papers about emuStudio, which could be helpful in getting additional context and some
+philosophical aspects for developers. 
 
 |---
 | emuStudio version | Year | Reference
 |-|-|-
-| 0.40 | 2022 | [emuStudio on Reddit][reddit]{:target="_blank"}
-|---
-| 0.40 | 2022 | [Twirling bar animation][twirl]{:target="_blank"}
-|---
-| 0.40 | 2022 | [emuStudio on 8bitnews][8bitnews]{:target="_blank"}
-|---
-| 0.40 | 2022 | [emuStudio on Gametech wiki][gametechwiki]{:target="_blank"}
-|---
 | 0.40 | 2020 | [Development of ATmega 328P micro-controller emulator for educational purposes][atmega-2020]{:target="_blank"}
 |---
 | 0.39 | 2017 | [RASP Abstract Machine Emulator — Extending the emuStudio Platform][rasp-2017]{:target="_blank"}
@@ -60,10 +53,7 @@ There have been a few published papers about emuStudio. Here I present listing o
 | 3.6b1 | 2008 | [Software-based CPU emulation][emulation-2008]{:target="_blank"}
 |===
 
-[gametechwiki]: https://emulation.gametechwiki.com/index.php/Altair_8800
-[8bitnews]: https://8bitnews.io/archive/2022-02-25/basic-in-js
-[twirl]: https://www.youtube.com/watch?v=uxn-sF07_xY
-[reddit]: https://www.reddit.com/r/asm/comments/t7e5ug/emustudio_8080z80_emulator_ide_and_framework/
+
 [emulib]: {{ site.baseurl }}/emulib_javadoc/
 [edigen]: https://github.com/emustudio/edigen
 [cputestsuite]: https://github.com/emustudio/cpu-testsuite

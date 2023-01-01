@@ -62,7 +62,7 @@ Command | Parameters | Return value | Description
 30      | URL (N bytes terminated with 0) | max 1024 byte pairs (URL content) in form `availability, data` (when `availability` is 1 the `data` byte is valid) until `availability` is 0 | read the contents of a URL
 31      | N/A        | 2 bytes      | get the clock frequency of the CPU
 32      | 2 bytes    | N/A          | set the clock frequency of the CPU. To make effect, CPU must be paused/run again.
-33      | 2 bytes (byte 0: unused interrupt vector, byte 1: interrupt data byte, an `RST` instruction) | N/A | generate interrupt
+33      | 2 bytes (byte 0: (unused) interrupt vector, byte 1: interrupt data byte, an `RST` instruction) | N/A | generate interrupt
 |---
 
 ### How to call a command
