@@ -80,6 +80,17 @@ letter a-z (or A-Z) or the at-sign (`@`). Then, it can be followed by letters, a
 
 However, they must not equal to any keyword.
 
+Also, if an identifier is used for one kind of definition (label, variable, or constant), it cannot be used for definition
+of another kind. For example, the following code is not valid
+
+```
+label:
+label set 1
+```
+
+At first the identified `label` is used for definition of a label, and on the second row the same identifier is used
+for definition of a variable. This is not allowed and will produce an error.
+
 ## Instructions syntax
 
 The program is basically a sequence of instructions. The instructions are separated by a new line. The instruction have
