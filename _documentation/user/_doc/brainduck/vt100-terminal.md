@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Terminal "brainduck-terminal"
+title: Terminal vt100-terminal
 nav_order: 5
 parent: BrainDuck
 permalink: /brainduck/terminal
@@ -8,9 +8,9 @@ permalink: /brainduck/terminal
 
 {% include analytics.html category="BrainDuck" %}
 
-# Terminal `brainduck-terminal`
+# Terminal `vt100-terminal`
 
-BrainDuck terminal is used as a part of BrainDuck computer, which acts as an interactive console, or generally
+VT100 terminal is used as a part of BrainDuck computer, which acts as an interactive console, or generally
 interactive input/output provider. It was written with the support of GUI, but can be used also in emulation automation,
 in which case it loads input from the file and output to another file.
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Compiler "brainc-brainduck"
+title: Compiler brainc-brainduck
 nav_order: 2
 parent: BrainDuck
 permalink: /brainduck/compiler
@@ -74,16 +74,16 @@ A memory cell has 8-bits (cells are bytes).
 
 ### Memory size
 
-Memory size is defined in `brainduck-mem` plugin. In this version of emuStudio, it is 65536 cells.
+Memory size is defined in `byte-mem` plugin. In this version of emuStudio, it is 65536 bytes.
 
 ### End-of-line code
 
-EOL is defined in `brainduck-terminal` plugin. In the current version of emuStudio, it is a Newline character with ASCII
+EOL is defined in `vt100-terminal` plugin. In the current version of emuStudio, it is a Newline character with ASCII
 code 10.
 
 ### End-of-file behavior
 
-EOF is defined in `brainduck-cpu` and `brainduck-terminal` plugins. In the current version of emuStudio, the current
+EOF is defined in `brainduck-cpu` and `vt100-terminal` plugins. In the current version of emuStudio, the current
 cell (where `P` is pointing at) is changed to value 0. This is not how original brainfuck behaves, which does not change
 the cell on EOF.
 

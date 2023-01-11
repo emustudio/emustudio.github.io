@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CPU "brainduck-cpu"
+title: CPU brainduck-cpu
 nav_order: 3
 parent: BrainDuck
 permalink: /brainduck/cpu
@@ -14,9 +14,9 @@ BrainDuck CPU is used as a part of BrainDuck computer, which acts as the interpr
 instructions correspond with brainfuck language.
 
 The program which is going to be executed is read from the operating memory, so the CPU must be connected with
-memory (`brainduck-mem`) to work properly.
+memory (`byte-mem`) to work properly.
 
-Also, optionally (but commonly) it should be connected with I/O device (`brainduck-terminal`), so input/output can be
+Also, optionally (but commonly) it should be connected with I/O device (`vt100-terminal`), so input/output can be
 received/send from/to the device. Only one device can be used.
 
 The CPU provides a basic user interface in the form of the status panel, which is visible in the emulator panel in the

@@ -21,7 +21,7 @@ BrainDuck architecture is just a name for virtual computer in emuStudio, and con
 - `brainc-brainduck`: Compiler of brainfuck language (original, without extensions)
 - `brainduck-cpu`: Brainfuck emulator acting like CPU with two registers
 - `byte-mem`: Virtual operating memory which holds both compiled brainfuck program and data
-- `brainduck-terminal`: Virtual terminal for displaying the output and requesting for input.
+- `vt100-terminal`: Virtual terminal for displaying the output and requesting for input.
 
 BrainDuck is implemented as [von Neumann] computer. It means that the program and data are shared in the same memory.
 This is not a common approach to implementing brainfuck interpreters, and it might be changed in the future.
@@ -45,10 +45,10 @@ following image shows the schema of BrainDuck computer:
 Arrows are in a direction of dependency. So for example `brainc-brainduck` depends on `byte-mem`, because
 compiled programs are directly loaded into memory.
 
-Between `brainduck-cpu` and `brainduck-terminal` exists bidirectional dependency, because input gained from a terminal
+Between `brainduck-cpu` and `vt100-terminal` exists bidirectional dependency, because input gained from a terminal
 is passed to the CPU, and output is pushed from CPU to the terminal.
 
-plugin `brainduck-cpu` also depends on `brainduck-mem`, because memory is a place where program and data are stored.
+plugin `brainduck-cpu` also depends on `byte-mem`, because memory is a place where program and data are stored.
 
 [brainfuck]: http://en.wikipedia.org/wiki/Brainfuck
 [miller]: http://esolangs.org/wiki/Urban_M%C3%BCller

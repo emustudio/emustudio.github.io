@@ -86,14 +86,12 @@ In order to mount disk images to the device, please open device settings:
 
 ![Settings window of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings1.png)
 
-- *1*: Select drive (A - P)
-- *2*: Choose the image file and click on "Mount". If there is a disk mounted already, it will be re-mounted with the
-  new file.
-- *3*: If you want to un-mount all disk drives, click on "Umount all" button
-- *4*: Set sectors per track and sector size for the current drive. (NOTE: Be cautious with the settings. Incorrect
-  values can result in disk image file damage. Existing default values were chosen from disk image files used by
-  [simh][simh]{:target="_blank"} emulator).
-- *5*: Set default values for sectors per track and sector size for the current drive.
+{: .list}
+| <span class="circle">1</span> | Select drive (A - P)
+| <span class="circle">2</span> | Choose the image file and click on "Mount". If there is a disk mounted already, it will be re-mounted with the new file.
+| <span class="circle">3</span> | If you want to un-mount all disk drives, click on "Umount all" button
+| <span class="circle">4</span> | Set sectors per track and sector size for the current drive. (NOTE: Be cautious with the settings. Incorrect values can result in disk image file damage. Existing default values were chosen from disk image files used by [simh][simh]{:target="_blank"} emulator).
+| <span class="circle">5</span> | Set default values for sectors per track and sector size for the current drive.
 
 ## CPU Ports settings
 
@@ -108,11 +106,11 @@ Port mapping can be changed in the Settings window, tab "CPU Ports":
 
 ![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings2.png)
 
-- *1*: Set CPU port number value for the three 88-dcdd ports
-- *2*: Set used CPU interrupt vector and whether interrupts are actually supported by 88-dcdd. Interrupt vector is
-  used when interrupt is signalled to the CPU which is implemented as equivalent to executing an instruction `RST`.
-  When interrupts are globally disabled here, enabling them in runtime won't work.
-- *3*: Setting default interrupt vector (which is 7).
+{: .list}
+| <span class="circle">1</span> | Set CPU port number value for the three 88-dcdd ports
+| <span class="circle">2</span> | Set used CPU interrupt vector and whether interrupts are actually supported by 88-dcdd. Interrupt vector is used when interrupt is signalled to the CPU which is implemented as equivalent to executing an instruction `RST`. When interrupts are globally disabled here, enabling them in runtime won't work.
+| <span class="circle">3</span> | Setting default interrupt vector (which is 7)
+
 
 ## Programming
 
