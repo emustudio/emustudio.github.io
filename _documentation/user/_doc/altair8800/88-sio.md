@@ -43,14 +43,11 @@ GUI can be seen here:
 
 The window shows attached device, control channel and data buffer.
 
-- *1*: Attached device name
-- *2*: Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The
-  displayed value shows the status. For details see the 88-sio manual.
-- *3*: 88-sio has internal buffer used for caching one byte coming from the connected device. If the CPU is not fast
-  enough to read it, the data can be overwritten by new data coming from the device. However, the buffer is not used
-  when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from
-  device.
-- *4*: Clear internal data buffer
+{: .list}
+| <span class="circle">1</span> | Attached device name
+| <span class="circle">2</span> | Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The displayed value shows the status. For details see the 88-sio manual.
+| <span class="circle">3</span> | 88-sio has internal buffer used for caching one byte coming from the connected device. If the CPU is not fast enough to read it, the data can be overwritten by new data coming from the device. However, the buffer is not used when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from device.
+| <span class="circle">4</span> | Clear internal data buffer
 
 ## Settings
 
@@ -64,11 +61,10 @@ device is connected. These general settings can be seen in the Settings window:
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings1.png)
 
-- *1*: TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On
-  ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
-- *2*: Converts input data to upper-case (the byte coming from device).
-- *3*: Maps input/output data Backspace or Delete character to some other character. Possibilities are: Backspace,
-  Delete, Unchanged.
+{: .list}
+| <span class="circle">1</span> | TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
+| <span class="circle">2</span> | Converts input data to upper-case (the byte coming from device).
+| <span class="circle">3</span> | Maps input/output data Backspace or Delete character to some other character. Possibilities are: Backspace, Delete, Unchanged.
 
 ### CPU Ports settings
 
@@ -97,10 +93,11 @@ But back to 88-sio. The port numbers allocation can be changed in the Settings w
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings2.png)
 
-- *1*: Attach/detach control channel ("status port") to/from CPU port
-- *2*: Reset control channel CPU ports to default ones (`0x10`, `0x14`, `0x16`, `0x18`)
-- *3*: Attach/detach data channel ("data port") to/from CPU port
-- *4*: Reset data channel CPU ports to default ones (`0x11`, `0x15`, `0x17`, `0x19`)
+{: .list}
+| <span class="circle">1</span> | Attach/detach control channel ("status port") to/from CPU port
+| <span class="circle">2</span> | Reset control channel CPU ports to default ones (`0x10`, `0x14`, `0x16`, `0x18`)
+| <span class="circle">3</span> | Attach/detach data channel ("data port") to/from CPU port
+| <span class="circle">4</span> | Reset data channel CPU ports to default ones (`0x11`, `0x15`, `0x17`, `0x19`)
 
 ### Interrupts settings
 
@@ -112,10 +109,9 @@ enabled or disabled, along with interrupt vector configuration in Settings windo
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings3.png)
 
-- *1*: Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled
-  in software (see "Port 1" section below).
-- *2*: Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7`
-  instruction)
+{: .list}
+| <span class="circle">1</span> | Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled in software (see "Port 1" section below).
+| <span class="circle">2</span> | Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7` instruction)
 
 ## Configuration file
 

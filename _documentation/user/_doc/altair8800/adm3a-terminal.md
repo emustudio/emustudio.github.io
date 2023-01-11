@@ -34,8 +34,10 @@ GUI can be seen here:
 
 ![GUI of adm3a-terminal]({{ site.baseurl }}/assets/altair8800/adm3a-gui.png)
 
-- *1*: Clear screen
-- *2*: Roll one line down
+{: .list}
+| <span class="circle">1</span> | Clear screen
+| <span class="circle">2</span> | Roll one line down
+
 
 ## Keyboard
 
@@ -158,15 +160,14 @@ The "settings" window is shown in the following image:
 
 ![Settings window of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a-settings.png)
 
-- *1*: File name used for reading input (when redirected - in "no GUI" mode)
-- *2*: File name used for writing output (when redirected - in "no GUI" mode)
-- *3*: In automatic mode, how long the terminal should wait until it reads next input character from the file
-  (in milliseconds)
-- *4*: Set terminal font. Original font has reduced character range to 256 characters; modern one supports full unicode.
-- *5*: Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back
-  to the screen.
-- *6*: Whether terminal GUI should be always-on-top of other windows
-- *7*: Save settings and dispose the dialog
+{: .list}
+| <span class="circle">1</span> | File name used for reading input (when redirected - in "no GUI" mode)
+| <span class="circle">2</span> | File name used for writing output (when redirected - in "no GUI" mode)
+| <span class="circle">3</span> | In automatic mode, how long the terminal should wait until it reads next input character from the file (in milliseconds)
+| <span class="circle">4</span> | Set terminal font. Original font has reduced character range to 256 characters; modern one supports full unicode.
+| <span class="circle">5</span> | Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back to the screen.
+| <span class="circle">6</span> | Whether terminal GUI should be always-on-top of other windows
+| <span class="circle">7</span> | Save settings and dispose the dialog
 
 Terminal behaves differently when emuStudio is run in automatic with "no GUI" mode. At that moment, input is redirected
 to be read from a file (instead of keyboard), and also output is redirected to be written to a file. File names are

@@ -7536,6 +7536,34 @@ a.skip-to-main:active {
   z-index: 999;
 }
 
+.custom-list {
+  list-style: decimal;
+  margin: 1em 0 1em 2.5em;
+}
+
+table.list, table.list th, table.list tr, table.list td, table.list caption, table.list tbody, table.list tfoot, table.list thead {
+  border: none !important;
+  outline: none !important;
+  background: transparent;
+  table-layout: auto;
+  width: unset;
+  min-width: fit-content;
+  border-collapse: collapse;
+  box-shadow: none;
+  box-suppress: discard;
+}
+
+*.circle {
+  display: inline;
+  border-radius: 50%;
+  padding: 1px 7px 1px 7px;
+  margin-right: 10px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  text-align: center;
+}
+
 div.opaque {
   background-color: #fff;
 }

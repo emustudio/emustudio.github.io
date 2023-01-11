@@ -42,9 +42,9 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 |---
 | CPU | `[cpu model]-cpu`, or `[computer type]-cpu` | `8080-cpu`, `z80-cpu`, `ram-cpu`, `brainduck-cpu`
 |---
-| Memory | `[some feature]-mem`, or `[computer type]-mem` | `standard-mem`, `ram-mem`, `brainduck-mem`
+| Memory | `[some feature]-mem`, or `[computer type]-mem` | `byte-mem`, `ram-mem`, `rasp-mem`
 |---
-| Device | `[device model]-[device type]` | `88-dcdd`, `adm3a-terminal`, `simh-pseudo`
+| Device | `[device model]-[device type]` | `88-dcdd`, `88-sio`, `adm3a-terminal`, `simh-pseudo`, `vt100-terminal`
 |===
 
 Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only

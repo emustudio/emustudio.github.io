@@ -1,8 +1,8 @@
 title: User documentation for emuStudio
 email: emustudio@googlegroups.com
-tagline: User documentation for emuStudio 0.40
+tagline: User documentation for emuStudio 0.41
 description: >- # this means to ignore newlines until "baseurl:"
-  User documentation for emuStudio 0.40. emuStudio is universal emulation platform
+  User documentation for emuStudio 0.41. emuStudio is universal emulation platform
   and framework targeting mainly academic sphere.
 baseurl: "/documentation/user" # the subpath of your site, e.g. /blog
 url: ""
