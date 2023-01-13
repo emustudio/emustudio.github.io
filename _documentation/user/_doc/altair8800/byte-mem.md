@@ -10,7 +10,7 @@ permalink: /altair8800/byte-mem
 
 # Operating memory "byte-mem"
 
-This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can
+This plugin emulates an operating memory with various features. It can be used for any virtual computer which can
 benefit from the following basic properties:
 
 - A memory cell has a size of 1 byte (8 bits)
@@ -38,21 +38,20 @@ an emulator that can benefit from it.
 To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator
 panel. The window is shown, as in the following image:
 
-![Byte operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png){:style="max-width:779"}
+![Byte operating memory]({{ site.baseurl }}/assets/altair8800/byte-mem.png)
 
-- *A*: Open a memory image. Current memory content, if it does not interfere with the loaded data will be kept.
-- *B*: Dump (save) whole memory content into a file.
-- *C*: Go to address. The address can be either in decimal, hexadecimal (prefix `0x`) or octal (prefix `0`) format.
-- *D*: Find a sequence. A dialog shows up where user can find either a plain text or sequence of bytes in the memory.
-- *E*: Erases all memory content.
-- *F*: Shows memory settings
-- *G*: By double-clicking on the memory cell it is possible to edit it and change its value. The value format is the
-  same as the input to "go to address" dialog (see *C*).
-- *H*: Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large (64 kB
-  by default), so it was divided into pages.
-- *I*: If the memory has set up [memory banks][memoryBanks], it is possible to change the view to different
-  bank. Switching in here has no effect on the emulator and on the active bank.
-- *J*: Displays the data of the selected cell in various forms.
+{: .list}
+| <span class="circle">1</span> | Open a memory image. Current memory content which does not overlap with the loaded data will be kept.
+| <span class="circle">2</span> | Dump (save) whole memory content into a file.
+| <span class="circle">3</span> | Go to address. The address can be either in decimal, hexadecimal (prefix `0x`) or octal (prefix `0`) format.
+| <span class="circle">4</span> | Find a sequence. A dialog shows up where user can find either a plain text or sequence of bytes in the memory.
+| <span class="circle">5</span> | Toggle ASCII mode (ASCII mode means to render characters instead of character codes)
+| <span class="circle">6</span> | Erases all memory content.
+| <span class="circle">7</span> | Shows memory settings
+| <span class="circle">8</span> | By double-clicking on a memory cell it is possible to edit it and change its value. The value can be either in decimal, hexadecimal (prefix `0x`) or octal (prefix `0`) format.
+| <span class="circle">9</span> | Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large, so it is split into pages. This split is just visual.
+| <span class="circle">10</span> | If the memory has set up [memory banks][memoryBanks], it is possible to change the view to different bank. Switching in here has no effect on the emulator and on the active bank.
+| <span class="circle">11</span> | Displays the data of the selected cell in various formats.
 
 Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
 letter/number key, a small text field appears allowing to edit the current value. When editing
@@ -62,32 +61,30 @@ is finished, the user can press <kbd>ENTER</kbd> key to confirm it, or <kbd>ESC<
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
 
-![Memory settings]({{ site.baseurl }}/assets/altair8800/standard-mem-settings.png){:style="max-width:659"}
+![Memory settings]({{ site.baseurl }}/assets/altair8800/byte-mem-settings.png)
 
-- *A*: Settings for memory bank-switching
-- *B*: Settings for ROM areas
-- *C*: If checked, settings for ROM areas will be saved to the configuration file
-- *D*: List of memory images which will be loaded at startup
-- *E*: The button will apply the settings
-
-ROM areas and memory bank-switching is explained in the following sections.
+{: .list}
+| <span class="circle">1</span> | Settings for memory bank-switching
+| <span class="circle">2</span> | Settings for ROM areas
+| <span class="circle">3</span> | If checked, settings for ROM areas will be saved to the configuration file
+| <span class="circle">4</span> | List of memory images which will be loaded at startup
+| <span class="circle">5</span> | The button will save and apply the settings
 
 ### ROM areas
 
-Some "controllers" - used as embedded devices - usually logically organize memory into areas, some of which are
-read-only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to
-specific addresses, so the programmer can access them.
+Some computers or modern "controllers" organize memory into logical areas, some of which could be physically mapped
+to a read-only memory loaded with a firmware, or a game (e.g. in a "cartridge"). These memories are wired to
+specific addresses, so the programmer can access them as if they were part of operating memory.
 
-The byte-mem plugin emulates this behavior. It allows us to define ROM areas that represent read-only
-memory.
+The byte-mem plugin emulates this behavior. It allows to define ROM areas that represent read-only memory.
 There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area
 cannot be changed from software running on the emulator. All writes to the memory will be ignored.
 
-Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing the value will
+Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing a value will
 not work.
 
-If a ROM range is defined, it is possible to remove only a part of it, effectively splitting the range and correcting
-their boundaries. For example, if there is defined a ROM range from `0x0A - 0x64` (see the image above), then it is
+If a ROM range is defined, it is possible to "remove" only a part of it, effectively splitting the range and correcting
+their boundaries. For example, if there is defined a ROM range from `0x0A - 0x64`, then it is
 possible to remove a range e.g. `0x32 - 0x46`, which is the part of defined ROM area. Then, the original ROM area is
 split into two parts - first will be a range from `0x0A - 0x31`, and the second from `0x47 - 0x64`.
 
@@ -98,12 +95,12 @@ size.
 To overcome this issue, memory was logically split into many regions of size equal to the processor address space. These
 regions are called "banks".
 
-Physically, banks could refer to the same memory, but they could be also different memories (e.g. external cartridges),
+Physically, banks could refer to the same memory, but they could be also different storages (e.g. external cartridges),
 and the bank-switching involved switching the active memory.
 
 Selecting a bank from a programming perspective was usually done by writing some code to some I/O port using some I/O
-instruction of a CPU. But it can be implemented in various ways, e.g. some memory addresses can be used for selecting a
-bank.
+instruction of a CPU (controlled by a specialized chip). But it can be implemented in various ways, e.g. some memory
+addresses can be used for selecting a bank.
 
 Also, it was very common that some part of the address space still kept some common memory part which was never switched
 out. This part is called a "common" part. In emuStudio, common part starts with the `Common` address (as it can be seen
