@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Device 88-sio
+title: Device "88-sio"
 nav_order: 7
 parent: MITS Altair8800
 permalink: /altair8800/88-sio

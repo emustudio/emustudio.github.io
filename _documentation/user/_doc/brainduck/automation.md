@@ -10,17 +10,20 @@ permalink: /brainduck/automation
 
 # Automation
 
-BrainDuck computer will recognize if automatic emulation is executed.
+BrainDuck computer is capable of running automatic emulation. Automation can operate in the
+interactive or non-interactive mode.
 
 ## Non-interactive mode
 
-If a `--nogui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
+If a `--no-gui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
 
-The input file is called `vt100-terminal.in` and must be placed in the directory from which emuStudio was executed.
+Default input file is called `vt100-terminal.in` and must be placed in the directory from which emuStudio was executed.
 If the file does not exist, emuStudio will not run.
 
-The output file is called `vt100-terminal.out` and it will be created automatically or appended when it exists in
+Default output file is called `vt100-terminal.out` and it will be created automatically or appended when it exists in
 the location from which emuStudio was executed.
+
+The input/output file names are configurable, please refer to [VT100 terminal documentation]({{ site.baseurl }}/brainduck/vt100-terminal#configuration-file).
 
 ## Be careful of EOLs
 
@@ -32,11 +35,11 @@ non-interactive mode, EOL may be of any-like type.
 
 Command line for starting non-interactive automatic emulation:
 
-    ./emuStudio --auto --config config/BrainDuck.toml --input examples/brainc-brainduck/mandelbrot.b
+    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b
 
-- computer configuration `config/BrainDuck.toml` will be loaded
+- computer configuration named "BrainDuck", file `config/BrainDuck.toml`, will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be performed
+- (`auto`) automatic emulation will be performed
 
 This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain
 additional information about the emulation progress:
@@ -44,14 +47,14 @@ additional information about the emulation progress:
 {:.code-example}
 ```
 [INFO] Starting emulation automation...
-[INFO] Compiler: BrainDuck Compiler, version 0.40-SNAPSHOT
-[INFO] CPU: BrainDuck CPU, version 0.40-SNAPSHOT
-[INFO] Memory: BrainDuck memory, version 0.40-SNAPSHOT
+[INFO] Compiler: BrainDuck Compiler, version 0.41
+[INFO] CPU: BrainDuck CPU, version 0.41
+[INFO] Memory: Byte-cell based operating memory, version 0.41
 [INFO] Memory size: 65536
-[INFO] Device: BrainDuck terminal, version 0.40-SNAPSHOT
+[INFO] Device: BrainDuck terminal, version 0.41
 [INFO] Compiling input file: examples/brainc-brainduck/mandelbrot.b
 [INFO] Compiler started working.
-[INFO] [Info   ] BrainDuck Compiler, version 0.40-SNAPSHOT
+[INFO] [Info   ] BrainDuck Compiler, version 0.41
 [INFO] [Info   ] Compile was successful. Output: /home/vbmacher/emuStudio/examples/brainc-brainduck/mandelbrot.hex
 [INFO] [Info   ] Compiled file was loaded into operating memory.
 [INFO] Compilation finished.

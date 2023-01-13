@@ -33,12 +33,12 @@ After the run, the following output on the stdout can be expected:
 [INFO] Being verbose. Writing to file:input_tape.out
 [INFO] Being verbose. Writing to file:output_tape.out
 [INFO] Starting emulation automation...
-[INFO] Compiler: RASP Assembler, version 0.40-SNAPSHOT
-[INFO] CPU: Random Access Stored Program (RASP) machine, version 0.40-SNAPSHOT
-[INFO] Memory: RASP Memory, version 0.40-SNAPSHOT
+[INFO] Compiler: RASP Assembler, version 0.41
+[INFO] CPU: Random Access Stored Program (RASP) machine, version 0.41
+[INFO] Memory: RASP Memory, version 0.41
 [INFO] Memory size: 0
-[INFO] Device: Input tape, version 0.40-SNAPSHOT
-[INFO] Device: Output tape, version 0.40-SNAPSHOT
+[INFO] Device: Input tape, version 0.41
+[INFO] Device: Output tape, version 0.41
 [INFO] Compiling input file: examples/raspc-rasp/instr_modif.rasp
 [INFO] Compiler started working.
 [INFO] [Info   ] Compilation was successful.

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CPU z80-cpu
+title: CPU "z80-cpu"
 nav_order: 4
 parent: MITS Altair8800
 permalink: /altair8800/z80-cpu
