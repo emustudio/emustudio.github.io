@@ -32,14 +32,14 @@ The console will contain information about emulation progress:
 ```
 [INFO] Loading virtual computer: config/SSEMBaby.toml
 [INFO] Starting emulation automation...
-[INFO] Compiler: SSEM Assembler, version 0.40-SNAPSHOT
-[INFO] CPU: SSEM CPU, version 0.40-SNAPSHOT
-[INFO] Memory: SSEM memory (Williams-Kilburn Tube), version 0.40-SNAPSHOT
+[INFO] Compiler: SSEM Assembler, version 0.41
+[INFO] CPU: SSEM CPU, version 0.41
+[INFO] Memory: SSEM memory (Williams-Kilburn Tube), version 0.41
 [INFO] Memory size: 128
-[INFO] Device: SSEM CRT display, version 0.40-SNAPSHOT
+[INFO] Device: SSEM CRT display, version 0.41
 [INFO] Compiling input file: examples/as-ssem/noodle-timer.ssem
 [INFO] Compiler started working.
-[INFO] [Info   ] SSEM Assembler, version 0.40-SNAPSHOT
+[INFO] [Info   ] SSEM Assembler, version 0.41
 [INFO] [Info   ] Compile was successful (program starts at 0000). Output: /home/vbmacher/emuStudio/examples/as-ssem/noodle-timer.bin
 [INFO] Compilation finished.
 [INFO] Program start address: 0000h

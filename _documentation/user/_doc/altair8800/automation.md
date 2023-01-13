@@ -10,18 +10,17 @@ permalink: /altair8800/automation
 
 # Automation
 
-MITS Altair8800 computer will recognize if automatic emulation is executed. The automation can operate in the
+MITS Altair8800 computer is capable of running automatic emulation. Automation can operate in the
 interactive or non-interactive mode.
 
-In case of the non-interactive mode (`--nogui` flag set in the command line), the input and output of the terminal
+In case of the non-interactive mode (`--no-gui` flag set in the command line), the input and output of the terminal
 ADM-3A will be redirected to files, instead of terminal GUI. The input/output file names are configurable, please refer
-to
-[ADM-3A terminal documentation]({{ site.baseurl }}/altair8800/adm3a-terminal#configuration-file).
+to [ADM-3A terminal documentation]({{ site.baseurl }}/altair8800/adm3a-terminal#configuration-file).
 
 ## Example
 
-In this example we will run a non-interactive automatic emulation. Input for the terminal will be stored in a file
-`adm3A-terminal.in`. The content of the file must be prepared in the advance, e.g.:
+In this example we will run a non-interactive automatic emulation. Input for the terminal will be stored in a default
+file name `adm3A-terminal.in`. The content of the file must be prepared in the advance, e.g.:
 
 {:.code-example}
 ```
@@ -33,12 +32,12 @@ NOTE: Do not forget to keep the last EOL character!
 
 The following command will emulate the computer and run "reverse text" program on it:
 
-    ./emuStudio --auto --nogui --config config/MITSAltair8800.toml --input examples/as-8080/reverse.asm
+    ./emuStudio -c "MITS Altair8800" -i examples/as-8080/reverse.asm auto --no-gui
 
-- computer configuration `config/MITSAltair8800.toml` will be loaded
+- computer configuration "MITS Altair8800" (file `config/MITSAltair8800.toml`) will be loaded
 - input file for compiler is one of the examples
 - (`--auto`) automatic emulation will be performed
-- (`--nogui`) non-interactive mode will be set
+- (`--no-gui`) non-interactive mode will be set
 
 After the program finishes, emuStudio is closed. The program output will be in the file `adm3A-terminal.out`:
 
@@ -57,16 +56,16 @@ Console will contain additional information about the emulation progress:
 [INFO] [device=LSI ADM-3A Terminal] Device was attached to 88-SIO
 [INFO] Processing input file: 'adm3A-terminal.in'; delay of chars read (ms): 0
 [INFO] Starting emulation automation...
-[INFO] Compiler: Intel 8080 Assembler, version 0.40-SNAPSHOT
-[INFO] CPU: Intel 8080 CPU, version 0.40-SNAPSHOT
-[INFO] Memory: Standard operating memory, version 0.40-SNAPSHOT
+[INFO] Compiler: Intel 8080 Assembler, version 0.41
+[INFO] CPU: Intel 8080 CPU, version 0.41
+[INFO] Memory: Byte-cell based operating memory, version 0.41
 [INFO] Memory size: 65536
-[INFO] Device: MITS 88-DCDD device, version 0.40-SNAPSHOT
-[INFO] Device: MITS 88-SIO serial board, version 0.40-SNAPSHOT
-[INFO] Device: LSI ADM-3A terminal, version 0.40-SNAPSHOT
+[INFO] Device: MITS 88-DCDD device, version 0.41
+[INFO] Device: MITS 88-SIO serial board, version 0.41
+[INFO] Device: LSI ADM-3A terminal, version 0.41
 [INFO] Compiling input file: examples/as-8080/reverse.asm
 [INFO] Compiler started working.
-[INFO] [Info   ] Intel 8080 Assembler, version 0.40-SNAPSHOT
+[INFO] [Info   ] Intel 8080 Assembler, version 0.41
 [INFO] [Info   ] Compilation was successful.
  Output file: /home/vbmacher/emuStudio/examples/as-8080/reverse.hex
 [INFO] [Info   ] Compiled file was loaded into memory.

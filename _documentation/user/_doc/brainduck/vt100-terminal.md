@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Terminal vt100-terminal
+title: Terminal "vt100-terminal"
 nav_order: 5
 parent: BrainDuck
 permalink: /brainduck/terminal
@@ -41,3 +41,15 @@ little dialog will appear asking the user to enter space-separated numbers, repr
 
 NOTE: The terminal does not display characters with ASCII codes less than 32. Only some special characters are
 interpreted: 0x8 (backspace), 0x9 (tab), 0xA (LF), and 0x10 (CR)
+
+## Configuration file
+
+The following table shows all the possible settings of VT100-terminal plugin:
+
+|---
+|Name | Default value | Valid values | Description
+|-|-|-|-
+|`inputFileName`   | `vt100-terminal.in`  | Path to existing file | File for reading input (when redirected)
+|`outputFileName`  | `vt100-terminal.out` | Path to existing file | File for writing output (when redirected)
+|`inputReadDelay`  | 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
+|---

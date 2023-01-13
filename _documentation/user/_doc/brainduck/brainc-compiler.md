@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Compiler brainc-brainduck
+title: Compiler "brainc-brainduck"
 nav_order: 2
 parent: BrainDuck
 permalink: /brainduck/compiler

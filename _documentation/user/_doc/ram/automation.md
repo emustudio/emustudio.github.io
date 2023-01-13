@@ -34,16 +34,16 @@ After the run, the following output on the stdout can be expected:
 [INFO] Being verbose. Writing to file:input_tape.out
 [INFO] Being verbose. Writing to file:output_tape.out
 [INFO] Starting emulation automation...
-[INFO] Compiler: RAM Compiler, version 0.40-SNAPSHOT
-[INFO] CPU: Random Access Machine (RAM), version 0.40-SNAPSHOT
-[INFO] Memory: RAM Program Tape, version 0.40-SNAPSHOT
+[INFO] Compiler: RAM Compiler, version 0.41
+[INFO] CPU: Random Access Machine (RAM), version 0.41
+[INFO] Memory: RAM Program Tape, version 0.41
 [INFO] Memory size: 0
-[INFO] Device: Registers (storage tape), version 0.40-SNAPSHOT
-[INFO] Device: Input tape, version 0.40-SNAPSHOT
-[INFO] Device: Output tape, version 0.40-SNAPSHOT
+[INFO] Device: Registers (storage tape), version 0.41
+[INFO] Device: Input tape, version 0.41
+[INFO] Device: Output tape, version 0.41
 [INFO] Compiling input file: examples/ramc-ram/factorial.ram
 [INFO] Compiler started working.
-[INFO] [Info   ] RAM Compiler, version 0.40-SNAPSHOT
+[INFO] [Info   ] RAM Compiler, version 0.41
 [INFO] [Info   ] Compile was successful.
 [INFO] [Info   ] Compiled file was loaded into program memory.
 [INFO] [Info   ] Compilation was saved to the file: /home/vbmacher/emuStudio/examples/ramc-ram/factorial.bram

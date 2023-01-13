@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CPU brainduck-cpu
+title: CPU "brainduck-cpu"
 nav_order: 3
 parent: BrainDuck
 permalink: /brainduck/cpu

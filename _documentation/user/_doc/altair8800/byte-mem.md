@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Memory standard-mem
+title: Memory "byte-mem"
 nav_order: 5
 parent: MITS Altair8800
-permalink: /altair8800/standard-mem
+permalink: /altair8800/byte-mem
 ---
 
 {% include analytics.html category="Altair8800" %}
 
-# Operating memory "standard-mem"
+# Operating memory "byte-mem"
 
 This plugin emulates an operating memory, in a quite broad meaning. It can be used for any virtual computer which can
 benefit from the following basic properties:
@@ -38,7 +38,7 @@ an emulator that can benefit from it.
 To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator
 panel. The window is shown, as in the following image:
 
-![Standard operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png){:style="max-width:779"}
+![Byte operating memory]({{ site.baseurl }}/assets/altair8800/standard-mem.png){:style="max-width:779"}
 
 - *A*: Open a memory image. Current memory content, if it does not interfere with the loaded data will be kept.
 - *B*: Dump (save) whole memory content into a file.
@@ -78,7 +78,7 @@ Some "controllers" - used as embedded devices - usually logically organize memor
 read-only, which usually contains the firmware, and some are rewritable. Physically, these memories are wired to
 specific addresses, so the programmer can access them.
 
-The standard operating memory plugin emulates this behavior. It allows us to define ROM areas that represent read-only
+The byte-mem plugin emulates this behavior. It allows us to define ROM areas that represent read-only
 memory.
 There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area
 cannot be changed from software running on the emulator. All writes to the memory will be ignored.
@@ -120,7 +120,7 @@ addresses. So, if we won't have any common address space, we require `ceil(21 / 
 
 ## Configuration file
 
-The following table shows all the possible settings of Standard operating memory plugin:
+The following table shows all the possible settings of byte-mem plugin:
 
 |---
 |Name | Default value | Valid values | Description
@@ -140,19 +140,19 @@ This section is for developers of emulators. If you do not plan to create custom
 this section.
 To get started with developing plugins for emuStudio, please read [developer documentation][developerDoc]{:target="_blank"}.
 
-As it was mentioned in the earlier sections, the Standard operating memory plugin can be used in other computers, too.
+As it was mentioned in the earlier sections, the byte-mem plugin can be used in other computers, too.
 Besides standard operations which are provided by `net.emustudio.emulib.plugins.memory.MemoryContext` interface, it
 provides custom context API, enabling to use more features - e.g. bank-switching.
 
 You can obtain the context in [Plugin.initialize()][pluginInitialize]{:target="_blank"} method. The context is
-named `net.emustudio.plugins.memory.standard.api.StandardMemoryContext`:
+named `net.emustudio.plugins.memory.bytemem.api.ByteMemoryContext`:
 
 {:.code-example}
 ```java
 ...
 
 public void initialize(SettingsManager settings){
-        StandardMemoryContext mem=contextPoolImpl.getMemoryContext(pluginID,StandardMemoryContext.class);
+        ByteMemoryContext mem=contextPoolImpl.getMemoryContext(pluginID,ByteMemoryContext.class);
         ...
         }
 ```
@@ -161,7 +161,7 @@ The memory context has the following content:
 
 {:.code-example}
 ```java
-package net.emustudio.plugins.memory.standard.api;
+package net.emustudio.plugins.memory.bytemem.api;
 
 import net.emustudio.emulib.plugins.annotations.PluginContext;
 import net.emustudio.emulib.plugins.memory.MemoryContext;
@@ -169,21 +169,13 @@ import net.emustudio.emulib.plugins.memory.MemoryContext;
 import java.util.List;
 
 /**
- * Extended memory context.
+ * "Byte" memory context.
  * <p>
  * Supports bank switching, ROM ranges, and loading HEX/BIN files.
  */
-@PluginContext(id = "Standard memory")
-public interface StandardMemoryContext extends MemoryContext<Short> {
-
-    /**
-     * This interface represents a range of addresses in the memory.
-     */
-    interface AddressRange {
-        int getStartAddress();
-
-        int getStopAddress();
-    }
+@SuppressWarnings("unused")
+@PluginContext(id = "Byte memory")
+public interface ByteMemoryContext extends MemoryContext<Byte> {
 
     /**
      * Determine whether specified memory position is read-only.
@@ -201,18 +193,18 @@ public interface StandardMemoryContext extends MemoryContext<Short> {
     List<? extends AddressRange> getReadOnly();
 
     /**
-     * Set specified memory range as RAM (Random Access Memory).
-     *
-     * @param range address range
-     */
-    void setReadWrite(AddressRange range);
-
-    /**
      * Set specified memory range as ROM (Read Only Memory).
      *
      * @param range address range
      */
     void setReadOnly(AddressRange range);
+
+    /**
+     * Set specified memory range as RAM (Random Access Memory).
+     *
+     * @param range address range
+     */
+    void setReadWrite(AddressRange range);
 
     /**
      * Get number of available memory banks.
@@ -226,14 +218,14 @@ public interface StandardMemoryContext extends MemoryContext<Short> {
      *
      * @return index of active (selected) memory bank
      */
-    short getSelectedBank();
+    int getSelectedBank();
 
     /**
      * Select (set as active) a memory bank.
      *
      * @param bankIndex index (number) of a bank which should be selected
      */
-    void selectBank(short bankIndex);
+    void selectBank(int bankIndex);
 
     /**
      * Return an address in the memory which represents a boundary from which
@@ -243,9 +235,27 @@ public interface StandardMemoryContext extends MemoryContext<Short> {
      * @return common boundary address
      */
     int getCommonBoundary();
+
+    /**
+     * Returns raw memory represented by Java array.
+     * <p>
+     * Memory notifications must be handled manually if this array changes.
+     *
+     * @return raw memory
+     */
+    Byte[][] getRawMemory();
+
+    /**
+     * This interface represents a range of addresses in the memory.
+     */
+    interface AddressRange {
+        int getStartAddress();
+
+        int getStopAddress();
+    }
 }
 ```
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [developerDoc]: /documentation/developer/introduction/
-[memoryBanks]: {{ site.baseurl }}/altair8800/standard-mem#memory-bank-switching
+[memoryBanks]: {{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching
