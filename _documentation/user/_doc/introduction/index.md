@@ -2,7 +2,8 @@
 layout: default
 title: Introduction
 nav_order: 1
-has_children: true
+has_children: false
+has_toc: false
 permalink: /introduction/
 ---
 
@@ -15,11 +16,13 @@ supports full emulation "life-cycle". From writing and compiling programs for em
 debugging. A framework, because it provides API and documentation which encourages implementing your custom
 toy-computer, either real or abstract.
 
-It does not aim to supersede other emulators which try to preserve history (e.g. [MAME][mame]{:target="_blank"},
-or [simh][simh]{:target="_blank"}), because they do better job, have big community around them, and it does not make
-sense to provide the same goal. Instead, emuStudio focuses on allowing programming the emulated devices - in the style
-of "write program - load it into computer - emulate".
+There are already many emulators out there doing great job in preserving history (e.g. [MAME][mame]{:target="_blank"},
+or [simh][simh]{:target="_blank"}). While emuStudio is also trying to be accurate in technical details and historical 
+behavior of emulated computers, but the main focus is allowing comfortable programming and experimenting with emulated
+devices - in the style of "write program - load it into computer - emulate".
 
+That is why you can expect quite detailed documentation of rather usage and programming of the devices than used 
+emulation techniques. That brings along nice GUI, source code editor and virtual computer designer.
 
 ## References
 
