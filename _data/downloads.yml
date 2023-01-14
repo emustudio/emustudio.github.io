@@ -1,5 +1,29 @@
 downloads:
   - {
+    versionid: '041',
+    version: '0.41',
+    java: {
+      href: 'https://jdk.java.net/archive/',
+      name: 'Java 11'
+    },
+    release: {
+      date: 'on ???',
+      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-041'
+    },
+    downloads: [
+      {
+        filename: 'emuStudio-0.41.zip',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.41/emuStudio-0.41.zip',
+        glyphs: [ 'fa-windows' ]
+      },
+      {
+        filename: 'emuStudio-0.41.tar',
+        href: 'https://github.com/emustudio/emuStudio/releases/download/RELEASE-0.41/emuStudio-0.41.tar',
+        glyphs: [ 'fa-linux' ]
+      }
+    ]
+  }
+  - {
     versionid: '040',
     version: '0.40',
     java: {

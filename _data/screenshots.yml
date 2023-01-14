@@ -56,8 +56,8 @@ screenshots:
     title: 'Computer-user interaction',
     id: 'CPM22',
     alt: 'CP/M 2.2',
-    thumbnail: '/files/images/cpm22-thumbnail.png',
-    image: '/files/images/cpm22.png',
+    thumbnail: '/files/images/cpm3.png',
+    image: '/files/images/cpm3.png',
     html: '
       <p class="lead">
       Users can interact with the emulated computer using virtual devices. For example, a terminal. Devices
