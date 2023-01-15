@@ -51,7 +51,7 @@ additional information about the emulation progress:
 [INFO] CPU: BrainDuck CPU, version 0.41
 [INFO] Memory: Byte-cell based operating memory, version 0.41
 [INFO] Memory size: 65536
-[INFO] Device: BrainDuck terminal, version 0.41
+[INFO] Device: VT100 Terminal, version 0.41
 [INFO] Compiling input file: examples/brainc-brainduck/mandelbrot.b
 [INFO] Compiler started working.
 [INFO] [Info   ] BrainDuck Compiler, version 0.41
