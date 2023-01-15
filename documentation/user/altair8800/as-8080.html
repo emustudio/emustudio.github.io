@@ -59,4 +59,7 @@ LOOP: RRC
 ENDM
 </code></pre></div></div> <p>And usage:</p> <div class="language-plaintext code-example highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LDA TEMP
 SHV 5
-</code></pre></div></div> <p>Which has the same effect as the previous example.</p> </div> </div> <div class="search-overlay"></div> </div> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script> </body> </html>
+</code></pre></div></div> <p>Which has the same effect as the previous example.</p> <h2 id="end-psudo-instruction"> <a href="#end-psudo-instruction" class="anchor-heading" aria-labelledby="end-psudo-instruction"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> END psudo-instruction </h2> <p>On encountering <code class="language-plaintext highlighter-rouge">END</code> pseudo-instruction, the compiler will allow only comments below this pseudo-instruction. It’s a marker of “program end”.</p> <p>The following example won’t compile:</p> <div class="language-plaintext code-example highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MVI A, 0
+END
+HLT   ; no code allowed, just comments!
+</code></pre></div></div> </div> </div> <div class="search-overlay"></div> </div> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script> </body> </html>

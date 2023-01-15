@@ -440,6 +440,20 @@ LD (TEMP), A
 
 Which has the same effect as the previous example.
 
+## END psudo-instruction
+
+On encountering `END` pseudo-instruction, the compiler will allow only comments below this pseudo-instruction.
+It's a marker of "program end".
+
+The following example won't compile:
+
+{:.code-example}
+```
+LD A, 0
+END
+HALT   ; no code allowed, just comments!
+```
+
 
 [asz80]: http://www.z80.info/zip/z80cpu_um.pdf
 [intelhex]: https://en.wikipedia.org/wiki/Intel_HEX
