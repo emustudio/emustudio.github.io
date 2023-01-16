@@ -26,4 +26,4 @@ notifications to speed up the emulation.
 [memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
 [abstractMemory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemory.html
 [abstractMemoryContext]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html
-[memoryListener]: http://localhost:4000/documentation/developer/0.40/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.MemoryListener.html
+[memoryListener]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.MemoryListener.html
