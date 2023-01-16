@@ -46,17 +46,35 @@ NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it mi
 
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 
-	$ ./emuStudio --help
-	 -a (--auto)            : run the emulation automation (default: false)
-     -c (--config) filename : load configuration with file name
-     -h (--help)            : output this message (default: true)
-     -i (--input) filename  : use the source code given by the file name
-     -n (--nogui)           : try to not show GUI in automation (default: false)
-     -s (--programStart) X  : set program start address (default: 0)
-     -w (--waitmax) X       : wait for emulation finish max X milliseconds (default: -1)
+    $ ./emuStudio --help
+    Usage: emuStudio [-hlV] [-i=FILE] [-c=NAME | -cf=FILE | -cn=INDEX] [COMMAND]
+    Universal emulation platform and framework
+      -h, --help              Show this help message and exit.
+      -i, --input-file=FILE   input file name (source code)
+      -l, --list-computers    list all existing virtual computers
+      -V, --version           Print version information and exit.
+    Virtual computer
+      -c, --computer=NAME     virtual computer name (see -l for options)
+          -cf, --computer-file=FILE
+                              virtual computer configuration file
+          -cn, --computer-index=INDEX
+                              virtual computer index (see -l for options)
+    Commands:
+      automation, auto  run emulation automation
 
-Most of these arguments are self-explanatory. Some of them have meaning only when emulation automation is turned
-on (`--nogui`, `--waitmax`, `--programStart`).
+Automation command has its own usage:
+
+    $ ./emuStudio auto --help
+    Usage: emuStudio automation [-hV] [--[no-]gui] [-s=ADDRESS] [-w=MILLIS]
+    run emulation automation
+          --[no-]gui         show/don't show GUI during automation
+      -h, --help             Show this help message and exit.
+      -s, --start-address=ADDRESS
+                             program start address
+      -V, --version          Print version information and exit.
+      -w, --waitmax=MILLIS   limit emulation time to max MILLIS (force kill
+                               afterwards)
+
 
 
 [java11]: https://jdk.java.net/archive/
