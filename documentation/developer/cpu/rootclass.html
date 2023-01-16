@@ -3,7 +3,7 @@
         <span class="n">title</span> <span class="o">=</span> <span class="s">"Sample CPU emulator"</span>
 <span class="o">)</span>
 <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unused"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CpuImpl</span> <span class="kd">extends</span> <span class="nc">AbstractCPU</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyCpuImpl</span> <span class="kd">extends</span> <span class="nc">AbstractCPU</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ContextImpl</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ContextImpl</span><span class="o">();</span>
 
     <span class="kd">private</span> <span class="nc">EmulatorEngine</span> <span class="n">engine</span><span class="o">;</span>
@@ -14,7 +14,7 @@
         <span class="kd">super</span><span class="o">(</span><span class="n">pluginID</span><span class="o">,</span> <span class="n">applicationApi</span><span class="o">,</span> <span class="n">settings</span><span class="o">);</span>
 
         <span class="k">try</span> <span class="o">{</span>
-            <span class="n">applicationApi</span><span class="o">.</span><span class="na">getContextPool</span><span class="o">().</span><span class="na">register</span><span class="o">(</span><span class="n">pluginID</span><span class="o">,</span> <span class="n">context</span><span class="o">,</span> <span class="nc">ExtendedContext</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">applicationApi</span><span class="o">.</span><span class="na">getContextPool</span><span class="o">().</span><span class="na">register</span><span class="o">(</span><span class="n">pluginID</span><span class="o">,</span> <span class="n">context</span><span class="o">,</span> <span class="nc">MyCpuContext</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvalidContextException</span> <span class="o">|</span> <span class="nc">ContextAlreadyRegisteredException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
             <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Could not register CPU context"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
             <span class="n">applicationApi</span><span class="o">.</span><span class="na">getDialogs</span><span class="o">().</span><span class="na">showError</span><span class="o">(</span>
@@ -25,10 +25,10 @@
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">PluginInitializationException</span> <span class="o">{</span>
-        <span class="nc">MemoryContext</span><span class="o">&lt;</span><span class="nc">Short</span><span class="o">&gt;</span> <span class="n">memory</span> <span class="o">=</span> <span class="n">contextPool</span><span class="o">.</span><span class="na">getMemoryContext</span><span class="o">(</span><span class="n">pluginId</span><span class="o">,</span> <span class="nc">MemoryContext</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">memory</span><span class="o">.</span><span class="na">getDataType</span><span class="o">()</span> <span class="o">!=</span> <span class="nc">Short</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">MemoryContext</span><span class="o">&lt;</span><span class="nc">Byte</span><span class="o">&gt;</span> <span class="n">memory</span> <span class="o">=</span> <span class="n">contextPool</span><span class="o">.</span><span class="na">getMemoryContext</span><span class="o">(</span><span class="n">pluginId</span><span class="o">,</span> <span class="nc">MemoryContext</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">memory</span><span class="o">.</span><span class="na">getDataType</span><span class="o">()</span> <span class="o">!=</span> <span class="nc">Byte</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidContextException</span><span class="o">(</span>
-                    <span class="s">"Unexpected memory cell type. Expected Short but was: "</span> <span class="o">+</span> <span class="n">memory</span><span class="o">.</span><span class="na">getDataType</span><span class="o">()</span>
+                    <span class="s">"Unexpected memory cell type. Expected Byte but was: "</span> <span class="o">+</span> <span class="n">memory</span><span class="o">.</span><span class="na">getDataType</span><span class="o">()</span>
             <span class="o">);</span>
         <span class="o">}</span>
 
@@ -84,4 +84,33 @@
         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div> <p>What can be noticed here is:</p> <ul> <li>this CPU register custom context in constructor. The context is custom, because it will allow attaching devices to specific CPU “ports”.</li> <li>obtaining <a href="/documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html" target="_blank">MemoryContext</a> is vital. If it is not successful, the <a href="/documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/PluginInitializationException.html" target="_blank">PluginInitializationException</a> will be propagated to the caller.</li> <li>actual CPU emulation is implemented in <code class="language-plaintext highlighter-rouge">EmulatorEngine</code> class, which requires a memory and CPU context.</li> <li>classes <code class="language-plaintext highlighter-rouge">DisassemblerImpl</code> and <code class="language-plaintext highlighter-rouge">DecoderImpl</code> are generated by <a href="https://github.com/emustudio/edigen" target="_blank">Edigen</a></li> </ul> </div> </div> <div class="search-overlay"></div> </div> </body> </html>
+</code></pre></div></div> <p>What can be noticed here is:</p> <ul> <li>this CPU register custom context in constructor. The context is custom, because it will allow attaching devices to specific CPU “ports”.</li> <li>obtaining <a href="/documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html" target="_blank">MemoryContext</a> is vital. If it is not successful, the <a href="/documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/PluginInitializationException.html" target="_blank">PluginInitializationException</a> will be propagated to the caller.</li> <li>actual CPU emulation is implemented in <code class="language-plaintext highlighter-rouge">EmulatorEngine</code> class, which requires a memory and CPU context.</li> <li>classes <code class="language-plaintext highlighter-rouge">DisassemblerImpl</code> and <code class="language-plaintext highlighter-rouge">DecoderImpl</code> are generated by <a href="https://github.com/emustudio/edigen" target="_blank">Edigen</a></li> </ul> <h2 id="cpu-context"> <a href="#cpu-context" class="anchor-heading" aria-labelledby="cpu-context"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> CPU Context </h2> <p>A CPU context is a way how to bring CPU-specific features to other plugins. Remember, plugins communicate only using contexts. A CPU context must extend from <code class="language-plaintext highlighter-rouge">net.emustudio.emulib.plugins.cpu.CPUContext</code> and must be annotated with <code class="language-plaintext highlighter-rouge">@PluginContext</code> annotation. In order a CPU context could be used by another plugins, it must be registered in a context pool obtained in plugin root class constructor (the registration must be performed in the same constructor).</p> <p>Therefore, a CPU context is often a pair of interface and implementation, for example context for 8080 CPU looks as follows:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Extended CPU context for 8080 processor.
+ */</span>
+<span class="nd">@PluginContext</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Context8080</span> <span class="kd">extends</span> <span class="nc">CPUContext</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * Attach a device into the CPU.
+     *
+     * @param device the device
+     * @param port   CPU port where the device should be attached
+     * @return true on success, false otherwise
+     */</span>
+    <span class="kt">boolean</span> <span class="nf">attachDevice</span><span class="o">(</span><span class="nc">DeviceContext</span><span class="o">&lt;</span><span class="nc">Byte</span><span class="o">&gt;</span> <span class="n">device</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">);</span>
+
+    <span class="cm">/**
+     * Detach a device from the CPU.
+     *
+     * @param port the CPU port number which will be freed.
+     */</span>
+    <span class="kt">void</span> <span class="nf">detachDevice</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">);</span>
+
+    <span class="cm">/**
+     * Set CPU frequency in kHZ
+     *
+     * @param freq new frequency in kHZ
+     */</span>
+    <span class="kt">void</span> <span class="nf">setCPUFrequency</span><span class="o">(</span><span class="kt">int</span> <span class="n">freq</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div> </div> </div> <div class="search-overlay"></div> </div> </body> </html>
