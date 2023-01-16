@@ -18,7 +18,7 @@ A device in emuStudio has three components:
 - optional main GUI window
 - optional settings GUI window
 
-Communication with devices is realized through device contexts. A device, as any other plugin, can have none, one or
+Communication between devices is realized using device contexts. A device, as any other plugin, can have none, one or
 more contexts, which should be registered in plugin root class constructor. Device context should implement
 a [DeviceContext][deviceContext]{:target="_blank"} interface.
 

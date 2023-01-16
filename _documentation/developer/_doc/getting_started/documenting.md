@@ -41,7 +41,7 @@ rendered documentation as well.
 ## User documentation
 
 Plugins are usually part of virtual computers. Therefore, virtual computers are "chapters" in the documentation in a
-separate directory (e.g. `_documentation/user/0.40/altair8800`, and plugins are described there, in a separate file 
+separate directory (e.g. `_documentation/user/0.41/altair8800`, and plugins are described there, in a separate file 
 (e.g. `byte-mem.md`). The documentation of virtual computer should document all possible configurations, and all possible
 plugins, even if their use is optional (which should be documented as well).
 
