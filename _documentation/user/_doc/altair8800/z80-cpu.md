@@ -38,6 +38,7 @@ The following table shows all the possible settings of Zilog Z80 CPU plugin:
 |-|-|-|-
 |`printCode`       | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump)
 |`printCodeUseCache`| false | true / false | If `printCode` is set to `true`, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops
+|`frequency_khz` | 4000 | > 0 | CPU frequency set on emuStudio startup (it can be changed in runtime, but won't be saved in settings)
 |---
 
 ## Dumping executed instructions
