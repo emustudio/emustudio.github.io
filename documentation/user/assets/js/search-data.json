@@ -7,7 +7,7 @@
   },"1": {
     "doc": "CPU \"8080-cpu\"",
     "title": "Configuration file",
-    "content": "The following table shows all the possible settings of Intel 8080 CPU plugin: . | Name | Default value | Valid values | Description | . | printCode | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump) | . | printCodeUseCache | false | true / false | If printCode is set to true, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops | . ",
+    "content": "The following table shows all the possible settings of Intel 8080 CPU plugin: . | Name | Default value | Valid values | Description | . | printCode | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump) | . | printCodeUseCache | false | true / false | If printCode is set to true, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops | . | frequency_khz | 2000 | &gt; 0 | CPU frequency set on emuStudio startup (it can be changed in runtime, but won’t be saved in settings) | . ",
     "url": "/documentation/user/altair8800/8080-cpu#configuration-file",
     "relUrl": "/altair8800/8080-cpu#configuration-file"
   },"2": {
@@ -1099,7 +1099,7 @@
   },"183": {
     "doc": "CPU \"z80-cpu\"",
     "title": "Configuration file",
-    "content": "The following table shows all the possible settings of Zilog Z80 CPU plugin: . | Name | Default value | Valid values | Description | . | printCode | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump) | . | printCodeUseCache | false | true / false | If printCode is set to true, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops | . ",
+    "content": "The following table shows all the possible settings of Zilog Z80 CPU plugin: . | Name | Default value | Valid values | Description | . | printCode | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump) | . | printCodeUseCache | false | true / false | If printCode is set to true, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops | . | frequency_khz | 4000 | &gt; 0 | CPU frequency set on emuStudio startup (it can be changed in runtime, but won’t be saved in settings) | . ",
     "url": "/documentation/user/altair8800/z80-cpu#configuration-file",
     "relUrl": "/altair8800/z80-cpu#configuration-file"
   },"184": {
