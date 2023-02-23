@@ -44,15 +44,22 @@ The following subsections describe in short how to boot some of those systems, a
 ## Boot ROM
 
 Booting operating systems on Altair requires special ROM image to be loaded in operating memory. The purpose of a boot
-ROM is to load specific block of data from a device and then run it as if it was code. The code block is often called '
-bootloader'. It is very small program which just loads either the whole or part of the operating system into memory and
-then jumps to it.
+ROM is to load some blocks of data from a disk device (e.g. 88-DCDD) and then execute it. The code block is often called
+a 'bootloader'.
 
-Originally, more boot ROMs existed. Different boot ROMs were used to load the code from different devices. In current
-implementation of emuStudio, there is only one boot ROM supported - so called 'disk bootloader' (or DBL), which loads
-operating system from MITS 88-DCDD (through CPU ports).
+A bootloader is device-specific, and often also disk format-specific. So e.g. for loading Altair 8" diskette with "simh"
+formatting there should be used different bootloader than other diskette types and/or formatting. 
 
-The bootloader is already available in a file `examples/altair8800/boot.bin` of emuStudio installation.
+The following table lists available bootloaders in emuStudio:
+
+|---
+|Bootloader | Disk type | Diskette format | Description
+|-|-|-|-
+|`examples/altair8800/boot/dbl.bin` | 88-dcdd | Altair8800 8", simh formatted | Original 88-dcdd bootloader ROM, compatible with 8080 and Z80
+|`examples/altair8800/boot/mdbl.bin`| 88-dcdd | Altair8800 8", simh formatted | Modified 88-dcdd bootloader ROM for computers supporting memory-banking using simh device
+|---
+
+The bootloaders are provided with source code which can be modified to user needs.
 
 Boot ROM must be loaded into memory at address `0xFF00` (hexadecimal). It is safe to jump to this address manually when
 operating system image file is mounted.
@@ -64,7 +71,7 @@ NOTE: All subsequent sections assume that the bootloader has been loaded in the 
 During Altair8800 computer era, many operating systems, applications and programming languages have been developed. On
 of the most known operating systems is CP/M. It was written by Gary Kildall from Digital Research, Inc. At first it was
 mono-tasking and single-user operating system which didn't need more than 64kB of memory. Subsequent versions added
-multi-user variants and they were ported to 16-bit processors.
+multi-user variants, and they were ported to 16-bit processors.
 
 The combination of CP/M and computers with S-100 bus (8-bit computers sharing some similarities with Altair 8800) was
 big "industry standard", widely spread in 70's up to 80's years of twentieth century. The operating system took the
@@ -94,7 +101,7 @@ Command `dir` is working, `ls` is better `dir`. More information about CP/M comm
 Steps for running CP/M 3 operating systems are not that different from CP/M 2. The disk image file is called `cpm3.dsk`
 and can be downloaded at [this link][ps-altair]{:target="_blank"}. CP/M 3 came with two versions: banked and non-banked.
 The image is the banked version of CP/M. Also, [simh][simh]{:target="_blank"} authors provided custom BIOS and custom
-bootloader.
+bootloader (`mdbl.bin`).
 
 Manual of CP/M 3 can be found at [this link][cpm3manual]{:target="_blank"}. For more information about
 [simh][simh]{:target="_blank"} version of Altair8800 and CP/M 3, click [here][simhmanual]{:target="_blank"}.
@@ -117,7 +124,7 @@ Also, the operating memory needs to be set for memory banks. The following param
 ### Boot ROM
 
 There exist specific version of bootloader (modified probably by [simh][simh]{:target="_blank"} authors) to load CP/M
-into banked memory. It is available in `examples/altair8800/mboot.bin` in your emuStudio installation. Before other
+into banked memory. It is available in `examples/altair8800/boot/mdbl.bin` in your emuStudio installation. Before other
 steps, please load this image into operating memory at address `0xFF00` (hexadecimal).
 
 ### Steps for booting CP/M 3
@@ -176,9 +183,6 @@ manage the disk. There was no operating system it ran under.
 
 After boot, you must mount the disk with `MOUNT 0`. Then, command `FILES` will show all files on the disk. To run a
 file, run command `RUN "file"`. Manual can be found at [this link][basic]{:target="_blank"}.
-
-It is assumed you have either `examples/altair8800/boot.bin` or `examples/altair8800/mboot.bin` mounted in the operating
-memory.
 
 Steps for booting BASIC follow:
 
