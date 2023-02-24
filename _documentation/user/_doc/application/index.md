@@ -47,18 +47,21 @@ NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it mi
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 
     $ ./emuStudio --help
-    Usage: emuStudio [-hlV] [-i=FILE] [-c=NAME | -cf=FILE | -cn=INDEX] [COMMAND]
+    Usage: emuStudio [-hV] [-cl] [-i=FILE] [-cn=NAME | -cf=FILE | -ci=INDEX]
+                     [COMMAND]
     Universal emulation platform and framework
+          -cl, --computers-list
+                              list all existing virtual computers
       -h, --help              Show this help message and exit.
       -i, --input-file=FILE   input file name (source code)
-      -l, --list-computers    list all existing virtual computers
       -V, --version           Print version information and exit.
     Virtual computer
-      -c, --computer=NAME     virtual computer name (see -l for options)
           -cf, --computer-file=FILE
                               virtual computer configuration file
-          -cn, --computer-index=INDEX
-                              virtual computer index (see -l for options)
+          -ci, --computer-index=INDEX
+                              virtual computer index (see -cl for options)
+          -cn, --computer-name=NAME
+                              virtual computer name (see -cl for options)
     Commands:
       automation, auto  run emulation automation
 
