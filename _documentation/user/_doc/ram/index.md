@@ -29,7 +29,7 @@ the next "empty" symbol. The head can also never return to the previously writte
 Data memory - registers tape - represents the random-access memory. It consists of so-called registers, abstract cells
 with arbitrary size. These registers are ordered - each one has assigned the index - its position within the tape called
 the _address_. The tape head can move arbitrarily up and down - but it has its minimum position. It is the first
-register, _R~0~_, called the accumulator. Below there is an unlimited number of higher-positioned registers.
+register, _R<sub>0</sub>_, called the accumulator. Below there is an unlimited number of higher-positioned registers.
 
 The role of the accumulator is kind of special - it often acts as an implicit operand for many instructions, or implicit
 place for storing the result of such instructions.
