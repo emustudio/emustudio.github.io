@@ -138,6 +138,25 @@ table.
 |`:`           | 26     |`U`   | 53     |      |
 |---
 
+## Drawing message boxes
+
+Using some ASCII characters from [code page 437][cp437]{:target="_blank"}, it is possible to draw various kinds of forms, for example:
+
+```
+message:
+db 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 10, 13
+db 186, "Hello world!", 186, 10, 13
+db 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188
+db 0
+```
+
+shown as:
+
+![Hello in a message box]({{ site.baseurl }}/assets/altair8800/hello.png)
+
+This is supported only by the "original" font, even though these symbols were not really present in original
+terminal.
+
 ## Terminal Settings
 
 It is possible to configure the terminal either from GUI or manually modifying configuration settings. Modification of
@@ -181,3 +200,4 @@ The following table shows all the possible settings of ADM-3A plugin:
 [manual1]: http://www.mirrorservice.org/sites/www.bitsavers.org/pdf/learSiegler/ADM3A_Maint.pdf
 [manual2]: http://maben.homeip.net/static/s100/learSiegler/terminal/Lear%20Siegler%20ADM3A%20operators%20manual.pdf
 [gui]: https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg
+[cp437]: https://en.wikipedia.org/wiki/Code_page_437
