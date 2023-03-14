@@ -402,7 +402,7 @@ Tests commented out with `;x` don't work yet.
 
 Create new virtual computer, call it "ZX Spectrum":
 
-![Abstract schema of ZX Spectrum]({{ site.baseurl }}/assets/altair8800/zs-spectrum-schema.png){:style="max-width:555"}
+![Abstract schema of ZX Spectrum]({{ site.baseurl }}/assets/altair8800/zx-spectrum-schema.png){:style="max-width:555"}
 
 It is basically the same computer as Altair8800 with Z80, but instead of ADM-3A terminal it uses draft of 
 ZX-spectrum display. This device is not even documented, because it's not really ZX spectrum. It exists just to be able

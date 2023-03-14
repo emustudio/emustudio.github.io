@@ -9,7 +9,6 @@
     <span class="o">);</span>
 
     <span class="kd">private</span> <span class="nc">MemoryContext</span><span class="o">&lt;</span><span class="nc">Byte</span><span class="o">&gt;</span> <span class="n">memory</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">programLocation</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">CompilerImpl</span><span class="o">(</span><span class="kt">long</span> <span class="n">pluginID</span><span class="o">,</span> <span class="nc">ApplicationApi</span> <span class="n">applicationApi</span><span class="o">,</span> <span class="nc">PluginSettings</span> <span class="n">settings</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">(</span><span class="n">pluginID</span><span class="o">,</span> <span class="n">applicationApi</span><span class="o">,</span> <span class="n">settings</span><span class="o">);</span>
@@ -58,10 +57,10 @@
                 <span class="n">visitor</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">program</span><span class="o">);</span>
             <span class="o">}</span>
 
-            <span class="n">programLocation</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">program</span><span class="o">.</span><span class="na">env</span><span class="o">().</span><span class="na">hasNoErrors</span><span class="o">())</span> <span class="o">{</span>
                 <span class="n">hex</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">outputFileName</span><span class="o">);</span>
-                <span class="n">programLocation</span> <span class="o">=</span> <span class="n">hex</span><span class="o">.</span><span class="na">findProgramLocation</span><span class="o">();</span>
+                <span class="kt">int</span> <span class="n">programLocation</span> <span class="o">=</span> <span class="n">hex</span><span class="o">.</span><span class="na">findProgramLocation</span><span class="o">();</span>
+                <span class="n">applicationApi</span><span class="o">.</span><span class="na">setProgramLocation</span><span class="o">(</span><span class="n">programLocation</span><span class="o">);</span>
 
                 <span class="n">notifyInfo</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
                         <span class="s">"Compile was successful.\n\tOutput: %s\n\tProgram starts at 0x%s"</span><span class="o">,</span>
@@ -94,29 +93,17 @@
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span><span class="nc">String</span> <span class="n">inputFileName</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">outputFileName</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">inputFileName</span><span class="o">);</span>
-        <span class="nc">SourceFileExtension</span> <span class="n">srcExtension</span> <span class="o">=</span> <span class="no">SOURCE_FILE_EXTENSIONS</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-
-        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inputFileName</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(</span><span class="nc">Locale</span><span class="o">.</span><span class="na">ENGLISH</span><span class="o">).</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s">"."</span> <span class="o">+</span> <span class="n">srcExtension</span><span class="o">.</span><span class="na">getExtension</span><span class="o">());</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">outputFileName</span> <span class="o">=</span> <span class="n">outputFileName</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="nf">compile</span><span class="o">(</span><span class="n">inputFileName</span><span class="o">,</span> <span class="n">outputFileName</span> <span class="o">+</span> <span class="s">".hex"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">outputFileName</span> <span class="o">=</span> <span class="n">stripKnownExtension</span><span class="o">(</span><span class="n">inputFileName</span><span class="o">,</span> <span class="no">SOURCE_FILE_EXTENSIONS</span><span class="o">)</span> <span class="o">+</span> <span class="s">".hex"</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">compile</span><span class="o">(</span><span class="n">inputFileName</span><span class="o">,</span> <span class="n">outputFileName</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">LexicalAnalyzer</span> <span class="nf">createLexer</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">SampleLexer</span> <span class="n">lexer</span> <span class="o">=</span> <span class="n">createLexer</span><span class="o">(</span><span class="nc">CharStreams</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">LexicalAnalyzerImpl</span><span class="o">(</span><span class="n">lexer</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nc">LexicalAnalyzer</span> <span class="nf">createLexer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">LexicalAnalyzerImpl</span><span class="o">(</span><span class="n">createLexer</span><span class="o">(</span><span class="kc">null</span><span class="o">));</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getProgramLocation</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">programLocation</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">SourceFileExtension</span><span class="o">&gt;</span> <span class="nf">getSourceFileExtensions</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">FileExtension</span><span class="o">&gt;</span> <span class="nf">getSourceFileExtensions</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="no">SOURCE_FILE_EXTENSIONS</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -144,14 +131,16 @@
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div> <p>Main outcomes are:</p> <ul> <li>this sample compiler uses ANTLR parser generator for generating parser and lexer - they must be written manually</li> <li>it optionally loads program output into memory</li> <li>it generates output file in Intel HEX format</li> <li>AST (abstract syntax tree) in form of classes must be written manually</li> <li>All semantic-analysis visitors must be written manually, including code generation (this is probably the hardest compiler work)</li> </ul> <p>The compiler does not register any plugin context, but when initialized, it obtains optional memory context (in this example, memory must have cells of <code class="language-plaintext highlighter-rouge">Byte</code> type). If the memory is available, after compilation the program will be loaded in the memory.</p> <p>Lexer and parser are not shown here, but they are created using mentioned <a href="https://www.antlr.org/" target="_blank">ANTLR</a> parser generator. Please check out this nice <a href="https://tomassetti.me/antlr-mega-tutorial/" target="_blank">ANTLR tutorial</a>.</p> <p>The compiler utilizes a helper class <a href="/documentation/developer/emulib_javadoc/net/emustudio/emulib/runtime/helpers/IntelHEX.html" target="_blank">IntelHEX</a> from emuLib for generating output files.</p> <p>Abstract syntax tree is the most important part of the compiler. In general, the flow of transforming the source code into output is going through AST. In the beginning, AST is isomorphic to the parse tree. Then some transformations are applied - like expression evaluation, include files expansion, by-value identifiers replacements, intermediate code generation with relative addresses, macro expansion, preprocessor code evaluation, absolute address assignment and final transformation into binary code or whatever the compiler produces. So in time, AST changes, nodes are moved, replaced by others, or removed. At the final stage, AST represents program output.</p> <p>Transformations of AST is best done using visitors (see <a href="https://refactoring.guru/design-patterns/visitor" target="_blank">Visitor pattern</a>). A visitor is accepting some or all node types from the AST and performs changes to the nodes, or the whole AST. It’s a detached, isolated functionality operating on AST, which can be separately tested.</p> <p>For more information, see the code of some existing compilers.</p> <h2 id="lexical-analyzer"> <a href="#lexical-analyzer" class="anchor-heading" aria-labelledby="lexical-analyzer"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Lexical analyzer </h2> <p>emuStudio application uses standardized token types in order to support syntax highlighting in general, for any compiler kind. It is thus required to provide a lexer which returns emuStudio-like token types:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">LexicalAnalyzer</span> <span class="kd">extends</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">Token</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nc">Token</span> <span class="nf">nextToken</span><span class="o">();</span>
+    <span class="nc">Token</span> <span class="nf">next</span><span class="o">();</span>
 
-    <span class="kt">boolean</span> <span class="nf">isAtEOF</span><span class="o">();</span>
+    <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">();</span>
 
+    <span class="kt">void</span> <span class="nf">reset</span><span class="o">(</span><span class="nc">String</span> <span class="n">input</span><span class="o">);</span>
+    
     <span class="kt">void</span> <span class="nf">reset</span><span class="o">(</span><span class="nc">InputStream</span> <span class="n">is</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div> <p>The implementation is usually manual, tokens generated by ANTLR are converted into the standardized variants, e.g.:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LexicalAnalyzerImpl</span> <span class="kd">implements</span> <span class="nc">LexicalAnalyzer</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">tokenMap</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="nc">SampleLexer</span><span class="o">.</span><span class="na">EOL</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span> <span class="c1">// highest number</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">tokenMap</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="nc">SampleLexer</span><span class="o">.</span><span class="na">EOL</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span> <span class="c1">// EOL has the highest number in this case</span>
 
     <span class="kd">static</span> <span class="o">{</span> <span class="c1">// TODO: not complete</span>
         <span class="n">tokenMap</span><span class="o">[</span><span class="no">COMMENT</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Token</span><span class="o">.</span><span class="na">COMMENT</span><span class="o">;</span>
@@ -197,7 +186,7 @@
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">Token</span> <span class="nf">nextToken</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Token</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">org</span><span class="o">.</span><span class="na">antlr</span><span class="o">.</span><span class="na">v4</span><span class="o">.</span><span class="na">runtime</span><span class="o">.</span><span class="na">Token</span> <span class="n">token</span> <span class="o">=</span> <span class="n">lexer</span><span class="o">.</span><span class="na">nextToken</span><span class="o">();</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Token</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
@@ -218,14 +207,20 @@
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAtEOF</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">lexer</span><span class="o">.</span><span class="na">_hitEOF</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">!</span><span class="n">lexer</span><span class="o">.</span><span class="na">_hitEOF</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reset</span><span class="o">(</span><span class="nc">InputStream</span> <span class="n">inputStream</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
         <span class="n">lexer</span><span class="o">.</span><span class="na">setInputStream</span><span class="o">(</span><span class="nc">CharStreams</span><span class="o">.</span><span class="na">fromStream</span><span class="o">(</span><span class="n">inputStream</span><span class="o">));</span>
     <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reset</span><span class="o">(</span><span class="nc">String</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">lexer</span><span class="o">.</span><span class="na">setInputStream</span><span class="o">(</span><span class="nc">CharStreams</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="n">source</span><span class="o">));</span>
+    <span class="o">}</span>
+
 
     <span class="kd">private</span> <span class="kt">int</span> <span class="nf">convertLexerTokenType</span><span class="o">(</span><span class="kt">int</span> <span class="n">tokenType</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">tokenType</span> <span class="o">==</span> <span class="no">EOF</span><span class="o">)</span> <span class="o">{</span>
