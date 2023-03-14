@@ -17,7 +17,7 @@ without the need to care about specific manufacturer's hardware details.
 Firstly, it is useful to present Random Access Stored Program (RASP) machine's architecture -- it is schematically
 depicted in the following figure.
 
-![RASP architecture]({{ site.baseurl }}/assets/rasp/RASP.png)
+![RASP machine]({{ site.baseurl }}/assets/rasp/rasp-machine.svg){: width="65%"}
 
 As we can see, the control unit, i.e. processor, reads data from the input tape and writes results of executed
 operations onto the output tape. The tapes serve as a form of I/O devices. The two heads -- reading (R) and writing (W),

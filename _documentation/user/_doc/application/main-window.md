@@ -32,6 +32,7 @@ checked automatically, users must take care of this.
 
 The source code editor supports the following features:
 
+- fixed font: [Fira Code regular][fira-code]{:target="_blank"} (cannot be changed at the moment)
 - line numbering & syntax highlighting
 - undo/redo capability
 - search/replace text
@@ -142,3 +143,6 @@ the instructions list contains controls to control the instruction window pages.
 - *D*: Go to the page where the current instruction position is.
 - *E*: Go to the next page.
 - *F*: Go forwards. The user will specify the number of pages for going forward.
+
+
+[fira-code]: https://github.com/tonsky/FiraCode
