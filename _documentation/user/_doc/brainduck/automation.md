@@ -35,7 +35,7 @@ non-interactive mode, EOL may be of any-like type.
 
 Command line for starting non-interactive automatic emulation:
 
-    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b
+    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b auto
 
 - computer configuration named "BrainDuck", file `config/BrainDuck.toml`, will be loaded
 - input file for compiler is one of the examples
