@@ -10,7 +10,7 @@ permalink: /ssem/automation
 
 # Automation
 
-SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
+SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--no-gui`),
 the memory final "snapshot" along with additional information is written to a file named `ssem.out`.
 
 The file is overwritten after each emulation "stop".
@@ -19,30 +19,32 @@ The file is overwritten after each emulation "stop".
 
 The emulator automation can be run as follows:
 
-    ./emuStudio --config config/SSEMBaby.toml --nogui --auto --input examples/as-ssem/noodle-timer.ssem
+    ./emuStudio -cf config/SSEMBaby.toml --input-file examples/as-ssem/noodle-timer.ssem auto --no-gui
 
 - computer configuration `config/SSEMBaby.toml` will be loaded
-- input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be performed
-- (`--nogui`) non-interactive mode will be set
+- input file for compiler is one of the standard examples
+- (`auto`) automatic emulation will be executed
+- (`--no-gui`) non-interactive mode will be set
 
 The console will contain information about emulation progress:
 
 {:.code-example}
+
 ```
-[INFO] Loading virtual computer: config/SSEMBaby.toml
 [INFO] Starting emulation automation...
+[INFO] Emulating computer: SSEM (Baby)
 [INFO] Compiler: SSEM Assembler, version 0.41
 [INFO] CPU: SSEM CPU, version 0.41
-[INFO] Memory: SSEM memory (Williams-Kilburn Tube), version 0.41
+[INFO] Memory: SSEM memory (Williams–Kilburn Tube), version 0.41
 [INFO] Memory size: 128
 [INFO] Device: SSEM CRT display, version 0.41
 [INFO] Compiling input file: examples/as-ssem/noodle-timer.ssem
 [INFO] Compiler started working.
-[INFO] [Info   ] SSEM Assembler, version 0.41
-[INFO] [Info   ] Compile was successful (program starts at 0000). Output: /home/vbmacher/emuStudio/examples/as-ssem/noodle-timer.bin
+[INFO] [INFO   ] SSEM Assembler, version 0.41
+[INFO] [INFO   ] Compile was successful.
+	Output: /home/vbmacher/tmp/emuStudio-release/examples/as-ssem/noodle-timer.bssem
+	Program starts at 0x0000
 [INFO] Compilation finished.
-[INFO] Program start address: 0000h
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
@@ -53,6 +55,7 @@ The console will contain information about emulation progress:
 the emulation will run without user interaction, and file `ssem.out` will be created with the following content:
 
 {:.code-example}
+
 ```
 ACC=0x3bfffe2
 CI=0x58
@@ -89,5 +92,5 @@ CI=0x58
 28             *         * * *   *                                 
 29                                             *       * * * * * * 
 30   * * * *   * * * * *       *   * * * * * *         * * * * * * 
-31         *   * *   * *                                         * 
+31   *                                                           *
 ```
