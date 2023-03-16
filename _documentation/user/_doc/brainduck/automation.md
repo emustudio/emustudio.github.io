@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 7
 parent: BrainDuck
 permalink: /brainduck/automation
 ---
@@ -35,11 +35,11 @@ non-interactive mode, EOL may be of any-like type.
 
 Command line for starting non-interactive automatic emulation:
 
-    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b
+    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b auto --no-gui
 
 - computer configuration named "BrainDuck", file `config/BrainDuck.toml`, will be loaded
 - input file for compiler is one of the examples
-- (`auto`) automatic emulation will be performed
+- (`auto`) automatic emulation will be executed
 
 This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain
 additional information about the emulation progress:

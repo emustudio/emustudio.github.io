@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 10
+nav_order: 11
 parent: MITS Altair8800
 permalink: /altair8800/automation
 ---
@@ -32,11 +32,11 @@ NOTE: Do not forget to keep the last EOL character!
 
 The following command will emulate the computer and run "reverse text" program on it:
 
-    ./emuStudio -c "MITS Altair8800" -i examples/as-8080/reverse.asm auto --no-gui
+    ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui
 
 - computer configuration "MITS Altair8800" (file `config/MITSAltair8800.toml`) will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be performed
+- (`--auto`) automatic emulation will be executed
 - (`--no-gui`) non-interactive mode will be set
 
 After the program finishes, emuStudio is closed. The program output will be in the file `adm3A-terminal.out`:
@@ -52,25 +52,24 @@ Console will contain additional information about the emulation progress:
 
 {:.code-example}
 ```
-[INFO] Loading virtual computer: config/MITSAltair8800.toml
-[INFO] [device=LSI ADM-3A Terminal] Device was attached to 88-SIO
-[INFO] Processing input file: 'adm3A-terminal.in'; delay of chars read (ms): 0
+[INFO] [88-SIO, device=LSI ADM-3A terminal] Device was attached
 [INFO] Starting emulation automation...
+[INFO] Emulating computer: MITS Altair8800
 [INFO] Compiler: Intel 8080 Assembler, version 0.41
 [INFO] CPU: Intel 8080 CPU, version 0.41
 [INFO] Memory: Byte-cell based operating memory, version 0.41
 [INFO] Memory size: 65536
-[INFO] Device: MITS 88-DCDD device, version 0.41
-[INFO] Device: MITS 88-SIO serial board, version 0.41
+[INFO] Device: MITS 88-DCDD, version 0.41
+[INFO] Device: MITS 88-SIO, version 0.41
 [INFO] Device: LSI ADM-3A terminal, version 0.41
 [INFO] Compiling input file: examples/as-8080/reverse.asm
 [INFO] Compiler started working.
-[INFO] [Info   ] Intel 8080 Assembler, version 0.41
-[INFO] [Info   ] Compilation was successful.
- Output file: /home/vbmacher/emuStudio/examples/as-8080/reverse.hex
-[INFO] [Info   ] Compiled file was loaded into memory.
+[INFO] [INFO   ] Intel 8080 Assembler, version 0.41
+[INFO] [INFO   ] Compile was successful.
+	Output: /home/vbmacher/tmp/emuStudio-release/examples/as-8080/reverse.hex
+	Program starts at 0x03E8
+[INFO] [INFO   ] Compiled file was loaded into memory.
 [INFO] Compilation finished.
-[INFO] Program start address: 03E8h
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop

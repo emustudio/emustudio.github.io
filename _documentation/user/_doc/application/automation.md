@@ -30,27 +30,20 @@ More specific information about automation can be found in any section devoted t
 
 The example of running automatic emulation is as follows:
 
-    ./emuStudio --auto --nogui --config config/MITSAltair8800.toml --input example.asm --waitmax 5000
+    ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui --waitmax 5000
 
-Argument `--auto` turns on the automatic emulation. If no other argument is provided, emuStudio will start as usual by
-asking to open a virtual computer. But after this step it will run the emulation with the settings as they appear in the
-computer configuration file (no source code compilation is performed).
-
-The `--nogui` argument sets the non-interactive mode. In this case, we must provide a virtual computer in the command
-line (using `--config` argument).
-
-The `--config` argument loads specific computer configuration automatically, instead of asking the user to open a
+The `-cf` (or `--computer-file`) argument loads specific computer configuration instead of asking the user to open a
 computer.
 
-Argument `--input` provides the source code to be compiled and loaded into memory before the emulation is executed.
+Argument `--input-file` provides the source code to be compiled and loaded into memory before the emulation is executed.
+It compiles the file only in case automated emulation is executed (see below).
+
+Command `auto` executes automatic emulation. If no other argument is provided, emuStudio will start as usual by
+asking to open a virtual computer. If computer is provided, it is opened. If input-file is provided, it is loaded and
+compiled into memory. Then, if the automatic emulation is interactive, will open all device GUIs and executes CPU.
+
+The `--no-gui` argument sets the non-interactive mode. In this case, emuStudio won't show any GUI windows and the
+communication with I/O is done via files (see involved plugins documentation).
 
 Argument `--waitmax 5000` tells emuStudio that the emulation should not last for more than 5 seconds. If it didn't
 finish up to this deadline, it is forcibly stopped and marked as failed.
-
-## Analyzing the results
-
-An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default,
-each run of automatic emulation creates (overwrites) a log located in `logs/automation.log` file.
-
-The log file is in plaintext format and contains messages which appeared in the log during the emulation.
-The log file format can be customized, see [Logging]({{ site.baseurl }}/application/logging) section for more details. 
