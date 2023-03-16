@@ -26,8 +26,10 @@ on the `Open` button loads selected computer.
 
 ![Managing virtual computers]({{ site.baseurl}}/assets/application/open-computer-panel.png)
 
-- *A*: Adds new computer. The abstract schema editor will be opened.
-- *B*: Deletes selected computer. Be aware of what you are doing - the action cannot be undone.
-- *C*: Edits selected computer. The abstract schema editor will be opened.
-- *D*: Renames computer.
-- *E*: Saves the displayed abstract schema into image file.
+{: .list}
+| <span class="circle">1</span> | Adds new computer. The abstract schema editor will be opened.
+| <span class="circle">2</span> | Deletes selected computer. Be aware of what you are doing - the action cannot be undone.
+| <span class="circle">3</span> | Edits selected computer. The abstract schema editor will be opened.
+| <span class="circle">4</span> | Renames computer.
+| <span class="circle">5</span> | Saves the displayed abstract schema into image file.
+

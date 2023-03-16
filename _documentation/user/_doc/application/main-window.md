@@ -89,21 +89,18 @@ If you hover over those icons, a help text is displayed on how to use the icon.
 
 ![Debugger toolbar]({{ site.baseurl}}/assets/application/debugger-toolbar.png)
 
-- *A*: Reset emulation.
-- *B*: Set the next instruction position to 0. CPU will perform the next instruction from there.
-- *C*: Set the next instruction position to the `(current - 1)`. This action can completely change the displaying of
-  instructions since the new instruction position does not have to be correct in terms of executing the current program.
-- *D*: Stop emulation (which was either running or paused).
-- *E*: Pause emulation (which was running).
-- *F*: Run emulation (which was paused).
-- *G*: Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval.
-  A dialog will appear to enter the time interval.
-- *H*: Step emulation (which was paused). CPU will execute only one - the very next - instruction.
-- *I*: Jump to location. The user will manually specify a location (address in memory) for the next instruction to
-  execute.
-- *J*: Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches
-  the breakpoint, it will pause there, waiting for the next user action.
-- *K*: Show operating memory. If the memory plugin does not have a GUI, the icon is disabled.
+{: .list}
+| <span class="circle">1</span> | Reset emulation.
+| <span class="circle">2</span> | Set the next instruction position to 0. CPU will perform the next instruction from there.
+| <span class="circle">3</span> | Set the next instruction position to the `(current - 1)`. This action can completely change the displaying of instructions since the new instruction position does not have to be correct in terms of executing the current program.
+| <span class="circle">4</span> | Stop emulation (which was either running or paused).
+| <span class="circle">5</span> | Pause emulation (which was running).
+| <span class="circle">6</span> | Run emulation (which was paused).
+| <span class="circle">7</span> | Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval.
+| <span class="circle">8</span> | Step emulation (which was paused). CPU will execute only one - the very next - instruction.
+| <span class="circle">9</span> | Jump to location. The user will manually specify a location (address in memory) for the next instruction to execute.
+| <span class="circle">10</span> | Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches the breakpoint, it will pause there, waiting for the next user action.
+| <span class="circle">11</span> | Show operating memory. If the memory plugin does not have a GUI, the icon is disabled.
 
 #### List of instructions
 
@@ -137,12 +134,12 @@ the instructions list contains controls to control the instruction window pages.
 
 ![Controlling instructions window]({{ site.baseurl }}/assets/application/pages.png)
 
-- *A*: Go to the first page. The very first row corresponds to instruction position 0.
-- *B*: Go backward. The user will specify the number of pages for going back.
-- *C*: Go to the previous page.
-- *D*: Go to the page where the current instruction position is.
-- *E*: Go to the next page.
-- *F*: Go forwards. The user will specify the number of pages for going forward.
-
+{: .list}
+| <span class="circle">1</span> | Go to the first page. The very first row corresponds to instruction position 0.
+| <span class="circle">2</span> | Go backward. The user will specify the number of pages for going back.
+| <span class="circle">3</span> | Go to the previous page.
+| <span class="circle">4</span> | Go to the page where the current instruction position is.
+| <span class="circle">5</span> | Go to the next page.
+| <span class="circle">6</span> | Go forwards. The user will specify the number of pages for going forward.
 
 [fira-code]: https://github.com/tonsky/FiraCode

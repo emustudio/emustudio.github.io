@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 7
 parent: BrainDuck
 permalink: /brainduck/automation
 ---

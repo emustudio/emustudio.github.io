@@ -20,21 +20,17 @@ Description of the control panel follows.
 
 ![Control panel in the computer schema editor]({{ site.baseurl }}/assets/application/schema-editor-panel.png)
 
-- *A*: Save the virtual computer.
-- *B*: Select a compiler.
-- *C*: Select a CPU.
-- *D*: Select a memory.
-- *E*: Select a device.
-- *F*: Use a connection line. The line is bidirectional by default.
-- *G*: Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is
-  the first clicked element and the target direction is the second clicked element.
-- *H*: Remove an element from the schema.
-- *I*: This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons
-  `B`, `C`, `D`, and `E`. Those names are plugin JAR file names.
-- *J*: Use / do not use a grid in the editor. Elements are "snapped" to the grid if it is used, and it's easier to draw
-  the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in
-  the
-  configuration file of the edited computer.
+{: .list}
+| <span class="circle">1</span> | Save the virtual computer.
+| <span class="circle">2</span> | Select a compiler.
+| <span class="circle">3</span> | Select a CPU.
+| <span class="circle">4</span> | Select a memory.
+| <span class="circle">5</span> | Select a device.
+| <span class="circle">6</span> | Use a connection line. The line is bidirectional by default.
+| <span class="circle">7</span> | Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element.
+| <span class="circle">8</span> | Remove an element from the schema.
+| <span class="circle">9</span> | This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons `2`, `3`, `4`, and `5`. The names are actually plugin JAR file names.
+| <span class="circle">10</span> | Use / do not use a grid in the editor. Elements are "snapped" to the grid if it is used, and it's easier to draw the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in the configuration file of the edited computer.
 
 Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have
 a CPU and memory. Optionally one or more devices, and optionally a compiler.

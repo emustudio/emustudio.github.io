@@ -415,351 +415,351 @@
   },"69": {
     "doc": "Automation",
     "title": "Example",
-    "content": "The example of running automatic emulation is as follows: ./emuStudio --auto --nogui --config config/MITSAltair8800.toml --input example.asm --waitmax 5000 . Argument --auto turns on the automatic emulation. If no other argument is provided, emuStudio will start as usual by asking to open a virtual computer. But after this step it will run the emulation with the settings as they appear in the computer configuration file (no source code compilation is performed). The --nogui argument sets the non-interactive mode. In this case, we must provide a virtual computer in the command line (using --config argument). The --config argument loads specific computer configuration automatically, instead of asking the user to open a computer. Argument --input provides the source code to be compiled and loaded into memory before the emulation is executed. Argument --waitmax 5000 tells emuStudio that the emulation should not last for more than 5 seconds. If it didn’t finish up to this deadline, it is forcibly stopped and marked as failed. ",
+    "content": "The example of running automatic emulation is as follows: ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui --waitmax 5000 . The -cf (or --computer-file) argument loads specific computer configuration instead of asking the user to open a computer. Argument --input-file provides the source code to be compiled and loaded into memory before the emulation is executed. It compiles the file only in case automated emulation is executed (see below). Command auto executes automatic emulation. If no other argument is provided, emuStudio will start as usual by asking to open a virtual computer. If computer is provided, it is opened. If input-file is provided, it is loaded and compiled into memory. Then, if the automatic emulation is interactive, will open all device GUIs and executes CPU. The --no-gui argument sets the non-interactive mode. In this case, emuStudio won’t show any GUI windows and the communication with I/O is done via files (see involved plugins documentation). Argument --waitmax 5000 tells emuStudio that the emulation should not last for more than 5 seconds. If it didn’t finish up to this deadline, it is forcibly stopped and marked as failed. ",
     "url": "/documentation/user/application/automation#example",
     "relUrl": "/application/automation#example"
   },"70": {
-    "doc": "Automation",
-    "title": "Analyzing the results",
-    "content": "An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default, each run of automatic emulation creates (overwrites) a log located in logs/automation.log file. The log file is in plaintext format and contains messages which appeared in the log during the emulation. The log file format can be customized, see Logging section for more details. ",
-    "url": "/documentation/user/application/automation#analyzing-the-results",
-    "relUrl": "/application/automation#analyzing-the-results"
-  },"71": {
     "doc": "Automation",
     "title": "Automation",
     "content": " ",
     "url": "/documentation/user/application/automation",
     "relUrl": "/application/automation"
-  },"72": {
+  },"71": {
     "doc": "Automation",
     "title": "Automation",
     "content": "BrainDuck computer is capable of running automatic emulation. Automation can operate in the interactive or non-interactive mode. ",
     "url": "/documentation/user/brainduck/automation#automation",
     "relUrl": "/brainduck/automation#automation"
-  },"73": {
+  },"72": {
     "doc": "Automation",
     "title": "Non-interactive mode",
     "content": "If a --no-gui flag is set, the input and output will be redirected to files, instead of terminal GUI. Default input file is called vt100-terminal.in and must be placed in the directory from which emuStudio was executed. If the file does not exist, emuStudio will not run. Default output file is called vt100-terminal.out and it will be created automatically or appended when it exists in the location from which emuStudio was executed. The input/output file names are configurable, please refer to VT100 terminal documentation. ",
     "url": "/documentation/user/brainduck/automation#non-interactive-mode",
     "relUrl": "/brainduck/automation#non-interactive-mode"
-  },"74": {
+  },"73": {
     "doc": "Automation",
     "title": "Be careful of EOLs",
     "content": "Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII code 10. plugin vt100-terminal interprets ENTER key in the interactive mode as Unix-like EOL. In the non-interactive mode, EOL may be of any-like type. ",
     "url": "/documentation/user/brainduck/automation#be-careful-of-eols",
     "relUrl": "/brainduck/automation#be-careful-of-eols"
-  },"75": {
+  },"74": {
     "doc": "Automation",
     "title": "Example",
     "content": "Command line for starting non-interactive automatic emulation: ./emuStudio -cn \"BrainDuck\" -i examples/brainc-brainduck/mandelbrot.b auto --no-gui . | computer configuration named “BrainDuck”, file config/BrainDuck.toml, will be loaded | input file for compiler is one of the examples | (auto) automatic emulation will be executed | . This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain additional information about the emulation progress: . [INFO] Starting emulation automation... [INFO] Compiler: BrainDuck Compiler, version 0.41 [INFO] CPU: BrainDuck CPU, version 0.41 [INFO] Memory: Byte-cell based operating memory, version 0.41 [INFO] Memory size: 65536 [INFO] Device: VT100 Terminal, version 0.41 [INFO] Compiling input file: examples/brainc-brainduck/mandelbrot.b [INFO] Compiler started working. [INFO] [Info ] BrainDuck Compiler, version 0.41 [INFO] [Info ] Compile was successful. Output: /home/vbmacher/emuStudio/examples/brainc-brainduck/mandelbrot.hex [INFO] [Info ] Compiled file was loaded into operating memory. [INFO] Compilation finished. [INFO] Program start address: 0000h [INFO] Resetting CPU... [INFO] Running emulation... [INFO] Normal stop [INFO] Instruction location = 2CBCh [INFO] Emulation completed . ",
     "url": "/documentation/user/brainduck/automation#example",
     "relUrl": "/brainduck/automation#example"
-  },"76": {
+  },"75": {
     "doc": "Automation",
     "title": "Automation",
     "content": " ",
     "url": "/documentation/user/brainduck/automation",
     "relUrl": "/brainduck/automation"
-  },"77": {
+  },"76": {
     "doc": "Automation",
     "title": "Automation",
     "content": "RAM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (--no-gui), each abstract tape is redirected to a file. The format of the files is described in abstract tape documentation. ",
     "url": "/documentation/user/ram/automation#automation",
     "relUrl": "/ram/automation#automation"
-  },"78": {
+  },"77": {
     "doc": "Automation",
     "title": "Example",
     "content": "Command line for starting non-interactive automatic emulation: ./emuStudio -cf config/RandomAccessMachineRAM.toml --input-file examples/ramc-ram/factorial.ram auto --no-gui . | computer config/RandomAccessMachineRAM.toml will be loaded | input file for compiler is one of the standard examples | (auto) automatic emulation will be executed | (--no-gui) non-interactive mode will be set | . After the run, the following output on the stdout can be expected: . [INFO] Starting logging symbols changes to a file: storage.out [INFO] Starting logging symbols changes to a file: input_tape.out [INFO] Starting logging symbols changes to a file: output_tape.out [INFO] Starting emulation automation... [INFO] Emulating computer: Random Access Machine (RAM) [INFO] Compiler: RAM Machine Assembler, version 0.41 [INFO] CPU: Random Access Machine (RAM), version 0.41 [INFO] Memory: RAM Program Tape, version 0.41-SNAPSHOT [INFO] Memory size: 0 [INFO] Device: Storage, version 0.41 [INFO] Device: Input tape, version 0.41 [INFO] Device: Output tape, version 0.41 [INFO] Compiling input file: examples/ramc-ram/factorial.ram [INFO] Compiler started working. [INFO] [INFO ] RAM Machine Assembler, version 0.41 [INFO] [INFO ] Compile was successful. Output: /home/vbmacher/tmp/emuStudio-release/examples/ramc-ram/factorial.bram [INFO] [INFO ] Compiled file was loaded into program memory. [INFO] Compilation finished. [INFO] Resetting CPU... [INFO] Running emulation... [INFO] Normal stop [INFO] Instruction location = 0011h [INFO] Emulation completed . Then, in the current working directory, there will be created three new files: . | input_tape.out: contains all input tape symbols | storage.out: contains log of register tape changes during emulation | output_tape.out: contains all output tape symbols | . Content of each file is a human-readable text file, but also parseable by computer. Every row has format: . position symbol . where position is zero-based index of a symbol on particular tape, and symbol is the symbol on that position. Abstract tapes of RAM machine are left-bounded, therefore all positions start at 0. ",
     "url": "/documentation/user/ram/automation#example",
     "relUrl": "/ram/automation#example"
-  },"79": {
+  },"78": {
     "doc": "Automation",
     "title": "Automation",
     "content": " ",
     "url": "/documentation/user/ram/automation",
     "relUrl": "/ram/automation"
-  },"80": {
+  },"79": {
     "doc": "Automation",
     "title": "Automation",
     "content": "RASP computer will recognize if automatic emulation is executed. In the case of non-interactive mode (--nogui), each abstract tape is redirected to a file. The format of the files is described in abstract tape documentation. ",
     "url": "/documentation/user/rasp/automation#automation",
     "relUrl": "/rasp/automation#automation"
-  },"81": {
+  },"80": {
     "doc": "Automation",
     "title": "Example",
     "content": "Command line for starting non-interactive automatic emulation: ./emuStudio -cf config/RandomAccessStoredProgramRASP.toml --input-file examples/raspc-rasp/factorial.rasp auto --no-gui . | configuration config/RandomAccessStoredProgramRASP.toml will be loaded | input file for compiler is one of the standard examples | (auto) automatic emulation will be executed | (--no-gui) non-interactive mode will be set | . After the run, the following output on the stdout can be expected: . [INFO] Starting logging symbols changes to a file: input_tape.out [INFO] Starting logging symbols changes to a file: output_tape.out [INFO] Starting emulation automation... [INFO] Emulating computer: Random-Access Stored Program (RASP) [INFO] Compiler: RASP Machine Assembler, version 0.41 [INFO] CPU: Random Access Stored Program (RASP), version 0.41 [INFO] Memory: RASP Memory, version 0.41 [INFO] Memory size: 0 [INFO] Device: Input tape, version 0.41 [INFO] Device: Output tape, version 0.41 [INFO] Compiling input file: examples/raspc-rasp/factorial.rasp [INFO] Compiler started working. [INFO] [INFO ] RASP Machine Assembler, version 0.41 [INFO] [INFO ] Compile was successful. Output: /home/vbmacher/tmp/emuStudio-release/examples/raspc-rasp/factorial.brasp Program starts at 0x0014 [INFO] [INFO ] Compiled file was loaded into program memory. [INFO] Compilation finished. [INFO] Resetting CPU... [INFO] Running emulation... [INFO] Normal stop [INFO] Instruction location = 0037h [INFO] Emulation completed . Then, in the current working directory, there will be created three new files: . | input_tape.out: contains all input tape symbols | output_tape.out: contains all output tape symbols | . Content of each file is a human-readable text file, but also parseable by computer. Every row has format: . position symbol . where position is zero-based index of a symbol on particular tape, and symbol is the symbol on that position. Abstract tapes of RASP machine are left-bounded, therefore all positions start at 0. ",
     "url": "/documentation/user/rasp/automation#example",
     "relUrl": "/rasp/automation#example"
-  },"82": {
+  },"81": {
     "doc": "Automation",
     "title": "Automation",
     "content": " ",
     "url": "/documentation/user/rasp/automation",
     "relUrl": "/rasp/automation"
-  },"83": {
+  },"82": {
     "doc": "Automation",
     "title": "Automation",
     "content": "SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (--no-gui), the memory final “snapshot” along with additional information is written to a file named ssem.out. The file is overwritten after each emulation “stop”. ",
     "url": "/documentation/user/ssem/automation#automation",
     "relUrl": "/ssem/automation#automation"
-  },"84": {
+  },"83": {
     "doc": "Automation",
     "title": "Example",
     "content": "The emulator automation can be run as follows: ./emuStudio -cf config/SSEMBaby.toml --input-file examples/as-ssem/noodle-timer.ssem auto --no-gui . | computer configuration config/SSEMBaby.toml will be loaded | input file for compiler is one of the standard examples | (auto) automatic emulation will be executed | (--no-gui) non-interactive mode will be set | . The console will contain information about emulation progress: . [INFO] Starting emulation automation... [INFO] Emulating computer: SSEM (Baby) [INFO] Compiler: SSEM Assembler, version 0.41 [INFO] CPU: SSEM CPU, version 0.41 [INFO] Memory: SSEM memory (Williams–Kilburn Tube), version 0.41 [INFO] Memory size: 128 [INFO] Device: SSEM CRT display, version 0.41 [INFO] Compiling input file: examples/as-ssem/noodle-timer.ssem [INFO] Compiler started working. [INFO] [INFO ] SSEM Assembler, version 0.41 [INFO] [INFO ] Compile was successful. Output: /home/vbmacher/tmp/emuStudio-release/examples/as-ssem/noodle-timer.bssem Program starts at 0x0000 [INFO] Compilation finished. [INFO] Resetting CPU... [INFO] Running emulation... [INFO] Normal stop [INFO] Instruction location = 005Ch [INFO] Emulation completed . the emulation will run without user interaction, and file ssem.out will be created with the following content: . ACC=0x3bfffe2 CI=0x58 L L L L L 5 6 7 8 9 0 1 2 I I I 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 00 01 * * * * * * * * * * * * * * * * * * * * * * 02 * * * * * * * * * * 03 * * * * * * * * * 04 * * * * * * * * * * 05 * * * * * * * * * * 06 * * * * * * * * * * * * * 07 * * * * * * * * * * 08 * * * * * * * 09 * * * * * * * * * * * * * * * * * * 10 * * * * * * * 11 * * * * * * * * * * * 12 * * * * * * * * * * * * * 13 * * * * * * * * * * * * * * * 14 * * * * * * * * * * 15 * * * * * * 16 * * * * * * * * * * * * * * 17 * * * * * * * * * * * * * * * * * * * * * 18 * * * * * * * * * * * * * 19 * * * * * * * 20 * * * * * * * * * * * * * 21 * * * * * * * * * * * * 22 * * * * * * * * * * * 23 * * * * * * 24 * * * * * * 25 * * * * * * * * * * * * * * * * 26 * * 27 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 28 * * * * * 29 * * * * * * * 30 * * * * * * * * * * * * * * * * * * * * * * 31 * * . ",
     "url": "/documentation/user/ssem/automation#example",
     "relUrl": "/ssem/automation#example"
-  },"85": {
+  },"84": {
     "doc": "Automation",
     "title": "Automation",
     "content": " ",
     "url": "/documentation/user/ssem/automation",
     "relUrl": "/ssem/automation"
-  },"86": {
+  },"85": {
     "doc": "Compiler \"brainc-brainduck\"",
     "title": "Compiler “brainc-brainduck”",
     "content": "BrainDuck compiler is used as a part of BrainDuck computer, which acts as a translator of brainfuck “human-readable” language into binary form, used by BrainDuck CPU. Those instructions and their binary codes have no relation with brainfuck itself, therefore the computer is not called brainfuck computer, because it is not brainfuck. But it does not mean you cannot write and run brainfuck programs in it :) . At first, each compiler, including BrainDuck compiler, provides a lexical analyzer for help with tokenizing the source code, used in syntax highlighting. Secondly, the compiler compiles the source code into other (usually binary) form which is then understood by CPU. Compilation takes part by user request (clicking on ‘compile’ icon in the main window). After compilation is successful, the compiler usually loads the translated program into operating memory and saves the translation into a file. So it is with BrainDuck compiler. Files have .hex extension (format is called Intel HEX). ",
     "url": "/documentation/user/brainduck/compiler#compiler-brainc-brainduck",
     "relUrl": "/brainduck/compiler#compiler-brainc-brainduck"
-  },"87": {
+  },"86": {
     "doc": "Compiler \"brainc-brainduck\"",
     "title": "Language Syntax",
     "content": "The language of BrainDuck compiler is almost identical to the original brainfuck. However, brainfuck interpreter is not specified well-enough, so there are open questions on how to treat with some special situations, which are described below. Generally, the language knows eight instructions. They are best described when they are compared with C language equivalent. Brainfuck uses only a single data pointer called P, pointing to bounded memory. The boundary is specified in brainduck-mem plugin. NOTE: BrainDuck architecture conforms to the true von-Neumann model, instead of classic Harvard-style interpreters. It means that program memory and data memory are not separated. The data pointer is therefore not initialized to 0 as programmers might expect and potentially there can be written brainfuck programs with self-modifications. | Brainfuck instruction | C language equivalent | . | &gt; | P++ | . | &lt; | P-- | . | + | ++*P | . | - | --*P | . | , | *P = getchar() | . | . | putchar(*P); | . | [ | while (*P) { | . | ] | } | . The compiler is supplied with many example programs written in brainfuck. ",
     "url": "/documentation/user/brainduck/compiler#language-syntax",
     "relUrl": "/brainduck/compiler#language-syntax"
-  },"88": {
+  },"87": {
     "doc": "Compiler \"brainc-brainduck\"",
     "title": "Additional details",
     "content": "Specification of brainfuck language or interpreter implementation is not complete. There are left some details which might be solved differently in different implementations. In this version of BrainDuck implementation in emuStudio, the details are hardcoded, as described below. Comments . The compiler considers a comment being everything that is not a brainfuck instruction. From the first occurrence of the unknown character, everything to the end of the line is treated as a comment. Exceptions are whitespaces, tabulators, and newlines. This practically means that it is impossible to write brainfuck program with syntax errors. In the following example, everything starting with # is treated as a comment, up to the end of the line. ++++[-] # Useless program in brainfuck. [-] clears the content of the memory cell. Cell size . A memory cell has 8-bits (cells are bytes). Memory size . Memory size is defined in byte-mem plugin. In this version of emuStudio, it is 65536 bytes. End-of-line code . EOL is defined in vt100-terminal plugin. In the current version of emuStudio, it is a Newline character with ASCII code 10. End-of-file behavior . EOF is defined in brainduck-cpu and vt100-terminal plugins. In the current version of emuStudio, the current cell (where P is pointing at) is changed to value 0. This is not how original brainfuck behaves, which does not change the cell on EOF. ",
     "url": "/documentation/user/brainduck/compiler#additional-details",
     "relUrl": "/brainduck/compiler#additional-details"
-  },"89": {
+  },"88": {
     "doc": "Compiler \"brainc-brainduck\"",
     "title": "Compiler \"brainc-brainduck\"",
     "content": " ",
     "url": "/documentation/user/brainduck/compiler",
     "relUrl": "/brainduck/compiler"
-  },"90": {
+  },"89": {
     "doc": "CPU \"brainduck-cpu\"",
     "title": "CPU “brainduck-cpu”",
     "content": "BrainDuck CPU is used as a part of BrainDuck computer, which acts as the interpreter of BrainDuck instructions. Those instructions correspond with brainfuck language. The program which is going to be executed is read from the operating memory, so the CPU must be connected with memory (byte-mem) to work properly. Also, optionally (but commonly) it should be connected with I/O device (vt100-terminal), so input/output can be received/send from/to the device. Only one device can be used. The CPU provides a basic user interface in the form of the status panel, which is visible in the emulator panel in the main window. Breakpoints are supported, so as “jump” to a specific location (which might be dangerous to use). ",
     "url": "/documentation/user/brainduck/cpu#cpu-brainduck-cpu",
     "relUrl": "/brainduck/cpu#cpu-brainduck-cpu"
-  },"91": {
+  },"90": {
     "doc": "CPU \"brainduck-cpu\"",
     "title": "Status panel",
     "content": "In the following image, you can see the status panel of brainduck-cpu. It is split into three parts. Within the ‘Internal status’ part, there is shown content of registers IP and P. Register IP does not have a counterpart in brainfuck. IP stands for “instruction pointer”. The content is pointing at the next instruction being executed. Register P is commonly known from brainfuck. It is a pointer to data. There is the measured execution time, which is reset when the user starts the program and stopped when either the program stops or the user stops it. Loop level shows the depth level of brainfuck loop the program is in. For example, if instruction pointer points into the middle of the program [[-]], to the - instruction, the loop level is 2. ",
     "url": "/documentation/user/brainduck/cpu#status-panel",
     "relUrl": "/brainduck/cpu#status-panel"
-  },"92": {
+  },"91": {
     "doc": "CPU \"brainduck-cpu\"",
     "title": "Running brainfuck programs",
     "content": "It is very important to reset the CPU after each source code compilation. The reason is that after compilation register P is not changed. It therefore might point somewhere into compiled code in the memory. If the program was executed, changes in data would corrupt the program itself. Resetting CPU would move the P register after the first occurrence of a memory cell with value 0. The value 0 in BrainDuck CPU represents halt instruction, which corresponds to EOF in brainfuck. ",
     "url": "/documentation/user/brainduck/cpu#running-brainfuck-programs",
     "relUrl": "/brainduck/cpu#running-brainfuck-programs"
-  },"93": {
+  },"92": {
     "doc": "CPU \"brainduck-cpu\"",
     "title": "CPU \"brainduck-cpu\"",
     "content": " ",
     "url": "/documentation/user/brainduck/cpu",
     "relUrl": "/brainduck/cpu"
-  },"94": {
+  },"93": {
     "doc": "Memory \"byte-mem\"",
     "title": "Operating memory “byte-mem”",
     "content": "This plugin emulates an operating memory with various features. It can be used for any virtual computer which can benefit from the following basic properties: . | A memory cell has a size of 1 byte (8 bits) | Memory cells are linearly ordered (sequential) | Each memory cell is accessible by a unique address, representing the index of the memory cell if the memory is imagined as an array of cells | . Besides, the memory supports these additional features: . | Setting up ROM (read-only memory) ranges | Changing memory size; by default it is 64kB | Support of bank switching | . There are also some “interactive” features: . | Manual loading/saving memory images in either binary or Intel HEX format | Ability to automatically load a memory image at startup | Intuitive control using keystrokes, and nice visual presentation of the data | . This operating memory is (for now) used only in an 8-bit emulator of MITS Altair8800. However, it is possible to develop an emulator that can benefit from it. ",
     "url": "/documentation/user/altair8800/byte-mem#operating-memory-byte-mem",
     "relUrl": "/altair8800/byte-mem#operating-memory-byte-mem"
-  },"95": {
+  },"94": {
     "doc": "Memory \"byte-mem\"",
     "title": "GUI overview",
     "content": "To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator panel. The window is shown, as in the following image: . | 1 | Open a memory image. Current memory content which does not overlap with the loaded data will be kept. | . | 2 | Dump (save) whole memory content into a file. | . | 3 | Go to address. The address can be either in decimal, hexadecimal (prefix 0x) or octal (prefix 0) format. | . | 4 | Find a sequence. A dialog shows up where user can find either a plain text or sequence of bytes in the memory. | . | 5 | Toggle ASCII mode (ASCII mode means to render characters instead of character codes) | . | 6 | Erases all memory content. | . | 7 | Shows memory settings | . | 8 | By double-clicking on a memory cell it is possible to edit it and change its value. The value can be either in decimal, hexadecimal (prefix 0x) or octal (prefix 0) format. | . | 9 | Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large, so it is split into pages. This split is just visual. | . | 10 | If the memory has set up memory banks, it is possible to change the view to different bank. Switching in here has no effect on the emulator and on the active bank. | . | 11 | Displays the data of the selected cell in various formats. | . Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other letter/number key, a small text field appears allowing to edit the current value. When editing is finished, the user can press ENTER key to confirm it, or ESC key to discard the editing. ",
     "url": "/documentation/user/altair8800/byte-mem#gui-overview",
     "relUrl": "/altair8800/byte-mem#gui-overview"
-  },"96": {
+  },"95": {
     "doc": "Memory \"byte-mem\"",
     "title": "Memory settings",
     "content": "Settings window can be opened by clicking on “settings” icon in the main GUI window: . | 1 | Settings for memory bank-switching | . | 2 | Settings for ROM areas | . | 3 | If checked, settings for ROM areas will be saved to the configuration file | . | 4 | List of memory images which will be loaded at startup | . | 5 | The button will save and apply the settings | . ROM areas . Some computers or modern “controllers” organize memory into logical areas, some of which could be physically mapped to a read-only memory loaded with a firmware, or a game (e.g. in a “cartridge”). These memories are wired to specific addresses, so the programmer can access them as if they were part of operating memory. The byte-mem plugin emulates this behavior. It allows to define ROM areas that represent read-only memory. There can be set up multiple ROM areas, and they can overlap. Effectively it means that memory cells in the ROM area cannot be changed from software running on the emulator. All writes to the memory will be ignored. Manually, as a user, it is possible to change the values, but only by loading a new memory image. Editing a value will not work. If a ROM range is defined, it is possible to “remove” only a part of it, effectively splitting the range and correcting their boundaries. For example, if there is defined a ROM range from 0x0A - 0x64, then it is possible to remove a range e.g. 0x32 - 0x46, which is the part of defined ROM area. Then, the original ROM area is split into two parts - first will be a range from 0x0A - 0x31, and the second from 0x47 - 0x64. Memory bank-switching . This technique was invented as a workaround for a problem when the address space of a processor was smaller than memory size. To overcome this issue, memory was logically split into many regions of size equal to the processor address space. These regions are called “banks”. Physically, banks could refer to the same memory, but they could be also different storages (e.g. external cartridges), and the bank-switching involved switching the active memory. Selecting a bank from a programming perspective was usually done by writing some code to some I/O port using some I/O instruction of a CPU (controlled by a specialized chip). But it can be implemented in various ways, e.g. some memory addresses can be used for selecting a bank. Also, it was very common that some part of the address space still kept some common memory part which was never switched out. This part is called a “common” part. In emuStudio, common part starts with the Common address (as it can be seen in the Settings dialog image above) and ends till the rest of the CPU address space (or memory end). To summarize, let’s consider an example. If a CPU is 8-bit, it means it has address space of size 2^8 - i.e. it can access memory from address 0 to (2^8 - 1). If the memory was larger, CPU just doesn’t allow to access higher memory cells. So memory bank-switching is coming for the rescue. If the memory has 2 MB, we require 2^log2(2MB) = 2^21 addresses. So, if we won’t have any common address space, we require ceil(21 / 8) = 3 banks: . | bank 0: maps from 0 - (2^8 - 1) | bank 1: maps from 2^8 - (2^16 - 1) | bank 2: maps from 2^16 - (2^21 - 1) | . ",
     "url": "/documentation/user/altair8800/byte-mem#memory-settings",
     "relUrl": "/altair8800/byte-mem#memory-settings"
-  },"97": {
+  },"96": {
     "doc": "Memory \"byte-mem\"",
     "title": "Configuration file",
     "content": "The following table shows all the possible settings of byte-mem plugin: . | Name | Default value | Valid values | Description | . | banksCount | 0 | &gt;= 0 | Number of memory banks | . | commonBoundary | 0 | &gt;= 0 and &lt; mem size | Address from which the banks are shared | . | memorySize | 65536 | &gt; 0 | Memory size in bytes | . | ROMfrom(i) | N/A | &gt;= 0 and &lt; mem size | Start of the i-th ROM area | . | ROMto(i) | N/A | &gt;= ROMfrom(i) and &lt; mem size | End of the i-th ROM area | . | imageName(i) | N/A | file path | The i-th memory image file name. If it ends with .hex suffix, it will be loaded as Intel HEX format, otherwise as binary | . | imageAddress(i) | N/A | &gt;= 0 and &lt; mem size | The i-th memory image load address | . ",
     "url": "/documentation/user/altair8800/byte-mem#configuration-file",
     "relUrl": "/altair8800/byte-mem#configuration-file"
-  },"98": {
+  },"97": {
     "doc": "Memory \"byte-mem\"",
     "title": "Using memory in custom computers",
     "content": "This section is for developers of emulators. If you do not plan to create custom virtual computers, you can safely skip this section. To get started with developing plugins for emuStudio, please read developer documentation. As it was mentioned in the earlier sections, the byte-mem plugin can be used in other computers, too. Besides standard operations which are provided by net.emustudio.emulib.plugins.memory.MemoryContext interface, it provides custom context API, enabling to use more features - e.g. bank-switching. You can obtain the context in Plugin.initialize() method. The context is named net.emustudio.plugins.memory.bytemem.api.ByteMemoryContext: ... public void initialize(SettingsManager settings){ ByteMemoryContext mem=contextPoolImpl.getMemoryContext(pluginID,ByteMemoryContext.class); ... } . The memory context has the following content: . package net.emustudio.plugins.memory.bytemem.api; import net.emustudio.emulib.plugins.annotations.PluginContext; import net.emustudio.emulib.plugins.memory.MemoryContext; import java.util.List; /** * \"Byte\" memory context. * &lt;p&gt; * Supports bank switching, ROM ranges, and loading HEX/BIN files. */ @SuppressWarnings(\"unused\") @PluginContext(id = \"Byte memory\") public interface ByteMemoryContext extends MemoryContext&lt;Byte&gt; { /** * Determine whether specified memory position is read-only. * * @param address memory position * @return true if the memory position is read only, false otherwise */ boolean isReadOnly(int address); /** * Get list of ranges of read-only addresses. * * @return list of ROM memory addresses */ List&lt;? extends AddressRange&gt; getReadOnly(); /** * Set specified memory range as ROM (Read Only Memory). * * @param range address range */ void setReadOnly(AddressRange range); /** * Set specified memory range as RAM (Random Access Memory). * * @param range address range */ void setReadWrite(AddressRange range); /** * Get number of available memory banks. * * @return count of memory banks */ int getBanksCount(); /** * Get index of the selected memory bank. * * @return index of active (selected) memory bank */ int getSelectedBank(); /** * Select (set as active) a memory bank. * * @param bankIndex index (number) of a bank which should be selected */ void selectBank(int bankIndex); /** * Return an address in the memory which represents a boundary from which * the memory banks have the same content. Before this address all banks * can have different content. * * @return common boundary address */ int getCommonBoundary(); /** * Returns raw memory represented by Java array. * &lt;p&gt; * Memory notifications must be handled manually if this array changes. * * @return raw memory */ Byte[][] getRawMemory(); /** * This interface represents a range of addresses in the memory. */ interface AddressRange { int getStartAddress(); int getStopAddress(); } } . ",
     "url": "/documentation/user/altair8800/byte-mem#using-memory-in-custom-computers",
     "relUrl": "/altair8800/byte-mem#using-memory-in-custom-computers"
-  },"99": {
+  },"98": {
     "doc": "Memory \"byte-mem\"",
     "title": "Memory \"byte-mem\"",
     "content": " ",
     "url": "/documentation/user/altair8800/byte-mem",
     "relUrl": "/altair8800/byte-mem"
-  },"100": {
+  },"99": {
     "doc": "Configuration file",
     "title": "Configuration file",
     "content": "emuStudio uses a configuration file called emuStudio.toml. It can be found in the root directory of emuStudio installation. The file is loaded just once on startup. It can be overwritten by emuStudio while running. The following table describes possible configuration options. | Configuration key | Possible values | Default value | Description | . | useSchemaGrid | true / false | true | Whether to show and use grid when editing computer configuration | . | schemaGridGap | positive integer | 20 | Gap between grid points in pixels | . | lookAndFeel | quoted string | “com.sun.java.swing.plaf.gtk.GTKLookAndFeel” | Java Look&amp;Feel used by emuStudio | . ",
     "url": "/documentation/user/application/configuration-file#configuration-file",
     "relUrl": "/application/configuration-file#configuration-file"
-  },"101": {
+  },"100": {
     "doc": "Configuration file",
     "title": "Configuration file",
     "content": " ",
     "url": "/documentation/user/application/configuration-file",
     "relUrl": "/application/configuration-file"
-  },"102": {
+  },"101": {
     "doc": "Example code",
     "title": "Example code",
     "content": "emuStudio provides a few brainf*ck code examples. If seeking for more, the following links might help: . | https://github.com/fabianishere/brainfuck/tree/master/examples | http://www.hevanet.com/cristofd/brainfuck/ | http://www.xappsoftware.com/wordpress/2011/03/19/brainfuck-sample-code/ | . ",
     "url": "/documentation/user/brainduck/examples#example-code",
     "relUrl": "/brainduck/examples#example-code"
-  },"103": {
+  },"102": {
     "doc": "Example code",
     "title": "Example code",
     "content": " ",
     "url": "/documentation/user/brainduck/examples",
     "relUrl": "/brainduck/examples"
-  },"104": {
+  },"103": {
     "doc": "MITS Altair8800",
     "title": "MITS Altair8800",
     "content": "Computer MITS Altair 8800 was named after a planet in one of the first episodes of Star Trek series. Having Intel 8080 CPU inside, with 256 bytes of memory, no display and keyboard is this computer, when comparing to the present era, absolutely ridiculous. His author, Ed Roberts, called the invention “personal computer”, which is now very common term. As Wikipedia states: . The Altair is widely recognized as the spark that ignited the microcomputer revolution. Wikipedia, Altair 8800 . Altair 8800 is one of the oldest commercially available computers overall. Ed Roberts (founder and CEO of MITS corporation) was selling these machines by classic mail directly from the factory. Various enthusiasts understood the power of Altair and started to develop software and hardware for the computer. Those people saw freedom in Altair - some kind of release from batch tasks ran on mainframe systems, maintained by elite. The phenomenon of a computer which could be put on the kitchen table allowed to make enormous money by two smart university students. In 1975, Paul Allen and Bill Gates wrote a trimmed version of BASIC programming language, called Altair BASIC, which pushed them directly to foundation of Microsoft corporation. Basic configuration of MITS Altair 8800 was: . | Item | Notes | . | Processor | Intel 8080 or 8080a | . | Speed | 2 MHz | . | RAM | from 256 bytes to 64 kB | . | ROM | optional; usually EPROM Intel 1702 with 256 bytes (They were used for various bootloaders) | . | Storage | optional; paper tapes, cassette tapes or 5.25” or 8” floppy disks (MITS 88-DCDD) | . | Extensions | at first 16 slots, later 18 slots | . | Bus | famous S-100 | . | Video | none | . | I/O | optional; parallel or serial board (MITS 88-SIO) | . | Original software | Altair DOS, CP/M, Altair BASIC | . ",
     "url": "/documentation/user/altair8800/#mits-altair8800",
     "relUrl": "/altair8800/#mits-altair8800"
-  },"105": {
+  },"104": {
     "doc": "MITS Altair8800",
     "title": "Altair8800 for emuStudio",
     "content": "In emuStudio, there exist two variants of the computer, varying in CPU. Either Intel 8080 CPU, or Zilog Z80 CPU is used. Some behavior was inspired by simh emulator. Abstract schema for emuStudio (Intel 8080): . Abstract schema for emuStudio (Zilog Z80): . Each plugin is described in further sections. ",
     "url": "/documentation/user/altair8800/#altair8800-for-emustudio",
     "relUrl": "/altair8800/#altair8800-for-emustudio"
-  },"106": {
+  },"105": {
     "doc": "MITS Altair8800",
     "title": "MITS Altair8800",
     "content": " ",
     "url": "/documentation/user/altair8800/",
     "relUrl": "/altair8800/"
-  },"107": {
+  },"106": {
     "doc": "emuStudio Application",
     "title": "emuStudio Application",
     "content": "emuStudio is a desktop application which allows emulation of various computers. Besides emulation, it contains source code editor, which can be used to write and then compile programs then to be instantly emulated. Virtual computers, as the emulators are called, are represented by plugins of various type (compiler, memory, CPU and device), combined in a computer configuration. The computer configuration can be opened during startup. The application has also command-line interface, which allows executing automatic “load-compile-emulate” workflow, possibly without graphical interface. This workflow is called “automatic emulation” and has its specifics, discussed per virtual computer. A logger is used by emuStudio which helps debugging of the application and plugins. ",
     "url": "/documentation/user/application/#emustudio-application",
     "relUrl": "/application/#emustudio-application"
-  },"108": {
+  },"107": {
     "doc": "emuStudio Application",
     "title": "Installation and run",
     "content": "At first, please download emuStudio distribution. It is either a TAR or ZIP file in the form emuStudio-[VERSION].zip. For Linux/Mac environments, a TAR variant will be more suitable since it preserves file attributes and execution permissions. Unpack the file where you want to have emuStudio installed. Before running, Java 11 or later must be installed. Then, emuStudio can be run by executing the following script: . | On Linux / Mac &gt; ./emuStudio . | On Windows: &gt; emuStudio.bat . | . NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it might work to some extent. ",
     "url": "/documentation/user/application/#installation-and-run",
     "relUrl": "/application/#installation-and-run"
-  },"109": {
+  },"108": {
     "doc": "emuStudio Application",
     "title": "Command-line arguments",
     "content": "emuStudio accepts several command line arguments. Their description is accessible with --help argument: . $ ./emuStudio --help Usage: emuStudio [-hV] [-cl] [-i=FILE] [-cn=NAME | -cf=FILE | -ci=INDEX] [COMMAND] Universal emulation platform and framework -cl, --computers-list list all existing virtual computers -h, --help Show this help message and exit. -i, --input-file=FILE input file name (source code) -V, --version Print version information and exit. Virtual computer -cf, --computer-file=FILE virtual computer configuration file -ci, --computer-index=INDEX virtual computer index (see -cl for options) -cn, --computer-name=NAME virtual computer name (see -cl for options) Commands: automation, auto run emulation automation . Automation command has its own usage: . $ ./emuStudio auto --help Usage: emuStudio automation [-hV] [--[no-]gui] [-s=ADDRESS] [-w=MILLIS] run emulation automation --[no-]gui show/don't show GUI during automation -h, --help Show this help message and exit. -s, --start-address=ADDRESS program start address -V, --version Print version information and exit. -w, --waitmax=MILLIS limit emulation time to max MILLIS (force kill afterwards) . ",
     "url": "/documentation/user/application/#command-line-arguments",
     "relUrl": "/application/#command-line-arguments"
-  },"110": {
+  },"109": {
     "doc": "emuStudio Application",
     "title": "emuStudio Application",
     "content": " ",
     "url": "/documentation/user/application/",
     "relUrl": "/application/"
-  },"111": {
+  },"110": {
     "doc": "BrainDuck",
     "title": "BrainDuck",
     "content": "BrainDuck is an abstract computer for emuStudio, which mimics brainfuck programming language. Originally, brainfuck was developed by Urban Miller and it is well-known fact that the language has a minimalistic compiler, and it’s eight instructions don’t prevent it to be Turing complete. Also, there exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of that can be read at Wikipedia or at other sources. BrainDuck architecture is just a name for virtual computer in emuStudio, and consists of these plugins: . | brainc-brainduck: Compiler of brainfuck language (original, without extensions) | brainduck-cpu: Brainfuck emulator acting like CPU with two registers | byte-mem: Virtual operating memory which holds both compiled brainfuck program and data | vt100-terminal: Virtual terminal for displaying the output and requesting for input. | . BrainDuck is implemented as [von Neumann] computer. It means that the program and data are shared in the same memory. This is not a common approach to implementing brainfuck interpreters, and it might be changed in the future. As implementing a brainfuck interpreter, one must deal with several portability issues, which include: . | Memory cell size (byte) | Memory size (number of memory cells) (by default 65536 when using byte-mem) | End-of-line code (0x0A is simulating both CRLF, 0x0D is just CR) | End-of-file behavior (in automatic no-GUI emulation when input is at EOF 0 is returned; in GUI-capable emulation the input is read from the host keyboard) | . ",
     "url": "/documentation/user/brainduck/#brainduck",
     "relUrl": "/brainduck/#brainduck"
-  },"112": {
+  },"111": {
     "doc": "BrainDuck",
     "title": "BrainDuck for emuStudio",
     "content": "In order to use BrainDuck, there must be drawn the abstract schema, saved in the configuration file. Abstract schemas are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The following image shows the schema of BrainDuck computer: . Arrows are in a direction of dependency. So for example brainc-brainduck depends on byte-mem, because compiled programs are directly loaded into memory. Between brainduck-cpu and vt100-terminal exists bidirectional dependency, because input gained from a terminal is passed to the CPU, and output is pushed from CPU to the terminal. plugin brainduck-cpu also depends on byte-mem, because memory is a place where program and data are stored. ",
     "url": "/documentation/user/brainduck/#brainduck-for-emustudio",
     "relUrl": "/brainduck/#brainduck-for-emustudio"
-  },"113": {
+  },"112": {
     "doc": "BrainDuck",
     "title": "BrainDuck",
     "content": " ",
     "url": "/documentation/user/brainduck/",
     "relUrl": "/brainduck/"
-  },"114": {
+  },"113": {
     "doc": "RAM",
     "title": "Random Access Machine (RAM)",
     "content": "Random Access Machine (RAM) is the abstract machine, invented to study algorithmic complexity of programs written on register-based computers. It is equivalent to the Turing machine and has a close relationship with a so-called Harvard computer architecture, which has separated storage for program and data. The model implies that it is not possible to modify instructions. RAM machine consists of several parts: input tape (read-only), output tape (write-only), program memory, data memory or registers (read/write) and a control unit (“engine”), as can be seen in the following image: . Input tape acts as a water-tap; the input data can be read from it, causing the input head to move to the next unread symbol. The head can never return to a previously read symbol. Output tape, on the other hand, acts as a sink. The output data can be written to it, causing the output head to move to the next “empty” symbol. The head can also never return to the previously written symbol. Data memory - registers tape - represents the random-access memory. It consists of so-called registers, abstract cells with arbitrary size. These registers are ordered - each one has assigned the index - its position within the tape called the address. The tape head can move arbitrarily up and down - but it has its minimum position. It is the first register, R0, called the accumulator. Below there is an unlimited number of higher-positioned registers. The role of the accumulator is kind of special - it often acts as an implicit operand for many instructions, or implicit place for storing the result of such instructions. Program memory is a bounded ordered sequence of registers; each of them is identified by its index within the tape, called address. Data memory is also ordered sequence of registers, but like the I/O tapes - bounded just from one side. Since RAM machine is somewhat abstract, it frees the user from thinking about some issues and just assumes that: . | The size of the problem is always small enough to fit in the RAM memory, | Data used within the computation are always small enough to fit in one register. | . The RAM virtual machine in emuStudio consists of the following plugins: . | ramc-ram: Compiler of the RAM language, very simple “assembler”-like language | ram-cpu: RAM simulator engine | ram-mem: Program memory | abstract-tape: Device which represents the “tape” used in RAM, other than program memory. The abstract schema must define three instances of this device, representing register, input, and output tapes. | . ",
     "url": "/documentation/user/ram/#random-access-machine-ram",
     "relUrl": "/ram/#random-access-machine-ram"
-  },"115": {
+  },"114": {
     "doc": "RAM",
     "title": "RAM in emuStudio",
     "content": "To use RAM, there must exist the abstract schema of the “computer”, saved in the configuration file. Abstract schemas are drawn in the schema editor in emuStudio (please see emuStudio main module documentation for more details). The following image shows the schema of RAM machine simulator: . The “-&gt;” arrows are in direction of dependency. So for example ramc-ram depends on ram-mem, because compiled programs are directly loaded into memory. The roles of the abstract tapes are assigned by the RAM “CPU” on runtime. ",
     "url": "/documentation/user/ram/#ram-in-emustudio",
     "relUrl": "/ram/#ram-in-emustudio"
-  },"116": {
+  },"115": {
     "doc": "RAM",
     "title": "RAM",
     "content": " ",
     "url": "/documentation/user/ram/",
     "relUrl": "/ram/"
-  },"117": {
+  },"116": {
     "doc": "RASP",
     "title": "Random-Access Stored Program (RASP)",
     "content": "Random Access Stored Program machine (RASP) is an abstract von-Neumann computer. It means it does not represent a physical device, but rather it is intended to work as a model to study von-Neumann architecture, without the need to care about specific manufacturer’s hardware details. Firstly, it is useful to present Random Access Stored Program (RASP) machine’s architecture – it is schematically depicted in the following figure. As we can see, the control unit, i.e. processor, reads data from the input tape and writes results of executed operations onto the output tape. The tapes serve as a form of I/O devices. The two heads – reading (R) and writing (W), are pointers to the current reading/writing position. As already stated, the RASP machine represents a von Neumann computer. This implies that the operating memory exists as a single unit in which both program and data can reside. The segment containing the program is organized in the way that two adjacent cells contain instruction/operand alternately. The memory can be read as well as written to by the control unit. ",
     "url": "/documentation/user/rasp/#random-access-stored-program-rasp",
     "relUrl": "/rasp/#random-access-stored-program-rasp"
-  },"118": {
+  },"117": {
     "doc": "RASP",
     "title": "RASP for emuStudio",
     "content": "Each virtual computer in emuStudio is defined by the so-called “abstract schema”. It defines all the parts of its architecture (what it consists of) and inner communication (how architecture components are interconnected). The following figure presents the RASP abstract schema: . ",
     "url": "/documentation/user/rasp/#rasp-for-emustudio",
     "relUrl": "/rasp/#rasp-for-emustudio"
-  },"119": {
+  },"118": {
     "doc": "RASP",
     "title": "RASP",
     "content": " ",
     "url": "/documentation/user/rasp/",
     "relUrl": "/rasp/"
-  },"120": {
+  },"119": {
     "doc": "SSEM",
     "title": "Small Scale Experimental Machine (SSEM)",
     "content": "Small Scale Experimental Machine, also known as SSEM, was the world’s very first stored-program computer, nicknamed “Baby”. It was a predecessor of Manchester Mark 1 which led to Ferranti Mark 1, the world’s first commercially available general-purpose computer. The following image shows the SSEM CRT display: . It is very simple computer, which can run only 7 instructions. ",
     "url": "/documentation/user/ssem/#small-scale-experimental-machine-ssem",
     "relUrl": "/ssem/#small-scale-experimental-machine-ssem"
-  },"121": {
+  },"120": {
     "doc": "SSEM",
     "title": "SSEM for emuStudio",
     "content": "In emuStudio, SSEM computer is composed of a compiler, memory, CRT display and CPU. Abstract schema follows: . ",
     "url": "/documentation/user/ssem/#ssem-for-emustudio",
     "relUrl": "/ssem/#ssem-for-emustudio"
-  },"122": {
+  },"121": {
     "doc": "SSEM",
     "title": "SSEM",
     "content": " ",
     "url": "/documentation/user/ssem/",
     "relUrl": "/ssem/"
-  },"123": {
+  },"122": {
     "doc": "Introduction",
     "title": "Introduction",
     "content": "emuStudio is a toy-computer emulation platform and framework, targeting mainly academic sphere. A platform, because it supports full emulation “life-cycle”. From writing and compiling programs for emulated machine, to running and debugging. A framework, because it provides API and documentation which encourages implementing your custom toy-computer, either real or abstract. There are already many emulators out there doing great job in preserving history (e.g. MAME, or simh). While emuStudio is also trying to be accurate in technical details and historical behavior of emulated computers, but the main focus is allowing comfortable programming and experimenting with emulated devices - in the style of “write program - load it into computer - emulate”. That is why you can expect quite detailed documentation of rather usage and programming of the devices than used emulation techniques. That brings along nice GUI, source code editor and virtual computer designer. ",
     "url": "/documentation/user/introduction/#introduction",
     "relUrl": "/introduction/#introduction"
-  },"124": {
+  },"123": {
     "doc": "Introduction",
     "title": "References",
     "content": "The following lists a few references on emuStudio online. | Year | Reference | . | 2022 | emuStudio on Reddit | . | 2022 | Twirling bar animation | . | 2022 | emuStudio on 8bitnews | . | 2022 | emuStudio on Gametech wiki | . ",
     "url": "/documentation/user/introduction/#references",
     "relUrl": "/introduction/#references"
-  },"125": {
+  },"124": {
     "doc": "Introduction",
     "title": "Introduction",
     "content": " ",
     "url": "/documentation/user/introduction/",
     "relUrl": "/introduction/"
-  },"126": {
+  },"125": {
     "doc": "Logging",
     "title": "Logging",
     "content": "No software is bug-free in these days, and not a person is perfect. Sometimes it might happen that emuStudio is not working as expected, either it does not start (with a weird message on screen), or it fails while running. For that purpose, everything important is being logged. If you encounter some problem and either want to fix it or report it, the logs, except steps to reproduce are the most important thing. By default, logging is written to the standard output (console). In case of a problem, it is a good practice to enable file logging. To enable file logging, open logback.xml file located in the root directory of emuStudio. Find a section named &lt;root ..&gt;, and change appender-ref from STDOUT to FILE as follows: . &lt;root level=\"debug\"&gt; &lt;appender-ref ref=\"FILE\"/&gt; &lt;/root&gt; . The log file is named logs/emuStudio.log. Every new run of emuStudio will append log messages into that file until emuStudio is terminated. By default, a rolling policy is enabled, which deletes logs older than 2 days and keeps the log in maximum size of 1 MB. It is of course configurable. For more information about how to configure loggers, please look at the logback site. ",
     "url": "/documentation/user/application/logging#logging",
     "relUrl": "/application/logging#logging"
+  },"126": {
+    "doc": "Logging",
+    "title": "Automation logger",
+    "content": "An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default, each run of automatic emulation creates (overwrites) a log located in logs/automation.log file. The log file is in plaintext format and contains messages which appeared in the log during the emulation. The log file format can be customized, see the previous section for more details. ",
+    "url": "/documentation/user/application/logging#automation-logger",
+    "relUrl": "/application/logging#automation-logger"
   },"127": {
     "doc": "Logging",
     "title": "Logging",
@@ -781,7 +781,7 @@
   },"130": {
     "doc": "Main window",
     "title": "Emulator tab",
-    "content": "Emulator tab is shown in the following image. It is currently open with MITS Altair8800 computer with Intel 8080 CPU, and several devices: . The tab contains three main parts. The first one is very useful - listing of operating memory disassembled into instructions. This part is called a debugger window, or “debugger”. The other part, below the debugger window, is a list of all computer devices used (“peripheral devices”). With a double click, the user can open the GUI window of that particular device, if it supports it. The right part shows the status of the CPU used in this computer. Each CPU has its own implementation of how the status window look and what it displays. Debugger window . Debugging is a process in which a programmer tries to analyze a program, usually with the intent to find bugs. The adverb “to debug” has a deep history. Very early computers were having so-called vacuum tubes, which were core elements acting as electrically controlled switches. From time to time a computer stopped working, and the most usual reason was that a bug (a real one) came in a vacuum tube. Maintainers of the computer had to go there and manually remove the bug. It happened that often so that the process of removing bugs got a name - “to de-bug”.] Debugger in emuStudio contains a debugger toolbar and list of few disassembled instructions from memory. In combination with the CPU status panel, it’s the most powerful tool for seeing (and checking) all internal behavior of the emulated computer. Debugger toolbar . Debugger toolbar contains buttons (icons) for controlling the emulation and accessing memory content. Most of these buttons are self-explanatory. If you hover over those icons, a help text is displayed on how to use the icon. | A: Reset emulation. | B: Set the next instruction position to 0. CPU will perform the next instruction from there. | C: Set the next instruction position to the (current - 1). This action can completely change the displaying of instructions since the new instruction position does not have to be correct in terms of executing the current program. | D: Stop emulation (which was either running or paused). | E: Pause emulation (which was running). | F: Run emulation (which was paused). | G: Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval. | H: Step emulation (which was paused). CPU will execute only one - the very next - instruction. | I: Jump to location. The user will manually specify a location (address in memory) for the next instruction to execute. | J: Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches the breakpoint, it will pause there, waiting for the next user action. | K: Show operating memory. If the memory plugin does not have a GUI, the icon is disabled. | . List of instructions . The largest part of the debugger window a list of few disassembled instructions, so-called instructions window. About 15 instructions are shown, but it depends on the CPU. They are arranged in a table. The first column is usually interactive, allowing the user to set breakpoints. The red strip is pointing to the very next instruction being executed. The size of disassembled memory (resulting in the number of disassembled instructions) is not configurable. Also, the user cannot change instructions in this place. Sometimes the instructions shown in the debugger do not have to be disassembled correctly. There are two reasons for that: . | first, instructions can have various binary sizes (e.g. one byte, two bytes, etc.) | second, memory can contain programs on various locations, and emuStudio doesn’t know where. Well, if it’s just a program compiled from the source code editor, it knows. | . The implication is that if emuStudio starts to disassemble instructions at the wrong location, the instructions will be disassembled incorrectly, or they can appear as invalid. However, emuStudio is trying hard to find the nearest program start location at which it’s safe to start disassembling. Usually, it’s just a few instructions back, so it is a fast process. Controlling of displaying the instructions . By default, instructions window points to the next instruction with a few instructions before and after the current one. This set of instructions is called an “instructions window”. The instruction window has it’s starting and ending offset in memory. It is possible to move the window to forwards or backward, in a per-page fashion. A toolbar below the instructions list contains controls to control the instruction window pages. | A: Go to the first page. The very first row corresponds to instruction position 0. | B: Go backward. The user will specify the number of pages for going back. | C: Go to the previous page. | D: Go to the page where the current instruction position is. | E: Go to the next page. | F: Go forwards. The user will specify the number of pages for going forward. | . ",
+    "content": "Emulator tab is shown in the following image. It is currently open with MITS Altair8800 computer with Intel 8080 CPU, and several devices: . The tab contains three main parts. The first one is very useful - listing of operating memory disassembled into instructions. This part is called a debugger window, or “debugger”. The other part, below the debugger window, is a list of all computer devices used (“peripheral devices”). With a double click, the user can open the GUI window of that particular device, if it supports it. The right part shows the status of the CPU used in this computer. Each CPU has its own implementation of how the status window look and what it displays. Debugger window . Debugging is a process in which a programmer tries to analyze a program, usually with the intent to find bugs. The adverb “to debug” has a deep history. Very early computers were having so-called vacuum tubes, which were core elements acting as electrically controlled switches. From time to time a computer stopped working, and the most usual reason was that a bug (a real one) came in a vacuum tube. Maintainers of the computer had to go there and manually remove the bug. It happened that often so that the process of removing bugs got a name - “to de-bug”.] Debugger in emuStudio contains a debugger toolbar and list of few disassembled instructions from memory. In combination with the CPU status panel, it’s the most powerful tool for seeing (and checking) all internal behavior of the emulated computer. Debugger toolbar . Debugger toolbar contains buttons (icons) for controlling the emulation and accessing memory content. Most of these buttons are self-explanatory. If you hover over those icons, a help text is displayed on how to use the icon. | 1 | Reset emulation. | . | 2 | Set the next instruction position to 0. CPU will perform the next instruction from there. | . | 3 | Set the next instruction position to the (current - 1). This action can completely change the displaying of instructions since the new instruction position does not have to be correct in terms of executing the current program. | . | 4 | Stop emulation (which was either running or paused). | . | 5 | Pause emulation (which was running). | . | 6 | Run emulation (which was paused). | . | 7 | Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval. | . | 8 | Step emulation (which was paused). CPU will execute only one - the very next - instruction. | . | 9 | Jump to location. The user will manually specify a location (address in memory) for the next instruction to execute. | . | 10 | Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches the breakpoint, it will pause there, waiting for the next user action. | . | 11 | Show operating memory. If the memory plugin does not have a GUI, the icon is disabled. | . List of instructions . The largest part of the debugger window a list of few disassembled instructions, so-called instructions window. About 15 instructions are shown, but it depends on the CPU. They are arranged in a table. The first column is usually interactive, allowing the user to set breakpoints. The red strip is pointing to the very next instruction being executed. The size of disassembled memory (resulting in the number of disassembled instructions) is not configurable. Also, the user cannot change instructions in this place. Sometimes the instructions shown in the debugger do not have to be disassembled correctly. There are two reasons for that: . | first, instructions can have various binary sizes (e.g. one byte, two bytes, etc.) | second, memory can contain programs on various locations, and emuStudio doesn’t know where. Well, if it’s just a program compiled from the source code editor, it knows. | . The implication is that if emuStudio starts to disassemble instructions at the wrong location, the instructions will be disassembled incorrectly, or they can appear as invalid. However, emuStudio is trying hard to find the nearest program start location at which it’s safe to start disassembling. Usually, it’s just a few instructions back, so it is a fast process. Controlling of displaying the instructions . By default, instructions window points to the next instruction with a few instructions before and after the current one. This set of instructions is called an “instructions window”. The instruction window has it’s starting and ending offset in memory. It is possible to move the window to forwards or backward, in a per-page fashion. A toolbar below the instructions list contains controls to control the instruction window pages. | 1 | Go to the first page. The very first row corresponds to instruction position 0. | . | 2 | Go backward. The user will specify the number of pages for going back. | . | 3 | Go to the previous page. | . | 4 | Go to the page where the current instruction position is. | . | 5 | Go to the next page. | . | 6 | Go forwards. The user will specify the number of pages for going forward. | . ",
     "url": "/documentation/user/application/main-window#emulator-tab",
     "relUrl": "/application/main-window#emulator-tab"
   },"131": {
@@ -799,7 +799,7 @@
   },"133": {
     "doc": "Opening a computer",
     "title": "Managing virtual computers",
-    "content": ". | A: Adds new computer. The abstract schema editor will be opened. | B: Deletes selected computer. Be aware of what you are doing - the action cannot be undone. | C: Edits selected computer. The abstract schema editor will be opened. | D: Renames computer. | E: Saves the displayed abstract schema into image file. | . ",
+    "content": ". | 1 | Adds new computer. The abstract schema editor will be opened. | . | 2 | Deletes selected computer. Be aware of what you are doing - the action cannot be undone. | . | 3 | Edits selected computer. The abstract schema editor will be opened. | . | 4 | Renames computer. | . | 5 | Saves the displayed abstract schema into image file. | . ",
     "url": "/documentation/user/application/opening-computer#managing-virtual-computers",
     "relUrl": "/application/opening-computer#managing-virtual-computers"
   },"134": {
@@ -913,7 +913,7 @@
   },"152": {
     "doc": "Computer schema",
     "title": "Computer schema",
-    "content": "Computer schema represents a real configuration of the emulated computer. They are “drawn” in a computer schema editor. Users pick plugins that appear as “boxes” or elements on the screen. Then using connection lines those elements can be connected together to express a relation (that they can “see” each other). Description of the control panel follows. | A: Save the virtual computer. | B: Select a compiler. | C: Select a CPU. | D: Select a memory. | E: Select a device. | F: Use a connection line. The line is bidirectional by default. | G: Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element. | H: Remove an element from the schema. | I: This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons B, C, D, and E. Those names are plugin JAR file names. | J: Use / do not use a grid in the editor. Elements are “snapped” to the grid if it is used, and it’s easier to draw the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in the configuration file of the edited computer. | . Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have a CPU and memory. Optionally one or more devices, and optionally a compiler. ",
+    "content": "Computer schema represents a real configuration of the emulated computer. They are “drawn” in a computer schema editor. Users pick plugins that appear as “boxes” or elements on the screen. Then using connection lines those elements can be connected together to express a relation (that they can “see” each other). Description of the control panel follows. | 1 | Save the virtual computer. | . | 2 | Select a compiler. | . | 3 | Select a CPU. | . | 4 | Select a memory. | . | 5 | Select a device. | . | 6 | Use a connection line. The line is bidirectional by default. | . | 7 | Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element. | . | 8 | Remove an element from the schema. | . | 9 | This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons 2, 3, 4, and 5. The names are actually plugin JAR file names. | . | 10 | Use / do not use a grid in the editor. Elements are “snapped” to the grid if it is used, and it’s easier to draw the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in the configuration file of the edited computer. | . Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have a CPU and memory. Optionally one or more devices, and optionally a compiler. ",
     "url": "/documentation/user/application/computer-schema#computer-schema",
     "relUrl": "/application/computer-schema#computer-schema"
   },"153": {

@@ -34,5 +34,12 @@ By default, a rolling policy is enabled, which deletes logs older than 2 days an
 It is of course configurable. For more information about how to configure loggers, please look at
 the [logback site][logback]{:target="_blank"}.
 
+## Automation logger
+
+An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default,
+each run of automatic emulation creates (overwrites) a log located in `logs/automation.log` file.
+
+The log file is in plaintext format and contains messages which appeared in the log during the emulation.
+The log file format can be customized, see the previous section for more details.
 
 [logback]: http://logback.qos.ch/manual/configuration.html
