@@ -991,7 +991,7 @@
   },"165": {
     "doc": "Software for SSEM",
     "title": "Software for SSEM",
-    "content": "The following links point to some software for SSEM (either original or created later) which can be run on emuStudio (possibly with slight modifications): . | https://www.computerconservationsociety.org/software/ssem/base.htm | http://www.historicsimulations.com/ssem.html | https://github.com/jcla1/gobaby/tree/master/examples | . The following animation shows running example nightmare.ssem: . ",
+    "content": "The following links point to some software for SSEM (either original or created later) which can be run on emuStudio (possibly with slight modifications): . | https://www.computerconservationsociety.org/software/ssem/base.htm | http://www.historicsimulations.com/ssem.html | https://github.com/jcla1/gobaby/tree/master/examples | . Below is depicted an animation which shows running a standard example ssem.ssem: . ",
     "url": "/documentation/user/ssem/software#software-for-ssem",
     "relUrl": "/ssem/software#software-for-ssem"
   },"166": {
@@ -1003,13 +1003,13 @@
   },"167": {
     "doc": "CPU \"ssem-cpu\"",
     "title": "SSEM CPU emulator",
-    "content": "SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit, arithmetic-logic unit, and I/O subsystem (CRT display). The speed of CPU is around 700 instructions per second. The architecture of our SSEM CPU emulator will look as follows (below is Display and Memory just to show how it is connected in overall): . ",
+    "content": "SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit, arithmetic-logic unit (ALU), and memory (which actually is a CRT display too). The speed of CPU is around 700 instructions per second. The ssem-cpu plugin implements the control unit (instruction decoding and executing) and ALU. ",
     "url": "/documentation/user/ssem/ssem-cpu#ssem-cpu-emulator",
     "relUrl": "/ssem/ssem-cpu#ssem-cpu-emulator"
   },"168": {
     "doc": "CPU \"ssem-cpu\"",
     "title": "Status panel",
-    "content": "The status panel is the interaction point between the CPU and the user. With it, the user can be allowed to modify or view the internal status of the CPU emulator. This is very handy when learning or checking how it works, what the registers’ values are (and compare them with those shown on a display), etc. The status panel shows the following: . | CPU run state | Internal state: registers or possibly portion of memory | Speed | . SSEM CPU status panel looks as follows: . ",
+    "content": "Status panel is shown below: . Registers section shows hexadecimal, decimal and binary representation of the: . | accumulator (A) | “control-instruction” (CI), which holds memory address of the current instruction (zero-based program counter) | . Memory-snippet shows “actual” memory-cell values (hexadecimal, decimal and binary): . | M[CI]: memory cell value at CI (the current row with the instruction) | line part (correctly reversed) of the current instruction row | M[line]: memory cell value at line address | . ",
     "url": "/documentation/user/ssem/ssem-cpu#status-panel",
     "relUrl": "/ssem/ssem-cpu#status-panel"
   },"169": {
@@ -1021,13 +1021,13 @@
   },"170": {
     "doc": "Display \"ssem-display\"",
     "title": "SSEM Display",
-    "content": "SSEM computer used CRT “display”, which displayed the SSEM memory content. emuStudio plugin does not mimic the real display interface with switches and everything, but it is just a display of the memory content. Here can be seen how the original display looked like. ",
+    "content": "SSEM computer used CRT memory (see ssem-mem), so memory cells were actually visible due to phosphorescent electrons glow in the vacuum tube. In emuStudio there are two plugins, separating the functionality of memory and display. At this link can be seen the original computer. ",
     "url": "/documentation/user/ssem/ssem-display#ssem-display",
     "relUrl": "/ssem/ssem-display#ssem-display"
   },"171": {
     "doc": "Display \"ssem-display\"",
     "title": "Graphical User Interface (GUI)",
-    "content": "GUI of the display looks as follows: . It doesn’t do any user interaction except displaying. ",
+    "content": "GUI window of the SSEM display in emuStudio is depicted below: . It doesn’t do any user interaction except displaying. Controlling the memory values can be interactively done in the ssem-mem plugin. ",
     "url": "/documentation/user/ssem/ssem-display#graphical-user-interface-gui",
     "relUrl": "/ssem/ssem-display#graphical-user-interface-gui"
   },"172": {
@@ -1039,13 +1039,13 @@
   },"173": {
     "doc": "Memory \"ssem-mem\"",
     "title": "Memory “ssem-mem”",
-    "content": "SSEM used the world’s first random-access memory called Williams or Williams-Kilburn tube. The used principle was the same as in standard Cathode-Ray-Tubes (CRTs). Original EDSAC computer (which introduced the von Neumann architecture) did not have random-access memory. SSEM memory had 32 memory cells (called words), each had a size of 32 bits. The memory could contain instructions and data. So, one SSEM instruction perfectly fits in the single memory word. SSEM had 32 so-called “lines”, which represented cells in memory. Each line, or a cell, was 4 bytes long. ",
+    "content": "SSEM (1948), a von-Neumann computer, from United Kingdom, used the world’s first random-access memory called Williams or Williams-Kilburn tube. It was bit-controlled memory, i.e. the smallest unit was a bit. The base device of the memory was actually a standard Cathode-Ray-Tube (CRT). Electron beams, controlled by magnetic fields, hit a phosphorescent surface of the vacuum tube and as they “jump” inside, they create a glow which can be seen with naked eye. What Williams invented was the way how to permanently keep a “bit” stored in the tube, by so-called “anticipation pulse method”. When a charged electron hits the surface, some charge is leaked from the surface, which then can be “scanned” (recognized) which then was re-inforced back-in the tube. This way the bit could “shine” permanently, until switched “off” manually. It’s true - bits could be switched off by switches on the machine. Interesting fact is that EDSAC computer (1949), which was directly inspired by von-Neumann’s “First draft of a report on the EDVAC” did not have random-access memory. SSEM memory has 32 memory cells (called words, in emuStudio called “rows”). Each cell has size of 32 bits (4 bytes, even though the word “byte” was formed later). The memory could contain instructions or data (hence von-Neumann computer). Each SSEM instruction perfectly fits in a single memory cell. The bit representation of a memory cell is reversed. For example, value 3, in common personal computers is represented as 011, but in SSEM memory it’s represented as 110. The structure of a memory cell is as follows: . | Bit: | 00 | 01 | 02 | 03 | 04 | … | 13 | 14 | 15 | … | 31 | . | Use: | L | L | L | L | L | 0 | I | I | I | 0 | 0 | . | Value: | 2^0 |   |   |   |   |   |   |   |   |   | 2^31 | . where bits LLLLL denote a “line”, which was interpreted as memory “address” - index of a memory cell. It was used as instruction operand. Bits III specify the instruction opcode (3 bits are enough for 7 instructions used by the computer). The rest of bits are unused, and thus were often used as data store. ",
     "url": "/documentation/user/ssem/ssem-mem#memory-ssem-mem",
     "relUrl": "/ssem/ssem-mem#memory-ssem-mem"
   },"174": {
     "doc": "Memory \"ssem-mem\"",
     "title": "Graphical user interface (GUI)",
-    "content": "Since emuStudio is interactive application, GUIs are a natural thing. The memory GUI looks as follows: . As you can see in the picture, a row represents single SSEM memory cell - 32 scattered bits and the last few columns show both the number the bits represent and a raw ASCII value of the 4-byte sequence of data. Editing the cells is also possible, by pointing to a bit, and pressing either 1 or 0 - possibly a DELETE key, committing the change immediately. This works for the value itself, and the data column as well. Movement around cells is possible with arrow keys. ",
+    "content": "The memory window looks as follows: . | 1 | Open SSEM binary image into memory (files compiled by SSEM compiler with extension .bssem) | . | 2 | Dump memory into a file (binary .bssem or human-readable .txt) | . | 3 | Clear memory | . | 4 | Decomposed instruction bits: line bits | . | 5 | Decomposed instruction bits: instruction opcode | . | 6 | Hexadecimal representation of the memory “row” (32 bits), correctly reversed | . | 7 | Decimal representation of the memory “row”, correctly reversed | . | 8 | Character string made of combining 4x 8 bits of memory “row”, not reversed | . It is possible to edit the bit cells manually: select the bit, double-click. The only accepted value is either 1 or 0. With a DELETE key, the bit is cleared to 0. It is also possible to edit hexadecimal, decimal or character string representation. Double-click on such cell and enter the value in particular format. For hexadecimal and decimal formats, the accepted values will be bit-reversed. Navigating cells is possible also with arrow keys. ",
     "url": "/documentation/user/ssem/ssem-mem#graphical-user-interface-gui",
     "relUrl": "/ssem/ssem-mem#graphical-user-interface-gui"
   },"175": {

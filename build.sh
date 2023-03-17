@@ -2,7 +2,7 @@
 
 # Tests before build
 echo "Checking {:target=\"_blank\"} ..."
-find _documentation/ -type f -name "*.md" -print0 | xargs -0 grep -e "\s\[[^]]*\]\[[^]]*\][^{]" | grep -v "\\[instantiation\\]" | grep -v "\\[initialization\\]" | grep -v "\\[memoryBanks\\]"
+find _documentation/ -type f -name "*.md" -print0 | xargs -0 grep -e "\s\[[^]]*\]\[[^]]*\][^{]" | grep -v "\\[instantiation\\]" | grep -v "\\[initialization\\]" | grep -v "\\[memoryBanks\\]" | grep -v "\\[ssem-mem\\]"
 if [[ "$?" -eq 0 ]]; then
   echo "  Problem"
   exit 1
