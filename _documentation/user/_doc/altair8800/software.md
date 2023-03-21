@@ -139,9 +139,11 @@ Specific steps how to boot CP/M 3 in emuStudio follow:
 
 The following image shows the look right after the boot:
 
-![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/cpm3.gif){:style="max-width:737px"}
+![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/cpm30.gif){:style="max-width:737px"}
 
 ## Altair DOS v1.0
+
+At first, make sure 88-sio includes CPU port 0 for status channel and CPU port 1 for data channel.
 
 Steps for booting Altair DOS v1.0 follow:
 

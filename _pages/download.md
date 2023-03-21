@@ -32,12 +32,15 @@ To run emuStudio, run the following command from the console:
 
 For more information, please see the [documentation]({{ site.baseurl }}/documentation/user/application/).
 
-# Disk images, ROMs, etc.
+# Software for emulated computers
 
-There exist multiple images of the original software for computers emulated on emuStudio. However, it is not possible to
-provide all of them due to potential licensing issues. Therefore, instead of providing the images with emuStudio
-installation, we rather list some links to sites that provide those.
+Software is essential for emulators as it is for computers. For emulators, software is usually preserved in disk images,
+ROM images, magnetic tapes in a digitalized form, and there are probably even more options. It then depends solely on
+the specific emulator, how it loads the software in.
+
+In emuStudio, each virtual computer has a section in documentation called "Original software". This section provide
+links to various sites with software for emulators.
 
 - [MITS Altair8800]({{ site.baseurl }}/documentation/user/altair8800/software)
-- [Brainf*ck]({{ site.baseurl }}/documentation/user/brainduck/examples)
+- [Brainduck]({{ site.baseurl }}/documentation/user/brainduck/examples)
 - [SSEM]({{ site.baseurl }}/documentation/user/ssem/software)

@@ -363,19 +363,19 @@ records:
   - delay: 309
     content: "\a"
   - delay: 143
-    content: "\r\nas-8080/ as-ssem/ as-z80/  \r\n$ ./emuStudio --auto --nogui --config config/MITSAltair8800.toml --input examples/as-8080/reverse.asm"
+    content: "\r\nas-8080/ as-ssem/ as-z80/  \r\n$ ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui"
   - delay: 938
     content: "\r\n"
   - delay: 447
-    content: "[INFO] Loading virtual computer: config/MITSAltair8800.toml\r\n"
+    content: "  [INFO] [88-SIO, device=LSI ADM-3A terminal] Device was attached\r\n"
   - delay: 217
-    content: "[INFO] [device=LSI ADM-3A Terminal] Device was attached to 88-SIO\r\n[INFO] Processing input file: 'adm3A-terminal.in'; delay of chars read (ms): 0\r\n"
+    content: "  [INFO] Starting emulation automation...\r\n"
   - delay: 11
-    content: "[INFO] Starting emulation automation...\r\n[INFO] Compiler: Intel 8080 Assembler, version 0.40-SNAPSHOT\r\n[INFO] CPU: Intel 8080 CPU, version 0.40-SNAPSHOT\r\n[INFO] Memory: Standard operating memory, version 0.40-SNAPSHOT\r\n[INFO] Memory size: 65536\r\n[INFO] Device: MITS 88-DCDD device, version 0.40-SNAPSHOT\r\n[INFO] Device: MITS 88-SIO serial board, version 0.40-SNAPSHOT\r\n[INFO] Device: LSI ADM-3A terminal, version 0.40-SNAPSHOT\r\n[INFO] Compiling input file: examples/as-8080/reverse.asm\r\n[INFO] Compiler started working.\r\n[INFO] [Info   ] Intel 8080 Assembler, version 0.40-SNAPSHOT\r\n"
+    content: "  [INFO] Emulating computer: MITS Altair8800\r\n  [INFO] Compiler: Intel 8080 Assembler, version 0.41\r\n  [INFO] CPU: Intel 8080 CPU, version 0.41\r\n  [INFO] Memory: Byte-cell based operating memory, version 0.41\r\n  [INFO] Memory size: 65536\r\n  [INFO] Device: MITS 88-DCDD, version 0.41\r\n  [INFO] Device: MITS 88-SIO, version 0.41\r\n  [INFO] Device: LSI ADM-3A terminal, version 0.41\r\n  [INFO] Compiling input file: examples/as-8080/reverse.asm\r\n  [INFO] Compiler started working.\r\n  [INFO] [INFO   ] Intel 8080 Assembler, version 0.41\r\n"
   - delay: 21
-    content: "[INFO] [Info   ] Compilation was successful.\r\n Output file: /home/vbmacher/emuStudio/examples/as-8080/reverse.hex\r\n[INFO] [Info   ] Compiled file was loaded into memory.\r\n[INFO] Compilation finished.\r\n[INFO] Program start address: 03E8h\r\n[INFO] Resetting CPU...\r\n[INFO] Running emulation...\r\n"
+    content: "  [INFO] [INFO   ] Compile was successful.\r\nOutput: /home/vbmacher/tmp/emuStudio-release/examples/as-8080/reverse.hex\r\n  Program starts at 0x03E8\r\n  [INFO] [INFO   ] Compiled file was loaded into memory.\r\n  [INFO] Compilation finished.\r\n  [INFO] Resetting CPU...\r\n  [INFO] Running emulation...\r\n"
   - delay: 110
-    content: "[INFO] Normal stop\r\n[INFO] Instruction location = 041Ch\r\n[INFO] Emulation completed\r\n"
+    content: "  [INFO] Normal stop\r\n  [INFO] Instruction location = 041Ch\r\n  [INFO] Emulation completed\r\n"
   - delay: 280
     content: '$ '
   - delay: 801

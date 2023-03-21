@@ -56,6 +56,13 @@ the documentation won't be processed by GitHub pages, just the website.
 ## Tools
 
 - Logo: MetaPost
-- Screenshot editing (markup): Shutter
-- Animated gif: peek, terminalizer
+- Screenshot editing (markup): [Shutter][shutter]
+- Animated gif:
+    - [peek][peek]: for bitmap gifs
+    - [terminalizer][terminalizer]: for terminal gifs
 - Thumbnails: imagemagick
+
+
+[peek]: https://github.com/phw/peek 
+[terminalizer]: https://github.com/faressoft/terminalizer
+[shutter]: https://shutter-project.org/
