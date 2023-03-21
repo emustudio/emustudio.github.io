@@ -54,8 +54,8 @@ screenshots:
   }
   - {
     title: 'Computer-user interaction',
-    id: 'CPM22',
-    alt: 'CP/M 2.2',
+    id: 'CPM30',
+    alt: 'CP/M 3.0',
     thumbnail: '/files/images/cpm3.png',
     image: '/files/images/cpm3.png',
     html: '
