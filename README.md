@@ -59,10 +59,11 @@ the documentation won't be processed by GitHub pages, just the website.
 - Screenshot editing (markup): [Shutter][shutter]
 - Animated gif:
     - [peek][peek]: for bitmap gifs
-    - [terminalizer][terminalizer]: for terminal gifs
+    - [asciinema][asciinema], [agg][agg]: for terminal gifs
+      - `./agg --theme asciinema reverse.cast reverse.gif`
 - Thumbnails: imagemagick
 
-
 [peek]: https://github.com/phw/peek 
-[terminalizer]: https://github.com/faressoft/terminalizer
+[asciinema]: https://github.com/asciinema/asciinema
+[agg]: https://github.com/asciinema/agg
 [shutter]: https://shutter-project.org/
