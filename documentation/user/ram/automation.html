@@ -15,13 +15,13 @@
 [INFO] Compiler started working.
 [INFO] [INFO   ] RAM Machine Assembler, version 0.41
 [INFO] [INFO   ] Compile was successful.
-	Output: /home/vbmacher/tmp/emuStudio-release/examples/ramc-ram/factorial.bram
+	Output: /home/emuStudio/examples/ramc-ram/factorial.bram
 [INFO] [INFO   ] Compiled file was loaded into program memory.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 0011h
+[INFO] Instruction location = 0x0011
 [INFO] Emulation completed
 </code></pre></div></div> <p>Then, in the current working directory, there will be created three new files:</p> <ul> <li><code class="language-plaintext highlighter-rouge">input_tape.out</code>: contains all input tape symbols</li> <li><code class="language-plaintext highlighter-rouge">storage.out</code>: contains log of register tape changes during emulation</li> <li><code class="language-plaintext highlighter-rouge">output_tape.out</code>: contains all output tape symbols</li> </ul> <p>Content of each file is a human-readable text file, but also parseable by computer. Every row has format:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>position symbol
 </code></pre></div></div> <p>where <code class="language-plaintext highlighter-rouge">position</code> is zero-based index of a symbol on particular tape, and <code class="language-plaintext highlighter-rouge">symbol</code> is the symbol on that position. Abstract tapes of RAM machine are left-bounded, therefore all positions start at 0.</p> </div> </div> <div class="search-overlay"></div> </div> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script> </body> </html>

@@ -42,13 +42,13 @@ The console will contain information about emulation progress:
 [INFO] Compiler started working.
 [INFO] [INFO   ] SSEM Assembler, version 0.41
 [INFO] [INFO   ] Compile was successful.
-	Output: /home/vbmacher/tmp/emuStudio-release/examples/as-ssem/noodle-timer.bssem
+	Output: /home/emuStudio/examples/as-ssem/noodle-timer.bssem
 	Program starts at 0x0000
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 005Ch
+[INFO] Instruction location = 0x005C
 [INFO] Emulation completed
 ```
 

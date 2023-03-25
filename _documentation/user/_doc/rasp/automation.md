@@ -43,14 +43,14 @@ After the run, the following output on the stdout can be expected:
 [INFO] Compiler started working.
 [INFO] [INFO   ] RASP Machine Assembler, version 0.41
 [INFO] [INFO   ] Compile was successful.
-	Output: /home/vbmacher/tmp/emuStudio-release/examples/raspc-rasp/factorial.brasp
+	Output: /home/emuStudio/examples/raspc-rasp/factorial.brasp
 	Program starts at 0x0014
 [INFO] [INFO   ] Compiled file was loaded into program memory.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 0037h
+[INFO] Instruction location = 0x0037
 [INFO] Emulation completed
 ```
 

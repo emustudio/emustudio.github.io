@@ -46,13 +46,13 @@ After the run, the following output on the stdout can be expected:
 [INFO] Compiler started working.
 [INFO] [INFO   ] RAM Machine Assembler, version 0.41
 [INFO] [INFO   ] Compile was successful.
-	Output: /home/vbmacher/tmp/emuStudio-release/examples/ramc-ram/factorial.bram
+	Output: /home/emuStudio/examples/ramc-ram/factorial.bram
 [INFO] [INFO   ] Compiled file was loaded into program memory.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 0011h
+[INFO] Instruction location = 0x0011
 [INFO] Emulation completed
 ```
 

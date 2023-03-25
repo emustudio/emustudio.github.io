@@ -46,7 +46,9 @@ additional information about the emulation progress:
 
 {:.code-example}
 ```
+[WARN] Input file vt100-terminal.in does not exist
 [INFO] Starting emulation automation...
+[INFO] Emulating computer: BrainDuck
 [INFO] Compiler: BrainDuck Compiler, version 0.41
 [INFO] CPU: BrainDuck CPU, version 0.41
 [INFO] Memory: Byte-cell based operating memory, version 0.41
@@ -54,14 +56,16 @@ additional information about the emulation progress:
 [INFO] Device: VT100 Terminal, version 0.41
 [INFO] Compiling input file: examples/brainc-brainduck/mandelbrot.b
 [INFO] Compiler started working.
-[INFO] [Info   ] BrainDuck Compiler, version 0.41
-[INFO] [Info   ] Compile was successful. Output: /home/vbmacher/emuStudio/examples/brainc-brainduck/mandelbrot.hex
-[INFO] [Info   ] Compiled file was loaded into operating memory.
+[INFO] [INFO   ] BrainDuck Compiler, version 0.41
+[INFO] [INFO   ] Compile was successful.
+	Output: /home/emuStudio/examples/brainc-brainduck/mandelbrot.hex
+	Program starts at 0x0000
+[INFO] [INFO   ] Memory has been cleared.
+[INFO] [INFO   ] Compiled file was loaded into operating memory.
 [INFO] Compilation finished.
-[INFO] Program start address: 0000h
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 2CBCh
+[INFO] Instruction location = 0x2CBC
 [INFO] Emulation completed
 ```
