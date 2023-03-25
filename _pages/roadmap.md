@@ -27,8 +27,8 @@ permalink: /roadmap/
 </div>
 
 
-Most of the future plans of emuStudio are represented either by issues [at GitHub]({{ site.data.roadmap.github_url }}/issues),
-or they are kind-of ad-hoc. All Issues _should be_ collected into [milestones]({{ site.data.roadmap.github_url }}/milestones).
+Most of the future plans of emuStudio are represented either by issues [at GitHub]({{ site.data.roadmap.github_url}}/issues),
+or they are kind-of ad-hoc. All Issues _should be_ collected into [milestones]({{ site.data.roadmap.github_url}}/milestones).
 
 # 5 Latest activities
 

@@ -19,9 +19,10 @@ In the source code, plugins are located in `plugins/` subdirectory, then branche
 ## Naming conventions
 
 Plugin names are derived from JAR file names. A naming convention defines how the name should be picked. Each plugin
-type has a different naming convention. General idea is that the JAR file name should say clearly what the plugin is about.
- 
-A plugin JAR file name should be in the form of: 
+type has a different naming convention. General idea is that the JAR file name should say clearly what the plugin is
+about.
+
+A plugin JAR file name should be in the form of:
 
 {:.code-example}
 ```
@@ -29,7 +30,7 @@ A plugin JAR file name should be in the form of:
 ```
 
 where `[specific abbreviation]` means some custom abbreviation of the real world "device" the plugin emulates or is part of,
-optionally preceded with the manufacturer (e.g. `intel-8080`, `lsi-adm-3A`, etc.).
+optionally preceded with the manufacturer (e.g. `intel-8080`, `adm-3A`, etc.).
 Then `[plugin type]` follows, but in a form, as it is shown in the following table:
 
 {:.table-responsive}
@@ -41,11 +42,10 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 |---
 | CPU | `[cpu model]-cpu`, or `[computer type]-cpu` | `8080-cpu`, `z80-cpu`, `ram-cpu`, `brainduck-cpu`
 |---
-| Memory | `[some feature]-mem`, or `[computer type]-mem` | `standard-mem`, `ram-mem`, `brainduck-mem`
+| Memory | `[some feature]-mem`, or `[computer type]-mem` | `byte-mem`, `ram-mem`, `rasp-mem`
 |---
-| Device | `[device model]-[device type]` | `88-disk`, `adm3a-terminal`, `simh-pseudo`
+| Device | `[device model]-[device type]` | `88-dcdd`, `88-sio`, `adm3a-terminal`, `simh-pseudo`, `vt100-terminal`
 |===
-
 
 Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
 just for word separation (e.g. `zilogZ80`).
@@ -58,10 +58,10 @@ instantiated by emuStudio, then assigned into a virtual computer and used.
 A class which is to be plugin root, must:
 
 - implement some plugin interface (i.e. [CPU][cpu]{:target="_blank"}, [Device][device]{:target="_blank"}, [Memory][memory]{:target="_blank"} or [Compiler][compiler]{:target="_blank"})
-- annotate the class with [PluginRoot][pluginRoot]{:target="_blank"} annotation  
+- annotate the class with [PluginRoot][pluginRoot]{:target="_blank"} annotation
 - implement a public constructor with three arguments of types (`long`, [ApplicationApi][applicationApi]{:target="_blank"}, [PluginSettings][pluginSettings]{:target="_blank"})
 
-A sample plugin root class might look like this: 
+A sample plugin root class might look like this:
 
 {:.code-example}
 ```java
@@ -77,7 +77,7 @@ public class SamplePlugin implements CPU {
 ```
 
 If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
-If there are more classes like this, the plugin might not work correctly.  
+If there are more classes like this, the plugin might not work correctly.
 
 The constructor parameters have the following meaning:
 
@@ -89,14 +89,15 @@ The constructor parameters have the following meaning:
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either
-bundled with the plugin, or the location should be present in the `Class-Path` attribute in the plugin's `Manifest` file.
+bundled with the plugin, or the location should be present in the `Class-Path` attribute in the plugin's `Manifest`
+file.
 
-Some libraries are pre-loaded by emuStudio and those shouldn't be included in plugin JAR file:
+Some libraries are preloaded by emuStudio and those shouldn't be included in plugin JAR file:
 
 - [emuLib][emulib]{:target="_blank"}
-- [java cup runtime][java-cup]{:target="_blank"}
+- [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
-- [args4j][args4j]{:target="_blank"} for command-line parsing
+- [Picoli][picoli]{:target="_blank"} for command-line parsing
 
 Plugins that want to use the dependencies above should specify them as "provided" in the project.
 
@@ -114,33 +115,34 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
 {:.code-example}
 ```groovy
 ...
-      // Examples
-      ["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
-        from(examples(":plugins:compiler:$compiler")) {
-          into "examples/$compiler"
-        }
-      }
+// Examples
+["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
+    from(examples(":plugins:compiler:$compiler")) {
+        into "examples/$compiler"
+    }
+}
 
-      // Scripts
-      ["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
-        from(scripts(":plugins:compiler:$compiler")) {
-          into "bin"
-        }
-      }
-      ["88-disk"].collect { device ->
-        from(scripts(":plugins:device:$device")) {
-          into "bin"
-        }
-      }
+// Scripts
+["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
+    from(scripts(":plugins:compiler:$compiler")) {
+        into "bin"
+    }
+}
+["88-dcdd"].collect { device ->
+    from(scripts(":plugins:device:$device")) {
+        into "bin"
+    }
+}
 ...
 ```
 
 It is necessary to put your plugin name in the particular collection.
 
 [emulib]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
-[java-cup]: https://mvnrepository.com/artifact/com.github.vbmacher/java-cup-runtime/11b-20160615
+[antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
-[args4j]: https://mvnrepository.com/artifact/args4j/args4j/2.33
+[picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
+
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [cpu]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html

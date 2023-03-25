@@ -19,25 +19,28 @@ permalink: /download/
 # Installation & run
 
 Unpack <code>emuStudio-[version].tar</code> (or <code>emuStudio-[version].zip</code>) file into location where you want
-to have emuStudio installed. The archive file contains the whole emuStudio with all official computer emulators and examples.
- 
+to have emuStudio installed. The archive file contains the whole emuStudio with all official computer emulators and
+examples.
+
 To run emuStudio, run the following command from the console:
 
 - On Linux / Mac
-<code>./emuStudio</code>
+  <code>./emuStudio</code>
 
 - On Windows:
-<code>emuStudio.bat</code>
+  <code>emuStudio.bat</code>
 
 For more information, please see the [documentation]({{ site.baseurl }}/documentation/user/application/).
 
+# Software for emulated computers
 
-# Disk images, ROMs, etc.
+Software is essential for emulators as it is for computers. For emulators, software is usually preserved in disk images,
+ROM images, magnetic tapes in a digitalized form, and there are probably even more options. It then depends solely on
+the specific emulator, how it loads the software in.
 
-There exist multiple images of the original software for computers emulated on emuStudio. However, it is not possible to
-provide all of them due to potential licensing issues. Therefore, instead of providing the images with emuStudio
-installation, we rather list some links to sites that provide those.  
- 
+In emuStudio, each virtual computer has a section in documentation called "Original software". This section provide
+links to various sites with software for emulators.
+
 - [MITS Altair8800]({{ site.baseurl }}/documentation/user/altair8800/software)
-- [Brainf*ck]({{ site.baseurl }}/documentation/user/brainduck/examples)
+- [Brainduck]({{ site.baseurl }}/documentation/user/brainduck/examples)
 - [SSEM]({{ site.baseurl }}/documentation/user/ssem/software)

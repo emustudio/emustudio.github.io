@@ -10,24 +10,16 @@ permalink: /ram/ram-mem
 
 # Program memory ("ram-mem")
 
-RAM memory is used as a part of RAM simulator, which acts as the "program memory", holding just the program.
+RAM memory is a part of RAM simulator and acts as the "program memory" (it holds just the program, no data).
 
-RAM CPU reads instructions from this memory. The instructions can be written here only by compiling the source code or loading an already compiled binary image.
+RAM CPU reads instructions from this memory, data are read from abstract tapes. Instructions are written into this
+memory only through compiling the source code or loading an already compiled binary image.
 
-The memory plugin contains a simple graphical window, a GUI, which provides a set of the following features:
-
-- It computes time and space complexity of the program
-- It shows the memory content (the "program") as the list of disassembled instructions
-
-## Graphical user interface (GUI)
-
-The memory GUI can be seen in the following picture.
+The memory plugin contains a simple graphical window, which can be seen in the following image:
 
 ![RAM memory window]({{ site.baseurl }}/assets/ram/ram-memory.png){:style="max-width:728"}
 
-- *A*: Opens already compiled program into memory. The previous program will be dismissed.
-- *B*: Clears memory.
-- *C*: Shows uniform time complexity for the actual program.
-- *D*: Shows uniform space complexity for the actual program.
-
-Uniform time complexity means the maximum number of instructions based on the input `N`. Uniform space complexity means the maximum number of used registers.
+{: .list}
+| <span class="circle">1</span> | Open already compiled program into memory. The previous program will be dismissed. RAM binary files has extension `.bram`.
+| <span class="circle">2</span> | Dump memory content into a file (either human-readable or `.bram`).
+| <span class="circle">3</span> | Clears memory.

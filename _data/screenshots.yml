@@ -54,17 +54,17 @@ screenshots:
   }
   - {
     title: 'Computer-user interaction',
-    id: 'CPM22',
-    alt: 'CP/M 2.2',
-    thumbnail: '/files/images/cpm22-thumbnail.png',
-    image: '/files/images/cpm22.png',
+    id: 'CPM30',
+    alt: 'CP/M 3.0',
+    thumbnail: '/files/images/cpm3.png',
+    image: '/files/images/cpm3.png',
     html: '
       <p class="lead">
       Users can interact with the emulated computer using virtual devices. For example, a terminal. Devices
       have custom capabilities, for trying to mimic the behavior of a real-world.
       </p>
       <p class="lead">
-      Take an example - <a href="/documentation/user/altair8800/88-disk">88-DISK device</a> in MITS Altair8800 computer.
+      Take an example - <a href="/documentation/user/altair8800/88-dcdd">88-DCDD device</a> in MITS Altair8800 computer.
       This device can be used for loading disk images containing files of some original vintage software.
       </p>'
   }

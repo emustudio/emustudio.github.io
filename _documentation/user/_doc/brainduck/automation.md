@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 7
 parent: BrainDuck
 permalink: /brainduck/automation
 ---
@@ -10,51 +10,62 @@ permalink: /brainduck/automation
 
 # Automation
 
-BrainDuck computer will recognize if automatic emulation is executed.
- 
+BrainDuck computer is capable of running automatic emulation. Automation can operate in the
+interactive or non-interactive mode.
+
 ## Non-interactive mode
- 
-If a `--nogui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
 
-The input file is called `brainduck-terminal.in` and must be placed in the directory from which emuStudio was executed. If the file does not exist, emuStudio will not run.
+If a `--no-gui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
 
-The output file is called `brainduck-terminal.out` and it will be created automatically or appended when it exists in the location from which emuStudio was executed.
+Default input file is called `vt100-terminal.in` and must be placed in the directory from which emuStudio was executed.
+If the file does not exist, emuStudio will not run.
+
+Default output file is called `vt100-terminal.out` and it will be created automatically or appended when it exists in
+the location from which emuStudio was executed.
+
+The input/output file names are configurable, please refer to [VT100 terminal documentation]({{ site.baseurl }}/brainduck/vt100-terminal#configuration-file).
 
 ## Be careful of EOLs
 
-Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII code 10. plugin `brainduck-terminal` interprets ENTER key in the interactive mode as Unix-like EOL. In the non-interactive mode, EOL may be of any-like type.
+Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII
+code 10. plugin `vt100-terminal` interprets ENTER key in the interactive mode as Unix-like EOL. In the
+non-interactive mode, EOL may be of any-like type.
 
 ## Example
 
 Command line for starting non-interactive automatic emulation:
 
-    ./emuStudio --auto --config config/BrainDuck.toml --input examples/brainc-brainduck/mandelbrot.b
+    ./emuStudio -cn "BrainDuck" -i examples/brainc-brainduck/mandelbrot.b auto --no-gui
 
-- computer configuration `config/BrainDuck.toml` will be loaded
+- computer configuration named "BrainDuck", file `config/BrainDuck.toml`, will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be performed
+- (`auto`) automatic emulation will be executed
 
 This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain
 additional information about the emulation progress:
 
 {:.code-example}
 ```
+[WARN] Input file vt100-terminal.in does not exist
 [INFO] Starting emulation automation...
-[INFO] Compiler: BrainDuck Compiler, version 0.40-SNAPSHOT
-[INFO] CPU: BrainDuck CPU, version 0.40-SNAPSHOT
-[INFO] Memory: BrainDuck memory, version 0.40-SNAPSHOT
+[INFO] Emulating computer: BrainDuck
+[INFO] Compiler: BrainDuck Compiler, version 0.41
+[INFO] CPU: BrainDuck CPU, version 0.41
+[INFO] Memory: Byte-cell based operating memory, version 0.41
 [INFO] Memory size: 65536
-[INFO] Device: BrainDuck terminal, version 0.40-SNAPSHOT
+[INFO] Device: VT100 Terminal, version 0.41
 [INFO] Compiling input file: examples/brainc-brainduck/mandelbrot.b
 [INFO] Compiler started working.
-[INFO] [Info   ] BrainDuck Compiler, version 0.40-SNAPSHOT
-[INFO] [Info   ] Compile was successful. Output: /home/vbmacher/emuStudio/examples/brainc-brainduck/mandelbrot.hex
-[INFO] [Info   ] Compiled file was loaded into operating memory.
+[INFO] [INFO   ] BrainDuck Compiler, version 0.41
+[INFO] [INFO   ] Compile was successful.
+	Output: /home/emuStudio/examples/brainc-brainduck/mandelbrot.hex
+	Program starts at 0x0000
+[INFO] [INFO   ] Memory has been cleared.
+[INFO] [INFO   ] Compiled file was loaded into operating memory.
 [INFO] Compilation finished.
-[INFO] Program start address: 0000h
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 2CBCh
+[INFO] Instruction location = 0x2CBC
 [INFO] Emulation completed
 ```

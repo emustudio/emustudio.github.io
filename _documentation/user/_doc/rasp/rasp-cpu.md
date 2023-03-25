@@ -10,46 +10,27 @@ permalink: /rasp/rasp-cpu
 
 # CPU "rasp-cpu"
 
-RASP CPU is the core of the RASP virtual computer. Its purpose is to execute the RASP program composed of RASP instructions which are stored in the RASP memory. The CPU is therefore connected with the memory. 
+This plugin is the core of the emulation/simulation. Even if we're supposed to talk about the RASP simulator, because
+emulation is connected more with imitation of real hardware than the abstract machine, there is a plugin that calls
+itself a RASP CPU. It is really not accurate, but CPU nowadays means something as the
+main or core engine of the computation which the machine does. So the name got stuck rather with this convention.
 
-To run 'interactive' RASP programs (programs reading user input and writing something to the output), input and output tapes are needed. They are included in the default RASP configuration.
+The plugin strictly requires a `rasp-mem`, and two instances of `abstract-tape` plugins, representing the input and 
+output tapes. After boot, the CPU assigns the specific meaning to each tape.
 
-## Supported instructions
 
-RASP CPU emulator supports the following instructions:
+## Status panel
 
-|---
-|Operation code | Instruction mnemonic code | Semantics
-|-|-|-
-|`1` |`READ i` |read from input tape into register `Ri`
-|`2` |`WRITE =i` |write constant `i` onto the output tape
-|`3` |`WRITE i` |write the content of the register `Ri` onto the output tape
-|`4` |`LOAD =i` |load the accumulator (register `R0`) with the `i` constant
-|`5` |`LOAD i` |load the accumulator (register `R0`) with the content of `Ri` register
-|`6` |`STORE i` |store the accumulator (register `R0`) content into register `Ri`
-|`7` |`ADD =i` |increase accumulator (register `R0`) value by constant `i`
-|`8` |`ADD i` |increase accumulator (register `R0`) value by the value of register `Ri`
-|`9` |`SUB =i` |decrease accumulator (register `R0`) value by constant `i`
-|`10` |`SUB i` |decrease accumlator (register R0) by the value of register `Ri`
-|`11`|`MUL =i` |multiply accumulator (register R0) by constant `i`
-|`12` |`MUL i` |multiply accumulator (register R0) by the value of register `Ri`
-|`13` |`DIV =i` |divide accumulator (register R0) by constant `i`
-|`14` |`DIV i` |divide accumulator (register R0) by the value of register `Ri`
-|`15` |`JMP l` |set instruction pointer (`IP`) to the address pointed to by the label `l`
-|`16` |`JZ l` |set instruction pointer (`IP`) to the address pointed to by the label `l` if value of the accumulator (register R0) is zero (`R0 = 0`)
-|`17` |`JGTZ l` |set instruction pointer (`IP`) to the address pointed to by the label `l` if value of the accumulator (register R0) is greater than zero (`R0 > 0`)
-|`18` |`HALT` |finish program execution
-|---
+In the following image, you can see the status panel of `rasp-cpu`.
 
-## CPU Status panel
+![RAM CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-cpu-status.png)
 
-There is a simple GUI window provided for the RASP CPU. It displays the two most important values: 
+It is split into three parts. Within the 'Internal status' part, there is shown the content of registers `R0`
+(accumulator) and `IP`. Register `IP` is the position of the program memory head. It stands for "instruction pointer". It
+is pointing at the next instruction being executed.
 
-- the current value of the accumulator (`R0` register)
-- the current value of the instruction pointer (`IP`) which points to the current position within the executed program 
+The input/output part shows the next unread symbol ("next input"), and the last symbol written to the output tape ("last
+output"). This is just for convenience; it is possible to see the same values in particular tape devices.
 
-Also, information about the current RUNNING STATUS is displayed.
-
-The following figure shows a screenshot:
-
-![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-status.png)
+The last part, "Run state", shows in which state the whole emulation is, and it is common to all emulators in emuStudio.
+The state "breakpoint" means that the emulation is paused.

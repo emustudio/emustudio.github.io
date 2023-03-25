@@ -10,20 +10,31 @@ permalink: /rasp/rasp-mem
 
 # Memory "rasp-mem"
 
-RASP memory plug-in serves as the main store (operating memory) for the RASP virtual computer. As already mentioned in the introduction of this manual, RASP is an example of von-Neumann architecture, which implies that both program and data reside in the same memory module.
+RASP memory plug-in is the main store (operating memory) used in RASP virtual computer. RASP is an example of
+von-Neumann architecture, which implies that both program and data reside in the same memory.
 
-After compilation of a RASP source code file, the compiled program is loaded into here. During the process of the emulation, the CPU plug-in reads instructions and their operands and writes results of the operations from/to the memory. 
+After compilation of a RASP source code, the compiled program is loaded into RASP memory. During the process of the
+emulation, the CPU plug-in reads instructions and their operands from the memory and writes results back to the same
+memory (except reading inputs and writing outputs).
 
 ## Graphical user interface (GUI)
 
-During the emulation, user can view the current content of the operating memory in a simple GUI window:
+RASP memory has a simple window, which can be accessed from the debug panel in emuStudio:
 
-![Memory GUI window]({{ site.baseurl }}/assets/rasp/rasp-memory.png)
+![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory.png)
 
-It is also possible to load a compiled memory image from a file by clicking on the ![OPEN icon]({{ site.baseurl }}/assets/rasp/document-open.png) icon. Then you can choose the binary file you want to load.
+{: .list}
+| <span class="circle">1</span> | Open already compiled program into memory. The previous program will be dismissed. RASP binary files has extension `.brasp`.
+| <span class="circle">2</span> | Dump memory content into a file (either human-readable or `.brasp`).
+| <span class="circle">3</span> | Clears memory.
 
-By clicking on the ![CLEAN icon]({{ site.baseurl }}/assets/rasp/edit-delete.png) icon, you can clean the entire memory content.
+The table with memory content is editable. By double-clicking on a row you can simply edit the value. You confirm your
+changes by the `ENTER` key:
 
-The table with memory content is editable. By double-clicking on a row you can simply edit the value. You confirm your changes by the `ENTER` key. 
- 
-WARNING: If you edit a cell that contains an instruction, you edit its operation code, e.g. if a cell contains the `ADD =` instruction (operation code 7) and you change the cell to 9, the operation code will be overwritten. As a result, the instruction changes to `SUB =`. It means that you cannot write number 9 as a data item here, only as an operation code.
+![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory-edit.png)
+
+NOTE: By editing an opcode cell (a cell that contains an instruction opcode), the instruction is changed. It is also possible
+to set invalid opcode values, which then results in "address fallout" error during emulation.
+
+For example, if a cell contains the `ADD =` instruction (operation code 7), which is then changed to 9 (`SUB =`), 
+the instruction on that location will be now changed and emuStudio will interpret it as such.

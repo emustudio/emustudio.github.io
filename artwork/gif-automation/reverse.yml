@@ -1,0 +1,317 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /home/vbmacher/tmp/emuStudio-release
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 127
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 37
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: null
+    title: null
+    style:
+      padding: 15px
+      border: 2px gray solid
+      boxShadow: none
+      margin: 0px
+      backgroundColor: black
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: watermark.svg
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.3
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+
+  # The size of the font
+  fontSize: 14
+
+  # The height of lines
+  lineHeight: 1
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+
+# Records, feel free to edit them
+records:
+  - delay: 740
+    content: "$ "
+  - delay: 2077
+    content: l
+  - delay: 121
+    content: l
+  - delay: 365
+    content: "\r\n\e[?2004l\r"
+  - delay: 5
+    content: "\e[0m\e[01;34mbin\e[0m\r\n\e[01;34mcompiler\e[0m\r\n\e[01;34mconfig\e[0m\r\n\e[01;34mcpu\e[0m\r\n\e[01;34mdevice\e[0m\r\n\e[01;34mexamples\e[0m\r\n\e[01;34mlib\e[0m\r\n\e[01;34mlogs\e[0m\r\n\e[01;34mmemory\e[0m\r\n\e[01;35madm3A-terminal.in\e[0m\r\n\e[02;32memuStudio\e[0m\r\nemuStudio.bat\r\nemuStudio.toml\r\nLICENSE\r\nlogback.xml\r\nREADME.md\r\n\r\n"
+  - delay: 5
+    content: "\r\n$ "
+  - delay: 2187
+    content: c
+  - delay: 198
+    content: a
+  - delay: 253
+    content: t
+  - delay: 161
+    content: ' '
+  - delay: 369
+    content: a
+  - delay: 185
+    content: d
+  - delay: 97
+    content: m
+  - delay: 104
+    content: '3A-terminal.in '
+  - delay: 926
+    content: "\r\n\e[?2004l\rhello, world!\r\n"
+  - delay: 18
+    content: "\r\n$ "
+  - delay: 2954
+    content: .
+  - delay: 72
+    content: /
+  - delay: 224
+    content: e
+  - delay: 111
+    content: m
+  - delay: 95
+    content: "\auStudio"
+  - delay: 872
+    content: ' '
+  - delay: 352
+    content: '-'
+  - delay: 692
+    content: c
+  - delay: 73
+    content: l
+  - delay: 962
+    content: "\r\n\e[?2004l\r"
+  - delay: 425
+    content: "Index\tComputer name\r\n"
+  - delay: 35
+    content: "0\tAltair8800: BASIC\r\n1\tAltair8800: DOS\r\n2\tBrainDuck\r\n3\tMITS Altair8800\r\n4\tMITS Altair8800 (Z80)\r\n5\tRandom Access Machine (RAM)\r\n6\tRandom-Access Stored Program (RASP)\r\n7\tSSEM (Baby)\r\n"
+  - delay: 30
+    content: "\r\n$ "
+  - delay: 1752
+    content: ./emuStudio -cl
+  - delay: 522
+    content: "\b\e[K"
+  - delay: 628
+    content: i
+  - delay: 155
+    content: ' '
+  - delay: 2298
+    content: '3'
+  - delay: 620
+    content: ' '
+  - delay: 1561
+    content: '-'
+  - delay: 132
+    content: '-'
+  - delay: 375
+    content: i
+  - delay: 167
+    content: 'n'
+  - delay: 130
+    content: p
+  - delay: 238
+    content: u
+  - delay: 83
+    content: t
+  - delay: 190
+    content: '-'
+  - delay: 184
+    content: f
+  - delay: 103
+    content: i
+  - delay: 183
+    content: l
+  - delay: 85
+    content: e
+  - delay: 122
+    content: ' '
+  - delay: 210
+    content: e
+  - delay: 368
+    content: "\a"
+  - delay: 1071
+    content: x
+  - delay: 356
+    content: amples/
+  - delay: 1505
+    content: a
+  - delay: 159
+    content: s
+  - delay: 214
+    content: '-'
+  - delay: 283
+    content: '8'
+  - delay: 116
+    content: '0'
+  - delay: 213
+    content: 80/
+  - delay: 1035
+    content: r
+  - delay: 161
+    content: e
+  - delay: 197
+    content: "\averse."
+  - delay: 426
+    content: "\a"
+  - delay: 134
+    content: "\r\nreverse.asm  reverse.hex  \r\n$ ./emuStudio -ci 3 --input-file examples/as-8080/reverse."
+  - delay: 1128
+    content: a
+  - delay: 198
+    content: 'sm '
+  - delay: 2002
+    content: a
+  - delay: 199
+    content: u
+  - delay: 163
+    content: t
+  - delay: 137
+    content: o
+  - delay: 167
+    content: ' '
+  - delay: 111
+    content: '-'
+  - delay: 154
+    content: '-'
+  - delay: 559
+    content: 'n'
+  - delay: 181
+    content: o
+  - delay: 467
+    content: '-'
+  - delay: 337
+    content: g
+  - delay: 130
+    content: u
+  - delay: 206
+    content: i
+  - delay: 1839
+    content: "\r\n\e[?2004l\r"
+  - delay: 1214
+    content: "[INFO] [88-SIO, device=LSI ADM-3A terminal] Device was attached\r\n"
+  - delay: 16
+    content: "[INFO] Starting emulation automation...\r\n[INFO] Emulating computer: MITS Altair8800\r\n[INFO] Compiler: Intel 8080 Assembler, version 0.41\r\n[INFO] CPU: Intel 8080 CPU, version 0.41\r\n[INFO] Memory: Byte-cell based operating memory, version 0.41\r\n[INFO] Memory size: 65536\r\n[INFO] Device: MITS 88-DCDD, version 0.41\r\n[INFO] Device: MITS 88-SIO, version 0.41\r\n[INFO] Device: LSI ADM-3A terminal, version 0.41\r\n[INFO] Compiling input file: examples/as-8080/reverse.asm\r\n[INFO] Compiler started working.\r\n[INFO] [INFO   ] Intel 8080 Assembler, version 0.41\r\n"
+  - delay: 321
+    content: "[INFO] [INFO   ] Compile was successful.\r\n\tOutput: /home/vbmacher/tmp/emuStudio-release/examples/as-8080/reverse.hex\r\n\tProgram starts at 0x03E8\r\n[INFO] [INFO   ] Compiled file was loaded into memory.\r\n[INFO] Compilation finished.\r\n[INFO] Resetting CPU...\r\n[INFO] Running emulation...\r\n"
+  - delay: 217
+    content: "[INFO] Normal stop\r\n[INFO] Instruction location = 041Ch\r\n[INFO] Emulation completed\r\n"
+  - delay: 174
+    content: "\r\n$ "
+  - delay: 2575
+    content: l
+  - delay: 135
+    content: l
+  - delay: 201
+    content: "\r\n\e[?2004l\r"
+  - delay: 5
+    content: "\e[0m\e[01;34mbin\e[0m\r\n\e[01;34mcompiler\e[0m\r\n\e[01;34mconfig\e[0m\r\n\e[01;34mcpu\e[0m\r\n\e[01;34mdevice\e[0m\r\n\e[01;34mexamples\e[0m\r\n\e[01;34mlib\e[0m\r\n\e[01;34mlogs\e[0m\r\n\e[01;34mmemory\e[0m\r\n\e[01;35madm3A-terminal.in\r\nadm3A-terminal.out\e[0m\r\n\e[02;32memuStudio\e[0m\r\nemuStudio.bat\r\nemuStudio.toml\r\nLICENSE\r\nlogback.xml\r\nREADME.md\r\n"
+  - delay: 17
+    content: "\r\n$ "
+  - delay: 1939
+    content: c
+  - delay: 186
+    content: a
+  - delay: 101
+    content: t
+  - delay: 119
+    content: ' '
+  - delay: 243
+    content: a
+  - delay: 183
+    content: d
+  - delay: 86
+    content: m
+  - delay: 129
+    content: "\a3A-terminal."
+  - delay: 815
+    content: o
+  - delay: 104
+    content: 'ut '
+  - delay: 537
+    content: "\r\n\e[?2004l\rReversed text ...\r\n\rEnter text: hello, world!\r\n\r!dlrow ,olleh"
+  - delay: 2242
+    content: "\r\n"

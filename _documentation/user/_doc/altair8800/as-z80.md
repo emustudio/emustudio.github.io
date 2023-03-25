@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Assembler as-z80
+title: Assembler "as-z80"
 nav_order: 2
 parent: MITS Altair8800
 permalink: /altair8800/as-z80
@@ -10,9 +10,10 @@ permalink: /altair8800/as-z80
 
 # Assembler "as-z80"
 
-The assembler syntax is inspired by `as-8080` assembler, and by instruction set described [here][asz80]{:target="_blank"}. The assembler supports the following features:
+The assembler syntax is similar to `as-8080` assembler. Z80 instructions described [here][asz80]{:target="_blank"}.
+Assembler supports the following features:
 
-- macro support (unlimited nesting)
+- macros (unlimited nesting)
 - include other files support
 - conditional assembly
 - data definition
@@ -20,10 +21,10 @@ The assembler syntax is inspired by `as-8080` assembler, and by instruction set 
 - literals and expressions in various radixes (bin, dec, hex, oct)
 - output is in [Intel HEX][intelhex]{:target="_blank"} format
 
-## Running from command line
+## Running from the command line
 
-The assembler is provided as part of emuStudio, and usually it is run from GUI. But it can be run also from the command line, as follows:
-
+The assembler is provided as part of emuStudio, and usually it is run from GUI. But it can be run also from the command
+line, as follows:
 
 - on Linux:
 ```
@@ -46,41 +47,54 @@ Options:
 
 ## Lexical symbols
 
-The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are as follows:
-
-
+The assembler does not differentiate between upper and lower case (it is case-insensitive). The token/symbol types are
+as follows:
 
 |---
-|Type      | Description
+|Type | Description
 |-|-
-| Keywords  | instruction names; preprocessor directives (`org`, `equ`, `var`, `macro`, `endm`, `include`, `if`, `endif`); data definitions (`db`, `dw`, `ds`); CPU registers
+| Keywords | instruction names; preprocessor directives (`org`, `equ`, `var`, `macro`, `endm`, `include`, `if`, `endif`); data definitions (`db`, `dw`, `ds`); CPU registers
 | Identifiers | `([a-zA-Z_\?@])[a-zA-Z_\?@0-9]*` except keywords
-| Labels      |
-| Constants   | strings or integers
-| Operators   | `+`, `-`, `*`, `/`, `=`, `%`, `&`, `\|`, `!`, `~`, `<<`, `>>`, `>`, `<`, `>=`, `<=`
-| Comments    | semi-colon (`;`) with text after it until the end of the line
+| Labels |
+| Constants | strings or integers
+| Operators | `+`, `-`, `*`, `/`, `=`, `%`, `&`, `\|`, `!`, `~`, `<<`, `>>`, `>`, `<`, `>=`, `<=`
+| Comments | semi-colon (`;`) with text after it until the end of the line
 |---
 
 ### Constants
 
-Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written using regexes:
+Numeric constants can be only integers, encoded with one of several number radixes. The possible formats are written
+using regexes:
 
 - binary numbers: `[0-1]+[bB]`
 - decimal numbers: `[0-9]+[dD]?`
 - octal numbers: `[0-7]+[oOqQ]`
-- hexadecimal numbers: `[0-9][0-9a-fA-F]*[hH]`
+- hexadecimal numbers: `[0-9][0-9a-fA-F]*[hH]` or `0[xX][0-9a-fA-F]+`
 
 Characters or strings must be enclosed in double-quotes, e,g,: `LD E, "*"`
 
 ### Identifiers
 
-Identifiers must fit to the following regex: `([a-zA-Z_\?@])[a-zA-Z_\?@0-9]*`. It means, that it has to start with a letter a-z (or A-Z) or the at-sign (`@`). Then, it can be followed by letters, at-sign, or numbers.
+Identifiers must fit to the following regex: `([a-zA-Z_\?@])[a-zA-Z_\?@0-9]*`. It means, that it has to start with a
+letter a-z (or A-Z) or the at-sign (`@`). Then, it can be followed by letters, at-sign, or numbers.
 
 However, they must not equal to any keyword.
 
+Also, if an identifier is used for one kind of definition (label, variable, constant, or macro), it cannot be used for definition
+of another kind. For example, the following code is not valid
+
+```
+label:
+label set 1
+```
+
+At first the identified `label` is used for definition of a label, and on the second row the same identifier is used
+for definition of a variable. This is not allowed and will produce an error.
+
 ## Instructions syntax
 
-The program is basically a sequence of instructions. The instructions are separated by a new line. The instruction have optional and mandatory parts, e.g.:
+The program is basically a sequence of instructions. The instructions are separated by a new line. The instruction have
+optional and mandatory parts, e.g.:
 
 {:.code-example}
 ```
@@ -90,10 +104,10 @@ LABEL: CODE OPERANDS ; COMMENT
 |---
 | Part | Required | Notes
 |-|-|-
-|`LABEL`    | Optional   | Identifier of the memory position, followed by a colon (`:`). It can be used as forward or backward reference in instructions which expect memory address (or 16 bit number).
-|`CODE`     | Mandatory  | Instruction name.
+|`LABEL`    | Optional | Identifier of the memory position, followed by a colon (`:`). It can be used as forward or backward reference in instructions which expect memory address (or 16 bit number).
+|`CODE`     | Mandatory | Instruction name.
 |`OPERANDS` | It depends | If applicable, a comma-separated (`,`) operands of the instruction.
-|`COMMENT`  | Optional   | semi-colonm (`;`) followed by any text until the end of the line.
+|`COMMENT`  | Optional | semi-colon (`;`) followed by any text until the end of the line.
 |---
 
 Fields `CODE` and `OPERANDS` must be separated by at least one space. For example:
@@ -105,28 +119,35 @@ Fields `CODE` and `OPERANDS` must be separated by at least one space. For exampl
     LOOP:   JP LOOP  ; Infinite loop
 ```
 
-Labels are optional. Instructions and pseudo-instructions and register names are reserved for assembler and cannot be used as labels. Also, there cannot be more definitions of the same label.
+Labels are optional. Instructions and pseudo-instructions and register names are reserved for assembler and cannot be
+used as labels. Also, there cannot be more definitions of the same label.
 
-Operands must be separated with comma (`,`). There exist several operand types, which represent so-called "address modes". Allowed address modes depend on the instruction. The possibilities are:
+Operands must be separated with comma (`,`). There exist several operand types, which represent so-called "address
+modes". Allowed address modes depend on the instruction. The possibilities are:
 
 - Implicit addressing: instructions do not have operands. They are implicit.
-- Register addressing: operands are registers. 8-bit general-purpose register names are: `A`, `B`, `C`, `D`, `E`, `H`, `L`.
-  Register pairs have names: `BC`, `DE`, `HL`. The stack pointer is defined as `SP`, and program status word (used by `push` / `pop` instructions) as `AF`.
+- Register addressing: operands are registers. 8-bit general-purpose register names are: `A`, `B`, `C`, `D`, `E`, `H`
+  , `L`.
+  Register pairs have names: `BC`, `DE`, `HL`. The stack pointer is defined as `SP`, and program status word (used
+  by `push` / `pop` instructions) as `AF`.
   Other 16-bit registers are defined as `IX`, `IY`.
 - Register indirect addressing: for example, loading a memory value at address in `HL` pair: `LD A, (HL)`.
 - Immediate addressing: operand is the 8-bit constant. It can be also one character, enclosed in double-quotes.
-- Direct addressing: operand is either 8-bit or 16-bit constant, which is understood as the memory location (address). For example: `LD (1234h), HL`.
+- Direct addressing: operand is either 8-bit or 16-bit constant, which is understood as the memory location (address).
+  For example: `LD (1234h), HL`.
 
 Immediate data or addresses can be defined in various ways:
 
 - Integer constant
 - Integer constant as a result of evaluation of some expression (e.g. `2 << 4`, or `2 + 2`)
-- Current address - denoted by special variable `$`. For example, instruction `JP $+6` denotes a jump by 6-bytes further from the current address.
+- Current address - denoted by special variable `$`. For example, instruction `JP $+6` denotes a jump by 6-bytes further
+  from the current address.
 - Character constants, enclosed in double-quotes (e.g. `LD A, "*"`)
 - Labels. For example: `JP THERE` will jump to the label `THERE`.
 - Variables. For example:
 
 {:.code-example}
+
 ```
     VALUE VAR 'A'
     LD A, VALUE
@@ -138,7 +159,6 @@ An expression is a combination of the data constants and operators. Expressions 
 any two expressions, they must not be defined circularly. Expressions can be used anywhere a constant is expected.
 
 There exist several operators, such as:
-
 
 |---
 | Expression | Notes
@@ -163,28 +183,28 @@ There exist several operators, such as:
 
 Operator priorities are as follows:
 
-
 |---
-|Priority | Operator    | Type
+|Priority | Operator | Type
 |-|-|-
-| 1       | `( )`       | Unary
-| 2       | `*`, `/`, `%`, `<<`, `>>`, `>`, `<`, `>=`, `<=` | Binary
-| 3       | `+`, `-`    | Unary and binary
-| 4       | `=`         | Binary
-| 5       | `!`         | Unary
-| 6       | `&`         | Binary
-| 7       | `\|`, `~`   | Binary
+| 1 | `( )`       | Unary
+| 2 | `*`, `/`, `%`, `<<`, `>>`, `>`, `<`, `>=`, `<=` | Binary
+| 3 | `+`, `-`    | Unary and binary
+| 4 | `=`         | Binary
+| 5 | `!`         | Unary
+| 6 | `&`         | Binary
+| 7 | `\|`, `~`   | Binary
 |---
 
 All operators work with their arguments as if they were 16-bit. Their results are always 16-bit numbers.
-If there is expected an 8-bit number, the result is automatically "cut" using operation `result AND 0FFh`. This may be unwanted behavior and might lead to bugs, but it is often useful so the programmer must ensure the correctness.
+If there is expected an 8-bit number, the result is automatically "cut" using operation `result AND 0FFh`. This may be
+unwanted behavior and might lead to bugs, but it is often useful so the programmer must ensure the correctness.
 
 ## Defining data
 
-Data can be defined using special pseudo-instructions. These accept constants. Negative integers are using [two's complement][twocompl]{:target="_blank"}.
+Data can be defined using special pseudo-instructions. These accept constants. Negative integers are
+using [two's complement][twocompl]{:target="_blank"}.
 
 The following table describes all possible data definition pseudo-instructions:
-
 
 |---
 | Expression | Notes
@@ -212,9 +232,11 @@ ADD3: dw 3C01H, 3CAEH  ; 013CAE3C
 ## Including other source files
 
 It is both useful and good practice to write modular programs. According to the [DRY][dry]{:target="_blank"} principle,
-the repetitive parts of the program should be refactored out into functions or modules. Functionally similar groups of these functions or modules can be put into a library, reusable in other programs.
+the repetitive parts of the program should be refactored out into functions or modules. Functionally similar groups of
+these functions or modules can be put into a library, reusable in other programs.
 
-The pseudo-instruction `include` exists for the purpose of including already written source code into the current program. The pseudo-instruction is defined as follows:
+The pseudo-instruction `include` exists for the purpose of including already written source code into the current
+program. The pseudo-instruction is defined as follows:
 
 {:.code-example}
 ```
@@ -224,9 +246,12 @@ INCLUDE "[filename]"
 where `[filename]` is a relative or absolute path to the file which will be included, enclosed in double-quotes.
 The file can include other files, but there must not be defined circular includes (the compiler will complain).
 
-The current compilation address (denoted by `$` variable) after the include will be updated about the binary size of the included file.
+The current address (denoted by `$` variable) below the `include` pseudo-instruction will be updated by the binary size
+of the included file.
 
-The namespace of the current program and the included file is *shared*. It means that labels or variables with the same name in the current program and the included file are prohibited. Include file "sees" everything in the current program as it was its part.
+The namespace of the current program and the included file is *shared*. It means that labels or variables with the same
+name in the current program and the included file are prohibited. Include file "sees" everything in the current program
+as it was its part.
 
 ### Example
 
@@ -261,9 +286,8 @@ the number of skipped bytes, we define concrete memory location (address).
 
 The following two code snippets are equal:
 
-
 |---
-| Address | Block 1       | Block 2       | Opcode
+| Address | Block 1 | Block 2 | Opcode
 |-|-|-|-
 | `2C00`  | `LD A,C`      | `LD A,C`      | `79`
 | `2C01`  | `JP NEXT`     | `JP NEXT`     | `C3 10 2C`
@@ -279,7 +303,8 @@ Define a constant. The `[identifier]` is a mandatory name of the constant.
 
 `[expression]` is the 16-bit expression.
 
-The pseudo-instruction will define a constant - assign a name to the given expression. The name of the constant then can be used anywhere where the constant is expected and the compiler will replace it with the expression.
+The pseudo-instruction will define a constant - assign a name to the given expression. The name of the constant then can
+be used anywhere where the constant is expected and the compiler will replace it with the expression.
 
 It is not possible to redefine a constant.
 
@@ -287,13 +312,16 @@ It is not possible to redefine a constant.
 
 Syntax: `[identifier] VAR [expression]`
 
-Define or re-define a variable. The `[identifier]` is a mandatory name of the constant. 
+Define or re-define a variable. The `[identifier]` is a mandatory name of the constant.
 
 `[expression]` is the 16-bit expression.
 
-The pseudo-instruction will define a variable - assign a name to the given expression. Then, the name of the variable can be used anywhere where the constant is expected.
+The pseudo-instruction will define a variable - assign a name to the given expression. Then, the name of the variable
+can be used anywhere where the constant is expected.
 
-It is possible to redefine a variable, which effectively means to reassign a new expression to the same name and forgetting the old one. The reassignment is aware of locality, i.e. before it the old value will be used, after it the new value will be used.
+It is possible to redefine a variable, which effectively means to reassign a new expression to the same name and
+forgetting the old one. The reassignment is aware of locality, i.e. before it the old value will be used, after it the
+new value will be used.
 
 ## Conditional assembly
 
@@ -306,7 +334,32 @@ if [expression]
 endif
 ```
 
-At first, the compiler evaluates the `[expression]`. If the result is 0, instructions between `if` and `endif` will be ignored. Otherwise they will be included in the source code.
+At first, the compiler evaluates the `[expression]`. If the result is 0, statements between `if` and `endif` are
+ignored.
+
+Labels defined inside the `if` block occupy the namespace even if the if-expression evaluates to 0. Hence, the following
+code yields an error (`Label already defined`):
+
+```
+if 0
+  label1: ld (bc), a
+endif
+label1: hlt 
+```
+
+Evaluation of the expression in the `if` statement must not use forward references. For example, the following code is
+not valid (will produce an error):
+
+```
+if variable
+  ld (bc), a
+endif
+variable set $
+```
+
+In this case, variable is about to be set to current address, which would be 0 if the `if` statement evaluates to `false`.
+Otherwise, it evaluates to `1`. Both options would be semantically correct, and the compiler cannot know what was the
+programmer's intention.
 
 ## Defining and using macros
 
@@ -321,12 +374,14 @@ endm
 
 The `[identifier]` is a mandatory name of the macro.
 
-The `[operands]` part is a list of identifiers, separated by commas (`,`). Inside the macro, operands act as constants. If the macro does not use any operands, this part can be omitted.
+The `[operands]` part is a list of identifiers, separated by commas (`,`). Inside the macro, operands act as constants.
+If the macro does not use any operands, this part can be omitted.
 
-The namespace of the operand identifiers is macro-local, ie. the operand names will not be visible outside the macro.
+The namespace of the operand identifiers is macro-local, i.e. the operand names will not be visible outside the macro.
 Also, the operand names can hide variables, labels, or constants defined in the outer scope.
 
-The macros can be understood as "templates" which will be expanded in the place where they are "called". The call syntax is as follows:
+The macros can be understood as "templates" which will be expanded in the place where they are "called". The call syntax
+is as follows:
 
 {:.code-example}
 ```
@@ -336,7 +391,8 @@ The macros can be understood as "templates" which will be expanded in the place 
 where `[macro name]` is the macro name as defined above. Then, `[arguments]` are comma-separated expressions, in the
 order as the original operands are defined. The number of arguments must be the same as the number of macro operands.
 
-The macro can be defined anywhere in the program, even in any included file. Also, it does not matter in which place is called - above or below the macro definition.
+The macro can be defined anywhere in the program, even in any included file. Also, it does not matter in which place is
+called - above or below the macro definition.
 
 ### Examples
 
@@ -383,6 +439,20 @@ LD (TEMP), A
 ```
 
 Which has the same effect as the previous example.
+
+## END psudo-instruction
+
+On encountering `END` pseudo-instruction, the compiler will allow only comments below this pseudo-instruction.
+It's a marker of "program end".
+
+The following example won't compile:
+
+{:.code-example}
+```
+LD A, 0
+END
+HALT   ; no code allowed, just comments!
+```
 
 
 [asz80]: http://www.z80.info/zip/z80cpu_um.pdf

@@ -7,14 +7,14 @@ layout: default
 <div class="jumbotron">
     <div class="row">
         <div class="col-md-4 col-lg-4">
-            <img class="img-responsive" src="{{ base }}files/images/logo-1.svg" alt="emuStudio-logo"/>
+            <img alt="emuStudio-logo" class="img-responsive" src="{{ base }}files/images/logo-1.svg"/>
         </div>
         <div class="col-md-8 col-lg-8">
-            <h1>Welcome to emuStudio!</h1>
+            <h1>emuStudio</h1>
             <p class="lead">
-                emuStudio is a free, cross-platform toy-computer emulation platform and framework. It targets the
-                "academic" sphere to help students or enthusiasts gaining the "know-how" and experiment with how computers
-                work.
+                Free, cross-platform toy-computer emulation platform and framework. It targets the
+                "academic" sphere to help students or enthusiasts gaining the "know-how" and experiment with how
+                computers work.
             </p>
             <p>
                 <strong>Platform</strong>, because it supports full computer emulation "life-cycle".
@@ -35,20 +35,24 @@ layout: default
                 configurations.
             </p>
 
-            <a class="github-button"
-               href="https://github.com/{{ site.repository }}"
-               data-style="mega"
-               data-count-href="/{{ site.repository }}/followers"
+            <a aria-label="Follow @{{ site.repository }} on GitHub"
+               class="github-button"
                data-count-api="/users/{{ site.repository }}#followers"
                data-count-aria-label="# followers on GitHub"
-               aria-label="Follow @{{ site.repository }} on GitHub">Follow @emuStudio</a>
+               data-count-href="/{{ site.repository }}/followers"
+               data-style="mega"
+               href="https://github.com/{{ site.repository }}">Follow @emuStudio</a>
+            <a aria-label="Sponsor"
+               class="github-button"
+               data-style="mega"
+               href="https://github.com/sponsors/vbmacher">Sponsor</a>
         </div>
     </div>
 </div>
 
 <h1>Getting started</h1>
 
-<p>The following options might help you getting started with emuStudio.</p>
+<p>The following options might help you to get started with emuStudio.</p>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -58,8 +62,9 @@ layout: default
             </div>
             <div class="col-md-8">
                 <h5 class="card-title">I want to see something first</h5>
-                <p class="card-text">If you are curious how emuStudio looks before installing it, we have some screenshots prepared.</p>
-                <a href="{{ base }}screenshots/" class="btn btn-primary">See Screenshots</a>
+                <p class="card-text">If you are curious how emuStudio looks before installing it, we have some
+                    screenshots prepared.</p>
+                <a class="btn btn-primary" href="{{ base }}screenshots/">See Screenshots</a>
             </div>
         </div>
     </div>
@@ -74,7 +79,7 @@ layout: default
             <div class="col-md-8">
                 <h5 class="card-title">Installation & run</h5>
                 <p class="card-text">The first step is to install emuStudio.</p>
-                <a href="{{ base }}download/" class="btn btn-primary">Go to Download page</a>
+                <a class="btn btn-primary" href="{{ base }}download/">Go to Download page</a>
             </div>
         </div>
     </div>
@@ -90,7 +95,7 @@ layout: default
                 <h5 class="card-title">What can I do as a user?</h5>
                 <p class="card-text">emuStudio is easy to use. Still, a guidance to advanced user experience might be
                     interesting.</p>
-                <a href="{{ base }}documentation/user/introduction" class="btn btn-primary">See User documentation</a>
+                <a class="btn btn-primary" href="{{ base }}documentation/user/introduction">See User documentation</a>
             </div>
         </div>
     </div>
@@ -105,7 +110,8 @@ layout: default
             <div class="col-md-8">
                 <h5 class="card-title">I'm a developer</h5>
                 <p class="card-text">Developers and enthusiasts might try writing a custom emulator.</p>
-                <a href="{{ base }}documentation/developer/introduction" class="btn btn-primary">See Developer documentation</a>
+                <a class="btn btn-primary" href="{{ base }}documentation/developer/introduction">See Developer
+                    documentation</a>
             </div>
         </div>
     </div>
