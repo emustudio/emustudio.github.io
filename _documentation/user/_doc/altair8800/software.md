@@ -16,7 +16,7 @@ available online, but only some were tested and proved to work. Some available o
 
 - Peter Schorn: [operating systems][schorn-os]{:target="_blank"},
   [other operating systems][schorn-os2]{:target="_blank"},
-  [original software][schorn-software]{:target="_blank"}, [programming languages][schorn-langs]{:target="_blank"},
+  [original Altair8800 software][schorn-software]{:target="_blank"}, [programming languages][schorn-langs]{:target="_blank"},
   [office applications][schorn-office]{:target="_blank"}, [games and tools][schorn-games]{:target="_blank"},
 - SIMH [CP/M and DOS][ceo-altair]{:target="_blank"}, [updated kit][ps-altair]{:target="_blank"} with 4K Basic, 8K Basic,
   Prolog, and CP/M 3
@@ -84,9 +84,8 @@ To run CP/M, please follow these steps:
 
 1. Mount `altcpm.dsk` to drive `A:` in MITS 88-DCDD.
 2. In emuStudio jump to location `0xFF00`
-3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
-4. Before starting emulation, show ADM-3A terminal
-5. Run the emulation
+3. Before starting emulation, show ADM-3A terminal
+4. Run the emulation
 
 When the steps are completed, CP/M should start (an informational message appears) and command line prompt will be
 displayed:
@@ -133,9 +132,8 @@ Specific steps how to boot CP/M 3 in emuStudio follow:
 
 1. Mount `cpm3.dsk` to drive `A:` in MITS 88-DCDD.
 2. In emuStudio jump to location `0xFF00`
-3. Optionally, you can set CPU frequency to 2500 kHz, which was Zilog Z80 original frequency.
-4. Before starting emulation, show ADM-3A terminal
-5. Run the emulation
+3. Before starting emulation, show ADM-3A terminal
+4. Run the emulation
 
 The following image shows the look right after the boot:
 
@@ -143,13 +141,12 @@ The following image shows the look right after the boot:
 
 ## Altair DOS v1.0
 
-At first, make sure 88-sio includes CPU port 0 for status channel and CPU port 1 for data channel.
-
+Altair DOS can be downloaded from ["original software"][schorn-software]{:target="_blank"} (`altdos.dsk`, `altdos2.dsk`)
 Steps for booting Altair DOS v1.0 follow:
 
-1. Mount `altdos.dsk` to drive `A:` in MITS 88-DCDD.
-2. In emuStudio jump to location `0xFF00`
-3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
+1. Make sure 88-sio includes CPU port 0 for status channel and CPU port 1 for data channel.
+2. Mount `altdos.dsk` to drive `A:` in MITS 88-DCDD (optionally, mount `altdos2.dsk` to drive `B:`).
+3. In emuStudio jump to location `0xFF00`
 4. Before starting emulation, show ADM-3A terminal
 5. Run the emulation
 
@@ -190,9 +187,8 @@ Steps for booting BASIC follow:
 
 1. Mount `mbasic.dsk` to drive `A:` in MITS 88-DCDD.
 2. In emuStudio jump to location `0xFF00`
-3. Optionally, you can set CPU frequency to 2000 kHz, which was Intel 8080 original frequency.
-4. Before starting emulation, show ADM-3A terminal
-5. Run the emulation
+3. Before starting emulation, show ADM-3A terminal
+4. Run the emulation
 
 The following image shows the look right after the boot:
 
