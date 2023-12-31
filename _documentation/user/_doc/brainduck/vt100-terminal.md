@@ -11,8 +11,8 @@ permalink: /brainduck/terminal
 # Terminal `vt100-terminal`
 
 VT100 terminal is probably one of the most popular terminal ever, created by DEC in 1978. It has many functions, activated
-by ASCII control sequences which became de facto a standard. Even today those control sequences are emulated by many modern
-terminals (as we like to call "command line prompts"). 
+by ASCII control sequences which became de facto a standard - ANSI X3.64 (ISO/IEC 6429). These control sequences are
+emulated today by majority of modern terminals (as we like to call "command line prompts"). 
 
 ![VT100-terminal]({{ site.baseurl }}/assets/brainduck/DEC_VT100_terminal.jpg)
 (Autor: Jason Scott – Flickr: IMG_9976, CC BY 2.0, [available here][vt100-image]{:target="_blank"})
