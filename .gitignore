@@ -23,3 +23,6 @@ _site/
 # End of https://www.gitignore.io/api/intellij+iml,jekyll,sass
 
 Gemfile.lock
+.bundle/
+
+documentation/
