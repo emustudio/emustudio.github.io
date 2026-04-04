@@ -1,6 +1,7 @@
 ---
 layout: default
 title: RASP
+description: "Random Access Stored Program (RASP) machine emulator in emuStudio — study von Neumann architecture with this abstract computer simulator."
 nav_order: 6
 has_children: true
 permalink: /rasp/

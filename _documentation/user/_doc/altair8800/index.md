@@ -1,6 +1,7 @@
 ---
 layout: default
 title: MITS Altair8800
+description: "MITS Altair 8800 emulator in emuStudio — emulate the first personal computer with Intel 8080 and Zilog Z80 CPUs, 88-DCDD floppy, ADM-3A and VT100 terminals."
 nav_order: 3
 has_children: true
 permalink: /altair8800/

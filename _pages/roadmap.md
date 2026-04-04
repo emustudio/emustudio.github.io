@@ -1,6 +1,7 @@
 ---
 layout: roadmap
 title: Roadmap
+description: "emuStudio development roadmap — planned features, upcoming emulators, and future improvements."
 permalink: /roadmap/
 ---
 

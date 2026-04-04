@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Introduction
+description: "Introduction to emuStudio — a free, cross-platform toy-computer emulation platform and framework for students and retro computing enthusiasts."
 nav_order: 1
 has_children: false
 has_toc: false

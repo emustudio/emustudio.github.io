@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Download
+description: "Download emuStudio — free, cross-platform vintage computer emulation platform. Available for Windows, Linux, and macOS."
 permalink: /download/
 ---
 

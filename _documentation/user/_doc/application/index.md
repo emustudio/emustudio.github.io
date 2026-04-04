@@ -1,6 +1,7 @@
 ---
 layout: default
 title: emuStudio Application
+description: "emuStudio application guide — how to use the emulation platform, source code editor, debugger, and virtual computer designer."
 nav_order: 2
 has_children: true
 permalink: /application/
