@@ -13,6 +13,13 @@ permalink: /application/opening-computer
 The first action that emuStudio does is loading a computer to be emulated. Virtual computers are described in abstract
 schemas, which are stored in configuration files.
 
+Available virtual computers include [MITS Altair8800]({{ site.baseurl }}/altair8800/),
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/),
+[BrainDuck]({{ site.baseurl }}/brainduck/),
+[RAM]({{ site.baseurl }}/ram/),
+[RASP]({{ site.baseurl }}/rasp/), and
+[SSEM]({{ site.baseurl }}/ssem/).
+
 Computers can be loaded either from the command line or manually in GUI (by default).
 The "open dialog" is the first thing which appears to a user.
 

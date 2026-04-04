@@ -18,15 +18,28 @@
         {{ site.data.global.title }}
         {% endif %}
     </title>
-    <meta content="emulator-programming,emulation-platform,emulation-framework,altair8800,Z80,intel-8080,SSEM,RAM,RASP,random-access-machine,random-access-stored-program-machine"
+    <meta content="emustudio,emulator,computer emulator,emulation platform,emulation framework,vintage computer emulator,retro computing,altair 8800,MITS Altair8800,intel 8080,i8080,zilog Z80,ZX Spectrum 48K,ZX Spectrum emulator,SSEM,Manchester Baby,random access machine,RAM machine,RASP,random access stored program machine,von Neumann architecture,Harvard architecture,brainfuck,BrainDuck,assembly language,8-bit computer,toy computer,cross-platform emulator,Java emulator,computer science education,academic emulator,cpu emulator,retro programming,vintage computing"
           name="keywords">
-    <meta content="Universal computer emulation platform and framework." name="description">
-    <meta content=”noindex,follow” name=”robots”>
+    <meta content="{% if page.description %}{{ page.description }}{% elsif page.title %}{{ page.title }} - emuStudio documentation{% else %}emuStudio is a free, cross-platform computer emulation platform and framework. Emulate vintage computers like MITS Altair 8800, ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines like RAM, RASP, and BrainDuck.{% endif %}" name="description">
+    <meta content="index,follow" name="robots">
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+
+    <!-- Open Graph -->
     <meta content="{% if page.title %}{{ page.title }}{% elsif post.title %}{{ post.title }}{% else %}{{ site.data.global.title }}{% endif %}"
           property="og:title">
-    <meta content="{{base}}files/images/logo-2.svg" property="og:image">
-    <meta content="Universal computer emulation platform and framework." property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="{{ site.url }}{{ page.url | replace: 'index.html', '' }}" property="og:url">
+    <meta content="{{ site.url }}files/images/logo-2.svg" property="og:image">
+    <meta content="emuStudio" property="og:site_name">
+    <meta content="{% if page.description %}{{ page.description }}{% elsif page.title %}{{ page.title }} - emuStudio documentation{% else %}emuStudio is a free, cross-platform computer emulation platform and framework. Emulate vintage computers like MITS Altair 8800, ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines like RAM, RASP, and BrainDuck.{% endif %}" property="og:description">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {{ site.data.global.title }}{% elsif post.title %}{{ post.title }} | {{ site.data.global.title }}{% else %}{{ site.data.global.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}Free, cross-platform computer emulation platform. Emulate Altair 8800, ZX Spectrum 48K, SSEM, RAM, RASP and more.{% endif %}">
+    <meta name="twitter:image" content="{{ site.url }}files/images/logo-2.svg">
 
     <!-- RSS -->
     <link href="{{ base }}feed.xml" rel="alternate"
@@ -40,7 +53,7 @@
     <meta content="#ffffff" name="msapplication-TileColor">
 
     <!-- Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic|Oswald:300,400,700"
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic|Oswald:300,400,700"
           rel="stylesheet">
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/7f2db714b8.js"></script>
 
@@ -54,7 +67,7 @@
     <!--[if lt IE 9]>
         <script src="{{ base }}js/html5shiv.min.js"></script>
         <script src="{{ base }}js/respond.min.js"></script>
-    [endif]-->
+    <![endif]-->
 
     <script crossorigin="anonymous"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -78,6 +91,43 @@
         gtag('config', '{{ site.google_analytics_id }}');
     </script>
     {% endif %}
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "emuStudio",
+        "url": "{{ site.url }}",
+        "description": "Free, cross-platform computer emulation platform and framework for academic use. Supports emulation of MITS Altair 8800 (Intel 8080, Zilog Z80), ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines (RAM, RASP, BrainDuck).",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, Linux, macOS",
+        "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Peter Jakubčo",
+            "url": "https://github.com/vbmacher"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "emuStudio",
+        "url": "{{ site.url }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ site.url }}/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
 </head>
 
 <body>

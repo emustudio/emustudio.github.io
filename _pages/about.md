@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About
+description: "Learn about emuStudio — an open-source computer emulation platform for education and retro computing enthusiasts. Started in 2006 at Technical University of Košice."
 permalink: /about/
 ---
 

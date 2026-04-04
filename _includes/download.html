@@ -12,7 +12,7 @@
             {{ download.filename }}
         </a>
         {% endfor %}
-        <p>
+        <div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Released {{ emustudio.release.date }}</li>
             <li class="list-group-item"><i class="fab fa-java fa-2x mr-2"></i><a href="{{ emustudio.java.href }}"
@@ -25,7 +25,7 @@
                 notes</a></li>
             {% endif %}
         </ul>
-        </p>
+        </div>
     </div>
     {% endfor %}
 </div>

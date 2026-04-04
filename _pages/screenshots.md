@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Screenshots
+description: "Screenshots of emuStudio in action — emulating MITS Altair 8800, ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines."
 permalink: /screenshots/
 ---
 
