@@ -10,6 +10,11 @@ permalink: /altair8800/z80-cpu
 
 # Zilog Z80 CPU emulator
 
+NOTE: This CPU plugin is shared across multiple virtual computers. It is used in both
+[MITS Altair8800]({{ site.baseurl }}/altair8800/) and
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) computers.
+{: .info}
+
 It was possible to upgrade your Altair 8800 computer with a "better" 8-bit processor [Zilog Z80][z80]{:target="_blank"}.
 The processor was probably the most used 8-bit processor in the '80s. It was backward compatible with 8080 and brought
 many enhancements. It was originally targeted for embedded systems, but it became popular very soon. Z80 was used for
@@ -20,9 +25,13 @@ see e.g. [S1 MP3 Player][mp3]{:target="_blank"}.
 Main features of the emulator include:
 
 * Interpretation as an emulation technique,
-* Correct real timing of instructions,
+* T-state precise timing of instructions,
 * Ability to set clock frequency manually at run-time,
-* Emulation of all instructions including interrupts,
+* Emulation of all instructions including undocumented ones,
+* Level-triggered interrupt support (configurable interrupt duration for ZX Spectrum ULA),
+* Correct interrupt skip window after `EI` instruction,
+* Proper handling of DD/FD prefix chains,
+* Memory contention support (via bus plugins),
 * Disassembler implementation,
 * Ability to "dump" instruction history to console at run-time,
 * Support of breakpoints,
@@ -230,8 +239,9 @@ As the author writes:
 > This set of programs is intended to help the emulator authors reach the desired level of the CPU emulation authenticity.
 
 The tests can be downloaded at [this link][z80test-raxoft]{:target="_blank"}. This test suite was designed for ZX Spectrum emulator
-authors. That's why it expects ZX Spectrum memory map, and I/O devices. Since emuStudio does not currently emulate
-ZX Spectrum, it is necessary to do some modifications to the original test suite to make it work.
+authors. That's why it expects ZX Spectrum memory map, and I/O devices. Since emuStudio now has a
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) emulation, these tests can be run directly on it. For running
+on Altair8800 without the ZX Spectrum plugins, some modifications are necessary:
 
 Apply the following patch on top of commit `9f84881428c4257f9f429ab1ac00d1bae0623231`:
 
@@ -400,16 +410,12 @@ Tests commented out with `;x` don't work yet.
 
 #### Running tests in emuStudio
 
-Create new virtual computer, call it "ZX Spectrum":
+Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer configuration, or create a custom one:
 
 ![Abstract schema of ZX Spectrum]({{ site.baseurl }}/assets/altair8800/zx-spectrum-schema.png){:style="max-width:555"}
 
-It is basically the same computer as Altair8800 with Z80, but instead of ADM-3A terminal it uses draft of 
-ZX-spectrum display. This device is not even documented, because it's not really ZX spectrum. It exists just to be able
-to run existing Z80 test suites.
-
 When the computer is opened, load compiled test suite in memory, e.g. file `src/z80full.out` at address 0x8000.
-Then, open the ZX-display and run emulation.
+Then, open the ZX Spectrum display and run emulation.
 
 #### Selecting only some tests
 
@@ -884,11 +890,11 @@ index 4af203f..03cc51a 100644
 
 #### Running tests in emuStudio
 
-Create new virtual computer, call it "ZX Spectrum" (see previous section on Patrik Rak's tests).
+Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer (see previous section on Patrik Rak's tests).
 
 When the computer is opened, load compiled test suite in memory, file
 `Tests/ZX48_ZX128/Z80BlockInstructionFlags/z80bltst.bin` at address 0x8000.
-Then, open the ZX-display and run emulation.
+Then, open the ZX Spectrum display and run emulation.
 
 Disclaimer: output will be awful.
 
@@ -909,7 +915,7 @@ link zexdoc
 
 #### Running tests in emuStudio
 
-Create new virtual computer, call it "ZX Spectrum" (see previous section on Patrik Rak's tests).
+Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer (see previous section on Patrik Rak's tests).
 
 In source code editor, compile the following support code:
 

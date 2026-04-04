@@ -10,6 +10,11 @@ permalink: /altair8800/as-z80
 
 # Assembler "as-z80"
 
+NOTE: This assembler plugin is shared across multiple virtual computers. It is used in both
+[MITS Altair8800]({{ site.baseurl }}/altair8800/) (with Z80 CPU) and
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) computers.
+{: .info}
+
 The assembler syntax is similar to `as-8080` assembler. Z80 instructions described [here][asz80]{:target="_blank"}.
 Assembler supports the following features:
 

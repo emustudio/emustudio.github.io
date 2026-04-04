@@ -47,3 +47,12 @@ communication with I/O is done via files (see involved plugins documentation).
 
 Argument `--waitmax 5000` tells emuStudio that the emulation should not last for more than 5 seconds. If it didn't
 finish up to this deadline, it is forcibly stopped and marked as failed.
+
+## ZX Spectrum example
+
+The ZX Spectrum 48K can also be run in automation mode. For interactive emulation with display and audio:
+
+    ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto
+
+For more details, see the [ZX Spectrum 48K automation]({{ site.baseurl }}/zxspectrum48k/automation) documentation.
+

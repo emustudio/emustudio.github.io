@@ -30,8 +30,9 @@ There are also some "interactive" features:
 - Ability to automatically load a memory image at startup
 - Intuitive control using keystrokes, and nice visual presentation of the data
 
-This operating memory is (for now) used only in an 8-bit emulator of MITS Altair8800. However, it is possible to develop
-an emulator that can benefit from it.
+This operating memory is used in the [MITS Altair8800]({{ site.baseurl }}/altair8800/) and
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) emulators. However, it is possible to develop
+other emulators that can benefit from it.
 
 ## GUI overview
 
