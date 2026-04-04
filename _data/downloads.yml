@@ -138,7 +138,7 @@ downloads:
       {
         filename: 'emuStudio-3.5b1.zip',
         href: '/files/emuStudio-3.5b1.zip',
-        gluphs: [ 'fa-windows', 'fa-linux' ]
+        glyphs: [ 'fa-windows', 'fa-linux' ]
       }
     ]
   }

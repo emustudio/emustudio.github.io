@@ -21,11 +21,11 @@
     <meta content="emulator-programming,emulation-platform,emulation-framework,altair8800,Z80,intel-8080,SSEM,RAM,RASP,random-access-machine,random-access-stored-program-machine"
           name="keywords">
     <meta content="Universal computer emulation platform and framework." name="description">
-    <meta content=”noindex,follow” name=”robots”>
+    <meta content="index,follow" name="robots">
 
     <meta content="{% if page.title %}{{ page.title }}{% elsif post.title %}{{ post.title }}{% else %}{{ site.data.global.title }}{% endif %}"
           property="og:title">
-    <meta content="{{base}}files/images/logo-2.svg" property="og:image">
+    <meta content="{{ site.url }}files/images/logo-2.svg" property="og:image">
     <meta content="Universal computer emulation platform and framework." property="og:description">
 
     <!-- RSS -->
@@ -40,7 +40,7 @@
     <meta content="#ffffff" name="msapplication-TileColor">
 
     <!-- Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic|Oswald:300,400,700"
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic|Oswald:300,400,700"
           rel="stylesheet">
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/7f2db714b8.js"></script>
 
@@ -54,7 +54,7 @@
     <!--[if lt IE 9]>
         <script src="{{ base }}js/html5shiv.min.js"></script>
         <script src="{{ base }}js/respond.min.js"></script>
-    [endif]-->
+    <![endif]-->
 
     <script crossorigin="anonymous"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
