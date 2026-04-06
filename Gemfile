@@ -4,6 +4,7 @@ require 'json'
 require 'open-uri'
 versions = JSON.parse(URI('https://pages.github.com/versions.json').read)
 
+gem 'rake'
 gem 'asciidoctor'
 gem 'pygments.rb'
 
