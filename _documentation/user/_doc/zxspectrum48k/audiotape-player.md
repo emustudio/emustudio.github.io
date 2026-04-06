@@ -23,7 +23,7 @@ The tape player connects to the ZX Spectrum bus and writes data signals that the
 | Format | Description
 |-|-
 | `.tap` | TAP format — a simple concatenation of data blocks as they would appear on tape. Each block is preceded by a 2-byte length field. Widely used and straightforward.
-| `.tzx` | TZX format — a more advanced format supporting standard speed data blocks, turbo speed blocks, pure tone pulses, pulse sequences, and other tape features. TZX support is partial (work in progress).
+| `.tzx` | TZX format — a more advanced format that can describe various tape encoding schemes. **Support is partial** — only standard speed data blocks (block ID `0x10`) are currently implemented, which covers the majority of commercially released software. Turbo speed blocks, pure tone sequences, and other advanced block types are not yet supported.
 |---
 
 ## GUI overview
@@ -32,27 +32,75 @@ The tape player window can be opened from the device list when the emulation is 
 
 ![Audio Tape Player]({{ site.baseurl }}/assets/zxspectrum48k/audiotape-player.png)
 
-The window is divided into two panels:
+The window is divided into two panels separated by a resizable split pane.
 
 ### Available tapes (left panel)
 
 The left panel allows browsing for tape files on the filesystem:
 
-- **Directory selector** — use the folder icon button to browse and select a directory containing tape files
-- **Tape list** — displays all `.tap` and `.tzx` files found in the selected directory
-- **Refresh** — refreshes the file list from the selected directory
-- **Load** — loads the selected tape file into the tape deck (inserts the tape)
+{: .list}
+| <span class="circle">1</span> | **Directory selector** — use the folder icon button to browse and select a directory containing tape files. Previously selected directories are remembered in the dropdown for quick switching.
+| <span class="circle">2</span> | **Refresh** — refreshes the file list from the selected directory
+| <span class="circle">3</span> | **Load** — loads the selected tape file into the tape deck (inserts the tape)
 
 ### Audio tape (right panel)
 
-The right panel shows the currently loaded tape and playback controls:
+The right panel shows the currently loaded tape, playback controls, and an event log:
 
-- **File name** — shows the name of the currently loaded tape file
-- **Status** — shows the current state of the tape (UNLOADED, STOPPED, PLAYING, CLOSED)
-- **Events log** — displays information about tape blocks and pulses during playback
-- **Play** — starts playback of the loaded tape
-- **Stop** — stops the currently playing tape
-- **Eject** — removes the loaded tape from the deck
+{: .list}
+| <span class="circle">4</span> | **Events log** — a table showing detailed information about tape blocks and pulses during playback. Allows to select multiple rows and then with Ctrl+C to copy them to the clipboard.
+| <span class="circle">5</span> | **Play** — starts playback of the loaded tape
+| <span class="circle">6</span> | **Stop** — stops the currently playing tape (the tape remains loaded)
+| <span class="circle">7</span> | **Eject** — stops playback and removes the loaded tape from the deck
+| <span class="circle">8</span> | **Copy** — copies selected rows from the events table to the clipboard (also available via `Ctrl+C`)
+| <span class="circle">9</span> | **Save** — saves the full event log to a file. Supported file formats are tab-separated values (`.tsv`) and plain text (`.txt`)
+
+
+The panel header shows:
+- **File name** — shows the name of the currently loaded tape file (or "N/A" if no tape is loaded)
+- **Status** — shows the current state of the tape:
+
+|---
+| State | Description
+|-|-
+| `UNLOADED` | No tape is loaded in the deck
+| `STOPPED` | A tape is loaded and ready to play (or playback has finished)
+| `PLAYING` | The tape is currently being played back
+| `CLOSED` | The plugin has been destroyed (terminal state)
+|---
+
+- **Events log** — a table showing detailed information about tape blocks and pulses during playback. The table has
+  four columns:
+
+|---
+| Column | Description
+|-|-
+| T-state | The CPU T-state at which the event occurred
+| Length | Pulse length in T-states (0 for non-pulse events)
+| Event | Event type (see [Event types](#event-types) below)
+| Details | Additional information about the event
+|---
+
+### Event types
+
+During playback, the events log displays the following event types:
+
+|---
+| Event | Description
+|-|-
+| `PAUSE` | Initial pause before tape data begins
+| `PILOT` | Leader tone pulse — a series of identical pulses used for synchronisation. Header blocks use 8063 pilot pulses, data blocks use 3223.
+| `SYNC1` | First sync pulse (667 T-states) marking the transition from leader tone to data
+| `SYNC2` | Second sync pulse (735 T-states)
+| `SYNC3` | End-of-block sync pulse (954 T-states)
+| `FLAG` | Block flag byte — `0x00` for header blocks, `0xFF` for data blocks
+| `PROGRAM` | Header describes a BASIC program (with filename, auto-start line, and program length)
+| `NUMBER ARRAY` | Header describes a number array variable
+| `STRING ARRAY` | Header describes a string array variable
+| `MEMORY BLOCK` | Header describes a code/memory block (with filename and start address)
+| `DATA` | Raw data bytes being transmitted
+| `CHECKSUM` | Block checksum byte
+|---
 
 ## Usage
 
@@ -67,6 +115,36 @@ To load software from tape into the ZX Spectrum:
 
 The tape will automatically stop when all blocks have been played back.
 
+{: .info}
+> The emulation reset will stop and eject any currently loaded tape.
+
+## Tape signal encoding
+
+The audio tape player reproduces the standard ZX Spectrum tape encoding. Each tape block is transmitted as a series
+of square-wave pulses with specific timings (measured in Z80 T-states at 3.5 MHz):
+
+|---
+| Signal component | Pulse length (T-states) | Notes
+|-|-|-
+| Leader (pilot) tone | 2168 | 8063 pulses for header, 3223 for data blocks
+| Sync pulse 1 | 667 | Marks start of data
+| Sync pulse 2 | 735 | Follows sync 1
+| Data bit 0 | 855 | Two pulses per zero bit
+| Data bit 1 | 1710 | Two pulses per one bit
+| End-of-block sync | 954 | Marks end of block
+| Inter-block pause | ~2 seconds | Silence between blocks
+|---
+
+Each data byte is transmitted MSB-first. Every bit is represented by two consecutive pulses of equal length — short
+pulses (855 T-states) for a zero bit, long pulses (1710 T-states) for a one bit.
+
+A standard tape block consists of:
+1. **Leader tone** — a long series of identical pulses for synchronisation
+2. **Sync pulses** — two short pulses marking the start of data
+3. **Flag byte** — `0x00` for header blocks, `0xFF` for data blocks
+4. **Data** — the block content
+5. **Checksum** — XOR of the flag byte and all data bytes
+
 ## Where to find tape files
 
 ZX Spectrum software in TAP and TZX format can be found at various online archives:
@@ -79,5 +157,3 @@ ZX Spectrum software in TAP and TZX format can be found at various online archiv
 [speccy]: https://cs.speccy.cz/
 [wos]: https://worldofspectrum.org/
 [planetemu]: https://www.planetemu.net/roms/sinclair-zx-spectrum-demos-tap
-
-
