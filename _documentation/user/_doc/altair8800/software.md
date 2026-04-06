@@ -25,7 +25,7 @@ available online, but only some were tested and proved to work. Some available o
 
 In order to manipulate with CP/M disk images, there are several options:
 
-- please look at 88-dcdd page [Experimental CP/M support][88-dcdd-cpm]
+- please look at 88-dcdd page [Experimental CP/M support][88-dcdd-cpm]{:target="_blank"}
 - you can try [cpmtools][cpmtools]{:target="_blank"}.
 - [SIMH emulator][simh]{:target="_blank"} supports run-time reading and writing files using utilities `HDIR.COM` (lists
   files on host computer),

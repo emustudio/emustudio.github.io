@@ -23,7 +23,7 @@ The tape player connects to the ZX Spectrum bus and writes data signals that the
 | Format | Description
 |-|-
 | `.tap` | TAP format — a simple concatenation of data blocks as they would appear on tape. Each block is preceded by a 2-byte length field. Widely used and straightforward.
-| `.tzx` | TZX format — a more advanced format that can describe various tape encoding schemes. **Support is partial** — only standard speed data blocks (block ID `0x10`) are currently implemented, which covers the majority of commercially released software. Turbo speed blocks, pure tone sequences, and other advanced block types are not yet supported.
+| `.tzx` | TZX format — a more advanced format that can describe various tape encoding schemes. Most block types are supported (see [Supported TZX blocks](#supported-tzx-blocks) below).
 |---
 
 ## GUI overview
@@ -88,18 +88,36 @@ During playback, the events log displays the following event types:
 |---
 | Event | Description
 |-|-
-| `PAUSE` | Initial pause before tape data begins
-| `PILOT` | Leader tone pulse — a series of identical pulses used for synchronisation. Header blocks use 8063 pilot pulses, data blocks use 3223.
-| `SYNC1` | First sync pulse (667 T-states) marking the transition from leader tone to data
-| `SYNC2` | Second sync pulse (735 T-states)
+| `PAUSE` | Pause/silence between blocks or initial pause before tape data begins
+| `PILOT` | Leader tone pulse — a series of identical pulses used for synchronisation. Header blocks use 8063 pilot pulses, data blocks use 3223. Also used for turbo speed blocks with custom timing.
+| `SYNC1` | First sync pulse (667 T-states for standard speed) marking the transition from leader tone to data
+| `SYNC2` | Second sync pulse (735 T-states for standard speed)
 | `SYNC3` | End-of-block sync pulse (954 T-states)
 | `FLAG` | Block flag byte — `0x00` for header blocks, `0xFF` for data blocks
 | `PROGRAM` | Header describes a BASIC program (with filename, auto-start line, and program length)
 | `NUMBER ARRAY` | Header describes a number array variable
 | `STRING ARRAY` | Header describes a string array variable
 | `MEMORY BLOCK` | Header describes a code/memory block (with filename and start address)
-| `DATA` | Raw data bytes being transmitted
+| `DATA` | Raw data bytes being transmitted (standard speed)
 | `CHECKSUM` | Block checksum byte
+| `TURBO DATA` | Data bytes from a turbo speed data block (TZX block `0x11`)
+| `PURE TONE` | Pure tone — a sequence of equal-length pulses (TZX block `0x12`)
+| `PULSE SEQ` | Pulse sequence — a series of pulses with varying lengths (TZX block `0x13`)
+| `PURE DATA` | Pure data block — data without pilot tone or sync pulses (TZX block `0x14`)
+| `DIRECT REC` | Direct recording — raw sample data (TZX block `0x15`)
+| `CSW REC` | CSW recording block (TZX block `0x18`, not yet fully supported)
+| `GEN DATA` | Generalized data block (TZX block `0x19`, not yet fully supported)
+| `STOP TAPE` | Stop the tape and wait for user to resume (pause duration = 0)
+| `GROUP` | Group start marker with group name (TZX block `0x21`)
+| `GROUP END` | Group end marker (TZX block `0x22`)
+| `STOP 48K` | Stop the tape if in 48K mode (TZX block `0x2A`)
+| `SIGNAL` | Set signal level (TZX block `0x2B`)
+| `TEXT` | Text description embedded in the tape file (TZX block `0x30`)
+| `MESSAGE` | Message block with display time (TZX block `0x31`)
+| `ARCHIVE` | Archive information — title, author, publisher, etc. (TZX block `0x32`)
+| `HARDWARE` | Hardware type information (TZX block `0x33`)
+| `CUSTOM` | Custom info block (TZX block `0x35`)
+| `GLUE` | Glue block — used to merge multiple TZX files (TZX block `0x5A`)
 |---
 
 ## Usage
@@ -144,6 +162,45 @@ A standard tape block consists of:
 3. **Flag byte** — `0x00` for header blocks, `0xFF` for data blocks
 4. **Data** — the block content
 5. **Checksum** — XOR of the flag byte and all data bytes
+
+## Supported TZX blocks
+
+The following TZX block types are supported:
+
+|---
+| Block ID | Name | Status
+|-|-|-
+| `0x10` | Standard Speed Data Block | ✅ Fully supported
+| `0x11` | Turbo Speed Data Block | ✅ Fully supported
+| `0x12` | Pure Tone | ✅ Fully supported
+| `0x13` | Pulse Sequence | ✅ Fully supported
+| `0x14` | Pure Data Block | ✅ Fully supported
+| `0x15` | Direct Recording | ✅ Fully supported
+| `0x18` | CSW Recording | ⚠️ Parsed but not yet fully decoded
+| `0x19` | Generalized Data Block | ⚠️ Parsed but not yet fully decoded
+| `0x20` | Pause / Stop the Tape | ✅ Fully supported
+| `0x21` | Group Start | ✅ Fully supported
+| `0x22` | Group End | ✅ Fully supported
+| `0x23` | Jump to Block | ✅ Fully supported
+| `0x24` | Loop Start | ✅ Fully supported
+| `0x25` | Loop End | ✅ Fully supported
+| `0x26` | Call Sequence | ✅ Fully supported
+| `0x27` | Return from Sequence | ✅ Fully supported
+| `0x28` | Select Block | ❌ Not supported (skipped with warning)
+| `0x2A` | Stop the Tape if in 48K Mode | ✅ Fully supported
+| `0x2B` | Set Signal Level | ✅ Fully supported
+| `0x30` | Text Description | ✅ Fully supported
+| `0x31` | Message Block | ✅ Fully supported
+| `0x32` | Archive Info | ✅ Fully supported
+| `0x33` | Hardware Type | ✅ Fully supported
+| `0x35` | Custom Info Block | ✅ Fully supported
+| `0x5A` | Glue Block | ✅ Fully supported
+|---
+
+{: .info}
+> The Select Block (`0x28`) requires interactive user input to choose a tape path and is currently not supported.
+> CSW Recording (`0x18`) and Generalized Data Block (`0x19`) are parsed and logged but their audio data is not yet
+> played back.
 
 ## Where to find tape files
 
