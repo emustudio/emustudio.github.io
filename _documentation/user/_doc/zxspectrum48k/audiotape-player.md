@@ -89,7 +89,7 @@ During playback, the events log displays the following event types:
 | Event | Description
 |-|-
 | `PAUSE` | Pause/silence between blocks or initial pause before tape data begins
-| `PILOT` | Leader tone pulse — a series of identical pulses used for synchronisation. Header blocks use 8063 pilot pulses, data blocks use 3223. Also used for turbo speed blocks with custom timing.
+| `PILOT` | Leader tone pulse — a series of identical pulses used for synchronization. Header blocks use 8063 pilot pulses, data blocks use 3223. Also used for turbo speed blocks with custom timing.
 | `SYNC1` | First sync pulse (667 T-states for standard speed) marking the transition from leader tone to data
 | `SYNC2` | Second sync pulse (735 T-states for standard speed)
 | `SYNC3` | End-of-block sync pulse (954 T-states)
@@ -202,15 +202,64 @@ The following TZX block types are supported:
 > CSW Recording (`0x18`) and Generalized Data Block (`0x19`) are parsed and logged but their audio data is not yet
 > played back.
 
-## Where to find tape files
+## Events tab (automation)
 
-ZX Spectrum software in TAP and TZX format can be found at various online archives:
+The tape player window has a second tab called **Events** that allows defining a sequence of automation events. These
+events can automate tape loading without manual interaction — useful for testing or batch processing.
 
-- [Speccy.cz][speccy]{:target="_blank"} — Czech ZX Spectrum archive
-- [World of Spectrum][wos]{:target="_blank"} — comprehensive ZX Spectrum archive
-- [Planet Emu][planetemu]{:target="_blank"} — ZX Spectrum tape images
+### Available automation events
 
+|---
+| Event | Parameter | Description
+|-|-|-
+| Load tape | File path | Load a tape file into the deck. Select a tape from the file list before adding this event.
+| Play tape | — | Start playback. The automation waits until the tape finishes playing before moving to the next event.
+| Stop tape | — | Stop the currently playing tape (tape remains loaded).
+| Reset tape | — | Stop and unload the current tape.
+| Unload tape | — | Stop playback and unload the tape from the deck.
+| Delay | Seconds | Wait for the specified number of seconds before executing the next event.
+|---
 
-[speccy]: https://cs.speccy.cz/
-[wos]: https://worldofspectrum.org/
-[planetemu]: https://www.planetemu.net/roms/sinclair-zx-spectrum-demos-tap
+### Events tab controls
+
+The Events tab toolbar provides controls for managing and running automation events:
+
+- **Event type dropdown** — select which event type to add
+- **+** — add the selected event type to the end of the event list
+- **-** — remove the selected event (or the last event if none is selected)
+- **↑** / **↓** — move the selected event up or down in the list
+- **Play** — start executing the automation event sequence
+- **Stop** — cancel the running automation
+- **Reset** — stop automation and reset the timeline
+
+Events are saved to the plugin settings and persist across sessions. They can also be used in non-interactive
+(headless) automation mode — see [Automation]({{ site.baseurl }}/zxspectrum48k/automation) for details.
+
+## Configuration file
+
+The following table describes available configuration keys:
+
+|---
+| Key | Type | Default | Description
+|-|-|-|-
+| `showGuiAtStartup` | Boolean | `false` | Whether to automatically open the tape player window when the emulation starts. Can also be set from the settings dialog in the GUI.
+| `automationEvents` | Array of strings | (empty) | List of automation events to execute sequentially after emulation reset (used in automation mode). Each event has the format `TYPE:parameter`. See [Automation events format](#automation-events-format) below.
+|---
+
+### Automation events format
+
+Each entry in the `automationEvents` array is a string in the format `TYPE:parameter`, where `TYPE` is one of the
+following and `parameter` depends on the event type:
+
+|---
+| Type | Format | Description
+|-|-|-
+| `LOAD_TAPE` | `LOAD_TAPE:/path/to/file.tap` | Load a tape file into the deck. The parameter is the file path.
+| `PLAY` | `PLAY:` | Start tape playback. Blocks until the tape finishes playing.
+| `STOP` | `STOP:` | Stop the currently playing tape (tape remains loaded).
+| `RESET` | `RESET:` | Stop and unload the current tape.
+| `UNLOAD` | `UNLOAD:` | Stop playback and unload the tape from the deck.
+| `DELAY` | `DELAY:5` | Wait for the specified number of seconds before executing the next event.
+|---
+
+For more details on automation, see [Automation]({{ site.baseurl }}/zxspectrum48k/automation).

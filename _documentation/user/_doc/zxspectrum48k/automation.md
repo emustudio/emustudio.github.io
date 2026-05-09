@@ -14,7 +14,7 @@ ZX Spectrum 48K computer is capable of running automatic emulation. Automation c
 non-interactive mode.
 
 In the interactive mode, the ZX Spectrum display window and audio tape player are shown automatically, allowing the
-user to interact with the emulated computer.
+user to interact with the emulated computer. If any automation events are configured, they are executed.
 
 In the non-interactive mode (`--no-gui` flag set in the command line), no GUI windows are shown. The emulation runs
 "headless" — there is no display output, no keyboard input, and no audio. This mode is useful for automated testing
@@ -45,55 +45,50 @@ section:
 | `frequency_khz` | 3500 | CPU clock frequency in kHz (3500 = 3.5 MHz, the standard ZX Spectrum clock)
 |---
 
-### Example configuration
+## Tape automation
+
+The [Audio Tape Player]({{ site.baseurl }}/zxspectrum48k/audiotape-player) supports automation events that can
+automatically load and play tape files. This is especially useful in non-interactive mode for running test suites
+or loading software without user interaction.
+
+### Configuring tape automation events
+
+Automation events are stored in the `audiotape-player` plugin settings under the `automationEvents` key. Each event
+is serialized as `TYPE:parameter`:
+
+|---
+| Event | Serialized format | Description
+|-|-|-
+| Load tape | `LOAD_TAPE:/path/to/file.tap` | Load a tape file into the deck
+| Play tape | `PLAY:` | Start playback and wait until the tape finishes
+| Stop tape | `STOP:` | Stop the currently playing tape
+| Reset tape | `RESET:` | Stop and unload the current tape
+| Unload tape | `UNLOAD:` | Stop playback and unload the tape
+| Delay | `DELAY:5` | Wait for the specified number of seconds
+|---
+
+### Example tape automation configuration
+
+To configure tape automation events in the configuration file, add the `automationEvents` array to the
+`audiotape-player` settings:
 
 {:.code-example}
 ```toml
-name = "ZX Spectrum 48K"
-
-[MEMORY]
-    path = "byte-mem.jar"
-    name = "byte-mem"
-    type = "MEMORY"
-
-    [MEMORY.settings]
-        banksCount = 0
-        imageName0 = "examples/zxspectrum-48k/48.rom"
-        imageAddress0 = 0
-        imageBank0 = 0
-        commonBoundary = 0
-
-[COMPILER]
-    path = "as-z80.jar"
-    name = "as-z80"
-    type = "COMPILER"
-
-[CPU]
-    path = "z80-cpu.jar"
-    name = "z80-cpu"
-    type = "CPU"
-
-    [CPU.settings]
-        frequency_khz = 3500
-
-[[DEVICE]]
-    path = "zxspectrum-ula.jar"
-    name = "zxspectrum-ula"
-    type = "DEVICE"
-
 [[DEVICE]]
     path = "audiotape-player.jar"
     name = "audiotape-player"
     type = "DEVICE"
 
-[[DEVICE]]
-    path = "zxspectrum-bus.jar"
-    name = "zxspectrum-bus"
-    type = "DEVICE"
+    [DEVICE.settings]
+        automationEvents = [
+            "LOAD_TAPE:/path/to/game.tap",
+            "DELAY:3",
+            "PLAY:"
+        ]
 ```
 
-NOTE: The connections between plugins are also defined in the configuration file but are omitted here for brevity.
-The bus plugin must be connected to the CPU, memory, ULA, and audio tape player.
+When running with the `auto` flag, the automation events are executed sequentially after emulation reset. The `PLAY`
+event blocks until the tape finishes playing, so subsequent events wait for playback completion.
 
 ## Example
 
@@ -108,26 +103,3 @@ The following command runs the ZX Spectrum 48K emulator in interactive automatio
 For non-interactive mode:
 
     ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto --no-gui
-
-Console will contain information about the emulation progress:
-
-{:.code-example}
-```
-[INFO] Starting emulation automation...
-[INFO] Emulating computer: ZX Spectrum 48K
-[INFO] Compiler: Zilog Z80 Assembler, version 0.42
-[INFO] CPU: Zilog Z80 CPU, version 0.42
-[INFO] Memory: Byte-cell based operating memory, version 0.42
-[INFO] Device: ZX Spectrum Bus, version 0.42
-[INFO] Device: ZX Spectrum48K ULA, version 0.42
-[INFO] Device: Audio Tape Player, version 0.42
-[INFO] Compiling input file: examples/zx-spectrum/twinkle_beeper.asm
-[INFO] Compiler started working.
-[INFO] [INFO   ] Zilog Z80 Assembler, version 0.42
-[INFO] [INFO   ] Compile was successful.
-[INFO] Compilation finished.
-[INFO] Resetting CPU...
-[INFO] Running emulation...
-```
-
-

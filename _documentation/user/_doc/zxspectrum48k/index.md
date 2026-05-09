@@ -53,6 +53,7 @@ device plugins:
   behavior
 - **zxspectrum-ula** — the ULA chip emulation providing video display, keyboard input, and beeper audio
 - **audiotape-player** — a cassette tape deck emulation supporting TAP and TZX tape image files
+- **audio-ay3_8910-chip** — the AY-3-8910 programmable sound generator providing 3-channel music and sound effects
 
 The abstract schema for emuStudio:
 
