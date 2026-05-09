@@ -184,8 +184,10 @@ namespace :build do
 
       puts "  Building #{subsite} documentation …"
       Dir.chdir(dir) do
-        run_or_fail 'bundle install --quiet'
-        run_or_fail 'JEKYLL_ENV=production bundle exec jekyll build'
+        Bundler.with_unbundled_env do
+          run_or_fail 'bundle install --quiet'
+          run_or_fail 'JEKYLL_ENV=production bundle exec jekyll build'
+        end
       end
     end
   end
