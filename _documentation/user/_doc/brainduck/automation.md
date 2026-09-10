@@ -23,7 +23,7 @@ If the file does not exist, emuStudio will not run.
 Default output file is called `vt100-terminal.out` and it will be created automatically or appended when it exists in
 the location from which emuStudio was executed.
 
-The input/output file names are configurable, please refer to [VT100 terminal documentation]({{ site.baseurl }}/brainduck/vt100-terminal#configuration-file).
+The input/output file names are configurable, please refer to [VT100 terminal documentation]({{ site.baseurl }}/brainduck/terminal#configuration-file).
 
 ## Be careful of EOLs
 

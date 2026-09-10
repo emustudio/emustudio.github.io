@@ -7,7 +7,7 @@ data_dir: ./_data
 
 # Serving
 baseurl: ""
-url: https://www.emustudio.net/
+url: https://www.emustudio.net
 detach: false
 port: 4000
 host: 0.0.0.0
@@ -18,7 +18,7 @@ include: [ ".htaccess", '_pages' ]
 exclude:
   - .gitignore
   - README.md
-  - build.sh
+  - Rakefile
   - Gemfile
   - Gemfile.lock
   - _documentation

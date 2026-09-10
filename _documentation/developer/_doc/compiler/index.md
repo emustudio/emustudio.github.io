@@ -297,7 +297,7 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
 
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
 [abstractCompiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/AbstractCompiler.html
-[intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/IntelHEX.html
+[intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/io/IntelHEX.html
 [antlr]: https://www.antlr.org/
 [antlr-tutorial]: https://tomassetti.me/antlr-mega-tutorial/
 [visitor]: https://refactoring.guru/design-patterns/visitor

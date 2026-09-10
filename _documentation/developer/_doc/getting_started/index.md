@@ -60,7 +60,7 @@ combination of multiple sister projects:
 [antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
 [picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
-[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
+[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [vonNeumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
 
