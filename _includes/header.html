@@ -24,14 +24,14 @@
     <meta content="index,follow" name="robots">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+    <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}">
 
     <!-- Open Graph -->
     <meta content="{% if page.title %}{{ page.title }}{% elsif post.title %}{{ post.title }}{% else %}{{ site.data.global.title }}{% endif %}"
           property="og:title">
     <meta content="website" property="og:type">
-    <meta content="{{ site.url }}{{ page.url | replace: 'index.html', '' }}" property="og:url">
-    <meta content="{{ site.url }}files/images/logo-2.svg" property="og:image">
+    <meta content="{{ page.url | replace: 'index.html', '' | absolute_url }}" property="og:url">
+    <meta content="{{ '/files/images/logo-2.svg' | absolute_url }}" property="og:image">
     <meta content="emuStudio" property="og:site_name">
     <meta content="{% if page.description %}{{ page.description }}{% elsif page.title %}{{ page.title }} - emuStudio documentation{% else %}emuStudio is a free, cross-platform computer emulation platform and framework. Emulate vintage computers like MITS Altair 8800, ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines like RAM, RASP, and BrainDuck.{% endif %}" property="og:description">
 
@@ -39,7 +39,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {{ site.data.global.title }}{% elsif post.title %}{{ post.title }} | {{ site.data.global.title }}{% else %}{{ site.data.global.title }}{% endif %}">
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}Free, cross-platform computer emulation platform. Emulate Altair 8800, ZX Spectrum 48K, SSEM, RAM, RASP and more.{% endif %}">
-    <meta name="twitter:image" content="{{ site.url }}files/images/logo-2.svg">
+    <meta name="twitter:image" content="{{ '/files/images/logo-2.svg' | absolute_url }}">
 
     <!-- RSS -->
     <link href="{{ base }}feed.xml" rel="alternate"

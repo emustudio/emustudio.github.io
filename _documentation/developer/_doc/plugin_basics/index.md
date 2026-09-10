@@ -143,7 +143,7 @@ It is necessary to put your plugin name in the particular collection.
 [slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
 [picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
 
-[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/PluginSettings.html
+[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [cpu]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html
 [device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/Device.html

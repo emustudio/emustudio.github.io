@@ -133,9 +133,17 @@ namespace :lint do
     problems = []
     find_files(DOC_SOURCE_DIR, 'md').each do |file|
       dir = File.dirname(file)
+      fence = nil
       File.readlines(file, encoding: 'utf-8').each_with_index do |line, idx|
-        # Skip lines inside code blocks / inline code that might produce false positives
-        next if line.strip.start_with?('```')
+        # Ignore the contents of fenced examples, not just their delimiters.
+        if fence
+          fence = nil if line.match?(/\A {0,3}#{Regexp.escape(fence[0])}{#{fence.length},}\s*\z/)
+          next
+        end
+        if (opening = line.match(/\A {0,3}(`{3,}|~{3,})/))
+          fence = opening[1]
+          next
+        end
         # Skip if the match is inside backtick-delimited inline code
         code_stripped = line.gsub(/`[^`]*`/, '')
 
@@ -162,7 +170,7 @@ namespace :lint do
 end
 
 desc 'Run all pre-build lint checks'
-task lint: %w[lint:target_blank lint:link_spaces lint:baseurl_slash]
+task lint: %w[lint:target_blank lint:link_spaces lint:baseurl_slash lint:broken_links]
 
 desc 'Run all post-build lint checks'
 task 'lint:post_build': %w[lint:imagepath]
