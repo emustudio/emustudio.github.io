@@ -135,7 +135,7 @@ public class CompilerImpl extends AbstractCompiler {
 
     @Override
     public String getCopyright() {
-        return "(c) Copyright 2006-2023, you";
+        return "(c) Copyright 2006-2026, you";
     }
 
     @Override
