@@ -46,23 +46,36 @@ Basic configuration of ZX Spectrum 48K:
 
 ## ZX Spectrum 48K for emuStudio
 
-In emuStudio, ZX Spectrum 48K is emulated using the Zilog Z80 CPU, byte-based operating memory, and three specialized
+In emuStudio, ZX Spectrum 48K is emulated using the Zilog Z80 CPU, byte-based operating memory, and four specialized
 device plugins:
 
-- **zxspectrum-bus** — a proxy between CPU, memory, and devices implementing memory/I/O contention and floating bus
-  behavior
-- **zxspectrum-ula** — the ULA chip emulation providing video display, keyboard input, and beeper audio
-- **audiotape-player** — a cassette tape deck emulation supporting TAP and TZX tape image files
-- **audio-ay3_8910-chip** — the AY-3-8910 programmable sound generator providing 3-channel music and sound effects
+- [`zxspectrum-bus`]({{ site.baseurl }}/zxspectrum48k/zxspectrum-bus) — a proxy between CPU, memory, and devices
+  implementing memory/I/O contention and floating bus behavior
+- [`zxspectrum-ula`]({{ site.baseurl }}/zxspectrum48k/zxspectrum-ula) — the ULA chip emulation providing video display,
+  keyboard input, and beeper audio
+- [`audiotape-player`]({{ site.baseurl }}/zxspectrum48k/audiotape-player) — a cassette tape deck emulation supporting
+  TAP and TZX tape image files
+- [`audio-ay3_8910-chip`]({{ site.baseurl }}/zxspectrum48k/audio-ay3_8910-chip) — the AY-3-8910 programmable sound
+  generator providing 3-channel music and sound effects
 
 The abstract schema for emuStudio:
 
 ![Abstract schema of ZX Spectrum 48K]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum48k-schema.png){:style="max-width:543"}
 
-The assembler used for the ZX Spectrum is [`as-z80`]({{ site.baseurl }}/altair8800/as-z80), which is the same assembler
-plugin used for the Altair8800 with Zilog Z80 CPU. The CPU plugin is also the same
-[`z80-cpu`]({{ site.baseurl }}/altair8800/z80-cpu), and the memory is the same
-[`byte-mem`]({{ site.baseurl }}/altair8800/byte-mem).
+### Getting started
+
+1. Open `config/ZxSpectrum48K.toml` from the emuStudio installation directory.
+2. In `[MEMORY.settings]`, set `imageName0` to the path of a legal 16 KB ZX Spectrum ROM image. The configuration
+   already loads it at address `0x0000` and protects `0x0000`–`0x3FFF` as ROM.
+3. Start the configured computer from the installation directory with
+   `./emuStudio -cf config/ZxSpectrum48K.toml`.
+4. Open the `zxspectrum-ula` device window to use the display and keyboard. To load cassette software, open the
+   `audiotape-player` device and select a TAP or TZX file.
+
+The assembler used for the ZX Spectrum is [`as-z80`]({{ site.baseurl }}/zxspectrum48k/as-z80), which is the same
+assembler plugin used for the Altair8800 with Zilog Z80 CPU. The CPU plugin is documented under
+[`z80-cpu`]({{ site.baseurl }}/zxspectrum48k/z80-cpu), and the memory under
+[`byte-mem`]({{ site.baseurl }}/zxspectrum48k/byte-mem).
 
 ### Requirements
 
@@ -76,4 +89,3 @@ Each plugin is described in further sections.
 [zxspectrum]: https://en.wikipedia.org/wiki/ZX_Spectrum
 [sinclair]: https://en.wikipedia.org/wiki/Sinclair_Research
 [permission]: https://groups.google.com/g/comp.sys.amstrad.8bit/c/HtpBU2Bzv_U/m/HhNDSU3MksAJ
-
