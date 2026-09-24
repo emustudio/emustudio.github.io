@@ -17,6 +17,10 @@ The content of the window is split into two panels or tabs, placeholders for two
 first tab is "Source code editor", second is "Emulator", used during computer
 emulation.
 
+Toolbar and dialog icons come from the active Swing Look&Feel when it supplies them, with bundled application icons as
+fallbacks. Changing `lookAndFeel` therefore keeps controls visually consistent without making an action disappear when
+a theme omits an optional icon.
+
 ## Source code editor
 
 ![Source code tab]({{ site.baseurl }}/assets/application/source-code.png){:style="max-width:760px"}
