@@ -79,6 +79,21 @@ public class SamplePlugin implements CPU {
 If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
 If there are more classes like this, the plugin might not work correctly.
 
+### Version and copyright metadata
+
+Plugins extending `AbstractCompiler`, `AbstractCPU`, `AbstractMemory`, or `AbstractDevice` inherit `getVersion()` and
+`getCopyright()`. Put a `version.properties` resource in the concrete plugin root class package:
+
+{:.code-example}
+```properties
+version=1.2.3
+copyright=Copyright 2026 Example Author
+```
+
+The base class loads `<plugin package>.version` through the concrete plugin's classloader, which is required by plugin
+isolation. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
+that bundle; duplicating the standard resource lookup in every plugin is unnecessary.
+
 The constructor parameters have the following meaning:
 
 - `pluginId` is a unique plugin identification, assigned by emuStudio. Some operations require it as an input argument.
