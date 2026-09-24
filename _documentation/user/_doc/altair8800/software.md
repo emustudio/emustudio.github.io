@@ -206,10 +206,10 @@ The following image shows the look right after the boot:
 [aclone]: http://altairclone.com/support.htm
 [deramp]: https://deramp.com/downloads/altair/
 [simh]: http://simh.trailing-edge.com/
-[cpmtools]: http://www.autometer.de/unix4fun/z80pack/
+[cpmtools]: https://github.com/udo-munk/z80pack
 [cpm22]: http://www.classiccmp.org/dunfield/r/cpm22.pdf
 [cpm3manual]: http://www.cpm.z80.de/manuals/cpm3-usr.pdf
-[simhmanual]: http://simh.trailing-edge.com/pdf/altairz80_doc.pdf
+[simhmanual]: https://github.com/open-simh/simh/blob/master/doc/altairz80_doc.docx
 [altairmanual]: http://altairclone.com/downloads/manuals/Altair%20DOS%20User's%20Manual.pdf
 [basic]: http://bitsavers.informatik.uni-stuttgart.de/pdf/mits/Altair_8800_BASIC_4.1_Reference_Jul77.pdf
 [manuals]: http://altairclone.com/altair_manuals.htm

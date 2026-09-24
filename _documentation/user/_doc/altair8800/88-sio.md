@@ -369,7 +369,7 @@ print:
 ```
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
-[manual]: http://maben.homeip.net/static/s100/altair/cards/Altair%2088-SIO%20serial%20IO.pdf
+[manual]: https://s100computers.com/Hardware%20Manuals/MITS/MITS_Altair_88-sio_Serial_IO_Card_Manual.pdf
 [manual-2]: https://usermanual.wiki/Document/MITSAltair88sioSerialIOCardManual.407144693/view
 [manual-deramp]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/10-MITS%20S100%20Boards/88-2SIO%20Dual%20Serial%20Board/MITS_Altair_88-2SIO_Searial_Board_Manual_1975.pdf
 [compupro-1]: http://www.s100computers.com/Hardware%20Manuals/CompuPro/CompuPro%20System%20Support%201%20Manual.pdf

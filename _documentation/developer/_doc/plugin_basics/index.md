@@ -165,4 +165,4 @@ It is necessary to put your plugin name in the particular collection.
 [memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
 [pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/annotations/PluginRoot.html  
-[toml]: https://github.com/toml-lang/toml/blob/master/versions/en/toml-v0.5.0.md
+[toml]: https://toml.io/en/v0.5.0

@@ -197,7 +197,7 @@ The following table shows all the possible settings of ADM-3A plugin:
 |---
 
 
-[manual1]: http://www.mirrorservice.org/sites/www.bitsavers.org/pdf/learSiegler/ADM3A_Maint.pdf
-[manual2]: http://maben.homeip.net/static/s100/learSiegler/terminal/Lear%20Siegler%20ADM3A%20operators%20manual.pdf
+[manual1]: https://bitsavers.trailing-edge.com/www.computer.museum.uq.edu.au/pdf/LSI%20ADM-3A%20Maintenance%20Manual.pdf
+[manual2]: https://bitsavers.trailing-edge.com/pdf/learSiegler/ADM_3/DP2880486F_ADM3A_UM_Apr86.pdf
 [gui]: https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg
 [cp437]: https://en.wikipedia.org/wiki/Code_page_437

@@ -964,7 +964,7 @@ and run the emulation.
 [z80]: https://en.wikipedia.org/wiki/Zilog_Z80
 [mp3]: https://en.wikipedia.org/wiki/S1_MP3_player
 [z80test-raxoft]: https://github.com/raxoft/z80test
-[sjasm]: https://www.xl2s.tk/
+[sjasm]: https://github.com/Konamiman/Sjasm/releases/tag/v0.42c
 [mktap]: {{ site.baseurl }}/assets/mktap-8.zip
 [mktap-16]: https://torinak.com/~jb/zx/mktap-16.tar.gz
 [ZXSpectrumNextTests]: https://github.com/MrKWatkins/ZXSpectrumNextTests
