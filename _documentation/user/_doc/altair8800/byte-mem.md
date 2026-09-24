@@ -58,6 +58,12 @@ Generally, it is possible to move around the cells using keystrokes (arrows). If
 letter/number key, a small text field appears allowing to edit the current value. When editing
 is finished, the user can press <kbd>ENTER</kbd> key to confirm it, or <kbd>ESC</kbd> key to discard the editing.
 
+### Finding repeated matches
+
+The Find dialog accepts either text or a byte sequence. After the first match, press <kbd>F3</kbd> to select the next
+match or <kbd>Shift</kbd>+<kbd>F3</kbd> to select the previous one. Search wraps at both ends of memory. The status text
+shows the current match number and total count, making repeated data easy to navigate without reopening the dialog.
+
 ## Memory settings
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
