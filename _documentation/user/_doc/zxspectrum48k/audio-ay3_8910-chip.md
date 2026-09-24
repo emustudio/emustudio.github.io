@@ -130,6 +130,11 @@ model the real chip's non-linear DAC behavior.
 The audio is driven by CPU T-state timing — the chip receives cycle notifications from the CPU and advances its
 internal generators accordingly. This ensures accurate pitch regardless of emulation speed.
 
+Tone, noise, and envelope generators use the CPU clock in hertz and keep their divider state between audio buffers.
+Register reads return data only through the register-select address (`FFFDh`); the data-write address is not a second
+read alias. Writing R13 restarts all envelope shapes with their documented continue, attack, alternate, and hold
+behavior.
+
 ## Configuration
 
 The AY-3-8910 plugin has no user-configurable settings. It automatically connects to the CPU context and uses the

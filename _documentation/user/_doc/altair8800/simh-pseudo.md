@@ -32,9 +32,9 @@ Command | Parameters | Return value | Description
 0       | N/A        | N/A          | print the current time on stdout, in milliseconds
 1       | N/A        | N/A          | start a new timer on the top of the timer stack (max depth 10)
 2       | N/A        | N/A          | stop timer on top of timer stack and print time difference on stdout, in milliseconds
-3       | N/A        | N/A          | reset the PTR device (NOT IMPLEMENTED)
-4       | N/A        | N/A          | attach the PTR device (NOT IMPLEMENTED)
-5       | N/A        | N/A          | detach the PTR device (NOT IMPLEMENTED)
+3       | N/A        | N/A          | rewind the attached PTR tape
+4       | N/A        | 1 byte       | attach the PTR to the file named at the beginning of the CP/M command line; returns `0` on success or `1` on failure
+5       | N/A        | N/A          | detach the PTR file
 6       | N/A        | 8 bytes (`"SIMH004\0"`) | get the current version of the SIMH pseudo device
 7       | N/A        | 6 bytes      | get the current time in ZSDOS format, all BCD values: byte 0: year modulo 100, byte 1: month, byte 2: day, byte 3: hour, byte 4: minute, byte 5: second
 8       | 2 bytes (address of a 6-byte block in memory representing ZSDOS time in format YY MM DD HH MM SS) | N/A          | set the current time in ZSDOS format: reads the time from given address
@@ -45,8 +45,8 @@ Command | Parameters | Return value | Description
 13      | N/A        | 2 bytes      | get the base address of the common memory segment
 14      | N/A        | N/A          | reset the SIMH-pseudo device (clears "undefined" state, resets timer stack and host filenames list)
 15      | N/A        | N/A          | show time difference to timer on top of stack on stdout, in milliseconds (does not pop the timer)
-16      | N/A        | 1 byte       | attach PTP device to the file with name at beginning of CP/M command line (NOT IMPLEMENTED)
-17      | N/A        | N/A          | detach PTP device (NOT IMPLEMENTED)
+16      | N/A        | 1 byte       | attach the PTP to the file named at the beginning of the CP/M command line; returns `0` on success or `1` on failure
+17      | N/A        | N/A          | detach the PTP file
 18      | N/A        | 1 byte       | determines whether machine has banked memory (returns number of memory banks)
 19      | N/A        | N/A          | set the CPU to a Z80 (NOT IMPLEMENTED)
 20      | N/A        | N/A          | set the CPU to an 8080 (NOT IMPLEMENTED)
@@ -66,6 +66,13 @@ Command | Parameters | Return value | Description
 |---
 
 ### Command details
+
+#### Paper tape commands (3-5, 16, 17)
+
+Connect `simh-pseudo` to an `88-ptr-ptp` device in addition to its CPU and memory connections. Attach commands 4 and
+16 read a host file name from the beginning of the CP/M command line at `0080h`. The file name is resolved by the host
+and the command returns one status byte: `0` after a successful attach and `1` after an invalid name or I/O failure.
+Reset command 3 rewinds the current reader file; commands 5 and 17 close and detach the corresponding file.
 
 #### Timer stack (commands 1, 2, 15)
 
