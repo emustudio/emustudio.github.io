@@ -29,4 +29,4 @@ The release is performed in several steps.
 2. The last commit in the `master` branch is tagged with tag `RELEASE-XXX`, where `XXX` is the released version
 3. The release is edited in GitHub to add release notes and binary artifacts
 
-[gitflow]: https://datasift.github.io/gitflow/IntroducingGitFlow.html
+[gitflow]: https://nvie.com/posts/a-successful-git-branching-model/

@@ -1,6 +1,15 @@
 ---
 ---
 @import '../_sass/syntax-highlighting';
+
+.gha-activity-icon .fas {
+  color: #bbb;
+  float: left;
+  font-size: 24px;
+  margin: 6px auto;
+  text-align: center;
+  width: 50px;
+}
 @import 'asciidoc.css';
 
 $scotch-primary: rgb(255, 69, 69);

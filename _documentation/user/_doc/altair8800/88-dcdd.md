@@ -792,4 +792,4 @@ The following table shows all the possible file configurations of the plugin:
 [cpm-4.1]: https://www.seasip.info/Cpm/format41.html
 [zsdos]: https://github.com/wwarthen/RomWBW/tree/master/Source/ZSDOS
 [cpm-filesystem]: https://deramp.com/downloads/digital_research/Manuals/CPM%20File%20System.pdf
-[zsdos-pdf]: https://661.org/p112/files/zsdos.pdf
+[zsdos-pdf]: https://github.com/wwarthen/RomWBW/blob/master/Source/ZSDOS/zsdos.pdf
