@@ -64,6 +64,9 @@ The Find dialog accepts either text or a byte sequence. After the first match, p
 match or <kbd>Shift</kbd>+<kbd>F3</kbd> to select the previous one. Search wraps at both ends of memory. The status text
 shows the current match number and total count, making repeated data easy to navigate without reopening the dialog.
 
+Loading and dumping can take place in the background. The selected action stays disabled until both the file operation
+and its completion callback finish, preventing an accidental second request while the GUI is still updating.
+
 ## Memory settings
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
