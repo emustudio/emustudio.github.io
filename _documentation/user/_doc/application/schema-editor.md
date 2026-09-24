@@ -35,6 +35,10 @@ Description of the control panel follows.
 Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have
 a CPU and memory. Optionally one or more devices, and optionally a compiler.
 
+Compiler, CPU, memory, and device boxes follow the same create, replace, and save lifecycle. Replacing a selected plugin
+updates that schema element in place, while saving writes every populated element through the same configuration path.
+This keeps positions, plugin settings, and connection endpoints consistent across element types.
+
 ## Connection lines
 
 The connection line represents a virtual "connection" between computer components. For the computer schema, it's not
