@@ -50,6 +50,16 @@ When writing assembly for the ZX Spectrum, keep the following in mind:
 - The ROM `BEEP` routine is available at address `0x03B5` (if the 48K ROM is loaded).
 - The standard program entry point from BASIC is `RANDOMIZE USR <address>`.
 
+## First program
+
+The distribution includes ZX Spectrum examples for the Z80 assembler. Open an example from the editor, compile it,
+and start execution at its `ORG` address. The examples use `ORG 8000H`, above ROM and display memory, so the compiled
+program can be loaded and run without replacing the system ROM.
+
+For a new program, select the ZX Spectrum 48K computer, create an assembly file beginning with `ORG 8000H`, compile it,
+set the instruction pointer to `8000h`, and run or single-step it in the emulator. Load a legal 48K ROM image in the
+memory settings first when the program calls ROM routines.
+
 ### Example: Simple beeper tone
 
 {:.code-example}
@@ -88,5 +98,4 @@ delay2:
 
     halt
 ```
-
 
