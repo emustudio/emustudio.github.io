@@ -69,6 +69,24 @@ public class EmulatorEngine {
 It uses interpretation emulation technique (the simplest one). Note that breakpoints must be manually handled - after
 execution of each instruction it should be checked if the current instruction hasn't a breakpoint, and if yes, return.
 
+## Data-driven opcode dispatch
+
+The bundled Intel 8080 and Z80 engines keep opcode-to-handler mappings in `dispatch-tables.txt` resources beside their
+`DispatchTables` classes. A section names the public dispatch-table field and handler signature, followed by hexadecimal
+opcode and `EmulatorEngine` method pairs:
+
+{:.code-example}
+```text
+[DISPATCH_TABLE] retInt
+00 I_NOP
+01 I_LXI
+```
+
+The loader binds those names with `MethodHandles.findVirtual` during class initialization. Blank lines and comments
+beginning with `#` are ignored; a missing resource, malformed row, unknown table, or missing handler fails initialization
+instead of silently assigning an opcode. Add or change bundled CPU mappings in this resource, not in a hand-written
+static assignment block. This is an implementation convention for the bundled engines, not a new plugin API.
+
 ## Emulating accurate timing
 
 Accurate timing in the emulation is sometimes necessary to achieve "intended" (real) response times: visual, audio,
