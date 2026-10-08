@@ -43,6 +43,26 @@ hex.generate("output-file.bin");
 hex.loadIntoMemory(memory, b -> b);
 ```
 
+## Video and audio recording
+
+`net.emustudio.emulib.runtime.recording.RecordingSession` records MP4 video with stereo PCM audio. It owns H.264
+encoding, audio buffering, the bounded worker queue and temporary file cleanup. Plugins supply native frames,
+their timing, and already mixed signed 16-bit little-endian stereo PCM. JCodec is an emuLib runtime dependency;
+plugins use only the emuLib API.
+
+```java
+RecordingSession session = new RecordingSession(width, height, 1, 60, 48_000);
+session.capture(frame, stereoPcm); // paired video/audio; inputs are copied
+// Independent producers can call captureVideo(frame) and captureAudio(pcm, length).
+session.stop(outputPath);         // save MP4; call off the UI thread
+```
+
+Dimensions must be positive and even. The third and fourth constructor arguments define the rational frame rate
+as `videoRate / videoScale`; Spectrum can use its frame T-states and CPU frequency without rounding to 50 fps.
+Capture returns false when stopped or failed; `getFailure()` supplies the failure. Queue overload fails recording
+instead of blocking emulation. `stop(null)` or `close()` discards the recording. Record controls, file selection,
+error dialogs, frame pacing and audio generation remain in the plugin.
+
 ## Bits utilities
 
 Class name
