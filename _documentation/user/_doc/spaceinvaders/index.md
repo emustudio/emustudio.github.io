@@ -2,7 +2,7 @@
 layout: default
 title: Space Invaders
 description: "Set up Space Invaders in emuStudio — load arcade ROMs, use keyboard controls, and configure the display."
-nav_order: 9
+nav_order: 4
 permalink: /spaceinvaders/
 ---
 

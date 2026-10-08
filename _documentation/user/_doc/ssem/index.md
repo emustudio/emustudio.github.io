@@ -2,7 +2,7 @@
 layout: default
 title: SSEM
 description: "SSEM Manchester Baby emulator in emuStudio — emulate the world's first stored-program computer with CRT display and 7-instruction set."
-nav_order: 7
+nav_order: 6
 has_children: true
 permalink: /ssem/
 ---

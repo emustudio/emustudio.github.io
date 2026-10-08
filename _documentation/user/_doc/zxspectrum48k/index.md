@@ -2,7 +2,7 @@
 layout: default
 title: ZX Spectrum 48K
 description: "ZX Spectrum 48K emulator in emuStudio — emulate the classic Sinclair home computer with Zilog Z80 CPU, ULA chip, and audio tape support."
-nav_order: 8
+nav_order: 5
 has_children: true
 permalink: /zxspectrum48k/
 ---
