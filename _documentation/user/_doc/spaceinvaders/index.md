@@ -130,8 +130,11 @@ colorOverlay = true
 |:--------|:--------|:------------|
 | `scale` | `2` | Integer pixel scale, at least `1`. At `2`, the initial display area is 448 by 512 pixels. |
 | `colorOverlay` | `true` | Red and green bands over the monochrome image. Set to `false` for white pixels on black. |
+| `soundEnabled` | `true` in GUI, `false` headless | Enable playback of external sound samples. |
+| `soundSamplesDirectory` | `examples/space-invaders/sounds` | Directory containing the sound samples `0.wav` through `9.wav`. |
 
-The display is already rotated into the upright arcade orientation. Sound effects are not implemented.
+The display is already rotated into the upright arcade orientation. Sound effects use external WAV samples supplied
+by the user. Missing samples or an unavailable audio device leave emulation running with a warning in the log.
 
 ## Troubleshooting
 
@@ -142,20 +145,168 @@ The display is already rotated into the upright arcade orientation. Sound effect
 | Game stops during the attract screen | Check that `memorySize` is `65536`, rather than `16384`. |
 | Keys do nothing | Focus the display window, check that the CPU is running, and insert a coin before starting. |
 | Display settings have no effect | Close and reopen the computer after saving the configuration. |
-| Device initialization fails | Keep the template's connections to both CPU and memory. In a custom schema, CPU ports `1`–`4` must be free. |
+| Device initialization fails | Keep the template's connections to both CPU and memory. In a custom schema, CPU ports `1`–`5` must be free. |
 
-## Hardware overview
+## Programming the display
 
-The bundled schema connects the assembler to memory, the CPU to memory, and the display device to both CPU and memory.
-For custom programs, the framebuffer occupies `2400h` through `3FFFh`, with one bit per pixel.
+Programs draw by writing directly to byte memory and access the device's input, shift-register, and sound functions
+with the 8080 `IN` and `OUT` instructions. The device reserves CPU ports `1` through `5`; a port's read and write
+functions can differ.
+
+### Screen memory layout
+
+The framebuffer occupies `2400h` through `3FFFh`: 7168 bytes for 224 by 256 pixels, with one bit per pixel.
+A set bit lights a pixel; a clear bit leaves it black. Each column occupies 32 consecutive bytes, starting at its
+bottom edge. Bit 0 is the lowest pixel in a byte and bit 7 is the highest.
+
+For screen coordinates `x = 0..223` and `y = 0..255`, with `(0, 0)` at the upper-left corner:
+
+```text
+hardwareY = 255 - y
+address   = 2400h + x * 32 + (hardwareY / 8)   ; integer division
+mask      = 1 << (hardwareY & 7)
+```
+
+To light one pixel without changing its neighbours, OR the byte with `mask`. To erase it, AND the byte with the
+8-bit complement of `mask`.
+
+| Pixel | Address | Mask |
+|:------|:--------|:-----|
+| Upper-left `(0, 0)` | `241Fh` | `80h` |
+| Lower-left `(0, 255)` | `2400h` | `01h` |
+| Upper-right `(223, 0)` | `3FFFh` | `80h` |
+| Lower-right `(223, 255)` | `3FE0h` | `01h` |
+
+There is no colour attribute memory. With `colorOverlay = true`, lit pixels are red in rows `0`–`63`, white in
+rows `64`–`183`, and green in rows `184`–`255`. With the overlay disabled, all lit pixels are white.
+
+### I/O ports
 
 | Port | Read | Write |
 |:-----|:-----|:------|
 | `1` | Coin, start, fire, and movement inputs | Ignored |
 | `2` | Cabinet inputs, including tilt | Shift amount (low three bits) |
-| `3` | Shift-register result | Ignored; sound is not emulated |
+| `3` | Shift-register result | Sound control 1 |
 | `4` | Returns zero | Shift data |
+| `5` | Returns zero | Sound control 2 |
+
+#### Keyboard input
+
+`IN 1` returns the following bits. Keyboard inputs are active high: a pressed key sets its bit and releasing the key
+clears it. Reading a port does not clear the inputs.
+
+| Bit | Mask | Meaning |
+|:----|:-----|:--------|
+| `0` | `01h` | Coin (**C**) |
+| `1` | `02h` | Start two-player game (**2**) |
+| `2` | `04h` | Start one-player game (**1**) |
+| `3` | `08h` | Always set |
+| `4` | `10h` | Fire (**Space**) |
+| `5` | `20h` | Move left (**Left**) |
+| `6` | `40h` | Move right (**Right**) |
+| `7` | `80h` | Always clear |
+
+On `IN 2`, only bit 2 (`04h`) is mapped, for tilt (**T**). Other bits return zero; cabinet DIP switches and separate
+player-two movement/fire inputs are not implemented. For example, `IN 1` followed by `ANI 10h` tests whether Fire is held.
+
+#### Hardware shift register
+
+The 16-bit shift register helps programs align sprite data. `OUT 4` loads a new byte into the high half and moves the
+previous high byte into the low half. `OUT 2` selects a shift amount from `0` to `7`; other bits are ignored.
+`IN 3` returns the shifted eight-bit result:
+
+```text
+OUT 4: register = (newByte << 8) | (oldRegister >> 8)
+OUT 2: amount   = value & 7
+IN 3:  result   = (register >> (8 - amount)) & FFh
+```
+
+Writing `AAh`, then `55h`, to port `4` leaves `55AAh` in the register. Selecting shift amount `2` makes `IN 3` return `56h`.
+Reading the result does not change the register. Reset clears both the register and shift amount.
+
+#### Sound output
+
+`OUT 3` and `OUT 5` latch sound-control bits. In addition to enabling playback in the configuration, software must
+set bit 5 of port `3` to enable the emulated amplifier.
+
+| Bit | `OUT 3` | `OUT 5` |
+|:----|:--------|:--------|
+| `0` | UFO loop (`0.wav`) | Fleet step 1 (`4.wav`) |
+| `1` | Shot (`1.wav`) | Fleet step 2 (`5.wav`) |
+| `2` | Player hit (`2.wav`) | Fleet step 3 (`6.wav`) |
+| `3` | Invader hit (`3.wav`) | Fleet step 4 (`7.wav`) |
+| `4` | Bonus (`9.wav`) | UFO hit (`8.wav`) |
+| `5` | Amplifier enable | Ignored |
+| `6`–`7` | Ignored | Ignored |
+
+One-shot effects trigger when their bit changes from 0 to 1 while the amplifier is enabled. Clear the bit before
+setting it again to replay an effect; repeatedly writing the same value does not retrigger it. Keep the other
+control bits when changing an effect. The UFO sample loops while port `3` bits 0 and 5 are both set.
+Clearing bit 0 stops the UFO loop; clearing bit 5 stops all sounds. Reset clears both sound latches and stops playback.
+
+For example, writing `20h`, then `22h`, then `20h` to port `3` enables sound, triggers a shot, and clears its trigger
+bit ready for another shot.
+
+### Raster interrupts
 
 A frame clock alternates 8080 `RST 1` and `RST 2` interrupts at 120 half-frames per second and refreshes the display
 at approximately 60 Hz. Timing follows the host clock rather than cycle-exact scanlines. Interrupts also run during
 [headless automation]({{ site.baseurl }}/application/automation), where no display window or keyboard controls are available.
+
+`RST 1` enters the handler at `0008h`; `RST 2` enters the handler at `0010h`. Before enabling interrupts with `EI`,
+initialize a stack in writable RAM and install handlers at both vectors. A handler must preserve the registers it
+changes and return with `RET`; use `EI` before returning to allow subsequent interrupts.
+
+The arcade ROMs already supply these handlers. For your own handlers, use a separate computer configuration and
+remove the ROM images and write protection covering the vector addresses. A program that does not use interrupts
+can keep them disabled with `DI`; the display still refreshes.
+
+### Example: draw and read Fire
+
+This program clears the framebuffer, draws a vertical line at column 112, and lights the upper-left pixel while
+**Space** is held. It starts at `2000h`, in writable RAM in the bundled configuration, and leaves interrupts disabled.
+It does not need the arcade ROMs.
+
+1. Stop the game and open a new source file in the editor. Paste the program below and compile it with
+   [`as-8080`]({{ site.baseurl }}/altair8800/as-8080).
+2. Click **Reset**, then use **Jump to location** to set the next instruction address to `0x2000`.
+3. Open the display, click **Run**, then focus the display window and hold/release **Space**.
+
+```asm
+org 2000h
+
+di
+lxi sp,2400h        ; stack grows down into RAM below the framebuffer
+lxi h,2400h
+lxi b,1C00h        ; clear all 7168 framebuffer bytes
+clear_screen:
+mvi m,0
+inx h
+dcx b
+mov a,b
+ora c
+jnz clear_screen
+
+lxi h,3200h        ; start of column 112: 2400h + 112 * 32
+mvi b,32
+draw_column:
+mvi m,0FFh
+inx h
+dcr b
+jnz draw_column
+
+poll_fire:
+in 1
+ani 10h
+jz fire_released
+mvi a,80h          ; bit 7 at 241Fh is the upper-left pixel
+jmp write_pixel
+fire_released:
+xra a
+write_pixel:
+sta 241Fh
+jmp poll_fire
+```
+
+The example writes the whole byte at `241Fh`, clearing the other seven pixels in that byte. In a program that shares
+that byte with other graphics, use the read–modify–write operations described above instead.
