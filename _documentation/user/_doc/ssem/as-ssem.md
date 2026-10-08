@@ -11,7 +11,7 @@ permalink: /ssem/as-ssem
 # Assembler "as-ssem"
 
 Assembler "as-ssem" is a simple language that compiles SSEM instructions into binary output and SSEM memory.
-Source code has `.ssem` file extension, and binary form has a `.bin` file extension.
+Source code has `.ssem` file extension, and compiler output has a `.bssem` file extension.
 
 The instructions table follows (modified from [Wikipedia][programming]{:target="_blank"}):
 
@@ -41,6 +41,18 @@ The instruction format is as follows:
 where bits `LLLLL` denote a "line", which is basically the memory address - index of a memory cell. It can be understood
 as an instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).
 
+## Running from the command line
+
+Run the supplied launcher from the emuStudio installation directory:
+
+```
+bin/as-ssem --output program.bssem program.ssem
+```
+
+On Windows, use `bin\as-ssem.bat` instead. Options are `--output`/`-o`, `--help`/`-h`, and `--version`/`-v`. Put options before the input filename.
+Without `--output`, the compiler uses the input filename with the `.bssem` extension. This compiles a file;
+it does not start a virtual computer. Use [automation]({{ site.baseurl }}/application/automation) to compile and run.
+
 ## Language syntax
 
 ### New-lines
@@ -56,6 +68,23 @@ Assembler supports all forms of instructions. All instructions must start with a
 ```
     01 LDN 20
 ```
+
+### Starting line
+
+Use `line START` to set the initial control line (default **0**). It does not occupy a memory word, so an instruction
+can have the same line number. The CPU increments the control line **before fetching**, so the first instruction
+executed after reset is on the following line:
+
+```
+04 START
+05 LDN 20
+06 STP
+20 NUM -8
+```
+
+The compiler supplies `4 * line` as the reset control address. Line numbers in this language refer to 32-bit words;
+the debugger's byte address for line `n` is `4 * n`. With no `START` directive, put the first executed instruction
+on line 1.
 
 ### Literals / constants
 
@@ -80,7 +109,9 @@ It means that the number will be stored untouched to the memory in the format as
 
 There exists also a third keyword, `BINS xxx`, with the exact meaning as `BNUM`.
 
-For all constants, the following rules hold. Only integral constants are supported, and the allowed range is from 0-31 (maximum is 2^5).
+Line numbers and instruction address operands range from **0 to 31**. `NUM` and `BNUM` define the contents of a
+**32-bit word**, rather than a five-bit address. `NUM` accepts signed decimal and hexadecimal values; `BNUM`/`BINS`
+accept binary digits and preserve their written bit order.
 
 ### Comments
 
@@ -90,6 +121,7 @@ the end of the line. Comment prefixes are:
 - Double-slash (`//`)
 - Semi-colon (`;`)
 - Double-dash (`--`)
+- Hash (`#`)
 
 ## Example
 
@@ -97,12 +129,13 @@ For example, simple `5+3` addition can be implemented as follows:
 
 {:.code-example}
 ```
-0 LDN 7 // load negative X into the accumulator
-1 SUB 8 // subtract Y from the value in the accumulator
-2 STO 9 // store the sum at address 7
-3 LDN 9 // A = -(-Sum)
-4 STO 9 // store sum
-5 HLT
+0 START
+1 LDN 7 // load negative X into the accumulator
+2 SUB 8 // subtract Y from the value in the accumulator
+3 STO 9 // store the negative sum at address 9
+4 LDN 9 // A = -(-Sum)
+5 STO 9 // store sum
+6 HLT
 
 7 NUM 3 // X
 8 NUM 5 // Y

@@ -10,7 +10,7 @@ permalink: /rasp/automation
 
 # Automation
 
-RASP computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--nogui`),
+RASP computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--no-gui`),
 each abstract tape is redirected to a file. The format of the files is described in
 [abstract tape documentation]({{site.baseurl}}/ram/abstract-tape).
 
@@ -54,7 +54,7 @@ After the run, the following output on the stdout can be expected:
 [INFO] Emulation completed
 ```
 
-Then, in the current working directory, there will be created three new files:
+Then, in the current working directory, there will be created two new files:
 
 - `input_tape.out`: contains all input tape symbols
 - `output_tape.out`: contains all output tape symbols

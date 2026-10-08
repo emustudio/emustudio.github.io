@@ -59,11 +59,11 @@ as follows:
 |Type | Description
 |-|-
 | Keywords | instruction names; preprocessor directives (`org`, `equ`, `var`, `macro`, `endm`, `include`, `if`, `endif`); data definitions (`db`, `dw`, `ds`); CPU registers
-| Identifiers | `([a-zA-Z_\?@])[a-zA-Z_\?@0-9]*` except keywords
-| Labels |
+| Identifiers | `[a-zA-Z_?@.][a-zA-Z_?@.0-9]*` except keywords
+| Labels | An identifier followed by `:` |
 | Constants | strings or integers
-| Operators | `+`, `-`, `*`, `/`, `=`, `%`, `&`, `\|`, `!`, `~`, `<<`, `>>`, `>`, `<`, `>=`, `<=`
-| Comments | semi-colon (`;`) with text after it until the end of the line
+| Operators | `+`, `-`, `*`, `/`, `=`, `%`, `&`, `\|`, `^`, `~`, `<<`, `>>`, `>`, `<`, `>=`, `<=`
+| Comments | `;`, `#`, `--`, or `//` through the end of the line; `/* … */` for block comments
 |---
 
 ### Constants
@@ -76,12 +76,13 @@ using regexes:
 - octal numbers: `[0-7]+[oOqQ]`
 - hexadecimal numbers: `[0-9][0-9a-fA-F]*[hH]` or `0[xX][0-9a-fA-F]+`
 
-Characters or strings must be enclosed in double-quotes, e,g,: `LD E, "*"`
+Characters or strings can be enclosed in single or double quotes, e.g. `LD E, "*"`.
 
 ### Identifiers
 
-Identifiers must fit to the following regex: `([a-zA-Z_\?@])[a-zA-Z_\?@0-9]*`. It means, that it has to start with a
-letter a-z (or A-Z) or the at-sign (`@`). Then, it can be followed by letters, at-sign, or numbers.
+Identifiers must fit to the following regex: `[a-zA-Z_?@.][a-zA-Z_?@.0-9]*`. It means, that it has to start with a
+letter a-z (or A-Z), underscore (`_`), question mark (`?`), at-sign (`@`), or dot (`.`). Subsequent
+characters can also be digits.
 
 However, they must not equal to any keyword.
 
@@ -90,7 +91,7 @@ of another kind. For example, the following code is not valid
 
 ```
 label:
-label set 1
+label var 1
 ```
 
 At first the identified `label` is used for definition of a label, and on the second row the same identifier is used
@@ -174,12 +175,12 @@ There exist several operators, such as:
 |`/`  | Integer division.
 |`=`  | Comparison for equality. Returns 1 if operands equal, 0 otherwise. Example: `DB 2 = 2`; evaluates to `DB 1`.
 |`%`  | Remainder after integer division. Example `DB 4 mod 3`; evaluates to `DB 1`.
-|`&`  | Logical and.
-|`\|` | Logical or.
-|`~`  | Logical xor.
-|`!`  | Logical not.
-|`<<` | Shift left by 1 bit. Example: `DB 1 SHL 3`; evaluates to `DB 8`
-|`>>` | Shift right by 1 bit.
+|`&`  | Bitwise AND.
+|`\|` | Bitwise OR.
+|`^`  | Bitwise XOR.
+|`~`  | Bitwise complement (also written `NOT`).
+|`<<` | Shift left by the number of bits in the right operand. Example: `DB 1 SHL 3`; evaluates to `DB 8`
+|`>>` | Shift right by the number of bits in the right operand.
 |`>`  | Greater than. Example: `DB 3 > 2`; evaluates to `DB 1`
 |`<`  | Less than.
 |`>=` | Greater or equal than.
@@ -191,18 +192,21 @@ Operator priorities are as follows:
 |---
 |Priority | Operator | Type
 |-|-|-
-| 1 | `( )`       | Unary
-| 2 | `*`, `/`, `%`, `<<`, `>>`, `>`, `<`, `>=`, `<=` | Binary
-| 3 | `+`, `-`    | Unary and binary
-| 4 | `=`         | Binary
-| 5 | `!`         | Unary
-| 6 | `&`         | Binary
-| 7 | `\|`, `~`   | Binary
+| 1 | `( )` | Grouping
+| 2 | `+`, `-`, `NOT`, `~` | Unary
+| 3 | `*`, `/`, `MOD`, `%` | Binary
+| 4 | `+`, `-` | Binary
+| 5 | `SHL`, `<<`, `SHR`, `>>` | Binary
+| 6 | `>`, `<`, `>=`, `<=` | Binary
+| 7 | `=` | Binary
+| 8 | `&` | Binary
+| 9 | `^` | Binary
+| 10 | `\|` | Binary
 |---
 
-All operators work with their arguments as if they were 16-bit. Their results are always 16-bit numbers.
-If there is expected an 8-bit number, the result is automatically "cut" using operation `result AND 0FFh`. This may be
-unwanted behavior and might lead to bugs, but it is often useful so the programmer must ensure the correctness.
+Expressions use signed 32-bit integer arithmetic. The assembler checks the final value against the size required by
+the instruction or data directive; oversized values can produce a compilation error. Use an explicit mask such as
+`value & 0FFh` when the low byte is intended. Right shifts (`SHR` / `>>`) shift in zeros.
 
 ## Defining data
 
@@ -226,7 +230,7 @@ The following table describes all possible data definition pseudo-instructions:
 HERE:  DB 0A3H          ; A3
 W0RD1: DB 5*2, 2FH-0AH  ; 0A25
 W0RD2: DB 5ABCH SHR 8   ; 5A
-STR:   DB "STRINGSpl"   ; 535452494E472031
+STR:   DB "STRINGSpl"   ; 535452494E4753706C
 MINUS: DB -03H          ; FD
 
 ADD1: dw COMP          ; 1C3B  (assume COMP is 3B1CH)
@@ -349,7 +353,7 @@ code yields an error (`Label already defined`):
 if 0
   label1: ld (bc), a
 endif
-label1: hlt 
+label1: halt
 ```
 
 Evaluation of the expression in the `if` statement must not use forward references. For example, the following code is
@@ -359,7 +363,7 @@ not valid (will produce an error):
 if variable
   ld (bc), a
 endif
-variable set $
+variable var $
 ```
 
 In this case, variable is about to be set to current address, which would be 0 if the `if` statement evaluates to `false`.
@@ -443,9 +447,9 @@ SHV 5
 LD (TEMP), A
 ```
 
-Which has the same effect as the previous example.
+This version performs five rotations; the previous example performs three.
 
-## END psudo-instruction
+## END pseudo-instruction
 
 On encountering `END` pseudo-instruction, the compiler will allow only comments below this pseudo-instruction.
 It's a marker of "program end".

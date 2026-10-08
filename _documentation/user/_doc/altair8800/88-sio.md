@@ -46,7 +46,7 @@ The window shows attached device, control channel and data buffer.
 {: .list}
 | <span class="circle">1</span> | Attached device name
 | <span class="circle">2</span> | Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The displayed value shows the status. For details see the 88-sio manual.
-| <span class="circle">3</span> | 88-sio has internal buffer used for caching one byte coming from the connected device. If the CPU is not fast enough to read it, the data can be overwritten by new data coming from the device. However, the buffer is not used when sending data to the connected device from CPU. Thus writing data from CPU won't clear data coming from device.
+| <span class="circle">3</span> | 88-sio queues bytes received from the connected device. Reading the data port removes the oldest queued byte. Sending data to the device does not clear this input queue.
 | <span class="circle">4</span> | Clear internal data buffer
 
 ## Settings
@@ -177,17 +177,17 @@ Read status of the device.
 
 - `D7` : _Output device ready_. Always 0 in the emulator.
 - `D6` : Not used (always 0).
-- `D5` : _Data available (for writing to the attached device)_. Always 0 in the emulator, meaning that no data is
-  pending to be written. Data are written immediately after `OUT` instruction.
-- `D4` : _Data overflow_. Value 1 means a new word of data has been received before the previous word was inputted to
-  the accumulator. In emuStudio, this never happens.
+- `D5`: set while received input is pending, like bit `D0`.
+- `D4`: the current implementation sets this bit when a byte arrives into an empty input queue and clears it when
+  a byte arrives into a nonempty queue. It does not indicate lost bytes; the input queue is unbounded.
 - `D3` : _Framing error_. Value 1 means that data bit has no valid stop bit. In emuStudio, this never happens.
 - `D2` : _Parity error_. Value 1 means that received parity does not agree with selected parity. In emuStudio, this
   never happens.
-- `D1` : _Transmitter buffer empty_. Value 1 means that the data word has been received from the attached device and
-  it's available for reading (from the Data port).
-- `D0` : _Input device ready_. Value 1 means that the CPU can write data to the SIO (that the board is ready). Always 1
-  in the emulator.
+- `D1`: transmitter ready, always 1. CPU output is forwarded immediately.
+- `D0`: received input available. When 1, read the data channel to obtain the next queued byte.
+
+Poll with `IN 10h` / `ANI 1` for input, and read the byte from `11h`. The corresponding default status after reset
+is `02h` (transmitter ready, no input). Reading an empty data queue returns `00h`.
 
 ### Data channel (port 2)
 
@@ -262,10 +262,12 @@ getchar:
 #### Reading text from keyboard
 
 Now follows an example, which will read a whole line of characters into memory starting at address in `DE` pair. The
-procedure will interpret some control keys, like: backspace and ENTER keys.
+procedure will interpret some control keys, like: backspace and ENTER keys. Append the `print` routine from the
+preceding example to this program. The 30-byte buffer allows up to 27 input characters plus CR, LF, and NUL.
 
 {:.code-example}
 ```
+lxi sp, 0FF00h     ; initialize stack in writable RAM
 lxi h, text        ; load address of 'text' label to HL
 xchg               ; DE <-> HL
 call getline       ; read line from the keyboard into DE
@@ -279,7 +281,7 @@ text: ds 30        ; here will be stored the read text
 
 ;Procedure for reading a text from keyboard.
 ;Input: DE = address, where the text should be put after reading
-;       C  = is used internally
+;       B, C = used internally; buffer must have at least 30 bytes
 getline:
     mvi c, 0       ; register C will be used as a counter of
                    ; read characters
@@ -290,7 +292,9 @@ next_char:
     in 11h         ; yes; read it to A register
 
     ; now ENTER and Backspace will be interpreted
-    cpi 13         ; ENTER?
+    cpi 10         ; LF (VT100 ENTER or Unix input file)?
+    jz getline_ret
+    cpi 13         ; CR (ADM-3A ENTER)?
     jz getline_ret ; yes; it means end of input
     cpi 8          ; Backspace ?
     jnz save_char  ; if not; store the character
@@ -315,6 +319,11 @@ next_char:
     jmp next_char  ; jump to next char
 
 save_char:         ; stores a character into memory at DE
+    mov b, a       ; retain the received character
+    mov a, c
+    cpi 27         ; reserve CR, LF and NUL in the 30-byte buffer
+    jnc next_char  ; discard characters when the buffer is full
+    mov a, b
     out 11h        ; show the character in A register
     stax d         ; store it at address DE
     inx d          ; increment DE
@@ -341,6 +350,7 @@ In this example, an interrupt is signalled when user presses a key on keyboard.
 {:.code-example}
 ```
 ; Tests signalling interrupts on input
+lxi sp, 0FF00h ; initialize stack in writable RAM
 mvi a, 1      ; 88-SIO: input interrupts enable
 out 0x10
 
@@ -350,9 +360,14 @@ jmp loop      ; do this forever (or until...)
 
 ; interrupt handler
 org 0x38      ; assuming interrupt vector is set to 7
+push psw
+push h
 in 0x11       ; read char from 88-SIO (and ignore it)
 lxi h, key    ; load address of 'key' label to HL
 call print    ; print "key pressed"
+pop h
+pop psw
+ei            ; allow subsequent interrupts
 ret           ; return from the interrupt
 
 key: db 'Key pressed!',10,13,0

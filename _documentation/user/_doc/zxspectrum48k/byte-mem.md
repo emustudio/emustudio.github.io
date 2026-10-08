@@ -39,8 +39,8 @@ The 16 KB ROM image must be configured to load at address `0x0000` at startup. I
 | `imageBank0` | `0` | Memory bank (default)
 |---
 
-Optionally, you can also set up a ROM area (`ROMfrom0 = 0`, `ROMto0 = 16383`) to prevent programs from accidentally
-overwriting the ROM contents, though this is not strictly required for most software.
+Protect the ROM with `ROMfrom0 = 0` and `ROMto0 = 16383` (inclusive). The bundled configuration already sets these
+keys. Keeping this protection models the real machine and prevents guest writes from corrupting BASIC or other ROM code.
 
 ### Contended memory
 

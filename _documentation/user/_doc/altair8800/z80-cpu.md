@@ -47,6 +47,7 @@ The following table shows all the possible settings of Zilog Z80 CPU plugin:
 |-|-|-|-
 |`printCode`       | false | true / false | Whether the emulator should print executed instructions, and its internal state to console (dump)
 |`printCodeUseCache`| false | true / false | If `printCode` is set to `true`, then a cache will be used which remembers already visited blocks of code so the instruction dump will not be bloated with infinite loops
+|`printCodeFileName` | `"syserr"` | `"syserr"` or writable file path | Trace destination: standard error, or a file overwritten when tracing starts
 |`frequency_khz` | 4000 | > 0 | CPU frequency set on emuStudio startup (it can be changed in runtime, but won't be saved in settings)
 |---
 
@@ -70,7 +71,7 @@ For example, let's take an example which computes a reverse text:
 
 org 1000
 
-dec sp       ; stack initialization (0FFFFh)
+ld sp, 0FF00h ; stack initialization in writable RAM
 
 ld hl,text1
 call putstr  ; print text1
@@ -98,6 +99,10 @@ dec bc
 
 call newline
 
+ld a, d
+or a
+jp z, char2_end ; an empty line has no characters to reverse
+
 char2_loop:
 ld a, (bc)
 call putchar
@@ -112,11 +117,11 @@ char2_end:
 
 halt
 
-include "include\getchar.inc"
-include "include\getline.inc"
-include "include\putstr.inc"
-include "include\putchar.inc"
-include "include\newline.inc"
+include "include/getchar.inc"
+include "include/getline.inc"
+include "include/putstr.inc"
+include "include/putchar.inc"
+include "include/newline.inc"
 
 text1: db "Reversed text ...",10,13,"Enter text: ",0
 text2: db 10,13,"Reversed: ",0
@@ -124,7 +129,7 @@ input: ds 30
 ```
 
 When the program is being run, and the dump instructions feature is turned on, on console you can see the following
-output:
+output in the following format (addresses and elapsed times depend on the program and run):
 
 {:.code-example}
 ```
@@ -216,7 +221,7 @@ following table.
 |---
 |Column | Description
 |-|-
-| 1 | Timestamp from program start (seconds)
+| 1 | Elapsed host time from the first traced instruction (milliseconds)
 | 2 | Program counter before instruction execution
 | 3 | Disassembled instruction
 | 4 | Instruction opcodes
@@ -409,6 +414,9 @@ Tests commented out with `;x` don't work yet.
 - In terminal, run `make`
 
 #### Running tests in emuStudio
+
+The patch above changes Spectrum output to Altair terminal I/O. For the Spectrum configuration, use the **unmodified**
+test suite instead: load its TAP file through the audio tape player and the ROM loader.
 
 Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer configuration, or create a custom one:
 
@@ -890,6 +898,9 @@ index 4af203f..03cc51a 100644
 
 #### Running tests in emuStudio
 
+The patch above changes Spectrum output to Altair terminal I/O. For the Spectrum configuration, use the **unmodified**
+test suite instead: load its TAP file through the audio tape player and the ROM loader.
+
 Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer (see previous section on Patrik Rak's tests).
 
 When the computer is opened, load compiled test suite in memory, file
@@ -910,18 +921,24 @@ at [this repository][zexall]{:target="_blank"}.
 
 ```
 zsm4 =zexall/L
-link zexdoc
+link zexall
 ```
 
 #### Running tests in emuStudio
 
-Use the [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) virtual computer (see previous section on Patrik Rak's tests).
+Use the **MITS Altair8800 with Z80** virtual computer, connected to an 88-SIO terminal. The support code below
+uses Altair serial port `11h`, which is not a Spectrum terminal port.
 
 In source code editor, compile the following support code:
 
 ```
 di
 halt
+
+; entry point after loading the COM program
+org 0040h
+ld sp, 0FF00h
+jp 0100h
 
 ; bdos simulation
 org 5
@@ -957,7 +974,7 @@ pop af
 ret
 ```
 
-Then, load `zexall.com` or `zexdoc.com` at location 0x100 into memory. Set program address to 0x100, open the terminal
+Then, load `zexall.com` or `zexdoc.com` at location 0x100 into memory. Set program address to 0x0040, open the terminal
 and run the emulation.
 
 

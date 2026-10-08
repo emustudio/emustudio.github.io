@@ -18,9 +18,10 @@ interactive or non-interactive mode.
 If a `--no-gui` flag is set, the input and output will be redirected to files, instead of terminal GUI.
 
 Default input file is called `vt100-terminal.in` and must be placed in the directory from which emuStudio was executed.
-If the file does not exist, emuStudio will not run.
+A missing input file produces a warning. Output-only programs can still run; programs requesting more input than the
+file supplies wait for input and need a timeout or a manual stop.
 
-Default output file is called `vt100-terminal.out` and it will be created automatically or appended when it exists in
+Default output file is called `vt100-terminal.out` and it will be created automatically or overwritten when it exists in
 the location from which emuStudio was executed.
 
 The input/output file names are configurable, please refer to [VT100 terminal documentation]({{ site.baseurl }}/brainduck/terminal#configuration-file).
@@ -41,7 +42,7 @@ Command line for starting non-interactive automatic emulation:
 - input file for compiler is one of the examples
 - (`auto`) automatic emulation will be executed
 
-This command will show terminal GUI and after the program finishes, emuStudio is closed. The console will contain
+This command runs without terminal windows and closes emuStudio after the program finishes. The console will contain
 additional information about the emulation progress:
 
 {:.code-example}

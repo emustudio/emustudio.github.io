@@ -37,5 +37,5 @@ The following table describes possible configuration options.
 |-|-|-|-
 |`useSchemaGrid`  | `true` / `false` | `true` | Whether to show and use grid when editing computer configuration    
 |`schemaGridGap`  | positive integer | 20 | Gap between grid points in pixels
-|`lookAndFeel`    | quoted string | "com.sun.java.swing.plaf.gtk.GTKLookAndFeel" | Java Look&Feel used by emuStudio
+|`theme`          | `"LIGHT"`, `"DARK"`, `"INTELLIJ"` | `"INTELLIJ"` | Application theme
 |---

@@ -29,8 +29,8 @@ The AY chip is accessed through two I/O ports using the ZX Spectrum 128K style w
 |---
 | Port | Address | Description
 |-|-|-
-| Register select | `0xFFFD` | Write a register number (0–15) to select which register to read/write
-| Data | `0xBFFD` | Read or write data to/from the currently selected register
+| Register select/read | `0xFFFD` | Write a register number (0–15); read the selected register's data
+| Data write | `0xBFFD` | Write data to the currently selected register; reads return `FFh`
 |---
 
 {: .info}

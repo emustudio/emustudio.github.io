@@ -67,6 +67,13 @@ shows the current match number and total count, making repeated data easy to nav
 Loading and dumping can take place in the background. The selected action stays disabled until both the file operation
 and its completion callback finish, preventing an accidental second request while the GUI is still updating.
 
+### Source information in saved images
+
+A memory dump also writes a UTF-8 `.meta` file beside the image, for example `program.bin.meta`. This stores source
+positions for annotated addresses. Keep it beside the image when copying it: loading the image automatically imports
+the sidecar so debugger source navigation remains available. An image without a sidecar still loads normally.
+Loading at a different binary address does not relocate the stored source positions.
+
 ## Memory settings
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
@@ -116,14 +123,15 @@ Also, it was very common that some part of the address space still kept some com
 out. This part is called a "common" part. In emuStudio, common part starts with the `Common` address (as it can be seen
 in the Settings dialog image above) and ends till the rest of the CPU address space (or memory end).
 
-To summarize, let's consider an example. If a CPU is 8-bit, it means it has address space of size 2^8 - i.e. it can
-access memory from address 0 to (2^8 - 1). If the memory was larger, CPU just doesn't allow to access higher memory
-cells. So memory bank-switching is coming for the rescue. If the memory has 2 MB, we require `2^log2(2MB) = 2^21`
-addresses. So, if we won't have any common address space, we require `ceil(21 / 8) = 3` banks:
+An 8-bit CPU need not have an 8-bit address bus. The Intel 8080 and Z80 use **16-bit addresses**, so they can address
+64 KiB (`0000h`–`FFFFh`) at a time. To expose 2 MiB through that address space without a common region requires
+`2 MiB / 64 KiB = 32` equal-sized banks. Each bank appears at the same guest addresses; selecting a bank changes which
+storage those addresses refer to.
 
-- bank 0: maps from 0 - (2^8 - 1)
-- bank 1: maps from 2^8 - (2^16 - 1)
-- bank 2: maps from 2^16 - (2^21 - 1)
+In `byte-mem`, `memorySize` is the size of **each bank**. Below `commonBoundary`, accesses use the selected bank;
+at or above it, accesses always use bank 0. With the default boundary of 0, the entire address space is common.
+Set the boundary to `memorySize` for completely separate banks. For an Altair guest, the
+[SIMH pseudo-device]({{ site.baseurl }}/altair8800/simh-pseudo) provides bank selection commands.
 
 ## Configuration file
 
@@ -132,14 +140,29 @@ The following table shows all the possible settings of byte-mem plugin:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`banksCount`      | 0 | >= 0 | Number of memory banks
-|`commonBoundary`  | 0 | >= 0 and < mem size | Address from which the banks are shared
-|`memorySize`      | 65536 | > 0 | Memory size in bytes
+|`banksCount`      | 1 | > 0 | Number of memory banks
+|`commonBoundary`  | 0 | >= 0 and <= mem size | First common address; `memorySize` means no common region
+|`memorySize`      | 65536 | Non-negative integer or quoted size | Size of each bank in bytes; strings can use `K` (1024) or `M` (1048576)
 |`ROMfrom`(i)      | N/A | >= 0 and < mem size | Start of the i-th ROM area
 |`ROMto`(i)        | N/A | >= `ROMfrom`(i) and < mem size | End of the i-th ROM area
-|`imageName`(i)    | N/A | file path | The i-th memory image file name. If it ends with `.hex` suffix, it will be loaded as Intel HEX format, otherwise as binary
+|`imageName`(i)    | N/A | file path | The i-th memory image file name; format is selected by extension
 |`imageAddress`(i) | N/A | >= 0 and < mem size | The i-th memory image load address
+|`imageBank`(i)    | 0 | 0 to `banksCount - 1` | Bank into which the i-th image is loaded
 |---
+
+Use concrete keys such as `imageName0`, `imageAddress0`, and `imageBank0`. Number image entries and ROM ranges
+consecutively from 0: loading stops at the first missing name/address pair or ROM endpoint pair. ROM endpoints are
+inclusive. Images are loaded before the startup ROM protections are applied. Relative image paths use the host working
+directory.
+
+`size` is an alias for `memorySize` and takes precedence when both are present. For example, `size = "64K"` is equivalent
+to `memorySize = 65536`.
+
+Intel HEX images carry their own addresses; binary images use `imageAddressN`. Extensions `.bin`, `.com`, `.out`, and
+`.rom`, as well as unknown extensions, select the binary loader. TAP and TZX loaders can extract Spectrum
+memory blocks, but do not run BASIC loaders or reproduce tape timing. The memory TZX loader accepts only standard-speed
+(`10h`) and turbo-speed (`11h`) data blocks. For a Spectrum ROM loader or other tape formats, use the
+[audio tape player]({{ site.baseurl }}/zxspectrum48k/audiotape-player).
 
 ## Using memory in custom computers
 
@@ -158,10 +181,10 @@ named `net.emustudio.plugins.memory.bytemem.api.ByteMemoryContext`:
 ```java
 ...
 
-public void initialize(SettingsManager settings){
-        ByteMemoryContext mem=contextPoolImpl.getMemoryContext(pluginID,ByteMemoryContext.class);
-        ...
-        }
+public void initialize() throws PluginInitializationException {
+    ByteMemoryContext mem = applicationApi.getContextPool().getMemoryContext(pluginID, ByteMemoryContext.class);
+    ...
+}
 ```
 
 The memory context has the following content:

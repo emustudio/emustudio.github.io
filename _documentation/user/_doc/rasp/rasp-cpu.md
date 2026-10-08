@@ -23,7 +23,7 @@ output tapes. After boot, the CPU assigns the specific meaning to each tape.
 
 In the following image, you can see the status panel of `rasp-cpu`.
 
-![RAM CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-cpu-status.png)
+![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-cpu-status.png)
 
 It is split into three parts. Within the 'Internal status' part, there is shown the content of registers `R0`
 (accumulator) and `IP`. Register `IP` is the position of the program memory head. It stands for "instruction pointer". It

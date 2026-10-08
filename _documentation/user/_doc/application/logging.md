@@ -22,7 +22,7 @@ To enable file logging, open `logback.xml` file located in the root directory of
 named `<root ..>`, and change `appender-ref` from `STDOUT` to `FILE` as follows:
 
 ```xml
-<root level="debug">
+<root level="info">
     <appender-ref ref="FILE"/>
 </root>
 ```
@@ -30,14 +30,15 @@ named `<root ..>`, and change `appender-ref` from `STDOUT` to `FILE` as follows:
 The log file is named `logs/emuStudio.log`. Every new run of emuStudio will append log messages into that file until
 emuStudio is terminated.
 
-By default, a rolling policy is enabled, which deletes logs older than 2 days and keeps the log in maximum size of 1 MB.
+The supplied rolling policy keeps up to 10 days of archived logs, rolls each file at 5 MB, and limits archived logs
+to 100 MB in total.
 It is of course configurable. For more information about how to configure loggers, please look at
 the [logback site][logback]{:target="_blank"}.
 
 ## Automation logger
 
 An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default,
-each run of automatic emulation creates (overwrites) a log located in `logs/automation.log` file.
+each emuStudio process creates (overwrites) `logs/automation.log`. Automation progress is written to this file.
 
 The log file is in plaintext format and contains messages which appeared in the log during the emulation.
 The log file format can be customized, see the previous section for more details.

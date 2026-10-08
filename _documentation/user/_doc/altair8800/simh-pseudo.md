@@ -14,6 +14,15 @@ This device is originally implemented as permanently connected to 88-SIO device 
 It listens to custom, non-standard commands from operating system thus simplifies communication between emulator (host) and
 running guest system. This device is required if you want to run CP/M operating system images made for simh emulator.
 
+## Connections and configuration
+
+Connect the plugin to an `8080-cpu` or `z80-cpu` context, `byte-mem`, and `88-ptr-ptp`. All three connections are
+required at initialization, including the paper tape device when the guest does not use tape commands. The CPU port
+is fixed at `FEh`. There is no device window, settings dialog, or plugin-specific configuration key.
+
+This plugin implements the commands listed below; it is not a complete SIMH monitor. Commands 19 and 20 do not replace
+the CPU plugin. Select the desired CPU in the virtual-computer configuration.
+
 ## Programming
 
 SIMH-pseudo device can be pretty useful also for users of emuStudio. Z80 or 8080 programs communicate with it via 
@@ -38,12 +47,12 @@ Command | Parameters | Return value | Description
 6       | N/A        | 8 bytes (`"SIMH004\0"`) | get the current version of the SIMH pseudo device
 7       | N/A        | 6 bytes      | get the current time in ZSDOS format, all BCD values: byte 0: year modulo 100, byte 1: month, byte 2: day, byte 3: hour, byte 4: minute, byte 5: second
 8       | 2 bytes (address of a 6-byte block in memory representing ZSDOS time in format YY MM DD HH MM SS) | N/A          | set the current time in ZSDOS format: reads the time from given address
-9       | N/A        | 5 bytes      | get the current time in CP/M 3 format: bytes 0-1: days since 1 Jan 1978 (16-bit little endian), bytes 2-4: BCD values for hour, minute, second
+9       | N/A        | 5 bytes      | get the current time in CP/M 3 format: bytes 0-1: days since 31 Dec 1977 (16-bit little endian), bytes 2-4: BCD values for hour, minute, second
 10      | 2 bytes (address of a 5-byte block in memory representing CP/M 3 time in format: 0-1: days since 31 Dec 77, 2: HH, 3: MM, 4: SS)    | N/A | set the current time in CP/M 3 format: reads the time from given address
 11      | N/A        | 1 byte       | get the selected bank
 12      | 1 byte     | N/A          | set the selected bank
 13      | N/A        | 2 bytes      | get the base address of the common memory segment
-14      | N/A        | N/A          | reset the SIMH-pseudo device (clears "undefined" state, resets timer stack and host filenames list)
+14      | N/A        | N/A          | clear the current command, timer stack, and host filenames list
 15      | N/A        | N/A          | show time difference to timer on top of stack on stdout, in milliseconds (does not pop the timer)
 16      | N/A        | 1 byte       | attach the PTP to the file named at the beginning of the CP/M command line; returns `0` on success or `1` on failure
 17      | N/A        | N/A          | detach the PTP file
@@ -52,7 +61,7 @@ Command | Parameters | Return value | Description
 20      | N/A        | N/A          | set the CPU to an 8080 (NOT IMPLEMENTED)
 21      | N/A        | N/A          | start timer interrupts
 22      | N/A        | N/A          | stop timer interrupts
-23      | 2 bytes    | N/A          | set the timer interval in which interrupts occur (in milliseconds; default 100 ms; value 0 is ignored)
+23      | 2 bytes    | N/A          | set the timer interval in which interrupts occur (in milliseconds; default 100 ms; value 0 restores the default)
 24      | 2 bytes    | N/A          | set the address to call by timer interrupts (default `0xFC00`)
 25      | N/A        | N/A          | reset the millisecond stop watch (starts counting from zero)
 26      | N/A        | 4 bytes      | read the millisecond stop watch (32-bit elapsed time since last reset, in milliseconds)
@@ -60,19 +69,47 @@ Command | Parameters | Return value | Description
 28      | N/A        | 1 byte       | obtain the file path separator of the OS under which emuStudio runs
 29      | N/A        | file names separated by 0, ends with double 0 | perform wildcard expansion and obtain list of file names
 30      | URL (N bytes terminated with 0) | max 1024 byte pairs (URL content) in form `availability, data` (when `availability` is 1 the `data` byte is valid) until `availability` is 0 | read the contents of a URL
-31      | N/A        | 4 bytes      | get the clock frequency of the CPU (32-bit value in Hz)
-32      | 4 bytes    | N/A          | set the clock frequency of the CPU (32-bit value in Hz). To take effect, the CPU must be paused and run again.
+31      | N/A        | 4 bytes      | get the clock frequency of the CPU (32-bit value in kHz)
+32      | 4 bytes    | N/A          | set the clock frequency of the CPU (32-bit value in kHz). To take effect, the CPU must be paused and run again.
 33      | 2 bytes (byte 0: (unused) interrupt vector, byte 1: interrupt data byte, an `RST` instruction) | N/A | generate interrupt
 |---
 
 ### Command details
+
+#### Host time and version (commands 0, 6-10)
+
+Command 0 prints host time to standard output; it returns no guest bytes. Command 6 returns the eight bytes
+`53h 49h 4Dh 48h 30h 30h 34h 00h` (`SIMH004` followed by NUL). Consume all eight reads.
+
+Commands 7 and 9 read the host clock, with separate guest offsets for the ZSDOS and CP/M 3 clocks. Reads use UTC.
+A BCD byte holds two decimal digits: for example, 23 is `23h`, not decimal byte 23. CP/M 3 day 0 is **31 December
+1977**, and day 1 is 1 January 1978; only its hour, minute, and second bytes are BCD.
+
+For commands 8 and 10, write the low and high bytes of a guest memory address containing the corresponding time block.
+These commands adjust a guest offset and do not change the host operating-system clock. ZSDOS years `00`–`49` mean
+2000–2049; `50`–`99` mean 1950–1999. Supply valid dates and a block entirely within memory. The setters currently
+calculate their offset against host local time, so on a host outside UTC their subsequent UTC reads can differ by the
+host timezone offset. The CP/M 3 setter also interprets its day bytes as signed Java bytes; values with a high bit set
+in either byte do not round-trip correctly.
+
+#### Banked memory (commands 11-13, 18)
+
+Command 11 reads the active bank index, command 12 selects the bank given by its next output byte, command 13 reads
+the two-byte common boundary, and command 18 reads the bank count. Bank indices start at 0. Select only banks below
+`banksCount`; one bank is the normal unbanked configuration. Configure banks and the common region in
+[byte-mem]({{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching). Commands 11, 13, and 18 do not select a bank.
+The count is returned in one byte, so configurations of 256 or more banks cannot report their full count this way.
 
 #### Paper tape commands (3-5, 16, 17)
 
 Connect `simh-pseudo` to an `88-ptr-ptp` device in addition to its CPU and memory connections. Attach commands 4 and
 16 read a host file name from the beginning of the CP/M command line at `0080h`. The file name is resolved by the host
 and the command returns one status byte: `0` after a successful attach and `1` after an invalid name or I/O failure.
-Reset command 3 rewinds the current reader file; commands 5 and 17 close and detach the corresponding file.
+Command 3 rewinds the current reader file; commands 5 and 17 close and detach the corresponding file.
+
+The CP/M tail has its length byte at `0080h`, a leading separator at `0081h`, and file-name characters from `0082h`.
+These commands skip the separator and use the remaining tail as the path. Relative names resolve against the host
+working directory. Attaching the punch **creates or truncates** the output file; it does not append.
 
 #### Timer stack (commands 1, 2, 15)
 
@@ -83,25 +120,64 @@ the push is silently ignored and a warning is printed to stdout.
 
 #### Timer interrupts (commands 21-24)
 
-When timer interrupts are started (command 21), the device monitors CPU cycles and generates a `CALL addr` interrupt
+When timer interrupts are started (command 21), the device checks elapsed host time periodically while CPU cycles are dispatched and generates a `CALL addr` interrupt
 (opcode `0xCD` followed by the low and high byte of the handler address) when the configured timer interval elapses.
 The interrupt handler address defaults to `0xFC00` and can be changed with command 24. The timer interval defaults to
-**100 ms** and can be changed with command 23 (a value of 0 is ignored and the default is used instead).
+**100 ms** and can be changed with command 23 (a value of 0 restores 100 ms).
 
 {: .note }
-> Timer interrupts work only in interrupt mode 0 of the CPU. The interrupt is delivered as a 3-byte `CALL addr`
-> instruction on the data bus.
+> For Z80, use interrupt mode 0; the 8080 also accepts this three-byte `CALL addr` interrupt. Initialize a stack in
+> writable memory, enable CPU interrupts with `EI`, and preserve registers in the handler. Re-enable interrupts before
+> returning if repeated interrupts are needed. These are host-time interrupts, not cycle-exact timers.
 
 #### Stop watch (commands 25, 26)
 
-The stop watch is independent from the timer stack. Command 25 records the current timestamp (resetting the stop watch).
+The stop watch measures host wall-clock time and is independent from the timer stack. Command 25 records the current timestamp (resetting the stop watch).
 Command 26 reads the elapsed time since the last reset as a **32-bit** value in milliseconds. The value is returned in
 little-endian order (4 reads: byte 0 = low, byte 3 = high).
 
 #### CPU clock frequency (commands 31, 32)
 
-The CPU clock frequency is a **32-bit** value in Hz. Command 31 returns it in little-endian order (4 reads), and
-command 32 expects it in little-endian order (4 writes).
+The CPU clock frequency is a **32-bit** value in **kHz**. Command 31 returns it in little-endian order (4 reads), and
+command 32 expects it in little-endian order (4 writes). Use a positive value no greater than `7FFFFFFFh`.
+For example, 2 MHz is 2000 kHz: write `D0h 07h 00h 00h`. Pause and resume the CPU for a running emulation to
+use its new frequency.
+
+#### Host sleep and path separator (commands 27, 28)
+
+Command 27 sleeps the emulation thread for approximately 1 ms, unless timer interrupts are active. Command 28 returns
+one byte: the host file separator (`/` on Unix-like hosts, `\` on Windows). Neither command converts guest file paths.
+
+#### File-name expansion (command 29)
+
+Place a host path or wildcard pattern in the same CP/M command-tail layout used by attach commands. The device scans
+its host directory and returns matching file names with the supplied directory prefix, each followed by NUL. A further NUL terminates the list; if
+there are no matches, the first read is NUL. Ordering is unspecified. Patterns use the host Java directory-glob syntax,
+rather than CP/M's fixed-width filename matching. The tail length is limited to 127 bytes, leaving at most 126 path characters
+after the skipped separator. Consume the terminating NUL before issuing another read-dependent command.
+
+#### URL text (command 30)
+
+After command 30, write the URL bytes and a terminating `00h`. The plugin stores at most 1023 URL bytes and ignores
+additional bytes until NUL. Fetching occurs synchronously after NUL, with connection and read timeouts of 10 seconds.
+
+Read an availability byte. If it is `01h`, read one data byte and repeat; if it is `00h`, the response has ended and
+there is **no following data byte**. Only the first 1024 text characters are returned. The host decodes the response
+as text, normalizes its line endings to LF, and emits each character's low byte. This command does not preserve binary
+files or arbitrary Unicode text. A failed request returns diagnostic text through the same stream, rather than a
+separate failure status.
+
+#### Software interrupt (command 33)
+
+Write two bytes after the command: an unused vector byte, then the interrupt data/opcode byte. For an 8080 or a Z80
+in mode 0, an `RST` opcode such as `FFh` requests `RST 7`. The CPU must have interrupts enabled. This command does
+not bypass `DI`, initialize the stack, or change the Z80 interrupt mode.
+
+#### Reset command (14)
+
+Command 14 clears command processing, the timer stack, and the file-name iterator. It does not restore the CPU
+frequency, stop timer interrupts, detach tapes, or reset the guest clock offsets. A full device reset through
+emuStudio resets the other command state as well.
 
 ### How to call a command
 
@@ -136,9 +212,10 @@ in a, (0xFE)    ; register A contains second byte of result
 ```
 
 
-Note: The program must send/receive all bytes. Otherwise, the device will stay in a state when it "expects" the rest of
-parameter bytes, or result bytes to be read. It is however possible to "reset" the device by sending a reset command 
-to the device (command 14).
+Complete each command's parameter writes and result reads before starting another command. While a command is waiting
+for parameter bytes, an `OUT` containing 14 is a **parameter**, not a reset command. Finish the packet (including the
+NUL for command 30) before sending command 14, or reset the device through emuStudio. Reading while no command is active
+returns `00h`; unknown command numbers are logged and ignored.
 
 ## Examples
 
@@ -159,7 +236,7 @@ CPU clock frequency.
 ;   6  - get SIMH version (8 bytes, null-terminated ASCII)
 ;   7  - get time in ZSDOS format (6 BCD bytes: YY MM DD HH MM SS)
 ;   11 - get selected bank (1 byte)
-;   31 - get CPU clock frequency (4 bytes, 32-bit little-endian Hz)
+;   31 - get CPU clock frequency (4 bytes, 32-bit little-endian kHz)
 
 SIOSTA  equ 0x10            ; 88-SIO status port
 SIODAT  equ 0x11            ; 88-SIO data port
@@ -340,7 +417,7 @@ putd8s: pop af
 ver_msg:  db "Version: ", 0
 time_msg: db "Time:    ", 0
 bank_msg: db "Bank:    ", 0
-freq_msg: db "CPU Hz:  0x", 0
+freq_msg: db "CPU kHz:  0x", 0
 hz_msg:   db "h", 0
 freq:     db 0, 0, 0, 0
 ```
@@ -351,10 +428,10 @@ When run, the output might look like:
 Version: SIMH004
 Time:    26/03/21 14:05:33
 Bank:    0
-CPU Hz:  0x001E8480h
+CPU kHz:  0x000007D0h
 ```
 
-The CPU frequency `0x001E8480` is 2,000,000 Hz (2 MHz).
+The CPU frequency `0x000007D0` is 2,000 kHz (2 MHz).
 
 ### Example: Stopwatch
 
