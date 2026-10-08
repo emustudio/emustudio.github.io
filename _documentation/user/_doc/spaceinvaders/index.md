@@ -117,8 +117,27 @@ so use one-player mode for normal play.
 
 ## Display settings
 
-Edit the existing `[DEVICE.settings]` section in `SpaceInvaders.toml`, then close and reopen the computer to apply changes.
-The display device has no settings dialog.
+On the **Emulator** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
+The settings window is shown below:
+
+![Space Invaders display settings with numbered controls]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png)
+
+{: .list}
+| <span class="circle">1</span> | **Scale**. Set an integer pixel scale of at least `1`. At `2`, the display area is 448 by 512 pixels. Saving resizes an open game window. |
+| <span class="circle">2</span> | **Color overlay**. Show red at the top, green at the bottom, and white in the middle. Clear this checkbox for white pixels on black. |
+| <span class="circle">3</span> | **Sound enabled**. Enable playback of the external sound samples. Clearing this checkbox stops playback. |
+| <span class="circle">4</span> | **Samples directory**. Enter the directory containing `0.wav` through `9.wav`. Relative paths are resolved from emuStudio's working directory. |
+| <span class="circle">5</span> | **Browse...**. Choose the sound samples directory. This updates the field; click **Save** to apply it. |
+| <span class="circle">6</span> | **Save**. Save all four settings, apply them immediately, and close the dialog. No restart is needed. Changing the samples directory reloads the sounds when sound is enabled. |
+| <span class="circle">7</span> | **Cancel**. Close the dialog without saving or applying your edits. |
+
+The scale must be a positive integer and the samples directory must be a nonempty, valid path. Invalid input keeps
+the dialog open so you can correct it. Sound samples are supplied by the user; choosing a directory does not download them.
+
+### Configuration file
+
+You can also edit the existing `[DEVICE.settings]` section in `SpaceInvaders.toml`, then close and reopen the computer
+to apply changes made directly to the file.
 
 ```toml
 [DEVICE.settings]
@@ -144,7 +163,7 @@ by the user. Missing samples or an unavailable audio device leave emulation runn
 | Blank display or game does not start | Check that all four ROM settings are uncommented, the paths exist, and the files have the sizes and addresses listed above. Reopen the computer, then Reset and Run. |
 | Game stops during the attract screen | Check that `memorySize` is `65536`, rather than `16384`. |
 | Keys do nothing | Focus the display window, check that the CPU is running, and insert a coin before starting. |
-| Display settings have no effect | Close and reopen the computer after saving the configuration. |
+| Display settings have no effect | Click **Save** in the settings dialog. If you edited the configuration file directly, close and reopen the computer. |
 | Device initialization fails | Keep the template's connections to both CPU and memory. In a custom schema, CPU ports `1`–`5` must be free. |
 
 ## Programming the display
