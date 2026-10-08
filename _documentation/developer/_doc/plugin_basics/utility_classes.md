@@ -43,6 +43,44 @@ hex.generate("output-file.bin");
 hex.loadIntoMemory(memory, b -> b);
 ```
 
+## Audio playback
+
+`net.emustudio.emulib.runtime.audio` provides two small playback utilities in emuLib 12.1.0-SNAPSHOT.
+Plugins own their output resources and close them when the device is destroyed.
+
+`AudioSink` accepts interleaved signed 16-bit little-endian PCM, with a configurable sample rate and channel count:
+
+```java
+AudioSink output = AudioSink.open(48_000, 2);
+output.accept(pcm, length); // complete stereo frames; buffer can be reused after this call
+output.flushAudio();       // on reset: discard pending audio, rather than drain it
+output.close();            // on device destruction
+```
+
+The Java Sound output copies batches into a bounded queue and writes them on a worker thread. A full queue drops
+the newest batch without blocking emulation. `AudioSink.NULL` discards samples for headless or silent execution.
+Opening a device can fail; the plugin decides whether to continue silently or report an initialization error.
+Generate and scale PCM in the plugin, then submit the same bytes to playback and recording sinks.
+
+`SamplePlayer<K>` plays overlapping effects identified by a plugin's enum, strings or other keys:
+
+```java
+SamplePlayer<String> effects = new SamplePlayer<>(48_000);
+effects.setVolumePercent(25);
+effects.load("alarm", Path.of("alarm.wav"));
+effects.play("alarm", true);                   // restart and loop until stopped
+byte[] stereoPcm = effects.captureAudio(800);   // for one 60 Hz recording frame
+effects.stop("alarm");
+effects.close();
+```
+
+Files are converted to mono PCM at the configured rate. Capture mixes currently playing effects into stereo PCM,
+applying volume and clipping overlapping samples to the signed 16-bit range. It reads host playback positions;
+it does not advance effects or provide an emulated clock. Missing identifiers are silent, while loading errors
+are reported to the caller. `stopAll()` stops effects without unloading them; `close()` releases samples but
+retains volume and permits later loading. Hardware synthesis, timing, filename conventions and controls stay in
+the plugin. Playback uses only the JDK, with no additional dependency.
+
 ## Video and audio recording
 
 `net.emustudio.emulib.runtime.recording.RecordingSession` records MP4 video with stereo PCM audio. It owns H.264
