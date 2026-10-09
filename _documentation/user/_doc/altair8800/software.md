@@ -23,37 +23,15 @@ The following sites provide disk images, memory images, source code and manuals:
 - [Altair clone downloads][aclone]{:target="_blank"}.
 - [DeRamp Altair software archive][deramp]{:target="_blank"}.
 
-The following subsections describe emuStudio setup and execution. Device requirements are listed in
-[Software requiring other hardware](#software-requiring-other-hardware).
+The setup below translates the archives' SIMH scripts into emuStudio settings. Requirements for unsupported devices
+are listed in [Software requiring other hardware](#software-requiring-other-hardware).
 
 ## Downloading and preparing software
 
-To download one of Schorn's packages, please follow these steps:
-
-1. Follow the download link in the appropriate table below and save the ZIP file.
-2. Extract the ZIP into its own directory. Keep its disk images, supporting files and documentation together.
-3. Make working copies of the disk images before mounting them. Guest programs write directly to mounted images.
-4. Start emuStudio and choose **MITS Altair8800 (Z80)** for the CP/M collections, or the 8080 computer for original
-   MITS software. Use a copy of the computer configuration when changing its devices.
-5. Stop the emulation before changing memory, disks or settings. Apply the setup described below, then follow the
-   steps for the chosen system or application. Wait for each prompt before typing the next answer.
-
-For example, on Linux, the following commands download and extract CP/M 2.2 and the games package:
-
-```sh
-mkdir -p ~/Downloads/altair8800-software/packages/cpm2
-mkdir -p ~/Downloads/altair8800-software/packages/games
-cd ~/Downloads/altair8800-software/packages/cpm2
-curl -fLO https://schorn.ch/cpm/zip/cpm2.zip
-unzip cpm2.zip
-cp cpm2.dsk cpm2-work.dsk
-cd ../games
-curl -fLO https://schorn.ch/cpm/zip/games.zip
-unzip games.zip
-cp games.dsk games-work.dsk
-```
-
-Mount the working copies, keeping the downloaded originals.
+Download and extract each ZIP with its disk images, support files and documentation together. Make working copies of
+disk images before mounting them; guest programs write directly to mounted media. Use **MITS Altair8800 (Z80)** for
+CP/M collections and the 8080 computer for original MITS software. Stop emulation before changing memory, disks or
+settings, and wait for each guest prompt before typing the next answer.
 
 Schorn's extensionless files, such as `cpm2`, `basic` and `wordstar`, are command scripts for SIMH. They describe the
 required hardware and mounts; they are not executable programs for emuStudio. The following tables translate those
@@ -145,13 +123,10 @@ These disks are optional for the basic CP/M boot and most application packages. 
 package's script calls for them. Apple II and ImageDisk images in the CP/M archives require other formats; mounting
 one with the default SIMH geometry does not make it compatible.
 
-## Boot ROM
+## Booting from disk
 
-Booting operating systems on Altair requires a special ROM image to be loaded in operating memory. Its purpose is
-to load some blocks of data from a disk device and then execute them. The code block is often called a 'bootloader'.
-A bootloader is device-specific, and often also disk format-specific.
-
-The following table lists the bootloaders used on this page:
+Altair disk systems need a bootloader matched to the controller and disk format. The following table lists the images
+used below:
 
 |---
 | Bootloader | Load address | Use
@@ -164,36 +139,20 @@ The following table lists the bootloaders used on this page:
 | [Original `HDBL.HEX`][hdbl]{:target="_blank"} | Addresses in HEX (`0xFC00`) | MITS hard-disk boot loader and monitor, for Hard Disk BASIC.
 |---
 
-The bundled bootloaders have assembly source which can be modified to user needs. The two bundled loaders are not
-interchangeable for every image: `dbl.bin` does not boot Schorn's current `cpm2.dsk`.
-
-To load a binary boot ROM, please follow these steps:
-
-1. Reset the computer before loading the images.
-2. Open the byte-memory GUI and select bank 0.
-3. Use **Load image**, choose the bootloader and set the load address to `0xFF00`.
-4. Mount the chosen system disk in drive `A:` (drive 0) of 88-DCDD.
-5. Show the terminal window, jump to location `0xFF00` in the emuStudio debugger, and run emulation.
-6. Wait for the system's prompt. Type commands into the terminal, not the source editor.
-
-For a HEX file, use load offset `0` and jump to its stated entry point. Memory settings can also load images at
-startup with `imageName0`, `imageAddress0` and `imageBank0 = 0`. A reset reloads configured startup images; reload
-manually loaded images after resetting if necessary.
+The bundled bootloaders include assembly source. They are not interchangeable: for example, `dbl.bin` does not boot
+Schorn's current `cpm2.dsk`. For a binary, reset, select bank 0, load at its table address, mount the matching disk
+in drive `A:` of 88-DCDD, open the terminal, jump to the entry point and run. Load Intel HEX at offset `0` and jump
+to its stated entry point. Startup memory settings use `imageName0`, `imageAddress0` and `imageBank0 = 0`; reset
+reloads configured images but may clear manually loaded ones. Enter commands in the terminal, not the source editor.
 
 ## CP/M 2.2
 
 Schorn's [CP/M 2.2 archive][pkg-cpm2]{:target="_blank"} supplies `cpm2.dsk`, utilities and SIMH support.
 Use this disk for the application tables below.
 
-To run Schorn CP/M 2.2, please follow these steps:
-
-1. Set Z80, 64K memory, one bank, and the serial and floppy settings described above.
-2. Load `mdbl.bin` into bank 0 at `0xFF00`.
-3. Mount `cpm2.dsk` in 88-DCDD drive `A:`. Optionally mount `app.dsk` from the same archive in drive `B:`.
-4. Open the terminal, jump to `0xFF00`, and run the emulation.
-5. Wait for `64K CP/M Version 2.2` and the `A>` prompt.
-6. Type `DIR` to list the disk, or `LS` for the supplied directory utility. Type `B:` and then `DIR` to inspect
-   `app.dsk`, if mounted.
+Use Z80, 64K memory, one bank, and the serial/floppy settings above. Load `mdbl.bin` at `0xFF00` in bank 0, mount
+`cpm2.dsk` in drive `A:` (optionally `app.dsk` in `B:`), then jump to `0xFF00` and run. At `A>`, use `DIR` or the
+supplied `LS`; use `B:` then `DIR` to inspect `app.dsk`.
 
 The following image shows `DIR` at the CP/M command prompt:
 
@@ -212,14 +171,9 @@ programming-language table for their commands.
 Schorn's [CP/M 3 archive][pkg-cpm3]{:target="_blank"} contains a banked system with an Altair BIOS.
 It needs the SIMH pseudo device and `mdbl.bin`.
 
-To boot it, please follow these steps:
-
-1. Choose the Z80 computer. Set memory to 64K, **8 banks**, and **common address `0xC000`**.
-2. Keep SIMH pseudo connected to the CPU and memory.
-3. Load `examples/altair8800/boot/mdbl.bin` into bank 0 at `0xFF00`.
-4. Mount `cpm3.dsk` in 88-DCDD drive `A:`. Use 32 sectors per track and 137 bytes per sector.
-5. Open the terminal, jump to `0xFF00`, and run the emulation.
-6. Wait for the loader messages and `A>` prompt. Type `DIR` or `HELP`.
+Use Z80 with 64K, **8 banks**, common address `0xC000`, and SIMH pseudo connected to CPU and memory. Load
+`mdbl.bin` in bank 0 at `0xFF00`; mount `cpm3.dsk` in 88-DCDD drive `A:` with 32 sectors per track and 137 bytes
+per sector. Jump to `0xFF00`, run, then use `DIR` or `HELP` at `A>`.
 
 ![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){:style="max-width:858px"}
 
@@ -230,10 +184,9 @@ and [SIMH AltairZ80 manual][simhmanual]{:target="_blank"} for the BIOS and addit
 
 ## Other CP/M operating systems
 
-Schorn supplies complete boot disks for many CP/M replacements. For the one-bank rows in the following table,
-use the CP/M 2.2 computer setup and `mdbl.bin`; replace the drive `A:` image with the image shown. For the eight-bank
-rows, use the CP/M 3 setup. Mount any indicated second floppy in `B:` before booting. The optional SIMH hard disks
-use the setup described above. Then open the terminal, jump to `0xFF00`, run, and wait for the command prompt.
+For one-bank systems use the CP/M 2.2 setup and `mdbl.bin`; for eight-bank systems use CP/M 3 settings. Replace
+drive `A:` with the listed image, mount any second floppy in `B:` and optional SIMH disks as described above, then
+boot at `0xFF00`.
 
 |---
 |Download | Drive A:; additional disks | Memory banks and startup
@@ -255,35 +208,23 @@ use the setup described above. Then open the terminal, jump to `0xFF00`, run, an
 |[ZCPR3][pkg-zcpr3]{:target="_blank"} | package `cpm2.dsk`; SIMH `i.dsk` and `j.dsk` | 1; consult package notes before replacing the CCP
 |---
 
-CP/M 1.4 uses a different disk layout: load `cpm1rom.com` as raw memory at `0xFF00`, mount `cpm1.dsk` in `A:` and
-`cpm1b.dsk` in `B:`, jump to `0xFF00`, and run. Its `cpm1dev.dsk` is a separate CP/M 2.2 development disk for rebuilding
-the 1.4 system; use `mdbl.bin` for that disk.
+For CP/M 1.4, load `cpm1rom.com` as memory at `0xFF00`, mount `cpm1.dsk` in `A:` and `cpm1b.dsk` in `B:`, then
+boot. Its `cpm1dev.dsk` is a separate CP/M 2.2 development disk and uses `mdbl.bin`. Burcon uses its own `dbl.bin`
+and `cpm.dsk` (optional `sysgen.dsk` in `B:`), but disk access reports `Bdos Err On A: Bad Sector`; use Schorn
+CP/M 2.2 for applications.
 
-Burcon's package contains `dbl.bin`, `cpm.dsk`, `sysgen.dsk` and instructions for rebuilding its BIOS. Load the
-package's own `dbl.bin` at `0xFF00`, mount `cpm.dsk` in `A:` and `sysgen.dsk` in `B:`, and boot with one memory bank.
-Burcon disk access returns `Bdos Err On A: Bad Sector` in emuStudio. Use the Schorn CP/M 2.2 setup above
-for emuStudio applications.
-
-For NZ-COM, boot its disk, then type `STARTZCM`. For Z3PLUS, boot with eight banks, then type `STARTZ3P`. The RCL
-collection uses the same banked setup and also supplies two SIMH hard disks full of utilities. Mount those in 88-HDSK
-drives 0 and 1; they appear as `I:` and `J:`. Type `DIR I:` or `DIR J:` and use `USER n` to select a listed user area.
-
-TurboDOS first boots CP/M from its own `cpm2.dsk`. Mount its `i.dsk` and `j.dsk` as SIMH hard disks, then type
-`TURBODOS` at `A>`. This is the supplied single-user setup; it does not establish a multi-terminal installation.
-MP/M and CP/NET require additional facilities and are described below.
+After boot, NZ-COM needs `STARTZCM`, Z3PLUS `STARTZ3P`. The RCL collection uses banked settings and optional SIMH
+disks in drives 0/1 (`I:`/`J:`); `DIR I:`/`DIR J:` lists them. TurboDOS boots its package's `cpm2.dsk` plus SIMH
+`i.dsk`/`j.dsk`, then starts with `TURBODOS`; this is a single-user setup. MP/M and CP/NET need unsupported
+facilities (see below).
 
 ## Altair DOS v1.0
 
 Altair DOS is in [Original Altair software][pkg-altsw]{:target="_blank"} (`altdos.dsk`, `altdos2.dsk`). It runs directly
 on the computer, without CP/M.
 
-To boot it, please follow these steps:
-
-1. Use one memory bank. In 88-SIO add status port `0x00` and data port `0x01` to the existing lists.
-2. Load the bundled `dbl.bin` at `0xFF00`.
-3. Mount `altdos.dsk` in 88-DCDD drive `A:`. Optionally mount `altdos2.dsk` in `B:`.
-4. Open the terminal, jump to `0xFF00`, and run.
-5. Answer the startup questions, pressing Enter after each answer:
+Use one memory bank; add 88-SIO status/data ports `0x00`/`0x01`; load bundled `dbl.bin` at `0xFF00`; and mount
+`altdos.dsk` in drive `A:` (optionally `altdos2.dsk` in `B:`). Boot at `0xFF00`, then answer each prompt:
 
 |---
 | Question | Answer
@@ -311,13 +252,9 @@ is a different program. A disk for one environment is not automatically readable
 
 ### MITS Disk BASIC
 
-MITS BASIC 4.1 is in [Original Altair software][pkg-altsw]{:target="_blank"} as `mbasic.dsk`. To boot it, please follow
-these steps:
-
-1. Set one memory bank and add 88-SIO status `0x00` and data `0x01` aliases.
-2. Load the bundled `dbl.bin` at `0xFF00` and mount `mbasic.dsk` in 88-DCDD drive `A:`.
-3. Open the terminal, jump to `0xFF00`, and run.
-4. Answer the startup questions as follows, waiting for each next prompt:
+MITS BASIC 4.1 is in [Original Altair software][pkg-altsw]{:target="_blank"} as `mbasic.dsk`. Use one memory bank,
+add 88-SIO status/data ports `0x00`/`0x01`, load bundled `dbl.bin` at `0xFF00`, and mount the disk in drive `A:`.
+Boot at `0xFF00`, then answer each prompt:
 
 |---
 | Question | Answer
@@ -364,23 +301,11 @@ as above, then `MOUNT 0` and `FILES`. This is a separate way to start BASIC 5.0,
 
 ### 4K, 8K and Extended BASIC memory images
 
-The [original software archive][pkg-altsw]{:target="_blank"} also contains BASIC as raw memory images. They normally
-read the physical Altair sense switches to choose their console. The emuStudio computer has no front-panel sense
-switch device on port `0xFF`; the unconnected port reads `0xFF`. To select the emulated 2SIO console, replace the
-specified `IN 0xFF` instruction with `MVI A,0x08` in memory. This supplies the switch value used by the package's
-SIMH scripts without adding a device.
-
-To run one of these images, please follow these steps:
-
-1. Choose the **8080** computer and use 64K memory with one bank. Stop and reset the computer.
-2. Open byte-memory, select bank 0, and load the selected `.bin` at `0x0000`.
-3. In the memory editor, change the two bytes `DB FF` at the indicated address to `3E 08`. Change only the listed
-   console-selection instructions. Keep the downloaded file unchanged.
-4. Enable 88-SIO status `0x10` and data `0x11`, uppercase input, and clear output bit 8.
-5. Open the terminal, jump to `0x0000`, and run.
-6. Answer `MEMORY SIZE?` with `61440`. Answer `TERMINAL WIDTH?` with `80` if asked, and the trigonometric-functions
-   question with `Y`. Wait for `OK` before entering a program.
-7. Type `PRINT 2+2`; the result should be `4`. For a small program, enter `10 PRINT "HELLO"`, then `RUN`.
+The raw BASIC images read Altair sense switches to select a console, but emuStudio has no switch device at `0xFF`
+(an unconnected port reads `0xFF`). Patch the listed `IN 0xFF` instruction from `DB FF` to `3E 08` in memory to
+select 2SIO. Use an 8080 with 64K and one bank; load the image at `0x0000`, enable 88-SIO `0x10`/`0x11`,
+uppercase input and clear output bit 8. Boot at zero. Answer memory size `61440`, terminal width `80` if asked,
+and trigonometric functions `Y`. At `OK`, `PRINT 2+2` should return `4`.
 
 |---
 | Binary | Version | Address of console patch
@@ -397,21 +322,13 @@ addresses. For a different image, use its supplied source and loader instruction
 
 ### Minidisk BASIC
 
-The [more original software archive][pkg-althdsw]{:target="_blank"} contains `mini0.dsk` through `mini4.dsk` and
-Mini-Disk BASIC 300-5-E. To prepare it, please follow these steps:
-
-1. Choose the **8080** computer. Replace 88-DCDD with 88-MDS in a copied schema and connect it to the CPU.
-   Use one memory bank and the 2SIO console at `0x10`/`0x11`.
-2. Mount `mini0.dsk` through `mini4.dsk` in minidisk drives 0 through 4.
-3. Load [original `DBL.HEX`][mini-dbl]{:target="_blank"} through byte-memory with offset `0`.
-4. Change bytes `DB FF` at `0xFF22` to `3E 00`, selecting the 2SIO console at `0x10`/`0x11`.
-5. Set a debugger breakpoint at `0x5452`, the BASIC console-selection instruction in `mini0.dsk`. To select
-   that address, use the debugger jump control, toggle its breakpoint, then jump back to `0xFF00`.
-6. Open the terminal and run. When the CPU pauses at `0x5452`, change `DB FF` at that address to `3E 08` in
-   byte-memory, unset the breakpoint, and resume. This patches BASIC itself after the disk loader has loaded it.
-7. Answer memory size `61440`, lineprinter `C`, highest disk number `4`, files `4`, and random files `4`.
-8. At `OK`, type `MOUNT 0`, then `FILES 0`. Use `MOUNT 1` and `FILES 1` for another drive, and `RUN "name"` for a
-   program on the selected BASIC disk. The archive notes that an initial disk I/O error mounting drive 0 can occur.
+The archive contains `mini0.dsk` through `mini4.dsk` and Mini-Disk BASIC 300-5-E. Use an 8080 with one bank;
+replace 88-DCDD with 88-MDS, connect it to the CPU, and mount the five images in drives 0-4. Enable 2SIO
+`0x10`/`0x11`. Load [original `DBL.HEX`][mini-dbl]{:target="_blank"} at offset `0`, patch `DB FF` at `0xFF22` to
+`3E 00`, and set a breakpoint at `0x5452`. Boot from `0xFF00`; when it pauses, patch `DB FF` at `0x5452` to
+`3E 08`, remove the breakpoint and resume. Answer memory `61440`, lineprinter `C`, highest disk `4`, files `4`,
+random files `4`. At `OK`, use `MOUNT n` and `FILES n` for each drive, then run programs with `RUN "name"`.
+An initial drive-0 mount I/O error can occur.
 
 The patch addresses apply to the files in `althdsw.zip`. Apply the patches after each cold boot.
 
@@ -427,23 +344,17 @@ The [more original software archive][pkg-althdsw]{:target="_blank"} contains `hd
 `hdbasic-300-5-f.dsk`. More accounting and data images are in [DeRamp's hard-disk BASIC directory][deramp-hdbasic]{:target="_blank"}.
 These are original MITS platter images, not Schorn's SIMH `i.dsk`.
 
-To prepare this installation, please follow these steps:
+Use an 8080, one bank and 2SIO `0x10`/`0x11`. Select MITS mode for 88-HDSK; connect it to 88-4PIO and the CPU,
+with 88-4PIO at base `0xA0` and two PIAs. Mount `hdbasic-300-5-c-acct.dsk` as unit 0 removable (`image0`) and
+`hdbasic-300-5-f.dsk` as unit 0 fixed (`image1`); both use 406 cylinders, two surfaces, 24 sectors and 256 bytes
+per sector.
 
-1. Choose the **8080** computer with one memory bank and the 2SIO console at `0x10`/`0x11`. Select `MITS` as
-   the 88-HDSK controller type. Connect 88-HDSK to **88-4PIO**, and connect 88-4PIO to the CPU.
-   Set 88-4PIO base port to `0xA0` with two PIAs. This is the connection used by the bundled MITS configuration.
-2. Mount `hdbasic-300-5-c-acct.dsk` as **unit 0 removable** (`image0`) and `hdbasic-300-5-f.dsk` as **unit 0 fixed**
-   (`image1`). Each platter uses 406 cylinders, two surfaces, 24 sectors and 256 bytes per sector.
-3. Load [original `HDBL.HEX`][hdbl]{:target="_blank"} with memory offset `0`. Set a debugger breakpoint at `0x7289`
-   for `hdbasic-300-5-c-acct.dsk`, then jump to `0xFC00` and run. The loader reads the system from the removable platter.
-4. When BASIC pauses at `0x7289`, change `DB FF` there to `3E 08` in byte-memory, unset the breakpoint, and resume.
-   This selects the 2SIO console. The corresponding instruction in `hdbasic-300-5-f.dsk` is at `0x7286`.
-5. Answer memory size `61440`, lineprinter `C`, highest disk number `0` for unit 0, and files `6`. The accounting
-   version then asks for the day, month and year. For a demonstration date, answer `9`, `10`, and `78` respectively,
-   pressing Enter after each answer. These prompts differ from floppy BASIC's random-file question.
-6. At `OK`, use `MOUNT 0` and `FILES 0`. Select an accounting program using its filename with `RUN "name"`.
-7. For example, `RUN "AP MENU"` selects Accounts Payable. When a module asks for a password, use its initials
-   followed by `TEST`, for example `APTEST`, `ARTEST`, `GLTEST` or `PRTEST`. The accompanying notes describe the modules and required data disks.
+Load [original `HDBL.HEX`][hdbl]{:target="_blank"} at offset `0`. Set a breakpoint at `0x7289` for the `c-acct`
+image (`0x7286` for the `f` image), jump to `0xFC00` and run. At the breakpoint, patch `DB FF` to `3E 08`, then
+resume. Answer memory `61440`, lineprinter `C`, highest disk `0`, files `6`; the accounting disk also asks for a
+date (e.g. `9`, `10`, `78`). At `OK`, use `MOUNT 0` and `FILES 0`; run a module with `RUN "name"` (e.g.
+`RUN "AP MENU"`; passwords are module initials plus `TEST`, such as `APTEST`). See linked notes for modules and
+data disks. Keep working platter copies: accounting programs modify records, and printing requires a printer device.
 
 See the [hard-disk contents and passwords][hd-contents]{:target="_blank"} and
 [floppy accounting notes][accounting]{:target="_blank"}. Keep the working platter images: accounting programs change
@@ -451,21 +362,11 @@ records. Printing needs a matching printer connection and is not supplied merely
 
 ## CP/M applications
 
-For the following application tables, use the Schorn CP/M 2.2 boot described above. A common sequence applies to
-all ordinary application disks:
-
-1. Download and extract [CP/M 2.2][pkg-cpm2]{:target="_blank"} and the chosen application archive.
-2. Mount a working copy of `cpm2.dsk` in 88-DCDD drive `A:` and the application image in `B:`. Use the Z80 computer,
-   one memory bank, and `mdbl.bin` at `0xFF00`.
-3. If the program is configured for VT100, use the VT100 terminal setup described above.
-4. Open the terminal, jump to `0xFF00`, run, and wait for `A>`.
-5. Type `B:` and press Enter. At `B>` type `DIR`, then the command in the table. Omit `.COM` when starting a program.
-6. Keep the application disk selected while running; overlays, libraries and game data must be on the expected drive.
-   Answer the program's questions in the terminal.
-
-A table command separated by `;` means separate commands followed by Enter, not a CP/M command separator.
-An application disk normally cannot replace the boot disk. ACT, COMAL, PILOT, SPL, MINOL/VTL and FOCAL development
-are exceptions: their supplied images contain a boot system and should be mounted in `A:`.
+For ordinary application disks, boot a working copy of Schorn's [CP/M 2.2][pkg-cpm2]{:target="_blank"} as
+described above, with the application disk in `B:`. At `A>`, type `B:`, then `DIR` and the table command; omit
+`.COM`. Keep overlays, libraries and game data on the required drive. Use VT100 where noted. Semicolons in the
+tables separate commands (press Enter after each); they are not CP/M syntax. ACT, COMAL, PILOT, SPL, MINOL/VTL and
+FOCAL development disks are bootable and belong in `A:`.
 
 ### Programming languages
 
@@ -501,8 +402,7 @@ are exceptions: their supplied images contain a boot system and should be mounte
 |[UCSD source disks][pkg-ucsddsk]{:target="_blank"} | Compressed `.raw.gz` disk files | Additional source media for UCSD, not standalone CP/M applications. Decompress and use the p-system disk mapping in its documentation.
 |---
 
-Some compilers use utilities from the boot disk. Before using a supplied build script on drive `B:`, copy the required
-utilities to the working application disk. For example, after booting, type:
+Build scripts on `B:` may need utilities from the boot disk. Copy the required files first; for example:
 
 ```text
 A:PIP B:=A:DO.COM
@@ -512,22 +412,20 @@ B:
 DO C TEST
 ```
 
-`DO` is Schorn's utility for running a `.SUB` command file; `DO C TEST` uses `C.SUB` with parameter `TEST`. For an
-ordinary CP/M submission, use `A:SUBMIT C TEST` after copying any tools the script needs. Read the script first with
-`TYPE C.SUB`: the examples build and overwrite output files on the working disk.
+Schorn's `DO C TEST` runs `C.SUB` with parameter `TEST`; CP/M's `A:SUBMIT C TEST` is an alternative after copying
+required tools. Read scripts with `TYPE C.SUB` first: they may overwrite working-disk files.
 
-For Microsoft BASIC under CP/M, type `MBASIC`, wait for `Ok`, then enter `PRINT 2+2`. To run one of the supplied
-programs, type `MBASIC ELIZA`, `MBASIC STARTREK`, `MBASIC HAMURS` or `MBASIC MSTMND` at `B>`. Other interpreter
-versions on `basic.dsk` are `MBASIC45`, `MBASIC51`, `MBASIC52` and `XBASIC`.
+For Microsoft BASIC, run `MBASIC`, then try `PRINT 2+2`; supplied programs start with `MBASIC ELIZA`,
+`MBASIC STARTREK`, `MBASIC HAMURS` or `MBASIC MSTMND`. Other interpreters on `basic.dsk`: `MBASIC45`, `MBASIC51`,
+`MBASIC52` and `XBASIC`.
 
 ![Microsoft BASIC running a program under CP/M in emuStudio]({{ site.baseurl }}/assets/altair8800/software-cpm-basic.png){:style="max-width:737px"}
 
 ![Turbo Pascal command menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-turbo-pascal.png){:style="max-width:737px"}
 
-The BASIC compilers also need their runtimes. `CBASIC BLACKJAK` creates an `.INT` file which is run with
-`CRUN2 BLACKJAK`; the Digital Research variant uses `CBASE2` and `CRUN`. `CB80` produces relocatable output which
-needs `LINK` or `LK80`. For Microsoft's BASCOM, copy `DO.COM` and `L80.COM` onto the working disk, then type
-`DO BASCOM BLACKJAK`. The supplied `BASCOM.SUB` compiles, links with `BASLIB` and runs the result.
+BASIC compiler outputs need their runtimes: `CBASIC BLACKJAK` produces `.INT` for `CRUN2 BLACKJAK`; Digital
+Research uses `CBASE2`/`CRUN`; and `CB80` output needs `LINK` or `LK80`. For BASCOM, copy `DO.COM` and `L80.COM`
+to the working disk, then run `DO BASCOM BLACKJAK` (`BASCOM.SUB` compiles, links with `BASLIB` and runs it).
 
 ### Office applications
 
@@ -548,8 +446,8 @@ All the following packages use the ordinary `A:` boot disk / `B:` application di
 
 ### Games
 
-Download [Games][pkg-games]{:target="_blank"}, mount `games.dsk` in `B:`, boot `cpm2.dsk` from `A:`, then type `B:`.
-Use VT100 for the screen games. Keep the complete games disk mounted because several games load accompanying data.
+Mount [Games][pkg-games]{:target="_blank"} `games.dsk` in `B:` and boot `cpm2.dsk` from `A:`. Select VT100 for
+screen games and keep the complete disk mounted for their data files.
 
 |---
 | Game | Command at `B>` | Notes
@@ -565,31 +463,27 @@ Use VT100 for the screen games. Keep the complete games disk mounted because sev
 
 ![Ladder opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-ladder.png){:style="max-width:737px"}
 
-Othello is on `cpm2.dsk`: at `A>` type `OTHELLO`. ELIZA, Star Trek, Hamurabi and Mastermind are BASIC programs in
-the BASIC collection and use `MBASIC name` as described above. DeRamp also has [CP/M games disks][deramp-cpm]{:target="_blank"},
-including Zork and a Creative Computing disk. The latter starts with `MBASIC MENU` after selecting its drive.
-Native BASIC games use `MOUNT`, `FILES` and `RUN "name"`, rather than these CP/M commands.
+Othello is on `cpm2.dsk` (`OTHELLO` at `A>`). ELIZA, Star Trek, Hamurabi and Mastermind use `MBASIC name`.
+[DeRamp CP/M games][deramp-cpm]{:target="_blank"} include Zork and a Creative Computing disk (`MBASIC MENU`).
+Native BASIC games instead use `MOUNT`, `FILES` and `RUN "name"`.
 
 ### Tools and CPU diagnostics
 
-Download [Tools][pkg-tools]{:target="_blank"}, mount `tools.dsk` in `B:`, and boot CP/M 2.2. Type `B:`, then
-`DDTZ27` to start the debugger, or `JOB15` to start the job utility. Their on-disk manuals are `DDTZ27.DOC` and
-`JOB.DOC`; display them with `TYPE` before using the tools.
+Mount [Tools][pkg-tools]{:target="_blank"} `tools.dsk` in `B:` and boot CP/M 2.2. Run `DDTZ27` (debugger) or
+`JOB15` (job utility); read `DDTZ27.DOC` and `JOB.DOC` with `TYPE`.
 
 The CP/M boot disk supplies `M80`, `L80`, `DDT`, `DDTZ`, `SID`, `ZSID`, `PIP`, `STAT`, `R`, `W` and `HDIR`.
 `M80` is Microsoft's assembler, `L80` its linker; both use the syntax documented by their original manuals, not
 emuStudio's source editor syntax. `R` and `W` depend on the connected SIMH pseudo device and PTR/PTP.
 
-[CPU test programs][cpu-tests]{:target="_blank"} include `TST8080.COM`, `8080PRE.COM`, `8080EXER.COM`,
-`8080EXM.COM` and `CPUTEST.COM`. Copy them into a CP/M disk using the transfer steps below. Use the **8080**
-computer for 8080 diagnostics, boot a suitable 8080-compatible CP/M disk such as `altcpm.dsk`, and type `TST8080`,
-`8080PRE`, `8080EXM` or `CPUTEST` at the prompt. These are CP/M programs; loading them at address 0 is incorrect.
-The original `8080EXER` reports CRC values which must be compared with real hardware; its `Error` text alone does
-not establish a CPU defect. See the [test notes][cpu-test-notes]{:target="_blank"}. A full exerciser run can take hours.
+[CPU tests][cpu-tests]{:target="_blank"} include `TST8080.COM`, `8080PRE.COM`, `8080EXER.COM`, `8080EXM.COM` and
+`CPUTEST.COM`. Copy them to CP/M media and run at the prompt (do not load them at address 0). Use the 8080 computer
+and a compatible system such as `altcpm.dsk`. Compare `8080EXER` CRCs with real hardware; its `Error` text alone
+does not prove a CPU defect. See the [test notes][cpu-test-notes]{:target="_blank"}; a full run can take hours.
 
 ## Moving host files into CP/M
 
-In order to manipulate CP/M disk images, there are several options:
+Use any of these to manipulate CP/M images:
 
 - the bundled `88-dcdd` command-line tool, described in [Experimental CP/M support][88-dcdd-cpm]{:target="_blank"};
 - [cpmtools][cpmtools]{:target="_blank"}, with a disk definition matching the actual image;
@@ -597,8 +491,8 @@ In order to manipulate CP/M disk images, there are several options:
 
 ### Using the bundled disk tool
 
-Stop the emulation and unmount the working image before changing it from the host. Run the tool from the emuStudio
-installation directory, where `examples/altair8800/cpm-formats.toml` is available. For example:
+Stop emulation and unmount the working image before host-side changes. Run the tool from the emuStudio installation
+directory, where `examples/altair8800/cpm-formats.toml` is available:
 
 ```sh
 cd /path/to/emuStudio
@@ -607,20 +501,17 @@ bin/88-dcdd -f cpm3-simh -i /path/to/cpm2-work.dsk cpmfs ls
 bin/88-dcdd -f cpm3-simh -i /path/to/cpm2-work.dsk cpmfs copy /path/to/HELLO.BAS cpm://HELLO.BAS
 ```
 
-Use **`cpm3-simh` for Schorn's `cpm2.dsk` and most application disks**. Use `cpm2-simh` for `altcpm.dsk`.
-An incorrect format can list a directory yet address file data incorrectly. Use `cpm1-simh` for the CP/M 1.4 system disk and consult the
-format file for DeRamp and ZSDOS variants. Check `cpmfs ls` before copying. Remount the modified image, boot it,
-and type `DIR` to confirm that the file is present.
+Use **`cpm3-simh` for Schorn's `cpm2.dsk` and most application disks**, `cpm2-simh` for `altcpm.dsk`, and
+`cpm1-simh` for the CP/M 1.4 system disk. Wrong formats can list directories but corrupt file access; check
+`cpmfs ls`, consult the format file for DeRamp/ZSDOS variants, then remount and verify with guest `DIR`.
 
-To run `HELLO.BAS`, mount a disk containing `MBASIC.COM` and type `MBASIC HELLO`. A binary CP/M program such as
-`TST8080.COM` is started with `TST8080`. Use short CP/M names: at most eight characters before the dot and three
-in the extension.
+Run `HELLO.BAS` with `MBASIC HELLO` from a disk containing `MBASIC.COM`; start `TST8080.COM` with `TST8080`.
+CP/M filenames allow up to eight characters, plus a three-character extension.
 
 ### Using R and W inside CP/M
 
-For Schorn's `cpm2.dsk` or `cpm3.dsk`, keep SIMH pseudo connected to CPU, memory and PTR/PTP. The host filename is
-resolved against the directory from which emuStudio was started. For example, start emuStudio from a working directory
-containing `HELLO.BAS`, boot CP/M, select a writable guest drive, and type:
+For Schorn's `cpm2.dsk`/`cpm3.dsk`, connect SIMH pseudo to CPU, memory and PTR/PTP. Host paths are relative to
+emuStudio's working directory. Start it in a directory containing `HELLO.BAS`, boot CP/M, select a writable drive:
 
 ```text
 A:R HELLO.BAS
@@ -628,10 +519,8 @@ DIR HELLO.BAS
 MBASIC HELLO
 ```
 
-`R` opens the named host file through the pseudo device and copies it into the current CP/M drive. It does not require
-a separate manual reader load. To export a guest file, type `A:W HELLO.BAS`; choose a working directory where that
-host filename can be written. `HDIR` lists host files in packages which supply the matching utility. Consult the
-[SIMH pseudo-device page][simh-device] for supported commands.
+`A:R HELLO.BAS` imports a host file; `A:W HELLO.BAS` exports one to the working directory. `HDIR` is available in
+packages that include it. See the [SIMH pseudo-device page][simh-device].
 
 ## Other original software
 
@@ -651,20 +540,12 @@ packages. Use the correct environment for each family:
 
 ### MITS Programming System II
 
-The [Programming System II floppy package][ps2-disk]{:target="_blank"} provides a convenient disk-based alternative
-to loading its monitor, editor, assembler and debugger from tape. To start it, please follow these steps:
-
-1. Download `PS2DEMO.DSK` and `PS2PROM.HEX` from that directory.
-2. Use one memory bank and the 88-DCDD controller. Enable the 2SIO console ports `0x10`/`0x11`.
-3. Mount a working copy of `PS2DEMO.DSK` in drive 0. Load `PS2PROM.HEX` in byte-memory with offset `0`.
-4. Open the terminal, jump to `0xF000`, and run.
-5. At the workspace prompt, choose `4` for the editor and AM2 assembler, or `3` for the debugger and AM2. Workspace
-   `2` contains 8K BASIC with the Chase program. The package's [instructions][ps2-readme]{:target="_blank"} describe
-   the preset memory layout.
-6. In an editor workspace, type `EDT` to start a new edit, `I` to insert source, Ctrl-Z to finish insertion, and `E`
-   to return to the monitor. Use `EDT(R)` to retain existing source when editing again.
-7. Start the assembler with `AM2`. Its `EOA` command returns to the monitor. Follow the supplied manual for assembly,
-   saving and execution; the monitor uses octal addresses.
+The [Programming System II floppy package][ps2-disk]{:target="_blank"} boots its monitor, editor, assembler and
+debugger from disk. Use one bank, 88-DCDD and 2SIO `0x10`/`0x11`; mount a working `PS2DEMO.DSK`, load
+`PS2PROM.HEX` at offset `0`, and run from `0xF000`. Choose workspace `4` for editor/AM2, `3` for debugger/AM2, or
+`2` for 8K BASIC/Chase; see the [package instructions][ps2-readme]{:target="_blank"} for memory layout. In the
+editor, `EDT`, `I`, source, Ctrl-Z, `E` edits a file; `EDT(R)` reopens it. Run `AM2` to assemble and `EOA` to
+return to the monitor. Addresses are octal.
 
 The tape package's `PS2-EDT.BIN`, `PS2-ASM.BIN`, `PS2-AM2.BIN` and `PS2-DBG.BIN` are monitor-load records, not ordinary
 raw memory binaries. Do not load them at address zero just because their extension is `.BIN`.
@@ -676,10 +557,9 @@ raw memory binaries. Do not load them at address zero just because their extensi
 `VTL2SIMH.TXT` describe the syntax. This avoids the physical-console switch selection needed by the standalone
 `minol22.bin` and `mitsvtl2.bin` versions.
 
-For standalone VTL-2 from that same archive, load `mitsvtl2.bin` at `0xF800`, change `DB FF` at `0xF820` to `3E 08`,
-and start at `0xF800` with the 2SIO console. For standalone MINOL, load `minol22.bin` at 0, change `DB FF` at `0x0252`
-to `3E 00`, enable 2SIO status `0x10` and data `0x11`, and start at 0. This last switch read controls its prompt.
-Use the 8080 computer for both standalone versions. The CP/M versions are the simpler installation.
+Standalone VTL-2: load `mitsvtl2.bin` at `0xF800`, patch `DB FF` at `0xF820` to `3E 08`, then start at `0xF800`.
+Standalone MINOL: load `minol22.bin` at 0, patch `DB FF` at `0x0252` to `3E 00`, enable 2SIO `0x10`/`0x11`,
+then start at 0. Use the 8080; the CP/M versions are simpler.
 
 The ROM directory also contains TURMON (`0xFD00`), hexadecimal TURMONH (`0xFD00`) and the Altair monitor (`0xF800`).
 Load their HEX files with offset 0, enable the `0x10`/`0x11` console, open the terminal and jump to the stated entry
@@ -688,38 +568,31 @@ improved loader/monitor ROMs, have their own I/O and origin settings in the supp
 
 ## Software requiring other hardware
 
-Some packages require devices or services unavailable in the standard emuStudio Altair schema.
-Changing a disk filename or its geometry cannot replace a missing controller or simulator service.
+Some software needs devices or services absent from the standard Altair schema; changing an image filename or geometry
+cannot replace a missing controller or simulator service.
 
 |---
 | Download or family | Requirement and execution route
 |-|-
 | [Burcon CP/M][pkg-burcon]{:target="_blank"} | `DIR` returns `Bdos Err On A: Bad Sector` in emuStudio. Its BIOS requires additional sector validation.
-| [MP/M II][pkg-mpm]{:target="_blank"} | Its script sets banked memory with common boundary `0xB000`, attaches `mpm.dsk` and SIMH `i.dsk`, and opens four telnet terminals. emuStudio has timer/banking support but does not provide that SIMH multi-terminal SIO installation. The supplied multi-user configuration cannot run with the standard emuStudio schema.
-| [CP/NET and CPNOS][pkg-cpnet]{:target="_blank"} | Require SIMH's NET socket device as well as client/server operating systems. A normal emuStudio SIO connection does not implement the network device.
-| [CompuPro CP/M Plus][pkg-cpmplus]{:target="_blank"} | Uses I8272, DISK1A/DISK2 and SystemSupport1 serial devices with IMD disks. This is separate from Schorn's runnable Altair `cpm3.dsk`. emuStudio does not supply these controllers.
-| [UCSD Pascal II.0][pkg-ucsd]{:target="_blank"} and [additional source disks][pkg-ucsddsk]{:target="_blank"} | Its `ucsd` script boots `ucsd.dsk` in floppy drive 4, attaches `dsk0.dsk` and `dsk1.dsk` to SIMH hard-disk drives, and loads the p-system with `PASCAL`. It needs the package's special disk layout; raw `.gz` source disks are not ordinary CP/M floppies. The standard CP/M setup on this page does not supply that installation.
-| Schorn's `appleiicpm.dsk`, `128sssd.imd` and `JRTPAS30.IMD` | Need the specified Apple II or ImageDisk sector format and mapping. Do not mount an IMD file as a raw 137-byte-sector disk.
-| [Other Schorn operating systems][schorn-os2]{:target="_blank"} | CompuPro, Cromemco, North Star, Vector Graphic, CP/M-86, 86-DOS, MS-DOS, CP/M-68K and related systems need their stated processors/controllers. They cannot run with the standard emuStudio Altair 8080/Z80 schema.
-| DeRamp North Star and iCOM disk trees | North Star, Tarbell and iCOM controller-specific images need those controllers. A raw `.dsk` or `.nsi` suffix does not make them 88-DCDD disks. Preserve their readmes and use the documented hardware or a simulator which supplies it.
-| MITS BASIC 1.0 and other unconverted tape-only releases | The archived `.tap` files need their matching bootstrap and console selection. They require a console switch register that the standard emuStudio schema does not supply.
-| Physical front-panel, cassette, printer, music and speech programs | Require the named switches, cassette interface, printer, DAC or speech hardware. The terminal cannot supply these peripherals. Serial text programs can use the console when their ports match.
+| [MP/M II][pkg-mpm]{:target="_blank"} | Requires banked memory (common boundary `0xB000`), `mpm.dsk`, SIMH `i.dsk` and four telnet terminals. The standard schema lacks its multi-terminal SIO setup.
+| [CP/NET and CPNOS][pkg-cpnet]{:target="_blank"} | Require SIMH's NET socket device; ordinary emuStudio SIO does not provide it.
+| [CompuPro CP/M Plus][pkg-cpmplus]{:target="_blank"} | Requires I8272, DISK1A/DISK2, SystemSupport1 serial devices and IMD media; distinct from runnable Schorn Altair `cpm3.dsk`.
+| [UCSD Pascal II.0][pkg-ucsd]{:target="_blank"} and [additional source disks][pkg-ucsddsk]{:target="_blank"} | Needs its special drive mapping: `ucsd.dsk` in floppy 4, `dsk0.dsk`/`dsk1.dsk` as SIMH hard disks, then `PASCAL`. Raw `.gz` source disks are not CP/M floppies.
+| Schorn's `appleiicpm.dsk`, `128sssd.imd` and `JRTPAS30.IMD` | Require Apple II or ImageDisk format/mapping; do not mount IMD as raw 137-byte-sector media.
+| [Other Schorn operating systems][schorn-os2]{:target="_blank"} | CompuPro, Cromemco, North Star, Vector Graphic, CP/M-86, 86-DOS, MS-DOS and CP/M-68K need other processors/controllers.
+| DeRamp North Star and iCOM disk trees | Require North Star, Tarbell or iCOM controllers. `.dsk`/`.nsi` extensions do not make these 88-DCDD images.
+| MITS BASIC 1.0 and other unconverted tape-only releases | Require matching `.tap` bootstrap and a console switch register, which the standard schema lacks.
+| Physical front-panel, cassette, printer, music and speech programs | Require their named hardware; a terminal only supports serial text when ports match.
 |---
 
 ## When a program does not start
 
-If there is no output, first check the bootloader and entry address, the mounted drive 0 image, and the serial ports.
-A CP/M disk expects a matching CP/M BIOS; a MITS BASIC disk expects Disk BASIC. For Schorn's current CP/M disks use
-`mdbl.bin`, not the original `dbl.bin`. Check memory banks and the common boundary for banked systems.
-
-If text is readable but the screen is filled with escape characters, use the terminal type for which the program was
-installed, usually VT100 for Schorn's screen applications. If CP/M prints `NAME?`, use `DIR` to confirm that `NAME.COM`
-is on the selected drive and in the selected user area. If an application starts but cannot load a file, keep its
-overlays/data on that drive, check the disk format, and wait for disk operations before entering another command.
-
-For BASIC memory-size errors, distinguish bytes from kilobytes and use the explicit answers above. For standalone
-BASIC with no console output, confirm that the listed console patch was applied after loading and was not lost on
-reset. Hardware-specific archives require their own installation rather than further changes to a working CP/M setup.
+If nothing appears, check the bootloader/entry address, drive 0 image, serial ports and memory banks. Match the
+loader and BIOS to the disk: Schorn's current CP/M uses `mdbl.bin`, while MITS BASIC needs Disk BASIC. For garbled
+screens select the configured terminal (often VT100); for CP/M `NAME?`, check `DIR`, drive and user area. Missing
+application files usually mean overlays/data are on the wrong drive or the disk format is wrong. BASIC memory
+answers use bytes or kilobytes as specified; reapply standalone console patches after reset.
 
 [schorn-software]: https://schorn.ch/altair_3.php
 [schorn-os]: https://schorn.ch/altair_4.php
