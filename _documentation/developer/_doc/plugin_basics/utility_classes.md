@@ -33,7 +33,7 @@ for (byte b : program) {
     hex.add(b);
 } 
 
-hex.generate("output-file.bin");
+hex.generate(Path.of("output-file.hex"));
 
 // alternative:
 // hex.generate(writer);
@@ -120,10 +120,13 @@ Few useful operations:
 
 This class is heavily used by [edigen][edigen]{:target="_blank"} dissasembler generator.
 
+`StringUtils.format(char format, Bits bits)` renders bits using `c` for a character, `s` for a string, `d` for decimal,
+and `x` or `X` for hexadecimal output. Formatting belongs to `StringUtils`; `Bits` handles bit operations.
+
 ## Number utilities
 
 Class name
-: [net.emustudio.emulib.runtime.helpers][emulib_numberutils]{:target="_blank"}
+: [net.emustudio.emulib.runtime.helpers.NumberUtils][emulib_numberutils]{:target="_blank"}
 
 Usage
 : Lot of useful conversions between various number types.
@@ -176,31 +179,18 @@ Class name
 Usage
 : Provides a function for accurate sleeping of the active thread in all host platforms (Windows, Linux).
 
-The function `SleepUtils.preciseSleepNanos` is more precise than `LockSupport::sleepNanos`.
+Use `SleepUtils.preciseSleepNanos` when a worker needs a short timed wait. Do not sleep on Swing's event-dispatch thread.
 
 
-## Timed event processing
+## CPU timing
 
-Class name
-: [net.emustudio.emulib.plugins.cpu.TimedEventsProcessor][emulib_timedeventprocessor]{:target="_blank"}
+`net.emustudio.emulib.plugins.cpu.AccurateFrequencyRunner` paces CPU execution against a target frequency in kHz.
+Supply the frequency and instruction-execution callbacks to `run()`, and call `addExecutedCycles()` for the cycles
+executed by each instruction. See the [engine example]({{ site.baseurl }}/cpu/engine#emulating-accurate-timing).
 
-Usage
-: soft real-time system based on a logical system clock, interpreted as number of passed CPU cycles. Events 
-are scheduled to be run every given cycles.
-
-This class is asynchronous, and thread safe event queue based on logical time. It means time is not advanced regularly,
-but it is advanced on external calls of `TimedEventsProcessor.advanceClock()` method, and by given number of "CPU cycles". 
-
-Events are scheduled to be executed every given "cycles" regularly. When the clock is advanced enough to pass over
-scheduled time of some events, those events are triggered. 
-
-This class is part of `plugins.cpu` package, because advancing system clock is performed by CPU if the instance is
-obtained through `CPUContext.getTimedEventsProcessor()` method. Thus, it is part of CPU public API.
-It is still possible to use this class independently too, but then use must make new instance and make sure of advancing
-the clock for events to be triggered.
-
-Timed event processing can be used for accurate emulation of multiple devices which speed or actions depend on the number
-of executed CPU cycles.
+Devices receive elapsed emulated time through `CPUContext.PassedCyclesListener`. Accumulate these deltas in the device
+to trigger frames, tape transitions, or synthesis at the required cycle boundaries. Register and remove listeners
+through the CPU context as described in [cycle listeners]({{ site.baseurl }}/cpu/rootclass#cycle-listeners).
 
 
 [emulib]: {{ site.baseurl }}/emulib_javadoc/
@@ -214,4 +204,3 @@ of executed CPU cycles.
 [emulib_radixutils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/RadixUtils.html
 
 [emulib_sleeputils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/SleepUtils.html
-[emulib_timedeventprocessor]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/TimedEventsProcessor.html

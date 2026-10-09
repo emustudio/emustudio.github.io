@@ -35,7 +35,10 @@ The AY chip is accessed through two I/O ports using the ZX Spectrum 128K style w
 
 {: .info}
 > Only the low byte of the port address (`0xFD`) is decoded by the CPU for device dispatch. The full 16-bit address
-> is used by the chip to distinguish between register select and data ports.
+> is passed to the chip, which decodes address bits A15, A14, and A1. On the attached `FDh` port, `port & C002h`
+> equal to `C000h` selects or reads a register, and `8000h` writes register data. Other address bits are ignored.
+> For example, `FDFDh` selects or reads a register and `BDFDh` writes its data. Addresses with a different low byte
+> are not dispatched to this device by the bundled CPU wiring.
 
 ## Registers
 
@@ -130,10 +133,14 @@ model the real chip's non-linear DAC behavior.
 The audio is driven by CPU T-state timing — the chip receives cycle notifications from the CPU and advances its
 internal generators accordingly. This ensures accurate pitch regardless of emulation speed.
 
+The AY device opens a host audio output during initialization, including in `--no-gui` mode. If that output is
+unavailable, initialization reports **AY-3-8910 tone output is unavailable**. For a silent headless run or a host without
+audio output, omit this optional device from the computer configuration.
+
 Tone, noise, and envelope generators use the CPU clock in hertz and keep their divider state between audio buffers.
-Register reads return data only through the register-select address (`FFFDh`); the data-write address is not a second
-read alias. Writing R13 restarts all envelope shapes with their documented continue, attack, alternate, and hold
-behavior.
+Register reads return data through the register-select address (`FFFDh`) and its decoded aliases; reads of the
+data-write address return `FFh`. Writing R13 restarts all envelope shapes with their documented continue, attack,
+alternate, and hold behavior.
 
 ## Configuration
 

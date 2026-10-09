@@ -24,8 +24,10 @@ The 88-DCDD hardware contained three parts:
     - the first one performed communication operations between the bus and CPU
     - the second one performed communication with the disk drives
 
-Original manual can be found at [deramp.com][manual]{:target="_blank"} or 
-[www.virtualaltair.com][manual2]{:target="_blank"}.
+## Original manual
+
+[MITS Altair Floppy Disk Documentation (88-DCDD, PDF)][manual]{:target="_blank"} covers drive operation,
+installation, controller programming, and schematics.
 
 ## Diskette formats
 
@@ -767,8 +769,7 @@ The following table shows all the possible file configurations of the plugin:
 |---
 
 
-[manual]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/30-Disk%20Storage%20Devices/20-88-DCDD%208%20inch%20Floppy%20System/Other%20Manual%20Scans/Altair%2088-DCDD%20Disk%20Drive%20System.pdf
-[manual2]: http://www.virtualaltair.com/virtualaltair.com/PDF/88dsk%20manual%20v2.pdf
+[manual]: https://deramp.com/downloads/altair/hardware/8_inch_floppy/Altair%20Floppy%20(88-DCDD)%20Manual.pdf
 [pertec]: http://cini.classiccmp.org/pdf/iCOM/FD400-5x0-5x1_Mar77.pdf
 [simh]: http://simh.trailing-edge.com/
 [altair-schorn]: https://schorn.ch/altair_3.php

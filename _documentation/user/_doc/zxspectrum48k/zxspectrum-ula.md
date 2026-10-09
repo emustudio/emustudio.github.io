@@ -181,7 +181,7 @@ levels:
 The emulator models these Issue 3 voltage levels by centering them and scaling into 16-bit PCM audio. The output
 is resampled to 48 kHz stereo using fixed-point time accumulation to maintain long-term timing accuracy.
 
-When a tape is playing, the tape input signal is mixed into the beeper output at a reduced amplitude (10% of peak)
+When a tape is playing, the tape input signal is mixed into the beeper output at a reduced amplitude (4% of beeper peak)
 to reproduce the familiar loading sounds.
 
 ### Volume control
@@ -202,4 +202,3 @@ The recording captures both the video frames and the beeper audio in sync.
 
 Video records the native screen and border at the emulated frame rate. Window resizing and the keyboard overlay
 do not affect the recording. Encoding runs while recording, so Save only finishes the MP4 and adds the audio.
-

@@ -24,13 +24,12 @@ will always be available in the class-path:
 - [emuLib][emulib-github]{:target="_blank"} (Maven [here][emulib-maven]{:target="_blank"})
 - [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
-- [Picoli][picoli]{:target="_blank"} for command-line parsing
+- [Picocli][picoli]{:target="_blank"} for command-line parsing
 
 The application provides also:
 
-- plugin configuration management - implementation of [PluginSettings][pluginSettings]{:target="_blank"} allowing
-  plugins
-  to register themselves or get instances of other registered plugins
+- plugin configuration management through [PluginSettings][pluginSettings]{:target="_blank"}
+- context registration and lookup through `ApplicationApi.getContextPool()`
 - runtime API for the communication between plugins and emuStudio application - implementation
   of [ApplicationApi][applicationApi]{:target="_blank"}
 
@@ -42,6 +41,17 @@ a virtual computer is inspired by the [von Neumann model][vonNeumann]{:target="_
 
 Each plugin implements API from emuLib, following some predefined rules. Plugin physically is compiled into a JAR file
 and copied into particular subdirectory in emuStudio installation.
+
+## Building the application and plugins
+
+Use the repository's Gradle 9.0 wrapper with JDK 17–24. The application and emuLib target Java 11 bytecode.
+In the emuStudio checkout, `./gradlew build` builds and tests the application and
+bundled plugins; `./gradlew :application:distZip :application:distTar` creates distributions. `./gradlew doc` renders
+the repository's architecture documentation.
+
+emuStudio uses `net.emustudio:emulib:12.1.0-SNAPSHOT`. When developing both repositories locally, run
+`./gradlew publishToMavenLocal` in emuLib before building emuStudio; its dependency lookup checks Maven Local first.
+For public API details, use the [emuLib reference][emulib-javadoc]{:target="_blank"}.
 
 ## GitHub repositories
 
@@ -57,14 +67,14 @@ combination of multiple sister projects:
 - [emuStudio website][website-github]{:target="_blank"}
 
 
-[antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
-[slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
-[picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
+[antlr-runtime]: https://www.antlr.org/
+[slf4j]: https://www.slf4j.org/
+[picoli]: https://picocli.info/
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
 [vonNeumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
 
-[emulib-maven]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
+[emulib-maven]: https://central.sonatype.com/artifact/net.emustudio/emulib
 [emulib-github]: https://github.com/emustudio/emuLib
 [emulib-javadoc]: {{ site.baseurl }}/emulib_javadoc/
 [emustudio-github-all]: https://github.com/orgs/emustudio/repositories

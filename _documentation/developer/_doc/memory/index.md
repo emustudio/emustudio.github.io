@@ -18,9 +18,37 @@ context. Memory context should be a class which either implements [MemoryContext
 interface, or extends [AbstractMemoryContext][abstractMemoryContext]{:target="_blank"} class. The latter provide
 additional functionality - management of memory "listeners".
 
-A memory listener (implementing [Memory.MemoryListener][memoryListener]{:target="_blank"} interface) can observe memory
+A memory listener (implementing [MemoryContext.MemoryListener][memoryListener]{:target="_blank"} interface) can observe memory
 value changes on all address range. But when the emulation is in running state, emuStudio turns off the memory
 notifications to speed up the emulation.
+
+## Cell type, size, and annotations
+
+`MemoryContext<CellType>.getCellTypeClass()` identifies the cell type; byte-oriented consumers must check for
+`Byte.class` during initialization. `getSize()` reports allocated cells. The CPU independently reports its instruction
+address space through `CPU.getAddressSpaceSize()`, which the debugger uses for address validation and pagination.
+
+Implement `annotations()` to expose a `MemoryContextAnnotations` store. emuLib's `Annotations` implements
+`MemoryAnnotations` and can be owned by the memory plugin and shared with its context. `AbstractMemoryContext` supplies
+listener management; the concrete context supplies storage and annotations.
+
+Annotations belong to the plugin ID in each annotation. Producers remove their own entries with `removeAll(pluginID)`
+when rebuilding them. Compilers can add `SourceCodeAnnotation` entries after writing generated cells:
+
+```java
+MemoryContextAnnotations annotations = memory.annotations();
+annotations.removeAll(pluginID);
+annotations.add(address, new SourceCodeAnnotation(
+        pluginID, SourceCodePosition.of(line, column, sourcePath.toString())
+));
+```
+
+The debugger uses these positions to open source files. In `byte-mem`, successful writes invalidate source annotations
+at the written addresses, including while notifications are disabled. Clearing memory removes all source annotations.
+An ignored ROM write leaves them intact. Annotations are keyed by address, without a bank identifier.
+
+Byte-memory image loaders and dumpers use a UTF-8 `.meta` sidecar to restore or save source positions. Sidecar addresses
+are absolute: loading a binary image at another address does not relocate its metadata.
 
 ## Shared GUI actions
 
@@ -37,4 +65,4 @@ specific load and dump operations.
 [memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
 [abstractMemory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemory.html
 [abstractMemoryContext]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html
-[memoryListener]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.MemoryListener.html
+[memoryListener]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html

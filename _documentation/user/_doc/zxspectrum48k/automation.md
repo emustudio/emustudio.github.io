@@ -17,8 +17,10 @@ In the interactive mode, the ZX Spectrum display window and audio tape player ar
 user to interact with the emulated computer. If any automation events are configured, they are executed.
 
 In the non-interactive mode (`--no-gui` flag set in the command line), no GUI windows are shown. The emulation runs
-"headless" — there is no display output, no keyboard input, and no audio. This mode is useful for automated testing
-or batch processing.
+headless, without a display window or keyboard input, and the ULA beeper is silent. The optional
+[AY sound device]({{ site.baseurl }}/zxspectrum48k/audio-ay3_8910-chip#audio-output) still opens a host audio output;
+omit it from the computer configuration for a silent run or a host without audio output. Headless mode is useful for
+automated testing or batch processing.
 
 ## Configuration file
 

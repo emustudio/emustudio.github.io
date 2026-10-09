@@ -46,7 +46,7 @@ emuStudio does not distribute the copyrighted arcade ROMs. Supply legally obtain
 
 1. Close the virtual computer before editing `config/SpaceInvaders.toml`.
 2. In `[MEMORY.settings]`, set `memorySize = 65536` (64 KiB) and keep `banksCount = 1` and `commonBoundary = 0`.
-   If your template uses `16384`, increase it: the game can access memory beyond the framebuffer.
+   The game needs the full 8080 address space, including addresses beyond the framebuffer.
 3. Uncomment the twelve `imageName`, `imageAddress`, and `imageBank` lines by removing their leading `#`.
    Set each `imageName` to the path of its ROM file. Absolute paths avoid dependence on the launch directory.
    Keep the addresses and bank numbers shown below.
@@ -154,6 +154,17 @@ colorOverlay = true
 
 The display is already rotated into the upright arcade orientation. Sound effects use external WAV samples supplied
 by the user. Missing samples or an unavailable audio device leave emulation running with a warning in the log.
+
+### Volume and recording
+
+The display toolbar provides a volume slider and a **Record** button. Volume ranges from 0% to 100% and starts at 25%;
+it changes both playback and recorded sound. The slider value lasts for the current computer session.
+
+Click **Record** to start capturing, then click **Stop** and choose an MP4 file to save. Canceling the save dialog
+discards the capture. Recording uses the native 224 by 256 pixel frame at 60 frames per second, with the selected color
+overlay and stereo sound from the active samples. Display scaling does not change the video dimensions. Encoding runs
+during capture; saving finishes the file in the background. Keep the display open until you stop and save:
+closing it discards an active recording.
 
 ## Troubleshooting
 

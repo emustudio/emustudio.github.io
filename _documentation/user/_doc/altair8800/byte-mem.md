@@ -155,8 +155,8 @@ consecutively from 0: loading stops at the first missing name/address pair or RO
 inclusive. Images are loaded before the startup ROM protections are applied. Relative image paths use the host working
 directory.
 
-`size` is an alias for `memorySize` and takes precedence when both are present. For example, `size = "64K"` is equivalent
-to `memorySize = 65536`.
+For example, `memorySize = "64K"` allocates 65,536 bytes per bank and `memorySize = "1M"` allocates 1,048,576 bytes.
+Suffixes are case-insensitive; unsuffixed strings use decimal or hexadecimal notation such as `"65536"` or `"0x10000"`.
 
 Intel HEX images carry their own addresses; binary images use `imageAddressN`. Extensions `.bin`, `.com`, `.out`, and
 `.rom`, as well as unknown extensions, select the binary loader. TAP and TZX loaders can extract Spectrum

@@ -24,8 +24,10 @@ The following image shows MITS 88-2SIO board.
 
 ![Serial board MITS 88-SIO-2]({{ site.baseurl }}/assets/altair8800/88-sio-2.png)
 
-Original manual of MITS 88-SIO serial board can be found [here][manual]{:target="_blank"}, 
-[here][manual-2]{:target="_blank"} or [here][manual-deramp]{:target="_blank"}.
+## Original manual
+
+[MITS 88-SIO Serial I/O Board Documentation (1975, PDF)][manual]{:target="_blank"} covers board operation,
+schematics, address selection, and baud-rate selection for the single-channel serial board.
 
 ## Features
 
@@ -384,9 +386,7 @@ print:
 ```
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
-[manual]: https://s100computers.com/Hardware%20Manuals/MITS/MITS_Altair_88-sio_Serial_IO_Card_Manual.pdf
-[manual-2]: https://usermanual.wiki/Document/MITSAltair88sioSerialIOCardManual.407144693/view
-[manual-deramp]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/10-MITS%20S100%20Boards/88-2SIO%20Dual%20Serial%20Board/MITS_Altair_88-2SIO_Searial_Board_Manual_1975.pdf
+[manual]: https://deramp.com/downloads/altair/hardware/sio_serial_interface/88-SIO%20Rev%200%20&%201.pdf
 [compupro-1]: http://www.s100computers.com/Hardware%20Manuals/CompuPro/CompuPro%20System%20Support%201%20Manual.pdf
 [compupro-if4]: http://www.s100computers.com/Hardware%20Folder/CompuPro/Interfacer%204/Interfacer%204.htm
 [compupro-if4-manual]: http://www.s100computers.com/Hardware%20Manuals/CompuPro/CompuPro%20Interface%204%20Manual.pdf

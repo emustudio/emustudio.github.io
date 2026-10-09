@@ -79,3 +79,10 @@ Reset deselects the drive and returns all tracks to 0, keeping the mounted files
 
 The implementation models the original 88-MDS geometry and protocol. It does not use the unrelated SIMH HDSK
 extension; use the `88-hdsk` plugin for that interface.
+
+## Original manual
+
+[MITS Altair 88-MDS Minidisk Documentation — Preliminary (PDF)][manual]{:target="_blank"} describes installation,
+controller programming, disk format, and schematics for the minidisk system.
+
+[manual]: https://deramp.com/downloads/altair/hardware/minidisk/88-MDS%20Minidisk%20Manual.pdf
