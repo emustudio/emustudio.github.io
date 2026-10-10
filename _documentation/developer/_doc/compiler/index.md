@@ -47,6 +47,7 @@ public class CompilerImpl extends AbstractCompiler {
                     );
                 }
             } catch (InvalidContextException | ContextNotFoundException e) {
+                memory = null;
                 LOGGER.warn("Memory is not available", e);
             }
         });
@@ -135,7 +136,7 @@ public class CompilerImpl extends AbstractCompiler {
 ```
 
 Main outcomes are:
-- this sample compiler uses ANTLR parser generator for generating parser and lexer - they must be written manually
+- this sample compiler uses ANTLR to generate a lexer and parser from a grammar written by the plugin author
 - it optionally loads program output into memory
 - it generates output file in Intel HEX format
 - AST (abstract syntax tree) in form of classes must be written manually

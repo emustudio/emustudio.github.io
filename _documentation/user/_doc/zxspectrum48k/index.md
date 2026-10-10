@@ -79,9 +79,9 @@ assembler plugin used for the Altair8800 with Zilog Z80 CPU. The CPU plugin is d
 
 ### Requirements
 
-The ZX Spectrum 48K emulation requires the original 16 KB ROM image. The ROM image is copyrighted by Amstrad, who have
-kindly given [permission][permission]{:target="_blank"} for it to be redistributed for emulation purposes. The ROM image must be configured in the
-`byte-mem` plugin settings to be loaded at address `0x0000` at startup.
+The ZX Spectrum 48K emulation requires a 16 KB ROM image. Obtain a copy you are permitted to use; the archive's
+[Amstrad permission correspondence][permission]{:target="_blank"} describes redistribution for emulation.
+Configure the image in `byte-mem` to load at address `0x0000` at startup.
 
 Each plugin is described in further sections.
 

@@ -8,9 +8,10 @@ permalink: /altair8800/88-hdsk
 
 {% include analytics.html category="Altair8800" %}
 
-# SIMH HDSK controller
+# Altair hard-disk controllers
 
-The `88-hdsk` plugin implements the SIMH Altair HDSK extension. HDSK is a synthetic host-backed block device for SIMH
+The `88-hdsk` plugin supports the SIMH Altair HDSK extension (default) and a MITS controller behind 88-4PIO.
+The following port protocol describes SIMH mode. HDSK is a synthetic host-backed block device for SIMH
 software, not a physical MITS multi-port controller. It uses port `FDh` and transfers sector data directly between a
 disk image and guest memory.
 
@@ -73,14 +74,14 @@ the plugin settings with `imageN`, `sectorSizeN`, and `sectorsPerTrackN`, where 
 |---
 | Key | Default | Values | Meaning
 |-|-|-|-
+| `controllerType` | `"SIMH"` | `"SIMH"`, `"MITS"` | Controller model; requires matching schema connections and reopening the computer |
 | `image0` … `image15` | None | Writable file path | Image to attach on startup; a missing file is created
 | `sectorSize0` … `sectorSize15` | 128 | 128, 256, 512, 1024 | Physical sector size in bytes
 | `sectorsPerTrack0` … `sectorsPerTrack15` | 32 | 1–255 | Physical sectors per track
 |---
 
-Relative paths resolve against the host working directory. GUI mounts and geometry changes apply to the current
-session; edit the computer configuration for startup persistence. There is no separate settings dialog, and the
-CPU port is fixed at `FDh`. Writes modify the mounted file directly and may extend it.
+Relative paths resolve against the host working directory. GUI mounts apply to the current session. Use the settings dialog or edit the computer configuration for
+startup persistence. In SIMH mode, the CPU port is fixed at `FDh`. Writes modify the mounted file directly and may extend it.
 
 ## Read example
 
@@ -102,3 +103,19 @@ hlt
 ```
 
 Mount an image first and ensure the destination is writable memory with room for one physical sector.
+
+## MITS hard-disk mode
+
+Set `controllerType = "MITS"` and connect the controller to an [`88-pio`]({{ site.baseurl }}/altair8800/88-pio)
+configured as `boardType = "88-4PIO"` with at least two PIAs. Communication uses four PIA channels and handshake lines;
+the controller does not attach directly to `FDh` or use the SIMH command packet above. Use guest software written for
+the MITS hard-disk interface.
+
+MITS mode accepts `image0` through `image7`, with optional `readOnly0` through `readOnly7` (default `false`). Each image
+must already exist and contain exactly **4,988,928 bytes**: 406 cylinders, two surfaces, 24 sectors per surface and
+256 bytes per sector. The GUI can create an image of this size. `sectorSizeN` and `sectorsPerTrackN` apply only to SIMH
+mode. Mounted image writes change the host file directly.
+
+The controller stages transfers through four 256-byte buffers and implements seek, sector read/write, buffer
+transfers, interface-register access and formatting. Reset clears the controller state while retaining mounted media.
+The device window shows the selected unit and activity; the settings dialog controls startup images and write protection.

@@ -14,7 +14,7 @@ ZX Spectrum 48K computer is capable of running automatic emulation. Automation c
 non-interactive mode.
 
 In the interactive mode, the ZX Spectrum display window and audio tape player are shown automatically, allowing the
-user to interact with the emulated computer. If any automation events are configured, they are executed.
+user to interact with the emulated computer. Start tape automation from the tape player's **Events** tab.
 
 In the non-interactive mode (`--no-gui` flag set in the command line), no GUI windows are shown. The emulation runs
 headless, without a display window or keyboard input, and the ULA beeper is silent. The optional
@@ -28,7 +28,7 @@ The ZX Spectrum 48K configuration file is `config/ZxSpectrum48K.toml`. The key s
 
 ### Memory (`byte-mem`) settings
 
-The most important setting is loading the 48K ROM image at startup. This is configured in the `[MEMORY.settings]`
+The most important setting is loading the 16 KB ROM image at startup. This is configured in the `[MEMORY.settings]`
 section:
 
 |---
@@ -44,14 +44,14 @@ section:
 |---
 | Setting | Default | Description
 |-|-|-
-| `frequency_khz` | 3500 | CPU clock frequency in kHz (3500 = 3.5 MHz, the standard ZX Spectrum clock)
+| `frequency_khz` | 4000 | CPU plugin default in kHz; the bundled Spectrum configuration sets 3500 (3.5 MHz)
 |---
 
 ## Tape automation
 
 The [Audio Tape Player]({{ site.baseurl }}/zxspectrum48k/audiotape-player) supports automation events that can
-automatically load and play tape files. This is especially useful in non-interactive mode for running test suites
-or loading software without user interaction.
+load and play a sequence of tape files from the GUI's **Events** tab. The current implementation does not start
+stored tape events in `auto --no-gui` mode.
 
 ### Configuring tape automation events
 
@@ -76,21 +76,17 @@ To configure tape automation events in the configuration file, add the `automati
 
 {:.code-example}
 ```toml
-[[DEVICE]]
-    path = "audiotape-player.jar"
-    name = "audiotape-player"
-    type = "DEVICE"
-
-    [DEVICE.settings]
-        automationEvents = [
-            "LOAD_TAPE:/path/to/game.tap",
-            "DELAY:3",
-            "PLAY:"
-        ]
+# Add to the existing audiotape-player [DEVICE.settings] table.
+automationEvents = [
+    "LOAD_TAPE:/path/to/game.tap",
+    "DELAY:3",
+    "PLAY:"
+]
 ```
 
-When running with the `auto` flag, the automation events are executed sequentially after emulation reset. The `PLAY`
-event blocks until the tape finishes playing, so subsequent events wait for playback completion.
+Start the sequence with the **Play** button in the tape player's **Events** tab.
+The `PLAY` event waits until tape playback finishes before the
+next event runs. The CPU must be running for tape pulses to advance; loading a tape does not type `LOAD ""` into BASIC.
 
 ## Example
 

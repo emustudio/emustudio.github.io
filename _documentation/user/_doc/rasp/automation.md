@@ -25,32 +25,25 @@ Command line for starting non-interactive automatic emulation:
 - (`auto`) automatic emulation will be executed
 - (`--no-gui`) non-interactive mode will be set
 
-After the run, the following output on the stdout can be expected:
+{: .info}
+> If startup reports `Plugin class count does not match plugin configuration count`, the application's plugin loader
+> failed to create multiple tape instances. Compilation and emulation have not started. The
+> [standalone compiler]({{ site.baseurl }}/rasp/raspc-rasp#running-from-the-command-line) can still compile your program.
+
+The console reports progress similar to the following (plugin details and paths depend on the installation):
 
 {:.code-example}
 ```
-[INFO] Starting logging symbols changes to a file: input_tape.out
-[INFO] Starting logging symbols changes to a file: output_tape.out
 [INFO] Starting emulation automation...
 [INFO] Emulating computer: Random-Access Stored Program (RASP)
-[INFO] Compiler: RASP Machine Assembler, version 0.41
-[INFO] CPU: Random Access Stored Program (RASP), version 0.41
-[INFO] Memory: RASP Memory, version 0.41
-[INFO] Memory size: 0
-[INFO] Device: Input tape, version 0.41
-[INFO] Device: Output tape, version 0.41
 [INFO] Compiling input file: examples/raspc-rasp/factorial.rasp
 [INFO] Compiler started working.
-[INFO] [INFO   ] RASP Machine Assembler, version 0.41
-[INFO] [INFO   ] Compile was successful.
-	Output: /home/emuStudio/examples/raspc-rasp/factorial.brasp
-	Program starts at 0x0014
-[INFO] [INFO   ] Compiled file was loaded into program memory.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
+[INFO] Starting logging symbols changes to a file: input_tape.out
+[INFO] Starting logging symbols changes to a file: output_tape.out
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 0x0037
 [INFO] Emulation completed
 ```
 

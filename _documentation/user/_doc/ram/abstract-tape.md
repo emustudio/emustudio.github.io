@@ -77,7 +77,7 @@ The following table shows all the possible settings of Abstract tape plugin:
 
 ## Automatic emulation
 
-The abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file
+In headless automatic emulation (`auto --no-gui`), symbol writes are logged to a file as `position symbol`, one per line. The file is overwritten after reset; GUI automation does not enable this logging. The file
 name is devised from the title of the tape, by the following algorithm:
 
 - At first, all spaces in the title are replaced with an underscore (`_`)
@@ -86,7 +86,7 @@ name is devised from the title of the tape, by the following algorithm:
 - Finally, the `.out` extension is added at the end.
 
 Invalid characters are the following: `*`, `.`, `#`, `%`, `&`, `+`, `!`, `~`, `/`, `?`, `<`, `>`, `,`, `|`, `{`, `}`
-, `[`, `]`, `"`, ```, `=`
+, `[`, `]`, `\`, `"`, `'`, backtick, `=`
 
 ## Using abstract tapes in your emulator
 
@@ -123,6 +123,11 @@ package net.emustudio.plugins.device.abstracttape.api;
 
 import net.emustudio.emulib.plugins.annotations.PluginContext;
 import net.emustudio.emulib.plugins.device.DeviceContext;
+import net.jcip.annotations.ThreadSafe;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Public API of the abstract tape.
@@ -295,6 +300,7 @@ public interface AbstractTapeContext extends DeviceContext<TapeSymbol> {
      * @throws IllegalArgumentException if the symbol type is not among accepted ones
      */
     void writeData(TapeSymbol value);
+}
 ```
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()

@@ -34,9 +34,9 @@ was in SSEM represented as `110`.
 
 The instruction format is as follows:
 
-| *Bit:*  | 00 | 01 | 02 | 03 | 04 | ... | 13 | 14 | 15 | ... | 31
-| *Use:*  | L | L | L | L | L | 0 | I | I | I | 0 | 0
-| *Value:*| 2^0 | | | | | | | | | | 2^31
+| Bits | 0–4 | 5–12 | 13–15 | 16–31 |
+|:-----|:----|:-----|:------|:------|
+| Use | Line (`LLLLL`) | Unused | Opcode (`III`) | Unused |
 
 where bits `LLLLL` denote a "line", which is basically the memory address - index of a memory cell. It can be understood
 as an instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).

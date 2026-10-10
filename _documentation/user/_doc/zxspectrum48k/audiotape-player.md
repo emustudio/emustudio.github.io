@@ -232,8 +232,9 @@ The Events tab toolbar provides controls for managing and running automation eve
 - **Stop** — cancel the running automation
 - **Reset** — stop automation and reset the timeline
 
-Events are saved to the plugin settings and persist across sessions. They can also be used in non-interactive
-(headless) automation mode — see [Automation]({{ site.baseurl }}/zxspectrum48k/automation) for details.
+Events are saved to the plugin settings and persist across sessions. Start them with **Play** in the **Events** tab.
+The current implementation does not start stored events in headless mode; see
+[Automation]({{ site.baseurl }}/zxspectrum48k/automation) for details.
 
 ## Configuration file
 
@@ -243,7 +244,7 @@ The following table describes available configuration keys:
 | Key | Type | Default | Description
 |-|-|-|-
 | `showGuiAtStartup` | Boolean | `false` | Whether to automatically open the tape player window when the emulation starts. Can also be set from the settings dialog in the GUI.
-| `automationEvents` | Array of strings | (empty) | List of automation events to execute sequentially after emulation reset (used in automation mode). Each event has the format `TYPE:parameter`. See [Automation events format](#automation-events-format) below.
+| `automationEvents` | Array of strings | (empty) | Saved event sequence started with **Play** in the **Events** tab. Each event has the format `TYPE:parameter`. See [Automation events format](#automation-events-format) below.
 |---
 
 ### Automation events format

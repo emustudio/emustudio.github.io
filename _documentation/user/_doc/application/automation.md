@@ -41,12 +41,13 @@ It compiles the file only in case automated emulation is executed (see below).
 Command `auto` executes automatic emulation. Select a computer with `-cf`, `-cn`, or `-ci`. If an input file is provided,
 it is compiled into memory. Interactive automation opens the device GUIs and starts the CPU.
 
-The `--no-gui` argument sets the non-interactive mode. In this case, emuStudio won't show any GUI windows and the
-communication with I/O is done via files (see involved plugins documentation).
+The `--no-gui` argument sets the non-interactive mode. In this case, emuStudio won't show any GUI windows and
+each device determines its headless behavior. Terminals can use files; other devices may run silently or require host
+resources (see the involved plugins' documentation).
 
 Argument `--waitmax 5000` waits at most 5 seconds for the running CPU to stop. When the deadline expires, the CPU is
-stopped and the timeout is logged. This limit does not include compilation or device initialization. Omit it to wait
-without a deadline.
+stopped when the virtual computer is closed. A CPU still running at the deadline is logged as `Invalid state
+(STATE_RUNNING)`. This limit does not include compilation or device initialization. Omit it to wait without a deadline.
 
 Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
 can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.

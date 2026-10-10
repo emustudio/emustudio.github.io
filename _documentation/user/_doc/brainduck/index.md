@@ -12,7 +12,7 @@ permalink: /brainduck/
 # BrainDuck
 
 BrainDuck is an abstract computer for emuStudio, which mimics [brainfuck][brainfuck]{:target="_blank"} programming
-language. Originally, brainfuck was developed by [Urban Miller][miller]{:target="_blank"} and it is well-known fact that
+language. Originally, brainfuck was developed by [Urban Müller][miller]{:target="_blank"} and it is well-known fact that
 the language has a minimalistic compiler, and it's eight instructions don't prevent it to be Turing complete. Also, there
 exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of
 that can be read at Wikipedia or at other sources.
@@ -24,8 +24,7 @@ BrainDuck architecture is just a name for virtual computer in emuStudio, and con
 - `byte-mem`: Virtual operating memory which holds both compiled brainfuck program and data
 - `vt100-terminal`: Virtual terminal for displaying the output and requesting for input.
 
-BrainDuck is implemented as [von Neumann] computer. It means that the program and data are shared in the same memory.
-This is not a common approach to implementing brainfuck interpreters, and it might be changed in the future.
+BrainDuck is implemented as a [von Neumann][vonneumann]{:target="_blank"} computer: program and data share the same memory.
 
 As implementing a brainfuck interpreter, one must deal with several [portability issues][portability]{:target="_blank"},
 which include:
@@ -33,7 +32,7 @@ which include:
 - Memory cell size (`byte`)
 - Memory size (number of memory cells) (by default 65536 when using `byte-mem`)
 - End-of-line code (0x0A is simulating both CRLF, 0x0D is just CR)
-- End-of-file behavior (in automatic no-GUI emulation when input is at EOF 0 is returned; in GUI-capable emulation the input is read from the host keyboard)
+- End-of-file behavior (no EOF byte is appended in headless mode; input waits after the file's queued bytes are exhausted)
 
 ## BrainDuck for emuStudio
 

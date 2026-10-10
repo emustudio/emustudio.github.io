@@ -64,9 +64,8 @@ Compiled source code can produce an output binary file (for example a HEX file),
 operating memory. If the emulation is
 running, the user must stop it first manually.
 
-If another program is loaded in memory, it is not removed before loading the currently compiled program, but the memory
-is overwritten at only those locations relevant to the compiled program. All the other
-content is left unchanged.
+Memory handling depends on the compiler. The 8080 and Z80 assemblers overwrite generated addresses and preserve other
+cells. BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading a successful compilation.
 
 ## Emulator tab
 

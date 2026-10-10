@@ -34,8 +34,9 @@ implementation:
 |Name | Default value | Valid values | Description
 |-|-|-|-
 |`printCode`       | false | true / false | Whether to dump executed instructions to console
+|`printCodeFileName` | `"syserr"` | `"syserr"` or writable path | Startup trace destination
 |`printCodeUseCache`| false | true / false | Use cache to avoid dumping repeated blocks
-|`frequency_khz` | 3500 | > 0 | CPU frequency in kHz (3500 for ZX Spectrum 48K)
+|`frequency_khz` | 4000 | > 0 | CPU plugin default in kHz; the Spectrum configuration sets 3500
 |---
 
 The standard ZX Spectrum 48K CPU frequency is **3500 kHz** (3.5 MHz).

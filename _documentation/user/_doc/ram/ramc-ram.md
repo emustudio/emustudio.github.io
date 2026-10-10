@@ -125,7 +125,7 @@ For example, this is a valid program:
 
 {:.code-example}
 ```
-; Copy R(X) to R(Y)
+; Copy R(Y) to R(X)
 ;
 ; input tape:
 ;   destination register: X

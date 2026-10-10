@@ -10,7 +10,7 @@ permalink: /altair8800/adm3a-terminal
 
 # Terminal LSI ADM-3A
 
-Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nickname 'Dumb Terminal'. In the time (1974),
+Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nickname 'Dumb Terminal'. Introduced in 1976,
 due to its cheapness and speed capabilities required in that time, it became de facto standard in the industry.
 Often it was used in connection with MITS Altair 8800 computer, so the decision of which terminal to emulate was clear.
 
@@ -52,9 +52,9 @@ which characters it can display. Original font contains only 255 characters, mod
 characters.
 
 The terminal can capture control codes (holding `CTRL` plus some key), and special control
-codes (`ESC + '=' + [X] + [Y]`).
-The special code (`ESC=XY`) sets the new cursor position, where `[X]` is a key translated to X position and `[Y]` a key
-translated into Y position of a cursor. The following subsection lists all possible control and special control key
+codes (`ESC + '=' + [Y] + [X]`).
+The special code (`ESC=YX`) sets the cursor position: send the row first, then the column, each encoded as its
+zero-based coordinate plus 32. The following subsection lists all possible control and special control key
 combinations.
 
 ### Control codes
@@ -81,8 +81,8 @@ The emulator is following it.
 |`CTRL+M`  | `CR`    | Return
 |`CTRL+N`  | `SO`    | Unlock keyboard
 |`CTRL+O`  | `SI`    | Lock keyboard
-|`CTRL+P`  | `OLE`   |
-|`CTRL+Q`  | `DCI`   |
+|`CTRL+P`  | `DLE`   |
+|`CTRL+Q`  | `DC1`   |
 |`CTRL+R`  | `DC2`   |
 |`CTRL+S`  | `DC3`   |
 |`CTRL+T`  | `DC4`   |
@@ -93,7 +93,7 @@ The emulator is following it.
 |`CTRL+Y`  | `EM`    |
 |`CTRL+Z`  | `SUB`   | Clear screen
 |`CTRL+[`  | `ESC`   | Initiate load cursor
-|`CTRL+x`  | `FS`    |
+|`CTRL+\`  | `FS`    |
 |`CTRL+]`  | `GS`    |
 |`CTRL+^`  | `RS`    | Home cursor
 |---
@@ -104,7 +104,7 @@ Terminal allows to set the absolute cursor position, when in "Cursor control Mod
 Emulated terminal does not support the "Cursor control Mode", but "load cursor" is supported.
 
 The "load cursor" operation can be activated by pressing `ESC` key followed by `=` key. Then the terminal expects
-another two key presses, one representing X, and the other one the Y position of the cursor.
+another two key presses, one representing the row (Y), and the other the column (X) of the cursor.
 
 X and Y coordinates are translated from the key presses. The following table shows the key-to-coordinate translation
 table.

@@ -22,7 +22,7 @@ ZX Spectrum software in TAP and TZX format can be found at various online archiv
 
 ## Requirements
 
-Before running any ZX Spectrum software, you need the **48K ROM image** loaded into memory at address `0x0000`. The ROM
+To use BASIC or programs that call ROM routines, load the **48K ROM image** into memory at address `0x0000`. The ROM
 contains the Sinclair BASIC interpreter and essential system routines (including the `BEEP` routine at `0x03B5` used
 by many programs).
 
@@ -127,54 +127,57 @@ ZX Spectrum software can be found at:
 For testing the Z80 CPU accuracy, see the [Z80 CPU documentation]({{ site.baseurl }}/altair8800/z80-cpu#testing-the-cpu)
 which describes how to run various Z80 test suites (Patrik Rak's z80test, ZXSpectrumNextTests, ZEXALL) in emuStudio.
 
-The following table lists known Z80 test suites and their results when run in the ZX Spectrum 48K emulation:
+The following suites exercise CPU behavior and Spectrum timing. Run them with the setup described in the CPU guide;
+results depend on the emulator build and test revision.
 
 ### Patrik Rak's z80test
 
+See the [upstream test descriptions][z80test]{:target="_blank"} for each variant.
+
 |---
-| Test file | Description | Result
-|-|-|-
-| `z80full.tap` | Complete Z80 instruction test | ✅ PASS
-| `z80flags.tap` | Documented instruction flag test | ✅ PASS
-| `z80doc.tap` | Documented instruction test | ✅ PASS
-| `z80docflags.tap` | Documented instruction flag variants | ✅ PASS
-| `z80ccf.tap` | CCF instruction test | ✅ PASS
-| `z80ccfscr.tap` | CCF instruction screen output test | ✅ PASS
-| `z80memptr.tap` | MEMPTR/WZ register test | ✅ PASS
+| Test file | Description
+|-|-
+| `z80full.tap` | Registers and all flags, including undocumented flags
+| `z80flags.tap` | All flags, including undocumented flags; registers ignored
+| `z80doc.tap` | Registers and documented flags
+| `z80docflags.tap` | Documented flags only; registers ignored
+| `z80ccf.tap` | Flags after CCF following each tested instruction
+| `z80ccfscr.tap` | Visual CCF flag pattern; compare with the suite’s reference images
+| `z80memptr.tap` | Flags after BIT n,(HL), probing MEMPTR behavior
 |---
 
 ### FUSE emulator tests
 
 |---
-| Test file | Description | Result
-|-|-|-
-| `fusetest.tap` | FUSE emulator compatibility test | ✅ PASS
+| Test file | Description
+|-|-
+| `fusetest.tap` | FUSE emulator compatibility test
 |---
 
 ### Timing tests 48K
 
 |---
-| Test file | Description | Result
-|-|-|-
-| [Timing tests 48K][timing48k]{:target="_blank"} | Instruction timing / T-state accuracy test for 48K model | ✅ PASS
+| Test file | Description
+|-|-
+| [Timing tests 48K][timing48k]{:target="_blank"} | Instruction timing / T-state accuracy test for 48K model
 |---
 
 ### ULA tests
 
 |---
-| Test file | Description | Result
-|-|-|-
-| `ulatest3.tap` | ULA timing and contention test | ✅ PASS
+| Test file | Description
+|-|-
+| `ulatest3.tap` | ULA timing and contention test
 |---
 
 ### ZXSpectrumNextTests
 
 |---
-| Test file | Description | Result
-|-|-|-
-| [Z80BlockInstructionFlags][nexttest-block]{:target="_blank"} | Block instruction flag behavior tests (LDI/LDIR/CPI/CPIR etc.) | ✅ PASS
-| [Z80CcfScfOutcomeStability][nexttest-ccfscf]{:target="_blank"} | CCF/SCF flag outcome stability tests | ✅ PASS
-| [Z80IntSkip][nexttest-intskip]{:target="_blank"} | Interrupt skip after EI instruction test | ✅ PASS
+| Test file | Description
+|-|-
+| [Z80BlockInstructionFlags][nexttest-block]{:target="_blank"} | Block instruction flag behavior tests (LDI/LDIR/CPI/CPIR etc.)
+| [Z80CcfScfOutcomeStability][nexttest-ccfscf]{:target="_blank"} | CCF/SCF flag outcome stability tests
+| [Z80IntSkip][nexttest-intskip]{:target="_blank"} | Interrupt skip after EI instruction test
 |---
 
 
@@ -201,4 +204,4 @@ The following table lists known Z80 test suites and their results when run in th
 [nexttest-ccfscf]: https://github.com/MrKWatkins/ZXSpectrumNextTests/tree/develop/Tests/ZX48_ZX128/Z80CcfScfOutcomeStability
 [nexttest-intskip]: https://github.com/MrKWatkins/ZXSpectrumNextTests/tree/develop/Tests/ZX48_ZX128/Z80IntSkip
 
-
+[z80test]: https://github.com/raxoft/z80test

@@ -30,7 +30,7 @@ Description of the control panel follows.
 | <span class="circle">7</span> | Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element.
 | <span class="circle">8</span> | Remove an element from the schema.
 | <span class="circle">9</span> | This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons `2`, `3`, `4`, and `5`. The names are actually plugin JAR file names.
-| <span class="circle">10</span> | Use / do not use a grid in the editor. Elements are "snapped" to the grid if it is used, and it's easier to draw the schema which looks good. The slider on the right then controls the density of the grid. The density is saved in the configuration file of the edited computer.
+| <span class="circle">10</span> | Toggle the grid and snap elements to it. The slider controls grid spacing, saved as `schemaGridGap` in the application's `emuStudio.toml`.
 
 Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have
 a CPU and memory. Optionally one or more devices, and optionally a compiler.

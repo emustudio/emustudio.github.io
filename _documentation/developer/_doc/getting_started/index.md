@@ -44,7 +44,8 @@ and copied into particular subdirectory in emuStudio installation.
 
 ## Building the application and plugins
 
-Use the repository's Gradle 9.0 wrapper with JDK 17–24. The application and emuLib target Java 11 bytecode.
+Use the wrapper supplied by each repository: emuStudio uses Gradle 8.14.4, while emuLib uses Gradle 9.0.
+JDK 21 can run both wrappers. emuStudio requests a Java 11 compilation toolchain; emuLib targets Java 11 bytecode.
 In the emuStudio checkout, `./gradlew build` builds and tests the application and
 bundled plugins; `./gradlew :application:distZip :application:distTar` creates distributions. `./gradlew doc` renders
 the repository's architecture documentation.

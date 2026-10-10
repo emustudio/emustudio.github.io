@@ -37,7 +37,7 @@ Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in t
 2. In 88-SIO, pair status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
 3. Use VT100 for the applications below: in a copy of the computer configuration, replace `adm3A-terminal`
    with `vt100-terminal` and connect it to 88-SIO in both directions. Save and reopen the computer, then open
-   the VT100 window with half-duplex disabled. ADM-3A also works for the CP/M command prompt.
+   the VT100 window. ADM-3A also works for the CP/M command prompt.
 4. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**. Keep enlarged Schorn images intact.
 
 ![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){:style="max-width:858px"}

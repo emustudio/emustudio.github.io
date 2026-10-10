@@ -128,9 +128,9 @@ An 8-bit CPU need not have an 8-bit address bus. The Intel 8080 and Z80 use **16
 `2 MiB / 64 KiB = 32` equal-sized banks. Each bank appears at the same guest addresses; selecting a bank changes which
 storage those addresses refer to.
 
-In `byte-mem`, `memorySize` is the size of **each bank**. Below `commonBoundary`, accesses use the selected bank;
+In `byte-mem`, `size` is the size of **each bank**. Below `commonBoundary`, accesses use the selected bank;
 at or above it, accesses always use bank 0. With the default boundary of 0, the entire address space is common.
-Set the boundary to `memorySize` for completely separate banks. For an Altair guest, the
+Set the boundary to `size` for completely separate banks. For an Altair guest, the
 [SIMH pseudo-device]({{ site.baseurl }}/altair8800/simh-pseudo) provides bank selection commands.
 
 ## Configuration file
@@ -141,8 +141,8 @@ The following table shows all the possible settings of byte-mem plugin:
 |Name | Default value | Valid values | Description
 |-|-|-|-
 |`banksCount`      | 1 | > 0 | Number of memory banks
-|`commonBoundary`  | 0 | >= 0 and <= mem size | First common address; `memorySize` means no common region
-|`memorySize`      | 65536 | Non-negative integer or quoted size | Size of each bank in bytes; strings can use `K` (1024) or `M` (1048576)
+|`commonBoundary`  | 0 | >= 0 and <= mem size | First common address; the bank size means no common region
+|`size`            | 65536 | Non-negative integer or quoted size | Size of each bank in bytes; strings can use `K` (1024) or `M` (1048576)
 |`ROMfrom`(i)      | N/A | >= 0 and < mem size | Start of the i-th ROM area
 |`ROMto`(i)        | N/A | >= `ROMfrom`(i) and < mem size | End of the i-th ROM area
 |`imageName`(i)    | N/A | file path | The i-th memory image file name; format is selected by extension
@@ -150,12 +150,14 @@ The following table shows all the possible settings of byte-mem plugin:
 |`imageBank`(i)    | 0 | 0 to `banksCount - 1` | Bank into which the i-th image is loaded
 |---
 
+`size` is the preferred bank-size key. `memorySize` is also accepted; if both are present, `size` takes precedence.
+
 Use concrete keys such as `imageName0`, `imageAddress0`, and `imageBank0`. Number image entries and ROM ranges
 consecutively from 0: loading stops at the first missing name/address pair or ROM endpoint pair. ROM endpoints are
 inclusive. Images are loaded before the startup ROM protections are applied. Relative image paths use the host working
 directory.
 
-For example, `memorySize = "64K"` allocates 65,536 bytes per bank and `memorySize = "1M"` allocates 1,048,576 bytes.
+For example, `size = "64K"` allocates 65,536 bytes per bank and `size = "1M"` allocates 1,048,576 bytes.
 Suffixes are case-insensitive; unsuffixed strings use decimal or hexadecimal notation such as `"65536"` or `"0x10000"`.
 
 Intel HEX images carry their own addresses; binary images use `imageAddressN`. Extensions `.bin`, `.com`, `.out`, and

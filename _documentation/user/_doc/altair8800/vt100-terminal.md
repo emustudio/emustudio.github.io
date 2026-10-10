@@ -64,6 +64,7 @@ This example prints "Hello!" in red on the default (black) background, and reset
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, red_hello
     call print
     hlt
@@ -84,6 +85,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, green_msg
     call print
     hlt
@@ -104,6 +106,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, bold_msg
     call print
     hlt
@@ -126,6 +129,7 @@ This example shows several colored lines, each with a different color, and reset
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, line1
     call print
     lxi h, line2
@@ -168,6 +172,7 @@ This example clears the screen, positions the cursor at row 10, column 20, and p
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, cls
     call print
     lxi h, pos_msg
@@ -195,6 +200,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, inverse_msg
     call print
     lxi h, newline

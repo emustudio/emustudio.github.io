@@ -25,7 +25,8 @@ Status panel is shown below:
 
 Registers section shows hexadecimal, decimal and binary representation of the:
 - accumulator (`A`)
-- "control-instruction" (`CI`), which holds memory address of the current instruction (zero-based program counter)
+- "control-instruction" (`CI`), the byte address of the current control line. The CPU increments it by four before
+  fetching the next instruction; line `n` has byte address `4 * n`.
 
 Memory-snippet shows "actual" memory-cell values (hexadecimal, decimal and binary):
 - `M[CI]`: memory cell value at `CI` (the current row with the instruction)

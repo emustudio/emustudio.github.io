@@ -22,7 +22,9 @@ Communication between devices is realized using device contexts. A device, as an
 more contexts, which should be registered in plugin root class constructor. Device context should implement
 a [DeviceContext][deviceContext]{:target="_blank"} interface.
 
-Sample implementation of a device root class might look as follows:
+The following partial example shows context registration and window creation. A complete device also implements
+`getDescription()`, `isGuiSupported()` and `destroy()`. Honor `PluginSettings.EMUSTUDIO_NO_GUI` before creating windows,
+and dispose windows and close device resources during destruction:
 
 {:.code-example}
 ```java

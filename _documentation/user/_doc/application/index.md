@@ -25,13 +25,13 @@ A logger is used by emuStudio which helps debugging of the application and plugi
 ## Installation and run
 
 At first, please download emuStudio distribution. It is either a TAR or ZIP file in the form `emuStudio-[VERSION].zip`.
-For Linux/Mac environments, a TAR variant will be more suitable since it preserves file attributes and execution
+For Linux, a TAR variant will be more suitable since it preserves file attributes and execution
 permissions. Unpack the file where you want to have emuStudio installed.
 
 Before running, [Java 11][java11]{:target="_blank"} or later must be installed. Then, emuStudio can be run by executing
 the following script:
 
-- On Linux / Mac
+- On Linux
 ```
 > ./emuStudio
 ```
@@ -48,11 +48,13 @@ NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it mi
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 
     $ ./emuStudio --help
-    Usage: emuStudio [-hV] [-cl] [-i=FILE] [-cn=NAME | -cf=FILE | -ci=INDEX]
-                     [COMMAND]
+    Usage: emuStudio [-hV] [-cl] [--config-dir=DIR] [-i=FILE] [--plugins-dir=DIR]
+                     [-cn=NAME | -cf=FILE | -ci=INDEX] [COMMAND]
     Universal emulation platform and framework
           -cl, --computers-list
                               list all existing virtual computers
+          --config-dir=DIR    configuration base directory
+          --plugins-dir=DIR   plugin base directory
       -h, --help              Show this help message and exit.
       -i, --input-file=FILE   input file name (source code)
       -V, --version           Print version information and exit.
@@ -73,12 +75,12 @@ for environment variables and path resolution.
 Automation command has its own usage:
 
     $ ./emuStudio auto --help
-    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=ADDRESS] [-w=MILLIS]
+    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=LOCATION] [-w=MILLIS]
     run emulation automation
           --[no-]gui         show/don't show GUI during automation
       -h, --help             Show this help message and exit.
-      -p, --program-location=ADDRESS
-                             program start address
+      -p, --program-location=LOCATION
+                             program start location
       -V, --version          Print version information and exit.
       -w, --waitmax=MILLIS   wait at most MILLIS for the CPU to stop
                                (stop the CPU afterwards)

@@ -80,5 +80,5 @@ screenshots:
       a program being emulated instead of having to manually interact with emuStudio. Or if we want to run our
       favourite vintage operating system without boring manual setup.
       </p>
-      <p class="lead">If the GUI is disabled, inputs and outputs are redirected to files.</p>'
+      <p class="lead">In headless automation, terminal and abstract-tape plugins use files for input or output; other devices determine their own headless behavior.</p>'
   }

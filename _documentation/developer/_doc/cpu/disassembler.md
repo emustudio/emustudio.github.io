@@ -79,9 +79,9 @@ will be tried.
 After root-rules declaration, rule definitions follow. Rule definition ends with a semicolon `;`.
 
 A **rule** is composed of one or more **variants**, split with pipe `|`. A variant can optionally start with a name -
-in quotes, followed by a colon `;`. The variant name can be referenced in disassembler part by rule name. Optionally,
+in quotes, followed by a colon `:`. The variant name can be referenced in disassembler part by rule name. Optionally,
 the variant can return a binary value taken from a *subrule* - again by referencing its name without quotes, followed
-by a colon `;`. What follows after colon is a mixture of **constants** or **subrules**.
+by a colon `:`. What follows after colon is a mixture of **constants** or **subrules**.
 
 A **constant** can be hexadecimal (e.g., `0xF`) or binary (`01`). Constants are used to perform unambiguous match of
 exactly one variant for each rule.
@@ -111,11 +111,11 @@ is `"sub Y, 3"`.
 
 By default, these format specifiers are available:
 * `%c` - one character, in the platform's default charset
-* `%d` - arbitrarily long signed integer, decimal
-* `%f` - a 4-byte of 8-byte floating point number
+* `%d` - signed integer in decimal (the default formatter stores numeric values in a 32-bit `int`)
+* `%f` - a 4-byte floating point number; the default numeric storage does not preserve a full 8-byte value
 * `%s` - a string (typically used for string constants returned from variants)
-* `%x` - arbitrarily long unsigned integer, hexadecimal, lowercase
-* `%X` - arbitrarily long unsigned integer, hexadecimal, uppercase
+* `%x` - 32-bit integer bit pattern, hexadecimal, lowercase
+* `%X` - 32-bit integer bit pattern, hexadecimal, uppercase
 * `%%` - a percent sign
 
 The rule-set on the right side of `=` can take decoding strategy as a parameter in brackets `()`. The following decoding
@@ -127,7 +127,7 @@ strategies are available:
 * `absolute` - decodes the bits as stored in 2's complement if they are negative; the negative sign is then thrown away
 * `shift_left` - shifts the number to the left by 1 bit. Does it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
   will result in `[0] = 2, [1] = 4`
-* `shift_right` - shifts the number to the right by 1 bit. Dies it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
+* `shift_right` - shifts the number to the right by 1 bit. Does it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
   will result in `[0] = 0, [1] = 0x81`
 
 The strategies can be combined. Multiple strategies will be applied in the left-to-right order.

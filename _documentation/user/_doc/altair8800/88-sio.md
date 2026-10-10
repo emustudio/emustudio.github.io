@@ -122,8 +122,8 @@ The following table shows all the possible settings of MITS 88-SIO plugin:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`statusPorts` | `"0x10, 0x14, 0x16, 0x18"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to status port of 88-sio
-|`dataPorts`   | `"0x11, 0x15, 0x17, 0x19"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to data port of 88-sio
+|`statusPorts` | `"0x10, 0x14, 0x16, 0x18"` | Comma-separated port numbers from 0 to 255 | CPU-ports mapped to status port of 88-sio
+|`dataPorts`   | `"0x11, 0x15, 0x17, 0x19"` | Comma-separated port numbers from 0 to 255 | CPU-ports mapped to data port of 88-sio
 |`clearInputBit8`   | `false` | `true`/`false` | Whether to clear 8th bit of the input written to 88-sio
 |`clearOutputBit8`  | `false` | `true`/`false` | Whether to clear 8th bit of the output, read from 88-sio
 |`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
@@ -226,6 +226,7 @@ For writing strings, it is more practical to have a procedure.
 
 {:.code-example}
 ```
+lxi sp, 0FF00h ; initialize stack in writable RAM
 lxi h, text  ; load address of 'text' label to HL
 call print   ; print text
 hlt          ; halt CPU

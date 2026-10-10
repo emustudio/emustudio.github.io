@@ -134,7 +134,7 @@ the CPU and when the position matched the requested one, data could be read or w
 
 emuStudio plugin does this in a more predictable way. Instead of automatic changing the position asynchronously,
 it is changed in time when a programmer actually performs the probing. For example, to set the sector number to - say -
-5, the programmer must probe the sector 5 times.
+5, poll port 2 until its sector field is 5. The emulator advances the sector on every other poll.
 
 Setting the offset within a sector is more challenging.
 After the track and sector are set, programmer must - again - probe the status port telling if current disk position
@@ -231,7 +231,7 @@ at the disk surface (by setting the bit `D2`).
 - `D0` : _Sector True_. If the value is 0, the offset in sector is 0. According to manual, the bit is set for maximum 30
   microseconds. Programs could detect the bit set and quickly start writing data until the _Sector true_ came back
   again. It could be made in time easily, because CPU was much faster than disk itself. plugin does not limit the
-  period. The value is 0 practically all the time, until first byte is written.
+  period. During sector polling, the plugin alternates this bit on successive reads and advances the sector on every other read.
 
 ### Port 3 (default address: 0x0A)
 
@@ -264,15 +264,15 @@ sector equ 18   ; sector number
 offset equ 20   ; offset within the sector
 data   equ 'A'  ; data for writing
 
-dcx sp          ; set stack register to 0xFFFF
+lxi sp, 0FF00h  ; initialize stack in writable RAM
 
 mvi a, disk0    ; select disk
 out 08h
 
 call ltrack     ; set track number
 
-call we         ; set 'write enable' sequence
 call lsector    ; set sector number
+call we         ; set 'write enable' sequence after sector selection
 call loffset    ; set sector offset
 call write      ; write data
 
@@ -544,14 +544,11 @@ The main section supports the following parameters:
 |-|-|-|-
 |`id`        | | any string without spaces | Disk format ID
 |`sectorSize`        | | > 0 | Raw sector size in bytes
-|`sectorSkew`        | 1 | optional; > 0 | Sector skew in bytes. It is not required to provide, if a sector skew table is provided. Used if `sectorSkewTable` is not provided.
-|`sectorSkewTable`   | | optional; array of sectors-per-track items (see `driveSpt` below) | Sector skew table. Used if `sectorSkew` is not provided.
+|`sectorSkew`        | 1 | optional; > 0 | Sector interleave factor, not a byte offset. Omit when supplying a nonempty `sectorSkewTable`.
+|`sectorSkewTable`   | | optional; array of sectors-per-track items (see `driveSpt` below) | Explicit sector order. Supplying both a nonempty table and `sectorSkew` is an error.
 |`sectorOps`         | `dummy` | `altair-floppy-mits`, `altair-floppy-deramp`, `altair-minidisk-deramp`, `dummy` | Sector operations - how to extract data from raw sector when reading, or how to encode data to raw sector when writing. See below for more information.
 |`bcInterpretsAsUnused`| false | true/false | `BC` is a value in a CP/M file record saying number of used bytes in the last data record for the file (`false`) or number of unused bytes in the record (`true`).
 |`dateFormat`        | `NOT_USED` | `NOT_USED`, `NATIVE`, `NATIVE2`, `DATE_STAMPER` | What type of date format this CP/M filesystem uses. See a description below.
-|`imageMounted0` ... `imageMounted15`       | false | true/false | Whether disk image is mounted on start
-|`interruptVector`                          | 7 | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
-|`interruptsSupported`                      | true | true/false | Whether interrupts are supported (independent on Port 2 runtime settings)
 |---
 
 ### Sector operations (`sectorOps`)
@@ -688,7 +685,7 @@ Date formats are partially described in various manuals: [CP/M tools manual][cpm
 [CP/M 2.2 file format][cpm-2.2]{:target="_blank"},
 [CP/M 3.1 file format][cpm-3.1]{:target="_blank"} and [CP/M 4.1 file format][cpm-4.1]{:target="_blank"}.
 
-**Naive 1**
+**Native 1**
 
 Value: `NATIVE`
 

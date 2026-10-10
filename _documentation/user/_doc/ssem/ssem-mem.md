@@ -13,12 +13,9 @@ permalink: /ssem/ssem-mem
 SSEM (1948), a von-Neumann computer, from United Kingdom, used the world's first **random-access** memory called Williams 
 or [Williams-Kilburn][tube]{:target="_blank"} tube. It was bit-controlled memory, i.e. the smallest unit was a bit.
 
-The base device of the memory was actually a standard Cathode-Ray-Tube (CRT). Electron beams, controlled by magnetic
-fields, hit a phosphorescent surface of the vacuum tube and as they "jump" inside, they create a glow which can be seen
-with naked eye. What Williams invented was the way how to permanently keep a "bit" stored in the tube, by so-called
-"anticipation pulse method". When a charged electron hits the surface, some charge is leaked from the surface, which
-then can be "scanned" (recognized) which then was re-inforced back-in the tube. This way the bit could "shine" permanently,
-until switched "off" manually. It's true - bits could be switched off by switches on the machine.
+The Williams-Kilburn tube stores bits as electrical charge patterns on a cathode-ray tube's surface. A pickup plate
+reads the charge, and periodic refresh restores it. This is volatile storage: it requires power and refresh to retain
+data. The emulated memory presents the stored bits in the GUI described below.
 
 Interesting fact is that [EDSAC][edsac]{:target="_blank"} computer (1949), which was directly inspired by von-Neumann's
 ["First draft of a report on the EDVAC"][edvac]{:target="_blank"} did not have random-access memory.

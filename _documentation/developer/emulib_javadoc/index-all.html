@@ -305,6 +305,8 @@ It is assumed the BCD has little endian.</div>
 <dd>
 <div class="block">Bytes are read/written in the big endian</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#BIN" class="member-name-link">BIN</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.html#bin2bcd(int)" class="member-name-link">bin2bcd(int)</a> - Static method in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/NumberUtils.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils</a></dt>
 <dd>
 <div class="block">Converts a binary number into packed BCD (1 byte, 2 BCD digits)</div>
@@ -824,6 +826,8 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Creates a border that fades from inner color to outer transparent.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html#FILE_ORDER" class="member-name-link">FILE_ORDER</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/FileExtension.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a> - Class in <a href="net/emustudio/emulib/plugins/compiler/package-summary.html">net.emustudio.emulib.plugins.compiler</a></dt>
 <dd>
 <div class="block">A file extension with description.</div>
@@ -848,9 +852,39 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Constructs a new FileExtensionsFilter from a FileExtension.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a> - Interface in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Common synchronous loader contract for BIN, I8HEX, TAP and TZX.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a> - Class in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Immutable format block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" class="type-name-link" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a> - Enum Class in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">File encodings and their extensions.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a> - Interface in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a> - Class in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Per-load traversal and cancellation.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" class="type-name-link" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a> - Enum Class in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a> - Class in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Spectrum header fields decoded independently of their destination.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html#fileName" class="member-name-link">fileName</a> - Variable in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a></dt>
 <dd>
 <div class="block">File name</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html#fileOrder()" class="member-name-link">fileOrder()</a> - Static method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></dt>
+<dd>
+<div class="block">Visits each physical block once.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/io/IntelHEX.html#findProgramLocation()" class="member-name-link">findProgramLocation()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></dt>
 <dd>
@@ -892,6 +926,8 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Default TitleBorder font</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.html#forFormat(net.emustudio.emulib.runtime.io.FileLoader.Format)" class="member-name-link">forFormat(FileLoader.Format)</a> - Static method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/StringUtils.html#format(char,net.emustudio.emulib.runtime.helpers.Bits)" class="member-name-link">format(char, Bits)</a> - Static method in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/StringUtils.html" title="class in net.emustudio.emulib.runtime.helpers">StringUtils</a></dt>
 <dd>
 <div class="block">Transforms bits into a meaningful string using the formatting character.</div>
@@ -920,6 +956,10 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Get formatted string of a word.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.html#forPath(java.nio.file.Path)" class="member-name-link">forPath(Path)</a> - Static method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></dt>
+<dd>
+<div class="block">Unknown extensions have no fallback; callers can explicitly select BIN.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a> - Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
 <div class="block">CPU real frequency calculator</div>
@@ -927,6 +967,10 @@ components (bytes) in little endian.</div>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#%3Cinit%3E()" class="member-name-link">FrequencyCalculator()</a> - Constructor for class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
 <dd>
 <div class="block">Constructs a new FrequencyCalculator.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#fromPath(java.nio.file.Path)" class="member-name-link">fromPath(Path)</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>
+<div class="block">Recognizes the last extension of the filename, independent of parent directories.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
@@ -956,6 +1000,10 @@ components (bytes) in little endian.</div>
 <dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#get(long,int,java.lang.Class)" class="member-name-link">get(long, int, Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
 <dd>
 <div class="block">Get annotations of given type at given memory location owned by given plugin ID</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getAddress()" class="member-name-link">getAddress()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">Embedded HEX address; empty for BIN and tape blocks.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#getAddressSpaceSize()" class="member-name-link">getAddressSpaceSize()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
@@ -1001,6 +1049,8 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Get a boolean value from settings.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getBytes()" class="member-name-link">getBytes()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getCellTypeClass()" class="member-name-link">getCellTypeClass()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
 <dd>
 <div class="block">Get memory cell type class.</div>
@@ -1073,6 +1123,12 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Get CPU frequency in kHz</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getData()" class="member-name-link">getData()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">BIN/HEX bytes or a standard/turbo Spectrum packet including flag and checksum.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getDataLength()" class="member-name-link">getDataLength()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/DeviceContext.html#getDataType()" class="member-name-link">getDataType()</a> - Method in interface net.emustudio.emulib.plugins.device.<a href="net/emustudio/emulib/plugins/device/DeviceContext.html" title="interface in net.emustudio.emulib.plugins.device">DeviceContext</a></dt>
 <dd>
 <div class="block">Get the type of transferred data.</div>
@@ -1129,6 +1185,8 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Returns the file extension.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#getExtensions()" class="member-name-link">getExtensions()</a> - Method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/FileExtensionsFilter.html#getExtensions()" class="member-name-link">getExtensions()</a> - Method in class net.emustudio.emulib.runtime.ui.components.<a href="net/emustudio/emulib/runtime/ui/components/FileExtensionsFilter.html" title="class in net.emustudio.emulib.runtime.ui.components">FileExtensionsFilter</a></dt>
 <dd>
 <div class="block">Get list of supported file extensions of the filter.</div>
@@ -1141,6 +1199,14 @@ components (bytes) in little endian.</div>
 <dd>
 <div class="block">Gets file name</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getFileName()" class="member-name-link">getFileName()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getFormat()" class="member-name-link">getFormat()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#getFormat()" class="member-name-link">getFormat()</a> - Method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.html#getFormat()" class="member-name-link">getFormat()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html#getFormattedMessage()" class="member-name-link">getFormattedMessage()</a> - Method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></dt>
 <dd>
 <div class="block">Return formatted string that represents this Message object.</div>
@@ -1152,6 +1218,10 @@ components (bytes) in little endian.</div>
 <dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getGUI()" class="member-name-link">getGUI()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
 <dd>
 <div class="block">Get GUI object.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getId()" class="member-name-link">getId()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">Tape block ID, or -1 for BIN/HEX bytes.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/RadixUtils.html#getInstance()" class="member-name-link">getInstance()</a> - Static method in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></dt>
 <dd>
@@ -1214,6 +1284,10 @@ followed by specified location.</div>
 <dd>
 <div class="block">Get 0-based starting offset of token position.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getParameter1()" class="member-name-link">getParameter1()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getParameter2()" class="member-name-link">getParameter2()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/PluginInitializationException.html#getPlugin()" class="member-name-link">getPlugin()</a> - Method in exception class net.emustudio.emulib.plugins.<a href="net/emustudio/emulib/plugins/PluginInitializationException.html" title="class in net.emustudio.emulib.plugins">PluginInitializationException</a></dt>
 <dd>
 <div class="block">Gets the plugin that caused this exception, if available.</div>
@@ -1264,6 +1338,10 @@ followed by specified location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html#getSourceName()" class="member-name-link">getSourceName()</a> - Method in class net.emustudio.emulib.plugins.compiler.antlr.<a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getSpectrumHeader()" class="member-name-link">getSpectrumHeader()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">Spectrum header metadata, if this packet has flag zero and a 17-byte header.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#getStatusPanel()" class="member-name-link">getStatusPanel()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
 <div class="block">Get CPU status panel.</div>
@@ -1316,9 +1394,17 @@ followed by specified location.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html#getTitle()" class="member-name-link">getTitle()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">OpcodeColumn</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html#getTraversal()" class="member-name-link">getTraversal()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#getType()" class="member-name-link">getType()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
 <div class="block">Get token type.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getType()" class="member-name-link">getType()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getUsedBitsInLastByte()" class="member-name-link">getUsedBitsInLastByte()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">Number of meaningful bits in the last byte of a standard/turbo packet.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/ShortenedString.html#getValue()" class="member-name-link">getValue()</a> - Method in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/ShortenedString.html" title="class in net.emustudio.emulib.runtime.ui">ShortenedString</a></dt>
 <dd>
@@ -1344,6 +1430,8 @@ followed by specified location.</div>
 <dd>
 <div class="block">Get opcode for instruction at specific location.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html#getVariable()" class="member-name-link">getVariable()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html#getVersion()" class="member-name-link">getVersion()</a> - Method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler">AbstractCompiler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#getVersion()" class="member-name-link">getVersion()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
@@ -1389,6 +1477,12 @@ followed by specified location.</div>
 <dd>
 <div class="block">Determines if a next token is available on the input at the current lexer position.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#hasValidChecksum()" class="member-name-link">hasValidChecksum()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
+<dd>
+<div class="block">XOR check of a Spectrum packet, including original flag and checksum.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#HEX" class="member-name-link">HEX</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
@@ -1524,6 +1618,8 @@ followed by specified location.</div>
 <dd>
 <div class="block">Check if showSettings() is supported by this plugin.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#isTape()" class="member-name-link">isTape()</a> - Method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html#iterator()" class="member-name-link">iterator()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html#iterator()" class="member-name-link">iterator()</a> - Method in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html" title="class in net.emustudio.emulib.runtime.ui">MaxItemsCache</a></dt>
@@ -1589,6 +1685,10 @@ followed by specified location.</div>
 <dt><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.Strategy.html#LITTLE_ENDIAN" class="member-name-link">LITTLE_ENDIAN</a> - Static variable in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils.Strategy</a></dt>
 <dd>
 <div class="block">Bytes are read/written in the little endian</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.html#load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Listener,net.emustudio.emulib.runtime.io.FileLoader.Options)" class="member-name-link">load(Path, FileLoader.Listener, FileLoader.Options)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></dt>
+<dd>
+<div class="block">Emits blocks to the listener; completion is omitted on failure or cancellation.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html#load(K,java.nio.file.Path)" class="member-name-link">load(K, Path)</a> - Method in class net.emustudio.emulib.runtime.audio.<a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html" title="class in net.emustudio.emulib.runtime.audio">SamplePlayer</a></dt>
 <dd>
@@ -1860,17 +1960,141 @@ something out (a message).</div>
 <dd>
 <div class="block">Creates new SourceCodePosition object</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onArchiveInfo(java.util.List)" class="member-name-link">onArchiveInfo(List)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x32 - Archive Info.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" class="member-name-link">onBlock(FileLoader.Block)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" class="member-name-link">onBlock(FileLoader.Block)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onBlockChecksum(byte)" class="member-name-link">onBlockChecksum(byte)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">On block checksum</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onBlockData(byte%5B%5D)" class="member-name-link">onBlockData(byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Raw data block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onBlockFlag(int)" class="member-name-link">onBlockFlag(int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Block flag (0 - header, 255- data)</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onCswRecording(int,int,int,long,byte%5B%5D)" class="member-name-link">onCswRecording(int, int, int, long, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x18 - CSW Recording.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onCustomInfo(java.lang.String,byte%5B%5D)" class="member-name-link">onCustomInfo(String, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x35 - Custom Info Block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onDataStart()" class="member-name-link">onDataStart()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Data block starts</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onDirectRecording(int,int,int,byte%5B%5D)" class="member-name-link">onDirectRecording(int, int, int, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x15 - Direct Recording.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html#onFileEnd()" class="member-name-link">onFileEnd()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></dt>
+<dd>
+<div class="block">Called only after successful traversal, never after failure or cancellation.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onFileEnd()" class="member-name-link">onFileEnd()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html#onFileStart()" class="member-name-link">onFileStart()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></dt>
+<dd>
+<div class="block">Called before the first block; reusable listeners should reset per-file state here.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onFileStart()" class="member-name-link">onFileStart()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html#onFinish()" class="member-name-link">onFinish()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></dt>
 <dd>
 <div class="block">This method is called whenever the compiler finishes the compilation.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onGeneralizedData(int,byte%5B%5D)" class="member-name-link">onGeneralizedData(int, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x19 - Generalized Data Block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onGlueBlock()" class="member-name-link">onGlueBlock()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x5A - Glue Block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onGroupEnd()" class="member-name-link">onGroupEnd()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x22 - Group End.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onGroupStart(java.lang.String)" class="member-name-link">onGroupStart(String)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x21 - Group Start.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onHardwareInfo(java.util.List)" class="member-name-link">onHardwareInfo(List)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x33 - Hardware Type.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onHeaderStart()" class="member-name-link">onHeaderStart()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Header block starts</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onMemoryBlock(java.lang.String,int,int)" class="member-name-link">onMemoryBlock(String, int, int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Data block will be a memory block</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onMessage(java.lang.String,int)" class="member-name-link">onMessage(String, int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x31 - Message Block.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html#onMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)" class="member-name-link">onMessage(CompilerMessage)</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></dt>
 <dd>
 <div class="block">Method will be invoked when compiler would like to print info message.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onNumberArray(java.lang.String,int,char)" class="member-name-link">onNumberArray(String, int, char)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Data block will be a number array variable</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onPause(int)" class="member-name-link">onPause(int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x20 - Pause (Silence) or Stop the Tape.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onProgram(java.lang.String,int,int,int)" class="member-name-link">onProgram(String, int, int, int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Data block will be a program in BASIC.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onPulseSequence(int%5B%5D)" class="member-name-link">onPulseSequence(int[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x13 - Pulse Sequence.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onPureData(int,int,int,int,byte%5B%5D)" class="member-name-link">onPureData(int, int, int, int, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x14 - Pure Data Block.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onPureTone(int,int)" class="member-name-link">onPureTone(int, int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x12 - Pure Tone.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onSetSignalLevel(int)" class="member-name-link">onSetSignalLevel(int)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x2B - Set Signal Level.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html#onStart()" class="member-name-link">onStart()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></dt>
 <dd>
 <div class="block">This method is called whenever a compiler begins to work.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onStopIfIn48KMode()" class="member-name-link">onStopIfIn48KMode()</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x2A - Stop the tape if in 48K mode.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onStringArray(java.lang.String,int,char)" class="member-name-link">onStringArray(String, int, char)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">Data block will be a String array variable</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onTextDescription(java.lang.String)" class="member-name-link">onTextDescription(String)</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x30 - Text Description.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html#onTurboSpeedData(int,int,int,int,int,int,int,int,byte%5B%5D)" class="member-name-link">onTurboSpeedData(int, int, int, int, int, int, int, int, byte[])</a> - Method in interface net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></dt>
+<dd>
+<div class="block">TZX Block 0x11 - Turbo Speed Data Block.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/DisassembledInstruction.html#opCode" class="member-name-link">opCode</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/DisassembledInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DisassembledInstruction</a></dt>
 <dd>
@@ -1965,6 +2189,12 @@ something out (a message).</div>
 <dd>
 <div class="block">Restarts the identified sample, optionally looping it until stopped.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html#playback()" class="member-name-link">playback()</a> - Static method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></dt>
+<dd>
+<div class="block">Tape traversal honoring TZX jumps, loops and call sequences.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html#PLAYBACK_ORDER" class="member-name-link">PLAYBACK_ORDER</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/Plugin.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins">Plugin</a> - Interface in <a href="net/emustudio/emulib/plugins/package-summary.html">net.emustudio.emulib.plugins</a></dt>
 <dd>
 <div class="block">Plugin main interface.</div>
@@ -2677,6 +2907,12 @@ events from this CPU.</div>
 <dd>
 <div class="block">Default table grid color</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#TAP" class="member-name-link">TAP</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/TapeListener.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a> - Interface in <a href="net/emustudio/emulib/runtime/io/package-summary.html">net.emustudio.emulib.runtime.io</a></dt>
+<dd>
+<div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/annotations/TextAnnotation.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.memory.annotations">TextAnnotation</a> - Class in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
 <dd>
 <div class="block">Text annotation.</div>
@@ -2773,6 +3009,8 @@ events from this CPU.</div>
 <dd>
 <div class="block">The message represents a warning.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#TZX" class="member-name-link">TZX</a> - Enum constant in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:U">U</h2>
 <dl class="index">
@@ -2827,6 +3065,14 @@ events from this CPU.</div>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html" title="enum class in net.emustudio.emulib.runtime.ui">Dialogs.DialogAnswer</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -2846,6 +3092,16 @@ the order they are declared.</div>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#values()" class="member-name-link">values()</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html#values()" class="member-name-link">values()</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html#values()" class="member-name-link">values()</a> - Static method in enum class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html" title="enum class in net.emustudio.emulib.runtime.ui">Dialogs.DialogAnswer</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
@@ -2861,6 +3117,10 @@ the order they are declared.</div>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#WHITESPACE" class="member-name-link">WHITESPACE</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
 <div class="block">Token is a whitespace</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html#withCancellation(java.util.function.BooleanSupplier)" class="member-name-link">withCancellation(BooleanSupplier)</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></dt>
+<dd>
+<div class="block">Thread interruption is always honored, in addition to this cancellation signal.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/DialogBase.html#workflow-heading" class="search-tag-link">Workflow</a> - Section in class net.emustudio.emulib.runtime.ui.components.DialogBase</dt>
 <dd>&nbsp;</dd>

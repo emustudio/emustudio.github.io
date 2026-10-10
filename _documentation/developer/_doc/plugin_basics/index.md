@@ -38,7 +38,7 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 |---
 | Plugin type | Naming convention | Examples
 |-|-|-
-| Compiler | `[language]-compiler` (for compiler of higher language), or `as-[cpu type]` (for assembler) | `as-8080`, `as-z80`, `brainc-compiler`, `ram-compiler`
+| Compiler | `as-[cpu type]` for assemblers, or a language/computer abbreviation | `as-8080`, `as-z80`, `brainc-brainduck`, `ramc-ram`, `raspc-rasp`
 |---
 | CPU | `[cpu model]-cpu`, or `[computer type]-cpu` | `8080-cpu`, `z80-cpu`, `ram-cpu`, `brainduck-cpu`
 |---
@@ -47,8 +47,8 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 | Device | `[device model]-[device type]` | `88-dcdd`, `88-sio`, `adm3a-terminal`, `simh-pseudo`, `vt100-terminal`
 |===
 
-Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
-just for word separation (e.g. `zilogZ80`).
+Plugin JAR names use letters, digits, hyphens and underscores, as in `z80-cpu.jar` and `audio-ay3_8910-chip.jar`.
+Use the actual filename when setting the plugin's `path` in a computer configuration; filenames can be case-sensitive.
 
 ## Plugin structure
 

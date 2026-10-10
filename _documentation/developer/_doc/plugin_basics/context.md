@@ -31,7 +31,7 @@ they can be further extended to provide customized versions of contexts.
 Plugin context objects are registered in [ContextPool][contextPool]{:target="_blank"} as key-value pair, where the key
 is an context interface which the context implements, and value is the context object. A plugin can register none, one
 or many contexts. Single context object can be registered multiple times, if the keys (context interfaces) are
-different.
+different. Multiple distinct context objects can also share an interface; their indices follow registration order.
 
 Sample custom context might be created like this:
 
@@ -62,7 +62,8 @@ Registration of this context might look as follows:
 @PluginRoot(type = PLUGIN_TYPE.CPU, title = "Sample CPU emulator")
 public class SamplePlugin implements CPU {
 
-    public SamplePlugin(long pluginID, ApplicationApi emustudio, PluginSettings settings) {
+    public SamplePlugin(long pluginID, ApplicationApi emustudio, PluginSettings settings)
+            throws InvalidContextException, ContextAlreadyRegisteredException {
         ContextPool contextPool = emustudio.getContextPool();
 
         SampleContext context = new SampleContextImpl();
@@ -87,7 +88,7 @@ public class SampleDevice implements Device {
     @Override
     public void initialize() throws PluginInitializationException {
 
-        // If obtaining the context is not vital, catch the exception
+        // This device requires the context; initialization failures propagate
         SampleContext cpuContext = contextPool.getCPUContext(pluginID, SampleContext.class);
 
         ...

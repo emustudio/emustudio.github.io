@@ -295,7 +295,7 @@ The following table shows all the possible settings of VT100-terminal plugin:
 |Name | Default value | Valid values | Description
 |-|-|-|-
 |`inputFileName`       | `vt100-terminal.in`  | Path to existing file | File for reading input (when redirected)
-|`outputFileName`      | `vt100-terminal.out` | Path to existing file | File for writing output (when redirected)
+|`outputFileName`      | `vt100-terminal.out` | Path to writable file | File for writing output (when redirected)
 |`inputReadDelayMillis`| 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
 |`columns`             | 80                   | > 0  | Number of terminal columns 
 |`rows`                | 24                   | > 0  | Number of terminal rows

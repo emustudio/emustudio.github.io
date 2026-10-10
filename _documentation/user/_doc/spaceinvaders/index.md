@@ -118,20 +118,20 @@ so use one-player mode for normal play.
 ## Display settings
 
 On the **Emulator** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
-The settings window is shown below:
+The settings panel is shown below:
 
-![Space Invaders display settings with numbered controls]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png)
+![Space Invaders display settings]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png)
 
-{: .list}
-| <span class="circle">1</span> | **Scale**. Set an integer pixel scale of at least `1`. At `2`, the display area is 448 by 512 pixels. Saving resizes an open game window. |
-| <span class="circle">2</span> | **Color overlay**. Show red at the top, green at the bottom, and white in the middle. Clear this checkbox for white pixels on black. |
-| <span class="circle">3</span> | **Sound enabled**. Enable playback of the external sound samples. Clearing this checkbox stops playback. |
-| <span class="circle">4</span> | **Samples directory**. Enter the directory containing `0.wav` through `9.wav`. Relative paths are resolved from emuStudio's working directory. |
-| <span class="circle">5</span> | **Browse...**. Choose the sound samples directory. This updates the field; click **Save** to apply it. |
-| <span class="circle">6</span> | **Save**. Save all four settings, apply them immediately, and close the dialog. No restart is needed. Changing the samples directory reloads the sounds when sound is enabled. |
-| <span class="circle">7</span> | **Cancel**. Close the dialog without saving or applying your edits. |
+| Setting | Description |
+|:--------|:------------|
+| **Scale** | Set an integer pixel scale of at least `1`. At `2`, the display area is 448 by 512 pixels. Saving resizes an open game window. |
+| **Color overlay** | Show red at the top, green at the bottom, and white in the middle. Clear this checkbox for white pixels on black. |
+| **Sound enabled** | Enable playback of the external sound samples. Clearing this checkbox stops playback. |
+| **Samples directory** | Enter the directory containing `0.wav` through `9.wav`. Relative paths are resolved from emuStudio's working directory. |
+| **Browse...** | Choose the sound samples directory. This updates the field; click **Save** to apply it. |
+| **Save** | Save all four settings, apply them immediately, and close the dialog. No restart is needed. Changing the samples directory reloads the sounds when sound is enabled. |
 
-The scale must be a positive integer and the samples directory must be a nonempty, valid path. Invalid input keeps
+Press **Esc** to close the dialog without saving. The scale must be a positive integer and the samples directory must be a nonempty, valid path. Invalid input keeps
 the dialog open so you can correct it. Sound samples are supplied by the user; choosing a directory does not download them.
 
 ### Configuration file
