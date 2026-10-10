@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-dcdd"
-nav_order: 6
+nav_order: 8
 parent: MITS Altair8800
 permalink: /altair8800/88-dcdd
 ---
@@ -24,8 +24,10 @@ The 88-DCDD hardware contained three parts:
     - the first one performed communication operations between the bus and CPU
     - the second one performed communication with the disk drives
 
-Original manual can be found at [deramp.com][manual]{:target="_blank"} or 
-[www.virtualaltair.com][manual2]{:target="_blank"}.
+## Original manual
+
+[MITS Altair Floppy Disk Documentation (88-DCDD, PDF)][manual]{:target="_blank"} covers drive operation,
+installation, controller programming, and schematics.
 
 ## Diskette formats
 
@@ -122,7 +124,7 @@ It is rudimentary to know how many tracks are available, so as how many sectors 
 
 In Altair8800, drive `Pertec FD400` used 8" diskettes. Each had 77 tracks. A track had 32 sectors with 137 bytes long.
 The capacity of a diskette was therefore `77 * 32 * 137 = 337568 B = 330 kB`. Software used less capacity, because
-9 bytes of each sector were used for the integrity checksum.
+9 bytes of each sector were used for headers, a stop byte, a checksum, and padding, leaving 128 bytes of payload.
 
 ### Setting the position
 
@@ -195,16 +197,8 @@ Initial values of the bits are: `11100111`.
 
 Control the disk head, and other settings if a disk drive is selected.
 
-- `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector
-  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing
-  sequence
-  holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence
-  period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte
-  of
-  a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or
-  end of a sector. However, the plugin does not require it.
-- `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the sector
-  number to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing
+- `D7` : _Write Enable_. Initializes write sequence (enables writing to the disk; value=1). The plugin sets the byte offset within the current sector
+  to 0 and also value 0 to bit `D0` of Port 1 (_Enter new write data_). According to the manual, a writing
   sequence
   holds only for short time, maximally until the end of sector is reached. The plugin does not limit the sequence
   period, it is deactivated only when the end of the sector is reached. In addition, each first byte and the last byte
@@ -299,7 +293,7 @@ mvi a, 1000b    ; head unload
 out 09h
 call movetrk    ; wait until the disk head can be moved
 mvi a, 10b      ; step out, decrement track number
-out 08h
+out 09h
 jmp ltrack0
 
 ltrack:         ; procedure sets a track number
@@ -555,9 +549,6 @@ The main section supports the following parameters:
 |`sectorOps`         | `dummy` | `altair-floppy-mits`, `altair-floppy-deramp`, `altair-minidisk-deramp`, `dummy` | Sector operations - how to extract data from raw sector when reading, or how to encode data to raw sector when writing. See below for more information.
 |`bcInterpretsAsUnused`| false | true/false | `BC` is a value in a CP/M file record saying number of used bytes in the last data record for the file (`false`) or number of unused bytes in the record (`true`).
 |`dateFormat`        | `NOT_USED` | `NOT_USED`, `NATIVE`, `NATIVE2`, `DATE_STAMPER` | What type of date format this CP/M filesystem uses. See a description below.
-|`sectorsPerTrack0` ... `sectorsPerTrack15` | 32 | > 0 | Count of sectors in a disk image, on disk A (0) up to P (15)
-|`sectorSize0` ... `sectorSize15`           | 137 | > 0 | Size of one sector in bytes on disk A (0) up to P (15)
-|`image0` ... `image15`                     | N/A | Path to existing file| File name to mount on disk A (0) up to P (15)
 |`imageMounted0` ... `imageMounted15`       | false | true/false | Whether disk image is mounted on start
 |`interruptVector`                          | 7 | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
 |`interruptsSupported`                      | true | true/false | Whether interrupts are supported (independent on Port 2 runtime settings)
@@ -599,9 +590,10 @@ follows:
 |0| Track number + 0x80
 |1| Skewed sector = `(Sector number * 17) MOD 32`  (the `sectorSkew` from the settings is overriden to 17, `driveSpt` overriden to 32)
 |2| 0
-|3 - 131| Data
-|132| 0xFF ("stop byte")
-|133| Data checksum (sum of bytes 3-131)
+|3 - 130| Data (128 bytes)
+|131| 0xFF ("stop byte")
+|132| Data checksum (sum of bytes 3-130)
+|133| 0
 |134| 0
 |135| 0
 |136| 0
@@ -621,16 +613,17 @@ The sector arrangement is different based on a track number. For tracks 0-5, the
 |-|-
 |0| 0
 |1| 1
-|2 - 130| Data
-|131| 0xFF ("stop byte")
-|132| Data checksum (sum of bytes 2-130)
+|2 - 129| Data (128 bytes)
+|130| 0xFF ("stop byte")
+|131| Data checksum (sum of bytes 2-129)
+|132| 0
 |133| 0
 |134| 0
 |135| 0
 |136| 0
 |---
 
-For tracks 5-76, the arrangement is:
+For tracks 6-76, the arrangement is:
 
 |---
 |Byte | Description
@@ -641,9 +634,10 @@ For tracks 5-76, the arrangement is:
 |3| 0
 |4| 0
 |5| 0
-|6 - 134| Data
-|135| 0xFF ("stop byte")
-|136| data checksum (sum of bytes 6-134)
+|6 - 133| Data (128 bytes)
+|134| 0xFF ("stop byte")
+|135| Data checksum (sum of bytes 6-133)
+|136| 0
 |---
 
 **Altair Minidisk: DeRamp**
@@ -660,9 +654,10 @@ The sector arrangement is different based on a track number. For tracks 0-3, the
 |-|-
 |0| 0
 |1| 1
-|2 - 130| Data
-|131| 0xFF ("stop byte")
-|132| Data checksum (sum of bytes 2-130)
+|2 - 129| Data (128 bytes)
+|130| 0xFF ("stop byte")
+|131| Data checksum (sum of bytes 2-129)
+|132| 0
 |133| 0
 |134| 0
 |135| 0
@@ -680,9 +675,10 @@ For tracks 4-34, the arrangement is:
 |3| 0
 |4| 0
 |5| 0
-|6 - 134| Data
-|135| 0xFF ("stop byte")
-|136| data checksum (sum of bytes 6-134)
+|6 - 133| Data (128 bytes)
+|134| 0xFF ("stop byte")
+|135| Data checksum (sum of bytes 6-133)
+|136| 0
 |---
 
 ### Date formats (`dateFormat`)
@@ -773,8 +769,7 @@ The following table shows all the possible file configurations of the plugin:
 |---
 
 
-[manual]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/30-Disk%20Storage%20Devices/20-88-DCDD%208%20inch%20Floppy%20System/Other%20Manual%20Scans/Altair%2088-DCDD%20Disk%20Drive%20System.pdf
-[manual2]: http://www.virtualaltair.com/virtualaltair.com/PDF/88dsk%20manual%20v2.pdf
+[manual]: https://deramp.com/downloads/altair/hardware/8_inch_floppy/Altair%20Floppy%20(88-DCDD)%20Manual.pdf
 [pertec]: http://cini.classiccmp.org/pdf/iCOM/FD400-5x0-5x1_Mar77.pdf
 [simh]: http://simh.trailing-edge.com/
 [altair-schorn]: https://schorn.ch/altair_3.php

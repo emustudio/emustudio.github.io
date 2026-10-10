@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 11
+nav_order: 2
 parent: MITS Altair8800
 permalink: /altair8800/automation
 ---
@@ -36,7 +36,7 @@ The following command will emulate the computer and run "reverse text" program o
 
 - computer configuration "MITS Altair8800" (file `config/MITSAltair8800.toml`) will be loaded
 - input file for compiler is one of the examples
-- (`--auto`) automatic emulation will be executed
+- (`auto`) automatic emulation will be executed
 - (`--no-gui`) non-interactive mode will be set
 
 After the program finishes, emuStudio is closed. The program output will be in the file `adm3A-terminal.out`:

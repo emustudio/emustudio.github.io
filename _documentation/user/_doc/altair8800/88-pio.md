@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-pio"
-nav_order: 12
+nav_order: 11
 parent: MITS Altair8800
 permalink: /altair8800/88-pio
 ---
@@ -10,7 +10,7 @@ permalink: /altair8800/88-pio
 
 # MITS 88-PIO parallel interface
 
-The `88-pio` plugin emulates the Intel 8255-compatible parallel interface used by the MITS 88-PIO. It implements
+The `88-pio` plugin provides an Intel 8255-compatible parallel interface. It implements
 mode 0: three parallel ports with independently configured input and output directions.
 
 ## CPU ports
@@ -55,3 +55,34 @@ lower directions for Port C.
 
 Open the device from the emulator device list to inspect the control word, directions, input pins, and output latches.
 The GUI can change input pin values for interactive testing; it does not bypass direction control.
+
+## Programming example
+
+This 8080 program sets all three ports to output and writes `55h` to Port A:
+
+```
+mvi a, 80h
+out 0Bh
+mvi a, 55h
+out 08h
+hlt
+```
+
+For bit set/reset commands, `01h` sets Port C bit 0 and `00h` clears it. These commands update the latch without
+changing the mode or the directions. A pin configured as input continues to read its input value.
+
+## Configuration and limitations
+
+The CPU port addresses are fixed; there are no plugin-specific configuration keys or settings dialog. The device
+context indices are **0 for Port A**, **1 for Port B**, and **2 for Port C**. A custom connected plugin uses the
+corresponding context index to read or drive that channel.
+
+Mode 1/2 handshaking and interrupts are not implemented. Reset selects control word `9Bh` (all ports input) and clears
+the output latches. Input pins default to `FFh`.
+
+## Original manual
+
+[MITS 88-PIO Parallel I/O Board Documentation (1975, PDF)][manual]{:target="_blank"} covers board operation,
+schematics, assembly, and address selection. The plugin's 8255-style ports and control words are documented above.
+
+[manual]: https://deramp.com/downloads/altair/hardware/MITS%2088-PIO.pdf

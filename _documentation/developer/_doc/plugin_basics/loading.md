@@ -10,15 +10,16 @@ permalink: /plugin_basics/loading
 
 # Loading and initialization
 
-Instantiating and initializing plugins is done by emuStudio application in one thread. All plugins share one
-class-loader, which creates a potential risk of naming conflicts. Therefore, each class and resource should be put in
-packages with a unique name.
+emuStudio instantiates and initializes plugins in one thread. Each virtual computer owns one `URLClassLoader` shared
+by its plugins and their dependencies. Classes and resources need unique package names within that computer.
+The application and emuLib APIs are provided by the parent classloader.
 
 ## Plugin instantiation
 
-Plugin JAR files are unzipped and loaded into memory as one mixed bunch. The class loader will recognize all found
-classes and resources. Dependencies explicitly specified in manifest files are recognized and loaded as well. In case
-of circular dependencies, plugins loading will fail.
+The loader reads the plugin JARs and their manifest `Class-Path` entries and collects their URLs, removing duplicates.
+It scans each plugin JAR for a concrete class implementing `Plugin` and annotated with `@PluginRoot`, then instantiates
+that root with the plugin ID, application API, and settings. Manifest dependency paths are resolved from the working
+directory. Keep the distribution's directory layout when launching emuStudio.
 
 This process happens just once in the beginning, so adding another plugin at run-time is not possible. The result of
 this phase is that all plugin classes are loaded in memory and all plugin roots are instantiated.
@@ -39,8 +40,8 @@ call [Plugin.initialize()][pluginInitialize]{:target="_blank"} method on each pl
 ordered by plugin type:
 
 1. Compiler
-2. CPU
-3. Memory
+2. Memory
+3. CPU
 4. Devices in the order as they are defined in the virtual computer configuration
 
 ### What should plugin do here
@@ -48,6 +49,13 @@ ordered by plugin type:
 The most important operation what a plugin should do in the [Plugin.initialize()][pluginInitialize]{:target="_blank"}
 method is to obtain "plugin contexts" of another connected plugins. Plugin contexts can be obtained from already
 mentioned [ContextPool][contextPool]{:target="_blank"} class, obtainable from emuStudio API.
+
+## Destruction
+
+Closing a virtual computer destroys devices in reverse configuration order, then the CPU, memory, and compiler.
+It closes the shared plugin classloader and computer configuration after plugin cleanup. A plugin's `destroy()` must
+release its listeners, worker threads, audio resources, and windows. Plugins must leave closing the shared classloader
+to the application. Loading or construction failures also close the loader.
 
 [contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ContextPool.html
 [pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "adm3a-terminal"
-nav_order: 8
+nav_order: 14
 parent: MITS Altair8800
 permalink: /altair8800/adm3a-terminal
 ---
@@ -14,11 +14,14 @@ Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nickname
 due to its cheapness and speed capabilities required in that time, it became de facto standard in the industry.
 Often it was used in connection with MITS Altair 8800 computer, so the decision of which terminal to emulate was clear.
 
-Maintenance manual can be downloaded at [this link][manual1]{:target="_blank"}, operator's manual
-[here][manual2]{:target="_blank"}.
-
 ![LSI ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a.jpg)
 (Image borrowed from [Wikipedia][gui]{:target="_blank"})
+
+## Original manuals
+
+- [Lear Siegler ADM-3A User's Reference Manual (DP2880486F, April 1986, PDF)][manual2]{:target="_blank"} — keyboard,
+  setup, and control codes.
+- [Lear Siegler ADM-3A Maintenance Manual (PDF)][manual1]{:target="_blank"} — operation, circuitry, and schematics.
 
 ## Display
 
@@ -188,8 +191,8 @@ The following table shows all the possible settings of ADM-3A plugin:
 |Name | Default value | Valid values | Description
 |-|-|-|-
 |`inputFileName`   | `adm3A-terminal.in`  | Path to existing file | File for reading input (when redirected)
-|`outputFileName`  | `adm3A-terminal.out` | Path to existing file | File for writing output (when redirected)
-|`inputReadDelay`  | 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
+|`outputFileName`  | `adm3A-terminal.out` | Path to writable file | File for writing output (when redirected)
+|`inputReadDelayMillis`  | 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
 |`halfDuplex`      | false                | true / false | Whether every keystroke will also cause to display it
 |`alwaysOnTop`     | false                | true / false | Whether terminal GUI should be always-on-top of other windows
 |`deviceIndex`     | 0                    | >= 0 | Index of connected device, if this terminal is connected to multiple devices in the schema (nonstandard, advanced use)
@@ -197,7 +200,7 @@ The following table shows all the possible settings of ADM-3A plugin:
 |---
 
 
-[manual1]: https://bitsavers.trailing-edge.com/www.computer.museum.uq.edu.au/pdf/LSI%20ADM-3A%20Maintenance%20Manual.pdf
-[manual2]: https://bitsavers.trailing-edge.com/pdf/learSiegler/ADM_3/DP2880486F_ADM3A_UM_Apr86.pdf
+[manual1]: https://bitsavers.org/pdf/learSiegler/ADM_3/ADM3A_Maint.pdf
+[manual2]: https://bitsavers.org/pdf/learSiegler/ADM_3/DP2880486F_ADM3A_UM_Apr86.pdf
 [gui]: https://en.wikipedia.org/wiki/ADM-3A#/media/File:Adm3aimage.jpg
 [cp437]: https://en.wikipedia.org/wiki/Code_page_437

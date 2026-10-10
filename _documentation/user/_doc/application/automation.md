@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 1
 parent: emuStudio Application
 permalink: /application/automation
 ---
@@ -21,8 +21,8 @@ access to the source code, debugger, or memory content.
 Non-interactive mode of the automatic emulation is even more "quiet" - it does not show any GUIs. The output of the
 emulation is usually redirected to one or more files. The specific behavior is plugin-based.
 
-Automatic emulation requires source code to be present. The source code is called the "input". It will be compiled
-before the emulation is executed.
+Source code supplied with `--input-file` is compiled and loaded before the CPU runs. This option is optional: omit it
+to run code already loaded by the computer configuration, such as a ROM image.
 
 More specific information about automation can be found in any section devoted to an emulated computer.
 
@@ -38,15 +38,20 @@ computer.
 Argument `--input-file` provides the source code to be compiled and loaded into memory before the emulation is executed.
 It compiles the file only in case automated emulation is executed (see below).
 
-Command `auto` executes automatic emulation. If no other argument is provided, emuStudio will start as usual by
-asking to open a virtual computer. If computer is provided, it is opened. If input-file is provided, it is loaded and
-compiled into memory. Then, if the automatic emulation is interactive, will open all device GUIs and executes CPU.
+Command `auto` executes automatic emulation. Select a computer with `-cf`, `-cn`, or `-ci`. If an input file is provided,
+it is compiled into memory. Interactive automation opens the device GUIs and starts the CPU.
 
 The `--no-gui` argument sets the non-interactive mode. In this case, emuStudio won't show any GUI windows and the
 communication with I/O is done via files (see involved plugins documentation).
 
-Argument `--waitmax 5000` tells emuStudio that the emulation should not last for more than 5 seconds. If it didn't
-finish up to this deadline, it is forcibly stopped and marked as failed.
+Argument `--waitmax 5000` waits at most 5 seconds for the running CPU to stop. When the deadline expires, the CPU is
+stopped and the timeout is logged. This limit does not include compilation or device initialization. Omit it to wait
+without a deadline.
+
+Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
+can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
+Check `logs/automation.log` and the device output to determine whether the run completed normally; automation failures
+are not all reflected in the process exit status.
 
 ## ZX Spectrum example
 

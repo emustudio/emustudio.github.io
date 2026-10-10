@@ -2,7 +2,7 @@
 layout: default
 title: BrainDuck
 description: "BrainDuck (Brainfuck) emulator in emuStudio — a Turing-complete abstract computer with minimalistic 8-instruction programming language."
-nav_order: 4
+nav_order: 7
 has_children: true
 permalink: /brainduck/
 ---

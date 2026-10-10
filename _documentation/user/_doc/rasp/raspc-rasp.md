@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Compiler "raspc-rasp"
-nav_order: 1
+nav_order: 2
 parent: RASP
 permalink: /rasp/raspc-rasp
 ---
@@ -15,6 +15,25 @@ input/output tape. Also, there are three control-flow instructions. Syntax is ve
 doesn't support indirect addressing.
 
 Source code files end with `.rasp` extension; compiler output uses extension `.brasp`.
+
+## Running from the command line
+
+Run the compiler from the emuStudio installation directory:
+
+```
+java -cp "compiler/*:memory/*:lib/*" net.emustudio.plugins.compiler.rasp.Runner --output program.brasp program.rasp
+```
+
+On Windows, replace the classpath separators `:` with `;`. Options are `--output`/`-o`, `--help`/`-h`, and `--version`/`-v`. Put options before the input filename.
+Without `--output`, the compiler uses the input filename with the `.brasp` extension. This compiles a file;
+it does not start a virtual computer. Use [automation]({{ site.baseurl }}/application/automation) to compile and run.
+
+## Numeric limits
+
+This implementation uses signed 32-bit integers (`-2147483648` through `2147483647`) for numeric values. Arithmetic
+can overflow this range; it does not provide the unbounded integers of the theoretical machine. Integer division
+truncates toward zero. Avoid dividing by zero, which stops execution with an error. Register indices must be
+non-negative.
 
 ## Language syntax
 
@@ -37,18 +56,14 @@ The `INPUT` section contains definitions the content of input tape - one or more
 <input> ITEMS
 ```
 
-where `ITEMS` is a space-separated list of inputs. Each input is one word - it might be any number or string. Strings
-must be in quotes - single (`'`) or double (`"`).
+where `ITEMS` is a space-separated list of signed integers. Decimal, hexadecimal (`0x` prefix or `h` suffix),
+octal (`o`/`q` suffix), and binary (`b` suffix) forms are supported. Unlike RAM, RASP does not accept string inputs.
 
-For example, the input section might be:
-
-{:.code-example}
 ```
-    <input> 1 2 3 'hello' 'world!'
+<input> 1 2 3 -4 0x10
 ```
 
-In this case, there are five inputs: numbers 1,2,3, then word "hello" and the last one is "world!". Note floating-point
-numeric values are not supported.
+These are five input values. Floating-point values are not supported.
 
 ### ORG section
 

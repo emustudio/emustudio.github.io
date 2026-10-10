@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 2
 parent: SSEM
 permalink: /ssem/automation
 ---

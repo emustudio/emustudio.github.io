@@ -24,7 +24,7 @@ Each plugin context must implement a [Context][context]{:target="_blank"} interf
 which extend [Context][context]{:target="_blank"} must be then annotated with 
 [PluginContext][pluginContext]{:target="_blank"} annotation.
 There are prepared some standard context interfaces in the API
-([CompilerContext][compilerContext]{:target="_blank"}, [MemoryContext][memoryContext]{:target="_blank"}, [CpuContext][cpuContext]{:target="_blank"}
+([CompilerContext][compilerContext]{:target="_blank"}, [MemoryContext][memoryContext]{:target="_blank"}, [CPUContext][cpuContext]{:target="_blank"}
 and [DeviceContext][deviceContext]{:target="_blank"}), and those can be used when implementing plugin context class - or
 they can be further extended to provide customized versions of contexts.
 
@@ -39,7 +39,7 @@ Sample custom context might be created like this:
 ```java
 
 @PluginContext
-public interface SampleContext extends CpuContext {
+public interface SampleContext extends CPUContext {
 
     // custom methods...
 }
@@ -68,7 +68,7 @@ public class SamplePlugin implements CPU {
         SampleContext context = new SampleContextImpl();
 
         // We will register the same context two times, but by different context interfaces
-        contextPool.register(pluginID, context, CpuContext.class); 
+        contextPool.register(pluginID, context, CPUContext.class);
         contextPool.register(pluginID, context, SampleContext.class);
     }
 }
@@ -101,8 +101,8 @@ If the requested context could not be found, or the plugins were not connected, 
 If the plugin needs to obtain the context, the plugin should let the exception propagate to the caller,
 otherwise it should be caught.
 
-[instantiation]: {{ site.baseurl }}/plugin_basics/loading.html#plugin-instantiation
-[initialization]: {{ site.baseurl }}/plugin_basics/loading.html#plugin-initialization
+[instantiation]: {{ site.baseurl }}/plugin_basics/loading#plugin-instantiation
+[initialization]: {{ site.baseurl }}/plugin_basics/loading#plugin-initialization
 [contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ContextPool.html
 [pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [context]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Context.html

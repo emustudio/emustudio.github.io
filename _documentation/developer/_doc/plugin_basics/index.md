@@ -90,8 +90,8 @@ version=1.2.3
 copyright=Copyright 2026 Example Author
 ```
 
-The base class loads `<plugin package>.version` through the concrete plugin's classloader, which is required by plugin
-isolation. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
+The base class loads `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
+the plugin JAR. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
 that bundle; duplicating the standard resource lookup in every plugin is unnecessary.
 
 The constructor parameters have the following meaning:
@@ -100,6 +100,24 @@ The constructor parameters have the following meaning:
 - `emustudio` is a runtime API implementation, provided by emuStudio application, to be used by plugins.
 - `settings` are plugin's settings. A plugin can use it for reading/writing its custom or emuStudio settings.
   Updated settings are saved immediately in the configuration file, in the same thread.
+
+### Settings
+
+`PluginSettings` extends `BasicSettings`: typed getters, setters, arrays, and nested settings use the same API.
+Unprefixed keys belong to the plugin's TOML settings table. Setters persist changes immediately; use getter defaults
+for optional keys.
+
+Keys beginning with `emustudio.` read application settings and are read-only to plugins. In particular,
+`PluginSettings.EMUSTUDIO_NO_GUI` and `PluginSettings.EMUSTUDIO_AUTO` report the active launch mode. These values come
+from the running application, so writing `nogui` or `auto` into TOML does not select that mode. Create Swing windows only
+when GUI mode is enabled, and close resources acquired by the plugin during destruction.
+
+```java
+boolean headless = settings.getBoolean(PluginSettings.EMUSTUDIO_NO_GUI, false);
+boolean automated = settings.getBoolean(PluginSettings.EMUSTUDIO_AUTO, false);
+int scale = settings.getInt("scale", 2);
+settings.setInt("scale", scale);
+```
 
 ## Third-party dependencies
 
@@ -112,9 +130,11 @@ Some libraries are preloaded by emuStudio and those shouldn't be included in plu
 - [emuLib][emulib]{:target="_blank"}
 - [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
-- [Picoli][picoli]{:target="_blank"} for command-line parsing
+- [Picocli][picoli]{:target="_blank"} for command-line parsing
 
 Plugins that want to use the dependencies above should specify them as "provided" in the project.
+The current emuStudio build uses `net.emustudio:emulib:12.1.0-SNAPSHOT`, ANTLR runtime `4.13.2`, SLF4J `2.0.17`, and
+Picocli `4.7.7`. Use the versions declared in emuStudio's `build.gradle` when building a plugin for that checkout.
 
 ## Incorporating a plugin in emuStudio
 
@@ -153,10 +173,10 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
 
 It is necessary to put your plugin name in the particular collection.
 
-[emulib]: https://search.maven.org/artifact/net.emustudio/emulib/11.5.0/jar
-[antlr-runtime]: https://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.11.1
-[slf4j]: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.30
-[picoli]: https://mvnrepository.com/artifact/info.picocli/picocli/4.7.0
+[emulib]: https://central.sonatype.com/artifact/net.emustudio/emulib
+[antlr-runtime]: https://www.antlr.org/
+[slf4j]: https://www.slf4j.org/
+[picoli]: https://picocli.info/
 
 [pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
 [applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html

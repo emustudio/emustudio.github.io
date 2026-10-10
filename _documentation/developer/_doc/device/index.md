@@ -72,6 +72,17 @@ public class DeviceImpl extends AbstractDevice {
 }
 ```
 
+## Audio and recording resources
+
+Use emuLib's `runtime.audio.AudioSink` for generated PCM and `SamplePlayer<K>` for WAV effects. Use
+`runtime.recording.RecordingSession` to encode video with stereo audio. The
+[utility guide]({{ site.baseurl }}/plugin_basics/utility_classes#audio-playback) describes formats, queues, and lifecycle.
+
+The device owns hardware timing, synthesis or sample selection, volume, controls, and file dialogs. Keep playback and
+encoding off the CPU thread. Use `AudioSink.NULL` for a silent headless device; decide during initialization how to handle
+an unavailable host audio device. Flush pending audio on reset, remove CPU cycle listeners on destruction, and close
+playback and recording resources. Saving a recording must run outside Swing's event-dispatch thread.
+
 [device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/Device.html
 [deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/DeviceContext.html
 [abstractDevice]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/AbstractDevice.html

@@ -66,18 +66,22 @@ emuStudio accepts several command line arguments. Their description is accessibl
     Commands:
       automation, auto  run emulation automation
 
+`--config-dir DIR` and `--plugins-dir DIR` select the configuration and plugin roots. See
+[configuration and plugin roots]({{ site.baseurl }}/application/configuration-file#configuration-and-plugin-roots)
+for environment variables and path resolution.
+
 Automation command has its own usage:
 
     $ ./emuStudio auto --help
-    Usage: emuStudio automation [-hV] [--[no-]gui] [-s=ADDRESS] [-w=MILLIS]
+    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=ADDRESS] [-w=MILLIS]
     run emulation automation
           --[no-]gui         show/don't show GUI during automation
       -h, --help             Show this help message and exit.
-      -s, --start-address=ADDRESS
+      -p, --program-location=ADDRESS
                              program start address
       -V, --version          Print version information and exit.
-      -w, --waitmax=MILLIS   limit emulation time to max MILLIS (force kill
-                               afterwards)
+      -w, --waitmax=MILLIS   wait at most MILLIS for the CPU to stop
+                               (stop the CPU afterwards)
 
 
 

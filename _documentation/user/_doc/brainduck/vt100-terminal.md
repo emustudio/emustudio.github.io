@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Terminal "vt100-terminal"
-nav_order: 5
+nav_order: 6
 parent: BrainDuck
 permalink: /brainduck/terminal
 ---
@@ -34,6 +34,12 @@ VT100-terminal plugin for emuStudio implements a substantial portion of the VT10
 
 NOTE: The plugin can also be used with MITS Altair8800. See [VT100 terminal for Altair8800]({{ site.baseurl }}/altair8800/vt100-terminal) for details.
 {: .info}
+
+## Original manual
+
+[Digital Equipment Corporation VT100 User Guide (EK-VT100-UG-001, August 1978, PDF)][manual]{:target="_blank"}
+describes keyboard operation, setup, and host control sequences. Chapter 3 contains the programmer's reference.
+The tables below describe the sequences and extensions supported by the emuStudio plugin.
 
 ## Graphical User Interface (GUI)
 
@@ -314,3 +320,4 @@ The following table shows all the possible settings of VT100-terminal plugin:
 
 [vt100-image]: https://commons.wikimedia.org/w/index.php?curid=29457452
 [dec-parser]: https://vt100.net/emu/dec_ansi_parser
+[manual]: https://bitsavers.org/pdf/dec/terminal/vt100/EK-VT100-UG-001_VT100_User_Guide_Aug78.pdf

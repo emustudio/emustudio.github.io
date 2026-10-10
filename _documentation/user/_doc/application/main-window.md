@@ -18,7 +18,7 @@ first tab is "Source code editor", second is "Emulator", used during computer
 emulation.
 
 Toolbar and dialog icons come from the active Swing Look&Feel when it supplies them, with bundled application icons as
-fallbacks. Changing `lookAndFeel` therefore keeps controls visually consistent without making an action disappear when
+fallbacks. Changing the `theme` setting therefore keeps controls visually consistent without making an action disappear when
 a theme omits an optional icon.
 
 ## Source code editor
@@ -43,9 +43,22 @@ The source code editor supports the following features:
 - cut/copy/paste text
 - `CTRL+{mouse wheel}` changes font size
 
-The compilation must be run manually. The compiler output window shows all messages which compiler produces. The content
-is dependent on the used compiler, but most likely it will contain compilation success or
-error messages.
+### Working with multiple files
+
+Each source file opens in its own tab. **New** creates an untitled tab; **Open** selects an already open file or opens
+another tab. A `*` after the tab name marks unsaved changes. Save, Save As, search, and compilation act on the selected
+tab. Closing a modified tab or leaving the computer prompts you to save or discard its changes, or cancel closing.
+Saved files that remain open are restored when you reopen that virtual computer.
+
+Hold <kbd>Ctrl</kbd> and click the quoted filename in an `include "file.asm"` or `#include "file.asm"` directive to open
+it in a tab. Both single and double quotes work. Save the containing source file first: relative include paths are
+resolved from its directory. A missing file produces an error dialog.
+
+### Compilation
+
+Click **Save & Compile** to save and compile the selected source file. Save other modified tabs first so included files
+are read from their current contents on disk. The compiler output window shows compilation messages and points to source
+positions supplied by the compiler.
 
 Compiled source code can produce an output binary file (for example a HEX file), and it's automatically loaded into the
 operating memory. If the emulation is
@@ -74,16 +87,16 @@ window look and what it displays.
 
 ### Debugger window
 
-Debugging is a process in which a programmer tries to analyze a program, usually with the intent to find bugs. The
-adverb "to debug" has a deep history.
-Very early computers were having so-called vacuum tubes, which were core elements acting as electrically controlled
-switches.
-From time to time a computer stopped working, and the most usual reason was that a bug (a real one) came in a vacuum
-tube.
-Maintainers of the computer had to go there and manually remove the bug. It happened that often so that the process of
-removing bugs got a name - "to de-bug".] Debugger in emuStudio contains
+Debugging is a process in which a programmer tries to analyze a program, usually with the intent to find bugs.
+Debugger in emuStudio contains
 a debugger toolbar and list of few disassembled instructions from memory. In combination with the CPU status panel, it's
 the most powerful tool for seeing (and checking) all internal behavior of the emulated computer.
+
+Double-click an instruction with source information to open its source file at the corresponding line. The 8080 and
+Z80 assemblers attach this information when compiling into memory. The file opens in an editor tab, including when it
+is an included source file. Writing to an annotated address invalidates its source information, even while running;
+annotations at other addresses remain available. Erasing memory removes all source positions. Saved byte-memory images
+can restore positions from their `.meta` sidecars; a raw image without annotations cannot provide this navigation.
 
 #### Debugger toolbar
 

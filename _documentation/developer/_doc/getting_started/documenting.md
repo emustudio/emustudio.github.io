@@ -10,38 +10,42 @@ permalink: /getting_started/documenting
 
 # Documenting
 
-There are two types of documentation - user and developer. Only the current version of the documentation is maintained.
-Older versions can be accessed from git. Both types of documentation use separate Jekyll static
-site project. The structure of the documentation is as follows:
+The website repository contains separate Jekyll sites for user and developer documentation. Both describe the current
+application and plugin APIs. Their source pages are under:
 
 {:.code-example}
 ```
 _documentation
   |
   + developer
-  |  + ... jekyll static site ...
+  |  + _doc/ ... developer pages ...
   + user
-     + ... jekyll static site ...
+     + _doc/ ... user pages ...
 ```
 
-Based on the type of documentation, you can navigate to the right place where to contribute. The documentation
-is built manually, not by GitHub pages. The reason for having separate Jekyll projects is that the documentation
-uses a different template than the main website, and those cannot be combined easily.
+Edit the site that matches your audience. Document the current workflow and API directly, with working examples and
+exact configuration keys. Keep user instructions about controls and results; put implementation contracts in the
+developer guide.
 
-When you update the documentation, please run script:
+From the website repository root, run:
 
 {:.code-example}
 ```
-_documentation/build.sh
+bundle exec rake lint
+bundle exec rake build
 ```
 
-which will generate the sites in the correct place, where the main website will recognize it. Commits should include
-rendered documentation as well.
+The build renders both documentation sites into `documentation/`, builds the root website, and checks the generated
+output. Commit the source pages; generated site output is ignored by Git.
+
+The emuLib API reference is under `_documentation/developer/emulib_javadoc/`. Generate it with `./gradlew javadoc` in
+the emuLib checkout, then replace this directory with `build/docs/javadoc/`. Include the regenerated reference in the
+documentation change when public APIs change.
 
 ## User documentation
 
 Plugins are usually part of virtual computers. Therefore, virtual computers are "chapters" in the documentation in a
-separate directory (e.g. `_documentation/user/0.41/altair8800`, and plugins are described there, in a separate file 
+separate directory (e.g. `_documentation/user/_doc/altair8800`), and plugins are described there, in a separate file
 (e.g. `byte-mem.md`). The documentation of virtual computer should document all possible configurations, and all possible
 plugins, even if their use is optional (which should be documented as well).
 

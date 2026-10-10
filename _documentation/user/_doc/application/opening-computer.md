@@ -15,6 +15,7 @@ schemas, which are stored in configuration files.
 
 Available virtual computers include [MITS Altair8800]({{ site.baseurl }}/altair8800/),
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/),
+[Space Invaders]({{ site.baseurl }}/spaceinvaders/),
 [BrainDuck]({{ site.baseurl }}/brainduck/),
 [RAM]({{ site.baseurl }}/ram/),
 [RASP]({{ site.baseurl }}/rasp/), and
@@ -39,4 +40,3 @@ on the `Open` button loads selected computer.
 | <span class="circle">3</span> | Edits selected computer. The abstract schema editor will be opened.
 | <span class="circle">4</span> | Renames computer.
 | <span class="circle">5</span> | Saves the displayed abstract schema into image file.
-

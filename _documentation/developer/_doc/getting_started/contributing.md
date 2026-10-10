@@ -17,7 +17,7 @@ word or providing a financial support.
 
 Each contribution topic should be tracked in a separate ticket in particular GitHub repository.
 
-Code contributors should start with forking particular GitHub repository, and branch off the `development` branch in a
+Code contributors should start with forking particular GitHub repository, and branch off the `develop` branch in a
 feature/bugfix
 branch named:
 
@@ -35,7 +35,7 @@ form:
 where `XXX` represents a ticket number. Please make sure the description is accurate, not too short and not too long.
 
 Next step is to make a [pull request][pull-requests]{:target="_blank"} to the upstream repository (original one), into
-branch `development`. Then, someone will review the PR, test it, and can suggest some changes. When reviewers are
+branch `develop`. Then, someone will review the PR, test it, and can suggest some changes. When reviewers are
 satisfied, they will merge the PR. If the commit message follows the formatting standard, the commit will appear in
 the ticket as a comment.
 

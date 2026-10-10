@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-mds"
-nav_order: 14
+nav_order: 10
 parent: MITS Altair8800
 permalink: /altair8800/88-mds
 ---
@@ -28,11 +28,61 @@ the unload-head command is accepted but ignored. Data transfers use programmed I
 
 These addresses overlap the 88-DCDD and 88-PIO. Connect only the controller required by the guest software.
 
+## Programming protocol
+
+Write to `08h` to select a drive: bits 3–0 choose drive 0–15, and bit 7 disables the selected drive when set. An
+unmounted drive cannot be selected. Read `08h` for **active-low** status:
+
+|---
+| Bit | Meaning of 0
+|-|-
+| 7 | Read data available
+| 6 | At track 0
+| 4 | Head movement allowed
+| 3 | Head loaded (compatibility status)
+| 2 | Head loaded
+| 1 | Head movement allowed (compatibility status)
+| 0 | Write sequence enabled
+|---
+
+With a mounted drive selected at track 0, status is `21h`. With no selected drive, status is `FFh` and data reads
+return `00h`. Status bit 5 is unused and remains 1.
+
+Write control bits to `09h`:
+
+|---
+| Bit | Action
+|-|-
+| 0 | Step inward, increasing track; stops at track 34
+| 1 | Step outward, decreasing track; stops at track 0
+| 7 | Begin a write at byte offset 0 in the current sector
+|---
+
+Other control bits have no implemented effect; head unload is ignored, and interrupts are not generated.
+
+Reading `09h` returns `C0h` plus the sector number in bits 4–1 and a toggling sector-true bit in bit 0. On every
+read where bit 0 becomes 0, the sector advances modulo 16. Poll for bit 0 = 0 and the required sector before a transfer.
+Selecting a drive or stepping a track resets this sequence; the first sector-true-low result is sector 0.
+
+Read 137 consecutive bytes from `0Ah` for a full raw sector. Further data reads repeat that sector unless another
+sector-position poll advances it. To write, select the sector, write `80h` to `09h`, then write 137 bytes to `0Ah`.
+A complete sector is flushed to the image. Changing the track/sector, deselecting, or ejecting also flushes a partially
+written buffer; write full sectors to avoid retaining stale buffer bytes.
+
 ## Disk images and GUI
 
 Open the device window to mount or eject a raw image in any drive, create a new correctly sized image, and inspect the
-selected drive, track, and sector. Changes are written directly to the mounted image. The plugin stores mounted image
-paths in its settings so they can be restored with the virtual computer.
+selected drive, track, and sector. Changes are written directly to the mounted image. GUI mounts apply to the current session. For startup mounts, configure `image0` through `image15` in the
+plugin settings. Paths are resolved against the host working directory and must identify readable, writable files
+containing at least 76,720 bytes. There are no geometry keys or separate settings dialog; ports and geometry are fixed.
+Reset deselects the drive and returns all tracks to 0, keeping the mounted files.
 
 The implementation models the original 88-MDS geometry and protocol. It does not use the unrelated SIMH HDSK
 extension; use the `88-hdsk` plugin for that interface.
+
+## Original manual
+
+[MITS Altair 88-MDS Minidisk Documentation — Preliminary (PDF)][manual]{:target="_blank"} describes installation,
+controller programming, disk format, and schematics for the minidisk system.
+
+[manual]: https://deramp.com/downloads/altair/hardware/minidisk/88-MDS%20Minidisk%20Manual.pdf

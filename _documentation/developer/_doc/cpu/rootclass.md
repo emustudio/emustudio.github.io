@@ -30,7 +30,7 @@ Sample implementation follows (only core methods are implemented):
         title = "Sample CPU emulator"
 )
 @SuppressWarnings("unused")
-public class MyCpuImpl extends AbstractCPU {
+public class CpuImpl extends AbstractCPU {
     private final ContextImpl context = new ContextImpl();
 
     private EmulatorEngine engine;
@@ -52,10 +52,10 @@ public class MyCpuImpl extends AbstractCPU {
 
     @Override
     public void initialize() throws PluginInitializationException {
-        MemoryContext<Byte> memory = contextPool.getMemoryContext(pluginId, MemoryContext.class);
-        if (memory.getDataType() != Byte.class) {
+        MemoryContext<Byte> memory = applicationApi.getContextPool().getMemoryContext(pluginID, MemoryContext.class);
+        if (memory.getCellTypeClass() != Byte.class) {
             throw new InvalidContextException(
-                    "Unexpected memory cell type. Expected Byte but was: " + memory.getDataType()
+                    "Unexpected memory cell type. Expected Byte but was: " + memory.getCellTypeClass()
             );
         }
 
@@ -153,7 +153,7 @@ public interface Context8080 extends CPUContext {
      * @param port   CPU port where the device should be attached
      * @return true on success, false otherwise
      */
-    boolean attachDevice(DeviceContext<Byte> device, int port);
+    boolean attachDevice(int port, CpuPortDevice device);
 
     /**
      * Detach a device from the CPU.
@@ -168,8 +168,28 @@ public interface Context8080 extends CPUContext {
      * @param freq new frequency in kHZ
      */
     void setCPUFrequency(int freq);
+
+    interface CpuPortDevice {
+        byte read(int portAddress);
+        void write(int portAddress, byte data);
+        String getName();
+    }
 }
 ```
+
+`CpuPortDevice` receives the full port address; the low eight bits select the attached port. This lets devices decode
+address lines used by machines such as the ZX Spectrum.
+
+## Cycle listeners
+
+`CPUContext.isPassedCyclesSupported()` tells a device whether it can subscribe to CPU timing. Register a
+`CPUContext.PassedCyclesListener` with `addPassedCyclesListener()` during initialization and remove it during
+destruction. `passedCycles(long cyclesDelta)` advances device time by the elapsed cycles. The overload
+`passedCycles(int address, int cycles)` also identifies the address driven during passive memory-bus cycles, allowing
+machine-specific contention handling. The CPU already accounts for the base cycles.
+
+`getCPUFrequency()` returns kHz; multiply by `1000` when a device requires hertz. Listeners run with CPU execution,
+so audio playback, file encoding, and Swing updates must not block that thread.
 
 
 [cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html

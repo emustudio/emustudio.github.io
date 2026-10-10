@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Compiler "brainc-brainduck"
-nav_order: 2
+nav_order: 3
 parent: BrainDuck
 permalink: /brainduck/compiler
 ---
@@ -23,6 +23,18 @@ Compilation takes part by user request (clicking on 'compile' icon in the main w
 the compiler usually loads the translated program into operating memory and saves the translation into a file. So it is
 with BrainDuck compiler. Files have `.hex` extension (format is called [Intel HEX][intelhex]{:target="_blank"}).
 
+## Running from the command line
+
+From the emuStudio installation directory, compile a source file without starting emulation:
+
+```
+java -cp "compiler/*:lib/*" net.emustudio.plugins.compiler.brainduck.Runner --output program.hex program.b
+```
+
+On Windows, use `;` instead of `:` between classpath entries. Options are `--output`/`-o`, `--help`/`-h`, and
+`--version`/`-v`, before the input filename. Without `--output`, the result uses the input filename with a `.hex`
+extension. To compile and run, use [BrainDuck automation]({{ site.baseurl }}/brainduck/automation).
+
 ## Language Syntax
 
 The language of BrainDuck compiler is almost identical to the original brainfuck. However, brainfuck interpreter is not
@@ -31,7 +43,7 @@ below.
 
 Generally, the language knows eight instructions. They are best described when they are compared with C language
 equivalent. Brainfuck uses only a single data pointer called `P`, pointing to bounded memory. The boundary is specified
-in `brainduck-mem` plugin.
+in the shared `byte-mem` plugin.
 
 NOTE: BrainDuck architecture conforms to the true von-Neumann model, instead of classic Harvard-style interpreters. It
 means that program memory and data memory are not separated. The data pointer is therefore not initialized to 0 as
@@ -63,6 +75,7 @@ details are hardcoded, as described below.
 The compiler considers a comment being everything that is not a brainfuck instruction. From the first occurrence of the
 unknown character, everything to the end of the line is treated as a comment. Exceptions are whitespaces, tabulators,
 and newlines. This practically means that it is impossible to write brainfuck program with syntax errors.
+Bracket pairing is a separate runtime concern: the compiler does not check that each `[` has a matching `]`.
 
 In the following example, everything starting with `#` is treated as a comment, up to the end of the line.
 
@@ -83,8 +96,8 @@ code 10.
 
 ### End-of-file behavior
 
-EOF is defined in `brainduck-cpu` and `vt100-terminal` plugins. In the current version of emuStudio, the current
-cell (where `P` is pointing at) is changed to value 0. This is not how original brainfuck behaves, which does not change
-the cell on EOF.
+The file keyboard queues the bytes in the input file and does not append an EOF byte. Once the queue is exhausted,
+a BrainDuck input instruction waits for another byte. A missing file behaves the same way. For unattended programs
+that may request too much input, use automation with `--waitmax`.
 
 [intelhex]: http://en.wikipedia.org/wiki/Intel_HEX

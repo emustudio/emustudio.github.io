@@ -25,8 +25,8 @@ Sample implementation of a compiler might look as follows (just some methods are
 )
 public class CompilerImpl extends AbstractCompiler {
     private final static Logger LOGGER = LoggerFactory.getLogger(CompilerImpl.class);
-    private final static List<SourceFileExtension> SOURCE_FILE_EXTENSIONS = List.of(
-            new SourceFileExtension("asm", "Assembler source file")
+    private final static List<FileExtension> SOURCE_FILE_EXTENSIONS = List.of(
+            new FileExtension("asm", "Assembler source file")
     );
 
     private MemoryContext<Byte> memory;
@@ -41,9 +41,9 @@ public class CompilerImpl extends AbstractCompiler {
         Optional.ofNullable(applicationApi.getContextPool()).ifPresent(pool -> {
             try {
                 memory = pool.getMemoryContext(pluginID, MemoryContext.class);
-                if (memory.getDataType() != Byte.class) {
+                if (memory.getCellTypeClass() != Byte.class) {
                     throw new InvalidContextException(
-                            "Unexpected memory cell type. Expected Byte but was: " + memory.getDataType()
+                            "Unexpected memory cell type. Expected Byte but was: " + memory.getCellTypeClass()
                     );
                 }
             } catch (InvalidContextException | ContextNotFoundException e) {
@@ -53,11 +53,12 @@ public class CompilerImpl extends AbstractCompiler {
     }
 
     @Override
-    public boolean compile(String inputFileName, String outputFileName) {
+    public void compile(Path inputPath, Optional<Path> outputPath) {
         notifyCompileStart();
         notifyInfo(getTitle() + ", version " + getVersion());
 
-        try (Reader reader = new FileReader(inputFileName)) {
+        Path finalOutputPath = outputPath.orElse(convertInputToOutputPath(inputPath, ".hex"));
+        try (Reader reader = Files.newBufferedReader(inputPath, StandardCharsets.UTF_8)) {
             SampleLexer lexer = createLexer(CharStreams.fromReader(reader));
             lexer.addErrorListener(new ParserErrorListener());
             CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -66,7 +67,7 @@ public class CompilerImpl extends AbstractCompiler {
             parser.addErrorListener(new ParserErrorListener());
 
             Program program = new Program(); // TODO: Create your AST
-            program.setFileName(inputFileName);
+            program.setFileName(inputPath.toString());
             new CreateProgramVisitor(program).visit(parser.rStart()); // TODO: Create AST creator visitor
 
             IntelHEX hex = new IntelHEX();
@@ -79,13 +80,13 @@ public class CompilerImpl extends AbstractCompiler {
             }
 
             if (program.env().hasNoErrors()) {
-                hex.generate(outputFileName);
+                hex.generate(finalOutputPath);
                 int programLocation = hex.findProgramLocation();
                 applicationApi.setProgramLocation(programLocation);
 
                 notifyInfo(String.format(
                         "Compile was successful.\n\tOutput: %s\n\tProgram starts at 0x%s",
-                        outputFileName, RadixUtils.formatWordHexString(programLocation)
+                        finalOutputPath, RadixUtils.formatWordHexString(programLocation)
                 ));
 
                 if (memory != null) {
@@ -94,28 +95,18 @@ public class CompilerImpl extends AbstractCompiler {
                 } else {
                     notifyWarning("Memory is not available.");
                 }
-                return true;
             } else {
                 for (CompileError error : program.env().getErrors()) {
-                    notifyError(error.line, error.column, error.msg);
+                    notifyError(error.position, error.msg);
                 }
-                return false;
             }
         } catch (CompileException e) {
-            notifyError(e.line, e.column, e.getMessage());
-            return false;
+            notifyError(e.position, e.getMessage());
         } catch (IOException e) {
             notifyError("Compilation error: " + e);
-            return false;
         } finally {
             notifyCompileFinish();
         }
-    }
-
-    @Override
-    public boolean compile(String inputFileName) {
-        String outputFileName = stripKnownExtension(inputFileName, SOURCE_FILE_EXTENSIONS) + ".hex";
-        return compile(inputFileName, outputFileName);
     }
 
     @Override
@@ -126,16 +117,6 @@ public class CompilerImpl extends AbstractCompiler {
     @Override
     public List<FileExtension> getSourceFileExtensions() {
         return SOURCE_FILE_EXTENSIONS;
-    }
-
-    @Override
-    public String getVersion() {
-        return "1.0.0";
-    }
-
-    @Override
-    public String getCopyright() {
-        return "(c) Copyright 2006-2026, you";
     }
 
     @Override
@@ -163,6 +144,18 @@ Main outcomes are:
 The compiler does not register any plugin context, but when initialized, it obtains optional memory context (in this example,
 memory must have cells of `Byte` type). If the memory is available, after compilation the program will be
 loaded in the memory.
+
+`compile(Path inputPath, Optional<Path> outputPath)` reports results through compiler listeners. Use
+`convertInputToOutputPath(inputPath, ".hex")` when no output path is supplied, and always pair `notifyCompileStart()`
+with `notifyCompileFinish()` in a `finally` block. Error positions are `SourceCodePosition` objects containing the
+source filename, line, and column, including for errors in included files.
+
+`AbstractCompiler` reads version and copyright from the plugin's `version.properties` resource as described in
+[plugin metadata]({{ site.baseurl }}/plugin_basics/#version-and-copyright-metadata).
+
+After loading generated code, attach source positions through `memory.annotations()`. The bundled 8080 and Z80
+assemblers remove annotations owned by their plugin ID and add positions for generated addresses, including included
+files. See [memory annotations]({{ site.baseurl }}/memory/#cell-type-size-and-annotations) for ownership and invalidation.
 
 Lexer and parser are not shown here, but they are created using mentioned [ANTLR][antlr]{:target="_blank"}
 parser generator. Please check out this nice [ANTLR tutorial][antlr-tutorial]{:target="_blank"}.
@@ -193,9 +186,7 @@ public interface LexicalAnalyzer extends Iterable<Token> {
 
     boolean hasNext();
 
-    void reset(String input);
-    
-    void reset(InputStream is) throws IOException;
+    void reset(char[] array, int offset, int length);
 }
 ```
 
@@ -275,13 +266,8 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
     }
 
     @Override
-    public void reset(InputStream inputStream) throws IOException {
-        lexer.setInputStream(CharStreams.fromStream(inputStream));
-    }
-
-    @Override
-    public void reset(String source) {
-        lexer.setInputStream(CharStreams.fromString(source));
+    public void reset(char[] array, int offset, int length) {
+        lexer.setInputStream(new CharArrayCharStream(array, offset, length));
     }
 
 
@@ -293,6 +279,11 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
     }
 }
 ```
+
+`CharArrayCharStream` and literal parsing helpers are provided by `net.emustudio.emulib.plugins.compiler.antlr`.
+The stream reads the specified slice without copying it, so keep that array unchanged while lexing. `ParsingUtils`
+provides numeric and quoted-string parsing, label extraction, and identifier normalization. Grammar, AST, semantic
+analysis, and code generation remain the compiler plugin's responsibility.
 
 
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html

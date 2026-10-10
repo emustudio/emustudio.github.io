@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CPU "z80-cpu"
-nav_order: 2
+nav_order: 4
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/z80-cpu
 ---

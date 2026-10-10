@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Assembler "as-z80"
-nav_order: 1
+nav_order: 3
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/as-z80
 ---

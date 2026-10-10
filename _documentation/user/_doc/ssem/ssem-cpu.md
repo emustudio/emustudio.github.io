@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CPU "ssem-cpu"
-nav_order: 2
+nav_order: 4
 parent: SSEM
 permalink: /ssem/ssem-cpu
 ---

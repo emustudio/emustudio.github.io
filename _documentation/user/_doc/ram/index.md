@@ -2,7 +2,7 @@
 layout: default
 title: RAM
 description: "Random Access Machine (RAM) emulator in emuStudio — study algorithmic complexity with this Harvard architecture abstract machine simulator."
-nav_order: 5
+nav_order: 8
 has_children: true
 permalink: /ram/
 ---

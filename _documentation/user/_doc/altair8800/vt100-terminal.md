@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "vt100-terminal"
-nav_order: 9
+nav_order: 16
 parent: MITS Altair8800
 permalink: /altair8800/vt100-terminal
 ---
@@ -26,6 +26,12 @@ see the [VT100 terminal documentation]({{ site.baseurl }}/brainduck/terminal).
 Abstract schema for emuStudio (with VT100 terminal):
 
 ![Abstract schema of MITS Altair8800 (with VT100 terminal)]({{ site.baseurl }}/assets/altair8800/altair-vt100-schema.png)
+
+## Original manual
+
+[Digital Equipment Corporation VT100 User Guide (EK-VT100-UG-001, August 1978, PDF)][manual]{:target="_blank"}
+describes keyboard operation, setup, and host control sequences. Chapter 3 contains the programmer's reference.
+The supported sequences and extensions of the plugin are listed in the emuStudio terminal guide linked above.
 
 ## Programming with ANSI escape sequences
 
@@ -235,3 +241,4 @@ the Altair8800. The full reference is available in the [VT100 terminal documenta
 
 Escape character (ESC) has ASCII code `27` (decimal) or `1Bh` (hexadecimal).
 
+[manual]: https://bitsavers.org/pdf/dec/terminal/vt100/EK-VT100-UG-001_VT100_User_Guide_Aug78.pdf

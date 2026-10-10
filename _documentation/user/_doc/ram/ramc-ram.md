@@ -15,6 +15,25 @@ input/output tape. Also, there are three control-flow instructions.
 
 Source code files end with `.ram` extension; compiler output uses extension `.bram`.
 
+## Running from the command line
+
+Run the compiler from the emuStudio installation directory:
+
+```
+java -cp "compiler/*:memory/*:lib/*" net.emustudio.plugins.compiler.ram.Runner --output program.bram program.ram
+```
+
+On Windows, replace the classpath separators `:` with `;`. Options are `--output`/`-o`, `--help`/`-h`, and `--version`/`-v`. Put options before the input filename.
+Without `--output`, the compiler uses the input filename with the `.bram` extension. This compiles a file;
+it does not start a virtual computer. Use [automation]({{ site.baseurl }}/application/automation) to compile and run.
+
+## Numeric limits
+
+This implementation uses signed 32-bit integers (`-2147483648` through `2147483647`) for numeric values. Arithmetic
+can overflow this range; it does not provide the unbounded integers of the theoretical machine. Integer division
+truncates toward zero. Avoid dividing by zero, which stops execution with an error. Register indices must be
+non-negative.
+
 ## Language syntax
 
 A program written for RAM consists of two sections, which can be intermixed and repeated in any order, but
@@ -80,7 +99,7 @@ The following table describes all possible instructions, usable in the RAM simul
 |---
 | Instruction | Constant (`=i`)        | Direct (`i`)              | Indirect (`*i`)
 |-|-|-|-
-| `READ`      | | _R<sub>i</sub>_ &larr; next input |
+| `READ`      | | _R<sub>i</sub>_ &larr; next input | _M[R<sub>i</sub>]_ &larr; next input |
 | `WRITE`     | output &larr; _i_          | output &larr; _R<sub>i</sub>_          | output &larr; _M[R<sub>i</sub>]_
 | `LOAD`      | _R<sub>0</sub>_ &larr; _i_          | _R<sub>0</sub>_ &larr; _R<sub>i</sub>_          | _R<sub>0</sub>_ &larr; _M[R<sub>i</sub>]_
 | `STORE`     | | _R<sub>i</sub>_ &larr; _R<sub>0</sub>_          | _M[R<sub>i</sub>]_ &larr; _R<sub>0</sub>_
