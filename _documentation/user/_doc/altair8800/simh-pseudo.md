@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "simh-pseudo"
-nav_order: 9
+nav_order: 15
 parent: MITS Altair8800
 permalink: /altair8800/simh-pseudo
 ---

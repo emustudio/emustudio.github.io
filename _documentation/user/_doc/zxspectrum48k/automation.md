@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 8
+nav_order: 2
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/automation
 ---

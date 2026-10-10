@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 6
+nav_order: 1
 parent: RAM
 permalink: /ram/automation
 ---

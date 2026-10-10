@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Memory "byte-mem"
-nav_order: 3
+nav_order: 5
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/byte-mem
 ---

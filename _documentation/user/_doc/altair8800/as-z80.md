@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Assembler "as-z80"
-nav_order: 2
+nav_order: 4
 parent: MITS Altair8800
 permalink: /altair8800/as-z80
 ---

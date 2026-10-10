@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "adm3a-terminal"
-nav_order: 8
+nav_order: 14
 parent: MITS Altair8800
 permalink: /altair8800/adm3a-terminal
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "zxspectrum-bus"
-nav_order: 4
+nav_order: 8
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/zxspectrum-bus
 ---

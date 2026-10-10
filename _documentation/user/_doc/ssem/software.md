@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Software for SSEM
-nav_order: 5
+nav_order: 1
 parent: SSEM
 permalink: /ssem/software
 ---

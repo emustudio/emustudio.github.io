@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-ptr-ptp"
-nav_order: 13
+nav_order: 12
 parent: MITS Altair8800
 permalink: /altair8800/88-ptr-ptp
 ---

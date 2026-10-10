@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "vt100-terminal"
-nav_order: 9
+nav_order: 16
 parent: MITS Altair8800
 permalink: /altair8800/vt100-terminal
 ---

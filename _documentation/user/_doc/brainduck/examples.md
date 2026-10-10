@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example code
-nav_order: 6
+nav_order: 1
 parent: BrainDuck
 permalink: /brainduck/examples
 ---

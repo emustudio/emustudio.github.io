@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-dcdd"
-nav_order: 6
+nav_order: 8
 parent: MITS Altair8800
 permalink: /altair8800/88-dcdd
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "88-hdsk"
-nav_order: 15
+nav_order: 9
 parent: MITS Altair8800
 permalink: /altair8800/88-hdsk
 ---

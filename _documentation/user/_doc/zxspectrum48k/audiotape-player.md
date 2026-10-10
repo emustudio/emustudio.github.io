@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "audiotape-player"
-nav_order: 6
+nav_order: 7
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/audiotape-player
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 4
+nav_order: 1
 parent: RASP
 permalink: /rasp/automation
 ---

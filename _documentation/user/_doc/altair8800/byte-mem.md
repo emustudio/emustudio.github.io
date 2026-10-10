@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Memory "byte-mem"
-nav_order: 5
+nav_order: 7
 parent: MITS Altair8800
 permalink: /altair8800/byte-mem
 ---

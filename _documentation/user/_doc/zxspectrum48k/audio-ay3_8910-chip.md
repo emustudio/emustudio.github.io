@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "audio-ay3_8910-chip"
-nav_order: 6.5
+nav_order: 6
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/audio-ay3_8910-chip
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CPU "rasp-cpu"
-nav_order: 2
+nav_order: 3
 parent: RASP
 permalink: /rasp/rasp-cpu
 ---

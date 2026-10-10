@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Automation
-nav_order: 11
+nav_order: 2
 parent: MITS Altair8800
 permalink: /altair8800/automation
 ---

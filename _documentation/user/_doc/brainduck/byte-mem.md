@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Memory "byte-mem"
-nav_order: 4
+nav_order: 5
 parent: BrainDuck
 permalink: /brainduck/byte-mem
 ---

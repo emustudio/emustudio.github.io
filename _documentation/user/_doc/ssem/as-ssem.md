@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Assembler "as-ssem"
-nav_order: 1
+nav_order: 3
 parent: SSEM
 permalink: /ssem/as-ssem
 ---

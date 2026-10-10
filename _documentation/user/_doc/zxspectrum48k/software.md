@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Software and examples
-nav_order: 7
+nav_order: 1
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/software
 ---

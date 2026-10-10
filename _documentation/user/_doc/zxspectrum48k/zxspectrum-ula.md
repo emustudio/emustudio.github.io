@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Device "zxspectrum-ula"
-nav_order: 5
+nav_order: 9
 parent: ZX Spectrum 48K
 permalink: /zxspectrum48k/zxspectrum-ula
 ---
