@@ -22,3 +22,27 @@ table.list, table.list th, table.list tr, table.list td, table.list caption, tab
     color: #000;
     text-align: center;
 }
+
+.annotated-screenshot {
+    position: relative;
+    max-width: 100%;
+    margin: 1rem 0;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .circle {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+        width: 26px;
+        height: 26px;
+        line-height: 22px;
+        font-size: 14px;
+        pointer-events: none;
+    }
+}

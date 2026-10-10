@@ -53,7 +53,8 @@ The window shows attached device, control channel and data buffer.
 
 ## Settings
 
-88-sio plugin has a separate settings window with three sections, described below.
+Select `88-sio` in the device list and click **Show settings...**. The dialog has three tabs, described below.
+Click **Save** to persist and apply all tabs; press **Esc** to discard edits.
 
 ### General settings
 

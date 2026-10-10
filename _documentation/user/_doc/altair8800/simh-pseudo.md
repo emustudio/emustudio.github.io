@@ -18,7 +18,11 @@ running guest system. This device is required if you want to run CP/M operating 
 
 Connect the plugin to an `8080-cpu` or `z80-cpu` context, `byte-mem`, and `88-ptr-ptp`. All three connections are
 required at initialization, including the paper tape device when the guest does not use tape commands. The CPU port
-is fixed at `FEh`. There is no device window, settings dialog, or plugin-specific configuration key.
+is fixed at `FEh`. There are no plugin-specific configuration keys.
+
+## GUI and settings
+
+This device has no GUI or settings dialog. Guest software controls it through CPU port `FEh`.
 
 This plugin implements the commands listed below; it is not a complete SIMH monitor. Commands 19 and 20 do not replace
 the CPU plugin. Select the desired CPU in the virtual-computer configuration.

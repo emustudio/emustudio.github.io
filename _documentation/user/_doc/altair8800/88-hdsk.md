@@ -15,6 +15,60 @@ The following port protocol describes SIMH mode. HDSK is a synthetic host-backed
 software, not a physical MITS multi-port controller. It uses port `FDh` and transfers sector data directly between a
 disk image and guest memory.
 
+## GUI overview
+
+On the **Emulator** tab, double-click `88-hdsk` in the device list. In SIMH mode, the window shows sixteen drives:
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-gui.png" alt="SIMH HDSK window with numbered disk selection, status, geometry and mounted image" width=620 points="1:91.61:5.19|2:47.74:31.69|3:92.58:31.69|4:91.61:74.29" %}
+
+{: .list}
+| <span class="circle">1</span> | **Disk selection**. Select drive A–P to inspect; this does not change the drive selected by guest software.
+| <span class="circle">2</span> | **Flags and settings**. Shows the selected drive, mount state, write protection and recent activity.
+| <span class="circle">3</span> | **Geometry**. Inspect track count, edit sectors per track and sector size, then click **Apply geometry** for the current session.
+| <span class="circle">4</span> | **Mounted image**. Shows the host file attached to the selected drive. Mount and create images in the settings dialog.
+
+MITS mode shows four units, each with a removable (`R`) and fixed (`F`) platter:
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-mits-gui.png" alt="MITS HDSK window with numbered platter selection, activity and fixed geometry" width=612 points="1:93.14:5.51|2:50.65:27.55|3:92.48:27.55|4:92.48:72.73" %}
+
+{: .list}
+| <span class="circle">1</span> | **Platter selection**. Inspect `0R`–`3F`; the number is the unit and the letter selects its removable or fixed platter.
+| <span class="circle">2</span> | **Flags and settings**. Shows mount state, write protection and controller activity for that platter.
+| <span class="circle">3</span> | **Geometry**. MITS geometry is fixed at 406 cylinders, two surfaces, 24 sectors per track and 256 bytes per sector.
+| <span class="circle">4</span> | **Mounted image**. Shows the selected platter’s host file.
+
+## Settings dialog
+
+Select `88-hdsk` in the device list and click **Show settings...**.
+
+### SIMH drive settings
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-settings-drive-settings.png" alt="SIMH HDSK drive settings with numbered drive selection, image, media actions, parameters and Save" width=595 points="1:4.71:10.07|2:5.55:36.69|3:89.08:48.92|4:91.93:63.55|5:82.02:95.92" %}
+
+{: .list}
+| <span class="circle">1</span> | **Drive**. Choose the drive whose settings you are editing. Switching drives keeps the other drives’ pending edits.
+| <span class="circle">2</span> | **Image**. Enter the startup image path, or use **Browse...** to select it.
+| <span class="circle">3</span> | **Media actions**. **Create image** creates a host file. **Unmount** and **Unmount all** clear paths for saving; **Save** applies those detachments.
+| <span class="circle">4</span> | **Parameters**. Set the sectors per track and physical sector size. **Set default** restores 32 sectors of 128 bytes; read-only protection is available only in MITS mode.
+| <span class="circle">5</span> | **Save**. Persist the settings and apply mounts and geometry when the controller mode is unchanged. Press **Esc** to discard pending settings; a file already created with **Create image** remains on disk.
+
+### MITS drive settings
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-mits-settings-drive-settings.png" alt="MITS HDSK drive settings with numbered platter selection, read-only protection and fixed parameters" width=659 points="1:4.86:10.66|2:30.20:52.03|3:92.26:61.42" %}
+
+{: .list}
+| <span class="circle">1</span> | **Drive**. Choose a removable or fixed platter of unit 0–3.
+| <span class="circle">2</span> | **Read-only**. Protect that image from guest writes. The image must already exist with the required size; **Create image** creates one of that size.
+| <span class="circle">3</span> | **Parameters**. Geometry is fixed, so sector size, sectors per track and defaults are disabled.
+
+### Controller selection
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-settings-controller.png" alt="HDSK controller settings with numbered controller model and connection requirements" width=595 points="1:30.76:13.19|2:92.44:24.46" %}
+
+{: .list}
+| <span class="circle">1</span> | **Controller**. Choose SIMH or MITS. Save, update the schema connections and reopen the computer to switch controller models.
+| <span class="circle">2</span> | **Connection requirements**. SIMH uses CPU port `FDh` and memory for DMA. MITS uses the 88-4PIO peripheral connection described below.
+
 ## Command packet
 
 Write one command byte followed by its packet bytes to port `FDh`. Read the same port for the command result.

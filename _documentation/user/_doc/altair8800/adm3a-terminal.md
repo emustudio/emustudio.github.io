@@ -162,8 +162,9 @@ terminal.
 
 ## Terminal Settings
 
-It is possible to configure the terminal either from GUI or manually modifying configuration settings. Modification of
-settings requires restarting emuStudio.
+Select `adm3A-terminal` in the device list and click **Show settings...** to open the dialog.
+Click **Save** to persist the settings; press **Esc** to discard edits. After editing the configuration file directly,
+close and reopen the computer.
 
 The "settings" window is shown in the following image:
 

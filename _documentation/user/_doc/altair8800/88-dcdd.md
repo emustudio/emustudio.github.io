@@ -63,9 +63,17 @@ Feature highlights are:
 - [x] GUI showing disk activity in runtime
 - [x] Interrupts are supported
 
-GUI can be seen in the following image:
+## GUI overview
 
-![GUI of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-dcdd.png)
+On the **Emulator** tab, double-click `88-dcdd` in the device list:
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-gui.png" alt="88-DCDD runtime window with numbered drive selection, flags, position and mounted image" width=556 points="1:91.55:5.56|2:48.56:33.89|3:91.01:33.89|4:90.83:64.17" %}
+
+{: .list}
+| <span class="circle">1</span> | **Disk selection**. Choose drive A–P to inspect. This does not select that drive for guest software.
+| <span class="circle">2</span> | **Flags and settings**. Shows the selected drive’s Port 1 status bits and Port 2 value.
+| <span class="circle">3</span> | **Position**. Shows the current track, sector and byte offset for the selected drive.
+| <span class="circle">4</span> | **Mounted image**. Shows the attached host file. Use **Show settings...** to mount or eject images and configure geometry.
 
 The window shows runtime status of virtual disk drives. By clicking on a drive button, its details are revealed below.
 Port1 is showing 88-dcdd status, ordered from the MSB to LSB, and instead of showing 1 and 0s, every bit is mapped
@@ -84,16 +92,17 @@ details.
 
 ## Mounting disk images
 
-In order to mount disk images to the device, please open device settings:
+Select `88-dcdd` in the device list and click **Show settings...**. Open the **Drive settings** tab:
 
-![Settings window of 88-DCDD]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings1.png)
+{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-settings-drive-settings.png" alt="88-DCDD drive settings with numbered drive selection, image path, browse and unmount actions, geometry, defaults and Save" width=595 points="1:4.71:12.21|2:5.55:36.34|3:62.18:51.16|4:91.93:61.63|5:92.10:71.22|6:78.99:95.35" %}
 
 {: .list}
-| <span class="circle">1</span> | Select drive (A - P)
-| <span class="circle">2</span> | Choose the image file and click on "Mount". If there is a disk mounted already, it will be re-mounted with the new file.
-| <span class="circle">3</span> | If you want to un-mount all disk drives, click on "Umount all" button
-| <span class="circle">4</span> | Set sectors per track and sector size for the current drive. (NOTE: Be cautious with the settings. Incorrect values can result in disk image file damage. Existing default values were chosen from disk image files used by [simh][simh]{:target="_blank"} emulator).
-| <span class="circle">5</span> | Set default values for sectors per track and sector size for the current drive.
+| <span class="circle">1</span> | **Drive**. Choose drive A–P; edits for other drives are retained when switching.
+| <span class="circle">2</span> | **Image**. Enter the host image path for the selected drive.
+| <span class="circle">3</span> | **Browse / Mount**. Browse for an image, then click **Mount** to attach it immediately. The button becomes **Unmount** while attached. **Unmount all** immediately ejects all images.
+| <span class="circle">4</span> | **Parameters**. Set sectors per track and physical sector size to match the image format.
+| <span class="circle">5</span> | **Set default**. Restore the selected drive’s default geometry.
+| <span class="circle">6</span> | **Save**. Persist geometry, CPU ports and startup mount settings. Press **Esc** to discard unsaved configuration edits; mounts and ejects already performed remain in effect.
 
 ## CPU Ports settings
 
@@ -106,13 +115,14 @@ different function. By default, the port mapping to CPU port numbers is as follo
 
 Port mapping can be changed in the Settings window, tab "CPU Ports":
 
-![Setting CPU ports]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings2.png)
+{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-settings-connection-with-cpu.png" alt="88-DCDD CPU connection settings with numbered CPU ports, interrupt support, vector, default mapping and Save" width=595 points="1:96.64:29.94|2:31.26:49.42|3:48.24:57.27|4:85.21:64.83|5:80.50:95.06" %}
 
 {: .list}
-| <span class="circle">1</span> | Set CPU port number value for the three 88-dcdd ports
-| <span class="circle">2</span> | Set used CPU interrupt vector and whether interrupts are actually supported by 88-dcdd. Interrupt vector is used when interrupt is signalled to the CPU which is implemented as equivalent to executing an instruction `RST`. When interrupts are globally disabled here, enabling them in runtime won't work.
-| <span class="circle">3</span> | Setting default interrupt vector (which is 7)
-
+| <span class="circle">1</span> | **Port 1 / Port 2 / Port 3**. Set the CPU addresses for flags and drive selection, sector and control operations, and data transfer.
+| <span class="circle">2</span> | **Interrupts supported**. Allow guest software to enable controller interrupts. When disabled here, runtime interrupt-enable commands have no effect.
+| <span class="circle">3</span> | **Interrupt vector**. Select RST vector `0`–`7`; the default is `7`.
+| <span class="circle">4</span> | **Set default**. Restore CPU port addresses `08h`, `09h` and `0Ah`. This button does not reset the interrupt vector.
+| <span class="circle">5</span> | **Save**. Persist and apply the new mapping and interrupt settings. Avoid CPU ports already occupied by other devices.
 
 ## Programming
 

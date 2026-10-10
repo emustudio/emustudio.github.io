@@ -73,11 +73,57 @@ The board publishes `PioContext` at index 0. A connected peripheral can drive in
 output and handshake changes. The [MITS hard-disk controller]({{ site.baseurl }}/altair8800/88-hdsk#mits-hard-disk-mode)
 requires this context with at least two PIAs; connect `88-hdsk` to `88-pio` in the computer schema.
 
-## GUI
+## GUI overview
 
-Open the device window to inspect the board's registers, input pins, output latches and attached peripheral.
-Interrupts require guest enable bits and a CPU that supports interrupts. Changing input pins in the GUI follows the
-selected board's direction and handshake rules.
+On the **Emulator** tab, double-click `88-pio` in the device list. The 88-4PIO window is shown below:
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-pio-gui.png" alt="88-4PIO window with numbered attached device, channel, registers and input controls" width=571 points="1:93.87:3.88|2:28.02:22.87|3:48.16:27.71|4:92.47:27.71|5:92.12:77.52" %}
+
+{: .list}
+| <span class="circle">1</span> | **Attached device**. Shows the connected peripheral identity; `unknown` means an identity is unavailable.
+| <span class="circle">2</span> | **Channel**. Select a PIA channel to inspect. This changes the view; the peripheral connection belongs to the whole board.
+| <span class="circle">3</span> | **Control channel**. Shows control-register bits, the hexadecimal value and interrupt flags for the selected channel.
+| <span class="circle">4</span> | **Data pins**. Shows input pins, output pins and the data-direction register. A DDR bit of `1` selects output.
+| <span class="circle">5</span> | **Peripheral input**. Set an input byte or change C1/C2 while no peripheral is connected. C2 can be edited only when configured as an input; attached peripherals own these controls otherwise.
+
+The original 88-PIO uses separate input and output latches instead of PIA channels:
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-pio-8212-gui.png" alt="Original 88-PIO window with numbered latches and manual handshake controls" width=515 points="1:43.30:25.39|2:92.43:25.39|3:92.43:77.48" %}
+
+{: .list}
+| <span class="circle">1</span> | **Control channel**. Shows input-data-ready (`D`), output-device-ready (`R`) and the interrupt-enable value.
+| <span class="circle">2</span> | **Data latches**. Inspect the most recent input and output bytes.
+| <span class="circle">3</span> | **Peripheral input**. Enter a byte and click **Strobe input** to place it in the input latch. **Output device ready** changes the output-ready flag.
+
+## Settings dialog
+
+Select `88-pio` in the device list and click **Show settings...**. Its three tabs are shown below.
+
+### General settings
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-general-settings.png" alt="88-PIO general settings with numbered board model, PIA count and Save button" width=534 points="1:94.38:11.40|2:41.95:38.60|3:79.21:94.04" %}
+
+{: .list}
+| <span class="circle">1</span> | **Board**. Choose the Intel 8212-based 88-PIO or Motorola 6820-based 88-4PIO.
+| <span class="circle">2</span> | **Populated PIAs**. Set one to four PIAs for 88-4PIO. This field is disabled for the original 88-PIO.
+| <span class="circle">3</span> | **Save**. Persist all tabs and close the dialog. Reopen the computer to apply the new board, ports or interrupt vector. Press **Esc** to discard edits.
+
+### Connection with CPU
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-connection-with-cpu.png" alt="88-PIO CPU connection settings with numbered base port, defaults and channel mapping" width=534 points="1:44.76:17.36|2:92.88:11.40|3:86.33:36.79" %}
+
+{: .list}
+| <span class="circle">1</span> | **CPU base port**. Enter a decimal or `0x` hexadecimal address with the alignment required by the selected board.
+| <span class="circle">2</span> | **Set default**. Restore the selected board’s default base port and two PIAs.
+| <span class="circle">3</span> | **Channel ports**. Preview the resulting register addresses; avoid overlaps with other devices.
+
+### Interrupts
+
+{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-interrupts.png" alt="88-PIO interrupt settings with numbered RST vector and default button" width=534 points="1:47.75:35.23|2:73.78:78.50" %}
+
+{: .list}
+| <span class="circle">1</span> | **Interrupt vector**. Select the RST vector, from `0` to `7`. Guest software must also enable interrupts.
+| <span class="circle">2</span> | **Set default**. Restore vector `7`. Click **Save** to persist it.
 
 ## Original manual
 

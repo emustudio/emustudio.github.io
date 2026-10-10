@@ -27,6 +27,32 @@ Abstract schema for emuStudio (with VT100 terminal):
 
 ![Abstract schema of MITS Altair8800 (with VT100 terminal)]({{ site.baseurl }}/assets/altair8800/altair-vt100-schema.png)
 
+## GUI overview
+
+On the **Emulator** tab, double-click `vt100-terminal` in the device list:
+
+{% include annotated-screenshot.html image="/assets/altair8800/vt100-terminal-gui.png" alt="Altair VT100 terminal with numbered display, input indicator and ASCII input button" width=900 points="1:94.78:4.95|2:1.56:93.41|3:6.22:93.54" %}
+
+{: .list}
+| <span class="circle">1</span> | **Display**. Shows bytes sent through the 88-SIO data port, including supported ANSI colors and cursor-control sequences. Focus the window to send keyboard input back through the serial board.
+| <span class="circle">2</span> | **Input indicator**. Blue means no blocking input request is pending; red means the device is waiting for input. With Altair’s serial connection, ordinary keystrokes are delivered to 88-SIO without waiting for a red indicator.
+| <span class="circle">3</span> | **ASC**. Enter space-separated character codes when a blocking input request enables this button.
+
+## Settings dialog
+
+Select `vt100-terminal` in the device list and click **Show settings...**:
+
+{% include annotated-screenshot.html image="/assets/altair8800/vt100-terminal-settings.png" alt="VT100 settings with numbered terminal size, input file, output file, input delay and Save" width=401 points="1:89.53:5.87|2:2.74:62.76|3:2.74:70.38|4:60.10:78.59|5:73.82:93.55" %}
+
+{: .list}
+| <span class="circle">1</span> | **Terminal size**. Set columns and rows; the defaults are 80 × 24. Saving a size change clears the current display.
+| <span class="circle">2</span> | **Input file**. Select the file read in headless mode.
+| <span class="circle">3</span> | **Output file**. Select the file receiving terminal output in headless mode. It must differ from the input path.
+| <span class="circle">4</span> | **Input delay**. Set the delay between characters read from the input file, in milliseconds.
+| <span class="circle">5</span> | **Save**. Persist and apply the terminal settings. Press **Esc** to close without saving.
+
+The file redirection settings are used in headless mode. See the [shared terminal configuration reference]({{ site.baseurl }}/brainduck/terminal#configuration-file) for the corresponding keys.
+
 ## Original manual
 
 [Digital Equipment Corporation VT100 User Guide (EK-VT100-UG-001, August 1978, PDF)][manual]{:target="_blank"}
