@@ -118,10 +118,8 @@ Few useful operations:
 - `Bits shiftRight()`: Shift the value to the right.
 - `byte[] toBytes()`: Converts wrapped `int` into array of 4 bytes
 
-This class is heavily used by [edigen][edigen]{:target="_blank"} dissasembler generator.
-
-`StringUtils.format(char format, Bits bits)` renders bits using `c` for a character, `s` for a string, `d` for decimal,
-and `x` or `X` for hexadecimal output. Formatting belongs to `StringUtils`; `Bits` handles bit operations.
+This class is used by the [edigen][edigen]{:target="_blank"} disassembler generator. The generated disassembler
+provides its own operation pipeline and value formatting (character, string, decimal, hexadecimal) on top of `Bits`.
 
 ## Number utilities
 
