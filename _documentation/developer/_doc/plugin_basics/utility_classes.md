@@ -137,7 +137,6 @@ Few useful operations:
 - `static int bin2bcd(int bin)`: Converts a binary number into packed BCD (1 byte, 2 BCD digits)
 - `static int[]	listToNativeInts(java.util.List<java.lang.Integer> list)`: Converts list of Integers into array of native ints.
 - `static java.lang.Byte[] nativeBytesToBytes(byte[] array)`: Converts native `byte[]` array to boxed `Byte[]` array.
-- `static java.lang.Integer[] nativeBytesToIntegers(byte[] array)`: Converts native `byte[]` array to boxed `Integer[]` array.
 - ...
 - `static int readBits(byte[] bytes, int start, int length, int bytesStrategy)`: Reads up to 32 bits from bytes into an `int`.
 - `static int readInt(byte[] word, int strategy)`: Reads an integer from the array of numbers.
@@ -155,14 +154,11 @@ Class name
 Usage
 : Utility functions for various radix conversions. 
 
-At first, an instance of `RadixUtils` must be created, because of some pattern regex pre-compilation and possibility
-to add new radixes dynamically. Usually, a singleton instance is used throughout the application (it's not thread-safe!). 
+Parsing uses the singleton from `RadixUtils.getInstance()`, which recognizes hexadecimal (`0x1F`, `1Fh`), decimal
+(`31`, `31d`) and octal (`37o`) numbers. The instance is not thread-safe.
 
 Few useful operations:
 
-- `void addNumberPattern(RadixUtils.NumberPattern pattern)`: Add `NumberPattern` for new radix recognition
-- `static byte[] convertToNumber(java.lang.String number, int fromRadix)`: Convert an integer number in any radix (stored in String) to binary components (bytes) in little endian.
-- ...
 - `static java.lang.String convertToRadix(byte[] number, int toRadix, boolean littleEndian)`: Converts number in any length to a number with specified radix.
 - ...
 - `static java.lang.String formatBinaryString(int number, int length)`: Get formatted binary string of given number.
