@@ -13,7 +13,7 @@ permalink: /application/main-window
 After opening a computer, the main window provides a source code editor and an **Emulator** tab. The editor tab shows
 the active source filename, or **Source code editor** when no file is selected.
 
-The **File** and **Edit** menus provide file and text operations. **Project** contains compilation, a view of the
+The **File**, **Edit**, and **Editor** menus provide file and text operations. **Project** contains compilation, a view of the
 computer schema, and compiler settings. **Help** contains information about emuStudio. The application's
 [theme setting]({{ site.baseurl }}/application/configuration-file) controls the appearance of windows and controls.
 
@@ -32,9 +32,13 @@ The source code editor supports the following features:
 - bundled **JetBrains Mono NL** font
 - line numbering and syntax highlighting
 - undo/redo
-- search/replace text
+- inline search/replace, selection search, and find/replace across files
 - cut/copy/paste text
+- multiple carets, rectangular editing, folding, bookmarks, and split views
 - <kbd>Ctrl</kbd> + mouse wheel changes font size
+
+See [Source editing]({{ site.baseurl }}/application/source-editing) for commands, shortcuts, and compiler-supported
+refactoring.
 
 ### Working with multiple files
 
@@ -43,9 +47,9 @@ another tab. A `*` after the tab name marks unsaved changes. Save, Save As, sear
 tab. Closing a modified tab or leaving the computer prompts you to save or discard its changes, or cancel closing.
 Saved files that remain open are restored when you reopen that virtual computer.
 
-Hold <kbd>Ctrl</kbd> and click the quoted filename in an `include "file.asm"` or `#include "file.asm"` directive to open
-it in a tab. Both single and double quotes work. Save the containing source file first: relative include paths are
-resolved from its directory. A missing file produces an error dialog.
+Hold <kbd>Ctrl</kbd> and click an include filename identified by the compiler to open it in a tab. The 8080 and Z80
+assemblers support quoted include paths. Save the containing source file first: relative include paths are resolved
+from its directory. Hovering over a missing file shows its path in a tooltip.
 
 ### Compilation
 
