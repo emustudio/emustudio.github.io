@@ -119,6 +119,14 @@ int scale = settings.getInt("scale", 2);
 settings.setInt("scale", scale);
 ```
 
+### GUI icons
+
+Use `GUI.loadIcon("icons/clear.png")` to load an icon from the calling class's package in the plugin JAR.
+For sharper rendering on high-resolution displays, include `icons/clear@2x.png` at twice the base image's width
+and height. The loader combines both images in a `BaseMultiResolutionImage` wrapped in an `ImageIcon`, keeping
+the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base resource is
+absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to specify the resource lookup class.
+
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either
