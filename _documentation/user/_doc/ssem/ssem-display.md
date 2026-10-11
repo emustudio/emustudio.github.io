@@ -24,10 +24,5 @@ GUI window of the SSEM display in emuStudio is depicted below:
 It doesn't do any user interaction except displaying. Controlling the memory values can be interactively done
 in the [ssem-mem][ssem-mem] plugin.
 
-## Configuration file
-
-The `ssem-display` plugin has no plugin-specific configuration keys. Connect it to `ssem-mem` in the
-computer schema. No `[DEVICE.settings]` table is required.
-
 [crt]: http://www.davidsharp.com/baby/
 [ssem-mem]: {{ site.baseurl }}/ssem/ssem-mem

@@ -160,7 +160,3 @@ Tone, noise, and envelope generators use the CPU clock in hertz and keep their d
 Register reads return data through the register-select address (`FFFDh`) and its decoded aliases; reads of the
 data-write address return `FFh`. Writing R13 restarts all envelope shapes with their documented continue, attack,
 alternate, and hold behavior.
-
-## Configuration file
-
-The AY-3-8910 plugin has no user-configurable settings.
