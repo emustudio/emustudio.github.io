@@ -60,7 +60,7 @@ device plugins:
 
 The abstract schema for emuStudio:
 
-![Abstract schema of ZX Spectrum 48K]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum48k-schema.png){:style="max-width:543"}
+![Abstract schema of ZX Spectrum 48K]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum48k-schema.png){:style="max-width:626px; width:100%"}
 
 ### Getting started
 

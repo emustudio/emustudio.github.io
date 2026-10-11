@@ -57,7 +57,7 @@ To use RAM, there must exist the abstract schema of the "computer", saved in the
 are drawn in the schema editor in emuStudio (please see emuStudio main module documentation for more details). The
 following image shows the schema of RAM machine simulator:
 
-![RAM abstract schema]({{ site.baseurl }}/assets/ram/ram-schema.png){:style="max-width:419"}
+![RAM abstract schema]({{ site.baseurl }}/assets/ram/ram-schema.png){:style="max-width:561px; width:100%"}
 
 The "->" arrows are in direction of dependency. So for example `ramc-ram` depends on `ram-mem`, because compiled
 programs are directly loaded into memory.

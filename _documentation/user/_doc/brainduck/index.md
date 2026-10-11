@@ -40,7 +40,7 @@ In order to use BrainDuck, there must be drawn the abstract schema, saved in the
 are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The
 following image shows the schema of BrainDuck computer:
 
-![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/brainduck-schema.png){:style="max-width:326"}
+![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/brainduck-schema.png){:style="max-width:426px; width:100%"}
 
 Arrows are in a direction of dependency. So for example `brainc-brainduck` depends on `byte-mem`, because
 compiled programs are directly loaded into memory.

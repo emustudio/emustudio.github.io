@@ -35,7 +35,7 @@ Each virtual computer in emuStudio is defined by the so-called "abstract schema"
 architecture (what it consists of) and inner communication (how architecture components are interconnected). The
 following figure presents the RASP abstract schema:
 
-![RASP abstract schema]({{ site.baseurl }}/assets/rasp/rasp-schema.png){:style="max-width:433"}
+![RASP abstract schema]({{ site.baseurl }}/assets/rasp/rasp-schema.png){:style="max-width:561px; width:100%"}
 
 
 [von-neumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
