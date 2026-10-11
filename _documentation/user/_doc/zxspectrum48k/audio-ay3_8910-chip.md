@@ -10,17 +10,36 @@ permalink: /zxspectrum48k/audio-ay3_8910-chip
 
 # AY-3-8910 Programmable Sound Generator
 
-The `audio-ay3_8910-chip` plugin emulates the General Instrument AY-3-8910 Programmable Sound Generator (PSG). The
-AY-3-8910 was not part of the original 48K ZX Spectrum, but was included in the 128K model and many third-party
-add-ons. Many ZX Spectrum games and demos use the AY chip for music and sound effects.
+## Introduction
 
-The chip provides:
+The General Instrument **AY-3-8910** is a Programmable Sound Generator (PSG) that
+generates three independent tones, noise, and volume envelopes under software control. Once its registers are
+programmed, the chip continues producing sound while the CPU performs other work. This makes it useful for
+music and sound effects in games and demos.
+
+![General Instrument AY-3-8910 sound chip in its 40-pin package]({{ site.baseurl }}/assets/zxspectrum48k/ay-3-8910-chip.jpg){: width="392" }
+
+*AY-3-8910 chip. Photo by [Joho345, via Wikimedia Commons][hardware-photo]{:target="_blank"} (public domain).*
+
+The original 48K ZX Spectrum had a beeper; AY sound required an expansion interface. The Spectrum 128K included
+the related **AY-3-8912**, which has the same sound-generation features in a smaller package with one fewer I/O
+port. The `audio-ay3_8910-chip` plugin adds AY sound to the emulated 48K computer using Spectrum 128K-style I/O ports.
+
+The plugin provides:
 
 - **3 tone channels** (A, B, C) — square-wave generators with 12-bit period control
 - **1 noise generator** — shared across all channels, with 5-bit period control
 - **1 envelope generator** — shared across all channels, with 16-bit period and 8 envelope shapes
 - **Volume control** — 4-bit per-channel amplitude or envelope-driven volume
 - **Stereo output** — mixed to stereo PCM at 48 kHz sample rate
+
+[datasheet]: https://amigan.yatho.com/AY-3-8910.pdf
+[hardware-photo]: https://commons.wikimedia.org/wiki/File:AY-3-8910.jpg
+
+### Original manual
+
+[General Instrument AY-3-8910/8912/8913 datasheet (PDF)][datasheet]{:target="_blank"} covers the chip's pins,
+registers, sound generation, and electrical characteristics.
 
 ## I/O ports
 
@@ -142,7 +161,6 @@ Register reads return data through the register-select address (`FFFDh`) and its
 data-write address return `FFh`. Writing R13 restarts all envelope shapes with their documented continue, attack,
 alternate, and hold behavior.
 
-## Configuration
+## Configuration file
 
-The AY-3-8910 plugin has no user-configurable settings. It automatically connects to the CPU context and uses the
-CPU clock frequency for timing calculations.
+The AY-3-8910 plugin has no user-configurable settings.

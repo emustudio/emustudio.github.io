@@ -202,3 +202,7 @@ The recording captures both the video frames and the beeper audio in sync.
 
 Video records the native screen and border at the emulated frame rate. Window resizing and the keyboard overlay
 do not affect the recording. Encoding runs while recording, so Save only finishes the MP4 and adds the audio.
+
+## Configuration file
+
+The `zxspectrum-ula` plugin has no plugin-specific configuration keys.

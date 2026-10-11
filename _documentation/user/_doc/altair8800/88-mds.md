@@ -10,8 +10,26 @@ permalink: /altair8800/88-mds
 
 # MITS 88-MDS minidisk controller
 
+## Introduction
+
+The **88-MDS** was MITS' 5.25-inch minidisk system for the Altair. It combined an external floppy drive with
+controller boards inside the computer, providing storage for programs and data without reloading them from tape.
+The single-sided, single-density disks had 35 tracks and held about 70 KB. Altair BASIC and Altair DOS were
+available for this system.
+
+![Original MITS Altair minidisk drive in its blue cabinet, with drive-address and write-protect indicators]({{ site.baseurl }}/assets/altair8800/88-mds-minidisk.jpg){: style="max-width: 640px; width: 100%;" }
+
+*Altair minidisk drive. Photo from [deramp.com's Altair collection][hardware-photo]{:target="_blank"}.*
+
 The `88-mds` plugin emulates the MITS 88-MDS minidisk controller and up to 16 drives. Each raw image has 35 tracks,
 16 sectors per track, and 137 bytes per sector, for a minimum image size of 76,720 bytes.
+
+[hardware-photo]: https://deramp.com/altair.html
+
+### Original manual
+
+[MITS Altair 88-MDS Minidisk Documentation — Preliminary (PDF)][manual]{:target="_blank"} describes installation,
+controller programming, disk format, and schematics for the minidisk system.
 
 ## CPU ports
 
@@ -71,12 +89,6 @@ written buffer; write full sectors to avoid retaining stale buffer bytes.
 
 ## Disk images and GUI
 
-Open the device window to mount or eject an existing raw image in any drive and inspect the
-selected drive, track, and sector. Changes are written directly to the mounted image. GUI mounts apply to the current session. For startup mounts, configure `image0` through `image15` in the
-plugin settings. Paths are resolved against the host working directory and must identify readable, writable files
-containing at least 76,720 bytes. There are no geometry keys or separate settings dialog; ports and geometry are fixed.
-Reset deselects the drive and returns all tracks to 0, keeping the mounted files.
-
 The implementation models the original 88-MDS geometry and protocol. It does not use the unrelated SIMH HDSK
 extension; use the `88-hdsk` plugin for that interface.
 
@@ -94,9 +106,24 @@ On the **Emulator** tab, double-click `88-mds` in the device list:
 
 There is no separate settings dialog. Attachments made here last for the current session; use `image0`–`image15` in the configuration for startup mounts.
 
-## Original manual
+## Configuration file
 
-[MITS Altair 88-MDS Minidisk Documentation — Preliminary (PDF)][manual]{:target="_blank"} describes installation,
-controller programming, disk format, and schematics for the minidisk system.
+Set these keys in the existing `[DEVICE.settings]` table for `88-mds` in the computer's TOML file.
+
+| Key | Default | Values | Meaning |
+|---|---|---|---|
+| `image0` … `image15` | Omitted (drive unmounted) | Path to an existing readable, writable file of at least 76,720 bytes | Raw minidisk image attached to the corresponding drive on startup |
+
+The suffix selects drive 0–15. Omit a key to leave that drive unmounted; an invalid image path prevents initialization.
+Relative paths resolve against emuStudio's working directory. For example, to mount two images:
+
+```toml
+[DEVICE.settings]
+image0 = "disks/basic.dsk"
+image1 = "disks/data.dsk"
+```
+
+Close and reopen the computer to apply file changes. CPU ports (`08h`–`0Ah`) and disk geometry are fixed;
+there are no settings for remapping ports, changing geometry, or write protection.
 
 [manual]: https://deramp.com/downloads/altair/hardware/minidisk/88-MDS%20Minidisk%20Manual.pdf

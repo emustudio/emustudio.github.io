@@ -64,17 +64,6 @@ button below the peripheral devices list in the Emulator panel. The window can b
 | <span class="circle">1</span> | Do not allow the tape to fall behind another window
 | <span class="circle">2</span> | Show the tape right after emuStudio start
 
-## Configuration file
-
-The following table shows all the possible settings of Abstract tape plugin:
-
-|---
-|Name | Default value | Valid values | Description
-|-|-|-|-
-|`showAtStartup`   | false | true, false | If the tape should be shown automatically after emuStudio is started
-|`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
-|---
-
 ## Automatic emulation
 
 In headless automatic emulation (`auto --no-gui`), symbol writes are logged to a file as `position symbol`, one per line. The file is overwritten after reset; GUI automation does not enable this logging. The file
@@ -302,5 +291,16 @@ public interface AbstractTapeContext extends DeviceContext<TapeSymbol> {
     void writeData(TapeSymbol value);
 }
 ```
+
+## Configuration file
+
+The following table shows all the possible settings of Abstract tape plugin:
+
+|---
+|Name | Default value | Valid values | Description
+|-|-|-|-
+|`showAtStartup`   | false | true, false | If the tape should be shown automatically after emuStudio is started
+|`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
+|---
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()

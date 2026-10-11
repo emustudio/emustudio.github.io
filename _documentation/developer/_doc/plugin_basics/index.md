@@ -127,6 +127,9 @@ and height. The loader combines both images in a `BaseMultiResolutionImage` wrap
 the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base resource is
 absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to specify the resource lookup class.
 
+Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
+Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE)`.
+
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either

@@ -569,4 +569,8 @@ Elapsed: 42 ms
 
 The actual elapsed time depends on the configured CPU clock frequency.
 
+## Configuration file
+
+The `simh-pseudo` plugin has no plugin-specific configuration keys.
+
 [simh]: http://simh.trailing-edge.com/

@@ -111,4 +111,6 @@ long as interrupts are enabled (`EI`).
 On a 48K Spectrum, the ULA does not place an IM 2 vector on the bus during the interrupt acknowledge cycle. The
 floating bus value at frame boundary is `0xFF`, so IM 2 handlers typically see vector `0xFF`.
 
+## Configuration file
 
+The `zxspectrum-bus` plugin has no plugin-specific configuration keys.

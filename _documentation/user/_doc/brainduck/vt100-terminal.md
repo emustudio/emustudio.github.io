@@ -287,6 +287,13 @@ Terminal behaves differently when emuStudio is run in automatic "No GUI" mode. A
 to be read from a file (instead of keyboard), and output is redirected to be written to a file. File names are
 configurable in the settings. Input and output file names are not allowed to point to the same file.
 
+## Known limitations
+
+- DCS (Device Control String) and OSC (Operating System Command) sequences are parsed but have no effect.
+- Bell (`BEL`) does not produce audible sound.
+- Truecolor and 256-color palette indices above 15 are not supported.
+- Shift Out / Shift In do not switch character sets.
+
 ## Configuration file
 
 The following table shows all the possible settings of VT100-terminal plugin:
@@ -300,14 +307,6 @@ The following table shows all the possible settings of VT100-terminal plugin:
 |`columns`             | 80                   | > 0  | Number of terminal columns 
 |`rows`                | 24                   | > 0  | Number of terminal rows
 |---
-
-## Known limitations
-
-- DCS (Device Control String) and OSC (Operating System Command) sequences are parsed but have no effect.
-- Bell (`BEL`) does not produce audible sound.
-- Truecolor and 256-color palette indices above 15 are not supported.
-- Shift Out / Shift In do not switch character sets.
-
 
 [vt100-image]: https://commons.wikimedia.org/w/index.php?curid=29457452
 [dec-parser]: https://vt100.net/emu/dec_ansi_parser

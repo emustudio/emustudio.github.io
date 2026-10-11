@@ -123,20 +123,6 @@ per track. Reads beyond a short image return `E5h`, matching empty CP/M media.
 Open the device window to mount, create, or eject images and change per-drive geometry. The same values can be set in
 the plugin settings with `imageN`, `sectorSizeN`, and `sectorsPerTrackN`, where `N` is the zero-based drive number.
 
-## Configuration file
-
-|---
-| Key | Default | Values | Meaning
-|-|-|-|-
-| `controllerType` | `"SIMH"` | `"SIMH"`, `"MITS"` | Controller model; requires matching schema connections and reopening the computer |
-| `image0` … `image15` | None | Writable file path | Image to attach on startup; a missing file is created
-| `sectorSize0` … `sectorSize15` | 128 | 128, 256, 512, 1024 | Physical sector size in bytes
-| `sectorsPerTrack0` … `sectorsPerTrack15` | 32 | 1–255 | Physical sectors per track
-|---
-
-Relative paths resolve against the host working directory. GUI mounts apply to the current session. Use the settings dialog or edit the computer configuration for
-startup persistence. In SIMH mode, the CPU port is fixed at `FDh`. Writes modify the mounted file directly and may extend it.
-
 ## Read example
 
 This 8080 program reads drive 0, track 0, sector 0 into guest address `2000h` and leaves the status in A:
@@ -173,3 +159,20 @@ mode. Mounted image writes change the host file directly.
 The controller stages transfers through four 256-byte buffers and implements seek, sector read/write, buffer
 transfers, interface-register access and formatting. Reset clears the controller state while retaining mounted media.
 The device window shows the selected unit and activity; the settings dialog controls startup images and write protection.
+
+## Configuration file
+
+Set these keys in the existing `[DEVICE.settings]` table for `88-hdsk` in the computer's TOML file.
+
+|---
+| Key | Default | Values | Meaning
+|-|-|-|-
+| `controllerType` | `"SIMH"` | `"SIMH"`, `"MITS"` | Controller model; requires matching schema connections and reopening the computer |
+| `image0` … `image15` | Omitted (drive unmounted) | File path | Startup image: SIMH uses drives 0–15 and creates missing files; MITS uses platter slots 0–7 and requires an existing image of exactly 4,988,928 bytes
+| `sectorSize0` … `sectorSize15` | 128 | 128, 256, 512, 1024 | Physical sector size in bytes; SIMH only
+| `sectorsPerTrack0` … `sectorsPerTrack15` | 32 | 1–255 | Physical sectors per track; SIMH only
+| `readOnly0` … `readOnly7` | `false` | `true`, `false` | Write protection for MITS platter slots; ignored in SIMH mode
+|---
+
+Relative paths resolve against the host working directory. GUI mounts apply to the current session. Use the settings dialog or edit the computer configuration for
+startup persistence. In SIMH mode, the CPU port is fixed at `FDh`. Writes modify the mounted file directly and may extend it.

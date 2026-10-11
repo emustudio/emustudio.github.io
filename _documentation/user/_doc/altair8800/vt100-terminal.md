@@ -273,4 +273,19 @@ the Altair8800. The full reference is available in the [VT100 terminal documenta
 
 Escape character (ESC) has ASCII code `27` (decimal) or `1Bh` (hexadecimal).
 
+## Configuration file
+
+Set these keys in the existing `[DEVICE.settings]` table for `vt100-terminal` in the computer's TOML file.
+
+| Key | Default | Values | Meaning |
+|---|---|---|---|
+| `inputFileName` | `"vt100-terminal.in"` | Path to an existing file | Input read in headless mode |
+| `outputFileName` | `"vt100-terminal.out"` | Writable file path | Terminal output in headless mode |
+| `inputReadDelayMillis` | `0` | Nonnegative integer | Delay between input characters, in milliseconds |
+| `columns` | `80` | Positive integer | Terminal width in characters |
+| `rows` | `24` | Positive integer | Terminal height in characters |
+
+Input and output paths must differ. Relative paths resolve against emuStudio's working directory.
+Close and reopen the computer to apply changes made directly to the file.
+
 [manual]: https://bitsavers.org/pdf/dec/terminal/vt100/EK-VT100-UG-001_VT100_User_Guide_Aug78.pdf

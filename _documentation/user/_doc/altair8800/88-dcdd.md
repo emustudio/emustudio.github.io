@@ -764,9 +764,9 @@ The following table shows all the possible file configurations of the plugin:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`port1CPU`        | 0x08 | > 0 and < 256 | Number of Port 1
-|`port2CPU`        | 0x09 | > 0 and < 256 | Number of Port 2
-|`port3CPU`        | 0x0A | > 0 and < 256 | Number of Port 3
+|`port1CPU`        | 0x08 | 0–255 | Number of Port 1
+|`port2CPU`        | 0x09 | 0–255 | Number of Port 2
+|`port3CPU`        | 0x0A | 0–255 | Number of Port 3
 |`sectorsPerTrack0` ... `sectorsPerTrack15` | 32 | > 0 | Count of sectors in a disk image, on disk A (0) up to P (15)
 |`sectorSize0` ... `sectorSize15`           | 137 | > 0 | Size of one sector in bytes on disk A (0) up to P (15)
 |`image0` ... `image15`                     | N/A | Path to existing file| File name to mount on disk A (0) up to P (15)

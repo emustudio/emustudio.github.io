@@ -66,15 +66,9 @@ Select `88-ptr-ptp` in the device list and click **Show settings...**:
 | <span class="circle">2</span> | **CPU ports**. The status and data ports are fixed at `12h` and `13h`; this dialog does not remap them.
 | <span class="circle">3</span> | **Save**. Persist the startup preference and close the dialog. Press **Esc** to discard edits.
 
-## Configuration file
-
-| Key | Default | Description |
-|:----|:--------|:------------|
-| `showGuiAtStartup` | `false` | Open the device window when the computer is initialized in GUI mode. |
+## Reset and configuration
 
 The plugin also publishes a paper tape context so `simh-pseudo` can attach, detach and rewind tapes.
-
-## Reset and configuration
 
 Reset rewinds an attached reader and clears its EOF state; it does not detach either file or truncate the punch again.
 Writing `03h` to the status port clears EOF without rewinding, so a reader still at the end returns `1Ah` again.
@@ -82,3 +76,9 @@ Writing `03h` to the status port clears EOF without rewinding, so a reader still
 Attach files in the device window, or from guest
 software through [SIMH pseudo-device commands]({{ site.baseurl }}/altair8800/simh-pseudo#paper-tape-commands-3-5-16-17).
 In a custom computer, `simh-pseudo` requires a connection to this device's paper tape context, as well as CPU and memory.
+
+## Configuration file
+
+| Key | Default | Description |
+|:----|:--------|:------------|
+| `showGuiAtStartup` | `false` | Open the device window when the computer is initialized in GUI mode. |

@@ -134,27 +134,6 @@ The settings panel is shown below:
 Press **Esc** to close the dialog without saving. The scale must be a positive integer and the samples directory must be a nonempty, valid path. Invalid input keeps
 the dialog open so you can correct it. Sound samples are supplied by the user; choosing a directory does not download them.
 
-### Configuration file
-
-You can also edit the existing `[DEVICE.settings]` section in `SpaceInvaders.toml`, then close and reopen the computer
-to apply changes made directly to the file.
-
-```toml
-[DEVICE.settings]
-scale = 2
-colorOverlay = true
-```
-
-| Setting | Default | Description |
-|:--------|:--------|:------------|
-| `scale` | `2` | Integer pixel scale, at least `1`. At `2`, the initial display area is 448 by 512 pixels. |
-| `colorOverlay` | `true` | Red and green bands over the monochrome image. Set to `false` for white pixels on black. |
-| `soundEnabled` | `true` in GUI, `false` headless | Enable playback of external sound samples. |
-| `soundSamplesDirectory` | `examples/space-invaders/sounds` | Directory containing the sound samples `0.wav` through `9.wav`. |
-
-The display is already rotated into the upright arcade orientation. Sound effects use external WAV samples supplied
-by the user. Missing samples or an unavailable audio device leave emulation running with a warning in the log.
-
 ### Volume and recording
 
 The display toolbar provides a volume slider and a **Record** button. Volume ranges from 0% to 100% and starts at 25%;
@@ -340,3 +319,26 @@ jmp poll_fire
 
 The example writes the whole byte at `241Fh`, clearing the other seven pixels in that byte. In a program that shares
 that byte with other graphics, use the read–modify–write operations described above instead.
+
+## Configuration file
+
+You can also edit the existing `[DEVICE.settings]` section in `SpaceInvaders.toml`, then close and reopen the computer
+to apply changes made directly to the file.
+
+```toml
+[DEVICE.settings]
+scale = 2
+colorOverlay = true
+soundEnabled = true
+soundSamplesDirectory = "examples/space-invaders/sounds"
+```
+
+| Setting | Default | Description |
+|:--------|:--------|:------------|
+| `scale` | `2` | Integer pixel scale, at least `1`. At `2`, the initial display area is 448 by 512 pixels. |
+| `colorOverlay` | `true` | Red and green bands over the monochrome image. Set to `false` for white pixels on black. |
+| `soundEnabled` | `true` in GUI, `false` headless | Enable playback of external sound samples. |
+| `soundSamplesDirectory` | `examples/space-invaders/sounds` | Directory containing the sound samples `0.wav` through `9.wav`. |
+
+The display is already rotated into the upright arcade orientation. Sound effects use external WAV samples supplied
+by the user. Missing samples or an unavailable audio device leave emulation running with a warning in the log.

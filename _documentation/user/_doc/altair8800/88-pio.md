@@ -10,21 +10,28 @@ permalink: /altair8800/88-pio
 
 # MITS 88-PIO and 88-4PIO parallel interfaces
 
+## Introduction
+
+The MITS **88-PIO** and **88-4PIO** were S-100 expansion boards for connecting an Altair to parallel peripherals.
+They transferred data over eight signal lines at a time, with handshake signals coordinating the computer and the
+peripheral. The original 88-PIO had separate eight-bit input and output ports; the 88-4PIO used Motorola 6820
+Peripheral Interface Adapters (PIAs), allowing each data line to be configured as an input or output.
+
+![Original MITS 88-PIO S-100 board with two Intel 8212 chips and a parallel connector]({{ site.baseurl }}/assets/altair8800/88-pio-board.jpg){: style="max-width: 640px; width: 100%;" }
+
+*Original 88-PIO board. Photo from the [deramp.com hardware archive][hardware-photos]{:target="_blank"}.*
+
+![MITS 88-4PIO S-100 board populated with four Motorola 6820 PIAs and ribbon cables]({{ site.baseurl }}/assets/altair8800/88-4pio-board.jpg){: style="max-width: 640px; width: 100%;" }
+
+*88-4PIO board populated with four PIAs. Photo from the [deramp.com hardware archive][hardware-photos]{:target="_blank"}.*
+
 The `88-pio` plugin supports two boards: the original Intel 8212-based **88-PIO**, with separate input and output
 latches, and the Motorola 6820-based **88-4PIO**, with two eight-bit channels per PIA. The default board is 88-4PIO.
 Select the board expected by the guest software and avoid conflicts with other devices' CPU ports.
 
-## Configuration
+### Original manual
 
-| Key | Default | Values | Meaning |
-|---|---|---|---|
-| `boardType` | `"88-4PIO"` | `"88-PIO"`, `"88-4PIO"` | Board model |
-| `basePort` | `A0h` for 88-4PIO; `04h` for 88-PIO | See below | First CPU port |
-| `piaCount` | 2 | 1–4 | Number of 6820 PIAs on 88-4PIO; unused by 88-PIO |
-| `interruptVector` | 7 | 0–7 | RST vector used when the board raises an interrupt |
-
-Use decimal integers or TOML hexadecimal integers, for example `basePort = 0xA0`. The settings dialog previews the
-port mapping. Save changes, then reopen the computer to apply them; press **Esc** to discard the dialog's edits.
+[MITS 88-PIO Parallel I/O Board Documentation (1975, PDF)][manual]{:target="_blank"} covers the original board.
 
 ## Original 88-PIO
 
@@ -125,8 +132,30 @@ Select `88-pio` in the device list and click **Show settings...**. Its three tab
 | <span class="circle">1</span> | **Interrupt vector**. Select the RST vector, from `0` to `7`. Guest software must also enable interrupts.
 | <span class="circle">2</span> | **Set default**. Restore vector `7`. Click **Save** to persist it.
 
-## Original manual
+## Configuration file
 
-[MITS 88-PIO Parallel I/O Board Documentation (1975, PDF)][manual]{:target="_blank"} covers the original board.
+Set these keys in the existing `[DEVICE.settings]` table for `88-pio` in the computer's TOML file.
+
+| Key | Default | Values | Meaning |
+|---|---|---|---|
+| `boardType` | `"88-4PIO"` | `"88-PIO"`, `"88-4PIO"` | Board model |
+| `basePort` | `0xA0` for 88-4PIO; `0x04` for 88-PIO | 88-4PIO: multiples of 16 from `0x00` to `0xF0`; 88-PIO: even addresses from `0x00` to `0xFE` | First CPU port; avoid overlaps with other devices |
+| `piaCount` | `2` | `1`–`4` | Number of 6820 PIAs on 88-4PIO; ignored by 88-PIO |
+| `interruptVector` | `7` | `0`–`7` | RST vector used when the board raises an interrupt |
+
+For example, the default 88-4PIO configuration is:
+
+```toml
+[DEVICE.settings]
+boardType = "88-4PIO"
+basePort = 0xA0
+piaCount = 2
+interruptVector = 7
+```
+
+Use decimal or hexadecimal TOML integers. For the original 88-PIO, set `boardType = "88-PIO"` and
+`basePort = 0x04`. Close and reopen the computer to apply changes made directly to the file.
+The settings dialog previews the port mapping; save its changes, then reopen the computer to apply them.
 
 [manual]: https://deramp.com/downloads/altair/hardware/MITS%2088-PIO.pdf
+[hardware-photos]: https://deramp.com/downloads/mfe_archive/010-S100%20Computers%20and%20Boards/00-MITS/10-MITS%20S100%20Boards/88-PIO%20Parallel%20IO/
