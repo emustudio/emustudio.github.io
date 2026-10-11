@@ -10,9 +10,20 @@ permalink: /altair8800/adm3a-terminal
 
 # Terminal LSI ADM-3A
 
-Emulation of famous terminal from Lear Siegler, Inc. - ADM-3A. It had a nickname 'Dumb Terminal'. Introduced in 1976,
-due to its cheapness and speed capabilities required in that time, it became de facto standard in the industry.
-Often it was used in connection with MITS Altair 8800 computer, so the decision of which terminal to emulate was clear.
+This device emulates the Lear Siegler ADM-3A, introduced in 1976 and marketed as the "Dumb Terminal". Its low price
+made it popular with universities and early microcomputer users, including owners of the MITS Altair 8800.
+It provided a keyboard and text display connected to a host computer over a serial link; the host ran the programs.
+
+The ADM-3A also has a lasting connection with Unix: Bill Joy used it at the University of California, Berkeley,
+when he developed the vi text editor around 1976. In his
+[1984 interview](https://begriffs.com/pdf/unix-review-bill-joy.pdf){:target="_blank"}, Joy recalled that obtaining
+ADM-3A terminals prompted work on screen editing.
+
+Its keyboard explains one of vi's most recognizable features. With no separate arrow keys, the ADM-3A had arrows
+printed on **H (left), J (down), K (up), and L (right)**. The terminal's corresponding control codes were
+`Ctrl+H`, `Ctrl+J`, `Ctrl+K`, and `Ctrl+L`; vi adopted the plain letters `h`, `j`, `k`, and `l` for movement in
+command mode, a convention retained by Vim. The `Esc` key sat where `Tab` sits on modern keyboards, within easy
+reach for returning to command mode. These details of a 1970s keyboard still shape how people edit code today.
 
 ![LSI ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a.jpg)
 (Image borrowed from [Wikipedia][gui]{:target="_blank"})
@@ -35,11 +46,11 @@ display frequency 60Hz.
 
 GUI can be seen here:
 
-![GUI of adm3a-terminal]({{ site.baseurl }}/assets/altair8800/adm3a-gui.png)
+{% include annotated-screenshot.html image="/assets/altair8800/adm3a-gui.png" alt="ADM-3A terminal with the original font, message box, and numbered Clear and Roll Up controls" width=1024 points="1:9.28:96.53|2:34.96:96.53" %}
 
 {: .list}
-| <span class="circle">1</span> | Clear screen
-| <span class="circle">2</span> | Roll one line down
+| <span class="circle">1</span> | **CLEAR**. Clear screen
+| <span class="circle">2</span> | **ROLL UP**. Scroll the contents up one line
 
 
 ## Keyboard
@@ -47,9 +58,9 @@ GUI can be seen here:
 Terminal could generate 128 ASCII characters (upper-case, lower-case, punctuation and numbers). Besides, it could
 generate special control characters which affected current position of the cursor and were not sent to CPU.
 
-Emulated device allows to generate almost everything what you can get from your host keyboard. It is only the font
-which characters it can display. Original font contains only 255 characters, modern font contains all unicode
-characters.
+The emulator interprets output bytes 128–255 as IBM code page 437 (CP437). The original font includes all of these
+extended characters, including single- and double-line box borders, shading, and blocks. This is an emuStudio
+extension; the original ADM-3A hardware used a 7-bit character set.
 
 The terminal can capture control codes (holding `CTRL` plus some key), and special control
 codes (`ESC + '=' + [Y] + [X]`).
@@ -143,7 +154,7 @@ table.
 
 ## Drawing message boxes
 
-Using some ASCII characters from [code page 437][cp437]{:target="_blank"}, it is possible to draw various kinds of forms, for example:
+Use [code page 437][cp437]{:target="_blank"} character codes to draw boxes, for example:
 
 ```
 message:
@@ -153,12 +164,12 @@ db 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188
 db 0
 ```
 
-shown as:
+The example displays:
 
 ![Hello in a message box]({{ site.baseurl }}/assets/altair8800/hello.png)
 
-This is supported only by the "original" font, even though these symbols were not really present in original
-terminal.
+Box borders join across character cells in the original font. When using the 88-SIO serial interface, keep
+`clearOutputBit8 = false` so it passes extended character codes to the terminal.
 
 ## Terminal Settings
 
@@ -168,7 +179,7 @@ close and reopen the computer.
 
 The "settings" window is shown in the following image:
 
-![Settings window of ADM-3A terminal]({{ site.baseurl }}/assets/altair8800/adm3a-settings.png)
+{% include annotated-screenshot.html image="/assets/altair8800/adm3a-settings.png" alt="ADM-3A terminal settings with numbered input and output files, input delay, font, half duplex, always on top, and Save controls" width=444 points="1:69.82:15.57|2:69.82:23.35|3:52.93:31.44|4:97.07:61.38|5:37.84:69.16|6:43.92:76.65|7:72.97:92.22" %}
 
 {: .list}
 | <span class="circle">1</span> | File name used for reading input (when redirected - in "no GUI" mode)
