@@ -13,7 +13,7 @@ permalink: /application/main-window
 After opening a computer, the main window provides a source code editor and an **Emulator** tab. The editor tab shows
 the active source filename, or **Source code editor** when no file is selected.
 
-The **File**, **Edit**, and **Editor** menus provide file and text operations. **Project** contains compilation, a view of the
+The **File** and **Edit** menus provide file and text operations. **Project** contains compilation, a view of the
 computer schema, and compiler settings. **Help** contains information about emuStudio. The application's
 [theme setting]({{ site.baseurl }}/application/configuration-file) controls the appearance of windows and controls.
 
@@ -35,6 +35,8 @@ The source code editor supports the following features:
 - inline search/replace, selection search, and find/replace across files
 - cut/copy/paste text
 - multiple carets, rectangular editing, folding, bookmarks, and split views
+- text transformations, editing macros, navigation history, and compiler-supported rename and extraction
+- whitespace and indentation settings, token colors, and syntax selection per file
 - <kbd>Ctrl</kbd> + mouse wheel changes font size
 
 See [Source editing]({{ site.baseurl }}/application/source-editing) for commands, shortcuts, and compiler-supported
@@ -43,8 +45,10 @@ refactoring.
 ### Working with multiple files
 
 Each source file opens in its own tab. **New** creates an untitled tab; **Open** selects an already open file or opens
-another tab. A `*` after the tab name marks unsaved changes. Save, Save As, search, and compilation act on the selected
-tab. Closing a modified tab or leaving the computer prompts you to save or discard its changes, or cancel closing.
+another tab. A `*` after the tab name marks unsaved changes. Click the small **×** on a file's tab to close it, or use
+**File → Close tab** / **Ctrl+W** for the active tab. Save, Save As, search, and compilation act on the focused source
+view, including in a split. Closing a modified tab or leaving the computer prompts you to save or discard its changes,
+or cancel closing. Closing the last tab creates a fresh untitled tab.
 Saved files that remain open are restored when you reopen that virtual computer.
 
 Hold <kbd>Ctrl</kbd> and click an include filename identified by the compiler to open it in a tab. The 8080 and Z80
