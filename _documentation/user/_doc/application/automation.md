@@ -10,16 +10,13 @@ permalink: /application/automation
 
 # Automation
 
-Automation, or automatic emulation, is a feature in which the user can run the emulation without manual steps.
-It is useful for example in school enabling automatic processing of assignments, or when working on custom projects,
-and we are curious just about the emulator or the emulation output.
+Automation loads a computer, optionally compiles a source file, and runs the CPU without using the main window.
+It is useful for batch runs, assignments, and programs whose device output is the main result.
 
-Automatic emulation can be interactive, or non-interactive. In the case of interactive emulation, during the process all
-device GUIs are shown automatically, allowing the user to interact with the emulated computer. The user however has no
-access to the source code, debugger, or memory content.
+In interactive mode, device GUIs are shown automatically when supported. You can interact with them, but the source
+editor and debugger are unavailable.
 
-Non-interactive mode of the automatic emulation is even more "quiet" - it does not show any GUIs. The output of the
-emulation is usually redirected to one or more files. The specific behavior is plugin-based.
+Non-interactive mode (`--no-gui`) opens no GUI windows. Device output and access to host resources depend on each plugin.
 
 Source code supplied with `--input-file` is compiled and loaded before the CPU runs. This option is optional: omit it
 to run code already loaded by the computer configuration, such as a ROM image.
@@ -53,12 +50,3 @@ Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the 
 can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
 Check `logs/automation.log` and the device output to determine whether the run completed normally; automation failures
 are not all reflected in the process exit status.
-
-## ZX Spectrum example
-
-The ZX Spectrum 48K can also be run in automation mode. For interactive emulation with display and audio:
-
-    ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto
-
-For more details, see the [ZX Spectrum 48K automation]({{ site.baseurl }}/zxspectrum48k/automation) documentation.
-

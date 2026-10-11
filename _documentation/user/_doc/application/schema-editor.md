@@ -10,56 +10,56 @@ permalink: /application/computer-schema
 
 # Computer schema
 
-Computer schema represents a real configuration of the emulated computer. They are "drawn" in a computer schema editor.
-Users pick plugins that appear as "boxes" or elements on the screen. Then using connection lines those elements can be
-connected together to express a relation (that they can "see" each other).
+A computer schema describes the plugins in a virtual computer and the connections between them. Each box represents
+a compiler, CPU, memory, or device plugin. Arrows show which plugins can access each other's contexts.
 
-![Computer schema editor]({{ site.baseurl }}/assets/application/schema-editor.png){:style="max-width:669"}
+In the [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer), select a computer and click
+**Edit computer**, or click **Create new computer** to start a new configuration.
 
-Description of the control panel follows.
+![Computer schema editor showing the MITS Altair8800 (Z80) configuration and its grid spacing slider]({{ site.baseurl }}/assets/application/computer-schema-editor.png){: style="max-width:890px; width: 100%;" }
 
-![Control panel in the computer schema editor]({{ site.baseurl }}/assets/application/schema-editor-panel.png)
+## Editor controls
 
-{: .list}
-| <span class="circle">1</span> | Save the virtual computer.
-| <span class="circle">2</span> | Select a compiler.
-| <span class="circle">3</span> | Select a CPU.
-| <span class="circle">4</span> | Select a memory.
-| <span class="circle">5</span> | Select a device.
-| <span class="circle">6</span> | Use a connection line. The line is bidirectional by default.
-| <span class="circle">7</span> | Set or unset the connection line to be bidirectional. If the line is not bidirectional, the source direction is the first clicked element and the target direction is the second clicked element.
-| <span class="circle">8</span> | Remove an element from the schema.
-| <span class="circle">9</span> | This drop-down list is used for selecting a specific plugin (element) in the computer schema. See icons `2`, `3`, `4`, and `5`. The names are actually plugin JAR file names.
-| <span class="circle">10</span> | Toggle the grid and snap elements to it. The slider controls grid spacing, saved as `schemaGridGap` in the application's `emuStudio.toml`.
+The following controls appear from left to right in the toolbar:
 
-Virtual computers in emuStudio are following the von-Neumann model of computers. It means that each computer must have
-a CPU and memory. Optionally one or more devices, and optionally a compiler.
+{: .list .control-list}
+| <span class="circle">1</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=2 y=2 %} | **Save & Close**. Save the computer configuration and close the editor.
+| <span class="circle">2</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=41 y=2 %} | **Set compiler**. Choose a compiler in the plugin selector, then click the canvas to place it.
+| <span class="circle">3</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=73 y=2 %} | **Set CPU**. Choose a CPU and click the canvas to place it.
+| <span class="circle">4</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=105 y=2 %} | **Set operating memory**. Choose a memory plugin and click the canvas to place it.
+| <span class="circle">5</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=137 y=2 %} | **Add device**. Choose a device and click the canvas to add it. A computer can contain several devices.
+| <span class="circle">6</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=176 y=2 %} | **Add connection**. Click the source box, optional intermediate points, then the destination box.
+| <span class="circle">7</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=208 y=2 %} | **Bidirectional connection**. Enabled by default for new lines. Turn it off to create an arrow from the first clicked box to the second. This toggle affects new connections.
+| <span class="circle">8</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=247 y=2 %} | **Delete component or connection**. Select this tool, then click a box or line to remove it. Removing a box also removes its connections.
+| <span class="circle">9</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=755 y=2 %} | **Plugin selector**. Lists plugins of the type selected by controls 2–5. Names are plugin JAR filenames without the `.jar` suffix.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=799 y=2 %} | **Grid**. Show the grid and snap placement and movement to it. The vertical slider on the right sets grid spacing. These application-wide settings are stored as `useSchemaGrid` and `schemaGridGap` in `emuStudio.toml`.
 
-Compiler, CPU, memory, and device boxes follow the same create, replace, and save lifecycle. Replacing a selected plugin
-updates that schema element in place, while saving writes every populated element through the same configuration path.
-This keeps positions, plugin settings, and connection endpoints consistent across element types.
+A computer can have one compiler, one CPU, one memory plugin, and multiple devices. The configurations supplied with
+emuStudio combine a CPU and memory with the compiler and devices required by that computer.
+
+Placing another compiler, CPU, or memory replaces the existing box of that type at the clicked location and reconnects
+its lines to the new box. Configure the replacement plugin's settings after opening the computer.
+
+With no drawing tool active, drag boxes to move them, or drag their borders to resize them. Drag across an empty area
+to select several boxes and lines. Hold <kbd>Ctrl</kbd> or <kbd>Shift</kbd> and click boxes to extend a selection. Press <kbd>Delete</kbd>
+to remove selected items. Press <kbd>Esc</kbd> to cancel the current drawing operation and clear the selection.
+
+Use **Save & Close** to keep schema changes. Closing the editor with the window's close button discards unsaved schema
+changes; grid preferences are application settings and take effect immediately.
 
 ## Connection lines
 
-The connection line represents a virtual "connection" between computer components. For the computer schema, it's not
-important how the connection is realized. It's safe to say that the connection is similar
-as if we say that a component "sees" the other component, in the direction of the arrow:
+A connection grants the source plugin access to contexts published by the destination plugin. The arrow points from
+the plugin requesting access to the plugin providing it. A bidirectional connection permits access in both directions.
 
-![CPU "sees" operating memory, but not vice-versa]({{ site.baseurl }}/assets/application/connection.png)
+![A one-way connection from the 8080 CPU to byte memory]({{ site.baseurl }}/assets/application/cpu-memory-connection.png)
 
-In the previous image, a CPU "sees" the memory, but not vice-versa. It means, CPU can read/write from/to memory, but
-memory is not seeing it, it can just answer to CPU requests. This connection makes
-sense in real-world computers.
+Here the CPU can obtain the memory context to read and write memory. The reverse direction is not enabled. The plugin
+implementations determine which contexts and connection directions a particular computer needs.
 
-Drawing connection lines is very easy. The connection line always connects exactly two elements in the schema.
-At first, the user must click on an already existing element in the schema. It's just a click, not
-a drag.
+To draw a line, select **Add connection** and click an existing box. Move the pointer toward the destination box;
+a temporary line follows it. Click empty canvas positions to add intermediate points, then click the destination box
+to finish. Use clicks rather than dragging, and press <kbd>Esc</kbd> to cancel an unfinished line.
 
-Then a grey temporary line is being drawn having its end at the mouse position and moving with the mouse move. If the
-element is not really close, the user can make a "path" by clicking somewhere in the
-schema. At those locations, fixed-points are created.
-
-When a user clicks at the second element, the temporary line disappears, and a real connection line is created.
-
-The user can find the fixed-points later and move them by dragging. They can be removed by clicking at them with the
-right mouse button.
+With no drawing tool active, drag an intermediate point to move it. Drag a line segment to add another point, or
+right-click an existing point to remove it.

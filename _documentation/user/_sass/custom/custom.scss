@@ -23,6 +23,38 @@ table.list, table.list th, table.list tr, table.list td, table.list caption, tab
     text-align: center;
 }
 
+.control-icon {
+    display: inline-block;
+    width: 32px;
+    height: 30px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+table.control-list {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+
+    td {
+        vertical-align: top;
+    }
+
+    td:first-child {
+        width: 92px;
+        white-space: nowrap;
+    }
+
+    .circle {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        padding: 0;
+        line-height: 22px;
+        vertical-align: middle;
+    }
+}
+
 .annotated-screenshot {
     position: relative;
     max-width: 100%;

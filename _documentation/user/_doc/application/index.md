@@ -11,10 +11,9 @@ permalink: /application/
 
 # emuStudio Application
 
-emuStudio is a desktop application which allows emulation of various computers. Besides emulation, it contains source
-code editor, which can be used to write and then compile programs then to be instantly emulated. Virtual computers, as
-the emulators are called, are represented by plugins of various type (compiler, memory, CPU and device), combined in a
-computer configuration. The computer configuration can be opened during startup.
+emuStudio is a desktop application for emulating computers. Its source code editor lets you write and compile programs
+for the selected computer. A virtual computer combines compiler, CPU, memory, and device plugins in a configuration
+that you select at startup.
 
 The application has also command-line interface, which allows executing automatic "load-compile-emulate" workflow,
 possibly without graphical interface. This workflow is called "automatic emulation" and has its specifics, discussed per
@@ -31,17 +30,20 @@ permissions. Unpack the file where you want to have emuStudio installed.
 Before running, [Java 11][java11]{:target="_blank"} or later must be installed. Then, emuStudio can be run by executing
 the following script:
 
-- On Linux
+- On Linux or macOS:
+
 ```
 > ./emuStudio
 ```
 
 - On Windows:
+
 ```
 > emuStudio.bat
 ```
 
-NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it might work to some extent.
+emuStudio runs on Linux, Windows, and macOS. Individual plugins can require additional host resources, such as audio
+or network access.
 
 ## Command-line arguments
 
@@ -54,9 +56,9 @@ emuStudio accepts several command line arguments. Their description is accessibl
           -cl, --computers-list
                               list all existing virtual computers
           --config-dir=DIR    configuration base directory
-          --plugins-dir=DIR   plugin base directory
       -h, --help              Show this help message and exit.
       -i, --input-file=FILE   input file name (source code)
+          --plugins-dir=DIR   plugin base directory
       -V, --version           Print version information and exit.
     Virtual computer
           -cf, --computer-file=FILE
@@ -82,9 +84,10 @@ Automation command has its own usage:
       -p, --program-location=LOCATION
                              program start location
       -V, --version          Print version information and exit.
-      -w, --waitmax=MILLIS   wait at most MILLIS for the CPU to stop
-                               (stop the CPU afterwards)
+      -w, --waitmax=MILLIS   limit emulation time to max MILLIS (force kill
+                               afterwards)
 
-
+The wait limit applies to CPU execution. See [automation]({{ site.baseurl }}/application/automation) for timeout
+behavior, program start addresses, and interpreting the logs.
 
 [java11]: https://jdk.java.net/archive/

@@ -10,8 +10,8 @@ permalink: /application/opening-computer
 
 # Opening a computer
 
-The first action that emuStudio does is loading a computer to be emulated. Virtual computers are described in abstract
-schemas, which are stored in configuration files.
+Before emulation starts, select a virtual computer. Each computer has a TOML configuration describing its plugins,
+their settings, and their connections.
 
 Available virtual computers include [MITS Altair8800]({{ site.baseurl }}/altair8800/),
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/),
@@ -21,22 +21,26 @@ Available virtual computers include [MITS Altair8800]({{ site.baseurl }}/altair8
 [RASP]({{ site.baseurl }}/rasp/), and
 [SSEM]({{ site.baseurl }}/ssem/).
 
-Computers can be loaded either from the command line or manually in GUI (by default).
-The "open dialog" is the first thing which appears to a user.
+Running emuStudio without a computer selection opens the **Open virtual computer** dialog. To select a computer from
+the command line, use `-cn NAME`, `-cf FILE`, or `-ci INDEX`; `-cl` lists the available names and indexes.
 
-!["Open a computer" dialog]({{ site.baseurl}}/assets/application/open-computer.png){:style="max-width:780"}
+![Open virtual computer dialog with the MITS Altair8800 (Z80) configuration selected]({{ site.baseurl }}/assets/application/open-virtual-computer.png){: style="max-width:1110px; width: 100%;" }
 
-The left part contains a control panel and a list of all available virtual computers. When a user clicks at a computer,
-it's abstract schema is displayed on the right. Double-clicking or clicking
-on the `Open` button loads selected computer.
+The **Virtual computers** list on the left contains the configurations in the selected
+[configuration root]({{ site.baseurl }}/application/configuration-file#configuration-and-plugin-roots).
+Select a computer to preview its schema on the right. Drag the divider to change the space available to the list and
+preview.
+
+Click **Open computer**, double-click the selected entry, or press <kbd>Enter</kbd> to load it. **Exit** closes the dialog
+without opening a computer.
 
 ## Managing virtual computers
 
-![Managing virtual computers]({{ site.baseurl}}/assets/application/open-computer-panel.png)
+The vertical toolbar manages computer configurations. Its controls are numbered from top to bottom:
 
-{: .list}
-| <span class="circle">1</span> | Adds new computer. The abstract schema editor will be opened.
-| <span class="circle">2</span> | Deletes selected computer. Be aware of what you are doing - the action cannot be undone.
-| <span class="circle">3</span> | Edits selected computer. The abstract schema editor will be opened.
-| <span class="circle">4</span> | Renames computer.
-| <span class="circle">5</span> | Saves the displayed abstract schema into image file.
+{: .list .control-list}
+| <span class="circle">1</span> {% include control-icon.html image="/assets/application/computer-management-toolbar.png" x=2 y=2 %} | **Create new computer**. Enter a name, then build its configuration in the [schema editor]({{ site.baseurl }}/application/computer-schema).
+| <span class="circle">2</span> {% include control-icon.html image="/assets/application/computer-management-toolbar.png" x=2 y=32 %} | **Delete computer**. Delete the selected configuration after confirmation. This action cannot be undone.
+| <span class="circle">3</span> {% include control-icon.html image="/assets/application/computer-management-toolbar.png" x=2 y=62 %} | **Edit computer**. Open the selected configuration in the schema editor.
+| <span class="circle">4</span> {% include control-icon.html image="/assets/application/computer-management-toolbar.png" x=2 y=92 %} | **Rename computer**. Enter a new name for the selected configuration.
+| <span class="circle">5</span> {% include control-icon.html image="/assets/application/computer-management-toolbar.png" x=2 y=122 %} | **Save schema image**. Export the displayed schema as a PNG image. This exports the picture; use the schema editor to save configuration changes.
