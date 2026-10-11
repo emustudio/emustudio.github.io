@@ -146,6 +146,20 @@ See the [upstream test descriptions][z80test]{:target="_blank"} for each variant
 | `z80memptr.tap` | Flags after BIT n,(HL), probing MEMPTR behavior
 |---
 
+### CPD-Test
+
+[CPD-Test][cpd-test]{:target="_blank"} by Michael Sapach checks how Z80 instructions change the hidden **MEMPTR**
+register, including loads and block I/O instructions.
+
+|---
+| Test file | Description | Download
+|-|-|-
+| `cpd-test1250429.tzx` | CPD-Test v0.7b (2025-04-29), MEMPTR behavior tests | [TZX (ZIP)][cpd-test-tzx]{:target="_blank"}
+|---
+
+Extract the ZIP and load the `.tzx` file using the tape-loading steps above. Check the final failure count;
+128K-only tests showing **SKIP** are expected on the 48K model.
+
 ### FUSE emulator tests
 
 |---
@@ -205,3 +219,5 @@ See the [upstream test descriptions][z80test]{:target="_blank"} for each variant
 [nexttest-intskip]: https://github.com/MrKWatkins/ZXSpectrumNextTests/tree/develop/Tests/ZX48_ZX128/Z80IntSkip
 
 [z80test]: https://github.com/raxoft/z80test
+[cpd-test]: https://github.com/redcode/Z80/wiki/CPD-Test
+[cpd-test-tzx]: https://zxe.io/depot/software/ZX%20Spectrum/CPD-Test%20v0.7b%20%282025-04-29%29%28Sapach,%20Michael%29%28TZX%29%5B%21%5D.zip
