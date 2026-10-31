@@ -144,6 +144,11 @@ absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to sp
 Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
 Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE)`.
 
+Toolbar buttons and toggles created by `GUI` use the tooltip as their default accessible name, or the action name when
+no tooltip is provided. These defaults follow action metadata changes; an explicit accessible name set by the plugin
+takes precedence. Supply a descriptive tooltip for icon-only controls. `GUI.styleTable(table)` accommodates the current
+font and preserves a larger default row height; applying it repeatedly does not keep increasing row height.
+
 ## Third-party dependencies
 
 Each plugin can depend on third-party libraries (or other plugins). In this case, the dependencies should be either
