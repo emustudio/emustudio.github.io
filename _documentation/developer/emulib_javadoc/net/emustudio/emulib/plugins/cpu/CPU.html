@@ -57,6 +57,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#getDebugger()" tabindex="0">getDebugger()</a></li>
 <li><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">addCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">removeCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#step()" tabindex="0">step()</a></li>
@@ -65,6 +66,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#stop()" tabindex="0">stop()</a></li>
 <li><a href="#getStatusPanel()" tabindex="0">getStatusPanel()</a></li>
 <li><a href="#isBreakpointSupported()" tabindex="0">isBreakpointSupported()</a></li>
+<li><a href="#getBreakpoints()" tabindex="0">getBreakpoints()</a></li>
 <li><a href="#setBreakpoint(int)" tabindex="0">setBreakpoint(int)</a></li>
 <li><a href="#unsetBreakpoint(int)" tabindex="0">unsetBreakpoint(int)</a></li>
 <li><a href="#isBreakpointSet(int)" tabindex="0">isBreakpointSet(int)</a></li>
@@ -162,6 +164,16 @@ to plugins.</div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get the number of addressable instruction locations exposed by this CPU.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getBreakpoints()" class="member-name-link">getBreakpoints</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Immutable snapshot of ordinary execution breakpoints; empty when enumeration is unsupported.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDebugger()" class="member-name-link">getDebugger</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Optional portable debugging capabilities.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDisassembler()" class="member-name-link">getDisassembler</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
@@ -250,6 +262,15 @@ events from this CPU.</div>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getDebugger()">
+<h3>getDebugger</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</span>&nbsp;<span class="element-name">getDebugger</span>()</div>
+<div class="block">Optional portable debugging capabilities. Unsupported plugins keep the empty default.</div>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
 <h3>addCPUListener</h3>
@@ -373,6 +394,15 @@ CPU itself should take care about updating the panel when it is appropriate.</di
 <dt>Returns:</dt>
 <dd>true if breakpoints are supported, false otherwise</dd>
 </dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getBreakpoints()">
+<h3>getBreakpoints</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getBreakpoints</span>()</div>
+<div class="block">Immutable snapshot of ordinary execution breakpoints; empty when enumeration is unsupported.</div>
 </div>
 </section>
 </li>

@@ -3,6 +3,7 @@ net.emustudio.emulib.plugins.annotations
 net.emustudio.emulib.plugins.compiler
 net.emustudio.emulib.plugins.compiler.antlr
 net.emustudio.emulib.plugins.cpu
+net.emustudio.emulib.plugins.cpu.debug
 net.emustudio.emulib.plugins.device
 net.emustudio.emulib.plugins.memory
 net.emustudio.emulib.plugins.memory.annotations

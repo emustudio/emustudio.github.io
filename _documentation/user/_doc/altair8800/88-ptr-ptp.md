@@ -34,7 +34,7 @@ is also set with no punch attached; in that case, output bytes are discarded. A 
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `88-ptr-ptp` in the device list. The **Reader** tab is shown below:
+On the **Debugger** tab, double-click `88-ptr-ptp` in the device list. The **Reader** tab is shown below:
 
 {% include annotated-screenshot.html image="/assets/altair8800/88-ptr-ptp-gui-reader.png" alt="Paper tape reader window with numbered directory, file list, load action, status, progress and reader controls" width=790 points="1:21.01:5.95|2:29.37:31.08|3:22.03:90.27|4:93.67:19.73|5:93.67:73.24|6:58.73:90.00" %}
 

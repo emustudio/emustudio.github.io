@@ -57,6 +57,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#getBanksCount()" tabindex="0">getBanksCount()</a></li>
+<li><a href="#getSelectedBank()" tabindex="0">getSelectedBank()</a></li>
+<li><a href="#getCommonBoundary()" tabindex="0">getCommonBoundary()</a></li>
+<li><a href="#getBank(int)" tabindex="0">getBank(int)</a></li>
+<li><a href="#readBank(int,int)" tabindex="0">readBank(int, int)</a></li>
 <li><a href="#read(int)" tabindex="0">read(int)</a></li>
 <li><a href="#read(int,int)" tabindex="0">read(int, int)</a></li>
 <li><a href="#write(int,CellType)" tabindex="0">write(int, CellType)</a></li>
@@ -159,11 +164,25 @@ is accessible by using <a href="#annotations()"><code>annotations()</code></a> m
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Clears the memory content.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getBank(int)" class="member-name-link">getBank</a><wbr>(int&nbsp;address)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getBanksCount()" class="member-name-link">getBanksCount</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Optional bank inspection.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a><wbr>&lt;<a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getCellTypeClass()" class="member-name-link">getCellTypeClass</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get memory cell type class.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getCommonBoundary()" class="member-name-link">getCommonBoundary</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSelectedBank()" class="member-name-link">getSelectedBank</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSize()" class="member-name-link">getSize</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
@@ -180,33 +199,39 @@ is accessible by using <a href="#annotations()"><code>annotations()</code></a> m
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Reads one or more adjacent cells from a memory.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeMemoryListener(net.emustudio.emulib.plugins.memory.MemoryContext.MemoryListener)" class="member-name-link">removeMemoryListener</a><wbr>(<a href="MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Removes a memory listener</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#readBank(int,int)" class="member-name-link">readBank</a><wbr>(int&nbsp;address,
+ int&nbsp;bank)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Inspect a bank without selecting it.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setMemoryNotificationsEnabled(boolean)" class="member-name-link">setMemoryNotificationsEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeMemoryListener(net.emustudio.emulib.plugins.memory.MemoryContext.MemoryListener)" class="member-name-link">removeMemoryListener</a><wbr>(<a href="MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a>&nbsp;listener)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Removes a memory listener</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setMemoryNotificationsEnabled(boolean)" class="member-name-link">setMemoryNotificationsEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Enable/disable notifications of memory changes globally.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Write a value to a memory cell at given location.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#write(int,CellType%5B%5D)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#write(int,CellType%5B%5D)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]&nbsp;values)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Write several cell values at once to a given location.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType%5B%5D,int)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType%5B%5D,int)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]&nbsp;values,
  int&nbsp;count)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Write several cell values at once to a given location.</div>
 </div>
 </div>
@@ -223,6 +248,49 @@ is accessible by using <a href="#annotations()"><code>annotations()</code></a> m
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getBanksCount()">
+<h3>getBanksCount</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getBanksCount</span>()</div>
+<div class="block">Optional bank inspection. Defaults describe a single unbanked address space.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSelectedBank()">
+<h3>getSelectedBank</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getSelectedBank</span>()</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getCommonBoundary()">
+<h3>getCommonBoundary</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCommonBoundary</span>()</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getBank(int)">
+<h3>getBank</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getBank</span><wbr><span class="parameters">(int&nbsp;address)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="readBank(int,int)">
+<h3>readBank</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></span>&nbsp;<span class="element-name">readBank</span><wbr><span class="parameters">(int&nbsp;address,
+ int&nbsp;bank)</span></div>
+<div class="block">Inspect a bank without selecting it. Implementations should avoid guest timing/I/O effects.</div>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="read(int)">
 <h3>read</h3>

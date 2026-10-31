@@ -33,6 +33,10 @@ is an context interface which the context implements, and value is the context o
 or many contexts. Single context object can be registered multiple times, if the keys (context interfaces) are
 different. Multiple distinct context objects can also share an interface; their indices follow registration order.
 
+Lookup uses the exact registered Java interface class. Share that interface between plugins;
+redeclaring identical methods does not make two interfaces interchangeable. Register each
+supported interface explicitly, including base interfaces and empty subinterfaces.
+
 Sample custom context might be created like this:
 
 {:.code-example}

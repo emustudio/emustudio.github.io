@@ -65,7 +65,7 @@ Feature highlights are:
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `88-dcdd` in the device list:
+On the **Debugger** tab, double-click `88-dcdd` in the device list:
 
 {% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-gui.png" alt="88-DCDD runtime window with numbered drive selection, flags, position and mounted image" width=556 points="1:91.55:5.56|2:48.56:33.89|3:91.01:33.89|4:90.83:64.17" %}
 

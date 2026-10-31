@@ -29,7 +29,7 @@ Abstract schema for emuStudio (with VT100 terminal):
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `vt100-terminal` in the device list:
+On the **Debugger** tab, double-click `vt100-terminal` in the device list:
 
 {% include annotated-screenshot.html image="/assets/altair8800/vt100-terminal-gui.png" alt="Altair VT100 terminal with numbered display, input indicator and ASCII input button" width=900 points="1:94.78:4.95|2:1.56:93.41|3:6.22:93.54" %}
 

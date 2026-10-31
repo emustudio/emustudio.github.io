@@ -66,6 +66,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#LITERAL" tabindex="0">LITERAL</a></li>
 <li><a href="#IDENTIFIER" tabindex="0">IDENTIFIER</a></li>
 <li><a href="#LABEL" tabindex="0">LABEL</a></li>
+<li><a href="#BLOCK_START" tabindex="0">BLOCK_START</a></li>
+<li><a href="#BLOCK_END" tabindex="0">BLOCK_END</a></li>
+<li><a href="#SYMBOL_DEFINITION" tabindex="0">SYMBOL_DEFINITION</a></li>
+<li><a href="#SYMBOL_REFERENCE" tabindex="0">SYMBOL_REFERENCE</a></li>
+<li><a href="#INCLUDE_PATH" tabindex="0">INCLUDE_PATH</a></li>
 <li><a href="#WHITESPACE" tabindex="0">WHITESPACE</a></li>
 <li><a href="#ERROR" tabindex="0">ERROR</a></li>
 <li><a href="#EOF" tabindex="0">EOF</a></li>
@@ -73,6 +78,10 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#getReferencedFile()" tabindex="0">getReferencedFile()</a></li>
+<li><a href="#getSymbolName()" tabindex="0">getSymbolName()</a></li>
+<li><a href="#getSymbolScope()" tabindex="0">getSymbolScope()</a></li>
+<li><a href="#getReferenceScope()" tabindex="0">getReferenceScope()</a></li>
 <li><a href="#getType()" tabindex="0">getType()</a></li>
 <li><a href="#getOffset()" tabindex="0">getOffset()</a></li>
 <li><a href="#getText()" tabindex="0">getText()</a></li>
@@ -86,6 +95,10 @@ loadScripts(document, 'script');</script>
 <h1 title="Interface Token" class="title">Interface Token</h1>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Known Implementing Classes:</dt>
+<dd><code><a href="SourceToken.html" title="class in net.emustudio.emulib.plugins.compiler">SourceToken</a></code></dd>
+</dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Token</span></div>
@@ -103,6 +116,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#BLOCK_END" class="member-name-link">BLOCK_END</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#BLOCK_START" class="member-name-link">BLOCK_START</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Opening and closing tokens of a foldable source block.</div>
+</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
 <div class="col-second even-row-color"><code><a href="#COMMENT" class="member-name-link">COMMENT</a></code></div>
 <div class="col-last even-row-color">
@@ -124,43 +145,56 @@ loadScripts(document, 'script');</script>
 <div class="block">Token is an identifier (e.g.</div>
 </div>
 <div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#LABEL" class="member-name-link">LABEL</a></code></div>
+<div class="col-second even-row-color"><code><a href="#INCLUDE_PATH" class="member-name-link">INCLUDE_PATH</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">A token naming another source file.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#LABEL" class="member-name-link">LABEL</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Token is an label identifier.</div>
 </div>
-<div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#LITERAL" class="member-name-link">LITERAL</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#LITERAL" class="member-name-link">LITERAL</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Token is a literal (e.g.</div>
 </div>
-<div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#OPERATOR" class="member-name-link">OPERATOR</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#OPERATOR" class="member-name-link">OPERATOR</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Token is a operator (e.g.</div>
 </div>
-<div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#PREPROCESSOR" class="member-name-link">PREPROCESSOR</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#PREPROCESSOR" class="member-name-link">PREPROCESSOR</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Token is a preprocessor keyword.</div>
 </div>
-<div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#REGISTER" class="member-name-link">REGISTER</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#REGISTER" class="member-name-link">REGISTER</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Token is a CPU register.</div>
 </div>
-<div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#RESERVED" class="member-name-link">RESERVED</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#RESERVED" class="member-name-link">RESERVED</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Token is a reserved word.</div>
 </div>
-<div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#SEPARATOR" class="member-name-link">SEPARATOR</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#SEPARATOR" class="member-name-link">SEPARATOR</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Token is a separator (e.g.</div>
 </div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#SYMBOL_DEFINITION" class="member-name-link">SYMBOL_DEFINITION</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A declared symbol and a reference to a symbol, as identified by source analysis.</div>
+</div>
 <div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#WHITESPACE" class="member-name-link">WHITESPACE</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-second odd-row-color"><code><a href="#SYMBOL_REFERENCE" class="member-name-link">SYMBOL_REFERENCE</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#WHITESPACE" class="member-name-link">WHITESPACE</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Token is a whitespace</div>
 </div>
 </div>
@@ -171,7 +205,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
@@ -180,7 +214,27 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOffset()" class="member-name-link">getOffset</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get 0-based starting offset of token position.</div>
+<div class="block">Get 0-based starting offset in UTF-16 code units (Java String indices).</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getReferencedFile()" class="member-name-link">getReferencedFile</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Referenced source file path, or null when the token is not an include path.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getReferenceScope()" class="member-name-link">getReferenceScope</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Scope searched for the referenced declaration.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSymbolName()" class="member-name-link">getSymbolName</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Symbol spelling, excluding punctuation, or null when this token has no symbol metadata.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSymbolScope()" class="member-name-link">getSymbolScope</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Lexical scope identity.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getText()" class="member-name-link">getText</a>()</code></div>
@@ -360,6 +414,89 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="BLOCK_START">
+<h3>BLOCK_START</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">BLOCK_START</span></div>
+<div class="block">Opening and closing tokens of a foldable source block.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../../../constant-values.html#net.emustudio.emulib.plugins.compiler.Token.BLOCK_START">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="BLOCK_END">
+<h3>BLOCK_END</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">BLOCK_END</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../../../constant-values.html#net.emustudio.emulib.plugins.compiler.Token.BLOCK_END">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="SYMBOL_DEFINITION">
+<h3>SYMBOL_DEFINITION</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">SYMBOL_DEFINITION</span></div>
+<div class="block">A declared symbol and a reference to a symbol, as identified by source analysis.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../../../constant-values.html#net.emustudio.emulib.plugins.compiler.Token.SYMBOL_DEFINITION">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="SYMBOL_REFERENCE">
+<h3>SYMBOL_REFERENCE</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">SYMBOL_REFERENCE</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../../../constant-values.html#net.emustudio.emulib.plugins.compiler.Token.SYMBOL_REFERENCE">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="INCLUDE_PATH">
+<h3>INCLUDE_PATH</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">INCLUDE_PATH</span></div>
+<div class="block">A token naming another source file.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../../../constant-values.html#net.emustudio.emulib.plugins.compiler.Token.INCLUDE_PATH">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="WHITESPACE">
 <h3>WHITESPACE</h3>
 <div class="horizontal-scroll">
@@ -419,6 +556,42 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="getReferencedFile()">
+<h3>getReferencedFile</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getReferencedFile</span>()</div>
+<div class="block">Referenced source file path, or null when the token is not an include path.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSymbolName()">
+<h3>getSymbolName</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSymbolName</span>()</div>
+<div class="block">Symbol spelling, excluding punctuation, or null when this token has no symbol metadata.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSymbolScope()">
+<h3>getSymbolScope</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSymbolScope</span>()</div>
+<div class="block">Lexical scope identity. Empty denotes the file/include-global scope; null means unknown.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getReferenceScope()">
+<h3>getReferenceScope</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getReferenceScope</span>()</div>
+<div class="block">Scope searched for the referenced declaration. Defaults to the token's lexical scope.</div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="horizontal-scroll">
@@ -439,7 +612,7 @@ The token type mus be one of the pre-defined constants located inside this inter
 <h3>getOffset</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">getOffset</span>()</div>
-<div class="block">Get 0-based starting offset of token position.</div>
+<div class="block">Get 0-based starting offset in UTF-16 code units (Java String indices).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>starting offset of the token in the source code</dd>

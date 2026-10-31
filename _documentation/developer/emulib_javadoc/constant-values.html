@@ -63,24 +63,17 @@ loadScripts(document, 'script');</script>
 <h2 title="net.emustudio.*">net.emustudio.*</h2>
 <ul class="block-list">
 <li>
-<div class="caption"><span>net.emustudio.emulib.plugins.<a href="net/emustudio/emulib/plugins/PluginMeta.html" title="class in net.emustudio.emulib.plugins">PluginMeta</a></span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Constant Field</div>
-<div class="table-header col-last">Value</div>
-<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.PluginMeta.UNKNOWN">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/PluginMeta.html#UNKNOWN">UNKNOWN</a></code></div>
-<div class="col-last even-row-color"><code>"(unknown)"</code></div>
-</div>
-</li>
-</ul>
-<ul class="block-list">
-<li>
 <div class="caption"><span>net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Constant Field</div>
 <div class="table-header col-last">Value</div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.BLOCK_END">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#BLOCK_END">BLOCK_END</a></code></div>
+<div class="col-last even-row-color"><code>2816</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.BLOCK_START">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#BLOCK_START">BLOCK_START</a></code></div>
+<div class="col-last odd-row-color"><code>2560</code></div>
 <div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.COMMENT">public&nbsp;static&nbsp;final&nbsp;int</code></div>
 <div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#COMMENT">COMMENT</a></code></div>
 <div class="col-last even-row-color"><code>1536</code></div>
@@ -93,30 +86,39 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.IDENTIFIER">public&nbsp;static&nbsp;final&nbsp;int</code></div>
 <div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#IDENTIFIER">IDENTIFIER</a></code></div>
 <div class="col-last odd-row-color"><code>2048</code></div>
-<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.LABEL">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#LABEL">LABEL</a></code></div>
-<div class="col-last even-row-color"><code>2304</code></div>
-<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.LITERAL">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#LITERAL">LITERAL</a></code></div>
-<div class="col-last odd-row-color"><code>1792</code></div>
-<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.OPERATOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#OPERATOR">OPERATOR</a></code></div>
-<div class="col-last even-row-color"><code>1280</code></div>
-<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.PREPROCESSOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#PREPROCESSOR">PREPROCESSOR</a></code></div>
-<div class="col-last odd-row-color"><code>512</code></div>
-<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.REGISTER">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#REGISTER">REGISTER</a></code></div>
-<div class="col-last even-row-color"><code>768</code></div>
-<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.RESERVED">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#RESERVED">RESERVED</a></code></div>
-<div class="col-last odd-row-color"><code>256</code></div>
-<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.SEPARATOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#SEPARATOR">SEPARATOR</a></code></div>
-<div class="col-last even-row-color"><code>1024</code></div>
-<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.WHITESPACE">public&nbsp;static&nbsp;final&nbsp;int</code></div>
-<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#WHITESPACE">WHITESPACE</a></code></div>
-<div class="col-last odd-row-color"><code>4096</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.INCLUDE_PATH">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#INCLUDE_PATH">INCLUDE_PATH</a></code></div>
+<div class="col-last even-row-color"><code>3584</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.LABEL">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#LABEL">LABEL</a></code></div>
+<div class="col-last odd-row-color"><code>2304</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.LITERAL">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#LITERAL">LITERAL</a></code></div>
+<div class="col-last even-row-color"><code>1792</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.OPERATOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#OPERATOR">OPERATOR</a></code></div>
+<div class="col-last odd-row-color"><code>1280</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.PREPROCESSOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#PREPROCESSOR">PREPROCESSOR</a></code></div>
+<div class="col-last even-row-color"><code>512</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.REGISTER">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#REGISTER">REGISTER</a></code></div>
+<div class="col-last odd-row-color"><code>768</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.RESERVED">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#RESERVED">RESERVED</a></code></div>
+<div class="col-last even-row-color"><code>256</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.SEPARATOR">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#SEPARATOR">SEPARATOR</a></code></div>
+<div class="col-last odd-row-color"><code>1024</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.SYMBOL_DEFINITION">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#SYMBOL_DEFINITION">SYMBOL_DEFINITION</a></code></div>
+<div class="col-last even-row-color"><code>3072</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.SYMBOL_REFERENCE">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#SYMBOL_REFERENCE">SYMBOL_REFERENCE</a></code></div>
+<div class="col-last odd-row-color"><code>3328</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.plugins.compiler.Token.WHITESPACE">public&nbsp;static&nbsp;final&nbsp;int</code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/plugins/compiler/Token.html#WHITESPACE">WHITESPACE</a></code></div>
+<div class="col-last even-row-color"><code>4096</code></div>
 </div>
 </li>
 </ul>
@@ -171,6 +173,188 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.Constants.FONT_DEFAULT_SIZE">public&nbsp;static&nbsp;final&nbsp;int</code></div>
 <div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/Constants.html#FONT_DEFAULT_SIZE">FONT_DEFAULT_SIZE</a></code></div>
 <div class="col-last odd-row-color"><code>12</code></div>
+</div>
+</li>
+<li>
+<div class="caption"><span>net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/StandardIcons.html" title="class in net.emustudio.emulib.runtime.ui">StandardIcons</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Constant Field</div>
+<div class="table-header col-last">Value</div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_ADD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_ADD">ICON_ADD</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/add.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_ASCII">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_ASCII">ICON_ASCII</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/ascii.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_BIDIRECTION">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_BIDIRECTION">ICON_BIDIRECTION</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/bidirection.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_BREAKPOINT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_BREAKPOINT">ICON_BREAKPOINT</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/breakpoint.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_BREAKPOINTS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_BREAKPOINTS">ICON_BREAKPOINTS</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/breakpoints.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_COMPILER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_COMPILER">ICON_COMPILER</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/compiler.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_COMPUTER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_COMPUTER">ICON_COMPUTER</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/computer.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_CONNECTION">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_CONNECTION">ICON_CONNECTION</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/connection.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_COPY">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_COPY">ICON_COPY</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/copy.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_CPU">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_CPU">ICON_CPU</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/cpu.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_CUT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_CUT">ICON_CUT</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/cut.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_DELETE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_DELETE">ICON_DELETE</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/delete.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_DEVICE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_DEVICE">ICON_DEVICE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/device.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_DISK_EMPTY">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_DISK_EMPTY">ICON_DISK_EMPTY</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/disk-empty.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_DISK_MOUNTED">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_DISK_MOUNTED">ICON_DISK_MOUNTED</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/disk-mounted.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_EJECT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_EJECT">ICON_EJECT</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/eject.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_ERASE_MEMORY">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_ERASE_MEMORY">ICON_ERASE_MEMORY</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/erase-memory.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_FAVICON">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_FAVICON">ICON_FAVICON</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/favicon.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_FIND">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_FIND">ICON_FIND</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/find.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_GRID">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_GRID">ICON_GRID</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/grid.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_INDICATOR_BLUE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_INDICATOR_BLUE">ICON_INDICATOR_BLUE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/indicator-blue.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_INDICATOR_GREEN">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_INDICATOR_GREEN">ICON_INDICATOR_GREEN</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/indicator-green.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_INDICATOR_RED">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_INDICATOR_RED">ICON_INDICATOR_RED</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/indicator-red.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_JUMP">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_JUMP">ICON_JUMP</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/jump.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_JUMP_TO_BEGINNING">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_JUMP_TO_BEGINNING">ICON_JUMP_TO_BEGINNING</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/jump-to-beginning.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_LOAD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_LOAD">ICON_LOAD</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/load.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_MEMORY">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_MEMORY">ICON_MEMORY</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/memory.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_MOTHERBOARD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_MOTHERBOARD">ICON_MOTHERBOARD</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/motherboard.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_MOVE_DOWN">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_MOVE_DOWN">ICON_MOVE_DOWN</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/move-down.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_MOVE_UP">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_MOVE_UP">ICON_MOVE_UP</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/move-up.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_NEW_FILE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_NEW_FILE">ICON_NEW_FILE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/new-file.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_OPEN_FILE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_OPEN_FILE">ICON_OPEN_FILE</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/open-file.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_BACK">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_BACK">ICON_PAGE_BACK</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/page-back.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_CURRENT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_CURRENT">ICON_PAGE_CURRENT</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/page-current.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_FIRST">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_FIRST">ICON_PAGE_FIRST</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/page-first.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_FORWARD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_FORWARD">ICON_PAGE_FORWARD</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/run.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_SEEK_BACKWARD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_SEEK_BACKWARD">ICON_PAGE_SEEK_BACKWARD</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/page-seek-backward.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_SEEK_FORWARD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAGE_SEEK_FORWARD">ICON_PAGE_SEEK_FORWARD</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/page-seek-forward.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PASTE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PASTE">ICON_PASTE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/paste.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAUSE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PAUSE">ICON_PAUSE</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/pause.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PLAY">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_PLAY">ICON_PLAY</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/run.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_RECORD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_RECORD">ICON_RECORD</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/record.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_REDO">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_REDO">ICON_REDO</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/redo.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_REFRESH">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_REFRESH">ICON_REFRESH</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/reset.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_REMOVE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_REMOVE">ICON_REMOVE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/remove.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_RENAME">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_RENAME">ICON_RENAME</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/rename.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_REPLACE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_REPLACE">ICON_REPLACE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/replace.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_RESET">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_RESET">ICON_RESET</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/reset.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_RUN">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_RUN">ICON_RUN</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/run.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_RUN_TIMED">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_RUN_TIMED">ICON_RUN_TIMED</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/run-timed.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_SAVE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_SAVE">ICON_SAVE</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/save.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_SETTINGS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_SETTINGS">ICON_SETTINGS</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/compiler.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_STEP">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_STEP">ICON_STEP</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/step.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_STEP_BACK">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_STEP_BACK">ICON_STEP_BACK</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/step-back.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_STOP">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_STOP">ICON_STOP</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/stop.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_UNDO">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_UNDO">ICON_UNDO</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/undo.png"</code></div>
+<div class="col-first even-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.ICON_VOLUME">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_VOLUME">ICON_VOLUME</a></code></div>
+<div class="col-last even-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/volume.png"</code></div>
+<div class="col-first odd-row-color"><code id="net.emustudio.emulib.runtime.ui.StandardIcons.LOGO_FILE">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#LOGO_FILE">LOGO_FILE</a></code></div>
+<div class="col-last odd-row-color"><code>"/net/emustudio/emulib/runtime/ui/icons/logo.png"</code></div>
 </div>
 </li>
 </ul>

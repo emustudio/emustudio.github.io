@@ -48,5 +48,53 @@ stopped when the virtual computer is closed. A CPU still running at the deadline
 
 Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
 can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
-Check `logs/automation.log` and the device output to determine whether the run completed normally; automation failures
-are not all reflected in the process exit status.
+Check `logs/automation.log` and the device output to determine whether the run completed normally. Compilation and
+debug-script failures return a nonzero exit status.
+Other run outcomes, including normal execution timeouts, are recorded in the logs.
+
+
+## Debug scripts
+
+Use `auto --debug-script FILE` to execute bounded debugger operations after optional compilation and CPU reset. Select
+the computer before `auto`; put `--debug-script`, `--no-gui`, and `-p` after it. For example, save this 8080 program as `probe.asm`:
+
+```text
+org 0
+mvi a, 42h
+sta 0100h
+hlt
+```
+
+Save its experiment as `probe.debug`:
+
+```text
+RUN 5 10
+ASSERT PC == 5
+ASSERT A == 0x42
+ASSERT mem[0x100] == 0x42
+CAPTURE result.bin
+```
+
+Run it from the emuStudio installation directory:
+
+```sh
+./emuStudio -cf config/MITSAltair8800.toml -i probe.asm auto --no-gui -p 0 --debug-script probe.debug
+```
+
+RUN stops before the instruction at address 5 after at most ten instructions. The assertions check the accumulator and
+stored byte; CAPTURE writes the selected logical bank to `result.bin` beside `probe.debug` (64 KiB for the default Altair
+memory). A failing assertion returns exit status 1 and identifies the script line in `logs/automation.log`.
+
+| Operation | Behavior |
+|---|---|
+| `STEP count` | Execute 1–1,000,000 instructions. |
+| `RUN address max-instructions` | Step until PC equals the address, with a limit of 1–1,000,000 instructions. If PC already matches, execute none. |
+| `ASSERT expression` | Require a nonzero numeric result; use the same expression syntax as watches. |
+| `CAPTURE filename` | Save the selected byte-memory bank, including its common region. Relative paths start at the script directory; an existing file is replaced. |
+
+Blank lines and lines starting with `#` are ignored. Addresses and counts accept decimal or `0x` prefixes. A failed
+operation, compilation error, unexpected CPU stop, or missing step-completion notification returns a nonzero exit status.
+Step completion has a five-second wait. The script runner uses synchronous stepping; `--waitmax` controls normal continuous
+automation and does not bound scripts. Use each RUN/STEP instruction limit to bound execution instead.
+
+See [Debugger analysis]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory-bank behavior.

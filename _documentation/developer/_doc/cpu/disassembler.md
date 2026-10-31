@@ -48,6 +48,17 @@ src_reg, dst_reg =
 The specification file might look a bit cryptic at first sight, but it's quite easy. The content is divided into two
 sections (_decoder_ and _disassembler_), separated with two `%%` chars on a separate line.
 
+## Structured instruction flow
+
+Implement optional `getFlow(address)` metadata to support callers/targets and control-flow navigation. `InstructionFlow`
+contains a kind (`LINEAR`, `JUMP`, `CALL`, `RETURN`, or `STOP`), the next sequential address, a fall-through flag, and direct
+target addresses. An empty optional means metadata is unavailable; an empty target list represents an unresolved indirect
+jump. Conditional jumps and returns retain fall-through; calls also retain the next sequential address.
+
+Decode flow from opcodes and operands rather than mnemonic text. The 8080/Z80 plugins use an opcode adapter around generated
+Edigen disassembly; the current `.eds` grammar does not define semantic flow attributes. See
+[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary and bank context.
+
 ## Decoder section
 
 ```

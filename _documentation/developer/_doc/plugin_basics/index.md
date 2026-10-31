@@ -81,8 +81,8 @@ If there are more classes like this, the plugin might not work correctly.
 
 ### Version and copyright metadata
 
-Plugins extending `AbstractCompiler`, `AbstractCPU`, `AbstractMemory`, or `AbstractDevice` inherit `getVersion()` and
-`getCopyright()`. Put a `version.properties` resource in the concrete plugin root class package:
+`Plugin` provides default `getVersion()` and `getCopyright()` methods, inherited by all plugin types and their abstract
+base classes. Put a `version.properties` resource in the concrete plugin root class package:
 
 {:.code-example}
 ```properties
@@ -90,7 +90,7 @@ version=1.2.3
 copyright=Copyright 2026 Example Author
 ```
 
-The base class loads `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
+The default methods load `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
 the plugin JAR. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
 that bundle; duplicating the standard resource lookup in every plugin is unnecessary.
 

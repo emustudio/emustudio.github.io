@@ -69,7 +69,7 @@ buffers remain unsaved and support undo; replacements in closed files are writte
 ## Text and indentation
 
 **Ctrl+Shift+D** duplicates a line or selection. **Edit → Text** also provides sorting, reversing, removing duplicate
-lines, case conversion, trailing-whitespace cleanup, tab/space conversion, reindentation, and column alignment.
+lines, trailing-whitespace cleanup, tab/space conversion, reindentation, and column alignment.
 
 **Ctrl+/** toggles comments using the compiler's comment delimiter. **Edit → Editor display → Indentation settings**
 controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
@@ -92,9 +92,8 @@ regions. A comment ending in `region` (optionally followed by a name) and a comm
 region. Plain text supports `#region` and `#endregion` lines. Fold detection does not recognize assembler keywords in
 the editor.
 
-**Edit → Editor display** controls visible whitespace, end-of-line markers, indentation guides, soft wrap, token colors, and
-syntax selection for the current file. The compiler syntax is the default; other choices include plain text, Java, C,
-JSON, XML, and shell. Display and indentation preferences are saved in application settings.
+**Edit → Editor display** controls visible whitespace, end-of-line markers, indentation guides, soft wrap, and token colors.
+Syntax highlighting follows the selected compiler. Display and indentation preferences are saved in application settings.
 
 **Edit → Editing macros → Start recording / Stop recording** records the editor library's typing and editing actions.
 **Ctrl+Shift+M** replays the last recording. Recording is shared across source views for the current application session.
