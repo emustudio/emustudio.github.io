@@ -1,0 +1,7 @@
+{
+  "files": ["_site/**/*.html"],
+  "exclude": ["_site/documentation/developer/emulib_javadoc/**"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}

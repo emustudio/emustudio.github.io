@@ -18,6 +18,8 @@ include: [ ".htaccess", '_pages' ]
 exclude:
   - .gitignore
   - README.md
+  - PRODUCT.md
+  - DESIGN.md
   - Rakefile
   - Gemfile
   - Gemfile.lock

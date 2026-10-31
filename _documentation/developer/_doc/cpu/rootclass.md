@@ -133,6 +133,10 @@ What can be noticed here is:
 
 ## Optional debugger support
 
+Custom instruction-table columns implement `DebuggerColumn<T>` and are read-only by default. Implement
+`getClassType()`, `getTitle()`, and `getValue(int location)`; override `isEditable()` and `setValue(...)` only for
+editable columns. The location is an instruction address, not a table row number.
+
 Override `getDebugger()` to return an optional `DebugCPU` port when the engine supports portable register access and
 instruction/access hooks. emuStudio owns the analysis UI, expression watches, named rules and recording. The bundled
 8080/Z80 plugins expose `DebugProbe`; plugins without the port retain their basic instruction debugger.
