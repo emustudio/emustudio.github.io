@@ -104,6 +104,15 @@ The following table shows C0 control codes handled by the terminal:
 | `0x85` | NEL  | Next line — moves cursor down (scrolls if needed) and performs carriage return
 | `0x88` | HTS  | Horizontal tab set
 | `0x8D` | RI   | Reverse index — moves cursor up, scrolls down if at top
+| `0x8E` | SS2  | Single shift 2 — recognized; character-set switching is not implemented
+| `0x8F` | SS3  | Single shift 3 — recognized; character-set switching is not implemented
+| `0x90` | DCS  | Begins a device control string; the payload is parsed but has no effect
+| `0x98` | SOS  | Begins a start-of-string payload, which is ignored
+| `0x9B` | CSI  | Begins a control sequence (equivalent to `ESC [`)
+| `0x9C` | ST   | Terminates a DCS, OSC, SOS, PM, or APC string
+| `0x9D` | OSC  | Begins an operating-system command; the payload is parsed but has no effect
+| `0x9E` | PM   | Begins a privacy-message payload, which is ignored
+| `0x9F` | APC  | Begins an application-program-command payload, which is ignored
 |---
 
 ## Escape sequences
@@ -287,13 +296,6 @@ Terminal behaves differently when emuStudio is run in automatic "No GUI" mode. A
 to be read from a file (instead of keyboard), and output is redirected to be written to a file. File names are
 configurable in the settings. Input and output file names are not allowed to point to the same file.
 
-## Known limitations
-
-- DCS (Device Control String) and OSC (Operating System Command) sequences are parsed but have no effect.
-- Bell (`BEL`) does not produce audible sound.
-- Truecolor and 256-color palette indices above 15 are not supported.
-- Shift Out / Shift In do not switch character sets.
-
 ## Configuration file
 
 The following table shows all the possible settings of VT100-terminal plugin:
@@ -301,12 +303,20 @@ The following table shows all the possible settings of VT100-terminal plugin:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`inputFileName`       | `vt100-terminal.in`  | Path to existing file | File for reading input (when redirected)
-|`outputFileName`      | `vt100-terminal.out` | Path to writable file | File for writing output (when redirected)
+|`inputFileName`       | `vt100-terminal.in`  | Path to readable file | File for reading input (when redirected)
+|`outputFileName`      | `vt100-terminal.out` | Path to writable file | File created or truncated for writing output (when redirected)
 |`inputReadDelayMillis`| 0                    | >= 0 | How long the terminal should wait until it reads next input character from the file (in milliseconds)
 |`columns`             | 80                   | > 0  | Number of terminal columns 
 |`rows`                | 24                   | > 0  | Number of terminal rows
 |---
+
+## Known limitations
+
+- DCS, OSC, SOS, PM, and APC string payloads are parsed or discarded but have no effect.
+- Bell (`BEL`) does not produce audible sound.
+- Truecolor and 256-color palette indices above 15 are not supported.
+- Shift Out / Shift In do not switch character sets.
+
 
 [vt100-image]: https://commons.wikimedia.org/w/index.php?curid=29457452
 [dec-parser]: https://vt100.net/emu/dec_ansi_parser
