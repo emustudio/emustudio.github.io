@@ -119,6 +119,20 @@ int scale = settings.getInt("scale", 2);
 settings.setInt("scale", scale);
 ```
 
+### Shared Swing helpers
+
+Use `GUI.runInBackground(action, task, onSuccess, onError)` for file operations that must keep the interface responsive.
+The task runs off Swing's event-dispatch thread (EDT); action enablement and both callbacks run on the EDT.
+Calls from another thread are queued on the EDT. A disabled action ignores new requests until its current operation
+finishes. Completion re-enables the action after the callback, including when the task or callback fails.
+Use `onError` to report the supplied exception; task exceptions retain their original cause and message.
+
+For paths and other long labels, `ShortenedString` measures the actual font and keeps Unicode character sequences intact
+when inserting a middle ellipsis. Call `deriveMaxStringLength(component, availableWidth)` after the value, font, or width
+changes. Zero or negative widths produce empty text; very narrow widths show only the dots that fit. Keep the full value
+available through a tooltip or another appropriate control. `MaxItemsCache` accepts non-null history values and a
+non-negative capacity; capacity zero retains no entries.
+
 ### GUI icons
 
 Use `GUI.loadIcon("icons/clear.png")` to load an icon from the calling class's package in the plugin JAR.
