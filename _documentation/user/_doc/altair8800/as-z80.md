@@ -310,7 +310,7 @@ Syntax: `[identifier] EQU [expression]`
 
 Define a constant. The `[identifier]` is a mandatory name of the constant.
 
-`[expression]` is the 16-bit expression.
+`[expression]` is evaluated as a signed 32-bit integer; its use in an instruction or data directive determines the required output size.
 
 The pseudo-instruction will define a constant - assign a name to the given expression. The name of the constant then can
 be used anywhere where the constant is expected and the compiler will replace it with the expression.
@@ -321,9 +321,9 @@ It is not possible to redefine a constant.
 
 Syntax: `[identifier] VAR [expression]`
 
-Define or re-define a variable. The `[identifier]` is a mandatory name of the constant.
+Define or re-define a variable. The `[identifier]` is the variable name.
 
-`[expression]` is the 16-bit expression.
+`[expression]` is evaluated as a signed 32-bit integer; its use in an instruction or data directive determines the required output size.
 
 The pseudo-instruction will define a variable - assign a name to the given expression. Then, the name of the variable
 can be used anywhere where the constant is expected.

@@ -64,20 +64,9 @@ button below the peripheral devices list in the Emulator panel. The window can b
 | <span class="circle">1</span> | Do not allow the tape to fall behind another window
 | <span class="circle">2</span> | Show the tape right after emuStudio start
 
-## Configuration file
-
-The following table shows all the possible settings of Abstract tape plugin:
-
-|---
-|Name | Default value | Valid values | Description
-|-|-|-|-
-|`showAtStartup`   | false | true, false | If the tape should be shown automatically after emuStudio is started
-|`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
-|---
-
 ## Automatic emulation
 
-The abstract tape supports automatic emulation. It means, that every change to it is being written to a file. The file
+In headless automatic emulation (`auto --no-gui`), symbol writes are logged to a file as `position symbol`, one per line. The file is overwritten after reset; GUI automation does not enable this logging. The file
 name is devised from the title of the tape, by the following algorithm:
 
 - At first, all spaces in the title are replaced with an underscore (`_`)
@@ -86,7 +75,7 @@ name is devised from the title of the tape, by the following algorithm:
 - Finally, the `.out` extension is added at the end.
 
 Invalid characters are the following: `*`, `.`, `#`, `%`, `&`, `+`, `!`, `~`, `/`, `?`, `<`, `>`, `,`, `|`, `{`, `}`
-, `[`, `]`, `"`, ```, `=`
+, `[`, `]`, `\`, `"`, `'`, backtick, `=`
 
 ## Using abstract tapes in your emulator
 
@@ -123,6 +112,11 @@ package net.emustudio.plugins.device.abstracttape.api;
 
 import net.emustudio.emulib.plugins.annotations.PluginContext;
 import net.emustudio.emulib.plugins.device.DeviceContext;
+import net.jcip.annotations.ThreadSafe;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Public API of the abstract tape.
@@ -295,6 +289,18 @@ public interface AbstractTapeContext extends DeviceContext<TapeSymbol> {
      * @throws IllegalArgumentException if the symbol type is not among accepted ones
      */
     void writeData(TapeSymbol value);
+}
 ```
+
+## Configuration file
+
+The following table shows all the possible settings of Abstract tape plugin:
+
+|---
+|Name | Default value | Valid values | Description
+|-|-|-|-
+|`showAtStartup`   | false | true, false | If the tape should be shown automatically after emuStudio is started
+|`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
+|---
 
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()

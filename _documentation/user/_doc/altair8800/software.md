@@ -28,7 +28,7 @@ loading images; reset before loading a bootloader or applying a memory patch.
 
 ## Z80 with one memory bank and 88-DCDD
 
-![Computer schema for one-bank Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and VT100]({{ site.baseurl }}/assets/altair8800/software-schema-cpm22.png){:style="max-width:796px"}
+![Computer schema for one-bank Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and VT100]({{ site.baseurl }}/assets/altair8800/software-schema-cpm22.png){:style="max-width:564px; width:100%"}
 
 Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in this section:
 
@@ -37,7 +37,7 @@ Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in t
 2. In 88-SIO, pair status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
 3. Use VT100 for the applications below: in a copy of the computer configuration, replace `adm3A-terminal`
    with `vt100-terminal` and connect it to 88-SIO in both directions. Save and reopen the computer, then open
-   the VT100 window with half-duplex disabled. ADM-3A also works for the CP/M command prompt.
+   the VT100 window. ADM-3A also works for the CP/M command prompt.
 4. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**. Keep enlarged Schorn images intact.
 
 ![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){:style="max-width:858px"}
@@ -272,7 +272,7 @@ packages that include it. See the [SIMH pseudo-device page][simh-device]{:target
 
 ## Z80 with banked memory and 88-DCDD
 
-![Computer schema for banked Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-cpm3.png){:style="max-width:796px"}
+![Computer schema for banked Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-cpm3.png){:style="max-width:569px; width:100%"}
 
 Use this setup for CP/M 3, Z3PLUS and the RCL Z3PLUS collection:
 
@@ -316,7 +316,7 @@ CPU and byte-memory in both directions, and reopen the computer. Mount the image
 
 ## 8080 with one memory bank and 88-DCDD
 
-![Computer schema for 8080 floppy software with 88-DCDD and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-floppy.png){:style="max-width:767px"}
+![Computer schema for 8080 floppy software with 88-DCDD and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-floppy.png){:style="max-width:569px; width:100%"}
 
 Use this setup for Altair DOS, native floppy Disk BASIC, Programming System II and 8080 CP/M diagnostics:
 
@@ -446,7 +446,7 @@ does not prove a CPU defect. See the [test notes][cpu-test-notes]{:target="_blan
 
 ## 8080 with one memory bank and serial console
 
-![Computer schema for standalone 8080 software with 88-SIO and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-serial.png){:style="max-width:767px"}
+![Computer schema for standalone 8080 software with 88-SIO and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-serial.png){:style="max-width:569px; width:100%"}
 
 Use this setup for standalone BASIC, MINOL, VTL-2, FOCAL and serial monitors:
 
@@ -500,7 +500,7 @@ before starting; the patch offsets differ from those of the BASIC images above.
 
 ## 8080 with 88-MDS minidisks
 
-![Computer schema for 8080 Minidisk BASIC with 88-MDS and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-minidisk.png){:style="max-width:767px"}
+![Computer schema for 8080 Minidisk BASIC with 88-MDS and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-minidisk.png){:style="max-width:569px; width:100%"}
 
 ### Minidisk BASIC
 
@@ -531,7 +531,7 @@ for its disk layout.
 
 ## 8080 with MITS hard disks
 
-![Computer schema for 8080 Hard Disk BASIC with 88-4PIO, MITS 88-HDSK and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-mits-hard-disk.png){:style="max-width:767px"}
+![Computer schema for 8080 Hard Disk BASIC with 88-4PIO, MITS 88-HDSK and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-mits-hard-disk.png){:style="max-width:569px; width:100%"}
 
 ### Hard Disk BASIC and accounting software
 

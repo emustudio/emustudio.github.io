@@ -298,7 +298,7 @@ Keys of the map represent addresses and values represent code.</div>
 <div class="block">Get the program hex code, encoded as map of addresses/bytes.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>Map representing the program code</dd>
+<dd>mutable map of program bytes, iterated in ascending address order</dd>
 </dl>
 </div>
 </section>
@@ -374,7 +374,7 @@ to the operating memory.</div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">findProgramLocation</span>()</div>
 <div class="block">Finds program location in memory.
 <p>
-It is actually the first address which has occurred in the program.</div>
+It is the lowest address in the program, or zero if the program is empty.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>program memory location</dd>
@@ -390,7 +390,8 @@ It is actually the first address which has occurred in the program.</div>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Parses Intel HEX file.
 <p>
-Lines starting with ; are ignored.</div>
+Blank lines and lines starting with ; after leading whitespace are ignored.
+Input checksums are ignored. Malformed data records report their line number.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>file</code> - file</dd>

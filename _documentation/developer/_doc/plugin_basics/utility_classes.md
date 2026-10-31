@@ -112,16 +112,14 @@ Usage
 Few useful operations:
 
 - `Bits absolute()`: Make the absolute value from the number stored in two's complement.
-- `Bits reverseBits()`: Reverses bits in each byte (max 4 bytes).
+- `Bits reverseBits()`: Reverses the specified bit sequence (up to 32 bits).
 - `Bits reverseBytes()`: Reverses the bytes.
 - `Bits shiftLeft()`: Shift the value to the left.
 - `Bits shiftRight()`: Shift the value to the right.
 - `byte[] toBytes()`: Converts wrapped `int` into array of 4 bytes
 
-This class is heavily used by [edigen][edigen]{:target="_blank"} dissasembler generator.
-
-`StringUtils.format(char format, Bits bits)` renders bits using `c` for a character, `s` for a string, `d` for decimal,
-and `x` or `X` for hexadecimal output. Formatting belongs to `StringUtils`; `Bits` handles bit operations.
+This class is used by the [edigen][edigen]{:target="_blank"} disassembler generator. The generated disassembler
+provides its own operation pipeline and value formatting (character, string, decimal, hexadecimal) on top of `Bits`.
 
 ## Number utilities
 
@@ -133,13 +131,12 @@ Usage
 
 Few useful operations:
 
-- `static int bcd2bin(int bcd)`: Converts packed BCD code (1 byte, 2 BCD digits) to binary It is assumed the BCD has little endian.
+- `static int bcd2bin(int bcd)`: Converts packed BCD code (1 byte, 2 BCD digits) to binary. A BCD byte contains the tens digit in its high nibble and the units in its low nibble.
 - `static int bin2bcd(int bin)`: Converts a binary number into packed BCD (1 byte, 2 BCD digits)
 - `static int[]	listToNativeInts(java.util.List<java.lang.Integer> list)`: Converts list of Integers into array of native ints.
 - `static java.lang.Byte[] nativeBytesToBytes(byte[] array)`: Converts native `byte[]` array to boxed `Byte[]` array.
-- `static java.lang.Integer[] nativeBytesToIntegers(byte[] array)`: Converts native `byte[]` array to boxed `Integer[]` array.
 - ...
-- `static int readBits(byte[] bytes, int start, int length, int bytesStrategy)`: Reads an arbitrary number of bits from bytes.
+- `static int readBits(byte[] bytes, int start, int length, int bytesStrategy)`: Reads up to 32 bits from bytes into an `int`.
 - `static int readInt(byte[] word, int strategy)`: Reads an integer from the array of numbers.
 - ...
 - `static int reverseBits(int value, int numberOfBits)`: Reverse bits in integer (max 32-bit) value.
@@ -155,14 +152,11 @@ Class name
 Usage
 : Utility functions for various radix conversions. 
 
-At first, an instance of `RadixUtils` must be created, because of some pattern regex pre-compilation and possibility
-to add new radixes dynamically. Usually, a singleton instance is used throughout the application (it's not thread-safe!). 
+Parsing uses the singleton from `RadixUtils.getInstance()`, which recognizes hexadecimal (`0x1F`, `1Fh`), decimal
+(`31`, `31d`) and octal (`37o`) numbers. The instance is not thread-safe.
 
 Few useful operations:
 
-- `void addNumberPattern(RadixUtils.NumberPattern pattern)`: Add `NumberPattern` for new radix recognition
-- `static byte[] convertToNumber(java.lang.String number, int fromRadix)`: Convert an integer number in any radix (stored in String) to binary components (bytes) in little endian.
-- ...
 - `static java.lang.String convertToRadix(byte[] number, int toRadix, boolean littleEndian)`: Converts number in any length to a number with specified radix.
 - ...
 - `static java.lang.String formatBinaryString(int number, int length)`: Get formatted binary string of given number.

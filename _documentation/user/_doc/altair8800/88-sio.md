@@ -53,7 +53,8 @@ The window shows attached device, control channel and data buffer.
 
 ## Settings
 
-88-sio plugin has a separate settings window with three sections, described below.
+Select `88-sio` in the device list and click **Show settings...**. The dialog has three tabs, described below.
+Click **Save** to persist and apply all tabs; press **Esc** to discard edits.
 
 ### General settings
 
@@ -114,25 +115,6 @@ enabled or disabled, along with interrupt vector configuration in Settings windo
 {: .list}
 | <span class="circle">1</span> | Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled in software (see "Port 1" section below).
 | <span class="circle">2</span> | Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7` instruction)
-
-## Configuration file
-
-The following table shows all the possible settings of MITS 88-SIO plugin:
-
-|---
-|Name | Default value | Valid values | Description
-|-|-|-|-
-|`statusPorts` | `"0x10, 0x14, 0x16, 0x18"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to status port of 88-sio
-|`dataPorts`   | `"0x11, 0x15, 0x17, 0x19"` | > 0 and < 256; X range from 0 upwards | CPU-ports mapped to data port of 88-sio
-|`clearInputBit8`   | `false` | `true`/`false` | Whether to clear 8th bit of the input written to 88-sio
-|`clearOutputBit8`  | `false` | `true`/`false` | Whether to clear 8th bit of the output, read from 88-sio
-|`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
-|`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE".
-|`mapBackspaceChar` | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "BACKSPACE" input key/character to given value. For example, if user presses "BACKSPACE" the 88-sio can map it as if user pressed "DEL".
-|`interruptsSupported`| `true` | `true`/`false` | Whether interrupts are supported in general. When disabled, they cannot be enabled in software.
-|`inputInterruptVector`  | `7` | 0-7 | Set input interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the input (e.g. a key press) if input interrupts are enabled    
-|`outputInterruptVector` | `7` | 0-7 | Set output interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the output (e.g. on displaying a char) if output interrupts are enabled
-|---
 
 ## Programming
 
@@ -226,6 +208,7 @@ For writing strings, it is more practical to have a procedure.
 
 {:.code-example}
 ```
+lxi sp, 0FF00h ; initialize stack in writable RAM
 lxi h, text  ; load address of 'text' label to HL
 call print   ; print text
 hlt          ; halt CPU
@@ -384,6 +367,28 @@ print:
     out 11h   ; otherwise; show it
     jmp print ; and repeat from the beginning
 ```
+
+## Configuration file
+
+The following table shows all the possible settings of MITS 88-SIO plugin:
+
+|---
+|Name | Default value | Valid values | Description
+|-|-|-|-
+|`statusPorts` | `""` (no ports) | Comma-separated port numbers from 0 to 255 | CPU-ports mapped to status port of 88-sio
+|`dataPorts`   | `""` (no ports) | Comma-separated port numbers from 0 to 255 | CPU-ports mapped to data port of 88-sio
+|`clearInputBit8`   | `false` | `true`/`false` | Whether to clear 8th bit of the input written to 88-sio
+|`clearOutputBit8`  | `false` | `true`/`false` | Whether to clear 8th bit of the output, read from 88-sio
+|`inputToUpperCase` | `false` | `true`/`false` | Whether to convert the input written to 88-sio into upper-case
+|`mapDeleteChar`    | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "DEL" input key/character to given value. For example, if user presses "DEL" the 88-sio can map it as if user pressed "BACKSPACE".
+|`mapBackspaceChar` | `"UNCHANGED"` | `BACKSPACE`, `DELETE`, `UNDERSCORE`, `UNCHANGED` | Maps a "BACKSPACE" input key/character to given value. For example, if user presses "BACKSPACE" the 88-sio can map it as if user pressed "DEL".
+|`interruptsSupported`| `true` | `true`/`false` | Whether interrupts are supported in general. When disabled, they cannot be enabled in software.
+|`inputInterruptVector`  | `7` | 0-7 | Set input interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the input (e.g. a key press) if input interrupts are enabled
+|`outputInterruptVector` | `7` | 0-7 | Set output interrupt vector. 88-sio will signal an interrupt to the CPU as RST instruction on the output (e.g. on displaying a char) if output interrupts are enabled
+|---
+
+The bundled Altair configurations set `statusPorts = "0x10, 0x14, 0x16, 0x18"` and
+`dataPorts = "0x11, 0x15, 0x17, 0x19"`. If these keys are omitted, no CPU ports are attached.
 
 [sio]: http://www.s100computers.com/Hardware%20Folder/MITS/SIO-B/SIO.htm
 [manual]: https://deramp.com/downloads/altair/hardware/sio_serial_interface/88-SIO%20Rev%200%20&%201.pdf

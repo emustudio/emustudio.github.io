@@ -10,38 +10,31 @@ permalink: /application/main-window
 
 # Main window
 
-The main window is the core part of the emuStudio application. Users usually spend there most of the time while working
-with emuStudio.
+After opening a computer, the main window provides a source code editor and an **Emulator** tab. The editor tab shows
+the active source filename, or **Source code editor** when no file is selected.
 
-The content of the window is split into two panels or tabs, placeholders for two actions users can do in emuStudio. The
-first tab is "Source code editor", second is "Emulator", used during computer
-emulation.
-
-Toolbar and dialog icons come from the active Swing Look&Feel when it supplies them, with bundled application icons as
-fallbacks. Changing the `theme` setting therefore keeps controls visually consistent without making an action disappear when
-a theme omits an optional icon.
+The **File** and **Edit** menus provide file and text operations. **Project** contains compilation, a view of the
+computer schema, and compiler settings. **Help** contains information about emuStudio. The application's
+[theme setting]({{ site.baseurl }}/application/configuration-file) controls the appearance of windows and controls.
 
 ## Source code editor
 
-![Source code tab]({{ site.baseurl }}/assets/application/source-code.png){:style="max-width:760px"}
+![Source editor showing reverse.asm and successful compilation output for the Intel 8080 assembler]({{ site.baseurl }}/assets/application/source-code-editor.png){: style="max-width: 1094px; width: 100%;" }
 
-In the source code editor, users can write programs for the emulated computer. However, the most important tool which
-allows translation of the source code into a binary program readable by emulated CPU is a compiler. Therefore, users
-must use the right compiler.
+Write programs in the editor and compile them with the computer's compiler plugin. The compiler determines the input
+language and must produce code compatible with the selected CPU.
 
-The input language of a compiler is not limited, it can be either a kind of assembler or even C or Pascal language. It
-depends on the compiler implementation, there can be many. The only restriction
-is that compiler must have an output that is compatible with CPU which is currently being emulated. This cannot be
-checked automatically, users must take care of this.
+The toolbar provides **New**, **Open**, **Save**, undo/redo, cut/copy/paste, find, replace, and **Save & Compile**.
+Compilation messages appear in the pane below the editor. Drag the divider to adjust its height.
 
 The source code editor supports the following features:
 
-- fixed font: [Fira Code regular][fira-code]{:target="_blank"} (cannot be changed at the moment)
-- line numbering & syntax highlighting
-- undo/redo capability
+- bundled **JetBrains Mono NL** font
+- line numbering and syntax highlighting
+- undo/redo
 - search/replace text
 - cut/copy/paste text
-- `CTRL+{mouse wheel}` changes font size
+- <kbd>Ctrl</kbd> + mouse wheel changes font size
 
 ### Working with multiple files
 
@@ -57,40 +50,33 @@ resolved from its directory. A missing file produces an error dialog.
 ### Compilation
 
 Click **Save & Compile** to save and compile the selected source file. Save other modified tabs first so included files
-are read from their current contents on disk. The compiler output window shows compilation messages and points to source
-positions supplied by the compiler.
+are read from their current contents on disk. The compiler output pane shows compilation messages and points to source
+positions supplied by the compiler. Stop running emulation before compiling.
 
-Compiled source code can produce an output binary file (for example a HEX file), and it's automatically loaded into the
-operating memory. If the emulation is
-running, the user must stop it first manually.
-
-If another program is loaded in memory, it is not removed before loading the currently compiled program, but the memory
-is overwritten at only those locations relevant to the compiled program. All the other
-content is left unchanged.
+Compiled code can produce a binary file (for example a HEX file) and is loaded into operating memory by the compiler.
+**Save & Compile** resets the memory plugin before invoking the compiler and resets the CPU afterwards. Memory contents
+then depend on the memory plugin's reset behavior and the compiler: the 8080 and Z80 assemblers write generated
+addresses, while BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading successful output.
 
 ## Emulator tab
 
-*Emulator tab* is shown in the following image. It is currently open with MITS Altair8800 computer with Intel 8080 CPU,
-and several devices:
+The following example shows the MITS Altair8800 computer with its Intel 8080 CPU and peripheral devices:
 
-![Emulator tab]({{ site.baseurl}}/assets/application/emulator.png){:style="max-width:760px"}
+![Emulator tab with the 8080 debugger, CPU status and Altair peripheral device list]({{ site.baseurl }}/assets/application/emulator-tab.png){: style="max-width: 1094px; width: 100%;" }
 
-The tab contains three main parts. The first one is very useful - listing of operating memory disassembled into
-instructions.
-This part is called a debugger window, or "debugger". The other part, below the debugger window, is a list of all
-computer
-devices used ("peripheral devices"). With a double click, the user can open the GUI window of that particular device, if
-it supports it.
+The **Debugger** on the left disassembles memory into instructions. **Peripheral devices** below it lists the computer's
+devices. Select a device and click **Show device**, or double-click it, to open its GUI when supported. **Show settings**
+opens that device's settings when available.
 
-The right part shows the status of the CPU used in this computer. Each CPU has its own implementation of how the status
-window look and what it displays.
+The **Status** panel on the right is supplied by the CPU plugin. This 8080 example shows registers, flags, CPU frequency,
+and execution state. Other CPUs provide different controls. Drag the dividers to resize the debugger, device list,
+and status panel.
 
 ### Debugger window
 
-Debugging is a process in which a programmer tries to analyze a program, usually with the intent to find bugs.
-Debugger in emuStudio contains
-a debugger toolbar and list of few disassembled instructions from memory. In combination with the CPU status panel, it's
-the most powerful tool for seeing (and checking) all internal behavior of the emulated computer.
+Use the debugger toolbar to run, pause, and step through a program while inspecting instructions and CPU state.
+The instruction table and page controls are hidden during continuous execution and become available when it pauses
+or stops.
 
 Double-click an instruction with source information to open its source file at the corresponding line. The 8080 and
 Z80 assemblers attach this information when compiling into memory. The file opens in an editor tab, including when it
@@ -100,63 +86,44 @@ can restore positions from their `.meta` sidecars; a raw image without annotatio
 
 #### Debugger toolbar
 
-Debugger toolbar contains buttons (icons) for controlling the emulation and accessing memory content. Most of these
-buttons are self-explanatory.
-If you hover over those icons, a help text is displayed on how to use the icon.
+The toolbar controls are numbered from left to right. Hover over a button to see its tooltip. Controls are enabled
+according to the CPU's execution state and the plugins' capabilities.
 
-![Debugger toolbar]({{ site.baseurl}}/assets/application/debugger-toolbar.png)
-
-{: .list}
-| <span class="circle">1</span> | Reset emulation.
-| <span class="circle">2</span> | Set the next instruction position to 0. CPU will perform the next instruction from there.
-| <span class="circle">3</span> | Set the next instruction position to the `(current - 1)`. This action can completely change the displaying of instructions since the new instruction position does not have to be correct in terms of executing the current program.
-| <span class="circle">4</span> | Stop emulation (which was either running or paused).
-| <span class="circle">5</span> | Pause emulation (which was running).
-| <span class="circle">6</span> | Run emulation (which was paused).
-| <span class="circle">7</span> | Run emulation with a timer (which was paused). Instructions are executed after elapsing specified time interval. A dialog will appear to enter the time interval.
-| <span class="circle">8</span> | Step emulation (which was paused). CPU will execute only one - the very next - instruction.
-| <span class="circle">9</span> | Jump to location. The user will manually specify a location (address in memory) for the next instruction to execute.
-| <span class="circle">10</span> | Set/unset breakpoint. The user can set or unset a breakpoint on a specific memory location. When the CPU reaches the breakpoint, it will pause there, waiting for the next user action.
-| <span class="circle">11</span> | Show operating memory. If the memory plugin does not have a GUI, the icon is disabled.
+{: .list .control-list}
+| <span class="circle">1</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=2 y=2 %} | **Reset**. Reset the CPU, memory, and devices.
+| <span class="circle">2</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=41 y=2 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
+| <span class="circle">3</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=73 y=2 %} | **Step back**. Move the instruction pointer to the debugger's estimated previous instruction. This does not undo execution or restore registers and memory.
+| <span class="circle">4</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=105 y=2 %} | **Stop**. Stop running or paused emulation.
+| <span class="circle">5</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=137 y=2 %} | **Pause**. Pause continuous or timed execution.
+| <span class="circle">6</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=169 y=2 %} | **Run**. Start or resume execution from the current instruction address.
+| <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=201 y=2 %} | **Timed run**. Enter the interval between instructions, in milliseconds, then run one instruction at each interval.
+| <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=233 y=2 %} | **Step forward**. Execute one instruction.
+| <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=272 y=2 %} | **Jump to address**. Enter the address of the next instruction to execute.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=311 y=2 %} | **Breakpoint**. Set or remove a breakpoint at an address. A supported CPU pauses when it reaches that address; it must implement breakpoint support.
+| <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=350 y=2 %} | **Show operating memory**. Open the memory plugin's window when available.
 
 #### List of instructions
 
-The largest part of the debugger window a list of few disassembled instructions, so-called *instructions window*. About
-15 instructions are shown, but it depends on the CPU. They are arranged in a table. The first column is usually
-interactive, allowing the user to set breakpoints. The red strip is pointing to the very next instruction being
-executed.
+The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
+they show a breakpoint checkbox, address, instruction, and opcode bytes. The red row marks the next instruction.
+Click a breakpoint checkbox to toggle it when supported.
 
-The size of disassembled memory (resulting in the number of disassembled instructions) is not configurable. Also, the
-user cannot change instructions in this place.
+The number of visible rows follows the space available in the window. To change memory contents, use the memory
+plugin's window or compile another program; the instruction and opcode cells are read-only.
 
-Sometimes the instructions shown in the debugger do not have to be disassembled correctly. There are two reasons for
-that:
+For CPUs with instructions of different lengths, decoding from the middle of an instruction can produce misleading
+results. Memory can also contain data rather than code. The debugger estimates preceding instruction boundaries;
+use a known program address when a listing looks incorrect.
 
-- first, instructions can have various binary sizes (e.g. one byte, two bytes, etc.)
-- second, memory can contain programs on various locations, and emuStudio doesn't know where. Well, if it's just a
-  program compiled from the source code editor, it knows.
+#### Browsing instructions
 
-The implication is that if emuStudio starts to disassemble instructions at the wrong location, the instructions will be
-disassembled incorrectly, or they can appear as invalid.
+The page controls below the table browse memory without changing the CPU's instruction pointer. Use **Current page**
+to return to the next instruction after browsing elsewhere.
 
-However, emuStudio is trying hard to find the nearest program start location at which it's safe to start disassembling.
-Usually, it's just a few instructions back, so it is a fast process.
-
-#### Controlling of displaying the instructions
-
-By default, instructions window points to the next instruction with a few instructions before and after the current
-one. This set of instructions is called an "instructions window". The instruction window has it's starting and ending
-offset in memory. It is possible to move the window to forwards or backward, in a per-page fashion. A toolbar below
-the instructions list contains controls to control the instruction window pages.
-
-![Controlling instructions window]({{ site.baseurl }}/assets/application/pages.png)
-
-{: .list}
-| <span class="circle">1</span> | Go to the first page. The very first row corresponds to instruction position 0.
-| <span class="circle">2</span> | Go backward. The user will specify the number of pages for going back.
-| <span class="circle">3</span> | Go to the previous page.
-| <span class="circle">4</span> | Go to the page where the current instruction position is.
-| <span class="circle">5</span> | Go to the next page.
-| <span class="circle">6</span> | Go forwards. The user will specify the number of pages for going forward.
-
-[fira-code]: https://github.com/tonsky/FiraCode
+{: .list .control-list}
+| <span class="circle">1</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=0 y=0 %} | **First page**. Start the listing at address `0`.
+| <span class="circle">2</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=28 y=0 %} | **Seek backward**. Enter the number of pages to move back.
+| <span class="circle">3</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=56 y=0 %} | **Previous page**. Move back one page.
+| <span class="circle">4</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=84 y=0 %} | **Current page**. Show the CPU's current instruction location.
+| <span class="circle">5</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=112 y=0 %} | **Next page**. Move forward one page.
+| <span class="circle">6</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=140 y=0 %} | **Seek forward**. Enter the number of pages to move forward.

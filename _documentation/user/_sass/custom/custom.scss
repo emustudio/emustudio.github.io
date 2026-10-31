@@ -22,3 +22,59 @@ table.list, table.list th, table.list tr, table.list td, table.list caption, tab
     color: #000;
     text-align: center;
 }
+
+.control-icon {
+    display: inline-block;
+    width: 32px;
+    height: 30px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+table.control-list {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+
+    td {
+        vertical-align: top;
+    }
+
+    td:first-child {
+        width: 92px;
+        white-space: nowrap;
+    }
+
+    .circle {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        padding: 0;
+        line-height: 22px;
+        vertical-align: middle;
+    }
+}
+
+.annotated-screenshot {
+    position: relative;
+    max-width: 100%;
+    margin: 1rem 0;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .circle {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+        width: 26px;
+        height: 26px;
+        line-height: 22px;
+        font-size: 14px;
+        pointer-events: none;
+    }
+}

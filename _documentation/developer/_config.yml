@@ -21,4 +21,8 @@ aux_links:
 markdown: kramdown
 theme: "just-the-docs"
 
+# Just the Docs 0.12 uses deprecated Sass APIs; remove once the theme migrates.
+sass:
+  silence_deprecations: [import, global-builtin, color-functions]
+
 destination: ../../documentation/developer/

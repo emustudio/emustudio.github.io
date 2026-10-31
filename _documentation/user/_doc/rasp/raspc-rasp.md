@@ -139,6 +139,8 @@ For example, this is a valid program:
 ; Program reads an integer number from the input tape, calculates its factorial and prints the result
 ; onto the output tape.
 
+<input> 5
+
 org 5 ; reserve 5 registers
 
 ;saves the constant 1 into R2 and R3 registers

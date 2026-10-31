@@ -34,7 +34,7 @@ changes by the `ENTER` key:
 ![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory-edit.png)
 
 NOTE: By editing an opcode cell (a cell that contains an instruction opcode), the instruction is changed. It is also possible
-to set invalid opcode values, which then results in "address fallout" error during emulation.
+to set invalid opcode values, which stop emulation with "instruction fallout".
 
 For example, if a cell contains the `ADD =` instruction (operation code 7), which is then changed to 9 (`SUB =`), 
 the instruction on that location will be now changed and emuStudio will interpret it as such.

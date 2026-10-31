@@ -8,8 +8,8 @@ The project is organized as **three separate Jekyll sites** that are combined at
 
 | Site | Source | Jekyll version | Theme |
 |---|---|---|---|
-| Root website | `/` (this repo root) | 3.x (`github-pages` gem) | custom (scotch-io) |
-| User documentation | `_documentation/user/` | 4.3.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
+| Root website | `/` (this repo root) | 4.4.1 | custom (scotch-io) |
+| User documentation | `_documentation/user/` | 4.4.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
 | Developer documentation | `_documentation/developer/` | 4.3.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
 
 Documentation sub-sites are pre-built into the `documentation/` directory and served as static files by the root site.
@@ -24,7 +24,7 @@ templates which might be released under different licenses:
 
 ## Prerequisites
 
-- **Ruby** ≥ 2.7
+- **Ruby** ≥ 3.2 (required by the Bundler 4 version in the root lockfile)
 - **Bundler** (`gem install bundler`)
 
 Install dependencies for each Jekyll site:

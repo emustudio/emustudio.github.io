@@ -11,10 +11,9 @@ permalink: /application/
 
 # emuStudio Application
 
-emuStudio is a desktop application which allows emulation of various computers. Besides emulation, it contains source
-code editor, which can be used to write and then compile programs then to be instantly emulated. Virtual computers, as
-the emulators are called, are represented by plugins of various type (compiler, memory, CPU and device), combined in a
-computer configuration. The computer configuration can be opened during startup.
+emuStudio is a desktop application for emulating computers. Its source code editor lets you write and compile programs
+for the selected computer. A virtual computer combines compiler, CPU, memory, and device plugins in a configuration
+that you select at startup.
 
 The application has also command-line interface, which allows executing automatic "load-compile-emulate" workflow,
 possibly without graphical interface. This workflow is called "automatic emulation" and has its specifics, discussed per
@@ -25,36 +24,41 @@ A logger is used by emuStudio which helps debugging of the application and plugi
 ## Installation and run
 
 At first, please download emuStudio distribution. It is either a TAR or ZIP file in the form `emuStudio-[VERSION].zip`.
-For Linux/Mac environments, a TAR variant will be more suitable since it preserves file attributes and execution
+For Linux, a TAR variant will be more suitable since it preserves file attributes and execution
 permissions. Unpack the file where you want to have emuStudio installed.
 
 Before running, [Java 11][java11]{:target="_blank"} or later must be installed. Then, emuStudio can be run by executing
 the following script:
 
-- On Linux / Mac
+- On Linux or macOS:
+
 ```
 > ./emuStudio
 ```
 
 - On Windows:
+
 ```
 > emuStudio.bat
 ```
 
-NOTE: Currently supported are Linux and Windows. Mac is NOT supported, but it might work to some extent.
+emuStudio runs on Linux, Windows, and macOS. Individual plugins can require additional host resources, such as audio
+or network access.
 
 ## Command-line arguments
 
 emuStudio accepts several command line arguments. Their description is accessible with `--help` argument:
 
     $ ./emuStudio --help
-    Usage: emuStudio [-hV] [-cl] [-i=FILE] [-cn=NAME | -cf=FILE | -ci=INDEX]
-                     [COMMAND]
+    Usage: emuStudio [-hV] [-cl] [--config-dir=DIR] [-i=FILE] [--plugins-dir=DIR]
+                     [-cn=NAME | -cf=FILE | -ci=INDEX] [COMMAND]
     Universal emulation platform and framework
           -cl, --computers-list
                               list all existing virtual computers
+          --config-dir=DIR    configuration base directory
       -h, --help              Show this help message and exit.
       -i, --input-file=FILE   input file name (source code)
+          --plugins-dir=DIR   plugin base directory
       -V, --version           Print version information and exit.
     Virtual computer
           -cf, --computer-file=FILE
@@ -73,16 +77,17 @@ for environment variables and path resolution.
 Automation command has its own usage:
 
     $ ./emuStudio auto --help
-    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=ADDRESS] [-w=MILLIS]
+    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=LOCATION] [-w=MILLIS]
     run emulation automation
           --[no-]gui         show/don't show GUI during automation
       -h, --help             Show this help message and exit.
-      -p, --program-location=ADDRESS
-                             program start address
+      -p, --program-location=LOCATION
+                             program start location
       -V, --version          Print version information and exit.
-      -w, --waitmax=MILLIS   wait at most MILLIS for the CPU to stop
-                               (stop the CPU afterwards)
+      -w, --waitmax=MILLIS   limit emulation time to max MILLIS (force kill
+                               afterwards)
 
-
+The wait limit applies to CPU execution. See [automation]({{ site.baseurl }}/application/automation) for timeout
+behavior, program start addresses, and interpreting the logs.
 
 [java11]: https://jdk.java.net/archive/

@@ -10,9 +10,8 @@ permalink: /cpu/runstate
 
 # Run states
 
-Emulator "life" is a state machine. A state machine reacts on asynchronous events, which make the machine to transition
-the current state to another state. In emuStudio, whole emulation "state" depends on CPU run state. The run state is a
-name for the following states: `breakpoint` (starting state), `running`, `stopped` (more variants).
+CPU execution is represented by a run state. `AbstractCPU` starts in `STATE_STOPPED_NORMAL`; resetting the CPU puts it
+in `STATE_STOPPED_BREAK`, ready to execute or single-step.
 
 The state machine, how it should work, can be seen in the following diagram:
 
@@ -33,29 +32,21 @@ public static enum RunState {
 }
 ```
 
-Implementation of the state machine is a sole responsibility of CPU plugin. emuStudio has some expectations of it, like:
+`AbstractCPU` implements the following controls:
 
-- initial run state should be `STATE_STOPPED_BREAK`
-- calling `reset()` should set the run state to `STATE_STOPPED_BREAK`
-- calling `pause()` if the current state is not one of `STATE_STOPPED_(how)` variant, it should set the run state
-  to `STATE_STOPPED_BREAK`. Otherwise, do nothing.
-- calling `step()` if the current state is one of `STATE_STOPPED_(how)` (except `STATE_STOPPED_BREAK`), it should do
-  nothing. Otherwise, it should set the run state to:
-    - `STATE_STOPPED_BREAK`, if the execution of the current instruction did not cause error, or it wasn't a "halt"
-      instruction.
-    - `STATE_STOPPED_(how)` state, where `(how)` should be replaced by:
-        - `BAD_INSTR` - if unknown instruction was encountered
-        - `ADDR_FALLOUT` - if instruction pointed to unknown or forbidden memory location
-        - `NORMAL` - if the instruction was "halt" causing CPU to "halt"
-- calling `run()` should set the state to `STATE_RUNNING` and run instructions "infinitely", upon external event or some
-  error, in which case it should set the state to:
-    - `STATE_STOPPED_BREAK` - if external call `pause()` method
-    - `STATE_STOPPED_(how)` state, where `(how)` should be replaced by:
-        - `BAD_INSTR` - if unknown instruction was encountered
-        - `ADDR_FALLOUT` - if instruction pointed to unknown or forbidden memory location
-        - `NORMAL` - if the instruction was "halt" causing CPU to "halt"
-- calling `stop()` if the current state is one of `STATE_STOPPED_(how)` (except `STATE_STOPPED_BREAK`), it should do
-  nothing. Otherwise, it should set the state to `STATE_STOPPED_NORMAL`.
+- `reset()` stops execution, resets the engine and selects `STATE_STOPPED_BREAK`.
+- `execute()` starts continuous execution only from `STATE_STOPPED_BREAK` and selects `STATE_RUNNING`.
+- `step()` executes one instruction only from `STATE_STOPPED_BREAK`. An engine result of `STATE_RUNNING` becomes
+  `STATE_STOPPED_BREAK`; normal stops and errors are preserved.
+- `pause()` interrupts a running engine and returns to `STATE_STOPPED_BREAK`, unless the engine reports a terminal
+  stop or error.
+- `stop()` interrupts execution and changes running or breakpoint states to `STATE_STOPPED_NORMAL`. Existing terminal
+  errors are preserved.
+
+The engine reports `STATE_STOPPED_ADDR_FALLOUT` for an invalid memory address and `STATE_STOPPED_BAD_INSTR` for an
+invalid instruction. A halt may report `STATE_STOPPED_NORMAL`, or remain running while waiting for an interrupt if
+that is how the emulated processor works. Continuous execution must check thread interruption so pause and stop can
+finish. CPU listeners may run outside Swing's event-dispatch thread; dispatch GUI updates onto that thread.
 
 If the CPU plugin root class implements [CPU][cpu]{:target="_blank"} interface, it is its responsibility to notify CPU
 run state changes and manage run state "listeners". But if the plugin root class extends 

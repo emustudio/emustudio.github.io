@@ -15,9 +15,9 @@ extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
 
 [AbstractCPU][abstractCPU]{:target="_blank"} implements several mechanisms which save developer time, like:
 
-- emulation control methods (run, step, stop, pause, reset) are queued for execution in the same thread, and implements
-  run state notification. It means that it is possible to call them from any other thread (e.g. also from
-  Swing [Event dispatch thread][swingthread]{:target="_blank"})
+- control methods (`execute`, `step`, `stop`, `pause`, `reset`) are serialized by a control executor. Continuous
+  execution runs on a separate CPU worker. Callers, including Swing's
+  [event-dispatch thread][swingthread]{:target="_blank"}, wait for the control action to complete.
 - implements notification of run states (see next chapter)
 - implements breakpoints management
 
@@ -31,6 +31,7 @@ Sample implementation follows (only core methods are implemented):
 )
 @SuppressWarnings("unused")
 public class CpuImpl extends AbstractCPU {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CpuImpl.class);
     private final ContextImpl context = new ContextImpl();
 
     private EmulatorEngine engine;

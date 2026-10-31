@@ -38,7 +38,7 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 |---
 | Plugin type | Naming convention | Examples
 |-|-|-
-| Compiler | `[language]-compiler` (for compiler of higher language), or `as-[cpu type]` (for assembler) | `as-8080`, `as-z80`, `brainc-compiler`, `ram-compiler`
+| Compiler | `as-[cpu type]` for assemblers, or a language/computer abbreviation | `as-8080`, `as-z80`, `brainc-brainduck`, `ramc-ram`, `raspc-rasp`
 |---
 | CPU | `[cpu model]-cpu`, or `[computer type]-cpu` | `8080-cpu`, `z80-cpu`, `ram-cpu`, `brainduck-cpu`
 |---
@@ -47,8 +47,8 @@ Then `[plugin type]` follows, but in a form, as it is shown in the following tab
 | Device | `[device model]-[device type]` | `88-dcdd`, `88-sio`, `adm3a-terminal`, `simh-pseudo`, `vt100-terminal`
 |===
 
-Plugin names can contain digits, small and capital letters (regex: `[a-zA-Z0-9]+`). Capital letters shall be used only
-just for word separation (e.g. `zilogZ80`).
+Plugin JAR names use letters, digits, hyphens and underscores, as in `z80-cpu.jar` and `audio-ay3_8910-chip.jar`.
+Use the actual filename when setting the plugin's `path` in a computer configuration; filenames can be case-sensitive.
 
 ## Plugin structure
 
@@ -118,6 +118,17 @@ boolean automated = settings.getBoolean(PluginSettings.EMUSTUDIO_AUTO, false);
 int scale = settings.getInt("scale", 2);
 settings.setInt("scale", scale);
 ```
+
+### GUI icons
+
+Use `GUI.loadIcon("icons/clear.png")` to load an icon from the calling class's package in the plugin JAR.
+For sharper rendering on high-resolution displays, include `icons/clear@2x.png` at twice the base image's width
+and height. The loader combines both images in a `BaseMultiResolutionImage` wrapped in an `ImageIcon`, keeping
+the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base resource is
+absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to specify the resource lookup class.
+
+Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
+Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE)`.
 
 ## Third-party dependencies
 

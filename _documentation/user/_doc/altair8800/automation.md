@@ -55,24 +55,11 @@ Console will contain additional information about the emulation progress:
 [INFO] [88-SIO, device=LSI ADM-3A terminal] Device was attached
 [INFO] Starting emulation automation...
 [INFO] Emulating computer: MITS Altair8800
-[INFO] Compiler: Intel 8080 Assembler, version 0.41
-[INFO] CPU: Intel 8080 CPU, version 0.41
-[INFO] Memory: Byte-cell based operating memory, version 0.41
-[INFO] Memory size: 65536
-[INFO] Device: MITS 88-DCDD, version 0.41
-[INFO] Device: MITS 88-SIO, version 0.41
-[INFO] Device: LSI ADM-3A terminal, version 0.41
 [INFO] Compiling input file: examples/as-8080/reverse.asm
 [INFO] Compiler started working.
-[INFO] [INFO   ] Intel 8080 Assembler, version 0.41
-[INFO] [INFO   ] Compile was successful.
-	Output: /home/emuStudio/examples/as-8080/reverse.hex
-	Program starts at 0x03E8
-[INFO] [INFO   ] Compiled file was loaded into memory.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
 [INFO] Running emulation...
 [INFO] Normal stop
-[INFO] Instruction location = 0x41C
 [INFO] Emulation completed
 ```

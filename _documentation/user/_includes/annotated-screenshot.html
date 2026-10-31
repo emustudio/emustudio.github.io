@@ -1,0 +1,8 @@
+<div class="annotated-screenshot" style="width: {{ include.width }}px">
+  <img src="{{ site.baseurl }}{{ include.image }}" alt="{{ include.alt | escape }}">
+  {% assign points = include.points | split: '|' %}
+  {% for point in points %}
+    {% assign coordinates = point | split: ':' %}
+    <span class="circle" aria-hidden="true" style="left: clamp(13px, {{ coordinates[1] }}%, calc(100% - 13px)); top: clamp(13px, {{ coordinates[2] }}%, calc(100% - 13px))">{{ coordinates[0] }}</span>
+  {% endfor %}
+</div>

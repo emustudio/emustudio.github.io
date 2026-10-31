@@ -89,13 +89,45 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="caption"><span>Classes</span></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Common synchronous loader contract for BIN, I8HEX, TAP and TZX.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Immutable format block.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">File encodings and their extensions.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Per-load traversal and cancellation.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab3">&nbsp;</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Spectrum header fields decoded independently of their destination.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Generator and loader of 16-bit Intel Hex files (I8HEX).</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
+</div>
 </div>
 </div>
 </div>

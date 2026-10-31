@@ -10,11 +10,6 @@ permalink: /altair8800/z80-cpu
 
 # Zilog Z80 CPU emulator
 
-NOTE: This CPU plugin is shared across multiple virtual computers. It is used in both
-[MITS Altair8800]({{ site.baseurl }}/altair8800/) and
-[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) computers.
-{: .info}
-
 The `z80-cpu` plugin emulates an 8-bit Zilog Z80 with a 16-bit address space (64 KiB). Its features include:
 
 - Documented and undocumented instructions, including DD/FD prefix chains.
@@ -26,6 +21,11 @@ The `z80-cpu` plugin emulates an 8-bit Zilog Z80 with a 16-bit address space (64
 I/O devices are selected by the low eight bits of the port address (`00h`–`FFh`). The CPU passes the full
 16-bit port address to the selected device, which allows Spectrum devices to decode its high byte.
 Reading an unattached port returns `FFh`.
+
+NOTE: This CPU plugin is shared across multiple virtual computers, for example in 
+[MITS Altair8800]({{ site.baseurl }}/altair8800/) and
+[ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/).
+{: .info}
 
 ## CPU status panel
 

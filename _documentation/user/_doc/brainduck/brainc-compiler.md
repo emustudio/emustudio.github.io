@@ -41,7 +41,7 @@ The language of BrainDuck compiler is almost identical to the original brainfuck
 specified well-enough, so there are open questions on how to treat with some special situations, which are described
 below.
 
-Generally, the language knows eight instructions. They are best described when they are compared with C language
+The eight brainfuck instructions are supported, plus `;` as an explicit halt instruction. They are best described when they are compared with C language
 equivalent. Brainfuck uses only a single data pointer called `P`, pointing to bounded memory. The boundary is specified
 in the shared `byte-mem` plugin.
 
@@ -87,7 +87,7 @@ A memory cell has 8-bits (cells are bytes).
 
 ### Memory size
 
-Memory size is defined in `byte-mem` plugin. In this version of emuStudio, it is 65536 bytes.
+Memory size is configurable in `byte-mem`. The bundled BrainDuck computer uses 65536 bytes.
 
 ### End-of-line code
 

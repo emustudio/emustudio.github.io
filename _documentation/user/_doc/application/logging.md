@@ -10,16 +10,11 @@ permalink: /application/logging
 
 # Logging
 
-No software is bug-free in these days, and not a person is perfect. Sometimes it might happen that emuStudio is not
-working as expected, either it does not start (with a weird message on screen), or it fails while running.
+emuStudio logs startup, plugin, and execution messages. When reporting a problem, include the relevant log messages,
+the computer configuration, and the steps needed to reproduce it. The supplied configuration writes general messages
+to the console; enable file logging to retain them.
 
-For that purpose, everything important is being logged. If you encounter some problem and either want to fix it or
-report it, the logs, except steps to reproduce are the most important thing.
-By default, logging is written to the standard output (console). In case of a problem, it is a good practice to enable
-file logging.
-
-To enable file logging, open `logback.xml` file located in the root directory of emuStudio. Find a section
-named `<root ..>`, and change `appender-ref` from `STDOUT` to `FILE` as follows:
+Open the distribution's `logback.xml` and replace the `STDOUT` reference in the `<root>` section with `FILE`:
 
 ```xml
 <root level="info">
@@ -27,20 +22,20 @@ named `<root ..>`, and change `appender-ref` from `STDOUT` to `FILE` as follows:
 </root>
 ```
 
-The log file is named `logs/emuStudio.log`. Every new run of emuStudio will append log messages into that file until
-emuStudio is terminated.
+General messages are then appended to `logs/emuStudio.log`, relative to the current working directory. Keep both
+appender references if you also want console output.
 
 The supplied rolling policy keeps up to 10 days of archived logs, rolls each file at 5 MB, and limits archived logs
 to 100 MB in total.
-It is of course configurable. For more information about how to configure loggers, please look at
-the [logback site][logback]{:target="_blank"}.
+For other logging options, see the [Logback configuration manual][logback]{:target="_blank"}.
 
 ## Automation logger
 
-An important part of the analysis of the result of the automatic emulation is the log saying what happened. By default,
-each emuStudio process creates (overwrites) `logs/automation.log`. Automation progress is written to this file.
+The supplied configuration also creates `logs/automation.log`. This plain-text file records automation progress,
+compiler messages, the CPU's final state, and instruction address. It is overwritten when a new emuStudio process starts,
+so copy it before another run if you need to retain a result.
 
-The log file is in plaintext format and contains messages which appeared in the log during the emulation.
-The log file format can be customized, see the previous section for more details.
+Check this file and the devices' output when evaluating [automatic emulation]({{ site.baseurl }}/application/automation).
+An automation failure is not always reflected in the process exit status.
 
 [logback]: http://logback.qos.ch/manual/configuration.html

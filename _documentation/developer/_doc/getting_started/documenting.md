@@ -62,15 +62,17 @@ Virtual computer documentation should start with a short introduction:
 - Possible computer configurations
 - Comparison of features which are supported vs. features of real computer
 
-Then, every plug-in should be described, in a separate file, in the following order:
+Order each computer's pages as follows, omitting categories that do not apply:
 
-- compiler ("programming language" tutorial)
+- introduction (the computer's parent page)
+- software and examples
+- automation
+- assemblers and compilers
 - CPU
 - memory
-- devices
+- devices, alphabetically
 
-The last chapters should be devoted to emulation automation and debugging problems (e.g. how to do some analysis when
-something doesn't work).
+Use `nav_order` in front matter to control this order. Keep troubleshooting guidance beside the workflow it explains.
 
 ## Developer's documentation
 

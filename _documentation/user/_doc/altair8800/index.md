@@ -1,7 +1,7 @@
 ---
 layout: default
 title: MITS Altair8800
-description: "MITS Altair 8800 emulator in emuStudio — emulate the first personal computer with Intel 8080 and Zilog Z80 CPUs, 88-DCDD floppy, ADM-3A and VT100 terminals."
+description: "MITS Altair 8800 emulator in emuStudio — emulate an early personal computer with Intel 8080 and Zilog Z80 CPUs, 88-DCDD floppy, ADM-3A and VT100 terminals."
 nav_order: 3
 has_children: true
 permalink: /altair8800/
@@ -11,7 +11,7 @@ permalink: /altair8800/
 
 # MITS Altair8800
 
-Computer MITS Altair 8800 was named after a planet in one of the first episodes of Star Trek series. Having Intel 8080
+The MITS Altair 8800 was introduced in 1975. Having Intel 8080
 CPU inside, with 256 bytes of memory, no display and keyboard is this computer, when comparing to the present era,
 absolutely ridiculous. His author, Ed Roberts, called the invention "personal computer", which is now very common term.
 As Wikipedia states:
@@ -21,7 +21,7 @@ As Wikipedia states:
 
 ![MITS Altair8800 with LSI ADM-3A terminal and floppy drive]({{ site.baseurl }}/assets/altair8800/altair8800.png)
 
-Altair 8800 is one of the oldest commercially available computers overall. Ed Roberts (founder and CEO of MITS
+Altair 8800 was one of the early commercially successful personal computers. Ed Roberts (founder and CEO of MITS
 corporation) was selling these machines by classic mail directly from the factory.
 
 Various enthusiasts understood the power of Altair and started to develop software and hardware for the computer. Those
@@ -52,11 +52,11 @@ Basic configuration of MITS Altair 8800 was:
 In emuStudio, there exist two variants of the computer, varying in CPU. Either Intel 8080 CPU, or Zilog Z80 CPU is used.
 Some behavior was inspired by [simh] emulator. Abstract schema for emuStudio (Intel 8080):
 
-![Abstract schema of MITS Altair8800 (with Intel 8080)]({{ site.baseurl }}/assets/altair8800/altair-8080-schema.png){:style="max-width:402"}
+![Abstract schema of MITS Altair8800 (with Intel 8080)]({{ site.baseurl }}/assets/altair8800/altair-8080-schema.png){:style="max-width:569px; width:100%"}
 
 Abstract schema for emuStudio (Zilog Z80):
 
-![Abstract schema of MITS Altair8800 (with Zilog Z80)]({{ site.baseurl }}/assets/altair8800/altair-z80-schema.png){:style="max-width:543"}
+![Abstract schema of MITS Altair8800 (with Zilog Z80)]({{ site.baseurl }}/assets/altair8800/altair-z80-schema.png){:style="max-width:569px; width:100%"}
 
 Each plugin is described in further sections.
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Download
-description: "Download emuStudio — free, cross-platform vintage computer emulation platform. Available for Windows, Linux, and macOS."
+description: "Download emuStudio — free, cross-platform vintage computer emulation platform. Available for Windows and Linux."
 permalink: /download/
 ---
 
@@ -12,7 +12,7 @@ permalink: /download/
   <p>
     All versions of emuStudio are available at
      <a href="https://github.com/emustudio/emuStudio/releases" target="_blank">GitHub</a>.
-    Supported platform for all versions is only PC.     
+    The distributed launchers support Linux and Windows.
   </p>
   {% include download.html %}
 </div>
@@ -23,9 +23,9 @@ Unpack <code>emuStudio-[version].tar</code> (or <code>emuStudio-[version].zip</c
 to have emuStudio installed. The archive file contains the whole emuStudio with all official computer emulators and
 examples.
 
-To run emuStudio, run the following command from the console:
+Install Java 11 or later, then run the launcher from the unpacked directory:
 
-- On Linux / Mac
+- On Linux
   <code>./emuStudio</code>
 
 - On Windows:
@@ -39,9 +39,11 @@ Software is essential for emulators as it is for computers. For emulators, softw
 ROM images, magnetic tapes in a digitalized form, and there are probably even more options. It then depends solely on
 the specific emulator, how it loads the software in.
 
-In emuStudio, each virtual computer has a section in documentation called "Original software". This section provide
-links to various sites with software for emulators.
+The computer guides explain how to obtain and load software, or provide examples for the abstract machines.
+Features documented for the current development version may be newer than the latest published release.
 
 - [MITS Altair8800]({{ site.baseurl }}/documentation/user/altair8800/software)
-- [Brainduck]({{ site.baseurl }}/documentation/user/brainduck/examples)
+- [ZX Spectrum 48K]({{ site.baseurl }}/documentation/user/zxspectrum48k/software)
+- [Space Invaders]({{ site.baseurl }}/documentation/user/spaceinvaders/)
+- [BrainDuck]({{ site.baseurl }}/documentation/user/brainduck/examples)
 - [SSEM]({{ site.baseurl }}/documentation/user/ssem/software)

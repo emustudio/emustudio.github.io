@@ -27,6 +27,32 @@ Abstract schema for emuStudio (with VT100 terminal):
 
 ![Abstract schema of MITS Altair8800 (with VT100 terminal)]({{ site.baseurl }}/assets/altair8800/altair-vt100-schema.png)
 
+## GUI overview
+
+On the **Emulator** tab, double-click `vt100-terminal` in the device list:
+
+{% include annotated-screenshot.html image="/assets/altair8800/vt100-terminal-gui.png" alt="Altair VT100 terminal with numbered display, input indicator and ASCII input button" width=900 points="1:94.78:4.95|2:1.56:93.41|3:6.22:93.54" %}
+
+{: .list}
+| <span class="circle">1</span> | **Display**. Shows bytes sent through the 88-SIO data port, including supported ANSI colors and cursor-control sequences. Focus the window to send keyboard input back through the serial board.
+| <span class="circle">2</span> | **Input indicator**. Blue means no blocking input request is pending; red means the device is waiting for input. With Altair’s serial connection, ordinary keystrokes are delivered to 88-SIO without waiting for a red indicator.
+| <span class="circle">3</span> | **ASC**. Enter space-separated character codes when a blocking input request enables this button.
+
+## Settings dialog
+
+Select `vt100-terminal` in the device list and click **Show settings...**:
+
+{% include annotated-screenshot.html image="/assets/altair8800/vt100-terminal-settings.png" alt="VT100 settings with numbered terminal size, input file, output file, input delay and Save" width=401 points="1:89.53:5.87|2:2.74:62.76|3:2.74:70.38|4:60.10:78.59|5:73.82:93.55" %}
+
+{: .list}
+| <span class="circle">1</span> | **Terminal size**. Set columns and rows; the defaults are 80 × 24. Saving a size change clears the current display.
+| <span class="circle">2</span> | **Input file**. Select the file read in headless mode.
+| <span class="circle">3</span> | **Output file**. Select the file receiving terminal output in headless mode. It must differ from the input path.
+| <span class="circle">4</span> | **Input delay**. Set the delay between characters read from the input file, in milliseconds.
+| <span class="circle">5</span> | **Save**. Persist and apply the terminal settings. Press **Esc** to close without saving.
+
+The file redirection settings are used in headless mode. See the [shared terminal configuration reference]({{ site.baseurl }}/brainduck/terminal#configuration-file) for the corresponding keys.
+
 ## Original manual
 
 [Digital Equipment Corporation VT100 User Guide (EK-VT100-UG-001, August 1978, PDF)][manual]{:target="_blank"}
@@ -64,6 +90,7 @@ This example prints "Hello!" in red on the default (black) background, and reset
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, red_hello
     call print
     hlt
@@ -84,6 +111,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, green_msg
     call print
     hlt
@@ -104,6 +132,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, bold_msg
     call print
     hlt
@@ -126,6 +155,7 @@ This example shows several colored lines, each with a different color, and reset
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, line1
     call print
     lxi h, line2
@@ -168,6 +198,7 @@ This example clears the screen, positions the cursor at row 10, column 20, and p
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, cls
     call print
     lxi h, pos_msg
@@ -195,6 +226,7 @@ print:
 
 {:.code-example}
 ```
+    lxi sp, 0FF00h ; stack in writable memory
     lxi h, inverse_msg
     call print
     lxi h, newline
@@ -240,5 +272,20 @@ the Altair8800. The full reference is available in the [VT100 terminal documenta
 |---
 
 Escape character (ESC) has ASCII code `27` (decimal) or `1Bh` (hexadecimal).
+
+## Configuration file
+
+Set these keys in the existing `[DEVICE.settings]` table for `vt100-terminal` in the computer's TOML file.
+
+| Key | Default | Values | Meaning |
+|---|---|---|---|
+| `inputFileName` | `"vt100-terminal.in"` | Path to an existing file | Input read in headless mode |
+| `outputFileName` | `"vt100-terminal.out"` | Writable file path | Terminal output in headless mode |
+| `inputReadDelayMillis` | `0` | Nonnegative integer | Delay between input characters, in milliseconds |
+| `columns` | `80` | Positive integer | Terminal width in characters |
+| `rows` | `24` | Positive integer | Terminal height in characters |
+
+Input and output paths must differ. Relative paths resolve against emuStudio's working directory.
+Close and reopen the computer to apply changes made directly to the file.
 
 [manual]: https://bitsavers.org/pdf/dec/terminal/vt100/EK-VT100-UG-001_VT100_User_Guide_Aug78.pdf
