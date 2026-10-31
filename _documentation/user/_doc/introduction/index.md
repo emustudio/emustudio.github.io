@@ -12,6 +12,9 @@ permalink: /introduction/
 
 # Introduction
 
+New to emuStudio? [Run your first program]({{ site.baseurl }}/first-experiment/) for a guided path from installation
+to running and inspecting a bundled example.
+
 emuStudio is a toy-computer emulation platform and framework, targeting mainly academic sphere. A platform, because it
 supports full emulation "life-cycle". From writing and compiling programs for emulated machine, to running and
 debugging. A framework, because it provides API and documentation which encourages implementing your custom

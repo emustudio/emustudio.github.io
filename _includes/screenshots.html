@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-4">
             <a class="thumbnail" data-toggle="modal" href="#modal{{ screenshot.id }}">
-                <img alt="{{ screenshot.alt }}" src="{{ screenshot.thumbnail }}" style="width:300px">
+                <img alt="{{ screenshot.alt }}" class="img-fluid" src="{{ screenshot.thumbnail }}" width="300">
             </a>
         </div>
         <div class="col">{{ screenshot.html }}</div>
@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img alt="{{ screenshot.alt }}" src="{{ screenshot.image }}">
+                <img alt="{{ screenshot.alt }}" class="img-fluid" src="{{ screenshot.image }}">
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
