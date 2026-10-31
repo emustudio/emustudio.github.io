@@ -13,7 +13,7 @@
 @import 'asciidoc.css';
 
 $scotch-primary: rgb(255, 69, 69);
-$scotch-secondary: #FF7B7B;
+$scotch-secondary: #b52b39;
 
 %oswald { font-family: 'Oswald', sans-serif; }
 %roboto { font-family: 'Roboto Condensed', sans-serif; }
@@ -30,12 +30,23 @@ p {
 }
 section, header, footer, main, article, nav, aside { position: relative; }
 a {
-    outline: none !important;
-    text-decoration: none !important;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
     transition: all 225ms ease;
     color: $scotch-secondary;
 
-    &:hover { color: #6165FF; }
+    &:hover { color: #8f202b; }
+}
+a:focus-visible,
+.btn:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+.btn:focus-visible {
+    outline-color: $scotch-secondary;
+}
+.btn, .dropdown-item {
+    text-decoration: none;
 }
 .btn {
     text-transform: uppercase;
@@ -49,12 +60,66 @@ h1, h2, h3, h4, h5, h6 { @extend %oswald; }
 }
 .jumbotron h1 { color: $scotch-primary; }
 
+.home-page {
+    padding-top: 2rem;
+
+    .home-intro {
+        margin-bottom: 3rem;
+
+        h1 { color: $scotch-secondary; }
+        p { margin-bottom: 1rem; }
+    }
+
+    .home-logo {
+        display: block;
+        width: 9rem;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .home-preview {
+        min-width: 0;
+        margin: 2rem 0 0;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        figcaption {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    }
+
+    .home-section {
+        margin-bottom: 3rem;
+
+        .col-md-6 { margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; }
+    }
+
+    .home-support {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .home-page .home-preview { margin-top: 0; }
+}
+
 nav.navbar {
     margin: 0;
 
     a {
         text-transform: uppercase;
         font-size: 16px;
+        text-decoration: none;
     }
 
     .navbar-brand {
@@ -256,6 +321,7 @@ aside {
 
     a {
         color: #fff;
+        text-decoration: none;
     }
 }
 
@@ -320,6 +386,9 @@ aside {
 
 .thumbnail {
     border: none;
+    text-decoration: none;
+
+    &:hover { text-decoration: none; }
 }
 
 .borderless tbody tr td,

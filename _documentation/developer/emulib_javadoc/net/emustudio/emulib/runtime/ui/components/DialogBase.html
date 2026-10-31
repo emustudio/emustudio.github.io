@@ -52,20 +52,7 @@ loadScripts(document, 'script');</script>
 <nav role="navigation" class="toc" aria-label="Table of contents">
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
-<li><a href="#" tabindex="0">Description</a>
-<ol class="toc-list">
-<li><a href="#workflow-heading" tabindex="0">Workflow</a></li>
-<li><a href="#capabilities-heading" tabindex="0">Capabilities</a></li>
-<li><a href="#controlling-esc-behavior-with-shouldcloseonescape--heading" tabindex="0">Controlling ESC behavior with #shouldCloseOnEscape()</a></li>
-<li><a href="#usage-examples-heading" tabindex="0">Usage examples</a>
-<ol class="toc-list">
-<li><a href="#simple-dialog-heading" tabindex="0">Simple dialog</a></li>
-<li><a href="#conditionally-preventing-esc-from-closing-heading" tabindex="0">Conditionally preventing ESC from closing</a></li>
-<li><a href="#re-showing-a-dialog-after-dispose-heading" tabindex="0">Re-showing a dialog after dispose</a></li>
-</ol>
-</li>
-</ol>
-</li>
+<li><a href="#" tabindex="0">Description</a></li>
 <li><a href="#nested-class-summary" tabindex="0">Nested Class Summary</a></li>
 <li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
@@ -114,116 +101,11 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">DialogBase</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JDialog.html" title="class or interface in javax.swing" class="external-link">JDialog</a></span></div>
-<div class="block">Base class for emuStudio plugin dialogs.
+<div class="block">Base class for emuStudio dialogs.
 <p>
-Provides a standard dialog workflow with automatic ESC-to-close behavior, recursive key listener management,
-proper dispose/re-show lifecycle, and content centering relative to the parent window.
-
-<h2 id="workflow-heading">Workflow</h2>
-<ol>
-  <li>Subclass <code>DialogBase</code>, choosing a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link"><code>Frame</code></a> or <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link"><code>Dialog</code></a> parent constructor.</li>
-  <li>Implement <a href="#initializeComponents()"><code>initializeComponents()</code></a> to build and return the dialog's main content panel.</li>
-  <li>Call <a href="#buildContent()"><code>buildContent()</code></a> as the <strong>last statement</strong> of your constructor. This:
-      <ul>
-        <li>Invokes <a href="#initializeComponents()"><code>initializeComponents()</code></a> to obtain the content.</li>
-        <li>Makes the content focusable (so key events are delivered even if it only contains non-focusable
-            components like <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link"><code>JLabel</code></a>s).</li>
-        <li>Adds the content to the dialog's content pane with <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/BorderLayout.html#CENTER" title="class or interface in java.awt" class="external-link"><code>BorderLayout.CENTER</code></a>.</li>
-        <li>Calls <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html#pack()" title="class or interface in java.awt" class="external-link"><code>Window.pack()</code></a> to size the dialog to its preferred size.</li>
-        <li>Centers the dialog relative to its parent.</li>
-        <li>Installs the ESC key listener recursively on all child components.</li>
-      </ul>
-  </li>
-  <li>Show the dialog with <a href="#setVisible(boolean)"><code>setVisible(true)</code></a>.</li>
-</ol>
-
-<h2 id="capabilities-heading">Capabilities</h2>
-<ul>
-  <li><strong>ESC-to-close:</strong> Pressing ESC disposes the dialog. This is handled via two complementary
-      mechanisms:
-      <ul>
-        <li><em>Primary:</em> A <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/KeyListener.html" title="class or interface in java.awt.event" class="external-link"><code>KeyListener</code></a> installed recursively on the dialog and all its descendants
-            (via <a href="../GUI.html#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>GUI.addKeyListenerRecursively(Component, KeyListener)</code></a>). It fires before component-level key bindings, so ESC is
-            caught before Swing components like <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link"><code>JTable</code></a> or <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSpinner.html" title="class or interface in javax.swing" class="external-link"><code>JSpinner</code></a> can consume it.</li>
-        <li><em>Fallback:</em> A root-pane keyboard action registered with <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JComponent.html#WHEN_IN_FOCUSED_WINDOW" title="class or interface in javax.swing" class="external-link"><code>JComponent.WHEN_IN_FOCUSED_WINDOW</code></a>.
-            This handles the case where no component has focus (e.g. a dialog containing only JLabels). If the
-            primary listener already consumed the event, this fallback does not double-fire.</li>
-      </ul>
-  </li>
-  <li><strong>Recursive key listener management:</strong> The ESC key listener is automatically added to all
-      existing child components and to any components added dynamically later (via a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ContainerListener.html" title="class or interface in java.awt.event" class="external-link"><code>ContainerListener</code></a>).
-      On <a href="#dispose()"><code>dispose()</code></a>, the listeners are recursively removed to prevent leaks.</li>
-  <li><strong>Dispose/re-show lifecycle:</strong> Calling <a href="#dispose()"><code>dispose()</code></a> removes all ESC key listeners.
-      Calling <a href="#setVisible(boolean)"><code>setVisible(true)</code></a> re-registers them, allowing a dialog instance to be
-      safely re-shown after disposal. Duplicate registration is prevented internally.</li>
-  <li><strong>Default close operation:</strong> Set to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/WindowConstants.html#DISPOSE_ON_CLOSE" title="class or interface in javax.swing" class="external-link"><code>WindowConstants.DISPOSE_ON_CLOSE</code></a>, so closing the dialog
-      via the window manager's close button also releases its resources.</li>
-  <li><strong>Null content support:</strong> If <a href="#initializeComponents()"><code>initializeComponents()</code></a> returns <code>null</code>, the dialog
-      is still created and centered, but no content is added and <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html#pack()" title="class or interface in java.awt" class="external-link"><code>Window.pack()</code></a> is not called.</li>
-</ul>
-
-<h2 id="controlling-esc-behavior-with-shouldcloseonescape--heading">Controlling ESC behavior with <a href="#shouldCloseOnEscape()"><code>shouldCloseOnEscape()</code></a></h2>
-<p>
-The <a href="#shouldCloseOnEscape()"><code>shouldCloseOnEscape()</code></a> method is consulted <em>every time</em> the ESC key is pressed, not just once
-at construction time. This means a subclass can change the return value dynamically based on runtime state
-(e.g. whether an emulated keyboard is active, or whether a text field is being edited).
-<p>
-When the method returns <code>false</code>, the ESC key event is neither consumed nor acted upon — it propagates
-normally and can be handled by other components.
-
-<h2 id="usage-examples-heading">Usage examples</h2>
-
-<h3 id="simple-dialog-heading">Simple dialog</h3>
-<pre><code>public class AboutDialog extends DialogBase {
-
-    public AboutDialog(Frame parent) {
-        super(parent, "About", true);
-        buildContent();
-    }
-
-    @Override
-    protected JComponent initializeComponents() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("My Plugin v1.0"));
-        return panel;
-    }
-}
-</code></pre>
-
-<h3 id="conditionally-preventing-esc-from-closing-heading">Conditionally preventing ESC from closing</h3>
-<pre><code>public class KeyboardDialog extends DialogBase {
-    private boolean keyboardActive = false;
-
-    public KeyboardDialog(Frame parent) {
-        super(parent, "Emulated Keyboard", false);
-        buildContent();
-    }
-
-    @Override
-    protected boolean shouldCloseOnEscape() {
-        // When the emulated keyboard is active, ESC should be forwarded
-        // to the emulator instead of closing the dialog.
-        return !keyboardActive;
-    }
-
-    public void setKeyboardActive(boolean active) {
-        this.keyboardActive = active;
-    }
-
-    @Override
-    protected JComponent initializeComponents() {
-        return new JPanel(); // keyboard UI
-    }
-}
-</code></pre>
-
-<h3 id="re-showing-a-dialog-after-dispose-heading">Re-showing a dialog after dispose</h3>
-<pre><code>// Create once, show multiple times:
-AboutDialog dialog = new AboutDialog(mainFrame);
-dialog.setVisible(true);  // first show — ESC listeners are registered
-// ... user presses ESC or closes the dialog — dispose() removes listeners
-dialog.setVisible(true);  // re-show — ESC listeners are re-registered automatically
-</code></pre></div>
+Subclasses implement <a href="#initializeComponents()"><code>initializeComponents()</code></a> and call <a href="#buildContent()"><code>buildContent()</code></a> as the last statement
+of their constructor. The dialog is packed, centered on its parent, disposed on close, and closed by ESC
+(unless <a href="#shouldCloseOnEscape()"><code>shouldCloseOnEscape()</code></a> returns <code>false</code>). A disposed dialog can be shown again.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -291,16 +173,12 @@ dialog.setVisible(true);  // re-show — ESC listeners are re-registered automat
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.awt.Dialog,java.lang.String,boolean)" class="member-name-link">DialogBase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link">Dialog</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Constructs a new DialogBase with a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link"><code>Dialog</code></a> parent.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>protected </code></div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.awt.Frame,java.lang.String,boolean)" class="member-name-link">DialogBase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link">Frame</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Constructs a new DialogBase with a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link"><code>Frame</code></a> parent.</div>
-</div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -318,27 +196,25 @@ dialog.setVisible(true);  // re-show — ESC listeners are re-registered automat
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildContent()" class="member-name-link">buildContent</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Builds and lays out the dialog content.</div>
+<div class="block">Adds content from <a href="#initializeComponents()"><code>initializeComponents()</code></a>, packs and centers the dialog, and installs ESC handling.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dispose()" class="member-name-link">dispose</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Disposes of the dialog and releases its resources.</div>
+<div class="block">Disposes the dialog and removes the ESC key listeners.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JComponent.html" title="class or interface in javax.swing" class="external-link">JComponent</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#initializeComponents()" class="member-name-link">initializeComponents</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates and returns the main content component of this dialog.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setVisible(boolean)" class="member-name-link">setVisible</a><wbr>(boolean&nbsp;visible)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Shows or hides this dialog.</div>
+<div class="block">Shows or hides the dialog; showing re-registers ESC key listeners removed by <a href="#dispose()"><code>dispose()</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldCloseOnEscape()" class="member-name-link">shouldCloseOnEscape</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determines whether pressing ESC should close (dispose) this dialog.</div>
+<div class="block">Checked on every ESC press; return <code>false</code> to let ESC propagate (e.g.</div>
 </div>
 </div>
 </div>
@@ -379,15 +255,11 @@ dialog.setVisible(true);  // re-show — ESC listeners are re-registered automat
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DialogBase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link">Frame</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</span></div>
-<div class="block">Constructs a new DialogBase with a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link"><code>Frame</code></a> parent.
-<p>
-Sets the default close operation to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/WindowConstants.html#DISPOSE_ON_CLOSE" title="class or interface in javax.swing" class="external-link"><code>WindowConstants.DISPOSE_ON_CLOSE</code></a> and registers the root-pane fallback
-ESC binding. Call <a href="#buildContent()"><code>buildContent()</code></a> as the last statement of the subclass constructor.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>parent</code> - the parent frame (may be <code>null</code> for an unowned dialog)</dd>
-<dd><code>title</code> - the dialog title shown in the title bar</dd>
-<dd><code>modal</code> - <code>true</code> to block input to other windows while this dialog is visible</dd>
+<dd><code>parent</code> - parent frame, or <code>null</code></dd>
+<dd><code>title</code> - dialog title</dd>
+<dd><code>modal</code> - whether the dialog is modal</dd>
 </dl>
 </div>
 </section>
@@ -399,15 +271,11 @@ ESC binding. Call <a href="#buildContent()"><code>buildContent()</code></a> as t
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DialogBase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link">Dialog</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</span></div>
-<div class="block">Constructs a new DialogBase with a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link"><code>Dialog</code></a> parent.
-<p>
-Sets the default close operation to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/WindowConstants.html#DISPOSE_ON_CLOSE" title="class or interface in javax.swing" class="external-link"><code>WindowConstants.DISPOSE_ON_CLOSE</code></a> and registers the root-pane fallback
-ESC binding. Call <a href="#buildContent()"><code>buildContent()</code></a> as the last statement of the subclass constructor.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>parent</code> - the parent dialog</dd>
-<dd><code>title</code> - the dialog title shown in the title bar</dd>
-<dd><code>modal</code> - <code>true</code> to block input to other windows while this dialog is visible</dd>
+<dd><code>parent</code> - parent dialog</dd>
+<dd><code>title</code> - dialog title</dd>
+<dd><code>modal</code> - whether the dialog is modal</dd>
 </dl>
 </div>
 </section>
@@ -425,32 +293,10 @@ ESC binding. Call <a href="#buildContent()"><code>buildContent()</code></a> as t
 <h3>shouldCloseOnEscape</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">shouldCloseOnEscape</span>()</div>
-<div class="block">Determines whether pressing ESC should close (dispose) this dialog.
-<p>
-This method is called <em>on every ESC key press</em>, not cached at construction time. This allows subclasses
-to return different values depending on runtime state. For example, an emulated-keyboard dialog can return
-<code>false</code> while the keyboard is capturing input, and <code>true</code> otherwise.
-<p>
-When this method returns <code>false</code>:
-<ul>
-  <li>The ESC key event is <strong>not</strong> consumed — it propagates normally to other listeners and
-      key bindings.</li>
-  <li>The dialog is <strong>not</strong> disposed.</li>
-</ul>
-When this method returns <code>true</code> (the default):
-<ul>
-  <li>The ESC key event is consumed (preventing further processing by Swing components).</li>
-  <li><a href="#dispose()"><code>dispose()</code></a> is called, which also removes the recursively-installed key listeners.</li>
-</ul></div>
+<div class="block">Checked on every ESC press; return <code>false</code> to let ESC propagate (e.g. to an emulated keyboard).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd><code>true</code> if ESC should close the dialog (default), <code>false</code> to let ESC propagate</dd>
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="#dispose()"><code>dispose()</code></a></li>
-</ul>
-</dd>
+<dd>whether ESC closes the dialog (default <code>true</code>)</dd>
 </dl>
 </div>
 </section>
@@ -460,11 +306,7 @@ When this method returns <code>true</code> (the default):
 <h3>dispose</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">dispose</span>()</div>
-<div class="block">Disposes of the dialog and releases its resources.
-<p>
-Before calling <code>super.dispose()</code>, this method recursively removes the ESC key listener from the dialog
-and all its descendants to prevent memory leaks. If the dialog is later re-shown via
-<a href="#setVisible(boolean)"><code>setVisible(true)</code></a>, the listeners are automatically re-registered.</div>
+<div class="block">Disposes the dialog and removes the ESC key listeners.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html#dispose()" title="class or interface in java.awt" class="external-link">dispose</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html" title="class or interface in java.awt" class="external-link">Window</a></code></dd>
@@ -477,17 +319,12 @@ and all its descendants to prevent memory leaks. If the dialog is later re-shown
 <h3>setVisible</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setVisible</span><wbr><span class="parameters">(boolean&nbsp;visible)</span></div>
-<div class="block">Shows or hides this dialog.
-<p>
-When <code>visible</code> is <code>true</code>, the ESC key listener is re-registered recursively on all child
-components. This supports the pattern of creating a dialog once and re-showing it after a previous
-<a href="#dispose()"><code>dispose()</code></a> call. Duplicate listener registration is prevented internally by
-<a href="../GUI.html#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>GUI.addKeyListenerRecursively(Component, KeyListener)</code></a>.</div>
+<div class="block">Shows or hides the dialog; showing re-registers ESC key listeners removed by <a href="#dispose()"><code>dispose()</code></a>.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html#setVisible(boolean)" title="class or interface in java.awt" class="external-link">setVisible</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link">Dialog</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>visible</code> - <code>true</code> to show the dialog, <code>false</code> to hide it</dd>
+<dd><code>visible</code> - whether to show the dialog</dd>
 </dl>
 </div>
 </section>
@@ -497,24 +334,8 @@ components. This supports the pattern of creating a dialog once and re-showing i
 <h3>buildContent</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">buildContent</span>()</div>
-<div class="block">Builds and lays out the dialog content. <strong>Must be called as the last statement of the subclass
-constructor.</strong>
-<p>
-This method performs the following steps in order:
-<ol>
-  <li>Calls <a href="#initializeComponents()"><code>initializeComponents()</code></a> to obtain the dialog's main content component.</li>
-  <li>If the content is non-<code>null</code>:
-      <ul>
-        <li>Makes the content focusable so that key events are delivered even when the content contains only
-            non-focusable components (e.g. <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link"><code>JLabel</code></a>s).</li>
-        <li>Adds the content to the dialog's content pane using <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/BorderLayout.html#CENTER" title="class or interface in java.awt" class="external-link"><code>BorderLayout.CENTER</code></a>.</li>
-        <li>Calls <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html#pack()" title="class or interface in java.awt" class="external-link"><code>Window.pack()</code></a> to size the dialog to its preferred size.</li>
-      </ul>
-  </li>
-  <li>Centers the dialog relative to its parent window.</li>
-  <li>Installs the ESC key listener recursively on the dialog and all its descendants (including any
-      components added dynamically in the future via a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ContainerListener.html" title="class or interface in java.awt.event" class="external-link"><code>ContainerListener</code></a>).</li>
-</ol></div>
+<div class="block">Adds content from <a href="#initializeComponents()"><code>initializeComponents()</code></a>, packs and centers the dialog, and installs ESC handling.
+Must be the last statement of the subclass constructor.</div>
 </div>
 </section>
 </li>
@@ -523,13 +344,9 @@ This method performs the following steps in order:
 <h3>initializeComponents</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JComponent.html" title="class or interface in javax.swing" class="external-link">JComponent</a></span>&nbsp;<span class="element-name">initializeComponents</span>()</div>
-<div class="block">Creates and returns the main content component of this dialog.
-<p>
-Called by <a href="#buildContent()"><code>buildContent()</code></a>. Subclasses should build their UI component tree and return the root
-component. Return <code>null</code> if the dialog has no content (the dialog will still be created and centered).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the main content component, or <code>null</code> for an empty dialog</dd>
+<dd>main content component, or <code>null</code> for an empty dialog</dd>
 </dl>
 </div>
 </section>

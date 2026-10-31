@@ -72,17 +72,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#writeInt(int,java.lang.Short%5B%5D,int)" tabindex="0">writeInt(int, Short[], int)</a></li>
 <li><a href="#numbersToBytes(java.lang.Number%5B%5D)" tabindex="0">numbersToBytes(Number[])</a></li>
 <li><a href="#numbersToNativeBytes(java.lang.Number%5B%5D)" tabindex="0">numbersToNativeBytes(Number[])</a></li>
-<li><a href="#shortsToBytes(java.lang.Short%5B%5D)" tabindex="0">shortsToBytes(Short[])</a></li>
-<li><a href="#shortsToNativeBytes(java.lang.Short%5B%5D)" tabindex="0">shortsToNativeBytes(Short[])</a></li>
-<li><a href="#shortsToNativeShorts(java.lang.Short%5B%5D)" tabindex="0">shortsToNativeShorts(Short[])</a></li>
-<li><a href="#nativeShortsToNativeBytes(short%5B%5D)" tabindex="0">nativeShortsToNativeBytes(short[])</a></li>
 <li><a href="#nativeIntsToNativeBytes(int%5B%5D)" tabindex="0">nativeIntsToNativeBytes(int[])</a></li>
 <li><a href="#nativeShortsToBytes(short%5B%5D)" tabindex="0">nativeShortsToBytes(short[])</a></li>
 <li><a href="#nativeShortsToShorts(short%5B%5D)" tabindex="0">nativeShortsToShorts(short[])</a></li>
 <li><a href="#nativeBytesToBytes(byte%5B%5D)" tabindex="0">nativeBytesToBytes(byte[])</a></li>
-<li><a href="#nativeBytesToIntegers(byte%5B%5D)" tabindex="0">nativeBytesToIntegers(byte[])</a></li>
-<li><a href="#nativeBytesToShorts(byte%5B%5D)" tabindex="0">nativeBytesToShorts(byte[])</a></li>
-<li><a href="#nativeBytesToInts(byte%5B%5D)" tabindex="0">nativeBytesToInts(byte[])</a></li>
 <li><a href="#listToNativeInts(java.util.List)" tabindex="0">listToNativeInts(List)</a></li>
 <li><a href="#bcd2bin(int)" tabindex="0">bcd2bin(int)</a></li>
 <li><a href="#bin2bcd(int)" tabindex="0">bin2bcd(int)</a></li>
@@ -158,35 +151,15 @@ It is assumed the BCD has little endian.</div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts native byte[] array to boxed Byte[] array.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeBytesToIntegers(byte%5B%5D)" class="member-name-link">nativeBytesToIntegers</a><wbr>(byte[]&nbsp;array)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeIntsToNativeBytes(int%5B%5D)" class="member-name-link">nativeIntsToNativeBytes</a><wbr>(int[]&nbsp;numbers)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native byte[] array to boxed Integer[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeBytesToInts(byte%5B%5D)" class="member-name-link">nativeBytesToInts</a><wbr>(byte[]&nbsp;array)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native byte[] array to boxed Integer[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeBytesToShorts(byte%5B%5D)" class="member-name-link">nativeBytesToShorts</a><wbr>(byte[]&nbsp;array)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native byte[] array to boxed Short[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeIntsToNativeBytes(int%5B%5D)" class="member-name-link">nativeIntsToNativeBytes</a><wbr>(int[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts native short[] array to native byte[] array.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToBytes(short%5B%5D)" class="member-name-link">nativeShortsToBytes</a><wbr>(short[]&nbsp;numbers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToBytes(short%5B%5D)" class="member-name-link">nativeShortsToBytes</a><wbr>(short[]&nbsp;numbers)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts native short[] array to Byte[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToNativeBytes(short%5B%5D)" class="member-name-link">nativeShortsToNativeBytes</a><wbr>(short[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native short[] array to native byte[] array.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToShorts(short%5B%5D)" class="member-name-link">nativeShortsToShorts</a><wbr>(short[]&nbsp;numbers)</code></div>
@@ -255,54 +228,39 @@ It is assumed the BCD has little endian.</div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Reverse bits in long (max 64-bit) value.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shortsToBytes(java.lang.Short%5B%5D)" class="member-name-link">shortsToBytes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts Short[] array to Byte[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shortsToNativeBytes(java.lang.Short%5B%5D)" class="member-name-link">shortsToNativeBytes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts Short[] array to native byte[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static short[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shortsToNativeShorts(java.lang.Short%5B%5D)" class="member-name-link">shortsToNativeShorts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts Short[] array to native short[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
  byte[]&nbsp;output,
  int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Split the value into 4 bytes.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,int%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,int%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
  int[]&nbsp;output,
  int&nbsp;strategy)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Split the value into 4 bytes.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;output,
+ int&nbsp;strategy)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Split the value into 4 bytes.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;output,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Integer%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;output,
  int&nbsp;strategy)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Split the value into 4 bytes.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Integer%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;output,
- int&nbsp;strategy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Short%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Short%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;output,
  int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Split the value into 4 bytes.</div>
 </div>
 </div>
@@ -615,69 +573,6 @@ Every number is converted to byte using number.byteValue() call.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="shortsToBytes(java.lang.Short[])">
-<h3>shortsToBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</span>&nbsp;<span class="element-name">shortsToBytes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</span></div>
-<div class="block">Converts Short[] array to Byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>boxed Byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="shortsToNativeBytes(java.lang.Short[])">
-<h3>shortsToNativeBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">shortsToNativeBytes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</span></div>
-<div class="block">Converts Short[] array to native byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>native byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="shortsToNativeShorts(java.lang.Short[])">
-<h3>shortsToNativeShorts</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">short[]</span>&nbsp;<span class="element-name">shortsToNativeShorts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;numbers)</span></div>
-<div class="block">Converts Short[] array to native short[] array.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>native short[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeShortsToNativeBytes(short[])">
-<h3>nativeShortsToNativeBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">nativeShortsToNativeBytes</span><wbr><span class="parameters">(short[]&nbsp;numbers)</span></div>
-<div class="block">Converts native short[] array to native byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>native byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="nativeIntsToNativeBytes(int[])">
 <h3>nativeIntsToNativeBytes</h3>
 <div class="horizontal-scroll">
@@ -736,51 +631,6 @@ Every number is converted to byte using number.byteValue() call.</div>
 <dd><code>array</code> - native byte[] array</dd>
 <dt>Returns:</dt>
 <dd>boxed Byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeBytesToIntegers(byte[])">
-<h3>nativeBytesToIntegers</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]</span>&nbsp;<span class="element-name">nativeBytesToIntegers</span><wbr><span class="parameters">(byte[]&nbsp;array)</span></div>
-<div class="block">Converts native byte[] array to boxed Integer[] array.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>array</code> - native byte[] array</dd>
-<dt>Returns:</dt>
-<dd>boxed Integer[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeBytesToShorts(byte[])">
-<h3>nativeBytesToShorts</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]</span>&nbsp;<span class="element-name">nativeBytesToShorts</span><wbr><span class="parameters">(byte[]&nbsp;array)</span></div>
-<div class="block">Converts native byte[] array to boxed Short[] array.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>array</code> - native byte[] array</dd>
-<dt>Returns:</dt>
-<dd>boxed Short[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeBytesToInts(byte[])">
-<h3>nativeBytesToInts</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">nativeBytesToInts</span><wbr><span class="parameters">(byte[]&nbsp;array)</span></div>
-<div class="block">Converts native byte[] array to boxed Integer[] array.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>array</code> - native byte[] array</dd>
-<dt>Returns:</dt>
-<dd>boxed Integer[] array</dd>
 </dl>
 </div>
 </section>

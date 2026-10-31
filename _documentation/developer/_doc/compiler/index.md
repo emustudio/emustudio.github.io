@@ -229,7 +229,7 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
         tokenMap[LIT_STRING] = Token.LITERAL;
 
         tokenMap[ID_IDENTIFIER] = Token.IDENTIFIER;
-        tokenMap[ID_LABEL] = Token.IDENTIFIER;
+        tokenMap[ID_LABEL] = Token.LABEL;
 
         tokenMap[ERROR] = Token.ERROR;
     }
@@ -285,6 +285,38 @@ public class LexicalAnalyzerImpl implements LexicalAnalyzer {
 The stream reads the specified slice without copying it, so keep that array unchanged while lexing. `ParsingUtils`
 provides numeric and quoted-string parsing, label extraction, and identifier normalization. Grammar, AST, semantic
 analysis, and code generation remain the compiler plugin's responsibility.
+
+### Generic editing metadata
+
+The desktop editor consumes generic token categories and optional `LexicalAnalyzer` operations. Keep assembler keywords,
+grammar rules, symbol scopes, and extraction logic inside the compiler plugin. Existing implementations work through
+default methods and need not support semantic editing.
+
+| Contract | Meaning |
+| --- | --- |
+| `Token.BLOCK_START`, `Token.BLOCK_END` | Properly nested block boundaries used by folding and reindentation. |
+| `Token.SYMBOL_DEFINITION`, `Token.SYMBOL_REFERENCE` | Declaration and use of a named symbol in a source-analysis snapshot. |
+| `Token.INCLUDE_PATH`, `getReferencedFile()` | A token identifying another source file, resolved relative to the containing file. |
+| `getSymbolName()` | Spelling beginning at the token offset, without punctuation such as a label's trailing colon. |
+| `getSymbolScope()` | Stable lexical scope identity; empty string is the source/include global scope; `null` means unknown. |
+| `getReferenceScope()` | Scope in which a reference is resolved, followed by the global scope. Defaults to its lexical scope. |
+| `getLineCommentStartAndEnd()` | Opening delimiter and optional closing delimiter, or `null` if comment toggling is unsupported. |
+| `analyze(String)` | Immutable tokens for a whole source snapshot, optionally enriched with semantic metadata. |
+| `isValidSymbolName(String)`, `normalizeSymbolName(String)` | Language-specific name validation and canonical comparison. |
+| `getExtractionKinds()`, `extract(...)` | Optional compiler-owned extraction operations returning edited source for preview. |
+
+Offsets use UTF-16 code units, matching Java String and Swing document indices. `SourceToken` is an immutable carrier for
+these fields. The default `analyze` copies lexical tokens into immutable snapshots; semantic implementations must validate
+their source before emitting declarations/references. Return unknown metadata instead of guessing a binding.
+
+The editor resolves definitions and references by scope and normalized spelling, traverses include paths, previews edits,
+and checks source snapshots again before applying them. It rejects ambiguous declarations, name conflicts, repeated/cyclic
+includes, and local-scope includes. Symbols whose scope is unknown cannot be renamed safely. Compiler analysis must not
+compile into memory, write output files, or depend on the desktop GUI.
+
+The 8080 and Z80 plugins supply macro/global/local symbol metadata and macro/subroutine extraction. RAM and RASP supply
+global labels. Brainc supplies loop block markers. Folding also supports generic indentation, multiline comments, and
+explicit editor regions, independent of compiler keywords.
 
 
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html

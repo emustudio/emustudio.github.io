@@ -31,6 +31,9 @@ The **Virtual computers** list on the left contains the configurations in the se
 Select a computer to preview its schema on the right. Drag the divider to change the space available to the list and
 preview.
 
+The panel below the schema shows the selected computer's plugin names, JAR paths, and configured settings. Its
+divider adjusts the space shared with the schema preview. Use **Edit computer** to change the configuration.
+
 Click **Open computer**, double-click the selected entry, or press <kbd>Enter</kbd> to load it. **Exit** closes the dialog
 without opening a computer.
 

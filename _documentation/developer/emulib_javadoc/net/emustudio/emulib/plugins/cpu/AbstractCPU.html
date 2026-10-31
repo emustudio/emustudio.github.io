@@ -72,10 +72,9 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
-<li><a href="#getVersion()" tabindex="0">getVersion()</a></li>
-<li><a href="#getCopyright()" tabindex="0">getCopyright()</a></li>
 <li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
 <li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
+<li><a href="#getBreakpoints()" tabindex="0">getBreakpoints()</a></li>
 <li><a href="#isBreakpointSupported()" tabindex="0">isBreakpointSupported()</a></li>
 <li><a href="#setBreakpoint(int)" tabindex="0">setBreakpoint(int)</a></li>
 <li><a href="#unsetBreakpoint(int)" tabindex="0">unsetBreakpoint(int)</a></li>
@@ -84,6 +83,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">removeCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#destroy()" tabindex="0">destroy()</a></li>
 <li><a href="#destroyInternal()" tabindex="0">destroyInternal()</a></li>
+<li><a href="#notifyInternalStateChanged()" tabindex="0">notifyInternalStateChanged()</a></li>
 <li><a href="#reset()" tabindex="0">reset()</a></li>
 <li><a href="#reset(int)" tabindex="0">reset(int)</a></li>
 <li><a href="#execute()" tabindex="0">execute()</a></li>
@@ -208,35 +208,35 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs CPU emulation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCopyright()" class="member-name-link">getCopyright</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBreakpoints()" class="member-name-link">getBreakpoints</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get copyright string.</div>
+<div class="block">This class support breakpoints.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get run-time title of this plugin.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersion()" class="member-name-link">getVersion</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSet(int)" class="member-name-link">isBreakpointSet</a><wbr>(int&nbsp;location)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get version of the plugin.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSet(int)" class="member-name-link">isBreakpointSet</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Determine if a breakpoint is set at a memory location.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSupported()" class="member-name-link">isBreakpointSupported</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This class support breakpoints.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSupported()" class="member-name-link">isBreakpointSupported</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Determine whether breakpoints are supported by CPU.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This class does not support showing settings</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected final void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInternalStateChanged()" class="member-name-link">notifyInternalStateChanged</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
@@ -304,10 +304,10 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html#call()" title="class or interface in java.util.concurrent" class="external-link">call</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.cpu.CPU">Methods inherited from interface&nbsp;<a href="CPU.html#method-summary" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></h3>
-<code><a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a></code></div>
+<code><a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDebugger()" title="getDebugger()">getDebugger</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.Plugin">Methods inherited from interface&nbsp;<a href="../Plugin.html#method-summary" title="interface in net.emustudio.emulib.plugins">Plugin</a></h3>
-<code><a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a></code></div>
+<code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a></code></div>
 </section>
 </li>
 </ul>
@@ -399,38 +399,6 @@ once, and each instance can have different title assigned at runtime.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getVersion()">
-<h3>getVersion</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getVersion</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#getVersion()">Plugin</a></code></span></div>
-<div class="block">Get version of the plugin.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getVersion()">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>version string</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getCopyright()">
-<h3>getCopyright</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCopyright</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#getCopyright()">Plugin</a></code></span></div>
-<div class="block">Get copyright string.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getCopyright()">getCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>copyright string</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="showSettings(javax.swing.JFrame)">
 <h3>showSettings</h3>
 <div class="horizontal-scroll">
@@ -461,16 +429,32 @@ once, and each instance can have different title assigned at runtime.</div>
 </section>
 </li>
 <li>
+<section class="detail" id="getBreakpoints()">
+<h3>getBreakpoints</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getBreakpoints</span>()</div>
+<div class="block">This class support breakpoints.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="CPU.html#getBreakpoints()">getBreakpoints</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
+<dt>Returns:</dt>
+<dd>true</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="isBreakpointSupported()">
 <h3>isBreakpointSupported</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBreakpointSupported</span>()</div>
-<div class="block">This class support breakpoints.</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#isBreakpointSupported()">CPU</a></code></span></div>
+<div class="block">Determine whether breakpoints are supported by CPU.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="CPU.html#isBreakpointSupported()">isBreakpointSupported</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd>true if breakpoints are supported, false otherwise</dd>
 </dl>
 </div>
 </section>
@@ -611,6 +595,15 @@ damage.</div>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroyInternal</span>()</div>
 <div class="block">Called by original destroy() method. Do not override the original destroy() method. Subsequent calls of
 destroy() will call this only once.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="notifyInternalStateChanged()">
+<h3>notifyInternalStateChanged</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyInternalStateChanged</span>()</div>
+<div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
 </div>
 </section>
 </li>

@@ -17,7 +17,7 @@ disk image and guest memory.
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `88-hdsk` in the device list. In SIMH mode, the window shows sixteen drives:
+On the **Debugger** tab, double-click `88-hdsk` in the device list. In SIMH mode, the window shows sixteen drives:
 
 {% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-gui.png" alt="SIMH HDSK window with numbered disk selection, status, geometry and mounted image" width=620 points="1:91.61:5.19|2:47.74:31.69|3:92.58:31.69|4:91.61:74.29" %}
 

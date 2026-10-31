@@ -73,8 +73,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#initialize()" tabindex="0">initialize()</a></li>
 <li><a href="#destroy()" tabindex="0">destroy()</a></li>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
-<li><a href="#getVersion()" tabindex="0">getVersion()</a></li>
-<li><a href="#getCopyright()" tabindex="0">getCopyright()</a></li>
 <li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
 <li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
 <li><a href="#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" tabindex="0">addCompilerListener(CompilerListener)</a></li>
@@ -183,19 +181,9 @@ implements <a href="Compiler.html" title="interface in net.emustudio.emulib.plug
 <div class="block">Does nothing.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCopyright()" class="member-name-link">getCopyright</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get copyright string.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get plugin title</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersion()" class="member-name-link">getVersion</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get version of the plugin.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
@@ -284,7 +272,7 @@ something out (a message).</div>
 <code><a href="Compiler.html#compile(java.nio.file.Path,java.util.Optional)" title="compile(Path, Optional)">compile</a>, <a href="Compiler.html#convertInputToOutputPath(java.nio.file.Path,java.lang.String)" title="convertInputToOutputPath(Path, String)">convertInputToOutputPath</a>, <a href="Compiler.html#createLexer()" title="createLexer()">createLexer</a>, <a href="Compiler.html#getSourceFileExtensions()" title="getSourceFileExtensions()">getSourceFileExtensions</a>, <a href="Compiler.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.Plugin">Methods inherited from interface&nbsp;<a href="../Plugin.html#method-summary" title="interface in net.emustudio.emulib.plugins">Plugin</a></h3>
-<code><a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a></code></div>
+<code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a></code></div>
 </section>
 </li>
 </ul>
@@ -396,38 +384,6 @@ something out (a message).</div>
 <dd><code><a href="../Plugin.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 <dt>Returns:</dt>
 <dd>title from the <a href="../annotations/PluginRoot.html" title="annotation interface in net.emustudio.emulib.plugins.annotations"><code>PluginRoot</code></a> annotation</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getVersion()">
-<h3>getVersion</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getVersion</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#getVersion()">Plugin</a></code></span></div>
-<div class="block">Get version of the plugin.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getVersion()">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>version string</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getCopyright()">
-<h3>getCopyright</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCopyright</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#getCopyright()">Plugin</a></code></span></div>
-<div class="block">Get copyright string.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getCopyright()">getCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>copyright string</dd>
 </dl>
 </div>
 </section>

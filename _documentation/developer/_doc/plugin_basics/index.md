@@ -81,8 +81,8 @@ If there are more classes like this, the plugin might not work correctly.
 
 ### Version and copyright metadata
 
-Plugins extending `AbstractCompiler`, `AbstractCPU`, `AbstractMemory`, or `AbstractDevice` inherit `getVersion()` and
-`getCopyright()`. Put a `version.properties` resource in the concrete plugin root class package:
+`Plugin` provides default `getVersion()` and `getCopyright()` methods, inherited by all plugin types and their abstract
+base classes. Put a `version.properties` resource in the concrete plugin root class package:
 
 {:.code-example}
 ```properties
@@ -90,7 +90,7 @@ version=1.2.3
 copyright=Copyright 2026 Example Author
 ```
 
-The base class loads `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
+The default methods load `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
 the plugin JAR. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
 that bundle; duplicating the standard resource lookup in every plugin is unnecessary.
 
@@ -119,6 +119,20 @@ int scale = settings.getInt("scale", 2);
 settings.setInt("scale", scale);
 ```
 
+### Shared Swing helpers
+
+Use `GUI.runInBackground(action, task, onSuccess, onError)` for file operations that must keep the interface responsive.
+The task runs off Swing's event-dispatch thread (EDT); action enablement and both callbacks run on the EDT.
+Calls from another thread are queued on the EDT. A disabled action ignores new requests until its current operation
+finishes. Completion re-enables the action after the callback, including when the task or callback fails.
+Use `onError` to report the supplied exception; task exceptions retain their original cause and message.
+
+For paths and other long labels, `ShortenedString` measures the actual font and keeps Unicode character sequences intact
+when inserting a middle ellipsis. Call `deriveMaxStringLength(component, availableWidth)` after the value, font, or width
+changes. Zero or negative widths produce empty text; very narrow widths show only the dots that fit. Keep the full value
+available through a tooltip or another appropriate control. `MaxItemsCache` accepts non-null history values and a
+non-negative capacity; capacity zero retains no entries.
+
 ### GUI icons
 
 Use `GUI.loadIcon("icons/clear.png")` to load an icon from the calling class's package in the plugin JAR.
@@ -129,6 +143,11 @@ absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to sp
 
 Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
 Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE)`.
+
+Toolbar buttons and toggles created by `GUI` use the tooltip as their default accessible name, or the action name when
+no tooltip is provided. These defaults follow action metadata changes; an explicit accessible name set by the plugin
+takes precedence. Supply a descriptive tooltip for icon-only controls. `GUI.styleTable(table)` accommodates the current
+font and preserves a larger default row height; applying it repeatedly does not keep increasing row height.
 
 ## Third-party dependencies
 

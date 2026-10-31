@@ -77,7 +77,7 @@ Keep the template's `ROMfrom` and `ROMto` settings, which protect ROM from write
 1. Launch emuStudio and choose **Space Invaders** in the
    [computer chooser]({{ site.baseurl }}/application/opening-computer), or run
    `./emuStudio -cf config/SpaceInvaders.toml` from the installation directory.
-2. Select the **Emulator** tab and double-click `spaceinvaders-display` in the device list to open the game window.
+2. Select the **Debugger** tab and double-click `spaceinvaders-display` in the device list to open the game window.
 3. Click **Reset**, then **Run** in the [debugger toolbar]({{ site.baseurl }}/application/main-window#debugger-toolbar).
    The ROMs are already loaded; no source compilation is needed to play.
 4. Focus the game window, press and release **C** to insert a coin, then press **1** to start a one-player game.
@@ -85,7 +85,7 @@ Keep the template's `ROMfrom` and `ROMto` settings, which protect ROM from write
 
 ## GUI overview
 
-To open the display, double-click `spaceinvaders-display` in the device list on the **Emulator** tab.
+To open the display, double-click `spaceinvaders-display` in the device list on the **Debugger** tab.
 The following screenshot shows a one-player game with `scale = 2` and `colorOverlay = true`:
 
 ![Space Invaders game screen with numbered score, invaders, player area, and lives and credits]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-screen.png){:style="max-width:448px"}
@@ -117,7 +117,7 @@ so use one-player mode for normal play.
 
 ## Display settings
 
-On the **Emulator** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
+On the **Debugger** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
 The settings panel is shown below:
 
 ![Space Invaders display settings]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png)

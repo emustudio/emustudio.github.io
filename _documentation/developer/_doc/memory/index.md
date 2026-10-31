@@ -50,6 +50,21 @@ An ignored ROM write leaves them intact. Annotations are keyed by address, witho
 Byte-memory image loaders and dumpers use a UTF-8 `.meta` sidecar to restore or save source positions. Sidecar addresses
 are absolute: loading a binary image at another address does not relocate its metadata.
 
+## Bank-aware inspection and guest accesses
+
+Expose `getBanksCount()`, `getSelectedBank()`, `getCommonBoundary()`, and `readBank(address, bank)` for bank-aware debugger
+inspection. Addresses below the common boundary are banked; addresses at or above it use physical bank zero. Inspection
+must keep bank selection and guest timing unchanged. The default context has one bank and delegates bank-zero inspection to
+`read`; memory-mapped providers must implement side-effect-free inspection themselves.
+
+Memory-change listeners serve UI refresh. Guest read/write watchpoints use the CPU's execution probe, so they still work
+when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
+writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
+
+Compiler annotations and their `.meta` sidecars remain address-based. The host's user labels/comments/bookmarks use separate
+image-identity and bank-aware metadata; they do not add bank semantics to `SourceCodeAnnotation`. See
+[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for bank identity and hook integration.
+
 ## Shared GUI actions
 
 Memory plugins with Swing interfaces can use emuLib's `GUI.runInBackground` for file and other blocking work. It

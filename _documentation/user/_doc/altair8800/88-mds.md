@@ -94,7 +94,7 @@ extension; use the `88-hdsk` plugin for that interface.
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `88-mds` in the device list:
+On the **Debugger** tab, double-click `88-mds` in the device list:
 
 {% include annotated-screenshot.html image="/assets/altair8800/88-mds-gui.png" alt="88-MDS minidisk window with numbered drive, image and position, attach and detach controls" width=550 points="1:92.73:8.89|2:92.73:45.93|3:26.73:87.41|4:71.09:87.41" %}
 

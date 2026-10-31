@@ -1,121 +1,88 @@
 ---
 layout: default
+homepage: true
 description: "emuStudio — free, cross-platform computer emulation platform and framework. Emulate MITS Altair 8800 (Intel 8080, Zilog Z80), ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines (RAM, RASP, BrainDuck). Ideal for education and retro computing."
 ---
 
 {% include analytics.html category="root" %}
 
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-lg-4">
-            <img alt="emuStudio-logo" class="img-responsive" src="{{ base }}files/images/logo-1.svg"/>
-        </div>
-        <div class="col-lg-8">
-            <h1>emuStudio</h1>
+<section class="jumbotron home-intro" aria-labelledby="home-title">
+    <div class="row align-items-center">
+        <div class="col-lg-5">
+            <img class="home-logo" src="{{ base }}files/images/logo-1.svg" alt="emuStudio logo"
+                 width="295" height="287"/>
+            <h1 id="home-title">Learn how computers work.</h1>
             <p class="lead">
-                Free, cross-platform toy-computer emulation platform and framework. It targets the
-                "academic" sphere to help students or enthusiasts gaining the "know-how" and experiment with how
-                computers work.
+                Write, run, and debug programs on vintage and abstract computers with emuStudio.
             </p>
-            <p>
-                <strong>Platform</strong>, because it supports full computer emulation "life-cycle".
-                From writing and compiling programs for the emulated machine, to running and debugging.
-                Examples of real computer emulators are <a href="{{ base }}documentation/user/altair8800">MITS
-                Altair8800</a>,
-                <a href="{{ base }}documentation/user/zxspectrum48k">ZX Spectrum 48K</a>,
-                <a href="{{ base }}documentation/user/spaceinvaders">Space Invaders</a> and
-                <a href="{{ base }}documentation/user/ssem">SSEM (a.k.a. "Baby")</a>. Abstract computers include:
-                <a href="{{ base }}documentation/user/ram">RAM</a>, <a href="{{ base }}documentation/user/rasp">RASP</a>,
-                and
-                <a href="{{ base }}documentation/user/brainduck">BrainDuck</a>.
-            </p>
-            <p>
-                <strong>Framework</strong>, because it includes API and supporting back-end enabling developing new
-                computer emulators.
-                Good <a href="{{ base }}documentation/developer/introduction">developer documentation</a> is a matter
-                of course.
-                As in real computers, emuStudio allows reusing existing components resulting in different computer
-                configurations.
-            </p>
+            <p>Free, cross-platform computer emulation platform and framework.</p>
+            <a class="btn btn-primary btn-lg" href="{{ base }}download/">Download emuStudio</a>
+        </div>
+        <figure class="col-lg-7 home-preview">
+            <img src="{{ site.baseurl }}/documentation/user/assets/application/source-code-editor.png"
+                 alt="emuStudio source editor showing an Intel 8080 assembly program and successful compilation"
+                 width="1104" height="809"/>
+            <figcaption>
+                Source editor in the development version.
+                <a href="{{ base }}screenshots/">See more screenshots</a>
+            </figcaption>
+        </figure>
+    </div>
+</section>
 
-            <a aria-label="Follow @{{ site.repository }} on GitHub"
-               class="github-button"
-               data-count-api="/users/{{ site.repository }}#followers"
-               data-count-aria-label="# followers on GitHub"
-               data-count-href="/{{ site.repository }}/followers"
-               data-style="mega"
-               href="https://github.com/{{ site.repository }}">Follow @emuStudio</a>
-            <a aria-label="Sponsor"
-               class="github-button"
-               data-style="mega"
-               href="https://github.com/sponsors/vbmacher">Sponsor</a>
+<section class="home-section" aria-labelledby="guides-title">
+    <h2 id="guides-title">Documentation</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Use emuStudio</h3>
+            <p>Run a bundled Hello, World! example, then inspect one instruction at a time.</p>
+            <a href="{{ base }}documentation/user/first-experiment/">Run your first program</a>
+        </div>
+        <div class="col-md-6">
+            <h3>Build an emulator</h3>
+            <p>Developers and enthusiasts can use the framework to create a custom emulator.</p>
+            <a href="{{ base }}documentation/developer/introduction">See Developer documentation</a>
         </div>
     </div>
-</div>
+</section>
 
-<h1>Getting started</h1>
+<section class="home-section" aria-labelledby="explore-title">
+    <h2 id="explore-title">Explore emuStudio</h2>
+    <p>
+        <strong>Platform</strong>, because it supports full computer emulation "life-cycle".
+        From writing and compiling programs for the emulated machine, to running and debugging.
+        Examples of real computer emulators are <a href="{{ base }}documentation/user/altair8800">MITS
+        Altair8800</a>,
+        <a href="{{ base }}documentation/user/zxspectrum48k">ZX Spectrum 48K</a>,
+        <a href="{{ base }}documentation/user/spaceinvaders">Space Invaders</a> and
+        <a href="{{ base }}documentation/user/ssem">SSEM (a.k.a. "Baby")</a>. Abstract computers include:
+        <a href="{{ base }}documentation/user/ram">RAM</a>, <a href="{{ base }}documentation/user/rasp">RASP</a>,
+        and
+        <a href="{{ base }}documentation/user/brainduck">BrainDuck</a>.
+    </p>
+    <p>
+        <strong>Framework</strong>, because it includes API and supporting back-end enabling developing new
+        computer emulators.
+        Good <a href="{{ base }}documentation/developer/introduction">developer documentation</a> is a matter
+        of course.
+        As in real computers, emuStudio allows reusing existing components resulting in different computer
+        configurations.
+    </p>
+</section>
 
-<p>The following options might help you to get started with emuStudio.</p>
-
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="row no-gutters">
-            <div class="col-md-2">
-                <i class="far fa-image fa-5x"></i>
-            </div>
-            <div class="col-md-8">
-                <h5 class="card-title">I want to see something first</h5>
-                <p class="card-text">If you are curious how emuStudio looks before installing it, we have some
-                    screenshots prepared.</p>
-                <a class="btn btn-primary" href="{{ base }}screenshots/">See Screenshots</a>
-            </div>
-        </div>
+<section class="home-section" aria-labelledby="support-title">
+    <h2 id="support-title">Support emuStudio</h2>
+    <div class="home-support">
+        <a aria-label="Follow @{{ site.repository }} on GitHub"
+           class="github-button"
+           data-count-api="/users/{{ site.repository }}#followers"
+           data-count-aria-label="# followers on GitHub"
+           data-count-href="/{{ site.repository }}/followers"
+           data-style="mega"
+           href="https://github.com/{{ site.repository }}">Follow @emuStudio</a>
+        <a aria-label="Sponsor"
+           class="github-button"
+           data-style="mega"
+           href="https://github.com/sponsors/vbmacher">Sponsor</a>
     </div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="row no-gutters">
-            <div class="col-md-2">
-                <i class="far fa-file-archive fa-5x"></i>
-            </div>
-            <div class="col-md-8">
-                <h5 class="card-title">Installation & run</h5>
-                <p class="card-text">The first step is to install emuStudio.</p>
-                <a class="btn btn-primary" href="{{ base }}download/">Go to Download page</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="row no-gutters">
-            <div class="col-md-2">
-                <i class="far fa-list-alt fa-5x"></i>
-            </div>
-            <div class="col-md-8">
-                <h5 class="card-title">What can I do as a user?</h5>
-                <p class="card-text">emuStudio is easy to use. Still, a guidance to advanced user experience might be
-                    interesting.</p>
-                <a class="btn btn-primary" href="{{ base }}documentation/user/introduction">See User documentation</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="row no-gutters">
-            <div class="col-md-2">
-                <i class="far fa-list-alt fa-5x"></i>
-            </div>
-            <div class="col-md-8">
-                <h5 class="card-title">I'm a developer</h5>
-                <p class="card-text">Developers and enthusiasts might try writing a custom emulator.</p>
-                <a class="btn btn-primary" href="{{ base }}documentation/developer/introduction">See Developer
-                    documentation</a>
-            </div>
-        </div>
-    </div>
-</div>
+</section>

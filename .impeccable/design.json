@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-31T22:09:08Z",
+  "title": "Design System: emuStudio Website",
+  "extensions": {
+    "colorMeta": {
+      "signal-coral": {
+        "role": "primary",
+        "displayName": "Signal Coral",
+        "tonalRamp": [
+          "oklch(15.00% 0.10089 25.65)",
+          "oklch(26.43% 0.16404 25.65)",
+          "oklch(37.86% 0.20626 25.65)",
+          "oklch(49.29% 0.22217 25.65)",
+          "oklch(60.71% 0.20977 25.65)",
+          "oklch(72.14% 0.17060 25.65)",
+          "oklch(83.57% 0.10968 25.65)",
+          "oklch(95.00% 0.03476 25.65)"
+        ]
+      },
+      "soft-coral": {
+        "role": "primary",
+        "displayName": "Soft Coral",
+        "tonalRamp": [
+          "oklch(15.00% 0.07327 21.80)",
+          "oklch(26.43% 0.11912 21.80)",
+          "oklch(37.86% 0.14979 21.80)",
+          "oklch(49.29% 0.16134 21.80)",
+          "oklch(60.71% 0.15233 21.80)",
+          "oklch(72.14% 0.12389 21.80)",
+          "oklch(83.57% 0.07965 21.80)",
+          "oklch(95.00% 0.02525 21.80)"
+        ]
+      },
+      "link-hover": {
+        "role": "secondary",
+        "displayName": "Link Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.10149 276.05)",
+          "oklch(26.43% 0.16501 276.05)",
+          "oklch(37.86% 0.20748 276.05)",
+          "oklch(49.29% 0.22348 276.05)",
+          "oklch(60.71% 0.21101 276.05)",
+          "oklch(72.14% 0.17161 276.05)",
+          "oklch(83.57% 0.11033 276.05)",
+          "oklch(95.00% 0.03497 276.05)"
+        ]
+      },
+      "action-blue": {
+        "role": "secondary",
+        "displayName": "Action Blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.09832 257.21)",
+          "oklch(26.43% 0.15985 257.21)",
+          "oklch(37.86% 0.20100 257.21)",
+          "oklch(49.29% 0.21650 257.21)",
+          "oklch(60.71% 0.20442 257.21)",
+          "oklch(72.14% 0.16625 257.21)",
+          "oklch(83.57% 0.10688 257.21)",
+          "oklch(95.00% 0.03388 257.21)"
+        ]
+      },
+      "action-blue-hover": {
+        "role": "secondary",
+        "displayName": "Action Blue Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.08631 256.87)",
+          "oklch(26.43% 0.14033 256.87)",
+          "oklch(37.86% 0.17645 256.87)",
+          "oklch(49.29% 0.19006 256.87)",
+          "oklch(60.71% 0.17945 256.87)",
+          "oklch(72.14% 0.14595 256.87)",
+          "oklch(83.57% 0.09383 256.87)",
+          "oklch(95.00% 0.02974 256.87)"
+        ]
+      },
+      "download-teal": {
+        "role": "secondary",
+        "displayName": "Download Teal",
+        "tonalRamp": [
+          "oklch(15.00% 0.05015 212.17)",
+          "oklch(26.43% 0.08155 212.17)",
+          "oklch(37.86% 0.10254 212.17)",
+          "oklch(49.29% 0.11045 212.17)",
+          "oklch(60.71% 0.10428 212.17)",
+          "oklch(72.14% 0.08481 212.17)",
+          "oklch(83.57% 0.05452 212.17)",
+          "oklch(95.00% 0.01728 212.17)"
+        ]
+      },
+      "download-teal-hover": {
+        "role": "secondary",
+        "displayName": "Download Teal Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.04291 212.05)",
+          "oklch(26.43% 0.06976 212.05)",
+          "oklch(37.86% 0.08772 212.05)",
+          "oklch(49.29% 0.09448 212.05)",
+          "oklch(60.71% 0.08921 212.05)",
+          "oklch(72.14% 0.07255 212.05)",
+          "oklch(83.57% 0.04664 212.05)",
+          "oklch(95.00% 0.01478 212.05)"
+        ]
+      },
+      "secondary-slate": {
+        "role": "secondary",
+        "displayName": "Secondary Slate",
+        "tonalRamp": [
+          "oklch(15.00% 0.00749 244.89)",
+          "oklch(26.43% 0.01218 244.89)",
+          "oklch(37.86% 0.01531 244.89)",
+          "oklch(49.29% 0.01649 244.89)",
+          "oklch(60.71% 0.01557 244.89)",
+          "oklch(72.14% 0.01266 244.89)",
+          "oklch(83.57% 0.00814 244.89)",
+          "oklch(95.00% 0.00258 244.89)"
+        ]
+      },
+      "secondary-slate-hover": {
+        "role": "secondary",
+        "displayName": "Secondary Slate Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.00628 240.13)",
+          "oklch(26.43% 0.01022 240.13)",
+          "oklch(37.86% 0.01285 240.13)",
+          "oklch(49.29% 0.01384 240.13)",
+          "oklch(60.71% 0.01306 240.13)",
+          "oklch(72.14% 0.01063 240.13)",
+          "oklch(83.57% 0.00683 240.13)",
+          "oklch(95.00% 0.00217 240.13)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "body-ink": {
+        "role": "neutral",
+        "displayName": "Body Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.00431 248.19)",
+          "oklch(26.43% 0.00701 248.19)",
+          "oklch(37.86% 0.00881 248.19)",
+          "oklch(49.29% 0.00949 248.19)",
+          "oklch(60.71% 0.00896 248.19)",
+          "oklch(72.14% 0.00729 248.19)",
+          "oklch(83.57% 0.00469 248.19)",
+          "oklch(95.00% 0.00149 248.19)"
+        ]
+      },
+      "navbar-charcoal": {
+        "role": "neutral",
+        "displayName": "Navbar Charcoal",
+        "tonalRamp": [
+          "oklch(15.00% 0.00603 248.21)",
+          "oklch(26.43% 0.00981 248.21)",
+          "oklch(37.86% 0.01234 248.21)",
+          "oklch(49.29% 0.01329 248.21)",
+          "oklch(60.71% 0.01255 248.21)",
+          "oklch(72.14% 0.01020 248.21)",
+          "oklch(83.57% 0.00656 248.21)",
+          "oklch(95.00% 0.00208 248.21)"
+        ]
+      },
+      "footer-charcoal": {
+        "role": "neutral",
+        "displayName": "Footer Charcoal",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "panel-grey": {
+        "role": "neutral",
+        "displayName": "Panel Grey",
+        "tonalRamp": [
+          "oklch(15.00% 0.00235 247.88)",
+          "oklch(26.43% 0.00382 247.88)",
+          "oklch(37.86% 0.00480 247.88)",
+          "oklch(49.29% 0.00517 247.88)",
+          "oklch(60.71% 0.00489 247.88)",
+          "oklch(72.14% 0.00397 247.88)",
+          "oklch(83.57% 0.00255 247.88)",
+          "oklch(95.00% 0.00081 247.88)"
+        ]
+      },
+      "card-border": {
+        "role": "neutral",
+        "displayName": "Card Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "docs-purple": {
+        "role": "secondary",
+        "displayName": "Documentation Purple",
+        "tonalRamp": [
+          "oklch(15.00% 0.09982 286.24)",
+          "oklch(26.43% 0.16231 286.24)",
+          "oklch(37.86% 0.20408 286.24)",
+          "oklch(49.29% 0.21983 286.24)",
+          "oklch(60.71% 0.20755 286.24)",
+          "oklch(72.14% 0.16880 286.24)",
+          "oklch(83.57% 0.10852 286.24)",
+          "oklch(95.00% 0.03440 286.24)"
+        ]
+      },
+      "docs-ink": {
+        "role": "neutral",
+        "displayName": "Docs Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.00671 300.99)",
+          "oklch(26.43% 0.01091 300.99)",
+          "oklch(37.86% 0.01372 300.99)",
+          "oklch(49.29% 0.01478 300.99)",
+          "oklch(60.71% 0.01396 300.99)",
+          "oklch(72.14% 0.01135 300.99)",
+          "oklch(83.57% 0.00730 300.99)",
+          "oklch(95.00% 0.00231 300.99)"
+        ]
+      },
+      "docs-heading": {
+        "role": "neutral",
+        "displayName": "Docs Heading",
+        "tonalRamp": [
+          "oklch(15.00% 0.00420 294.95)",
+          "oklch(26.43% 0.00682 294.95)",
+          "oklch(37.86% 0.00858 294.95)",
+          "oklch(49.29% 0.00924 294.95)",
+          "oklch(60.71% 0.00873 294.95)",
+          "oklch(72.14% 0.00710 294.95)",
+          "oklch(83.57% 0.00456 294.95)",
+          "oklch(95.00% 0.00145 294.95)"
+        ]
+      },
+      "docs-sidebar": {
+        "role": "neutral",
+        "displayName": "Docs Sidebar",
+        "tonalRamp": [
+          "oklch(15.00% 0.00246 274.97)",
+          "oklch(26.43% 0.00400 274.97)",
+          "oklch(37.86% 0.00503 274.97)",
+          "oklch(49.29% 0.00542 274.97)",
+          "oklch(60.71% 0.00512 274.97)",
+          "oklch(72.14% 0.00416 274.97)",
+          "oklch(83.57% 0.00268 274.97)",
+          "oklch(95.00% 0.00085 274.97)"
+        ]
+      },
+      "docs-border": {
+        "role": "neutral",
+        "displayName": "Docs Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.00232 325.62)",
+          "oklch(26.43% 0.00377 325.62)",
+          "oklch(37.86% 0.00474 325.62)",
+          "oklch(49.29% 0.00511 325.62)",
+          "oklch(60.71% 0.00482 325.62)",
+          "oklch(72.14% 0.00392 325.62)",
+          "oklch(83.57% 0.00252 325.62)",
+          "oklch(95.00% 0.00080 325.62)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Public-site main headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Public-site reading text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Public-site uppercase button labels."
+      },
+      "docs-headline": {
+        "displayName": "Docs Headline",
+        "purpose": "Documentation first-level headings at the larger theme size."
+      },
+      "docs-body": {
+        "displayName": "Docs Body",
+        "purpose": "Documentation reading text."
+      },
+      "docs-code": {
+        "displayName": "Docs Code",
+        "purpose": "Documentation code samples."
+      }
+    },
+    "shadows": [
+      {
+        "name": "article-tile",
+        "value": "0 0.15em 0.35em 0 rgba(0, 0, 0, 0.135)",
+        "purpose": "Inherited public article-tile style; not the default getting-started card."
+      },
+      {
+        "name": "primary-focus",
+        "value": "0 0 0 .2rem rgba(38,143,255,.5)",
+        "purpose": "Public primary-button focus halo."
+      },
+      {
+        "name": "download-focus",
+        "value": "0 0 0 .2rem rgba(58,176,195,.5)",
+        "purpose": "Download-button focus halo."
+      },
+      {
+        "name": "secondary-focus",
+        "value": "0 0 0 .2rem rgba(130,138,145,.5)",
+        "purpose": "Secondary-button focus halo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "public-links",
+        "value": "all 225ms ease",
+        "purpose": "Public text links and inherited article image effects."
+      },
+      {
+        "name": "bootstrap-controls",
+        "value": "color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out",
+        "purpose": "Bootstrap button state transitions, disabled under its reduced-motion rule."
+      },
+      {
+        "name": "docs-search-padding",
+        "value": "padding-left linear 200ms",
+        "purpose": "Theme search-field padding transition at the sidebar breakpoint."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "public-sm",
+        "value": "576px"
+      },
+      {
+        "name": "public-md",
+        "value": "768px"
+      },
+      {
+        "name": "public-lg",
+        "value": "992px"
+      },
+      {
+        "name": "public-xl",
+        "value": "1200px"
+      },
+      {
+        "name": "docs-xs",
+        "value": "20rem"
+      },
+      {
+        "name": "docs-sm",
+        "value": "31.25rem"
+      },
+      {
+        "name": "docs-md",
+        "value": "50rem"
+      },
+      {
+        "name": "docs-lg",
+        "value": "66.5rem"
+      },
+      {
+        "name": "docs-xl",
+        "value": "87.5rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Public-site Bootstrap variant with the existing uppercase Oswald label and state colors.",
+      "html": "<button type=\"button\" class=\"ds-button-primary\">See user documentation</button>",
+      "css": ".ds-button-primary{display:inline-block;border:1px solid transparent;border-radius:.25rem;padding:.375rem .75rem;font-family:Oswald,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;text-transform:uppercase;text-align:center;color:#fff;cursor:pointer;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;background:#007bff;border-color:#007bff;}.ds-button-primary:hover{background:#0069d9;border-color:#0062cc}.ds-button-primary:focus,.ds-button-primary:focus-visible{outline:0;background:#0069d9;border-color:#0062cc;box-shadow:0 0 0 .2rem rgba(38,143,255,.5)}.ds-button-primary:active{background:#0062cc;border-color:#005cbf}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}"
+    },
+    {
+      "name": "Download Button",
+      "kind": "button",
+      "refersTo": "button-download",
+      "description": "Public-site Bootstrap variant with the existing uppercase Oswald label and state colors.",
+      "html": "<button type=\"button\" class=\"ds-button-download\">Download emuStudio</button>",
+      "css": ".ds-button-download{display:inline-block;border:1px solid transparent;border-radius:.25rem;padding:.375rem .75rem;font-family:Oswald,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;text-transform:uppercase;text-align:center;color:#fff;cursor:pointer;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;background:#17a2b8;border-color:#17a2b8;padding:.5rem 1rem;font-size:1.25rem;border-radius:.3rem;}.ds-button-download:hover{background:#138496;border-color:#117a8b}.ds-button-download:focus,.ds-button-download:focus-visible{outline:0;background:#138496;border-color:#117a8b;box-shadow:0 0 0 .2rem rgba(58,176,195,.5)}.ds-button-download:active{background:#117a8b;border-color:#10707f}@media(prefers-reduced-motion:reduce){.ds-button-download{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Public-site Bootstrap variant with the existing uppercase Oswald label and state colors.",
+      "html": "<button type=\"button\" class=\"ds-button-secondary\">Close</button>",
+      "css": ".ds-button-secondary{display:inline-block;border:1px solid transparent;border-radius:.25rem;padding:.375rem .75rem;font-family:Oswald,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;text-transform:uppercase;text-align:center;color:#fff;cursor:pointer;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;background:#6c757d;border-color:#6c757d;}.ds-button-secondary:hover{background:#5a6268;border-color:#545b62}.ds-button-secondary:focus,.ds-button-secondary:focus-visible{outline:0;background:#5a6268;border-color:#545b62;box-shadow:0 0 0 .2rem rgba(130,138,145,.5)}.ds-button-secondary:active{background:#545b62;border-color:#4e555b}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none}}"
+    },
+    {
+      "name": "Getting-started Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat public-site card with a light outline and an instructional heading.",
+      "html": "<section class=\"ds-card\"><h5 class=\"ds-card-title\">What can I do as a user?</h5><p class=\"ds-card-copy\">See user documentation for application workflows and computer guides.</p></section>",
+      "css": ".ds-card{padding:1.25rem;background:#fff;color:#212529;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;font-family:\"Roboto Condensed\",sans-serif;font-size:18px;line-height:30px}.ds-card-title{margin:0 0 .5rem;font-family:Oswald,sans-serif;font-size:1.25rem;font-weight:500;line-height:1.2}.ds-card-copy{margin:0 0 30px}"
+    },
+    {
+      "name": "Public Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Dark navigation band; the preview isolates its brand and link states rather than fixing it to the viewport.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Website\"><a class=\"ds-nav-brand\" href=\"#home\">emuStudio</a><a class=\"ds-nav-link ds-nav-current\" href=\"#download\" aria-current=\"page\">Download</a><a class=\"ds-nav-link\" href=\"#screenshots\">Screenshots</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;flex-wrap:wrap;gap:1rem;padding:.5rem 1rem;background:#343a40;font-family:\"Roboto Condensed\",sans-serif;font-size:16px;line-height:30px}.ds-nav a{outline:none;text-decoration:none;transition:all 225ms ease}.ds-nav-brand{color:#fff}.ds-nav-link{color:rgba(255,255,255,.5);text-transform:uppercase}.ds-nav-link:hover,.ds-nav-link:focus-visible{color:rgba(255,255,255,.75)}.ds-nav-link.ds-nav-current{color:#fff}"
+    },
+    {
+      "name": "Documentation Search",
+      "kind": "input",
+      "refersTo": "docs-search",
+      "description": "Square, borderless theme search field with its focus-colored icon. The snippet is a visual primitive, not a search engine.",
+      "html": "<div class=\"ds-search\"><input class=\"ds-search-input\" id=\"ds-doc-search\" type=\"search\" placeholder=\"Search emuStudio documentation\"/><label class=\"ds-search-label\" for=\"ds-doc-search\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"></circle><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"></line></svg><span class=\"ds-search-label-text\">Search documentation</span></label></div>",
+      "css": ".ds-search{position:relative;height:3.75rem;background:#fff;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif}.ds-search-input{position:absolute;width:100%;height:100%;padding:.5rem 1rem .5rem 2.5rem;font:inherit;font-size:1rem;color:#5c5962;background:#fff;border:0;border-radius:0;box-sizing:border-box}.ds-search-input:focus,.ds-search-input:focus-visible{outline-offset:-1px}.ds-search-label{position:absolute;inset:0 auto 0 1rem;display:flex;align-items:center;pointer-events:none}.ds-search-label svg{width:1.2rem;height:1.2rem;color:#959396}.ds-search-input:focus+.ds-search-label svg{color:#7253ed}.ds-search-label-text{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(min-width:50rem){.ds-search-input{padding-left:3.5rem;font-size:.875rem;transition:padding-left linear 200ms}.ds-search-label{left:2rem}}"
+    },
+    {
+      "name": "Documentation Navigation",
+      "kind": "nav",
+      "refersTo": "docs-navigation",
+      "description": "Theme sidebar links with a heavier active state and a pale directional gradient.",
+      "html": "<nav class=\"ds-doc-nav\" aria-label=\"User documentation\"><a class=\"ds-doc-link\" href=\"#introduction\">Introduction</a><a class=\"ds-doc-link ds-doc-active\" href=\"#application\" aria-current=\"page\">Application</a></nav>",
+      "css": ".ds-doc-nav{background:#f5f6fa;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;font-size:1rem}.ds-doc-link{display:block;min-height:3rem;padding:.25rem 3rem .25rem 1rem;line-height:2.5rem;color:#7253ed;text-decoration:none;outline-offset:-1px}.ds-doc-link:hover,.ds-doc-active{color:rgb(95.0763157895,59.9157894737,234.5842105263);background-image:linear-gradient(-90deg,rgb(234.8,236.82,244.9) 0%,rgba(234.8,236.82,244.9,.8) 80%,rgba(234.8,236.82,244.9,0) 100%)}.ds-doc-link:focus-visible{outline-offset:-1px}.ds-doc-active{font-weight:600}@media(min-width:50rem){.ds-doc-link{min-height:2rem;line-height:1.5rem;padding-right:2rem;padding-left:2rem}}"
+    },
+    {
+      "name": "Screenshot Marker",
+      "kind": "custom",
+      "refersTo": "screenshot-marker",
+      "description": "Fixed-size callout number used over user-documentation screenshots and beside control explanations.",
+      "html": "<span class=\"ds-marker\" aria-hidden=\"true\">1</span>",
+      "css": ".ds-marker{display:inline-block;box-sizing:border-box;width:26px;height:26px;border:2px solid #000;border-radius:50%;background:#fff;color:#000;font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;font-size:14px;font-weight:400;line-height:22px;text-align:center;pointer-events:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Computer Lab",
+    "overview": "Practical, approachable, technical. The public website pairs condensed headings and body text with coral accents, dark navigation, pale introductory panels, and straightforward controls. Real application screenshots explain the product and provide the main visual evidence.\n\nThe documentation is a distinct, quieter part of the same project: system typography, purple links, a pale sidebar, searchable navigation, code samples, and annotated screenshots. Keep each area's existing vocabulary when extending it. The shared character is instructional clarity, not an identical palette or font stack across all three sites.",
+    "keyCharacteristics": [
+      "Condensed public-site typography with coral identity accents.",
+      "Functional blue, teal, and slate action controls.",
+      "Mostly flat surfaces, pale panels, borders, and selective subtle shadows.",
+      "Separate documentation typography, palette, and navigation.",
+      "Actual emulator screenshots with numbered instructional callouts."
+    ],
+    "rules": [
+      {
+        "name": "The Context Rule",
+        "body": "Preserve the public-site and documentation palettes in their own contexts; a shared project identity does not make their accent roles interchangeable.",
+        "section": "colors"
+      },
+      {
+        "name": "The Selective Depth Rule",
+        "body": "Keep ordinary content surfaces flat; apply an existing shadow only to the component or state that already owns it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the current font and palette roles within each site area.",
+      "Do use actual application screenshots and keep numbered callouts aligned with their explanations.",
+      "Do reuse existing Bootstrap or just-the-docs component states and responsive behavior in their respective contexts.",
+      "Do check the relevant templates and generated CSS when changing a recorded token; this document captures the implementation rather than replacing its source styles."
+    ],
+    "donts": [
+      "Don't recolor every action coral; the incumbent design distinguishes identity accents from action variants.",
+      "Don't replace documentation system text and sidebar navigation with the public site's condensed typography and navbar.",
+      "Don't turn selective tile shadows into a global card treatment.",
+      "Don't treat inherited outline suppression, untested contrast, or source-derived breakpoints as proof of accessibility or successful browser validation."
+    ]
+  }
+}

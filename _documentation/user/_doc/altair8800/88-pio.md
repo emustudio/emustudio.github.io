@@ -82,7 +82,7 @@ requires this context with at least two PIAs; connect `88-hdsk` to `88-pio` in t
 
 ## GUI overview
 
-On the **Emulator** tab, double-click `88-pio` in the device list. The 88-4PIO window is shown below:
+On the **Debugger** tab, double-click `88-pio` in the device list. The 88-4PIO window is shown below:
 
 {% include annotated-screenshot.html image="/assets/altair8800/88-pio-gui.png" alt="88-4PIO window with numbered attached device, channel, registers and input controls" width=571 points="1:93.87:3.88|2:28.02:22.87|3:48.16:27.71|4:92.47:27.71|5:92.12:77.52" %}
 

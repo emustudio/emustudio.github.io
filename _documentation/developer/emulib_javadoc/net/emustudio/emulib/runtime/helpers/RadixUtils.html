@@ -53,20 +53,12 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
-<li><a href="#nested-class-summary" tabindex="0">Nested Class Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#getInstance()" tabindex="0">getInstance()</a></li>
-<li><a href="#setDefaults()" tabindex="0">setDefaults()</a></li>
-<li><a href="#addNumberPattern(net.emustudio.emulib.runtime.helpers.RadixUtils.NumberPattern)" tabindex="0">addNumberPattern(RadixUtils.NumberPattern)</a></li>
 <li><a href="#convertToRadix(byte%5B%5D,int,boolean)" tabindex="0">convertToRadix(byte[], int, boolean)</a></li>
-<li><a href="#convertToRadix(java.lang.String,int)" tabindex="0">convertToRadix(String, int)</a></li>
-<li><a href="#convertToRadix(java.lang.String,int,int)" tabindex="0">convertToRadix(String, int, int)</a></li>
-<li><a href="#convertToNumber(java.lang.String,int)" tabindex="0">convertToNumber(String, int)</a></li>
-<li><a href="#convertToNumber(java.lang.String,int,int)" tabindex="0">convertToNumber(String, int, int)</a></li>
 <li><a href="#parseRadix(java.lang.String)" tabindex="0">parseRadix(String)</a></li>
-<li><a href="#parseRadix(java.lang.String,int)" tabindex="0">parseRadix(String, int)</a></li>
 <li><a href="#formatByteHexString(int)" tabindex="0">formatByteHexString(int)</a></li>
 <li><a href="#formatWordHexString(int)" tabindex="0">formatWordHexString(int)</a></li>
 <li><a href="#formatWordHexString(short,short)" tabindex="0">formatWordHexString(short, short)</a></li>
@@ -101,23 +93,6 @@ various number radixes easier.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>Nested Class Summary</h2>
-<div class="caption"><span>Nested Classes</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Class</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="RadixUtils.NumberPattern.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils.NumberPattern</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">This class represents a number pattern in single radix</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -129,101 +104,57 @@ various number radixes easier.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addNumberPattern(net.emustudio.emulib.runtime.helpers.RadixUtils.NumberPattern)" class="member-name-link">addNumberPattern</a><wbr>(<a href="RadixUtils.NumberPattern.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils.NumberPattern</a>&nbsp;pattern)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add NumberPattern for new automatic radix recognition</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToNumber(java.lang.String,int)" class="member-name-link">convertToNumber</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Convert an integer number in any radix (stored in String) to binary
-components (bytes) in little endian.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToNumber(java.lang.String,int,int)" class="member-name-link">convertToNumber</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix,
- int&nbsp;bytesCount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Convert an integer number in any radix (stored in String) to binary
-components (bytes) in little endian.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToRadix(byte%5B%5D,int,boolean)" class="member-name-link">convertToRadix</a><wbr>(byte[]&nbsp;number,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToRadix(byte%5B%5D,int,boolean)" class="member-name-link">convertToRadix</a><wbr>(byte[]&nbsp;number,
  int&nbsp;toRadix,
  boolean&nbsp;littleEndian)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts number in any length to a number with specified radix.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convertToRadix(java.lang.String,int)" class="member-name-link">convertToRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;toRadix)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts number in any length to a number with specified radix.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToRadix(java.lang.String,int,int)" class="member-name-link">convertToRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix,
- int&nbsp;toRadix)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts number in any length to a number with specified radix.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
  int&nbsp;length)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get formatted binary string of given number.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int,int,boolean)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int,int,boolean)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
  int&nbsp;length,
  int&nbsp;spacePerBits,
  boolean&nbsp;spacesFromLeft)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get formatted binary string of given number.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatByteHexString(int)" class="member-name-link">formatByteHexString</a><wbr>(int&nbsp;byteNumber)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatByteHexString(int)" class="member-name-link">formatByteHexString</a><wbr>(int&nbsp;byteNumber)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get formatted string of a byte.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatDwordHexString(int)" class="member-name-link">formatDwordHexString</a><wbr>(int&nbsp;number)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatDwordHexString(int)" class="member-name-link">formatDwordHexString</a><wbr>(int&nbsp;number)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get formatted string of a dword.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(int)" class="member-name-link">formatWordHexString</a><wbr>(int&nbsp;wordNumber)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted string of a word.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(short,short)" class="member-name-link">formatWordHexString</a><wbr>(short&nbsp;upper,
- short&nbsp;lower)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(int)" class="member-name-link">formatWordHexString</a><wbr>(int&nbsp;wordNumber)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get formatted string of a word.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getInstance()" class="member-name-link">getInstance</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(short,short)" class="member-name-link">formatWordHexString</a><wbr>(short&nbsp;upper,
+ short&nbsp;lower)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Get formatted string of a word.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getInstance()" class="member-name-link">getInstance</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Gets the singleton instance of RadixUtils.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseRadix(java.lang.String)" class="member-name-link">parseRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Parses a number in known radix into integer.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseRadix(java.lang.String,int)" class="member-name-link">parseRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;radix)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseRadix(java.lang.String)" class="member-name-link">parseRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Parses a number in known radix into integer.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDefaults()" class="member-name-link">setDefaults</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Clears all user-defined patterns</div>
 </div>
 </div>
 </div>
@@ -256,28 +187,6 @@ components (bytes) in little endian.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="setDefaults()">
-<h3>setDefaults</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDefaults</span>()</div>
-<div class="block">Clears all user-defined patterns</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="addNumberPattern(net.emustudio.emulib.runtime.helpers.RadixUtils.NumberPattern)">
-<h3>addNumberPattern</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addNumberPattern</span><wbr><span class="parameters">(<a href="RadixUtils.NumberPattern.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils.NumberPattern</a>&nbsp;pattern)</span></div>
-<div class="block">Add NumberPattern for new automatic radix recognition</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pattern</code> - NumberPattern instance</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="convertToRadix(byte[],int,boolean)">
 <h3>convertToRadix</h3>
 <div class="horizontal-scroll">
@@ -298,90 +207,6 @@ components (bytes) in little endian.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="convertToRadix(java.lang.String,int)">
-<h3>convertToRadix</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">convertToRadix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;toRadix)</span></div>
-<div class="block">Converts number in any length to a number with specified radix.
-<p>
-This method will automatically detect the number original radix. It
-can detect several hexadecimal, decimal, and octal formats.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - String representing number in hexa, octal or decadic radix</dd>
-<dd><code>toRadix</code> - target radix of the number</dd>
-<dt>Returns:</dt>
-<dd>String of a number in specified radix</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if the number is not in known format</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="convertToRadix(java.lang.String,int,int)">
-<h3>convertToRadix</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">convertToRadix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix,
- int&nbsp;toRadix)</span></div>
-<div class="block">Converts number in any length to a number with specified radix.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - String representing number in any radix</dd>
-<dd><code>fromRadix</code> - source radix of the number</dd>
-<dd><code>toRadix</code> - target radix of the number</dd>
-<dt>Returns:</dt>
-<dd>String of a number in target radix</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="convertToNumber(java.lang.String,int)">
-<h3>convertToNumber</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">convertToNumber</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix)</span></div>
-<div class="block">Convert an integer number in any radix (stored in String) to binary
-components (bytes) in little endian.
-<p>
-Complexity: O(n)</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - number stored as String</dd>
-<dd><code>fromRadix</code> - the radix of the number</dd>
-<dt>Returns:</dt>
-<dd>Array of binary components of that number</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="convertToNumber(java.lang.String,int,int)">
-<h3>convertToNumber</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">convertToNumber</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;fromRadix,
- int&nbsp;bytesCount)</span></div>
-<div class="block">Convert an integer number in any radix (stored in String) to binary
-components (bytes) in little endian.
-<p>
-Complexity: O(n)</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - number stored as String</dd>
-<dd><code>fromRadix</code> - the radix of the number</dd>
-<dd><code>bytesCount</code> - number of bytes. If the results has fewer bytes, they will be appended from the left. If
-                  it contains more bytes, they will be cut from the left (from MSB).</dd>
-<dt>Returns:</dt>
-<dd>Array of binary components of that number</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="parseRadix(java.lang.String)">
 <h3>parseRadix</h3>
 <div class="horizontal-scroll">
@@ -395,26 +220,6 @@ Complexity: O(n)</div>
 <dd>parsed integer</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if the number is not in known format</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseRadix(java.lang.String,int)">
-<h3>parseRadix</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseRadix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number,
- int&nbsp;radix)</span>
-               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
-<div class="block">Parses a number in known radix into integer.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - number in some known radix</dd>
-<dd><code>radix</code> - radix of the number (known pattern must exist for parsing)</dd>
-<dt>Returns:</dt>
-<dd>parsed integer</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if there is no pattern available for given radix or the number is unparseable</dd>
 </dl>
 </div>
 </section>
