@@ -1,0 +1,31 @@
+{
+  "OpenComputer": [
+    "**Create new computer**. Enter a name, then place and connect plugins in the schema editor.",
+    "**Delete computer**. Delete the selected configuration after confirmation.",
+    "**Edit computer**. Change the selected computer’s plugins, connections, and layout.",
+    "**Rename computer**. Change the selected configuration’s name.",
+    "**Save schema image**. Export the selected computer’s schema as a PNG image.",
+    "**Virtual computers**. Select a configuration to preview it; double-click it or press Enter to open it.",
+    "**Show plugin configuration**. Expand the plugin paths and settings below the schema preview.",
+    "**Open computer**. Load the selected virtual computer.",
+    "**Exit**. Close the chooser."
+  ],
+  "EditComputer": [
+    "**Save & Close**. Save the configuration and close the editor.",
+    "**Set compiler**. Choose a compiler, then click the canvas to place it.",
+    "**Set CPU**. Choose a CPU, then click the canvas to place it.",
+    "**Set operating memory**. Choose a memory plugin, then click the canvas to place it.",
+    "**Add device**. Choose a device plugin, then click the canvas to add it.",
+    "**Add connection**. Click the source, optional intermediate points, and the destination.",
+    "**Bidirectional connection**. Toggle whether new connections carry data in both directions.",
+    "**Delete component or connection**. Select this tool, then click the item to remove.",
+    "**Plugin selector**. Select the plugin to place with the active component tool.",
+    "**Grid**. Show the grid and snap components to it.",
+    "**Grid spacing**. Adjust the distance between grid points.",
+    "**Canvas**. Place, move, and connect the computer’s plugins."
+  ],
+  "CPM30": [
+    "**Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal.",
+    "**ASCII input**. Enter byte values when the guest requests input."
+  ]
+}

@@ -46,12 +46,14 @@ display frequency 60Hz.
 
 GUI can be seen here:
 
-{% include annotated-screenshot.html image="/assets/altair8800/adm3a-gui.png" alt="ADM-3A terminal with the original font, message box, and numbered Clear and Roll Up controls" width=1024 points="1:9.28:96.53|2:34.96:96.53" %}
+![ADM-3A terminal with the original font, message box, and numbered display and scrolling controls]({{ site.baseurl }}/assets/altair8800/adm3a-gui.png){: style="max-width: 1024px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **CLEAR**. Clear screen
-| <span class="circle">2</span> | **ROLL UP**. Scroll the contents up one line
-
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal display**. Read the output sent by the emulated computer and type input when requested. |
+| <span class="circle">2</span> | **Clear**. Clear the terminal display. |
+| <span class="circle">3</span> | **Roll Up**. Scroll the display upward. |
 
 ## Keyboard
 
@@ -166,7 +168,14 @@ db 0
 
 The example displays:
 
-![Hello in a message box]({{ site.baseurl }}/assets/altair8800/hello.png)
+![Hello in a message box]({{ site.baseurl }}/assets/altair8800/hello.png){: style="max-width: 1024px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal display**. Read the output sent by the emulated computer and type input when requested. |
+| <span class="circle">2</span> | **Clear**. Clear the terminal display. |
+| <span class="circle">3</span> | **Roll Up**. Scroll the display upward. |
 
 Box borders join across character cells in the original font. When using the 88-SIO serial interface, keep
 `clearOutputBit8 = false` so it passes extended character codes to the terminal.
@@ -179,16 +188,20 @@ close and reopen the computer.
 
 The "settings" window is shown in the following image:
 
-{% include annotated-screenshot.html image="/assets/altair8800/adm3a-settings.png" alt="ADM-3A terminal settings with numbered input and output files, input delay, font, half duplex, always on top, and Save controls" width=444 points="1:69.82:15.57|2:69.82:23.35|3:52.93:31.44|4:97.07:61.38|5:37.84:69.16|6:43.92:76.65|7:72.97:92.22" %}
+![ADM-3A terminal settings with numbered input and output files, input delay, font, half duplex, always on top, and Save controls]({{ site.baseurl }}/assets/altair8800/adm3a-settings.png){: style="max-width: 433px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | File name used for reading input (when redirected - in "no GUI" mode)
-| <span class="circle">2</span> | File name used for writing output (when redirected - in "no GUI" mode)
-| <span class="circle">3</span> | In automatic mode, how long the terminal should wait until it reads next input character from the file (in milliseconds)
-| <span class="circle">4</span> | Choose the original or modern font. Both display the same byte-oriented character set: ASCII and the CP437 extension described above. Changing the font does not enable Unicode input.
-| <span class="circle">5</span> | Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back to the screen.
-| <span class="circle">6</span> | Whether terminal GUI should be always-on-top of other windows
-| <span class="circle">7</span> | Save settings and dispose the dialog
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Input file**. Read terminal input from this file in headless automation. |
+| <span class="circle">2</span> | **Browse input**. Choose the input file. |
+| <span class="circle">3</span> | **Output file**. Write terminal output to this file in headless automation. |
+| <span class="circle">4</span> | **Browse output**. Choose the output file. |
+| <span class="circle">5</span> | **Input delay**. Set the delay between bytes read from the input file. |
+| <span class="circle">6</span> | **Font**. Choose the terminal’s display font. |
+| <span class="circle">7</span> | **Half duplex**. Echo locally typed characters in the terminal. |
+| <span class="circle">8</span> | **Always on top**. Keep the display above other windows. |
+| <span class="circle">9</span> | **Save**. Apply and save the terminal settings. |
 
 Terminal behaves differently when emuStudio is run in automatic with "no GUI" mode. At that moment, input is redirected
 to be read from a file (instead of keyboard), and also output is redirected to be written to a file. File names are
@@ -210,7 +223,6 @@ The following table shows all the possible settings of ADM-3A plugin:
 |`deviceIndex`     | 0                    | >= 0 | Index of connected device, if this terminal is connected to multiple devices in the schema (nonstandard, advanced use)
 |`font`            | `original`           | `original`, `modern` | Terminal font
 |---
-
 
 [manual1]: https://bitsavers.org/pdf/learSiegler/ADM_3/ADM3A_Maint.pdf
 [manual2]: https://bitsavers.org/pdf/learSiegler/ADM_3/DP2880486F_ADM3A_UM_Apr86.pdf

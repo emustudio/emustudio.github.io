@@ -16,23 +16,25 @@ a compiler, CPU, memory, or device plugin. Arrows show which plugins can access 
 In the [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer), select a computer and click
 **Edit computer**, or click **Create new computer** to start a new configuration.
 
-![Computer schema editor showing the MITS Altair8800 (Z80) configuration and its grid spacing slider]({{ site.baseurl }}/assets/application/computer-schema-editor.png){: style="max-width:890px; width: 100%;" }
+![Computer schema editor showing the MITS Altair8800 configuration and its grid spacing slider]({{ site.baseurl }}/assets/application/computer-schema-editor.png){: style="max-width: 1000px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Save & Close**. Save the configuration and close the editor. |
+| <span class="circle">2</span> | **Set compiler**. Choose a compiler, then click the canvas to place it. |
+| <span class="circle">3</span> | **Set CPU**. Choose a CPU, then click the canvas to place it. |
+| <span class="circle">4</span> | **Set operating memory**. Choose a memory plugin, then click the canvas to place it. |
+| <span class="circle">5</span> | **Add device**. Choose a device plugin, then click the canvas to add it. |
+| <span class="circle">6</span> | **Add connection**. Click the source, optional intermediate points, and the destination. |
+| <span class="circle">7</span> | **Bidirectional connection**. Toggle whether new connections carry data in both directions. |
+| <span class="circle">8</span> | **Delete component or connection**. Select this tool, then click the item to remove. |
+| <span class="circle">9</span> | **Plugin selector**. Select the plugin to place with the active component tool. |
+| <span class="circle">10</span> | **Grid**. Show the grid and snap components to it. |
+| <span class="circle">11</span> | **Grid spacing**. Adjust the distance between grid points. |
+| <span class="circle">12</span> | **Canvas**. Place, move, and connect the computer’s plugins. |
 
 ## Editor controls
-
-The following controls appear from left to right in the toolbar:
-
-{: .list .control-list}
-| <span class="circle">1</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=2 y=2 %} | **Save & Close**. Save the computer configuration and close the editor.
-| <span class="circle">2</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=41 y=2 %} | **Set compiler**. Choose a compiler in the plugin selector, then click the canvas to place it.
-| <span class="circle">3</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=73 y=2 %} | **Set CPU**. Choose a CPU and click the canvas to place it.
-| <span class="circle">4</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=105 y=2 %} | **Set operating memory**. Choose a memory plugin and click the canvas to place it.
-| <span class="circle">5</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=137 y=2 %} | **Add device**. Choose a device and click the canvas to add it. A computer can contain several devices.
-| <span class="circle">6</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=176 y=2 %} | **Add connection**. Click the source box, optional intermediate points, then the destination box.
-| <span class="circle">7</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=208 y=2 %} | **Bidirectional connection**. Enabled by default for new lines. Turn it off to create an arrow from the first clicked box to the second. This toggle affects new connections.
-| <span class="circle">8</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=247 y=2 %} | **Delete component or connection**. Select this tool, then click a box or line to remove it. Removing a box also removes its connections.
-| <span class="circle">9</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=755 y=2 %} | **Plugin selector**. Lists plugins of the type selected by controls 2–5. Names are plugin JAR filenames without the `.jar` suffix.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/computer-schema-toolbar.png" x=799 y=2 %} | **Grid**. Show the grid and snap placement and movement to it. The vertical slider on the right sets grid spacing. These application-wide settings are stored as `useSchemaGrid` and `schemaGridGap` in `emuStudio.toml`.
 
 A computer can have one compiler, one CPU, one memory plugin, and multiple devices. The configurations supplied with
 emuStudio combine a CPU and memory with the compiler and devices required by that computer.

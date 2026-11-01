@@ -21,7 +21,15 @@ The bundled RAM configuration supplies these connections.
 
 In the following image, you can see the status panel of `ram-cpu`.
 
-![RAM CPU status panel]({{ site.baseurl }}/assets/ram/ram-cpu-status.png)
+![RAM CPU status panel]({{ site.baseurl }}/assets/ram/ram-cpu-status.png){: style="max-width: 214px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **R0**. Inspect the accumulator. |
+| <span class="circle">2</span> | **IP**. Inspect the next instruction position. |
+| <span class="circle">3</span> | **Next input**. Preview the symbol at the input-tape head. |
+| <span class="circle">4</span> | **Last output**. Inspect the most recently written output symbol. |
 
 **Internal status** shows `R0` (the accumulator) and `IP` (the instruction pointer). `IP` is the address of the next
 instruction in program memory.
@@ -30,4 +38,3 @@ The input/output section shows the next unread symbol ("next input") and the las
 ("last output"). The tape windows show the same values.
 
 **Run state** shows the emulation state, as in other emuStudio CPU plugins. The state "breakpoint" means execution is paused.
-

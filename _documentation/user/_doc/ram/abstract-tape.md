@@ -36,31 +36,46 @@ The input tape is editable in the GUI, while the output tape is controlled by th
 
 To open a tape, select it in the peripheral device list on the **Debugger** tab and click **Show device...**.
 
-![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png)
+![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png){: style="max-width: 172px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Prepend**. Add a symbol before the first cell; disabled for left-bounded RAM and RASP tapes. |
+| <span class="circle">2</span> | **Symbols**. The red entry marks the tape head; click an entry to select it. |
+| <span class="circle">3</span> | **Append**. Add a symbol after the last cell. |
+| <span class="circle">4</span> | **Remove symbol**. Remove the selected symbol. |
+| <span class="circle">5</span> | **Edit symbol**. Change the selected symbol. |
+| <span class="circle">6</span> | **Clear tape**. Remove all tape symbols. |
 
 The red symbol marks the current head position. Click a symbol to select it for editing or removal. The selected symbol
 has a blue background in the following image:
 
-![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png)
+![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png){: style="max-width: 172px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Add a symbol at the beginning of an editable, unbounded tape. This is disabled for RAM and RASP tapes because they are left-bounded.
-| <span class="circle">2</span> | The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by the symbol itself.
-| <span class="circle">3</span> | If the tape allows it, one can add a new symbol after the last one in the tape. In the image, the tape allows it.
-| <span class="circle">4</span> | Removes the selected symbol from the tape.
-| <span class="circle">5</span> | Edits the tape symbol. The symbol must be selected.
-| <span class="circle">6</span> | Clears the tape content
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Prepend**. Add a symbol before the first cell; disabled for left-bounded RAM and RASP tapes. |
+| <span class="circle">2</span> | **Symbols**. The red entry marks the tape head; click an entry to select it. |
+| <span class="circle">3</span> | **Append**. Add a symbol after the last cell. |
+| <span class="circle">4</span> | **Remove symbol**. Remove the selected symbol. |
+| <span class="circle">5</span> | **Edit symbol**. Change the selected symbol. |
+| <span class="circle">6</span> | **Clear tape**. Remove all tape symbols. |
 
 ## Settings
 
 To open the tape settings, select the tape in the peripheral device list on the **Debugger** tab and click
 **Show settings...**:
 
-![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png)
+![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png){: style="max-width: 170px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Do not allow the tape to fall behind another window
-| <span class="circle">2</span> | Show the tape right after emuStudio start
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Always on top**. Keep the tape window above other windows. |
+| <span class="circle">2</span> | **Show GUI at startup**. Open this tape when the computer opens. |
+| <span class="circle">3</span> | **Save**. Save the tape-window preferences. |
 
 ## Automatic emulation
 

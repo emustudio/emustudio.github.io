@@ -88,13 +88,15 @@ Keep the template's `ROMfrom` and `ROMto` settings, which protect ROM from write
 To open the display, double-click `spaceinvaders-display` in the device list on the **Debugger** tab.
 The following screenshot shows a one-player game with `scale = 2` and `colorOverlay = true`:
 
-![Space Invaders game screen with numbered score, invaders, player area, and lives and credits]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-screen.png){:style="max-width:448px"}
+![Space Invaders game screen with numbered score, invaders, player area, and lives and credits]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-screen.png){: style="max-width: 448px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Score area. Shows player scores and the high score. |
-| <span class="circle">2</span> | Invader formation. Move your cannon and fire at the advancing enemies. |
-| <span class="circle">3</span> | Player area and shields. The cannon moves along the bottom of the playfield; the shields provide cover until they are damaged. |
-| <span class="circle">4</span> | Remaining lives and credits. Press **C** to insert a coin before starting a game. |
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Score**. Read the player and high scores. |
+| <span class="circle">2</span> | **Invaders**. Track the advancing formation. |
+| <span class="circle">3</span> | **Player area**. Move the cannon and fire from behind the shields. |
+| <span class="circle">4</span> | **Lives and credits**. Check remaining lives and inserted credits. |
 
 The red upper band and green lower band come from the optional color overlay. The underlying framebuffer is monochrome.
 Use the main window's debugger toolbar to pause, resume, or reset the game.
@@ -120,7 +122,17 @@ so use one-player mode for normal play.
 On the **Debugger** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
 The settings panel is shown below:
 
-![Space Invaders display settings]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png)
+![Space Invaders display settings]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png){: style="max-width: 492px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Scale**. Set the display’s integer enlargement factor. |
+| <span class="circle">2</span> | **Color overlay**. Toggle the red and green arcade-screen bands. |
+| <span class="circle">3</span> | **Sound enabled**. Enable playback of the game’s sound samples. |
+| <span class="circle">4</span> | **Samples directory**. Enter the directory containing sound samples. |
+| <span class="circle">5</span> | **Browse**. Choose the samples directory. |
+| <span class="circle">6</span> | **Save**. Validate, save, and apply the display settings. Press Escape to discard edits. |
 
 | Setting | Description |
 |:--------|:------------|

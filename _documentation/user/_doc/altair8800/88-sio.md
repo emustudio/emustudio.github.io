@@ -41,15 +41,17 @@ features:
 
 GUI can be seen here:
 
-![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio.png)
+![GUI of 88-SIO]({{ site.baseurl }}/assets/altair8800/88-sio.png){: style="max-width: 700px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Attached device**. Identify the terminal or other peripheral connected to the serial board. |
+| <span class="circle">2</span> | **Control channel**. Inspect the serial status and control bits. |
+| <span class="circle">3</span> | **Data channel**. Inspect the received and transmitted byte. |
+| <span class="circle">4</span> | **Clear buffer**. Discard buffered input. |
 
 The window shows attached device, control channel and data buffer.
-
-{: .list}
-| <span class="circle">1</span> | Attached device name
-| <span class="circle">2</span> | Control channel status. Control channel is used to retrieve 88-sio status, or enable/disable interrupts. The displayed value shows the status. For details see the 88-sio manual.
-| <span class="circle">3</span> | 88-sio queues bytes received from the connected device. Reading the data port removes the oldest queued byte. Sending data to the device does not clear this input queue.
-| <span class="circle">4</span> | Clear internal data buffer
 
 ## Settings
 
@@ -61,12 +63,17 @@ Click **Save** to persist and apply all tabs; press **Esc** to discard edits.
 The 88-sio plugin can transform transferred bytes to suit the connected device or guest software. These options
 extend the original board's behavior:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings1.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings1.png){: style="max-width: 484px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
-| <span class="circle">2</span> | Converts input data to upper-case (the byte coming from device).
-| <span class="circle">3</span> | Maps Backspace or Delete to `BACKSPACE`, `DELETE`, `UNDERSCORE`, or `UNCHANGED`.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **TTY mode**. Clear the high bit of each received byte. |
+| <span class="circle">2</span> | **ANSI mode**. Clear the high bit of each transmitted byte. |
+| <span class="circle">3</span> | **Uppercase input**. Convert received letters to uppercase. |
+| <span class="circle">4</span> | **Delete mapping**. Choose the byte sent for the Delete key. |
+| <span class="circle">5</span> | **Backspace mapping**. Choose the byte sent for Backspace. |
+| <span class="circle">6</span> | **Save**. Apply and save these conversions. |
 
 ### CPU Ports settings
 
@@ -93,13 +100,20 @@ CPU ports),
 
 But back to 88-sio. The port numbers allocation can be changed in the Settings window:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings2.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings2.png){: style="max-width: 484px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Attach/detach control channel ("status port") to/from CPU port
-| <span class="circle">2</span> | Reset control channel CPU ports to default ones (`0x10`, `0x14`, `0x16`, `0x18`)
-| <span class="circle">3</span> | Attach/detach data channel ("data port") to/from CPU port
-| <span class="circle">4</span> | Reset data channel CPU ports to default ones (`0x11`, `0x15`, `0x17`, `0x19`)
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Status-port aliases**. These CPU ports expose the same status/control channel. |
+| <span class="circle">2</span> | **Add status port**. Add a status/control-port alias. |
+| <span class="circle">3</span> | **Remove status port**. Remove the selected alias. |
+| <span class="circle">4</span> | **Default status ports**. Restore the standard status/control mapping. |
+| <span class="circle">5</span> | **Data-port aliases**. These CPU ports expose the same data channel. |
+| <span class="circle">6</span> | **Add data port**. Add a data-port alias. |
+| <span class="circle">7</span> | **Remove data port**. Remove the selected alias. |
+| <span class="circle">8</span> | **Default data ports**. Restore the standard data mapping. |
+| <span class="circle">9</span> | **Save**. Apply and save both port lists. |
 
 ### Interrupts settings
 
@@ -107,11 +121,16 @@ But back to 88-sio. The port numbers allocation can be changed in the Settings w
 connected device; an output interrupt signals that data has been sent to it. The Settings window controls interrupt
 support and the input and output vectors:
 
-![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings3.png)
+![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings3.png){: style="max-width: 484px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Enable/disable interrupt support and set interrupt vectors. If interrupts are disabled, they cannot be enabled in software (see "Port 1" section below).
-| <span class="circle">2</span> | Reset to default. Interrupts will be supported and interrupt vector is set to 7 (equivalent to calling `RST 7` instruction)
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Interrupts supported**. Enable serial interrupts when supported by the CPU. |
+| <span class="circle">2</span> | **Input vector**. Choose the RST vector for received input. |
+| <span class="circle">3</span> | **Output vector**. Choose the RST vector for output readiness. |
+| <span class="circle">4</span> | **Set default**. Restore the standard interrupt vectors. |
+| <span class="circle">5</span> | **Save**. Apply and save the interrupt settings. |
 
 ## Programming
 

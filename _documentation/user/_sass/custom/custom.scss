@@ -13,14 +13,27 @@ table.list, table.list th, table.list tr, table.list td, table.list caption, tab
 }
 
 *.circle {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    padding: 1px 7px 1px 7px;
+    padding: 0;
     margin-right: 10px;
     background: #fff;
     border: 2px solid #000;
     color: #000;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
     text-align: center;
+}
+
+table.control-list.screenshot-controls td:first-child,
+table.control-list.screenshot-controls th:first-child {
+    width: 52px;
 }
 
 .control-icon {
@@ -52,29 +65,5 @@ table.control-list {
         padding: 0;
         line-height: 22px;
         vertical-align: middle;
-    }
-}
-
-.annotated-screenshot {
-    position: relative;
-    max-width: 100%;
-    margin: 1rem 0;
-
-    img {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-
-    .circle {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        margin: 0;
-        padding: 0;
-        width: 26px;
-        height: 26px;
-        line-height: 22px;
-        font-size: 14px;
-        pointer-events: none;
     }
 }

@@ -27,7 +27,16 @@ data pointer and loop state inconsistent.
 
 In the following image, you can see the status panel of `brainduck-cpu`.
 
-![BrainDuck CPU status panel]({{ site.baseurl }}/assets/brainduck/status-panel.png)
+![BrainDuck CPU status panel]({{ site.baseurl }}/assets/brainduck/status-panel.png){: style="max-width: 520px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **IP**. Inspect the next program instruction address. |
+| <span class="circle">2</span> | **P**. Inspect the data pointer. |
+| <span class="circle">3</span> | **Pointee**. Inspect the byte at the data pointer. |
+| <span class="circle">4</span> | **Runtime status**. Inspect measured execution time and the current loop nesting level. |
+| <span class="circle">5</span> | **Memory preview**. Inspect nearby data cells. |
 
 It is split into three parts. Within the 'Internal status' part, there is shown content of registers `IP` and `P`.
 Register `IP` does not have a counterpart in brainfuck. IP stands for "instruction pointer". The content is pointing at

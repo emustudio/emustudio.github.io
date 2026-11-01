@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img alt="{{ screenshot.alt }}" class="img-fluid" src="{{ screenshot.image }}">
+                {% include screenshot-figure.html screenshot=screenshot %}
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>

@@ -47,8 +47,12 @@ When emulation is stopped, click **Load snapshot...** in the CPU status panel to
 snapshots and Z80 versions 1, 2, and 3. It restores CPU registers, interrupt state, program counter, RAM, and border
 colour as one operation before execution resumes.
 
-![Z80 CPU status panel with Load snapshot action]({{ site.baseurl }}/assets/zxspectrum48k/z80-snapshot-action.png){: style="max-width: 324px; width: 100%;" }
+![Z80 CPU status panel with Load snapshot action]({{ site.baseurl }}/assets/zxspectrum48k/z80-snapshot-action.png){: style="max-width: 324px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Load snapshot**. Load a supported Z80 snapshot while the CPU is stopped. This restores the state included in that snapshot. |
 
 The 48K virtual computer intentionally rejects 128K and banked snapshots. A rejected or malformed file leaves the
 current machine state unchanged and reports the reason to the user.
-

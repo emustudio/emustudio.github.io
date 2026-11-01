@@ -38,20 +38,24 @@ other emulators that can benefit from it.
 
 On the **Debugger** tab, click **Show operating memory** in the toolbar to open the memory window:
 
-![Byte operating memory]({{ site.baseurl }}/assets/altair8800/byte-mem.png)
+![Byte operating memory]({{ site.baseurl }}/assets/altair8800/byte-mem.png){: style="max-width: 794px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Open a memory image. Current memory content which does not overlap with the loaded data will be kept.
-| <span class="circle">2</span> | Dump (save) whole memory content into a file.
-| <span class="circle">3</span> | Go to address. The address can be either in decimal, hexadecimal (prefix `0x`) or octal (prefix `0`) format.
-| <span class="circle">4</span> | Find a sequence. A dialog shows up where user can find either a plain text or sequence of bytes in the memory.
-| <span class="circle">5</span> | Toggle ASCII mode (ASCII mode means to render characters instead of character codes)
-| <span class="circle">6</span> | Erases all memory content.
-| <span class="circle">7</span> | Shows memory settings
-| <span class="circle">8</span> | By double-clicking on a memory cell it is possible to edit it and change its value. The value can be either in decimal, hexadecimal (prefix `0x`) or octal (prefix `0`) format.
-| <span class="circle">9</span> | Page of the memory view. The whole memory cannot be shown in single window, because it can be quite large, so it is split into pages. This split is just visual.
-| <span class="circle">10</span> | If the memory has set up [memory banks][memoryBanks], it is possible to change the view to different bank. Switching in here has no effect on the emulator and on the active bank.
-| <span class="circle">11</span> | Displays the data of the selected cell in various formats.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Load image**. Load binary or Intel HEX data into memory. |
+| <span class="circle">2</span> | **Dump memory**. Save the memory image and its annotation sidecar. |
+| <span class="circle">3</span> | **Go to address**. Select an address in the memory table. |
+| <span class="circle">4</span> | **Find sequence**. Search for text or bytes. |
+| <span class="circle">5</span> | **Find next**. Select the next matching sequence. |
+| <span class="circle">6</span> | **Find previous**. Select the previous matching sequence. |
+| <span class="circle">7</span> | **ASCII mode**. Toggle between characters and byte values. |
+| <span class="circle">8</span> | **Erase memory**. Clear all memory content. |
+| <span class="circle">9</span> | **Settings**. Open bank, ROM, and startup-image settings. |
+| <span class="circle">10</span> | **Memory cells**. Select a cell or double-click to edit its value. |
+| <span class="circle">11</span> | **Page**. Select the displayed memory page. |
+| <span class="circle">12</span> | **Bank**. Select the bank to inspect without switching the CPU’s active bank. |
+| <span class="circle">13</span> | **Selected cell**. Read its address, byte value, and character representation. |
 
 Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
 letter/number key, a small text field appears allowing to edit the current value. When editing
@@ -77,14 +81,22 @@ Loading at a different binary address does not relocate the stored source positi
 
 Settings window can be opened by clicking on "settings" icon in the main GUI window:
 
-![Memory settings]({{ site.baseurl }}/assets/altair8800/byte-mem-settings.png)
+![Memory settings]({{ site.baseurl }}/assets/altair8800/byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Settings for memory bank-switching
-| <span class="circle">2</span> | Settings for ROM areas
-| <span class="circle">3</span> | If checked, settings for ROM areas will be saved to the configuration file
-| <span class="circle">4</span> | List of memory images which will be loaded at startup
-| <span class="circle">5</span> | The button will save and apply the settings
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
 
 ### ROM areas
 

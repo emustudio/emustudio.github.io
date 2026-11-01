@@ -36,35 +36,43 @@ is also set with no punch attached; in that case, output bytes are discarded. A 
 
 On the **Debugger** tab, double-click `88-ptr-ptp` in the device list. The **Reader** tab is shown below:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-ptr-ptp-gui-reader.png" alt="Paper tape reader window with numbered directory, file list, load action, status, progress and reader controls" width=790 points="1:21.01:5.95|2:29.37:31.08|3:22.03:90.27|4:93.67:19.73|5:93.67:73.24|6:58.73:90.00" %}
+![Paper tape reader window with numbered directory, file list, load action, status, progress and reader controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-reader.png){: style="max-width: 800px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Directory**. Browse for the folder containing paper tapes.
-| <span class="circle">2</span> | **Available tapes**. Select a readable `.pt`, `.bin` or `.hex` file. The device streams the file’s bytes without interpreting its format.
-| <span class="circle">3</span> | **Refresh / Load**. Refresh the list after changing files on disk; **Load** attaches the selected reader tape.
-| <span class="circle">4</span> | **Reader status**. Shows the attached filename and whether the reader is ready or at end of tape.
-| <span class="circle">5</span> | **Progress**. Shows bytes consumed by guest software; loading a tape does not execute it.
-| <span class="circle">6</span> | **Rewind / Eject**. Rewind to byte zero or detach the reader file.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Directory**. Choose the directory to list. |
+| <span class="circle">2</span> | **Browse directory**. Select a paper-tape directory. |
+| <span class="circle">3</span> | **Tape files**. Select the file to load. |
+| <span class="circle">4</span> | **Refresh**. Reload the directory listing. |
+| <span class="circle">5</span> | **Load**. Load the selected file into the reader. |
+| <span class="circle">6</span> | **Reader status**. Inspect the loaded file and read position. |
+| <span class="circle">7</span> | **Rewind**. Return to the beginning of the loaded tape. |
+| <span class="circle">8</span> | **Eject**. Unload the reader’s tape. |
 
 Select the **Punch** tab to manage the output tape:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-ptr-ptp-gui-punch.png" alt="Paper tape punch window with numbered output status, Save tape and Close output controls" width=790 points="1:93.67:19.73|2:52.78:89.19|3:76.71:89.19" %}
+![Paper tape punch window with numbered output status, Save tape and Close output controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-punch.png){: style="max-width: 800px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Punch status**. Shows the output file and current punch state.
-| <span class="circle">2</span> | **Save tape**. Choose an output file to receive guest writes. Opening it creates or truncates the file immediately.
-| <span class="circle">3</span> | **Close output**. Close the punch file. Further guest output is discarded until another output tape is attached.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Punch status**. Inspect the output file and punched-byte count. |
+| <span class="circle">2</span> | **Save tape**. Choose an output file for punched bytes. |
+| <span class="circle">3</span> | **Close output**. Finish writing and close the punch output. |
 
 ## Settings dialog
 
 Select `88-ptr-ptp` in the device list and click **Show settings...**:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-ptr-ptp-settings.png" alt="Paper tape settings with numbered startup checkbox, fixed CPU ports and Save button" width=231 points="1:89.18:18.26|2:8.23:66.96|3:56.71:80.87" %}
+![Paper tape settings with numbered startup checkbox, fixed CPU ports and Save button]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-settings.png){: style="max-width: 223px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Show GUI at startup**. Open the reader/punch window when the computer is initialized in GUI mode.
-| <span class="circle">2</span> | **CPU ports**. The status and data ports are fixed at `12h` and `13h`; this dialog does not remap them.
-| <span class="circle">3</span> | **Save**. Persist the startup preference and close the dialog. Press **Esc** to discard edits.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Show GUI at startup**. Open the reader/punch window when the computer opens. |
+| <span class="circle">2</span> | **CPU ports**. The reader/punch uses fixed status port `12h` and data port `13h`. |
+| <span class="circle">3</span> | **Save**. Save the startup preference. |
 
 ## Reset and configuration
 

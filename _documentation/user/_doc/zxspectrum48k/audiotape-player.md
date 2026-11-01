@@ -31,31 +31,33 @@ The tape player connects to the ZX Spectrum bus and writes data signals that the
 Open the tape player from **Debugger → Peripheral devices → Show device**. The window can be opened while stopped;
 start the CPU before playing tape pulses:
 
-![Audio Tape Player]({{ site.baseurl }}/assets/zxspectrum48k/audiotape-player.png)
+![Audio Tape Player]({{ site.baseurl }}/assets/zxspectrum48k/audiotape-player.png){: style="max-width: 800px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Directory**. Select the tape directory. |
+| <span class="circle">2</span> | **Browse directory**. Choose a directory containing tape files. |
+| <span class="circle">3</span> | **Tape files**. Select a file to load. |
+| <span class="circle">4</span> | **Refresh**. Reload the file list. |
+| <span class="circle">5</span> | **Load**. Load the selected tape. |
+| <span class="circle">6</span> | **Tape status**. Read the loaded filename and playback position. |
+| <span class="circle">7</span> | **Log**. Review playback and block-processing messages. |
+| <span class="circle">8</span> | **Play**. Start or resume tape playback. |
+| <span class="circle">9</span> | **Stop**. Pause tape playback. |
+| <span class="circle">10</span> | **Eject**. Unload the tape. |
+| <span class="circle">11</span> | **Copy**. Copy selected log rows. |
+| <span class="circle">12</span> | **Save logs**. Export the playback log. |
 
 The window is divided into two panels separated by a resizable split pane.
 
 ### Available tapes (left panel)
 
-The left panel allows browsing for tape files on the filesystem:
-
-{: .list}
-| <span class="circle">1</span> | **Directory selector** — use the folder icon button to browse and select a directory containing tape files. Previously selected directories are remembered in the dropdown for quick switching.
-| <span class="circle">2</span> | **Refresh** — refreshes the file list from the selected directory
-| <span class="circle">3</span> | **Load** — loads the selected tape file into the tape deck (inserts the tape)
+The left panel lists tape files in the selected directory.
 
 ### Audio tape (right panel)
 
-The right panel shows the currently loaded tape, playback controls, and an event log:
-
-{: .list}
-| <span class="circle">4</span> | **Events log** — a table showing detailed information about tape blocks and pulses during playback. Allows to select multiple rows and then with Ctrl+C to copy them to the clipboard.
-| <span class="circle">5</span> | **Play** — starts playback of the loaded tape
-| <span class="circle">6</span> | **Stop** — stops the currently playing tape (the tape remains loaded)
-| <span class="circle">7</span> | **Eject** — stops playback and removes the loaded tape from the deck
-| <span class="circle">8</span> | **Copy** — copies selected rows from the events table to the clipboard (also available via `Ctrl+C`)
-| <span class="circle">9</span> | **Save** — saves the full event log to a file. Supported file formats are tab-separated values (`.tsv`) and plain text (`.txt`)
-
+The right panel shows the loaded tape, playback controls, and event log.
 
 The panel header shows:
 - **File name** — shows the name of the currently loaded tape file (or "N/A" if no tape is loaded)
@@ -208,7 +210,20 @@ The following TZX block types are supported:
 The tape player window has a second tab called **Events** that allows defining a sequence of automation events. These
 events can automate tape loading without manual interaction — useful for testing or batch processing.
 
-![Audio Tape Player Events tab with load, delay, play, delay, and stop events]({{ site.baseurl }}/assets/zxspectrum48k/tape-events.png){: style="max-width: 798px; width: 100%;" }
+![Audio Tape Player Events tab and timeline controls]({{ site.baseurl }}/assets/zxspectrum48k/tape-events.png){: style="max-width: 800px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Timeline**. Select an event to inspect or reorder. |
+| <span class="circle">2</span> | **Event type**. Choose the kind of event to add. |
+| <span class="circle">3</span> | **Add event**. Add an event to the timeline. |
+| <span class="circle">4</span> | **Remove event**. Delete the selected event. |
+| <span class="circle">5</span> | **Move up**. Move the selected event earlier. |
+| <span class="circle">6</span> | **Move down**. Move the selected event later. |
+| <span class="circle">7</span> | **Play**. Execute the timeline. |
+| <span class="circle">8</span> | **Stop**. Pause timeline execution. |
+| <span class="circle">9</span> | **Reset**. Return the timeline to its initial position. |
 
 ### Available automation events
 
@@ -244,7 +259,13 @@ The current implementation does not start stored events in headless mode; see
 Select the tape player in **Peripheral devices** and click **Show settings**. **Show GUI at startup** controls
 whether its window opens automatically; click **Save** to store the choice.
 
-![Audio Tape Player Settings with Show GUI at startup and Save]({{ site.baseurl }}/assets/zxspectrum48k/tape-settings.png)
+![Audio Tape Player Settings with Show GUI at startup and Save]({{ site.baseurl }}/assets/zxspectrum48k/tape-settings.png){: style="max-width: 170px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Show GUI at startup**. Open Audio Tape Player when the computer opens. |
+| <span class="circle">2</span> | **Save**. Save the startup preference. |
 
 ## Configuration file
 

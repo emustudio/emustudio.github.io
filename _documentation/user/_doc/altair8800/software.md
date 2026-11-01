@@ -40,11 +40,52 @@ Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in t
    the VT100 window. ADM-3A also works for the CP/M command prompt.
 4. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**. Keep enlarged Schorn images intact.
 
-![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){:style="max-width:858px"}
+![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
 
-![88-SIO console port aliases for CP/M]({{ site.baseurl }}/assets/altair8800/software-88-sio-settings.png){:style="max-width:488px"}
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
 
-![88-DCDD mounted system disk and sector settings]({{ site.baseurl }}/assets/altair8800/software-88-dcdd-settings.png){:style="max-width:599px"}
+![88-SIO console port aliases for CP/M]({{ site.baseurl }}/assets/altair8800/software-88-sio-settings.png){: style="max-width: 484px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Status-port aliases**. These CPU ports expose the same status/control channel. |
+| <span class="circle">2</span> | **Add status port**. Add a status/control-port alias. |
+| <span class="circle">3</span> | **Remove status port**. Remove the selected alias. |
+| <span class="circle">4</span> | **Default status ports**. Restore the standard status/control mapping. |
+| <span class="circle">5</span> | **Data-port aliases**. These CPU ports expose the same data channel. |
+| <span class="circle">6</span> | **Add data port**. Add a data-port alias. |
+| <span class="circle">7</span> | **Remove data port**. Remove the selected alias. |
+| <span class="circle">8</span> | **Default data ports**. Restore the standard data mapping. |
+| <span class="circle">9</span> | **Save**. Apply and save both port lists. |
+
+![88-DCDD mounted system disk and sector settings]({{ site.baseurl }}/assets/altair8800/software-88-dcdd-settings.png){: style="max-width: 678px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose which of the sixteen drives to configure. |
+| <span class="circle">2</span> | **Image**. Enter the selected drive’s disk-image path. |
+| <span class="circle">3</span> | **Browse**. Choose a disk image. |
+| <span class="circle">4</span> | **Mount**. Set whether the selected image is mounted. |
+| <span class="circle">5</span> | **Unmount all**. Unmount every drive. |
+| <span class="circle">6</span> | **Sectors per track**. Set the image’s track geometry. |
+| <span class="circle">7</span> | **Sector size**. Set the number of bytes in each sector. |
+| <span class="circle">8</span> | **Set default**. Restore the standard geometry. |
+| <span class="circle">9</span> | **Save**. Apply and save the drive settings. |
 
 ### CP/M 2.2
 
@@ -57,7 +98,13 @@ Use this disk for the application tables below.
 
 The following image shows `DIR` at the CP/M command prompt:
 
-![Operating system CP/M 2.2]({{ site.baseurl }}/assets/altair8800/software-cpm22.png){:style="max-width:737px"}
+![Operating system CP/M 2.2]({{ site.baseurl }}/assets/altair8800/software-cpm22.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 Commands are followed by Enter. `DIR B:` lists another drive without changing the current drive. `USER 1` selects
 user area 1; use `USER 0` to return. `TYPE filename` displays text, and `PIP` copies files. More information can be
@@ -169,9 +216,21 @@ For Microsoft BASIC, run `MBASIC`, then try `PRINT 2+2`; supplied programs start
 `MBASIC STARTREK`, `MBASIC HAMURS` or `MBASIC MSTMND`. Other interpreters on `basic.dsk`: `MBASIC45`, `MBASIC51`,
 `MBASIC52` and `XBASIC`.
 
-![Microsoft BASIC running a program under CP/M in emuStudio]({{ site.baseurl }}/assets/altair8800/software-cpm-basic.png){:style="max-width:737px"}
+![Microsoft BASIC running a program under CP/M in emuStudio]({{ site.baseurl }}/assets/altair8800/software-cpm-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-![Turbo Pascal command menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-turbo-pascal.png){:style="max-width:737px"}
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+
+![Turbo Pascal command menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-turbo-pascal.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 BASIC compiler outputs need their runtimes: `CBASIC BLACKJAK` produces `.INT` for `CRUN2 BLACKJAK`; Digital
 Research uses `CBASE2`/`CRUN`; and `CB80` output needs `LINK` or `LK80`. For BASCOM, copy `DO.COM` and `L80.COM`
@@ -193,7 +252,13 @@ disk in `B:`, then run from `0xFF00`. At `A>`, type `B:`, then the package comma
 |[SuperCalc2 1.00][pkg-supercalc]{:target="_blank"} | `supercalc.dsk` | `SC2`, then Enter to start or `?` for help. The executable is `SC2.COM`, not `SC.COM`.
 |---
 
-![WordStar opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-wordstar.png){:style="max-width:737px"}
+![WordStar opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-wordstar.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 #### Games
 
@@ -213,7 +278,13 @@ at `0xFF00` and run from `0xFF00`. At `A>`, type `B:`, then a game command below
 | Sargon | `SARGON` | Chess program; follow its startup prompts.
 |---
 
-![Ladder opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-ladder.png){:style="max-width:737px"}
+![Ladder opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-ladder.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 Othello is on `cpm2.dsk` (`OTHELLO` at `A>`). ELIZA, Star Trek, Hamurabi and Mastermind use `MBASIC name`.
 [DeRamp CP/M games][deramp-cpm]{:target="_blank"} include Zork and a Creative Computing disk (`MBASIC MENU`).
@@ -291,9 +362,30 @@ It needs the SIMH pseudo device and `mdbl.bin`.
 2. Mount `cpm3.dsk` in 88-DCDD drive `A:`.
 3. Jump to `0xFF00` and run. At `A>`, type `DIR` or `HELP`.
 
-![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){:style="max-width:858px"}
+![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
 
-![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/software-cpm3.png){:style="max-width:737px"}
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
+
+![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/software-cpm3.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 The applications in the one-bank section use CP/M 2.2. See the [CP/M 3 manual][cpm3manual]{:target="_blank"}
 and [SIMH AltairZ80 manual][simhmanual]{:target="_blank"} for the BIOS and additional disk formats.
@@ -352,7 +444,13 @@ commands differ from CP/M commands. See the [Altair DOS manual][altairmanual]{:t
 Automatic memory detection probes writable memory. If all 64K is RAM and no ROM boundary is configured, the probe
 can wrap around and report `INSUFFICIENT MEMORY`. The explicit answer above avoids relying on that probe.
 
-![Operating system Altair DOS 1.0]({{ site.baseurl }}/assets/altair8800/software-altairdos.png){:style="max-width:737px"}
+![Operating system Altair DOS 1.0]({{ site.baseurl }}/assets/altair8800/software-altairdos.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 ### MITS Disk BASIC
 
@@ -389,7 +487,13 @@ programs. `LOAD "STARTREK"` loads without running; `LIST` displays the source, a
 programs include INVEST, 3DTTT, DAYOWEEK, DAYSPAN, DIAMOND, RUSROU, BOXING, MAP, ANNUITY, LOAN and BOMBER.
 Use the name printed by `FILES`. The [BASIC 4.1 reference manual][basic]{:target="_blank"} describes the disk commands.
 
-![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/software-disk-basic.png){:style="max-width:737px"}
+![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/software-disk-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 The same steps apply to the following native 8-inch floppy versions:
 
@@ -527,7 +631,13 @@ The supplied minidisk-capable loader is different from the bundled simplified `d
 CP/M and transfer tools are in the [minidisk archive][clone-mini]{:target="_blank"}; use the [88-MDS manual][mds-manual]{:target="_blank"}
 for its disk layout.
 
-![Minidisk BASIC disk directory in emuStudio]({{ site.baseurl }}/assets/altair8800/software-minidisk-basic.png){:style="max-width:737px"}
+![Minidisk BASIC disk directory in emuStudio]({{ site.baseurl }}/assets/altair8800/software-minidisk-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
+| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 ## 8080 with MITS hard disks
 
