@@ -17,7 +17,7 @@ The following links point to some software for SSEM (either original or created 
 - [http://www.historicsimulations.com/ssem.html](http://www.historicsimulations.com/ssem.html){:target="_blank"}
 - [https://github.com/jcla1/gobaby/tree/master/examples](https://github.com/jcla1/gobaby/tree/master/examples){:target="_blank"}
 
-Below is depicted an animation which shows running a standard example [ssem.ssem][ssem-ssem]{:target="_blank"}:
+The following animation shows the bundled example [ssem.ssem][ssem-ssem]{:target="_blank"}:
 
 ![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-ssem.gif){:style="max-width:459"}
 

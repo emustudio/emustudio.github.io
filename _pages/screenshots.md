@@ -9,6 +9,8 @@ permalink: /screenshots/
 
 # Screenshots
 
-What you can do with emuStudio? Is it interesting for you? This section shows some answers.
+These screenshots show computer selection, programming, debugging, device interaction, and automation.
+Some show earlier interfaces; the [current application guide]({{ site.baseurl }}/documentation/user/application/)
+explains today’s controls. The terminal automation recording shows release 0.41.
 
 {% include screenshots.html %}

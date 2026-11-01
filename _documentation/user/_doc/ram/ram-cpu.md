@@ -10,13 +10,12 @@ permalink: /ram/ram-cpu
 
 # CPU "ram-cpu"
 
-This plugin is the core of the emulation/simulation. Even if we're supposed to talk about the RAM simulator, because
-emulation is connected more with imitation of real hardware than the abstract machine, there is a plugin that calls
-itself a RAM CPU. It is really not accurate, but CPU nowadays means something as the
-main or core engine of the computation which the machine does. So the name got stuck rather with this convention.
+The `ram-cpu` plugin executes RAM instructions. Although RAM is an abstract machine, emuStudio uses the same CPU plugin
+interface as it does for physical processors.
 
-The plugin strictly requires a `ram-mem`, and three instances of `abstract-tape` plugins, representing the tapes. After
-boot, the CPU assigns the specific meaning to each tape.
+The plugin requires `ram-mem` and three instances of `abstract-tape`. At startup, the CPU assigns them to storage, input,
+and output, in the order of the `[[DEVICE]]` entries in the computer configuration.
+The bundled RAM configuration supplies these connections.
 
 ## Status panel
 
@@ -24,13 +23,11 @@ In the following image, you can see the status panel of `ram-cpu`.
 
 ![RAM CPU status panel]({{ site.baseurl }}/assets/ram/ram-cpu-status.png)
 
-It is split into three parts. Within the 'Internal status' part, there is shown the content of registers `R0`
-(accumulator) and `IP`. Register `IP` is the position of the program memory head. It stands for "instruction pointer". It
-is pointing at the next instruction being executed.
+**Internal status** shows `R0` (the accumulator) and `IP` (the instruction pointer). `IP` is the address of the next
+instruction in program memory.
 
-The input/output part shows the next unread symbol ("next input"), and the last symbol written to the output tape ("last
-output"). This is just for convenience; it is possible to see the same values in particular tape devices.
+The input/output section shows the next unread symbol ("next input") and the last symbol written to the output tape
+("last output"). The tape windows show the same values.
 
-The last part, "Run state", shows in which state the whole emulation is, and it is common to all emulators in emuStudio.
-The state "breakpoint" means that the emulation is paused.
+**Run state** shows the emulation state, as in other emuStudio CPU plugins. The state "breakpoint" means execution is paused.
 

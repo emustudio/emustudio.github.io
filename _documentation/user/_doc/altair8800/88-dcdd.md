@@ -129,8 +129,8 @@ Port mapping can be changed in the Settings window, tab "CPU Ports":
 The basic idea is to programmatically select a drive, then set a "position". After that data can be either read or
 written. For nice introduction with historical context see [this nice blog post][programming-history]{:target="_blank"}.
 
-The "position" in the floppy disk is determined by a track number, sector number and the offset within the sector.
-It is rudimentary to know how many tracks are available, so as how many sectors per track and the sector size.
+The position on a floppy disk consists of a track number, sector number and byte offset within the sector.
+Match the track count, sectors per track and sector size to the mounted image.
 
 In Altair8800, drive `Pertec FD400` used 8" diskettes. Each had 77 tracks. A track had 32 sectors with 137 bytes long.
 The capacity of a diskette was therefore `77 * 32 * 137 = 337568 B = 330 kB`. Software used less capacity, because
@@ -146,10 +146,8 @@ emuStudio plugin does this in a more predictable way. Instead of automatic chang
 it is changed in time when a programmer actually performs the probing. For example, to set the sector number to - say -
 5, poll port 2 until its sector field is 5. The emulator advances the sector on every other poll.
 
-Setting the offset within a sector is more challenging.
-After the track and sector are set, programmer must - again - probe the status port telling if current disk position
-is actually set at the beginning of the sector. If so, then a programmer must read the data until which increments
-the position, until the position is as requested.
+To reach a byte offset, select the track and sector, then poll the status port for available data. Read and discard
+bytes until the desired offset is reached; each data read advances the byte position.
 
 ### CPU Ports
 
@@ -216,7 +214,7 @@ Control the disk head, and other settings if a disk drive is selected.
   a sector should have set its MSB (7th bit) to 1. It was called the "sync bit" for easier identification of start or
   end of a sector. However, the plugin does not require it.
 - `D6` : _Head Current Switch_. On real disks the bit should be set to 1 when a program is writing data to tracks from
-  43-76. The plugin the bit is ignored.
+  43-76. The plugin ignores this bit.
 - `D5` : _Interrupt Disable_. If set to 1, interrupts support will be disabled.
 - `D4` : _Interrupt Enable_. If set to 1, interrupts support will be enabled. Interrupt will be signalled to CPU on
   "sector true" event. This effectively means on every other position reading (see *READ* part below). The device will

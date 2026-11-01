@@ -114,7 +114,8 @@ Implementations are provided by the host application (e.g., emuStudio) and made 
 <p>
 Static utility methods (<a href="#loadIcon(java.lang.String)"><code>loadIcon(String)</code></a>, <a href="#loadFontResource(java.lang.String,java.lang.Class,int)"><code>loadFontResource(String, Class, int)</code></a>, <a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>addKeyListenerRecursively(Component, KeyListener)</code></a>,
 <a href="#removeKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>removeKeyListenerRecursively(Component, KeyListener)</code></a>) are provided directly on this interface and do not depend on any
-external layout or look-and-feel libraries.</div>
+external layout or look-and-feel libraries.
+Toolbar factories provide accessible names from their tooltip or action name; callers can override them.</div>
 </div>
 </section>
 <section class="summary">
@@ -314,7 +315,7 @@ external layout or look-and-feel libraries.</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#styleTable(javax.swing.JTable)" class="member-name-link">styleTable</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Makes a JTable look modern.</div>
+<div class="block">Applies the host's table styling, preserving larger row heights and accommodating the current font.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextArea.html" title="class or interface in javax.swing" class="external-link">JTextArea</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#textAreaReadOnly(int,int)" class="member-name-link">textAreaReadOnly</a><wbr>(int&nbsp;columns,
@@ -462,7 +463,8 @@ with the base image in a <a href="https://docs.oracle.com/en/java/javase/25/docs
 <p>
 The given action is disabled before the task starts and re-enabled when it finishes (whether it
 succeeds or fails). On success <code>onSuccess</code> is invoked on the EDT; on failure <code>onError</code>
-is invoked on the EDT with the unwrapped cause.</div>
+is invoked on the EDT with the unwrapped cause.
+Calls from other threads are queued on the EDT. Calls while the action is disabled are ignored.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>action</code> - the action to disable while the task runs (e.g. the invoking <code>AbstractAction</code>)</dd>
@@ -988,7 +990,8 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>styleTable</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">styleTable</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</span></div>
-<div class="block">Makes a JTable look modern.</div>
+<div class="block">Applies the host's table styling, preserving larger row heights and accommodating the current font.
+Reapplying the style must not keep increasing row heights.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>table</code> - the JTable</dd>

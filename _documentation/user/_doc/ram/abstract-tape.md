@@ -16,37 +16,35 @@ machine, and RASP machine. The plugin of the abstract tape for emuStudio is call
 There are several properties which an abstract tape might have:
 
 - Bounded, one-side bounded or unbounded
-- Random access (allowing to move the head in both directions) or linear access (allowing to move head only in one
-  direction)
+- Random access to cells or sequential access by moving a head
 - Specific or any cell content type (e.g. cells are integers, or strings, or can be any value?)
-- Read-only, or read-write cells
+- Read-only, write-only, or read/write access
 - Purpose of the tape (title)
 
-This plugin allows us to set up such properties, but those are set up by the virtual computer which uses it, not by
-the user. For more information, please see the programming section.
+The virtual computer's CPU plugin sets these properties at startup. They are not user settings. Plugin developers can
+use the context API described in [Using abstract tapes in your emulator](#using-abstract-tapes-in-your-emulator).
 
 Currently, there are just two virtual computers utilizing this plugin:
 
 - RAM machine
 - RASP machine
 
-After emuStudio is run, RAM CPU (or RASP CPU) sets up properties for all used tapes. So the tape "purpose" and behavior
-is set in run time.
+RAM assigns three tapes to storage, input, and output; RASP assigns two tapes to input and output. All are left-bounded.
+The input tape is editable in the GUI, while the output tape is controlled by the CPU. RAM's storage tape is also editable.
 
 ## Graphical user interface (GUI)
 
-The graphical user interface of the abstract tape is very simple. To open it, select the tape in the peripheral devices
-list in the Emulator panel. Then, click on the "Show" button.
+To open a tape, select it in the peripheral device list on the **Debugger** tab and click **Show device...**.
 
 ![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png)
 
-The symbol, highlighted with the red color is the current head position, in this case. To manipulate with particular
-symbols, one must click on the symbol, which appears _selected_ (blue background in this case), as in the following image:
+The red symbol marks the current head position. Click a symbol to select it for editing or removal. The selected symbol
+has a blue background in the following image:
 
 ![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png)
 
 {: .list}
-| <span class="circle">1</span> | If the tape allows it, one can add a new symbol before the selected one in the tape. In the image, the tape does not allow it.
+| <span class="circle">1</span> | Add a symbol at the beginning of an editable, unbounded tape. This is disabled for RAM and RASP tapes because they are left-bounded.
 | <span class="circle">2</span> | The tape content area. Usually, each row consists of the symbol "index" or position within the tape, followed by the symbol itself.
 | <span class="circle">3</span> | If the tape allows it, one can add a new symbol after the last one in the tape. In the image, the tape allows it.
 | <span class="circle">4</span> | Removes the selected symbol from the tape.
@@ -55,8 +53,8 @@ symbols, one must click on the symbol, which appears _selected_ (blue background
 
 ## Settings
 
-The tape allows us to edit some settings from the graphical mode; to open the settings window click on the "Settings"
-button below the peripheral devices list in the Emulator panel. The window can be seen in the following image:
+To open the tape settings, select the tape in the peripheral device list on the **Debugger** tab and click
+**Show settings...**:
 
 ![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png)
 
@@ -66,10 +64,12 @@ button below the peripheral devices list in the Emulator panel. The window can b
 
 ## Automatic emulation
 
-In headless automatic emulation (`auto --no-gui`), symbol writes are logged to a file as `position symbol`, one per line. The file is overwritten after reset; GUI automation does not enable this logging. The file
-name is devised from the title of the tape, by the following algorithm:
+In headless automatic emulation (`auto --no-gui`), symbol writes are logged to a file as `position symbol`, one per line.
+The file is overwritten after reset; GUI automation does not enable this logging. These files record writes, rather than
+complete snapshots of the tapes. The file name is derived from the tape title:
 
-- At first, all spaces in the title are replaced with an underscore (`_`)
+- Leading and trailing whitespace is removed
+- Remaining whitespace is replaced with an underscore (`_`)
 - Then, all invalid characters are replaced with an underscore
 - Every character is converted to lower-case
 - Finally, the `.out` extension is added at the end.

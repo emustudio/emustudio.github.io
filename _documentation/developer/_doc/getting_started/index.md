@@ -10,48 +10,64 @@ permalink: /getting_started/
 
 # Getting started
 
-emuStudio is a Java Swing application that implements editor of virtual computer, source code editor,
-and emulation "controller" (sometimes known as "debugger"). The emulation controller is used for controlling the
-emulation, and also supports interaction in application GUI. Under the hood, it operates with an instance
-of the so-called "virtual computer". The virtual computer - or a computer emulator - is loaded from the computer
-configuration, selected by the user on the application startup.
+emuStudio is a Java Swing application with a virtual computer editor, source code editor, and debugger. At startup,
+the user selects a computer configuration. The application loads and connects plugin instances according to that
+configuration, then controls their execution through the debugger.
 
-Virtual computer is assembled from plugin object instances, possibly interconnected, according to the definition of
-given computer configuration. Each plugin is a single, almost a self-contained JAR file. It means almost all
-dependencies the plugin uses are present in the JAR file, except the following, which are bundled with emuStudio and
-will always be available in the class-path:
+Each plugin is a JAR file. Bundle its dependencies except for the libraries supplied by emuStudio on the classpath:
 
 - [emuLib][emulib-github]{:target="_blank"} (Maven [here][emulib-maven]{:target="_blank"})
 - [ANTLR4 runtime][antlr-runtime]{:target="_blank"}
 - [SLF4J logging][slf4j]{:target="_blank"}
 - [Picocli][picoli]{:target="_blank"} for command-line parsing
 
-The application provides also:
+The application also provides:
 
 - plugin configuration management through [PluginSettings][pluginSettings]{:target="_blank"}
 - context registration and lookup through `ApplicationApi.getContextPool()`
 - runtime API for the communication between plugins and emuStudio application - implementation
   of [ApplicationApi][applicationApi]{:target="_blank"}
 
-Plugins get those objects in the constructor. Details are provided in further chapters, but here can be revealed just
-this: there are four types of plugins: a **compiler** (which can produce code loadable in the
-emulated memory), one **CPU** emulator, one operating **memory**, and none, one or more virtual **devices**. The core
-concept of
-a virtual computer is inspired by the [von Neumann model][vonNeumann]{:target="_blank"}.
+Plugins receive these objects through their constructor. There are four plugin types: a **compiler** that produces
+code for emulated memory, a **CPU** emulator, **memory**, and **devices**. A computer can have at most one compiler,
+CPU, and memory plugin, and any number of devices. Its basic model is inspired by the
+[von Neumann model][vonNeumann]{:target="_blank"}.
 
-Each plugin implements API from emuLib, following some predefined rules. Plugin physically is compiled into a JAR file
-and copied into particular subdirectory in emuStudio installation.
+Each plugin implements the emuLib API and is installed in the corresponding emuStudio subdirectory.
 
 ## Building the application and plugins
 
-Use the wrapper supplied by each repository: emuStudio uses Gradle 8.14.4, while emuLib uses Gradle 9.0.
-JDK 21 can run both wrappers. emuStudio requests a Java 11 compilation toolchain; emuLib targets Java 11 bytecode.
-In the emuStudio checkout, `./gradlew build` builds and tests the application and
-bundled plugins; `./gradlew :application:distZip :application:distTar` creates distributions. `./gradlew doc` renders
-the repository's architecture documentation.
+Use each repository's wrapper. emuStudio uses Gradle 8.14.4 and requires an installed **JDK 11 compilation toolchain**.
+emuLib uses Gradle 9.0, which needs **JDK 17 or later to run**; JDK 21 is a suitable build JDK. emuLib still targets
+Java 11 bytecode. Installing only JDK 21 does not supply emuStudio's requested JDK 11 compiler.
 
-emuStudio uses `net.emustudio:emulib:12.1.0-SNAPSHOT`. When developing both repositories locally, run
-`./gradlew publishToMavenLocal` in emuLib before building emuStudio; its dependency lookup checks Maven Local first.
+For emuStudio alone, set `JAVA_HOME` to JDK 11. To run both wrappers with JDK 21, install JDK 11 as well and make it
+discoverable by Gradle. For example, after replacing these paths with your installed JDK locations:
+
+{:.code-example}
+```sh
+export JAVA_HOME=/path/to/jdk-21
+./gradlew -Porg.gradle.java.installations.paths=/path/to/jdk-11 build
+```
+
+In the emuStudio checkout, `./gradlew build` builds and tests the application and bundled plugins;
+`./gradlew :application:distZip :application:distTar` creates distributions. `./gradlew doc` renders the repository's
+architecture documentation.
+
+If Gradle reports that no Java 11 toolchain matches, check that the configured path points to a JDK containing `bin/javac`.
+Run `./gradlew -q javaToolchains` to inspect discovered installations. This build does not configure automatic toolchain
+downloads.
+
+emuStudio uses `net.emustudio:emulib:12.1.0-SNAPSHOT`. For local development against a sibling emuLib checkout, run
+the following from emuStudio with JDK 21 and the Java 11 toolchain available:
+
+{:.code-example}
+```sh
+./gradlew -PemuLibPath=../emuLib build
+```
+
+This composite build substitutes the local emuLib project for the Maven dependency. Alternatively, run
+`./gradlew publishToMavenLocal` in emuLib before building emuStudio; emuStudio checks Maven Local first.
 For public API details, use the [emuLib reference][emulib-javadoc]{:target="_blank"}.
 
 ## GitHub repositories

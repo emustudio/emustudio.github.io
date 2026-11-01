@@ -205,7 +205,8 @@ loadScripts(document, 'script');</script>
  int&nbsp;componentWidth)</span></div>
 <div class="block">Derives the maximum length of the shortened string to fit the component width.
 <p>
-Should be called when the component width changes.</div>
+Should be called when the component width, font, or displayed value changes.
+Non-positive widths produce an empty string.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>component</code> - component</dd>
@@ -263,7 +264,8 @@ Should be called when the component width changes.</div>
 <div class="block">Get the shortened String.
 <p>
 A shortened string is cut off at derived max string length. It does it by selecting some string prefix and
-suffix, and inserts "..." in the middle.</div>
+suffix, and inserts "..." in the middle. Unicode character sequences are kept intact.
+If there is insufficient room for three dots, only the dots that fit are shown.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>shortened string</dd>

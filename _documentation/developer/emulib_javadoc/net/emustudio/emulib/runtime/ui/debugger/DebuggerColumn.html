@@ -127,15 +127,15 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Gets a value from the column cell.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isEditable()" class="member-name-link">isEditable</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isEditable()" class="member-name-link">isEditable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Determines whether this column is editable by user.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setValue(int,java.lang.Object)" class="member-name-link">setValue</a><wbr>(int&nbsp;location,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setValue(int,java.lang.Object)" class="member-name-link">setValue</a><wbr>(int&nbsp;location,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Set a value to a column cell.</div>
 </div>
 </div>
@@ -182,11 +182,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isEditable()">
 <h3>isEditable</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isEditable</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEditable</span>()</div>
 <div class="block">Determines whether this column is editable by user.
 <p>
 For example, a "mnemo" column shouldn't be editable, but "breakpoint" column can (and should).
-Note that the returned value holds to all cells in the column.</div>
+Note that the returned value holds to all cells in the column. Columns are read-only by default.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if the column is editable, false otherwise</dd>
@@ -198,15 +198,16 @@ Note that the returned value holds to all cells in the column.</div>
 <section class="detail" id="setValue(int,java.lang.Object)">
 <h3>setValue</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setValue</span><wbr><span class="parameters">(int&nbsp;location,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setValue</span><wbr><span class="parameters">(int&nbsp;location,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span>
-       throws <span class="exceptions"><a href="CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></span></div>
+               throws <span class="exceptions"><a href="CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></span></div>
 <div class="block">Set a value to a column cell.
 <p>
 It is called by emuStudio when user sets a value to a cell in the debugger table. It is used only if
 the column is editable (see <a href="#isEditable()"><code>isEditable</code></a> method).
 <p>
-NOTE: This method should ensure proper changes in CPU's internal state, if necessary.</div>
+NOTE: This method should ensure proper changes in CPU's internal state, if necessary.
+The default implementation has no effect; editable columns must override it.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>location</code> - Cell index (usually memory address). It is not a "row number" in the debugger table.</dd>

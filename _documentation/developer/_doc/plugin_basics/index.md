@@ -173,13 +173,12 @@ A new plugin is another Gradle submodule, which should be "registered" in `setti
 If a plugin is part of a new computer, the new configuration should be created (in [TOML][toml]{:target="_blank"} format)
 and put in `application/src/main/files/config` directory.
 
-Plugin can have static example files, or shell scripts. Plugin must copy them into build directory,
-e.g. `plugins/compiler/as-8080/build/libs/examples` or `plugins/compiler/as-8080/build/libs/scripts`.
-Then, in `application/build.gradle` are sections marked with `// Examples` or `// Scripts` comments:
+To distribute a plugin's example files, copy them into its `build/libs/examples` directory, for example
+`plugins/compiler/as-8080/build/libs/examples`. Add the compiler's module name to the `// Examples` collection in
+`application/build.gradle`:
 
 {:.code-example}
 ```groovy
-...
 // Examples
 ["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
     from(examples(":plugins:compiler:$compiler")) {
@@ -187,21 +186,22 @@ Then, in `application/build.gradle` are sections marked with `// Examples` or `/
     }
 }
 
-// Scripts
-["as-8080", "as-z80", "as-ssem", "brainc-brainduck", "ramc-ram", "raspc-rasp"].collect { compiler ->
-    from(scripts(":plugins:compiler:$compiler")) {
-        into "bin"
-    }
-}
-["88-dcdd"].collect { device ->
-    from(scripts(":plugins:device:$device")) {
-        into "bin"
-    }
-}
-...
 ```
 
-It is necessary to put your plugin name in the particular collection.
+Command-line tools use the `launchers` map in the same build file. Each entry supplies a launcher name, main class,
+JAR paths relative to the distribution root, and an optional JVM-options environment variable. For example:
+
+{:.code-example}
+```groovy
+// Entry in the existing launchers map:
+'as-z80': ['net.emustudio.plugins.compiler.asZ80.Runner',
+           ['compiler/as-z80.jar', 'compiler/as-8080.jar']]
+```
+
+`generateLaunchers` expands the shared templates in `application/src/main/launchers/` into Unix and Windows launchers;
+the distribution copies them into `bin/`. Without an explicit options-variable name, the task uppercases the launcher
+name, replaces hyphens with underscores, and appends `_OPTS` (for example, `AS_Z80_OPTS`). Keep the JAR list complete
+when a tool depends on another plugin. Application libraries under `lib/` are added automatically.
 
 [emulib]: https://central.sonatype.com/artifact/net.emustudio/emulib
 [antlr-runtime]: https://www.antlr.org/

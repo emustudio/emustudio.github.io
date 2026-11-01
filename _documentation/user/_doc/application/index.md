@@ -15,22 +15,20 @@ emuStudio is a desktop application for emulating computers. Its source code edit
 for the selected computer. A virtual computer combines compiler, CPU, memory, and device plugins in a configuration
 that you select at startup.
 
-The application has also command-line interface, which allows executing automatic "load-compile-emulate" workflow,
-possibly without graphical interface. This workflow is called "automatic emulation" and has its specifics, discussed per
-virtual computer.
+The command-line interface can load, compile, and run programs, with or without device windows. This workflow is called
+**automatic emulation**; each computer guide describes its device behavior.
 
-A logger is used by emuStudio which helps debugging of the application and plugins.
+Logs help diagnose application and plugin problems; see [Logging]({{ site.baseurl }}/application/logging).
 
 ## Installation and run
 
-At first, please download emuStudio distribution. It is either a TAR or ZIP file in the form `emuStudio-[VERSION].zip`.
-For Linux, a TAR variant will be more suitable since it preserves file attributes and execution
-permissions. Unpack the file where you want to have emuStudio installed.
+Download and unpack the complete `emuStudio-[VERSION].tar` or `emuStudio-[VERSION].zip` distribution. On Linux,
+prefer TAR because it preserves execution permissions. Run the launcher from the unpacked directory.
 
 Before running, [Java 11][java11]{:target="_blank"} or later must be installed. Then, emuStudio can be run by executing
 the following script:
 
-- On Linux or macOS:
+- On Linux:
 
 ```
 > ./emuStudio
@@ -42,8 +40,8 @@ the following script:
 > emuStudio.bat
 ```
 
-emuStudio runs on Linux, Windows, and macOS. Individual plugins can require additional host resources, such as audio
-or network access.
+The distributed launchers support Linux and Windows. macOS operation has not been verified for this development version.
+Individual plugins can require additional host resources, such as audio or network access.
 
 ## Command-line arguments
 
@@ -77,17 +75,21 @@ for environment variables and path resolution.
 Automation command has its own usage:
 
     $ ./emuStudio auto --help
-    Usage: emuStudio automation [-hV] [--[no-]gui] [-p=LOCATION] [-w=MILLIS]
+    Usage: emuStudio automation [-hV] [--[no-]gui] [--debug-script=<debugScript>]
+                                [-p=LOCATION] [-w=MILLIS]
     run emulation automation
+          --debug-script=<debugScript>
+                             run bounded STEP/RUN/ASSERT/CAPTURE operations after
+                               compile/reset
           --[no-]gui         show/don't show GUI during automation
       -h, --help             Show this help message and exit.
       -p, --program-location=LOCATION
                              program start location
       -V, --version          Print version information and exit.
-      -w, --waitmax=MILLIS   limit emulation time to max MILLIS (force kill
-                               afterwards)
+      -w, --waitmax=MILLIS   wait at most MILLIS for the running CPU to stop
 
-The wait limit applies to CPU execution. See [automation]({{ site.baseurl }}/application/automation) for timeout
-behavior, program start addresses, and interpreting the logs.
+The wait limit applies to CPU execution and closes the virtual computer when it expires. Compilation and device
+initialization are outside this limit. See [automation]({{ site.baseurl }}/application/automation) for timeout behavior,
+program start addresses, and interpreting the logs.
 
 [java11]: https://jdk.java.net/archive/

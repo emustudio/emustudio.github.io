@@ -28,7 +28,8 @@ The tape player connects to the ZX Spectrum bus and writes data signals that the
 
 ## GUI overview
 
-The tape player window can be opened from the device list when the emulation is running:
+Open the tape player from **Debugger → Peripheral devices → Show device**. The window can be opened while stopped;
+start the CPU before playing tape pulses:
 
 ![Audio Tape Player]({{ site.baseurl }}/assets/zxspectrum48k/audiotape-player.png)
 
@@ -207,6 +208,8 @@ The following TZX block types are supported:
 The tape player window has a second tab called **Events** that allows defining a sequence of automation events. These
 events can automate tape loading without manual interaction — useful for testing or batch processing.
 
+![Audio Tape Player Events tab with load, delay, play, delay, and stop events]({{ site.baseurl }}/assets/zxspectrum48k/tape-events.png){: style="max-width: 798px; width: 100%;" }
+
 ### Available automation events
 
 |---
@@ -235,6 +238,13 @@ The Events tab toolbar provides controls for managing and running automation eve
 Events are saved to the plugin settings and persist across sessions. Start them with **Play** in the **Events** tab.
 The current implementation does not start stored events in headless mode; see
 [Automation]({{ site.baseurl }}/zxspectrum48k/automation) for details.
+
+## Settings
+
+Select the tape player in **Peripheral devices** and click **Show settings**. **Show GUI at startup** controls
+whether its window opens automatically; click **Save** to store the choice.
+
+![Audio Tape Player Settings with Show GUI at startup and Save]({{ site.baseurl }}/assets/zxspectrum48k/tape-settings.png)
 
 ## Configuration file
 

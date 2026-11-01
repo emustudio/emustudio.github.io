@@ -9,8 +9,8 @@ permalink: /device/
 
 # Writing a device
 
-In emuStudio, plugin root class must either implement [Device][device]{:target="_blank"} interface, or can extend more
-bloat-free [AbstractDevice][abstractDevice]{:target="_blank"} class.
+A device plugin root implements [Device][device]{:target="_blank"}, usually by extending
+[AbstractDevice][abstractDevice]{:target="_blank"}.
 
 A device in emuStudio has three components:
 
@@ -18,9 +18,8 @@ A device in emuStudio has three components:
 - optional main GUI window
 - optional settings GUI window
 
-Communication between devices is realized using device contexts. A device, as any other plugin, can have none, one or
-more contexts, which should be registered in plugin root class constructor. Device context should implement
-a [DeviceContext][deviceContext]{:target="_blank"} interface.
+Devices communicate through contexts. Register any provided contexts in the plugin root's constructor. Device contexts
+implement [DeviceContext][deviceContext]{:target="_blank"} or a derived interface.
 
 The following partial example shows context registration and window creation. A complete device also implements
 `getDescription()`, `isGuiSupported()` and `destroy()`. Honor `PluginSettings.EMUSTUDIO_NO_GUI` before creating windows,

@@ -8,7 +8,7 @@ downloads:
     },
     release: {
       date: 'on 2023-03-25',
-      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-041'
+      href: 'https://github.com/emustudio/emuStudio/releases/tag/RELEASE-0.41'
     },
     downloads: [
       {
@@ -32,7 +32,7 @@ downloads:
     },
     release: {
       date: 'on 2020-06-26',
-      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-040'
+      href: 'https://github.com/emustudio/emuStudio/releases/tag/RELEASE-0.40'
     },
     downloads: [
       {
@@ -56,7 +56,7 @@ downloads:
     },
     release: {
       date: 'on 2017-03-20',
-      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-039'
+      href: 'https://github.com/emustudio/emuStudio/releases/tag/RELEASE-0.39'
     },
     downloads: [
       {
@@ -75,7 +75,7 @@ downloads:
     },
     release: {
       date: 'on 2011-10-24',
-      href: 'https://github.com/emustudio/emuStudio/blob/develop/RELEASES.md#version-038b'
+      href: 'https://github.com/emustudio/emuStudio/releases/tag/RELEASE-0.38.0'
     },
     downloads: [
       {

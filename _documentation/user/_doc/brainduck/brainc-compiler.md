@@ -10,28 +10,21 @@ permalink: /brainduck/compiler
 
 # Compiler "brainc-brainduck"
 
-BrainDuck compiler is used as a part of BrainDuck computer, which acts as a translator of *brainfuck* "human-readable"
-language into binary form, used by BrainDuck CPU. Those instructions and their binary codes have no relation with
-brainfuck itself, therefore the computer is not called *brainfuck computer*, because it is **not** brainfuck. But it
-does not mean you cannot write and run brainfuck programs in it :)
+The BrainDuck compiler translates brainfuck source into machine code for the BrainDuck CPU. It also supplies tokens
+for syntax highlighting in the source editor.
 
-At first, each compiler, including BrainDuck compiler, provides a lexical analyzer for help with tokenizing the source
-code, used in syntax highlighting. Secondly, the compiler *compiles* the source code into other (usually binary) form
-which is then understood by CPU.
-
-Compilation takes part by user request (clicking on 'compile' icon in the main window). After compilation is successful,
-the compiler usually loads the translated program into operating memory and saves the translation into a file. So it is
-with BrainDuck compiler. Files have `.hex` extension (format is called [Intel HEX][intelhex]{:target="_blank"}).
+Click **Save & Compile source file** to compile the current program. The compiler loads the result into memory and
+saves it beside the source as a `.hex` file in [Intel HEX][intelhex]{:target="_blank"} format.
 
 ## Running from the command line
 
 From the emuStudio installation directory, compile a source file without starting emulation:
 
 ```
-java -cp "compiler/*:lib/*" net.emustudio.plugins.compiler.brainduck.Runner --output program.hex program.b
+bin/brainc-brainduck --output program.hex program.b
 ```
 
-On Windows, use `;` instead of `:` between classpath entries. Options are `--output`/`-o`, `--help`/`-h`, and
+On Windows, use `bin\brainc-brainduck.bat`. Options are `--output`/`-o`, `--help`/`-h`, and
 `--version`/`-v`, before the input filename. Without `--output`, the result uses the input filename with a `.hex`
 extension. To compile and run, use [BrainDuck automation]({{ site.baseurl }}/brainduck/automation).
 

@@ -10,10 +10,10 @@ permalink: /ssem/as-ssem
 
 # Assembler "as-ssem"
 
-Assembler "as-ssem" is a simple language that compiles SSEM instructions into binary output and SSEM memory.
-Source code has `.ssem` file extension, and compiler output has a `.bssem` file extension.
+The `as-ssem` assembler compiles SSEM source into binary files and, when used in emuStudio, loads the result into memory.
+Source files use the `.ssem` extension; compiled files use `.bssem`.
 
-The instructions table follows (modified from [Wikipedia][programming]{:target="_blank"}):
+The implemented instructions follow the [SSEM instruction set][programming]{:target="_blank"}:
 
 |---
 |Binary code |Mnemonic |Action |Operation
@@ -22,10 +22,13 @@ The instructions table follows (modified from [Wikipedia][programming]{:target="
 |100 |JRP / JPR / JMR S | CI + S(L) -> CI |Jump to the instruction at the program counter (`CI`) plus the relative value obtained from the specified memory address `S(L)` (relative unconditional jump)
 |010 |LDN S |-S(L) -> A |Take the number from the specified memory address `S(L)`, negate it, and load it into the accumulator
 |110 |STO S |A -> S(L)        |Store the number in the accumulator to the specified memory address `S(L)`
-|001 or 101 |SUB S |A - S(L) -> A |Subtract the number at the specified memory address `S(L)` from the value in accumulator, and store the result in the accumulator
+|001 |SUB S |A - S(L) -> A |Subtract the number at the specified memory address `S(L)` from the value in accumulator, and store the result in the accumulator
 |011 |CMP / SKN |if A<0 then CI+1->CI |Skip next instruction if the accumulator contains a negative value
 |111 |STP / HLT |Stop |
 |---
+
+The [original machine][ssem-reference]{:target="_blank"} also used opcode `101` for subtraction. The emuStudio assembler emits `001`; the current CPU
+does not execute `101`.
 
 The instructions are stored in a memory, which had 32 cells. Each cell was 32 bits long, and each instruction fit into
 exactly one cell. So each instruction has 32 bits. The bit representation was reversed, so the most and the least
@@ -57,8 +60,8 @@ it does not start a virtual computer. Use [automation]({{ site.baseurl }}/applic
 
 ### New-lines
 
-New-line character (LF, CR, or CRLF) are delimiters of instructions and the last character of the program.
-Successive empty new-line characters will be ignored.
+Separate source lines with LF or CRLF. The final newline is optional, and blank lines are ignored. A lone CR is not a
+line separator.
 
 ### Instructions
 
@@ -146,3 +149,4 @@ The accumulator should now contain value `8`, as well as memory cell at index 9.
 
 
 [programming]: https://en.wikipedia.org/wiki/Manchester_Small-Scale_Experimental_Machine#Programming
+[ssem-reference]: https://curation.cs.manchester.ac.uk/computer50/www.computer50.org/mark1/prog98/ssemref.html

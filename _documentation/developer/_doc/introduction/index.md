@@ -11,15 +11,13 @@ permalink: /introduction/
 
 # Introduction
 
-This guide shall help you, the developer, to write your virtual computer for emuStudio. API is designed for simplicity
-and tries to save the developer from solving the most common problems. Created emulators can mimic either real or
-abstract computers. I hope you will have fun!
+This guide explains how to develop virtual computers for emuStudio. The plugin API supplies common runtime services
+so you can concentrate on emulating a real computer or an abstract model.
 
 ## Project references
 
-emuStudio is a collection of repositories. Plugins and the application share a runtime library, CPU disassembler might
-be generated using a sister project edigen, and instructions tested using cpu-testsuite framework. Here you can find
-documentation references for these sister projects.
+emuStudio spans several repositories. The application and plugins share emuLib; CPU plugins can use Edigen to generate
+disassemblers and cpu-testsuite to test instructions.
 
 |---
 |Project reference | Purpose

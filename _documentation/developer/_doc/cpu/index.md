@@ -10,8 +10,7 @@ permalink: /cpu/
 
 # Writing a CPU
 
-CPU plugins in emuStudio are not just plain emulators. They must cooperate with emuStudio and provide capabilities
-allowing debugging and some interaction.
+CPU plugins implement emulation and expose the controls and state needed by emuStudio's debugger.
 
 A CPU plugin must implement:
 
@@ -26,15 +25,35 @@ Disassembler
 Java Swing GUI panel
 : It should implement the visualization of CPU registers, possibly current frequency and CPU run state.
 
-Both disassembler and GUI panel should be instantiated just once. It is good practice to instantiate disassembler during
-plugin [instantiation][instantiation] or [initialization][initialization], and GUI in
-the [CPU.getStatusPanel()][getStatusPanel]{:target="_blank"} method call. emuStudio application will call the method
-just once from Swing [Event dispatch thread][swingthread]{:target="_blank"}.
+Create one disassembler during plugin [instantiation][instantiation] or [initialization][initialization]. Create and
+cache the status panel in [CPU.getStatusPanel()][getStatusPanel]{:target="_blank"}; the application calls it from
+Swing's [event-dispatch thread][swingthread]{:target="_blank"} when constructing the debugger.
 
-Programming a disassembler might be tedious and error-prone. That's why we encourage to use a tool which can generate
-the disassembler from a specification file. The tool is called [Edigen][edigen]{:target="_blank"}, an abbreviation
-for _Emulator DIsassembler GENerator_. It can be nicely incorporated into Gradle build
-using [edigen-gradle-plugin][edigen-gradle]{:target="_blank"}.
+You can generate the disassembler from a specification with [Edigen][edigen]{:target="_blank"}, short for
+_Emulator DIsassembler GENerator_. The [Edigen Gradle plugin][edigen-gradle]{:target="_blank"} integrates generation
+with Java compilation; see [Gradle integration]({{ site.baseurl }}/cpu/disassembler#gradle-integration).
+
+## Testing instructions
+
+The optional [CPU testing suite][cpu-testsuite]{:target="_blank"} executes instruction tests with generated operands.
+Use the artifact matching your emuLib major version. The current emuStudio checkout uses:
+
+{:.code-example}
+```groovy
+dependencies {
+    testImplementation 'net.emustudio:cpu-testsuite_12:1.2.1-SNAPSHOT'
+}
+```
+
+The suite needs JUnit 4 and a linearly addressed `Byte` or `Short` memory context. Supply a `CpuRunner` adapter for
+registers, flags, PC and SP, a `CpuVerifier` adapter for assertions, and a concrete generic `TestBuilder`. Names such
+as `ByteTestBuilder` are CPU-specific consumer helpers, not library classes. The [consumer setup][cpu-testsuite]{:target="_blank"}
+shows how to build those adapters and generate test cases.
+
+For each operand pair, the runner resets the CPU, restores retained flags, applies injectors, captures pre-execution
+state, steps one instruction, and runs verifiers. Word injection and verification use the memory stub's word-reading
+strategy; configure it to match the CPU. Program memory grows to cover `CPU.getAddressSpaceSize()`, so implement that
+contract accurately rather than assuming every CPU has a 64 KiB address space.
 
 
 [bario]: http://www.xsim.com/papers/Bario.2001.emubook.pdf
@@ -45,3 +64,4 @@ using [edigen-gradle-plugin][edigen-gradle]{:target="_blank"}.
 [swingthread]: https://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
 [edigen]: https://github.com/emustudio/edigen
 [edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
+[cpu-testsuite]: https://github.com/emustudio/cpu-testsuite#consumer-setup

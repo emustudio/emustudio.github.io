@@ -38,7 +38,7 @@ Basic configuration of ZX Spectrum 48K:
 |Speed | 3.5 MHz
 |RAM | 48 KB (addresses `0x4000` - `0xFFFF`)
 |ROM | 16 KB (addresses `0x0000` - `0x3FFF`), containing Sinclair BASIC interpreter
-|Video | 256×192 pixels with 32×24 colour attributes, 8-pixel wide border
+|Video | 256×192 pixels with 32×24 colour attributes and a surrounding border
 |Sound | 1-bit beeper via ULA port `0xFE`
 |Storage | Cassette tape (via EAR/MIC sockets)
 |Keyboard | 40-key rubber keyboard (8 half-rows × 5 keys)
@@ -64,13 +64,21 @@ The abstract schema for emuStudio:
 
 ### Getting started
 
-1. Open `config/ZxSpectrum48K.toml` from the emuStudio installation directory.
-2. In `[MEMORY.settings]`, set `imageName0` to the path of a legal 16 KB ZX Spectrum ROM image. The configuration
-   already loads it at address `0x0000` and protects `0x0000`–`0x3FFF` as ROM.
+1. Use `config/ZxSpectrum48K.toml` from the emuStudio installation directory.
+   The supplied configuration is named **ZX Spectrum 48K + AY** in the computer selector.
+2. Place a legal 16 KB ZX Spectrum ROM image named `48.rom` in the installation directory, or set `imageName0`
+   in `[MEMORY.settings]` to its path. The configuration uses one memory bank, loads the image at address `0x0000`,
+   and protects `0x0000`–`0x3FFF` as ROM.
 3. Start the configured computer from the installation directory with
    `./emuStudio -cf config/ZxSpectrum48K.toml`.
-4. Open the `zxspectrum-ula` device window to use the display and keyboard. To load cassette software, open the
-   `audiotape-player` device and select a TAP or TZX file.
+4. In **Debugger → Peripheral devices**, select `zxspectrum-ula` and click **Show device** to open its display and
+   keyboard. Click **Run** to boot BASIC. To load cassette software, open `audiotape-player` and select a TAP or TZX file.
+
+The bundled configuration includes AY sound and opens a host audio output during initialization. If initialization
+reports **AY-3-8910 tone output is unavailable**, remove this optional device in the
+[schema editor]({{ site.baseurl }}/application/computer-schema), or provide a working host audio output.
+If the ROM does not load, check that `imageName0` names your own readable 16 KB file. Relative image paths are resolved
+from the working directory; start emuStudio from the installation directory when using the default `48.rom` path.
 
 The assembler used for the ZX Spectrum is [`as-z80`]({{ site.baseurl }}/zxspectrum48k/as-z80), which is the same
 assembler plugin used for the Altair8800 with Zilog Z80 CPU. The CPU plugin is documented under

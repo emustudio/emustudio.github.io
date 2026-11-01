@@ -29,7 +29,7 @@ The ZX Spectrum 48K has a total of 64 KB address space organized as follows:
 
 ### ROM image setup
 
-The 16 KB ROM image must be configured to load at address `0x0000` at startup. In the `byte-mem` settings, configure:
+Use one 64 KB bank (`memorySize = 65536`, `banksCount = 1`, `commonBoundary = 0`). The 16 KB ROM image must be configured to load at address `0x0000` at startup. In the `byte-mem` settings, configure:
 
 |---
 | Setting | Value | Description

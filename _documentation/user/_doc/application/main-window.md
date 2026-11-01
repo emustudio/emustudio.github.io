@@ -24,7 +24,7 @@ computer schema, and compiler settings. **Help** contains information about emuS
 Write programs in the editor and compile them with the computer's compiler plugin. The compiler determines the input
 language and must produce code compatible with the selected CPU.
 
-The toolbar provides **New**, **Open**, **Save**, undo/redo, cut/copy/paste, find, replace, and **Save & Compile**.
+The toolbar provides **New**, **Open**, **Save**, undo/redo, cut/copy/paste, find, replace, and **Save & Compile source file**.
 Compilation messages appear in the pane below the editor. Drag the divider to adjust its height.
 
 The source code editor supports the following features:
@@ -57,23 +57,27 @@ from its directory. Hovering over a missing file shows its path in a tooltip.
 
 ### Compilation
 
-Click **Save & Compile** to save and compile the selected source file. Save other modified tabs first so included files
+Click **Save & Compile source file** to save and compile the selected source file. Save other modified tabs first so included files
 are read from their current contents on disk. The compiler output pane shows compilation messages and points to source
 positions supplied by the compiler. Stop running emulation before compiling.
 
 Compiled code can produce a binary file (for example a HEX file) and is loaded into operating memory by the compiler.
-**Save & Compile** resets the memory plugin before invoking the compiler and resets the CPU afterwards. Memory contents
+**Save & Compile source file** resets the memory plugin before invoking the compiler and resets the CPU afterwards.
+Memory contents
 then depend on the memory plugin's reset behavior and the compiler: the 8080 and Z80 assemblers write generated
 addresses, while BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading successful output.
 
 ## Debugger tab
 
-The instruction listing on the left disassembles memory using the CPU plugin. The resizable inspection pane below it
-contains memory search and comparison, annotations, breakpoints, references and instruction history.
+![Debugger workspace with Instructions selected and CPU status, watches, and devices on the right]({{ site.baseurl }}/assets/application/debugger-workspace.png){: style="max-width: 1280px; width: 100%;" }
+
+The left workspace has **Instructions**, **Memory**, **Annotations**, **Breakpoints**, **References** and **History**
+tabs. **Instructions** disassembles memory using the CPU plugin; switch tabs to search or compare bytes, annotate
+addresses, manage breakpoint rules, follow references, or inspect recorded instructions.
 
 The right column holds the CPU plugin's status/register panel, expression watches, and **Peripheral devices**, in that
 order. Select a device and click **Show device**, or double-click it, to open its GUI when supported. **Show settings**
-opens that device's settings when available. Drag the dividers to resize the listing, inspection and right column.
+opens that device's settings when available. Drag the dividers to resize the workspace and sections of the right column.
 Each CPU supplies its own registers, flags, execution-state display and other status controls.
 
 ### Debugger window
@@ -94,17 +98,17 @@ The toolbar controls are numbered from left to right. Hover over a button to see
 according to the CPU's execution state and the plugins' capabilities.
 
 {: .list .control-list}
-| <span class="circle">1</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=2 y=2 %} | **Reset**. Reset the CPU, memory, and devices.
-| <span class="circle">2</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=41 y=2 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
-| <span class="circle">3</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=73 y=2 %} | **Move PC Back**. Move the instruction pointer to the debugger's estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
-| <span class="circle">4</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=105 y=2 %} | **Stop**. Stop running or paused emulation.
-| <span class="circle">5</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=137 y=2 %} | **Pause**. Pause continuous or timed execution.
-| <span class="circle">6</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=169 y=2 %} | **Run**. Start or resume execution from the current instruction address.
-| <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=201 y=2 %} | **Timed run**. Enter the interval between instructions, in milliseconds, then run one instruction at each interval.
-| <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=233 y=2 %} | **Step forward**. Execute one instruction.
-| <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=272 y=2 %} | **Jump to address**. Enter the address of the next instruction to execute.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=311 y=2 %} | **Breakpoints**. Select the embedded **Breakpoints** inspector. Manage ordinary address breakpoints and, on supported CPUs, named rules with conditions, hit counts, source locations, and read/write watchpoints. Pause execution before editing.
-| <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=350 y=2 %} | **Show operating memory**. Open the memory plugin's window when available.
+| <span class="circle">1</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=0 y=0 %} | **Run**. Start or resume execution from the current instruction address.
+| <span class="circle">2</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=32 y=0 %} | **Pause**. Pause continuous or timed execution.
+| <span class="circle">3</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=64 y=0 %} | **Stop**. Stop running or paused emulation.
+| <span class="circle">4</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=96 y=0 %} | **Timed run**. Enter the interval between instructions, in milliseconds, then run one instruction at each interval.
+| <span class="circle">5</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=128 y=0 %} | **Step forward**. Execute one instruction.
+| <span class="circle">6</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=166 y=0 %} | **Reset**. Reset the CPU, memory, and devices.
+| <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=198 y=0 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
+| <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=230 y=0 %} | **Move PC Back**. Move the instruction pointer to the debugger’s estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
+| <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=262 y=0 %} | **Jump to address**. Enter the address of the next instruction to execute.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint / inspect address...**. Open **Set breakpoint** to set or unset an address breakpoint, or choose **Inspect only** to view its live bytes. **Keep inspection while stepping** retains a breakpoint’s inspected address. Use the **Breakpoints** tab for named rules and watchpoints. Pause before editing.
+| <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=332 y=0 %} | **Show operating memory**. Open the memory plugin’s window when available.
 
 #### Inspection pane
 
@@ -113,16 +117,17 @@ bookmarks or breakpoints. Select **References** for static flow and incoming ref
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins; 8080 and Z80 provide register access, watchpoints, conditions and recording.
 
-Address selection in the instruction listing follows into inspection while its address is unpinned. Browsing never
-changes the program counter or the CPU's selected memory bank. **Pin address** keeps the inspection selection when
-execution pauses or the listing selection changes. History shows recorded state without restoring the live machine.
+Selecting an instruction updates the inspection address. Browsing changes neither the program counter nor the CPU’s
+selected memory bank. A breakpoint hit opens **Memory** at its address; **Keep inspection while stepping** retains that
+selection across subsequent steps. History shows recorded state without restoring the live machine.
 See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
 
 #### List of instructions
 
 The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
-they show a breakpoint checkbox, address, instruction, and opcode bytes. The red row marks the next instruction.
-Click a breakpoint checkbox to toggle it when supported.
+they show a breakpoint control, address, instruction, and opcode bytes, followed by user labels and comments. The red
+row marks the next instruction. Click the breakpoint control to cycle through off, enabled, and enabled with inspection
+kept while stepping. A further click removes it. Hover over the control to see its current state.
 
 The number of visible rows follows the space available in the window. To change memory contents, use the memory
 plugin's window or compile another program; the instruction and opcode cells are read-only.

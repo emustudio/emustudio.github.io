@@ -10,8 +10,7 @@ permalink: /ram/ramc-ram
 
 # Compiler "ramc-ram"
 
-RAM has a very simple assembler-like language, consisting of direct and indirect reading/writing from/to registers or
-input/output tape. Also, there are three control-flow instructions. 
+The RAM language provides direct and indirect register access, input/output operations, and three jump instructions.
 
 Source code files end with `.ram` extension; compiler output uses extension `.bram`.
 
@@ -47,15 +46,15 @@ INSTRUCTIONS section
 
 ### Input section
 
-The `INPUT` section contains definitions the content of input tape - one or more lines in the form:
+The `INPUT` section defines the input tape with one or more lines of the form:
 
 {:.code-example}
 ```
 <input> ITEMS
 ```
 
-where `ITEMS` is a space-separated list of inputs. Each input is one word - it might be any number or string. Strings
-must be in quotes - single (`'`) or double (`"`).
+`ITEMS` is a space-separated list of integers or strings. Quote strings with single (`'`) or double (`"`) quotes.
+Integers support decimal, hexadecimal (`0x` prefix or `h` suffix), octal (`o`/`q` suffix), and binary (`b` suffix) notation.
 
 For example, the input section might be:
 
@@ -64,8 +63,7 @@ For example, the input section might be:
     <input> 1 2 3 'hello' 'world!'
 ```
 
-In this case, there are five inputs: numbers 1,2,3, then word "hello" and the last one is "world!". Note floating-point
-numeric values are not supported.
+This defines five inputs: `1`, `2`, `3`, `hello`, and `world!`. Floating-point values are not supported.
 
 ### Instructions section
 
@@ -87,8 +85,8 @@ double-dash (`--`) or double-slash (`//`). A one-line comment continues to the e
 start with `/*` characters and end with `*/` characters. In-between there can be multiple lines of text, all treated
 as comment.
 
-An instructions consists of the operation code, optionally followed by an operand separated with at least one
-space (` `), but not with a newline.
+An instruction consists of an operation code and, where required, an operand. Separate them with spaces or tabs on the
+same line.
 
 Operation code is expressed as an abbreviation of corresponding operation (e.g. `SUB` for SUBtraction). An operand can
 be one of three types: constant (`=i`), direct operand (`i`), where `i` specifies the register index on tape and
@@ -109,15 +107,14 @@ The following table describes all possible instructions, usable in the RAM simul
 | `MUL`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ * _M[R<sub>i</sub>]_
 | `DIV`       | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _i_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _R<sub>i</sub>_ | _R<sub>0</sub>_ &larr; _R<sub>0</sub>_ / _M[R<sub>i</sub>]_
 |---
-| `JMP`       | | _IP_ &larr; _i_               |
-| `JZ`        | | *if* _R<sub>0</sub>_ == 0 *then* _IP_ &larr; _i_ |
-| `JGTZ`      | | *if* _R<sub>0</sub>_ > 0 *then* _IP_ &larr; _i_  |
+| `JMP label` | | _IP_ &larr; address of _label_ |
+| `JZ label` | | *if* _R<sub>0</sub>_ == 0 *then* _IP_ &larr; address of _label_ |
+| `JGTZ label` | | *if* _R<sub>0</sub>_ > 0 *then* _IP_ &larr; address of _label_ |
 |---
 | `HALT`      | | halts the simulation |
 |---
 
-The table describes also the behavior of each instruction. The compiler does not care about the behavior, but about the
-syntax of the instructions, which is also incorporated in the table.
+Jump instructions take a label, rather than a numeric register index. The compiler resolves it to a program address.
 
 ### Code example
 

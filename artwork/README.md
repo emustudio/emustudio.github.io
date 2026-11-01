@@ -2,9 +2,10 @@
 
 ## Logo
 
-Logo was developed using MetaPost. In order to "compile" the logo, run:
+The logo is a MetaPost source. From `artwork/`, run:
 
 ```
+cd logo
 mpost logo.mp
 ```
 
@@ -13,11 +14,15 @@ Slovak language.
 
 ## Animated gif of terminal
 
-1. Edit `automation.yml` and update watermark path to ABSOLUTE PATH of `watermark.svg` file
+The files in `gif-automation/` record an emuStudio **0.41** session. Keep their original commands, version output,
+and computer indexes as historical evidence. To render the YAML recording:
 
-2. Install [terminalizer](https://github.com/faressoft/terminalizer)
+1. Open `gif-automation/reverse.yml` and set `watermark.imagePath` to the absolute path of `gif-automation/watermark.svg`.
+   Its recorded `cwd` is from the original machine; replace it if your renderer needs a local working directory.
+2. Use [terminalizer](https://github.com/faressoft/terminalizer).
+3. From `gif-automation/`, run `terminalizer render -s 3 -o reverse.gif -q 100 reverse.yml`.
 
-3. Run: `terminalizer render -s 3 -o automation.gif -q 100 automation.yml`
+Alternatively, render the existing asciinema recording with `agg --theme asciinema reverse.cast reverse.gif`.
 
 ## Thumbnails of screenshots
 

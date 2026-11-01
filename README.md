@@ -10,7 +10,7 @@ The project is organized as **three separate Jekyll sites** that are combined at
 |---|---|---|---|
 | Root website | `/` (this repo root) | 4.4.1 | custom (scotch-io) |
 | User documentation | `_documentation/user/` | 4.4.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
-| Developer documentation | `_documentation/developer/` | 4.3.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
+| Developer documentation | `_documentation/developer/` | 4.4.1 | [just-the-docs](https://github.com/pmarsceill/just-the-docs) |
 
 Documentation sub-sites are pre-built into the `documentation/` directory and served as static files by the root site.
 
@@ -50,6 +50,7 @@ bundle exec rake -T
 | Task | Description |
 |---|---|
 | `rake build` | **Full production build** — lint → clean → build docs → build site → post-build lint |
+| `rake build:api` | Regenerate the bundled emuLib Javadoc from the sibling checkout; requires its build JDK |
 | `rake build:docs` | Build the user & developer documentation sub-sites |
 | `rake build:site` | Build the root Jekyll site |
 | `rake lint` | Run all **pre-build** lint checks |

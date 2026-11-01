@@ -140,8 +140,9 @@ Bit:  3      2         1         0
 The AY-3-8910 plugin provides a waveform monitor window that can be opened from the device list. It displays a live
 PCM trace of the generated chip output.
 
-The toolbar at the bottom provides:
-- **Volume control** — a slider popup to adjust the AY output volume (0–100%)
+![AY-3-8910 waveform monitor showing generated chip output]({{ site.baseurl }}/assets/zxspectrum48k/ay-waveform.png){: style="max-width: 720px; width: 100%;" }
+
+Click **AY output volume** in the bottom toolbar to adjust the output volume (0–100%).
 
 ## Audio output
 

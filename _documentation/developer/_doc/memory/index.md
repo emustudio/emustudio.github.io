@@ -9,14 +9,12 @@ permalink: /memory/
 
 # Writing a memory
 
-In emuStudio, plugin root class must either implement [Memory][memory]{:target="_blank"} interface, or can extend more
-bloat-free [AbstractMemory][abstractMemory]{:target="_blank"} class.
+A memory plugin root implements [Memory][memory]{:target="_blank"}, usually by extending
+[AbstractMemory][abstractMemory]{:target="_blank"}.
 
-Generally, a memory in an emulator is usually implemented as an array of bytes. Indexes to the array represent
-addresses, and values are the memory cell values. In emuStudio, this kind of implementation is reflected by memory
-context. Memory context should be a class which either implements [MemoryContext][memoryContext]{:target="_blank"}
-interface, or extends [AbstractMemoryContext][abstractMemoryContext]{:target="_blank"} class. The latter provide
-additional functionality - management of memory "listeners".
+Memory is often stored as an array whose indices are addresses and whose elements are cell values. emuStudio exposes
+it through [MemoryContext][memoryContext]{:target="_blank"}; cells can have any Java type, not just `Byte`.
+[AbstractMemoryContext][abstractMemoryContext]{:target="_blank"} provides listener management for implementations.
 
 A memory listener (implementing [MemoryContext.MemoryListener][memoryListener]{:target="_blank"} interface) can observe memory
 value changes on all address range. But when the emulation is in running state, emuStudio turns off the memory

@@ -11,15 +11,13 @@ permalink: /brainduck/
 
 # BrainDuck
 
-BrainDuck is an abstract computer for emuStudio, which mimics [brainfuck][brainfuck]{:target="_blank"} programming
-language. Originally, brainfuck was developed by [Urban Müller][miller]{:target="_blank"} and it is well-known fact that
-the language has a minimalistic compiler, and it's eight instructions don't prevent it to be Turing complete. Also, there
-exist many extensions of the language and there are organized programming contests in brainfuck worldwide. But all of
-that can be read at Wikipedia or at other sources.
+BrainDuck is an abstract computer for running [brainfuck][brainfuck]{:target="_blank"} programs in emuStudio.
+[Urban Müller][miller]{:target="_blank"} designed brainfuck around eight instructions and a data pointer. BrainDuck
+compiles those instructions into machine code and adds `;` as an explicit halt instruction.
 
 BrainDuck architecture is just a name for virtual computer in emuStudio, and consists of these plugins:
 
-- `brainc-brainduck`: Compiler of brainfuck language (original, without extensions)
+- `brainc-brainduck`: Compiler for the eight brainfuck instructions and `;` (halt)
 - `brainduck-cpu`: Brainfuck emulator acting like CPU with two registers
 - `byte-mem`: Virtual operating memory which holds both compiled brainfuck program and data
 - `vt100-terminal`: Virtual terminal for displaying the output and requesting for input.
@@ -36,9 +34,8 @@ which include:
 
 ## BrainDuck for emuStudio
 
-In order to use BrainDuck, there must be drawn the abstract schema, saved in the configuration file. Abstract schemas
-are drawn in the schema editor in emuStudio (please see emuStudio application documentation for more details). The
-following image shows the schema of BrainDuck computer:
+Open the bundled **BrainDuck** computer to use the configuration below. To create a custom variant, draw and save its
+connections in the [schema editor]({{ site.baseurl }}/application/computer-schema):
 
 ![BrainDuck abstract schema]({{ site.baseurl}}/assets/brainduck/brainduck-schema.png){:style="max-width:426px; width:100%"}
 
@@ -48,7 +45,7 @@ compiled programs are directly loaded into memory.
 Between `brainduck-cpu` and `vt100-terminal` exists bidirectional dependency, because input gained from a terminal
 is passed to the CPU, and output is pushed from CPU to the terminal.
 
-plugin `brainduck-cpu` also depends on `byte-mem`, because memory is a place where program and data are stored.
+The `brainduck-cpu` plugin also depends on `byte-mem`, which stores both the program and its data.
 
 [brainfuck]: http://en.wikipedia.org/wiki/Brainfuck
 [miller]: http://esolangs.org/wiki/Urban_M%C3%BCller

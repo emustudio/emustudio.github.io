@@ -90,8 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="annotations">@NotThreadSafe
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">MaxItemsCache&lt;V&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Limited Cache
-A cache with max items limit, retaining most used items, and removing the least used items above given limit.</div>
+<div class="block">Bounded history of distinct values, ordered from most to least recently inserted.</div>
 </div>
 </section>
 <section class="summary">
@@ -178,6 +177,8 @@ A cache with max items limit, retaining most used items, and removing the least 
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>limit</code> - the cache is allowed to contain only given number of items</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the limit is negative</dd>
 </dl>
 </div>
 </section>
@@ -205,11 +206,12 @@ A cache with max items limit, retaining most used items, and removing the least 
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="#type-param-V" title="type parameter in MaxItemsCache">V</a>&nbsp;value)</span></div>
 <div class="block">Adds new value to the cache.
-If the cache items are above the limit, the least used item is removed.
-Added value is always considered as the most used.</div>
+Moves an existing value to the front and removes the oldest value if the limit is exceeded.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - value to be cached</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - if the value is null</dd>
 </dl>
 </div>
 </section>

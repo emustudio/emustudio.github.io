@@ -27,11 +27,11 @@ computer). Each SSEM instruction perfectly fits in a single memory cell.
 The bit representation of a memory cell is reversed. For example, value `3`, in common personal computers is represented
 as `011`, but in SSEM memory it's represented as `110`.
 
-The structure of a memory cell is as follows:
+An instruction uses the following fields within a memory word:
 
-| *Bit:*  | 00 | 01 | 02 | 03 | 04 | ... | 13 | 14 | 15 | ... | 31
-| *Use:*  | L | L | L | L | L | 0 | I | I | I | 0 | 0
-| *Value:*| 2^0 | | | | | | | | | | 2^31
+| Bits | 0–4 | 5–12 | 13–15 | 16–31 |
+|:-----|:----|:-----|:------|:------|
+| Use | Line (`LLLLL`) | Unused | Opcode (`III`) | Unused |
 
 where bits `LLLLL` denote a "line", which was interpreted as memory "address" - index of a memory cell. It was used
 as instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions used by the
@@ -42,7 +42,7 @@ computer). The rest of bits are unused, and thus were often used as data store.
 
 The memory window looks as follows:
 
-![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){:style="max-width:969px"}
+![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){:style="max-width:969px; width:100%"}
 
 {: .list}
 | <span class="circle">1</span> | Open SSEM binary image into memory (files compiled by SSEM compiler with extension `.bssem`)
@@ -52,13 +52,15 @@ The memory window looks as follows:
 | <span class="circle">5</span> | Decomposed instruction bits: instruction opcode
 | <span class="circle">6</span> | Hexadecimal representation of the memory "row" (32 bits), correctly reversed
 | <span class="circle">7</span> | Decimal representation of the memory "row", correctly reversed
-| <span class="circle">8</span> | Character string made of combining 4x 8 bits of memory "row", not reversed
+| <span class="circle">8</span> | Four characters formed from the decoded 32-bit word, one character per byte
 
-It is possible to edit the bit cells manually: select the bit, double-click. The only accepted value is either 1 or 0.
-With a DELETE key, the bit is cleared to 0.
+Double-click a bit cell to edit it. Accepted values are `1` and `0`; press **Delete** to clear a bit to `0`.
 
-It is also possible to edit hexadecimal, decimal or character string representation. Double-click on such cell and enter
-the value in particular format. For hexadecimal and decimal formats, the accepted values will be bit-reversed.
+You can also double-click a hexadecimal, decimal, or character cell to edit the word. Both numeric columns accept
+decimal integers or hexadecimal integers with a `0x` prefix. For example, enter `0x20` for hexadecimal 20; entering `20`
+stores decimal 20, even in the **Hex** column. A leading `0` selects octal, so use `0x` explicitly for hexadecimal
+values. Values must fit a signed 32-bit integer. A character edit uses the first
+four characters. The plugin bit-reverses the decoded word for storage.
 
 Navigating cells is possible also with arrow keys.
 

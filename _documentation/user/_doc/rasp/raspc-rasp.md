@@ -10,9 +10,8 @@ permalink: /rasp/raspc-rasp
 
 # Compiler "raspc-rasp"
 
-RASP compiler has a very simple assembler-like language, consisting of direct reading/writing from/to registers or
-input/output tape. Also, there are three control-flow instructions. Syntax is very similar to RAM machine, just RASP 
-doesn't support indirect addressing.
+The RASP language provides direct register access, input/output operations, and three jump instructions. Its syntax
+resembles RAM's, but it does not support indirect addressing.
 
 Source code files end with `.rasp` extension; compiler output uses extension `.brasp`.
 
@@ -49,7 +48,7 @@ INSTRUCTIONS section
 
 ### Input section
 
-The `INPUT` section contains definitions the content of input tape - one or more lines in the form:
+The `INPUT` section defines the input tape with one or more lines of the form:
 
 {:.code-example}
 ```
@@ -76,8 +75,9 @@ org 5   ; sets next address to 5
 read 0
 ```
 
-By default, if ORG is not specified in the beginning of the program, it is added implicitly as `ORG 20`. It is because
-registers in RASP are stored in memory (R0 at address 0, etc.), so this implicit ORG pre-allocates 20 registers.
+Without an initial `ORG`, instructions start at address 20. This leaves addresses 0–19 available for registers, including
+the accumulator at address 0. Registers and program share memory; writing a register that overlaps the program changes
+its instructions or operands.
 
 ### Instructions section
 
@@ -99,12 +99,11 @@ double-dash (`--`) or double-slash (`//`). A one-line comment continues to the e
 start with `/*` characters and end with `*/` characters. In-between there can be multiple lines of text, all treated
 as comment.
 
-An instructions consists of the operation code, optionally followed by an operand separated with at least one
-space (` `), but not with a newline.
+An instruction consists of an operation code and, where required, an operand. Separate them with spaces or tabs on the
+same line.
 
-Operation code is expressed as an abbreviation of corresponding operation (e.g. `SUB` for SUBtraction). An operand can
-be one of three types: constant (`=i`), direct operand (`i`), where `i` specifies the register index on tape and
-label, pointing to the address in memory.
+The operation code abbreviates the operation (for example, `SUB` for subtraction). An operand can be a constant (`=i`),
+a direct register address (`i`), or a label naming a memory address. Jump instructions require labels.
 
 The following table describes all possible instructions, usable in the RASP simulator:
 

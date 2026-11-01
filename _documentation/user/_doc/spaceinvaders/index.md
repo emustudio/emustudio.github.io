@@ -136,10 +136,11 @@ the dialog open so you can correct it. Sound samples are supplied by the user; c
 
 ### Volume and recording
 
-The display toolbar provides a volume slider and a **Record** button. Volume ranges from 0% to 100% and starts at 25%;
+In the display toolbar, click **Audio volume** to open the volume slider. Volume ranges from 0% to 100% and starts at 25%;
 it changes both playback and recorded sound. The slider value lasts for the current computer session.
 
-Click **Record** to start capturing, then click **Stop** and choose an MP4 file to save. Canceling the save dialog
+Click **Start video recording** to start capturing, then **Stop recording and save video** and choose an MP4 file.
+These names appear as toolbar tooltips. Canceling the save dialog
 discards the capture. Recording uses the native 224 by 256 pixel frame at 60 frames per second, with the selected color
 overlay and stereo sound from the active samples. Display scaling does not change the video dimensions. Encoding runs
 during capture; saving finishes the file in the background. Keep the display open until you stop and save:

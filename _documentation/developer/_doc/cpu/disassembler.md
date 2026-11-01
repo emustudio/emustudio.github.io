@@ -10,9 +10,9 @@ permalink: /cpu/disassembler
 
 # Disassembler
 
-Disassembler is not needed for the emulation itself. It is needed for emuStudio to be able to visually show the
-instructions. You can create a disassembler by implementing interface [Disassembler][disassembler]{:target="_blank"}
-from emuLib. Or you can use [Edigen][edigen]{:target="_blank"}, a disassembler generator for emuStudio.
+A disassembler lets emuStudio display instructions in the debugger. Implement emuLib's
+[Disassembler][disassembler]{:target="_blank"} interface directly, or generate an implementation with
+[Edigen][edigen]{:target="_blank"}.
 
 [Edigen][edigen]{:target="_blank"} works similarly as parser generator: developer writes a specification file.
 Then, [Edigen][edigen]{:target="_blank"} (either from the command line or using
@@ -42,7 +42,7 @@ src_reg, dst_reg =
 # disassembler
 "%s %s, %s" = instruction dst_reg src_reg;
 "%s %s, %d" = instruction dst_reg immediate;
-"%0x"       = data;
+"%x"        = data;
 ```
 
 The specification file might look a bit cryptic at first sight, but it's quite easy. The content is divided into two
@@ -112,9 +112,8 @@ The final result is `{instruction: "sub", dst_reg: "Y", immediate: 3}`.
 
 ## Disassembler section
 
-Disassembler part matches a set of rules (on the right side of `=`) to a formatting string (on the left side). The first
-set of rules which is a subset of the result rule-set is selected. The corresponding formatting string is used,
-substituting the formats with concrete values.
+The disassembler maps a set of rules on the right side of `=` to a format string on the left. It selects the format
+whose rule set exactly matches the decoded result's keys, then substitutes the corresponding values.
 
 In our example, the first rule-set cannot be used, since our result does not contain `src_reg`. However, our result
 contains all rules specified in the second rule-set (`instruction dst_reg immediate`), so the disassembled instruction
@@ -129,12 +128,14 @@ By default, these format specifiers are available:
 * `%X` - 32-bit integer bit pattern, hexadecimal, uppercase
 * `%%` - a percent sign
 
+The default formatter consumes these two-character specifiers. It does not support Java formatter width or padding
+flags such as `%02x`.
+
 The rule-set on the right side of `=` can take decoding strategy as a parameter in brackets `()`. The following decoding
 strategies are available:
 
 * `bit_reverse` - reverses the bits
-* `big_endian` - decodes the bits as they are stored in big-endian format
-* `little_endian` - decodes the bits as they are stored in little-endian format
+* `reverse_bytes` - reverses the byte order (an endianness swap)
 * `absolute` - decodes the bits as stored in 2's complement if they are negative; the negative sign is then thrown away
 * `shift_left` - shifts the number to the left by 1 bit. Does it in "big endian" way. Meaning bytes `[0] = 1, [1] = 2`
   will result in `[0] = 2, [1] = 4`
@@ -142,6 +143,33 @@ strategies are available:
   will result in `[0] = 0, [1] = 0x81`
 
 The strategies can be combined. Multiple strategies will be applied in the left-to-right order.
+Unknown strategy names fail generation. See the [EDS language reference][eds-language]{:target="_blank"} for the full syntax.
+
+## Gradle integration
+
+The current emuStudio CPU plugins use `edigen-gradle-plugin` to generate sources during Java compilation:
+
+{:.code-example}
+```groovy
+plugins {
+    id 'net.emustudio.edigen-gradle-plugin' version '1.6.0-SNAPSHOT'
+}
+
+edigen {
+    decoderName = 'example.cpu.DecoderImpl'
+    disassemblerName = 'example.cpu.DisassemblerImpl'
+}
+```
+
+Put the specification in `src/main/edigen/cpu.eds`, or set `specification` in the `edigen` block. `generateSources`
+writes Java files under `build/generated-sources/edigen/` by default and registers those directories with the Java
+source set. A separate `compileJava.dependsOn` declaration is unnecessary. In emuStudio, the snapshot plugin resolves
+through the repositories already declared in `settings.gradle`.
+
+Keep generated output separate from handwritten sources. The task tracks its files with ownership metadata; it refuses
+to overwrite an unowned destination file and removes obsolete owned files after a class rename. When upgrading from a
+version without that metadata, clean the old generated output once (`clean` covers the default directories). See the
+[plugin reference][edigen-gradle]{:target="_blank"} for templates, output locations, and local Edigen development.
 
 ## Formatting in rule names
 
@@ -206,6 +234,7 @@ for `%X` just do `%%X`.
 
 
 [edigen]: https://github.com/emustudio/edigen
+[eds-language]: https://github.com/emustudio/edigen/blob/development/docs/_eds-language.adoc
 [edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
 [ssem]: https://en.wikipedia.org/wiki/Manchester_Baby
 [disassembler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/Disassembler.html

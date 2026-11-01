@@ -10,13 +10,12 @@ permalink: /ram/automation
 
 # Automation
 
-RAM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--no-gui`),
-each abstract tape is redirected to a file. The format of the files is described in
+In headless automatic emulation (`auto --no-gui`), each abstract tape logs symbol writes to a file. The format is described in
 [abstract tape documentation]({{site.baseurl}}/ram/abstract-tape).
 
 ## Example
 
-Command line for starting non-interactive automatic emulation:
+Run the bundled factorial example from the emuStudio installation directory:
 
     ./emuStudio -cf config/RandomAccessMachineRAM.toml --input-file examples/ramc-ram/factorial.ram auto --no-gui
 
@@ -24,11 +23,6 @@ Command line for starting non-interactive automatic emulation:
 - input file for compiler is one of the standard examples
 - (`auto`) automatic emulation will be executed
 - (`--no-gui`) non-interactive mode will be set
-
-{: .info}
-> If startup reports `Plugin class count does not match plugin configuration count`, the application's plugin loader
-> failed to create multiple tape instances. Compilation and emulation have not started. The
-> [standalone compiler]({{ site.baseurl }}/ram/ramc-ram#running-from-the-command-line) can still compile your program.
 
 The console reports progress similar to the following (plugin details and paths depend on the installation):
 
@@ -49,15 +43,21 @@ The console reports progress similar to the following (plugin details and paths 
 [INFO] Emulation completed
 ```
 
-Then, in the current working directory, there will be created three new files:
+The run creates three files in the current working directory:
 
-- `input_tape.out`: contains all input tape symbols
+- `input_tape.out`: records input symbols loaded during reset
 - `storage.out`: contains log of register tape changes during emulation
-- `output_tape.out`: contains all output tape symbols
+- `output_tape.out`: records output symbols written by the program
 
-Content of each file is a human-readable text file, but also parseable by computer. Every row has format:
+The bundled example supplies input `8`. Its `output_tape.out` contains `8! = 40320` at position 0:
+
+```
+0 40320
+```
+
+Each file is a text log. Every row has the format:
 
     position symbol
 
-where `position` is zero-based index of a symbol on particular tape, and `symbol` is the symbol on that position.
-Abstract tapes of RAM machine are left-bounded, therefore all positions start at 0.
+`position` is the zero-based symbol position on the tape, and `symbol` is the value written there. A position can occur
+more than once in the log, especially in `storage.out`. RAM tapes are left-bounded, so positions start at 0.

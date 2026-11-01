@@ -10,8 +10,8 @@ permalink: /ssem/ssem-display
 
 # SSEM Display
 
-SSEM computer used CRT memory (see [ssem-mem][ssem-mem]), so memory cells were actually visible due to phosphorescent electrons
-glow in the vacuum tube. In emuStudio there are two plugins, separating the functionality of memory and display.
+SSEM used CRT memory (see [ssem-mem][ssem-mem]), whose patterns were visible on the phosphor screen. In emuStudio,
+separate plugins provide memory and display.
  
 [At this link][crt]{:target="_blank"} can be seen the original computer.
 
@@ -21,8 +21,7 @@ GUI window of the SSEM display in emuStudio is depicted below:
 
 ![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-display.png)
 
-It doesn't do any user interaction except displaying. Controlling the memory values can be interactively done
-in the [ssem-mem][ssem-mem] plugin.
+The display shows memory contents. To edit them, use the [ssem-mem][ssem-mem] window.
 
 [crt]: http://www.davidsharp.com/baby/
 [ssem-mem]: {{ site.baseurl }}/ssem/ssem-mem

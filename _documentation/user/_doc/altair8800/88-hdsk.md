@@ -120,8 +120,9 @@ or unattached image reports 2,048 tracks (8 MiB at the default geometry); a none
 from its length, rounded up to a whole track and capped at 65,536 tracks. Each drive can instead use a power-of-two sector size from 128 through 1,024 bytes and 1 through 255 sectors
 per track. Reads beyond a short image return `E5h`, matching empty CP/M media.
 
-Open the device window to mount, create, or eject images and change per-drive geometry. The same values can be set in
-the plugin settings with `imageN`, `sectorSizeN`, and `sectorsPerTrackN`, where `N` is the zero-based drive number.
+Use **Show settings...** to mount, create, or eject images and set their startup geometry. The device window's
+**Apply geometry** button changes geometry for the current session. The configuration keys are `imageN`,
+`sectorSizeN`, and `sectorsPerTrackN`, where `N` is the zero-based drive number.
 
 ## Read example
 

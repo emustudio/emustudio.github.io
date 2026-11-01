@@ -10,8 +10,7 @@ permalink: /zxspectrum48k/automation
 
 # Automation
 
-ZX Spectrum 48K computer is capable of running automatic emulation. Automation can operate in the interactive or
-non-interactive mode.
+ZX Spectrum 48K supports interactive and non-interactive automation.
 
 In the interactive mode, the ZX Spectrum display window and audio tape player are shown automatically, allowing the
 user to interact with the emulated computer. Start tape automation from the tape player's **Events** tab.
@@ -94,10 +93,14 @@ The following command runs the ZX Spectrum 48K emulator in interactive automatio
 
     ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto
 
-- computer configuration "ZX Spectrum 48K" (file `config/ZxSpectrum48K.toml`) will be loaded
+- computer configuration "ZX Spectrum 48K + AY" (file `config/ZxSpectrum48K.toml`) will be loaded
 - input file for compiler is the beeper example
 - (`auto`) automatic emulation will be executed (interactive mode — display and devices will be shown)
 
-For non-interactive mode:
+For a bounded non-interactive run:
 
-    ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto --no-gui
+    ./emuStudio -cf config/ZxSpectrum48K.toml --input-file examples/zx-spectrum/twinkle_beeper.asm auto --no-gui --waitmax 5000
+
+The deadline bounds execution if the program keeps running. With interrupts disabled, the example’s `HALT` stops
+the CPU; with interrupts enabled, interrupts can resume its loop. Headless ULA output is silent, so this command
+checks execution rather than audible beeper output. Remove AY first if the host has no audio output.

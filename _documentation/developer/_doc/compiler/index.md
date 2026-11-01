@@ -9,11 +9,11 @@ permalink: /compiler/
 
 # Writing a compiler
 
-A compiler plugin must either implement [Compiler][compiler]{:target="_blank"} interface, or extend more
-bloat-free [AbstractCompiler][abstractCompiler]{:target="_blank"} class. Common practice is to utilize
-[ANTLR][antlr]{:target="_blank"} parser generator, which has a direct runtime support in emuStudio.
+A compiler plugin implements [Compiler][compiler]{:target="_blank"}, usually by extending
+[AbstractCompiler][abstractCompiler]{:target="_blank"}. The bundled compilers use the
+[ANTLR][antlr]{:target="_blank"} parser generator; emuStudio supplies its runtime.
 
-As every plug-in root class, compiler class must use annotation [PluginRoot][pluginRoot]{:target="_blank"}.
+Like every plugin root class, the compiler class must have the [PluginRoot][pluginRoot]{:target="_blank"} annotation.
 
 Sample implementation of a compiler might look as follows (just some methods are implemented):
 
@@ -135,12 +135,9 @@ public class CompilerImpl extends AbstractCompiler {
 }
 ```
 
-Main outcomes are:
-- this sample compiler uses ANTLR to generate a lexer and parser from a grammar written by the plugin author
-- it optionally loads program output into memory
-- it generates output file in Intel HEX format
-- AST (abstract syntax tree) in form of classes must be written manually
-- All semantic-analysis visitors must be written manually, including code generation (this is probably the hardest compiler work) 
+The sample uses ANTLR to generate a lexer and parser from the plugin author's grammar. It writes Intel HEX output and
+loads it into memory when a compatible context is available. The plugin author supplies the abstract syntax tree
+(AST), semantic-analysis visitors, and code generation.
 
 The compiler does not register any plugin context, but when initialized, it obtains optional memory context (in this example,
 memory must have cells of `Byte` type). If the memory is available, after compilation the program will be
@@ -163,16 +160,14 @@ parser generator. Please check out this nice [ANTLR tutorial][antlr-tutorial]{:t
 
 The compiler utilizes a helper class [IntelHEX][intelhex]{:target="_blank"} from emuLib for generating output files.
 
-Abstract syntax tree is the most important part of the compiler. In general, the flow of transforming the source code
-into output is going through AST. In the beginning, AST is isomorphic to the parse tree. Then some transformations are
-applied - like expression evaluation, include files expansion, by-value identifiers replacements, intermediate code generation
-with relative addresses, macro expansion, preprocessor code evaluation, absolute address assignment and final
-transformation into binary code or whatever the compiler produces. So in time, AST changes, nodes are moved, replaced
-by others, or removed. At the final stage, AST represents program output.
+Build an abstract syntax tree (AST) from the parse tree, then transform it through passes. Semantic analysis resolves labels, checks types and operands,
+and transforms nodes into a form suitable for code generation. The AST can omit grammar-only details; it does not
+need to have the parse tree’s structure. Later passes may replace, move or remove nodes before producing binary code
+or the compiler’s other output.
 
-Transformations of AST is best done using visitors (see [Visitor pattern][visitor]{:target="_blank"}). A visitor is accepting
-some or all node types from the AST and performs changes to the nodes, or the whole AST. It's a detached, isolated
-functionality operating on AST, which can be separately tested.
+Visitors can separate AST transformations into independently testable passes (see the
+[Visitor pattern][visitor]{:target="_blank"}). Each visitor handles selected node types and transforms those nodes
+or the whole tree.
 
 For more information, see the code of some existing compilers.
 

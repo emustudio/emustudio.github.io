@@ -11,23 +11,22 @@ permalink: /rasp/
 
 # Random-Access Stored Program (RASP)
 
-Random Access Stored Program machine (RASP) is an abstract von-Neumann computer. It means it does not represent a
-physical device, but rather it is intended to work as a model to study [von-Neumann architecture][von-neumann]{:target="_blank"},
-without the need to care about specific manufacturer's hardware details.
+A Random Access Stored Program machine (RASP) is an abstract computer used to study
+[von Neumann architecture][von-neumann]{:target="_blank"} without the details of a particular manufacturer's hardware.
 
-Firstly, it is useful to present Random Access Stored Program (RASP) machine's architecture -- it is schematically
-depicted in the following figure.
+The following figure shows its architecture:
 
 ![RASP machine]({{ site.baseurl }}/assets/rasp/rasp-machine.svg){: width="65%"}
 
-As we can see, the control unit, i.e. processor, reads data from the input tape and writes results of executed
-operations onto the output tape. The tapes serve as a form of I/O devices. The two heads -- reading (R) and writing (W),
-are pointers to the current reading/writing position.
+The control unit reads data from the input tape and writes results to the output tape. The reading (R) and writing (W)
+heads point to the current positions on these I/O tapes.
 
-As already stated, the RASP machine represents a von Neumann computer. This implies that the operating memory exists as
-a single unit in which both program and data can reside. The segment containing the program is organized in the way that
-two adjacent cells contain instruction/operand alternately.
-The memory can be read as well as written to by the control unit.
+Program and data share the same memory. Instructions with operands occupy two adjacent cells: the opcode, followed by
+the operand. `HALT` occupies one cell. The control unit can read and write this memory, so a program can modify its own
+instructions.
+
+Unlike the theoretical model, this implementation uses signed 32-bit integers. See the compiler's
+[numeric limits]({{ site.baseurl }}/rasp/raspc-rasp#numeric-limits) before using large values.
 
 ## RASP for emuStudio
 

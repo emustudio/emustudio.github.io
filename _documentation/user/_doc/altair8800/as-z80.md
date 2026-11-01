@@ -15,8 +15,8 @@ NOTE: This assembler plugin is shared across multiple virtual computers. It is u
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) computers.
 {: .info}
 
-The assembler syntax is similar to `as-8080` assembler. Z80 instructions described [here][asz80]{:target="_blank"}.
-Assembler supports the following features:
+The assembler uses syntax similar to `as-8080`. The [Z80 manual][asz80]{:target="_blank"} describes the CPU's
+instructions. The assembler supports:
 
 - macros (unlimited nesting)
 - include other files support
@@ -28,8 +28,8 @@ Assembler supports the following features:
 
 ## Running from the command line
 
-The assembler is provided as part of emuStudio, and usually it is run from GUI. But it can be run also from the command
-line, as follows:
+The assembler runs from the source editor or the command line. Run these commands from the emuStudio installation
+directory:
 
 - on Linux:
 ```
@@ -94,13 +94,11 @@ label:
 label var 1
 ```
 
-At first the identified `label` is used for definition of a label, and on the second row the same identifier is used
-for definition of a variable. This is not allowed and will produce an error.
+The first line defines `label` as a label; the second tries to reuse it as a variable, which produces an error.
 
 ## Instructions syntax
 
-The program is basically a sequence of instructions. The instructions are separated by a new line. The instruction have
-optional and mandatory parts, e.g.:
+Write each instruction on a separate line. An instruction has these optional and required parts:
 
 {:.code-example}
 ```
@@ -210,8 +208,8 @@ the instruction or data directive; oversized values can produce a compilation er
 
 ## Defining data
 
-Data can be defined using special pseudo-instructions. These accept constants. Negative integers are
-using [two's complement][twocompl]{:target="_blank"}.
+Data-definition pseudo-instructions accept constants. Negative integers use
+[two's complement][twocompl]{:target="_blank"}.
 
 The following table describes all possible data definition pseudo-instructions:
 
@@ -264,14 +262,14 @@ as it was its part.
 
 ### Example
 
-Let `a.asm` contains:
+Let `a.asm` contain:
 
 {:.code-example}
 ```
 ld b, 80h
 ```
 
-Let `b.asm` contains:
+Let `b.asm` contain:
 
 {:.code-example}
 ```
