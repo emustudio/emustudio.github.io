@@ -51,8 +51,8 @@ changing a display option affects the focused view immediately. The other open v
 | `editorWrap` | `true` / `false` | `false` | Wrap long lines in the source view. |
 | `editorFolding` | `true` / `false` | `true` | Enable source folding. |
 
-Column alignment, token colors, and per-file bookmarks are also stored by the editor. Use its dialogs and bookmark
-commands to change them. See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
+Column alignment, token colors, per-file bookmarks, and per-file syntax choices are also stored by the editor. Use
+its editing menus to change them. See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
 
 Computer configurations are separate TOML files in `config/`. Use the
 [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and

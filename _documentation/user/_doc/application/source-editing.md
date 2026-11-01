@@ -70,8 +70,10 @@ buffers remain unsaved and support undo; replacements in closed files are writte
 
 **Ctrl+Shift+D** duplicates a line or selection. **Edit → Text** also provides sorting, reversing, removing duplicate
 lines, trailing-whitespace cleanup, tab/space conversion, reindentation, and column alignment.
+**Uppercase**, **Lowercase**, and **Invert case** transform selected text, including multiple selections, in one undo
+step. With no selection, these case commands leave the text unchanged.
 
-**Ctrl+/** toggles comments using the compiler's comment delimiter. **Edit → Editor display → Indentation settings**
+**Ctrl+/** toggles comments using the active syntax's comment delimiter. **Edit → Editor display → Indentation settings**
 controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
 uses generic block markers supplied by the compiler.
 
@@ -93,7 +95,11 @@ region. Plain text supports `#region` and `#endregion` lines. Fold detection doe
 the editor.
 
 **Edit → Editor display** controls visible whitespace, end-of-line markers, indentation guides, soft wrap, and token colors.
-Syntax highlighting follows the selected compiler. Display and indentation preferences are saved in application settings.
+Choose **Syntax highlighting** to select the syntax for the focused file: **Default (selected compiler)**,
+**Plain text**, or one of the bundled language modes. This choice also selects that mode's comment and folding rules;
+compilation and compiler-assisted refactoring still use the virtual computer's compiler. Both views of the same file
+share its syntax choice. Choices for saved files are restored on reopening; untitled files keep their choice when saved.
+Display and indentation preferences are saved in application settings.
 
 **Edit → Editing macros → Start recording / Stop recording** records the editor library's typing and editing actions.
 **Ctrl+Shift+M** replays the last recording. Recording is shared across source views for the current application session.
