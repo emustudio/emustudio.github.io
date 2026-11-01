@@ -17,9 +17,12 @@ binary image to populate program memory.
 
 The memory plugin contains a simple graphical window, which can be seen in the following image:
 
-![RAM memory window]({{ site.baseurl }}/assets/ram/ram-memory.png){:style="max-width:728"}
+![RAM memory window]({{ site.baseurl }}/assets/ram/ram-memory.png){: style="max-width: 473px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Load a compiled program, replacing the previous one. RAM binary files have the extension `.bram`.
-| <span class="circle">2</span> | Dump memory content into a file (either human-readable or `.bram`).
-| <span class="circle">3</span> | Clears memory.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
+| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
+| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
+| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |

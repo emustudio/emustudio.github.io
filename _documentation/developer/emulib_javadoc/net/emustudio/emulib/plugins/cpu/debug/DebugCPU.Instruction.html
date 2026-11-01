@@ -59,8 +59,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
+<li><a href="#sequence" tabindex="0">sequence</a></li>
 <li><a href="#address" tabindex="0">address</a></li>
 <li><a href="#bank" tabindex="0">bank</a></li>
+<li><a href="#mnemonic" tabindex="0">mnemonic</a></li>
+<li><a href="#opcodes" tabindex="0">opcodes</a></li>
 <li><a href="#before" tabindex="0">before</a></li>
 <li><a href="#after" tabindex="0">after</a></li>
 <li><a href="#accesses" tabindex="0">accesses</a></li>
@@ -69,7 +72,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E(int,int,java.util.Map,java.util.Map,java.util.List,boolean)" tabindex="0">Instruction(int, int, Map, Map, List, boolean)</a></li>
+<li><a href="#%3Cinit%3E(long,int,int,java.lang.String,java.lang.String,java.util.Map,java.util.Map,java.util.List,boolean)" tabindex="0">Instruction(long, int, int, String, String, Map, Map, List, boolean)</a></li>
 </ol>
 </li>
 </ol>
@@ -109,19 +112,38 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>final int</code></div>
 <div class="col-second odd-row-color"><code><a href="#address" class="member-name-link">address</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Executed instruction location (interrupted location for acknowledge-only events).</div>
+</div>
 <div class="col-first even-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#after" class="member-name-link">after</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>final int</code></div>
 <div class="col-second odd-row-color"><code><a href="#bank" class="member-name-link">bank</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Executed instruction location (interrupted location for acknowledge-only events).</div>
+</div>
 <div class="col-first even-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#before" class="member-name-link">before</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>final boolean</code></div>
 <div class="col-second odd-row-color"><code><a href="#completed" class="member-name-link">completed</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#mnemonic" class="member-name-link">mnemonic</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Captured before execution; opcode bytes are represented as a hexadecimal sequence.</div>
+</div>
+<div class="col-first odd-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#opcodes" class="member-name-link">opcodes</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Captured before execution; opcode bytes are represented as a hexadecimal sequence.</div>
+</div>
+<div class="col-first even-row-color"><code>final long</code></div>
+<div class="col-second even-row-color"><code><a href="#sequence" class="member-name-link">sequence</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Monotonic execution order within this CPU probe, including across resets.</div>
+</div>
 </div>
 </section>
 </li>
@@ -133,8 +155,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,java.util.Map,java.util.Map,java.util.List,boolean)" class="member-name-link">Instruction</a><wbr>(int&nbsp;address,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(long,int,int,java.lang.String,java.lang.String,java.util.Map,java.util.Map,java.util.List,boolean)" class="member-name-link">Instruction</a><wbr>(long&nbsp;sequence,
+ int&nbsp;address,
  int&nbsp;bank,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mnemonic,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opcodes,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;&nbsp;before,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;&nbsp;after,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a>&gt;&nbsp;accesses,
@@ -162,10 +187,21 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="sequence">
+<h3>sequence</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">sequence</span></div>
+<div class="block">Monotonic execution order within this CPU probe, including across resets.</div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="address">
 <h3>address</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">address</span></div>
+<div class="block">Executed instruction location (interrupted location for acknowledge-only events).
+A composite interrupt/ISR event's before snapshot may precede interrupt acknowledgement.</div>
 </div>
 </section>
 </li>
@@ -174,6 +210,26 @@ loadScripts(document, 'script');</script>
 <h3>bank</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">bank</span></div>
+<div class="block">Executed instruction location (interrupted location for acknowledge-only events).
+A composite interrupt/ISR event's before snapshot may precede interrupt acknowledgement.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="mnemonic">
+<h3>mnemonic</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">mnemonic</span></div>
+<div class="block">Captured before execution; opcode bytes are represented as a hexadecimal sequence.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="opcodes">
+<h3>opcodes</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">opcodes</span></div>
+<div class="block">Captured before execution; opcode bytes are represented as a hexadecimal sequence.</div>
 </div>
 </section>
 </li>
@@ -218,11 +274,14 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int,int,java.util.Map,java.util.Map,java.util.List,boolean)">
+<section class="detail" id="&lt;init&gt;(long,int,int,java.lang.String,java.lang.String,java.util.Map,java.util.Map,java.util.List,boolean)">
 <h3>Instruction</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Instruction</span><wbr><span class="parameters">(int&nbsp;address,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Instruction</span><wbr><span class="parameters">(long&nbsp;sequence,
+ int&nbsp;address,
  int&nbsp;bank,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mnemonic,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opcodes,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;&nbsp;before,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;&nbsp;after,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a>&gt;&nbsp;accesses,

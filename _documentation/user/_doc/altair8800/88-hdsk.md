@@ -19,23 +19,27 @@ disk image and guest memory.
 
 On the **Debugger** tab, double-click `88-hdsk` in the device list. In SIMH mode, the window shows sixteen drives:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-gui.png" alt="SIMH HDSK window with numbered disk selection, status, geometry and mounted image" width=620 points="1:91.61:5.19|2:47.74:31.69|3:92.58:31.69|4:91.61:74.29" %}
+![SIMH HDSK window with numbered disk selection, status, geometry and mounted image]({{ site.baseurl }}/assets/altair8800/88-hdsk-gui.png){: style="max-width: 611px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Disk selection**. Select drive A–P to inspect; this does not change the drive selected by guest software.
-| <span class="circle">2</span> | **Flags and settings**. Shows the selected drive, mount state, write protection and recent activity.
-| <span class="circle">3</span> | **Geometry**. Inspect track count, edit sectors per track and sector size, then click **Apply geometry** for the current session.
-| <span class="circle">4</span> | **Mounted image**. Shows the host file attached to the selected drive. Mount and create images in the settings dialog.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose a SIMH disk or a MITS removable/fixed platter to inspect. |
+| <span class="circle">2</span> | **Activity**. Inspect controller status and the most recent command. |
+| <span class="circle">3</span> | **Geometry and position**. Read the selected disk’s parameters and current position. |
+| <span class="circle">4</span> | **Mounted image**. Read the path and protection state of the selected image. |
 
 MITS mode shows four units, each with a removable (`R`) and fixed (`F`) platter:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-mits-gui.png" alt="MITS HDSK window with numbered platter selection, activity and fixed geometry" width=612 points="1:93.14:5.51|2:50.65:27.55|3:92.48:27.55|4:92.48:72.73" %}
+![MITS HDSK window with numbered platter selection, activity and fixed geometry]({{ site.baseurl }}/assets/altair8800/88-hdsk-mits-gui.png){: style="max-width: 660px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Platter selection**. Inspect `0R`–`3F`; the number is the unit and the letter selects its removable or fixed platter.
-| <span class="circle">2</span> | **Flags and settings**. Shows mount state, write protection and controller activity for that platter.
-| <span class="circle">3</span> | **Geometry**. MITS geometry is fixed at 406 cylinders, two surfaces, 24 sectors per track and 256 bytes per sector.
-| <span class="circle">4</span> | **Mounted image**. Shows the selected platter’s host file.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose a SIMH disk or a MITS removable/fixed platter to inspect. |
+| <span class="circle">2</span> | **Activity**. Inspect controller status and the most recent command. |
+| <span class="circle">3</span> | **Geometry and position**. Read the selected disk’s parameters and current position. |
+| <span class="circle">4</span> | **Mounted image**. Read the path and protection state of the selected image. |
 
 ## Settings dialog
 
@@ -43,31 +47,51 @@ Select `88-hdsk` in the device list and click **Show settings...**.
 
 ### SIMH drive settings
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-settings-drive-settings.png" alt="SIMH HDSK drive settings with numbered drive selection, image, media actions, parameters and Save" width=595 points="1:4.71:10.07|2:5.55:36.69|3:89.08:48.92|4:91.93:63.55|5:82.02:95.92" %}
+![SIMH HDSK drive settings with numbered drive selection, image, media actions, parameters and Save]({{ site.baseurl }}/assets/altair8800/88-hdsk-settings-drive-settings.png){: style="max-width: 643px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Drive**. Choose the drive whose settings you are editing. Switching drives keeps the other drives’ pending edits.
-| <span class="circle">2</span> | **Image**. Enter the startup image path, or use **Browse...** to select it.
-| <span class="circle">3</span> | **Media actions**. **Create image** creates a host file. **Unmount** and **Unmount all** clear paths for saving; **Save** applies those detachments.
-| <span class="circle">4</span> | **Parameters**. Set the sectors per track and physical sector size. **Set default** restores 32 sectors of 128 bytes; read-only protection is available only in MITS mode.
-| <span class="circle">5</span> | **Save**. Persist the settings and apply mounts and geometry when the controller mode is unchanged. Press **Esc** to discard pending settings; a file already created with **Create image** remains on disk.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose a SIMH drive or a MITS unit’s removable (**R**) or fixed (**F**) platter. |
+| <span class="circle">2</span> | **Image**. Enter the disk-image path. |
+| <span class="circle">3</span> | **Browse**. Choose an existing disk image. |
+| <span class="circle">4</span> | **Create**. Create an image for the selected drive. |
+| <span class="circle">5</span> | **Unmount**. Remove the selected image when saving. |
+| <span class="circle">6</span> | **Unmount all**. Remove all controller images when saving. |
+| <span class="circle">7</span> | **Read-only**. Prevent writes to the selected image. |
+| <span class="circle">8</span> | **Sectors per track**. Set SIMH geometry; MITS geometry is fixed. |
+| <span class="circle">9</span> | **Sector size**. Set SIMH sector size; MITS uses 256-byte sectors. |
+| <span class="circle">10</span> | **Set default**. Restore the standard geometry where editable. |
+| <span class="circle">11</span> | **Save**. Apply and save the selected images and geometry. |
 
 ### MITS drive settings
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-mits-settings-drive-settings.png" alt="MITS HDSK drive settings with numbered platter selection, read-only protection and fixed parameters" width=659 points="1:4.86:10.66|2:30.20:52.03|3:92.26:61.42" %}
+![MITS HDSK drive settings with numbered platter selection, read-only protection and fixed parameters]({{ site.baseurl }}/assets/altair8800/88-hdsk-mits-settings-drive-settings.png){: style="max-width: 707px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Drive**. Choose a removable or fixed platter of unit 0–3.
-| <span class="circle">2</span> | **Read-only**. Protect that image from guest writes. The image must already exist with the required size; **Create image** creates one of that size.
-| <span class="circle">3</span> | **Parameters**. Geometry is fixed, so sector size, sectors per track and defaults are disabled.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose a SIMH drive or a MITS unit’s removable (**R**) or fixed (**F**) platter. |
+| <span class="circle">2</span> | **Image**. Enter the disk-image path. |
+| <span class="circle">3</span> | **Browse**. Choose an existing disk image. |
+| <span class="circle">4</span> | **Create**. Create an image for the selected drive. |
+| <span class="circle">5</span> | **Unmount**. Remove the selected image when saving. |
+| <span class="circle">6</span> | **Unmount all**. Remove all controller images when saving. |
+| <span class="circle">7</span> | **Read-only**. Prevent writes to the selected image. |
+| <span class="circle">8</span> | **Sectors per track**. Set SIMH geometry; MITS geometry is fixed. |
+| <span class="circle">9</span> | **Sector size**. Set SIMH sector size; MITS uses 256-byte sectors. |
+| <span class="circle">10</span> | **Set default**. Restore the standard geometry where editable. |
+| <span class="circle">11</span> | **Save**. Apply and save the selected images and geometry. |
 
 ### Controller selection
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-hdsk-settings-controller.png" alt="HDSK controller settings with numbered controller model and connection requirements" width=595 points="1:30.76:13.19|2:92.44:24.46" %}
+![HDSK controller settings with numbered controller model and connection requirements]({{ site.baseurl }}/assets/altair8800/88-hdsk-settings-controller.png){: style="max-width: 643px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Controller**. Choose SIMH or MITS. Save, update the schema connections and reopen the computer to switch controller models.
-| <span class="circle">2</span> | **Connection requirements**. SIMH uses CPU port `FDh` and memory for DMA. MITS uses the 88-4PIO peripheral connection described below.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Controller**. Select the SIMH interface or the MITS controller behind 88-4PIO. The two models need different connections. |
+| <span class="circle">2</span> | **Save**. Save the model selection; reopen the computer to initialize the selected controller. |
 
 ## Command packet
 

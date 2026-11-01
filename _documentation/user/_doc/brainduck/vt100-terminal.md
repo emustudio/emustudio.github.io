@@ -44,7 +44,14 @@ The tables below describe the sequences and extensions supported by the emuStudi
 
 In the following screenshot, VT100-terminal window is shown:
 
-![VT100-terminal window]({{ site.baseurl }}/assets/brainduck/vt100-terminal.png)
+![VT100-terminal window]({{ site.baseurl }}/assets/brainduck/vt100-terminal.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal display**. Read the emulated computer’s output and type input when the computer requests it. |
+| <span class="circle">2</span> | **Input indicator**. A red indicator means the emulated computer is waiting for input. |
+| <span class="circle">3</span> | **ASCII input**. Enter space-separated byte values instead of typing characters. |
 
 Each `.` (dot) instruction sends a byte from the BrainDuck CPU to the terminal for display.
 
@@ -52,7 +59,14 @@ Input cannot be entered anytime. In brainfuck, the input is requested through `,
 encounters `,` (comma) instruction, the user is asked to enter input. This situation is marked with a red icon in the
 bottom-left corner:
 
-![Input is enabled in VT100-terminal window]({{ site.baseurl }}/assets/brainduck/vt100-terminal-input.png)
+![Input is enabled in VT100-terminal window]({{ site.baseurl }}/assets/brainduck/vt100-terminal-input.png){: style="max-width: 900px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Terminal display**. Read the emulated computer’s output and type input when the computer requests it. |
+| <span class="circle">2</span> | **Input indicator**. A red indicator means the emulated computer is waiting for input. |
+| <span class="circle">3</span> | **ASCII input**. Enter space-separated byte values instead of typing characters. |
 
 Next to the icon, there is a blue "ASC" button. This button can be used for entering binary values as input. A special
 little dialog will appear asking the user to enter space-separated numbers, representing ASCII codes of the input.
@@ -279,15 +293,21 @@ that are not easily typed on the host keyboard.
 
 The following screenshot shows settings dialog of the terminal:
 
-![VT100-terminal settings]({{ site.baseurl }}/assets/brainduck/vt100-terminal-settings.png)
+![VT100-terminal settings]({{ site.baseurl }}/assets/brainduck/vt100-terminal-settings.png){: style="max-width: 394px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Set number of terminal columns. The "Set default" button sets columns to the default value.
-| <span class="circle">2</span> | Set number of terminal rows. The "Set default" button sets rows to the default value.
-| <span class="circle">3</span> | Set input file name, which will be used in "No GUI" mode instead of keyboard.
-| <span class="circle">4</span> | Set output file name, which will be used in "No GUI" mode instead of display.
-| <span class="circle">5</span> | Set input read delay (in milliseconds) when reading input file in "No GUI" mode. Can be used for slowing down emulation.
-| <span class="circle">6</span> | Saves the settings, and closes the dialog.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Columns**. Set the number of character columns. |
+| <span class="circle">2</span> | **Default columns**. Restore the standard width. |
+| <span class="circle">3</span> | **Rows**. Set the number of character rows. |
+| <span class="circle">4</span> | **Default rows**. Restore the standard height. |
+| <span class="circle">5</span> | **Input file**. Supply input for headless automation. |
+| <span class="circle">6</span> | **Browse input**. Choose the input file. |
+| <span class="circle">7</span> | **Output file**. Save output during headless automation. |
+| <span class="circle">8</span> | **Browse output**. Choose the output file. |
+| <span class="circle">9</span> | **Input delay**. Set the delay between bytes read from the input file. |
+| <span class="circle">10</span> | **Save**. Apply and save the terminal settings. |
 
 ## Automation / headless mode
 

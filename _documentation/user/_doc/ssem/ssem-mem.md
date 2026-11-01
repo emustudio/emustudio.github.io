@@ -37,22 +37,19 @@ where bits `LLLLL` denote a "line", which was interpreted as memory "address" - 
 as instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions used by the
 computer). The rest of bits are unused, and thus were often used as data store.
 
-
 ## Graphical user interface (GUI)
 
 The memory window looks as follows:
 
-![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){:style="max-width:969px; width:100%"}
+![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){: style="max-width: 961px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Open SSEM binary image into memory (files compiled by SSEM compiler with extension `.bssem`)
-| <span class="circle">2</span> | Dump memory into a file (binary `.bssem` or human-readable `.txt`)
-| <span class="circle">3</span> | Clear memory
-| <span class="circle">4</span> | Decomposed instruction bits: line bits
-| <span class="circle">5</span> | Decomposed instruction bits: instruction opcode
-| <span class="circle">6</span> | Hexadecimal representation of the memory "row" (32 bits), correctly reversed
-| <span class="circle">7</span> | Decimal representation of the memory "row", correctly reversed
-| <span class="circle">8</span> | Four characters formed from the decoded 32-bit word, one character per byte
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
+| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
+| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
+| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |
 
 Double-click a bit cell to edit it. Accepted values are `1` and `0`; press **Delete** to clear a bit to `0`.
 
@@ -63,7 +60,6 @@ values. Values must fit a signed 32-bit integer. A character edit uses the first
 four characters. The plugin bit-reverses the decoded word for storage.
 
 Navigating cells is possible also with arrow keys.
-
 
 [tube]: https://en.wikipedia.org/wiki/Manchester_Small-Scale_Experimental_Machine#Williams-Kilburn_tube
 [edsac]: https://en.wikipedia.org/wiki/EDSAC

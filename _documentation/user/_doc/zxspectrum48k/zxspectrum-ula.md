@@ -25,28 +25,40 @@ All ULA functions are accessed through a single I/O port: **port `0xFE`** (254 d
 When the emulation is running, the ZX Spectrum display can be opened from the device list. It shows the 256×192 pixel
 screen with border, an on-screen keyboard overlay, and a toolbar with controls.
 
-![ZX Spectrum ULA display]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula.png)
+![ZX Spectrum ULA display]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula.png){: style="max-width: 778px; width: 100%; height: auto;" }
 
-{: .list}
-| The display window shows the ZX Spectrum screen output. The border colour changes based on the value written to port `0xFE`.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Display**. The running Spectrum ROM writes its screen through the ULA. |
+| <span class="circle">2</span> | **Keyboard opacity**. Show the slider for the on-screen keyboard overlay. |
+| <span class="circle">3</span> | **Beeper volume**. Adjust the Spectrum beeper volume. |
+| <span class="circle">4</span> | **Video recording**. Choose a file and record the display and supported audio. |
 
 ### Toolbar
 
 The toolbar at the bottom of the display window provides controls for keyboard overlay, volume, and video recording:
 
-![ZX Spectrum ULA toolbar]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula-toolbar.png)
+![ZX Spectrum ULA toolbar]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula-toolbar.png){: style="max-width: 100px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | Keyboard opacity control — shows a slider popup to adjust the on-screen keyboard overlay transparency (0–100%)
-| <span class="circle">2</span> | Volume control — shows a slider popup to adjust the beeper volume (0–100%)
-| <span class="circle">3</span> | Record — starts/stops video recording. When recording is started, the button changes to a stop icon. When stopped, a file dialog appears to save the MP4 file.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Keyboard opacity**. Adjust the on-screen keyboard overlay. |
+| <span class="circle">2</span> | **Beeper volume**. Adjust beeper volume. |
+| <span class="circle">3</span> | **Video recording**. Start or stop recording. |
 
 ### On-screen keyboard
 
 The ZX Spectrum's 40-key rubber keyboard layout is rendered as an overlay on the display canvas. The keyboard can
 be made visible by adjusting the keyboard opacity slider in the toolbar.
 
-![ZX Spectrum on-screen keyboard]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula-keyboard.png)
+![ZX Spectrum on-screen keyboard]({{ site.baseurl }}/assets/zxspectrum48k/zxspectrum-ula-keyboard.png){: style="max-width: 778px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **On-screen keys**. Click keys to send Spectrum key presses. Adjust keyboard opacity from the display toolbar. |
 
 The on-screen keyboard is interactive — keys can be clicked with the mouse to simulate key presses and releases.
 When the keyboard overlay opacity is set to 0%, mouse interaction is disabled.

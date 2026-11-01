@@ -58,20 +58,36 @@ Use **Previous / Next**, **Shift+F3 / F3**, or **Edit → Find previous / Find n
 selected match; **Replace all** replaces every match within the current search boundary in one undo step. The **×**
 in the search bar hides it without closing the file.
 
-Choose **Files…** or **Edit → Find / replace in files…** to search open tabs or a directory. Include/exclude globs use
+Choose **Find / replace in files** or **Edit → Find / replace in files…** to search open tabs or a directory. Include/exclude globs use
 semicolon-separated patterns, for example `*.asm;*.inc`. Directory searches read UTF-8 text and use unsaved open buffers
 when available. Results show the file, line, matched text, and proposed replacement; double-click a result to navigate.
 Check the replacements to apply and choose **Apply checked replacements**. Changed snapshots abort replacement. Open
 buffers remain unsaved and support undo; replacements in closed files are written to disk.
 
-![Find and replace across open files with a selectable replacement preview]({{ site.baseurl }}/assets/application/source-search-files.png){: style="max-width: 1000px; width: 100%;" }
+![Find and replace across open files with a selectable replacement preview]({{ site.baseurl }}/assets/application/source-search-files.png){: style="max-width: 486px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Find**. Enter the text or regular expression to search for. |
+| <span class="circle">2</span> | **Replace**. Enter the proposed replacement. |
+| <span class="circle">3</span> | **Match case**. Require matching letter case. |
+| <span class="circle">4</span> | **Whole word**. Match complete words. |
+| <span class="circle">5</span> | **Regex**. Interpret the query as a regular expression. |
+| <span class="circle">6</span> | **Preserve case**. Adapt replacements to the matched text’s case. |
+| <span class="circle">7</span> | **Scope**. Search open files or a selected directory. |
+| <span class="circle">8</span> | **Preview**. Review matches and check the replacements to apply; double-click a row to navigate. |
+| <span class="circle">9</span> | **Search**. Build the match and replacement preview. |
+| <span class="circle">10</span> | **Apply checked replacements**. Apply only the checked changes. |
 
 ## Text and indentation
 
 **Ctrl+Shift+D** duplicates a line or selection. **Edit → Text** also provides sorting, reversing, removing duplicate
 lines, trailing-whitespace cleanup, tab/space conversion, reindentation, and column alignment.
+**Uppercase**, **Lowercase**, and **Invert case** transform selected text, including multiple selections, in one undo
+step. With no selection, these case commands leave the text unchanged.
 
-**Ctrl+/** toggles comments using the compiler's comment delimiter. **Edit → Editor display → Indentation settings**
+**Ctrl+/** toggles comments using the active syntax's comment delimiter. **Edit → Editor display → Indentation settings**
 controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
 uses generic block markers supplied by the compiler.
 
@@ -93,7 +109,11 @@ region. Plain text supports `#region` and `#endregion` lines. Fold detection doe
 the editor.
 
 **Edit → Editor display** controls visible whitespace, end-of-line markers, indentation guides, soft wrap, and token colors.
-Syntax highlighting follows the selected compiler. Display and indentation preferences are saved in application settings.
+Choose **Syntax highlighting** to select the syntax for the focused file: **Default (selected compiler)**,
+**Plain text**, or one of the bundled language modes. This choice also selects that mode's comment and folding rules;
+compilation and compiler-assisted refactoring still use the virtual computer's compiler. Both views of the same file
+share its syntax choice. Choices for saved files are restored on reopening; untitled files keep their choice when saved.
+Display and indentation preferences are saved in application settings.
 
 **Edit → Editing macros → Start recording / Stop recording** records the editor library's typing and editing actions.
 **Ctrl+Shift+M** replays the last recording. Recording is shared across source views for the current application session.
@@ -112,7 +132,14 @@ symbol metadata; RAM and RASP provide labels. Comments and strings are not renam
 ambiguous declarations, repeated/cyclic includes, and name conflicts are rejected. Save an untitled source before
 resolving its relative includes.
 
-![Rename preview listing the source positions that will change]({{ site.baseurl }}/assets/application/source-rename-preview.png){: style="max-width: 900px; width: 100%;" }
+![Rename preview listing the source positions that will change]({{ site.baseurl }}/assets/application/source-rename-preview.png){: style="max-width: 580px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Preview**. Review the proposed symbol rename before applying it. |
+| <span class="circle">2</span> | **OK**. Apply the displayed changes. |
+| <span class="circle">3</span> | **Cancel**. Close the preview and keep the source unchanged. |
 
 The 8080 and Z80 assemblers support **Edit → Refactor → Extract selection…** for complete instruction lines outside existing macros.
 Choose **Macro** or **Subroutine (uses stack)**, enter a new name, and review the generated source. Extraction rejects
@@ -120,7 +147,14 @@ declarations, nested blocks, and includes. Subroutine extraction also rejects st
 requires a working stack at runtime. Other compilers do not offer extraction. Review address-sensitive code after
 subroutine extraction because the generated call, jump, and return change the program layout.
 
-![Extraction preview showing the selected instructions moved into a new macro]({{ site.baseurl }}/assets/application/source-extraction-preview.png){: style="max-width: 900px; width: 100%;" }
+![Extraction preview showing the selected instructions moved into a new macro]({{ site.baseurl }}/assets/application/source-extraction-preview.png){: style="max-width: 580px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Preview**. Review the proposed extracted source before applying it. |
+| <span class="circle">2</span> | **OK**. Apply the displayed changes. |
+| <span class="circle">3</span> | **Cancel**. Close the preview and keep the source unchanged. |
 
 ## Keyboard shortcuts
 

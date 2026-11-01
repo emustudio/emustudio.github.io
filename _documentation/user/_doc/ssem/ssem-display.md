@@ -19,7 +19,12 @@ separate plugins provide memory and display.
 
 GUI window of the SSEM display in emuStudio is depicted below:
 
-![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-display.png)
+![SSEM Display GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-display.png){: style="max-width: 456px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Store display**. Each row represents a store line; lit dots show set bits in the 32-bit words. |
 
 The display shows memory contents. To edit them, use the [ssem-mem][ssem-mem] window.
 

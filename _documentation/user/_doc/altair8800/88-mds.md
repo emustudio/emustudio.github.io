@@ -97,13 +97,15 @@ extension; use the `88-hdsk` plugin for that interface.
 
 On the **Debugger** tab, double-click `88-mds` in the device list:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-mds-gui.png" alt="88-MDS minidisk window with numbered drive, image and position, attach and detach controls" width=550 points="1:92.73:8.89|2:92.73:45.93|3:26.73:87.41|4:71.09:87.41" %}
+![88-MDS minidisk window with numbered drive, image and position, attach and detach controls]({{ site.baseurl }}/assets/altair8800/88-mds-gui.png){: style="max-width: 214px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Drive**. Choose drive 0–15 to inspect or attach an image; guest software selects its active drive independently.
-| <span class="circle">2</span> | **Image and status**. Shows the host file, current track and sector, and whether the drive is selected or idle.
-| <span class="circle">3</span> | **Attach image**. Choose an existing readable, writable raw minidisk image of at least 76,720 bytes.
-| <span class="circle">4</span> | **Detach**. Flush pending writes and eject the image from the selected drive.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive**. Choose one of the five minidisk drives. |
+| <span class="circle">2</span> | **Image and position**. Inspect the mounted image, track, sector, and byte position. |
+| <span class="circle">3</span> | **Attach image**. Choose and mount an image in the selected drive. |
+| <span class="circle">4</span> | **Detach**. Unmount the selected drive’s image. |
 
 There is no separate settings dialog. Attachments made here last for the current session; use `image0`–`image15` in the configuration for startup mounts.
 

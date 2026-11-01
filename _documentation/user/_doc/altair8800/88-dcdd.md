@@ -67,13 +67,15 @@ Feature highlights are:
 
 On the **Debugger** tab, double-click `88-dcdd` in the device list:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-gui.png" alt="88-DCDD runtime window with numbered drive selection, flags, position and mounted image" width=556 points="1:91.55:5.56|2:48.56:33.89|3:91.01:33.89|4:90.83:64.17" %}
+![88-DCDD runtime window with numbered drive selection, flags, position and mounted image]({{ site.baseurl }}/assets/altair8800/88-dcdd-gui.png){: style="max-width: 604px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Disk selection**. Choose drive A–P to inspect. This does not select that drive for guest software.
-| <span class="circle">2</span> | **Flags and settings**. Shows the selected drive’s Port 1 status bits and Port 2 value.
-| <span class="circle">3</span> | **Position**. Shows the current track, sector and byte offset for the selected drive.
-| <span class="circle">4</span> | **Mounted image**. Shows the attached host file. Use **Show settings...** to mount or eject images and configure geometry.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drives A–P**. Select the drive whose state appears below. |
+| <span class="circle">2</span> | **Flags**. Inspect the selected drive’s status bits. |
+| <span class="circle">3</span> | **Position**. Read the current track, sector, and byte position. |
+| <span class="circle">4</span> | **Mounted image**. Read the path of the selected drive’s disk image. |
 
 The window shows runtime status of virtual disk drives. By clicking on a drive button, its details are revealed below.
 Port1 is showing 88-dcdd status, ordered from the MSB to LSB, and instead of showing 1 and 0s, every bit is mapped
@@ -94,15 +96,20 @@ details.
 
 Select `88-dcdd` in the device list and click **Show settings...**. Open the **Drive settings** tab:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-settings-drive-settings.png" alt="88-DCDD drive settings with numbered drive selection, image path, browse and unmount actions, geometry, defaults and Save" width=595 points="1:4.71:12.21|2:5.55:36.34|3:62.18:51.16|4:91.93:61.63|5:92.10:71.22|6:78.99:95.35" %}
+![88-DCDD drive settings with numbered drive selection, image path, browse and unmount actions, geometry, defaults and Save]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings-drive-settings.png){: style="max-width: 643px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Drive**. Choose drive A–P; edits for other drives are retained when switching.
-| <span class="circle">2</span> | **Image**. Enter the host image path for the selected drive.
-| <span class="circle">3</span> | **Browse / Mount**. Browse for an image, then click **Mount** to attach it immediately. The button becomes **Unmount** while attached. **Unmount all** immediately ejects all images.
-| <span class="circle">4</span> | **Parameters**. Set sectors per track and physical sector size to match the image format.
-| <span class="circle">5</span> | **Set default**. Restore the selected drive’s default geometry.
-| <span class="circle">6</span> | **Save**. Persist geometry, CPU ports and startup mount settings. Press **Esc** to discard unsaved configuration edits; mounts and ejects already performed remain in effect.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Drive selector**. Choose which of the sixteen drives to configure. |
+| <span class="circle">2</span> | **Image**. Enter the selected drive’s disk-image path. |
+| <span class="circle">3</span> | **Browse**. Choose a disk image. |
+| <span class="circle">4</span> | **Mount**. Set whether the selected image is mounted. |
+| <span class="circle">5</span> | **Unmount all**. Unmount every drive. |
+| <span class="circle">6</span> | **Sectors per track**. Set the image’s track geometry. |
+| <span class="circle">7</span> | **Sector size**. Set the number of bytes in each sector. |
+| <span class="circle">8</span> | **Set default**. Restore the standard geometry. |
+| <span class="circle">9</span> | **Save**. Apply and save the drive settings. |
 
 ## CPU Ports settings
 
@@ -115,14 +122,18 @@ different function. By default, the port mapping to CPU port numbers is as follo
 
 Port mapping can be changed in the Settings window, tab "CPU Ports":
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-dcdd-settings-connection-with-cpu.png" alt="88-DCDD CPU connection settings with numbered CPU ports, interrupt support, vector, default mapping and Save" width=595 points="1:96.64:29.94|2:31.26:49.42|3:48.24:57.27|4:85.21:64.83|5:80.50:95.06" %}
+![88-DCDD CPU connection settings with numbered CPU ports, interrupt support, vector, default mapping and Save]({{ site.baseurl }}/assets/altair8800/88-dcdd-settings-connection-with-cpu.png){: style="max-width: 643px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Port 1 / Port 2 / Port 3**. Set the CPU addresses for flags and drive selection, sector and control operations, and data transfer.
-| <span class="circle">2</span> | **Interrupts supported**. Allow guest software to enable controller interrupts. When disabled here, runtime interrupt-enable commands have no effect.
-| <span class="circle">3</span> | **Interrupt vector**. Select RST vector `0`–`7`; the default is `7`.
-| <span class="circle">4</span> | **Set default**. Restore CPU port addresses `08h`, `09h` and `0Ah`. This button does not reset the interrupt vector.
-| <span class="circle">5</span> | **Save**. Persist and apply the new mapping and interrupt settings. Avoid CPU ports already occupied by other devices.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Port 1**. Set the drive-selection and status port. |
+| <span class="circle">2</span> | **Port 2**. Set the control port. |
+| <span class="circle">3</span> | **Port 3**. Set the data port. |
+| <span class="circle">4</span> | **Interrupts supported**. Enable disk interrupts. |
+| <span class="circle">5</span> | **Interrupt vector**. Choose the RST vector sent to the CPU. |
+| <span class="circle">6</span> | **Set default**. Restore the standard port mapping and interrupt vector. |
+| <span class="circle">7</span> | **Save**. Apply and save the CPU connection settings. |
 
 ## Programming
 
@@ -772,7 +783,6 @@ The following table shows all the possible file configurations of the plugin:
 |`interruptVector`                          | 7 | 0 to 7 | Interrupt vector to be used when an interrupt is signalled to CPU
 |`interruptsSupported`                      | true | true/false | Whether interrupts are supported (independent on Port 2 runtime settings)
 |---
-
 
 [manual]: https://deramp.com/downloads/altair/hardware/8_inch_floppy/Altair%20Floppy%20(88-DCDD)%20Manual.pdf
 [pertec]: http://cini.classiccmp.org/pdf/iCOM/FD400-5x0-5x1_Mar77.pdf

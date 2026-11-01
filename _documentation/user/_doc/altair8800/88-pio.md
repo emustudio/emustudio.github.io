@@ -84,23 +84,31 @@ requires this context with at least two PIAs; connect `88-hdsk` to `88-pio` in t
 
 On the **Debugger** tab, double-click `88-pio` in the device list. The 88-4PIO window is shown below:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-pio-gui.png" alt="88-4PIO window with numbered attached device, channel, registers and input controls" width=571 points="1:93.87:3.88|2:28.02:22.87|3:48.16:27.71|4:92.47:27.71|5:92.12:77.52" %}
+![88-4PIO window with numbered attached device, channel, registers and input controls]({{ site.baseurl }}/assets/altair8800/88-pio-gui.png){: style="max-width: 555px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Attached device**. Shows the connected peripheral identity; `unknown` means an identity is unavailable.
-| <span class="circle">2</span> | **Channel**. Select a PIA channel to inspect. This changes the view; the peripheral connection belongs to the whole board.
-| <span class="circle">3</span> | **Control channel**. Shows control-register bits, the hexadecimal value and interrupt flags for the selected channel.
-| <span class="circle">4</span> | **Data pins**. Shows input pins, output pins and the data-direction register. A DDR bit of `1` selects output.
-| <span class="circle">5</span> | **Peripheral input**. Set an input byte or change C1/C2 while no peripheral is connected. C2 can be edited only when configured as an input; attached peripherals own these controls otherwise.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Attached device**. Identify the board’s connected peripheral. |
+| <span class="circle">2</span> | **Channel**. Select the PIA channel to inspect. This changes the view, not the attached peripheral. |
+| <span class="circle">3</span> | **Registers**. Inspect data, direction, control, and handshake state for the selected channel. |
+| <span class="circle">4</span> | **Input byte**. Enter the simulated input-pin value. |
+| <span class="circle">5</span> | **Set input pins**. Apply the entered byte to the selected channel. |
+| <span class="circle">6</span> | **C1 high**. Set the selected channel’s C1 input level. |
+| <span class="circle">7</span> | **C2 high**. Set the selected channel’s C2 input level. |
 
 The original 88-PIO uses separate input and output latches instead of PIA channels:
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-pio-8212-gui.png" alt="Original 88-PIO window with numbered latches and manual handshake controls" width=515 points="1:43.30:25.39|2:92.43:25.39|3:92.43:77.48" %}
+![Original 88-PIO window with numbered latches and manual handshake controls]({{ site.baseurl }}/assets/altair8800/88-pio-8212-gui.png){: style="max-width: 503px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Control channel**. Shows input-data-ready (`D`), output-device-ready (`R`) and the interrupt-enable value.
-| <span class="circle">2</span> | **Data latches**. Inspect the most recent input and output bytes.
-| <span class="circle">3</span> | **Peripheral input**. Enter a byte and click **Strobe input** to place it in the input latch. **Output device ready** changes the output-ready flag.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Attached device**. Identify the peripheral connected to the original 88-PIO board. |
+| <span class="circle">2</span> | **Latches and status**. Inspect the input/output latches and handshake flags. |
+| <span class="circle">3</span> | **Input byte**. Enter a byte to present at the input. |
+| <span class="circle">4</span> | **Strobe input**. Latch the entered byte as a new peripheral input. |
+| <span class="circle">5</span> | **Output device ready**. Set the peripheral’s output-ready handshake input. |
 
 ## Settings dialog
 
@@ -108,29 +116,37 @@ Select `88-pio` in the device list and click **Show settings...**. Its three tab
 
 ### General settings
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-general-settings.png" alt="88-PIO general settings with numbered board model, PIA count and Save button" width=534 points="1:94.38:11.40|2:41.95:38.60|3:79.21:94.04" %}
+![88-PIO general settings with numbered board model, PIA count and Save button]({{ site.baseurl }}/assets/altair8800/88-pio-settings-general-settings.png){: style="max-width: 534px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Board**. Choose the Intel 8212-based 88-PIO or Motorola 6820-based 88-4PIO.
-| <span class="circle">2</span> | **Populated PIAs**. Set one to four PIAs for 88-4PIO. This field is disabled for the original 88-PIO.
-| <span class="circle">3</span> | **Save**. Persist all tabs and close the dialog. Reopen the computer to apply the new board, ports or interrupt vector. Press **Esc** to discard edits.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Board**. Select original 88-PIO or 88-4PIO emulation. |
+| <span class="circle">2</span> | **Populated PIAs**. Set how many PIAs the 88-4PIO board contains. |
+| <span class="circle">3</span> | **Save**. Save the board configuration; reopen the computer to initialize it. |
 
 ### Connection with CPU
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-connection-with-cpu.png" alt="88-PIO CPU connection settings with numbered base port, defaults and channel mapping" width=534 points="1:44.76:17.36|2:92.88:11.40|3:86.33:36.79" %}
+![88-PIO CPU connection settings with numbered base port, defaults and channel mapping]({{ site.baseurl }}/assets/altair8800/88-pio-settings-connection-with-cpu.png){: style="max-width: 534px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **CPU base port**. Enter a decimal or `0x` hexadecimal address with the alignment required by the selected board.
-| <span class="circle">2</span> | **Set default**. Restore the selected board’s default base port and two PIAs.
-| <span class="circle">3</span> | **Channel ports**. Preview the resulting register addresses; avoid overlaps with other devices.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **CPU base port**. Set the first port claimed by the selected board. |
+| <span class="circle">2</span> | **Set default**. Restore the selected model’s standard base port. |
+| <span class="circle">3</span> | **Port map**. Review the CPU ports and channel registers derived from the base port. |
+| <span class="circle">4</span> | **Save**. Save the mapping; reopen the computer to apply it. |
 
 ### Interrupts
 
-{% include annotated-screenshot.html image="/assets/altair8800/88-pio-settings-interrupts.png" alt="88-PIO interrupt settings with numbered RST vector and default button" width=534 points="1:47.75:35.23|2:73.78:78.50" %}
+![88-PIO interrupt settings with numbered RST vector and default button]({{ site.baseurl }}/assets/altair8800/88-pio-settings-interrupts.png){: style="max-width: 534px; width: 100%; height: auto;" }
 
-{: .list}
-| <span class="circle">1</span> | **Interrupt vector**. Select the RST vector, from `0` to `7`. Guest software must also enable interrupts.
-| <span class="circle">2</span> | **Set default**. Restore vector `7`. Click **Save** to persist it.
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Interrupt vector**. Choose the RST vector used for board interrupts. |
+| <span class="circle">2</span> | **Set default**. Restore the standard interrupt vector. |
+| <span class="circle">3</span> | **Save**. Save the vector; reopen the computer to apply it. |
 
 ## Configuration file
 

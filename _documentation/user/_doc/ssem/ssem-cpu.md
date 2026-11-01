@@ -21,7 +21,16 @@ The `ssem-cpu` plugin implements the control unit (instruction decoding and exec
 
 Status panel is shown below:
 
-![SSEM CPU Status panel GUI]({{ site.baseurl }}/assets/ssem/ssem-status-panel.png)
+![SSEM CPU Status panel GUI]({{ site.baseurl }}/assets/ssem/ssem-status-panel.png){: style="max-width: 596px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **A**. Read the accumulator in hexadecimal, decimal, and binary. |
+| <span class="circle">2</span> | **CI**. Read the control-instruction byte address. |
+| <span class="circle">3</span> | **M[CI]**. Read the instruction word at the control-instruction address. |
+| <span class="circle">4</span> | **line**. Read the decoded and reversed instruction-line field. |
+| <span class="circle">5</span> | **M[line]**. Read the memory word selected by that line field. |
 
 The registers section shows hexadecimal, decimal, and binary representations of:
 

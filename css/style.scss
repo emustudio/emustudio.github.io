@@ -391,6 +391,25 @@ aside {
     &:hover { text-decoration: none; }
 }
 
+.screenshot-key .circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 26px;
+    height: 26px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font: normal 14px/1 sans-serif;
+}
+
+.screenshot-key {
+    td:first-child { width: 52px; }
+    p { margin: 0; }
+}
+
 .borderless tbody tr td,
 .borderless tbody tr th,
 .borderless thead tr th,

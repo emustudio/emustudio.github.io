@@ -15,7 +15,7 @@ The `z80-cpu` plugin emulates an 8-bit Zilog Z80 with a 16-bit address space (64
 - Documented and undocumented instructions, including DD/FD prefix chains.
 - Instruction timing in T-states and memory contention through the connected bus.
 - Maskable interrupts, non-maskable interrupts and the interrupt delay after `EI`.
-- Disassembly, single stepping, breakpoints and instruction tracing.
+- Disassembly, single stepping, breakpoints and shared debugger recording.
 - Main and alternate register sets, flags and measured execution frequency in the CPU status panel.
 
 I/O devices are selected by the low eight bits of the port address (`00h`–`FFh`). The CPU passes the full
@@ -35,7 +35,6 @@ The **Set 1** and **Set 2** tabs show the main and alternate registers and flags
 - **CPU Frequency** sets the target clock in kHz. Pause or stop emulation before changing it.
   The change lasts for the current session; edit `frequency_khz` to make it persistent.
 - **Runtime frequency** shows the measured execution rate.
-- **Dump instructions history** enables tracing to standard error with repeated-address caching.
 - **Load snapshot...** restores a ZX Spectrum 48K `.sna` or `.z80` snapshot while emulation is paused or stopped.
   Use it with the [ZX Spectrum computer]({{ site.baseurl }}/zxspectrum48k/z80-cpu), whose ROM, bus and ULA
   provide the hardware expected by the snapshot. After loading, run emulation to resume the program.
@@ -48,68 +47,19 @@ contains `settings = { }`, remove that inline table before adding `[CPU.settings
 |---
 | Name | Default value | Valid values | Description
 |-|-|-|-
-| `printCode` | `false` | `true` / `false` | Enable instruction tracing when the CPU is initialized.
-| `printCodeUseCache` | `false` | `true` / `false` | With `printCode = true`, summarize repeated visits to instruction addresses.
-| `printCodeFileName` | `"syserr"` | `"syserr"` or writable file path | Write the startup trace to standard error or a file. The file is overwritten when the CPU is initialized.
 | `frequency_khz` | `4000` | Positive integer | Target CPU clock in kHz. The bundled Spectrum computer sets this to `3500`.
 |---
 
-For example, to record every instruction to a file:
+## Recording executed instructions
 
-```toml
-[CPU.settings]
-frequency_khz = 4000
-printCode = true
-printCodeUseCache = false
-printCodeFileName = "z80-trace.txt"
-```
+Use **History** in the shared debugger to record recent instructions or continuously save execution to a file.
+Recorded instructions include their sequence, opcode bytes and disassembly captured before execution, before/after
+register values, raw flags, physical bank, memory accesses and completion status. Z80 register snapshots include
+alternate registers. See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording).
 
-The status panel's tracing checkbox changes the active tracer. Turning it on selects cached output to standard
-error, regardless of the startup file and cache settings.
-
-## Dumping executed instructions
-
-Tracing prints the disassembled instruction and CPU state after its execution. It also works when single stepping.
-Launch emuStudio from a terminal to see standard-error output, or use `printCodeFileName` to capture a startup trace.
-
-For example, compile this program with [as-z80]({{ site.baseurl }}/altair8800/as-z80) into writable memory,
-set the program address to `0000h`, reset the CPU and step through its first three instructions:
-
-{:.code-example}
-```asm
-org 0000h
-ld sp, 0FF00h
-ld a, 2Ah
-inc a
-halt
-```
-
-With caching disabled, the first three trace lines look like this. Elapsed times vary between runs:
-
-{:.code-example}
-```text
-0000 | PC=0000 |    ld sp, FF00h |   31 00 FF || regs=00 00 00 00 00 00 00 00  IX=0000 IY=0000 IFF=0 I=00 R=01 | flags=       | SP=ff00 | PC=0003
-0032 | PC=0003 |       ld a, 2Ah |      3E 2A || regs=00 00 00 00 00 00 00 2a  IX=0000 IY=0000 IFF=0 I=00 R=02 | flags=       | SP=ff00 | PC=0005
-0034 | PC=0005 |           inc a |         3C || regs=00 00 00 00 00 00 00 2b  IX=0000 IY=0000 IFF=0 I=00 R=03 | flags=       | SP=ff00 | PC=0006
-```
-
-|---
-| Field | Meaning
-|-|-
-| First column | Elapsed host time in milliseconds since the tracer's first instruction; this is not a T-state count.
-| First `PC` | Address of the instruction being executed.
-| Mnemonic and opcode | Disassembled instruction and its bytes.
-| `regs` | Main registers in order: `B C D E H L`, an unused slot, then `A`. The unused slot is not `F`.
-| `IX`, `IY` | Index registers after execution.
-| `IFF` | Interrupt-enable flip-flop `IFF1` after execution.
-| `I`, `R` | Interrupt-vector and refresh registers after execution.
-| `flags` | Set documented flags: `S Z H P N C`, where `P` represents parity/overflow. Unset flags are spaces; undocumented `X` and `Y` flags are omitted.
-| `SP`, last `PC` | Stack pointer and next instruction address after execution.
-|---
-
-The fields before `||` describe the instruction; those after it describe the resulting CPU state.
-With caching enabled, repeated visits are summarized as `Block from ... to ...; count=...`.
-Disable caching when you need a complete trace of a loop.
+For unattended startup runs, use the application's
+[automation recording]({{ site.baseurl }}/application/automation#instruction-recording) option. Recording belongs
+to the application rather than the CPU configuration or status panel.
 
 ## Testing the CPU
 

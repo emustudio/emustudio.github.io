@@ -1,0 +1,12 @@
+{% assign explanations = site.data.screenshot_controls[include.screenshot.id] %}
+<img alt="{{ include.screenshot.alt }}" class="img-fluid" src="{{ include.screenshot.image }}">
+{% if explanations %}
+<table class="table screenshot-key text-left">
+    <thead><tr><th scope="col">Mark</th><th scope="col">Explanation</th></tr></thead>
+    <tbody>
+    {% for explanation in explanations %}
+    <tr><td><span class="circle">{{ forloop.index }}</span></td><td>{{ explanation | markdownify }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}

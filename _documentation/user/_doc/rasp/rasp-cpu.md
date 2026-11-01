@@ -17,12 +17,19 @@ The plugin requires `rasp-mem` and two instances of `abstract-tape`. At startup,
 in the order of the `[[DEVICE]]` entries in the computer configuration.
 The bundled RASP configuration supplies these connections. Both tapes accept integer symbols only.
 
-
 ## Status panel
 
 In the following image, you can see the status panel of `rasp-cpu`.
 
-![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-cpu-status.png)
+![RASP CPU status panel]({{ site.baseurl }}/assets/rasp/rasp-cpu-status.png){: style="max-width: 214px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **R0**. Inspect the accumulator. |
+| <span class="circle">2</span> | **IP**. Inspect the next instruction address. |
+| <span class="circle">3</span> | **Next input**. Preview the next input symbol. |
+| <span class="circle">4</span> | **Last output**. Inspect the most recently written output symbol. |
 
 **Internal status** shows `R0` (the accumulator) and `IP` (the instruction pointer). `IP` is the memory address of the next
 instruction.

@@ -12,7 +12,7 @@ permalink: /zxspectrum48k/z80-cpu
 
 The ZX Spectrum 48K uses the same Z80 CPU plugin as the [MITS Altair8800]({{ site.baseurl }}/altair8800/z80-cpu).
 Please refer to the [z80-cpu documentation]({{ site.baseurl }}/altair8800/z80-cpu) for the complete CPU reference,
-including instruction dumping, configuration, and testing.
+including instruction recording, configuration, and testing.
 
 ## ZX Spectrum enhancements
 
@@ -33,9 +33,6 @@ implementation:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`printCode`       | false | true / false | Whether to dump executed instructions to console
-|`printCodeFileName` | `"syserr"` | `"syserr"` or writable path | Startup trace destination
-|`printCodeUseCache`| false | true / false | Use cache to avoid dumping repeated blocks
 |`frequency_khz` | 4000 | > 0 | CPU plugin default in kHz; the Spectrum configuration sets 3500
 |---
 
@@ -47,8 +44,12 @@ When emulation is stopped, click **Load snapshot...** in the CPU status panel to
 snapshots and Z80 versions 1, 2, and 3. It restores CPU registers, interrupt state, program counter, RAM, and border
 colour as one operation before execution resumes.
 
-![Z80 CPU status panel with Load snapshot action]({{ site.baseurl }}/assets/zxspectrum48k/z80-snapshot-action.png){: style="max-width: 324px; width: 100%;" }
+![Z80 CPU status panel with Load snapshot action]({{ site.baseurl }}/assets/zxspectrum48k/z80-snapshot-action.png){: style="max-width: 324px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Load snapshot**. Load a supported Z80 snapshot while the CPU is stopped. This restores the state included in that snapshot. |
 
 The 48K virtual computer intentionally rejects 128K and banked snapshots. A rejected or malformed file leaves the
 current machine state unchanged and reports the reason to the user.
-

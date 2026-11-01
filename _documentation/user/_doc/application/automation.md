@@ -53,6 +53,25 @@ debug-script failures return a nonzero exit status.
 Other run outcomes, including normal execution timeouts, are recorded in the logs.
 
 
+## Instruction recording
+
+Add `--record-instructions FILE` after `auto` to save a continuous instruction recording, including in `--no-gui` mode:
+
+```sh
+./emuStudio -cf config/MITSAltair8800.toml -i probe.asm auto --no-gui -p 0 --waitmax 5000 --record-instructions probe.emutrace
+```
+
+Recording starts after optional compilation and CPU reset, before the first instruction executes. The CPU must expose
+the optional debugging port; all bundled CPU plugins support it. This option also works with `--debug-script`.
+Open the saved file from **History** in the interactive debugger to inspect it, or export readable text there.
+Relative recording paths start at the launch directory.
+
+Continuous recording uses bounded buffered output. Slow storage can slow execution; recording errors are reported
+instead of silently losing instructions. Stopping recording or closing the computer flushes the file and writes its
+completion marker. A file interrupted before clean closure is reported as incomplete when inspected.
+See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording) for the recorded fields
+and offline inspection workflow.
+
 ## Debug scripts
 
 Use `auto --debug-script FILE` to execute bounded debugger operations after optional compilation and CPU reset. Select
