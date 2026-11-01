@@ -180,6 +180,24 @@ task 'lint:post_build': %w[lint:imagepath]
 # ---------------------------------------------------------------------------
 
 namespace :build do
+  desc 'Regenerate the bundled emuLib API reference (optional emuLib checkout path)'
+  task :api, [:emulib_dir] do |_task, args|
+    emulib_dir = File.expand_path(args[:emulib_dir] || '../emuLib')
+    destination = File.expand_path('_documentation/developer/emulib_javadoc')
+    Dir.chdir(emulib_dir) { run_or_fail './gradlew javadoc' }
+    generated = File.join(emulib_dir, 'build/docs/javadoc')
+    abort "Missing generated API reference: #{generated}" unless File.file?(File.join(generated, 'index.html'))
+
+    FileUtils.rm_rf(destination)
+    FileUtils.cp_r(generated, destination)
+    # Javadoc itself emits trailing whitespace. Normalize it during import so
+    # the generated tree passes git diff --check without hand-editing HTML.
+    find_files(destination, 'html').each do |file|
+      text = File.read(file, encoding: 'utf-8')
+      File.write(file, text.gsub(/[ \t]+$/, ''))
+    end
+  end
+
   desc 'Build documentation sub-sites (user & developer)'
   task :docs do
     puts 'Building documentation sub-sites …'

@@ -44,7 +44,8 @@ controller programming, disk format, and schematics for the minidisk system.
 The command and status protocol follows the MITS minidisk controller. Selecting a drive loads its head automatically;
 the unload-head command is accepted but ignored. Data transfers use programmed I/O, not DMA.
 
-These addresses overlap the 88-DCDD and 88-PIO. Connect only the controller required by the guest software.
+These addresses overlap the default 88-DCDD ports. Connect only the disk controller required by the guest software,
+and keep any configurable peripheral ports clear of `08h`–`0Ah`.
 
 ## Programming protocol
 

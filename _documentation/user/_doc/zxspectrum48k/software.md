@@ -30,7 +30,20 @@ See the [Automation]({{ site.baseurl }}/zxspectrum48k/automation) page for detai
 
 ## Bundled examples
 
-emuStudio comes with two beeper demo programs in the `examples/zx-spectrum/` directory:
+emuStudio includes four programs in `examples/zx-spectrum/`. Assemble them with `as-z80`; they start at `0x8000`.
+In the editor, **Save & Compile source file** loads the program and resets the CPU to its entry point. Open the ULA display,
+then click **Run**. Stop execution before compiling another example. Click **Stop** when you finish a program that keeps running.
+
+### `border_stripes.asm`
+
+A visual first example: fills the bitmap with alternating vertical stripes, sets bright yellow ink on blue paper,
+and selects a blue border. It writes directly to display memory and does not call ROM routines.
+
+### `ay_ode_to_joy.asm`
+
+Plays a three-voice arrangement of the opening of “Ode to Joy”. It requires the `audio-ay3_8910-chip` device and
+a working host audio output. Use the supplied `config/ZxSpectrum48K.toml` (**ZX Spectrum 48K + AY**). It uses ports `0xFFFD` and `0xBFFD`
+and does not call ROM routines.
 
 ### `twinkle_beeper.asm`
 

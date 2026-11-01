@@ -10,12 +10,11 @@ permalink: /brainduck/terminal
 
 # Terminal `vt100-terminal`
 
-VT100 terminal is probably one of the most popular terminal ever, created by DEC in 1978. It has many functions, activated
-by ASCII control sequences which became de facto a standard - ANSI X3.64 (ISO/IEC 6429). These control sequences are
-emulated today by majority of modern terminals (as we like to call "command line prompts"). 
+DEC introduced the VT100 terminal in 1978. Its cursor movement, screen controls and other functions use ASCII control
+sequences, many of which are also supported by modern terminals.
 
 ![VT100-terminal]({{ site.baseurl }}/assets/brainduck/DEC_VT100_terminal.jpg)
-(Autor: Jason Scott – Flickr: IMG_9976, CC BY 2.0, [available here][vt100-image]{:target="_blank"})
+(Author: Jason Scott – Flickr: IMG_9976, CC BY 2.0, [available here][vt100-image]{:target="_blank"})
 
 VT100-terminal plugin for emuStudio implements a substantial portion of the VT100/ANSI escape-sequence set, following the
 [DEC ANSI parser model][dec-parser]{:target="_blank"}. Supported features include:
@@ -47,8 +46,7 @@ In the following screenshot, VT100-terminal window is shown:
 
 ![VT100-terminal window]({{ site.baseurl }}/assets/brainduck/vt100-terminal.png)
 
-It's easy and simple. BrainDuck CPU as it interprets `.` (dot) instructions, it sends the output to this terminal, which
-displays it on the screen.
+Each `.` (dot) instruction sends a byte from the BrainDuck CPU to the terminal for display.
 
 Input cannot be entered anytime. In brainfuck, the input is requested through `,` instruction. Only when CPU
 encounters `,` (comma) instruction, the user is asked to enter input. This situation is marked with a red icon in the
@@ -64,7 +62,8 @@ write position.
 
 ## Display
 
-Default display size is **80 columns × 24 rows**, configurable via settings. The display manages a character buffer
+The plugin defaults to **80 columns × 24 rows**; the bundled BrainDuck configuration sets **130 × 50**. Both dimensions
+are configurable in settings. The display manages a character buffer
 (video memory) and a parallel attribute buffer of the same size. Each cell carries its own video attribute
 (foreground color, background color, and style flags).
 

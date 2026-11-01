@@ -58,16 +58,15 @@ Click **Save** to persist and apply all tabs; press **Esc** to discard edits.
 
 ### General settings
 
-The 88-sio plugin support various behaviors of the data transfer, which in reality was the behavior of connected devices
-and not 88-sio. The reason for supporting these features here is to allow some versatility, regardless of which
-device is connected. These general settings can be seen in the Settings window:
+The 88-sio plugin can transform transferred bytes to suit the connected device or guest software. These options
+extend the original board's behavior:
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings1.png)
 
 {: .list}
 | <span class="circle">1</span> | TTY/ANSI mode. On TTY mode, clears input bit 8 (performs `AND 0x7F` on the byte coming from device). On ANSI mode, clears output bit 8 (performs `AND 0x7F` on the byte coming from CPU).
 | <span class="circle">2</span> | Converts input data to upper-case (the byte coming from device).
-| <span class="circle">3</span> | Maps input/output data Backspace or Delete character to some other character. Possibilities are: Backspace, Delete, Unchanged.
+| <span class="circle">3</span> | Maps Backspace or Delete to `BACKSPACE`, `DELETE`, `UNDERSCORE`, or `UNCHANGED`.
 
 ### CPU Ports settings
 
@@ -77,7 +76,7 @@ and thus using wider variety of original software, the device control and data c
 ports.
 This makes effectively an impression as if there existed multiple 88-sio cards connected to the same device.
 
-By default, used CPU port allocation is:
+The bundled Altair configurations use these CPU ports:
 
 - Control channel (or "status port"): `0x10`, `0x14`, `0x16`, `0x18` (most commonly used: `0x10` for terminal)
 - Data channel (or "data port"): `0x11`, `0x15`, `0x17`, `0x19` (most commonly used: `0x11` for terminal)
@@ -104,11 +103,9 @@ But back to 88-sio. The port numbers allocation can be changed in the Settings w
 
 ### Interrupts settings
 
-88-sio supports input and output interrupts. If enabled, input interrupt is signalled to CPU when a data becomes
-available
-from the connected device. An output interrupt is signalled when data is sent to device. Interrupts support can be
-generally
-enabled or disabled, along with interrupt vector configuration in Settings window:
+88-sio supports input and output interrupts. When enabled, an input interrupt signals that data has arrived from the
+connected device; an output interrupt signals that data has been sent to it. The Settings window controls interrupt
+support and the input and output vectors:
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings3.png)
 
@@ -188,7 +185,7 @@ unlimited capacity, so no data should be lost and can be read anytime.
 
 ### Program example
 
-In this section it will be shown a small "How to" program terminal using 88-SIO ports.
+These examples send and receive terminal data through the 88-SIO ports.
 
 #### Print a character on screen
 
@@ -228,8 +225,7 @@ print:
 
 #### Reading character from keyboard
 
-For reading a character, it is required to read the Port 1 until the character is not ready. Then we can read it from
-Port 2.
+Poll Port 1 until bit 0 indicates that a character is ready, then read it from Port 2.
 
 {:.code-example}
 ```

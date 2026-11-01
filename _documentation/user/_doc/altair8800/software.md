@@ -33,7 +33,7 @@ loading images; reset before loading a bootloader or applying a memory patch.
 Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in this section:
 
 1. Open **MITS Altair8800 (Z80)**. In byte-memory settings (the wrench button), set **65536 bytes** and
-   **1 memory bank**. Keep SIMH pseudo connected to CPU and memory.
+   **1 memory bank**. Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
 2. In 88-SIO, pair status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
 3. Use VT100 for the applications below: in a copy of the computer configuration, replace `adm3A-terminal`
    with `vt100-terminal` and connect it to 88-SIO in both directions. Save and reopen the computer, then open
@@ -99,7 +99,7 @@ use Schorn CP/M 2.2 for applications. TurboDOS's `TURBODOS` command starts a sin
 
 For DOS+, P2DOS, ZSDOS, NZ-COM, TurboDOS and ZCPR3 packages that supply `i.dsk` or `j.dsk`:
 
-1. In a copy of the computer configuration, select `SIMH` for 88-HDSK (`controllerType = "SIMH").
+1. In a copy of the computer configuration, select `SIMH` for 88-HDSK (`controllerType = "SIMH"`).
 2. Connect 88-HDSK to CPU and byte-memory in both directions. It uses CPU port `0xFD` and accesses memory directly.
 3. Save and reopen the computer. Mount `i.dsk` in 88-HDSK drive 0 and, where supplied, `j.dsk` in drive 1.
    Use **32 sectors per track** and **128 bytes per sector**.
@@ -277,7 +277,7 @@ packages that include it. See the [SIMH pseudo-device page][simh-device]{:target
 Use this setup for CP/M 3, Z3PLUS and the RCL Z3PLUS collection:
 
 1. Open **MITS Altair8800 (Z80)**. Set byte-memory to **65536 bytes**, **8 banks** and
-   **common address `0xC000`**. Keep SIMH pseudo connected to CPU and memory so the BIOS can switch banks.
+   **common address `0xC000`**. Keep SIMH pseudo connected to CPU, memory and PTR/PTP so the BIOS can switch banks.
 2. Pair 88-SIO status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
    Open the connected terminal with half-duplex disabled; use VT100 for screen applications.
 3. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**.

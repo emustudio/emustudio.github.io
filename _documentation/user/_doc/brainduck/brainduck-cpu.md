@@ -10,19 +10,18 @@ permalink: /brainduck/cpu
 
 # CPU "brainduck-cpu"
 
-BrainDuck CPU is used as a part of BrainDuck computer, which acts as the interpreter of BrainDuck instructions. Those
-instructions correspond with brainfuck language.
+The BrainDuck CPU interprets the compiled instructions of the BrainDuck computer, which correspond to the brainfuck
+language.
 
 The program which is going to be executed is read from the operating memory, so the CPU must be connected with
 memory (`byte-mem`) to work properly.
 
-Also, optionally (but commonly) it should be connected with I/O device (`vt100-terminal`), so input/output can be
-received/send from/to the device. Only one device can be used.
+Connect one I/O device, normally `vt100-terminal`, to run programs that read input or write output.
 
-The CPU provides a basic user interface in the form of the status panel, which is visible in the emulator panel in the
-main window.
+The CPU status panel appears on the **Debugger** tab in the main window.
 
-Breakpoints are supported, so as "jump" to a specific location (which might be dangerous to use).
+The CPU supports breakpoints and jumping to a specific address. Jumping into the middle of a program can leave its
+data pointer and loop state inconsistent.
 
 ## Status panel
 
@@ -42,9 +41,9 @@ the middle of the program `[[-]]`, to the `-` instruction, the loop level is 2.
 
 ## Running brainfuck programs
 
-It is very important to reset the CPU after each source code compilation. The reason is that after compilation
-register `P` is not changed. It therefore might point somewhere into compiled code in the memory. If the program was
-executed, changes in data would corrupt the program itself.
+**Save & Compile source file** resets the CPU automatically after compilation. If you load a compiled memory image
+directly or invoke a compiler outside this workflow, reset the CPU before running it. Otherwise, register `P` can
+still point into the new program, and data writes can overwrite its instructions.
 
-Resetting CPU would move the `P` register after the first occurrence of a memory cell with value `0`. The value `0` in
-BrainDuck CPU represents halt instruction, which corresponds to EOF in brainfuck.
+Reset scans from the program's start address for the first memory cell containing `0`, then places `P` immediately
+after it. In BrainDuck machine code, `0` is the halt instruction that terminates a compiled program.

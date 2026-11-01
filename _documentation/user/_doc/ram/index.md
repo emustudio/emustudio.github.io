@@ -11,21 +11,21 @@ permalink: /ram/
 
 # Random Access Machine (RAM)
 
-Random Access Machine (RAM) is the abstract machine, invented to study algorithmic complexity of programs written on
-register-based computers. It is equivalent to the Turing machine and has a close relationship with a
-so-called [Harvard computer architecture][harvard]{:target="_blank"}, which has separated storage for program and data.
-The model implies that it is not possible to modify instructions.
+A Random Access Machine (RAM) is an abstract machine used to study the algorithmic complexity of programs on
+register-based computers. It is equivalent to a Turing machine. Like
+[Harvard computer architecture][harvard]{:target="_blank"}, it separates program storage from data storage. Instructions
+cannot modify the program.
 
 RAM machine consists of several parts: input tape (read-only), output tape (write-only), program memory,
 data memory or registers (read/write) and a control unit ("engine"), as can be seen in the following image:
 
 ![RAM machine]({{ site.baseurl }}/assets/ram/ram-machine.svg){: width="85%"}
 
-Input tape acts as a water-tap; the input data can be read from it, causing the input head to move to the next unread
-symbol. The head can never return to a previously read symbol.
+Reading an input symbol advances the input head to the next unread symbol. The head cannot return to a previously read
+symbol.
 
-Output tape, on the other hand, acts as a sink. The output data can be written to it, causing the output head to move to
-the next "empty" symbol. The head can also never return to the previously written symbol.
+Writing an output symbol advances the output head to the next empty position. The head cannot return to a previously
+written symbol.
 
 Data memory - registers tape - represents the random-access memory. It consists of so-called registers, abstract cells
 with arbitrary size. These registers are ordered - each one has assigned the index - its position within the tape called
@@ -51,18 +51,20 @@ The RAM virtual machine in emuStudio consists of the following plugins:
 - `abstract-tape`: Device which represents the "tape" used in RAM, other than program memory. The abstract schema
   must define three instances of this device, representing register, input, and output tapes.
 
+Unlike the theoretical model, numeric values in this implementation are limited to signed 32-bit integers. See the
+compiler's [numeric limits]({{ site.baseurl }}/ram/ramc-ram#numeric-limits) before using large values.
+
 ## RAM in emuStudio
 
-To use RAM, there must exist the abstract schema of the "computer", saved in the configuration file. Abstract schemas
-are drawn in the schema editor in emuStudio (please see emuStudio main module documentation for more details). The
-following image shows the schema of RAM machine simulator:
+Open the bundled `RandomAccessMachineRAM.toml` configuration to use RAM. Its abstract schema defines the plugins and
+their connections. You can inspect or change it in the [schema editor]({{ site.baseurl }}/application/computer-schema):
 
 ![RAM abstract schema]({{ site.baseurl }}/assets/ram/ram-schema.png){:style="max-width:561px; width:100%"}
 
 The "->" arrows are in direction of dependency. So for example `ramc-ram` depends on `ram-mem`, because compiled
 programs are directly loaded into memory.
 
-The roles of the abstract tapes are assigned by the RAM "CPU" on runtime.
+The RAM CPU assigns each tape its role at startup.
 
 
 [harvard]: https://en.wikipedia.org/wiki/Harvard_architecture

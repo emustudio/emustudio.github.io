@@ -19,7 +19,7 @@ The following image shows the [SSEM CRT display][wikis]{:target="_blank"}:
 
 ![SSEM CRT]({{ site.baseurl }}/assets/ssem/ssem.jpg)
 
-It is very simple computer, which can run only 7 instructions.
+The computer has seven instructions.
 
 ## SSEM for emuStudio
 

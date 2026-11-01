@@ -28,9 +28,9 @@ The input/output file names are configurable, please refer to [VT100 terminal do
 
 ## Be careful of EOLs
 
-Take care of end-of-line characters. Most of brainfuck programs count with Unix-like EOLs, i.e. characters with ASCII
-code 10. plugin `vt100-terminal` interprets ENTER key in the interactive mode as Unix-like EOL. In the
-non-interactive mode, EOL may be of any-like type.
+Check which end-of-line character the program expects. Many brainfuck programs expect LF (ASCII 10).
+The `vt100-terminal` plugin sends LF for ENTER in interactive mode. In headless mode, it reads the input file's bytes
+without converting line endings; a CRLF file supplies both CR (13) and LF (10).
 
 ## Example
 

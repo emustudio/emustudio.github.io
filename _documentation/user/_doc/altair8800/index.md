@@ -11,24 +11,20 @@ permalink: /altair8800/
 
 # MITS Altair8800
 
-The MITS Altair 8800 was introduced in 1975. Having Intel 8080
-CPU inside, with 256 bytes of memory, no display and keyboard is this computer, when comparing to the present era,
-absolutely ridiculous. His author, Ed Roberts, called the invention "personal computer", which is now very common term.
-As Wikipedia states:
+The MITS Altair 8800 was introduced in 1975 with an Intel 8080 CPU, 256 bytes of memory, and no display or keyboard.
+Designed by Ed Roberts, it helped make the personal computer accessible to enthusiasts. As Wikipedia states:
 
 > The Altair is widely recognized as the spark that ignited the microcomputer revolution.
 >> Wikipedia, Altair 8800
 
 ![MITS Altair8800 with LSI ADM-3A terminal and floppy drive]({{ site.baseurl }}/assets/altair8800/altair8800.png)
 
-Altair 8800 was one of the early commercially successful personal computers. Ed Roberts (founder and CEO of MITS
-corporation) was selling these machines by classic mail directly from the factory.
+The Altair became one of the early commercially successful personal computers. MITS sold the machines by mail,
+directly from the factory. Enthusiasts developed hardware and software for a computer they could own and use at home,
+rather than sharing a mainframe through batch jobs.
 
-Various enthusiasts understood the power of Altair and started to develop software and hardware for the computer. Those
-people saw freedom in Altair - some kind of release from batch tasks ran on mainframe systems, maintained by elite.
-The phenomenon of a computer which could be put on the kitchen table allowed to make enormous money by two smart
-university students. In 1975, Paul Allen and Bill Gates wrote a trimmed version of BASIC programming language, called
-Altair BASIC, which pushed them directly to foundation of Microsoft corporation.
+In 1975, Paul Allen and Bill Gates wrote Altair BASIC, a version of the BASIC programming language for the machine.
+That work led to the founding of Microsoft.
 
 Basic configuration of MITS Altair 8800 was:
 

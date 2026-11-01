@@ -18,10 +18,9 @@ screenshots:
     image: '/files/images/edit-computer.png',
     html: '
       <p class="lead">
-      Computers used in emuStudio must be "built" before they can be used. It means a user must select computer components
-      and connect them together in a <a href="/documentation/user/application/computer-schema">schema</a>.
-      Computer components are plugins placed in appropriate location in emuStudio
-      installation. A computer then consists of the schema and configuration, specific for this computer.
+      Bundled computers already have configurations and can be opened directly. To create or customize a computer, select
+      plugins and connect them in a <a href="/documentation/user/application/computer-schema">schema</a>.
+      The configuration stores the schema, plugin paths, and settings for that computer.
       </p>'
   }
   - {
@@ -41,15 +40,14 @@ screenshots:
   - {
     title: 'Debugger',
     id: 'Debugger',
-    alt: 'Emulator panel',
-    thumbnail: '/files/images/emulator.png',
-    image: '/files/images/emulator.png',
+    alt: 'Debugger with Instructions, CPU status, watches, and peripheral devices',
+    thumbnail: '/documentation/user/assets/application/debugger-workspace.png',
+    image: '/documentation/user/assets/application/debugger-workspace.png',
     html: '
       <p class="lead">
-      When the program is compiled, it can be emulated. Debugger, in the emulator panel, is to help with
-      controlling the emulation life-cycle. It shows the internals of emulated components. CPU emulation can be
-      run, paused, or stopped. Users can execute just a single step or run the emulation in timed-steps.
-      All provided computers support breakpoints capability.
+      After compilation, use the Debugger tab to run, pause, stop, or step through the program.
+      Instructions and inspection tools share the left workspace; CPU status, watches, and peripheral devices appear
+      on the right. The toolbar supports single steps, timed execution, and breakpoints.
       </p>'
   }
   - {

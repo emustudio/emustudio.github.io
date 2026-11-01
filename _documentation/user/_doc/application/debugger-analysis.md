@@ -8,118 +8,156 @@ permalink: /application/debugger-analysis
 
 # Debugger inspection
 
-Open the **Debugger** tab after compiling or loading your program. Run, pause and step with the existing debugger
-toolbar. The instruction-aligned listing stays on the left. Drag the divider beneath it to resize the inspection pane,
-which contains **Memory**, **Annotations**, **Breakpoints**, **References** and **History**. CPU status and registers,
-expression watches, and peripheral-device selection occupy the right column, in that order. These tools share the
-same workspace; no separate analysis window is needed.
+![8080 program paused at 0100, with instruction labels, CPU registers and memory watches]({{ site.baseurl }}/assets/application/debugger-demo-instructions.png)
 
-Pause before inspecting or editing live state. Browsing addresses changes the inspection selection, not the PC.
-The toolbar's **Breakpoints** button selects the embedded **Breakpoints** tab. **Pin address** keeps the inspection
-at its selected address when execution pauses; otherwise it follows the PC. Back and Forward navigate recent selections.
-Selecting a row in the instruction listing follows into inspection unless its address is pinned. Drag the dividers
-to give more room to instructions, inspection or the right column.
+Open **Debugger** after compiling or loading a program. Pause to inspect or edit state. Selecting an instruction changes
+the inspected address; the PC stays put. Drag dividers to resize the workspace.
+8080/Z80 support registers, watchpoints and recording; other CPUs depend on their plugins.
+
+<details markdown="1">
+<summary>8080 example used in these screenshots</summary>
+
+Compile this program with **MITS Altair8800**. It writes `41 42` at `8000` and calls a subroutine.
+Screenshot addresses and bytes are hexadecimal.
+
+```text
+org 100h
+lxi sp,9000h
+mvi a,41h
+sta 8000h
+call increment
+hlt
+increment: inr a
+sta 8001h
+ret
+org 8000h
+db 0,0
+org 8100h
+db 'HELLO DEBUGGER',0
+```
+
+</details>
+
+## Inspect an address
+
+![Set breakpoint dialog targeting 0x8000 in bank 0, with Inspect only, Unset and Set buttons]({{ site.baseurl }}/assets/application/debugger-demo-inspect.png)
+
+Choose **Set breakpoint / inspect address...**, enter `0x8000`, then **Inspect only** to open live memory.
+**Bank** selects inspection memory without switching the CPU's bank; common memory uses physical bank zero.
+**Set** adds an execution breakpoint; hitting it opens **Memory**. With **Set**, enable **Keep inspection while stepping**
+to retain the inspected address during later steps. Instruction-table breakpoint controls cycle through off, enabled
+and keep-inspection states.
 
 ## Memory and annotations
 
-Choose the logical memory bank to inspect. Inspection does not change the CPU's bank selection. The common region
-always uses physical bank zero. **Memory** shows bytes, labels, comments and captured strings; use the instruction
-listing above it for disassembly. Instruction decoding and flow analysis use the CPU's active bank. **Show source**
-opens the current compiled source mapping where available.
+### Find bytes, integers or text
 
-Memory controls distinguish live bytes, captured search results and the comparison baseline. Open **Compare / strings**
-to reveal **Capture baseline**, **Compare baseline**, **Compare binary** and **Find strings**. Capture a baseline before
-running an experiment, then pause and compare to locate changed bytes. Comparing a binary requires a full-size raw
-image for the selected bank. Previous/Next result controls and the result count accompany the result set. Replacing
-the comparison baseline preserves user annotations: their identity stays tied to the original annotation image.
+![Byte search for 41 42 finds one match at 8000, labeled output]({{ site.baseurl }}/assets/application/debugger-demo-search.png)
 
-Use the search type to find **Bytes**, an **Integer**, or **Text**. Byte patterns accept hexadecimal pairs and wildcards
-(`3E ?? 32`, `A? ?F`). Integer searches use a byte width of 1, 2, 4 or 8 and the selected byte order. Text search uses UTF-8.
-Rescan filters the previous result set by Changed, Equal, Increased or Decreased, comparing unsigned integers against
-the previous scan. It retains the original search bank, width and byte order. String inspection finds printable ASCII
-runs of at least four bytes and shows their captured text.
+After running the example, choose **Bytes**, enter `41 42`, then **Find**. Wildcards work too: `3E ?? 32` or `A? ?F`.
+**Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
 
-Select an existing annotation to edit it, or choose **Annotate inspected address** to start editing the current inspection
-address. **Editing bank N:ADDR** identifies the edit target. **Save annotation** writes the label, comment, bookmark and
-code/data classification to that target, even if stepping or browsing has since moved the inspected address. Search the
-annotation list or show Bookmarks, then **Go to annotation**. User annotations are saved separately from compiler-generated source mappings.
-They persist beside the computer configuration in a file bound to the capture's SHA-256, bank layout and physical addresses.
-Save/Import also support explicit metadata files. Import rejects another image or an invalid layout without partial updates.
+**Rescan** filters previous matches by Changed, Equal, Increased or Decreased, retaining the original bank, width and byte
+order. Results show captured bytes; **Live memory** returns to current bytes.
 
-After compiling or loading a different program, choose **Use current program** in the inspection footer. This saves the
-previous image's annotations, captures current memory, and loads annotations matching that image. Annotations and
-metadata export then refer to the new capture. Use **Capture baseline** separately when starting a byte-comparison
-experiment; refreshing that comparison baseline does not replace or clear annotations.
+### Compare before and after execution
+
+![Baseline comparison shows 41 at 8000, 42 at 8001, and return-address bytes at 8FFE and 8FFF]({{ site.baseurl }}/assets/application/debugger-demo-compare.png)
+
+Open **Compare / strings** and **Capture baseline** before running. Pause, then **Compare baseline**.
+Here, `STA` changed `8000–8001`; `CALL` left its return address at `8FFE–8FFF` after `RET` restored SP.
+**Compare binary** accepts a full-size raw image of the inspected bank. Baseline capture preserves annotations.
+
+### Find readable strings
+
+![String scan finds HELLO DEBUGGER at 8100 and shows its message label]({{ site.baseurl }}/assets/application/debugger-demo-strings.png)
+
+Choose **Find strings** under **Compare / strings**. It finds printable ASCII runs of at least four bytes,
+including `HELLO DEBUGGER` at `8100`. Displayed text comes from the scan's capture.
+
+### Label and bookmark addresses
+
+![Annotation editor labels bank 0 address 8000 as output, marks it DATA and bookmarks it]({{ site.baseurl }}/assets/application/debugger-demo-annotations.png)
+
+Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **DATA**, enable
+**Bookmark**, then **Save annotation**. Check **Editing bank N:ADDR**; browsing leaves this edit target unchanged.
+Use **Filter**, **Bookmarks only** and **Go to annotation** to revisit entries.
+
+Annotations persist beside the computer configuration, bound to a captured image and bank layout. After loading another
+program, **Take snapshot** saves the old annotations and loads those matching the new capture. **Save**/**Import** transfer
+metadata for the same image. Compiler source mappings remain separate.
 
 ## Watches and breakpoints
 
-8080/Z80 support portable registers and guest access hooks. Other CPUs keep their existing debugger; register editing,
-portable watchpoints or recording may be unavailable. Watches can still inspect supported byte memory.
+### Watch registers and memory
 
-Expressions support register names, `reg(NAME)`, `mem[address]`, little-endian `mem16[address]`/`mem32[address]`, big-endian
-`mem16be[address]`/`mem32be[address]`, arithmetic, shifts, bitwise operations, comparisons, and short-circuit `&&`/`||`.
-Examples: `HL`, `mem16[SP]`, `A == 0x42`, `(mem[0x8000] & 1) != 0`. Choose **Hex + decimal**, **Binary** or **ASCII** to
-format watch values; changed values have a marker. **Follow value as address** selects the evaluated address. Open
-**Edit register** to reveal the register/value fields, then choose **Write register** to change a supported register
-while paused. Invalid values remain in the form for correction, and register width is validated.
+![Watches show A as 0x42, SP as 0x9000, bytes 0x41 and 0x42, and their little-endian word 0x4241]({{ site.baseurl }}/assets/application/debugger-demo-watches.png)
 
-Add a named EXEC, READ, WRITE or SOURCE rule. Specify an address (a one-based source line for SOURCE), bank (`-1` for all),
-optional condition, and qualifying hit count. SOURCE requires a file path and resolves current compiler source mappings;
-lines without a current mapping are ineffective. Conditions are evaluated before EXEC/SOURCE instructions or after a guest
-instruction for access watchpoints. Read watchpoints include instruction fetches; write events describe attempted guest writes.
-Debugger inspection produces no guest access events. Resume skips an EXEC/SOURCE rule once at its stopped address.
+Enter an **Expression** and choose **Add**. Watches use the inspection bank. Choose **Hex + decimal**, **Binary** or **ASCII**;
+changed values receive a marker. **Follow value** opens the evaluated address. **Edit register** reveals **Write register**.
 
-Enable/disable named rules and reset their hit counts in the manager. **Add ordinary breakpoint** adds an unconditional
-execution breakpoint to the CPU. These share the main debugger's address breakpoint checkboxes and remain available
-on CPUs without advanced hooks. Named rules add separate conditions, watchpoints, and source locations; they do not set
-the ordinary address checkboxes. Select a named rule or ordinary breakpoint and choose **Remove** to delete it.
-**Save settings** persists named rules, expressions and ordinary execution breakpoints
-beside the computer configuration in its `.debugger` companion file. Adding/removing watches or changing rules saves these
-settings; closing the computer also saves ordinary breakpoints. Hit counts restart at zero when reloading.
-Recording is disabled at startup, and its history is not persisted.
+| Expression | Meaning |
+|---|---|
+| `A` or `reg(A)` | Accumulator. |
+| `mem[0x8000]` | Byte: `0x41` after execution. |
+| `mem16[0x8000]` | Little-endian word: `0x4241`. |
+| `mem16be[0x8000]` | Big-endian word: `0x4142`; `mem32`/`mem32be` read four bytes. |
+| `(mem[0x8000] & 1) != 0` | Test bit 0. Arithmetic, shifts, comparisons and short-circuit `&&`/`||` are supported. |
 
-Watches use the inspection bank. Rule conditions use the CPU's selected logical bank, including when the
-instruction itself is in common ROM.
-The bank on an execution rule identifies the instruction's physical bank; shared-region instructions belong to bank zero.
-An access rule uses the accessed address's physical bank. A rule counts a qualifying instruction once, even if that instruction
-accesses the watched address more than once; it stops from the selected qualifying hit onwards.
+### Stop on a conditional memory write
+
+![Named WRITE rule at 0x8001 in all banks, conditioned on A == 0x42, with inspection kept while stepping]({{ site.baseurl }}/assets/application/debugger-demo-breakpoints.png)
+
+Before rerunning, open **Breakpoints**, enter a name, choose **WRITE**, and set the address to `0x8001`. Enter condition
+`A == 0x42`, leave **Bank** at `-1` and **Stop from hit** at `1`, enable **Keep inspection while stepping**, then click
+**Add breakpoint**. It stops after the writing instruction. Bank `-1` matches all banks; conditions use the CPU's selected logical bank.
+Each qualifying instruction counts once, even with repeated accesses.
+
+**EXEC** stops before execution; **SOURCE** requires a file path and a one-based line with a current compiler mapping.
+**READ** includes instruction fetches; **WRITE** includes attempted guest writes. Debugger reads trigger no access rules.
+Named rules stay separate from instruction-table breakpoints; **Add ordinary breakpoint** creates an unconditional one.
+Resuming skips the stopped EXEC/SOURCE rule once.
+
+Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Watches and breakpoints persist in the computer's
+`.debugger` file; **Save settings** saves them explicitly. Hit counts restart at zero when reloading.
 
 ## References, flow and history
 
-Analyze from a selected address to show at most 256 reachable decoded instructions. Select an instruction in the reference
-list or graph to navigate to its address; the list provides keyboard navigation.
-Branch and call edges have different colors. Incoming-reference search scans sequential candidate instructions; code/data
-classification can be incomplete. Indirect jump targets remain unresolved. These are static views, not execution coverage.
+### Follow a call
 
-Enable **Record last 1024 instructions** while paused, then run or step. The history shows executed addresses, before/after
-register values and guest memory accesses. Recording can reduce throughput. Historical state is read-only and leaves the live
-machine unchanged. **Move PC Back** only changes the PC; it does not undo instructions or restore registers, memory or devices.
+![Static reference list shows the call from 0108 to 010C beside the decoded instruction graph]({{ site.baseurl }}/assets/application/debugger-demo-references.png)
+
+Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
+Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** searches callers.
+Analysis uses the CPU's active bank and at most 256 reachable instructions; indirect targets may remain unresolved.
+Static references do not prove execution coverage.
+
+### Inspect a recorded write
+
+![Recorded instruction 010D to 0110 shows A at 42 and WRITE bank 0:8001 = 42]({{ site.baseurl }}/assets/application/debugger-demo-history.png)
+
+Enable **Record last 1024 instructions** while paused, then run or step. Select `010D → 0110` to see
+`WRITE bank 0:8001 = 42`, register values and instruction fetches. Recording can reduce throughput and starts disabled;
+history is not saved. Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC.
 
 ## Repeatable debugger operations
 
-Use `auto --debug-script FILE` to run operations after optional compilation and CPU reset:
+Run the same check with `auto --debug-script FILE` after compiling the example:
 
 ```text
-# Addresses and counts accept decimal or 0x prefixes.
-RUN 0x0100 10000
-ASSERT PC == 0x0100
-STEP 2
-ASSERT mem[0x8000] == 0x42
+RUN 0x010B 20
+ASSERT A == 0x42
+ASSERT mem16[0x8000] == 0x4241
 CAPTURE result.bin
 ```
 
-RUN requires an instruction limit; STEP allows at most one million instructions. CAPTURE writes the selected logical bank,
-with paths relative to the script directory. A failed assertion, operation, unexpected CPU stop or step timeout returns a
-nonzero automation exit status. This runner executes steps rather than starting an unbounded real-time run.
+`RUN` stops before `HLT` at `010B`, within 20 instructions. `CAPTURE` writes the selected logical bank beside the script.
+Failed assertions return a nonzero exit status. See [Debug scripts]({{ site.baseurl }}/application/automation#debug-scripts)
+for the command line and operation limits.
 
 ## Export memory and metadata
 
-In **Annotations**, choose **Export memory and metadata**. This writes the selected annotation-image bank to
-`memory-bank-N.bin` and user metadata to `memory-bank-N.properties`. The binary contains captured bytes; later live
-memory changes and comparison-baseline captures do not change it. The properties file records the processor identifier,
-bank, base address, memory size, common-memory boundary, image identity, labels, comments, bookmarks and code/data kinds.
-Common addresses retain physical bank zero.
-
-The export uses ordinary binary and UTF-8 Java properties files. Annotation **Import** accepts metadata for the same
-image and layout, preserving the binding between user labels and the captured program. Compiler source maps, runtime
-traces, live device state, patched binaries and bank-switch behavior are outside this format.
+In **Annotations**, choose **Export memory and metadata** to write `memory-bank-N.bin` and `memory-bank-N.properties`.
+The binary contains the annotation image's captured bytes, even after live memory changes. The UTF-8 properties file
+records image identity, processor, bank layout, labels, comments, bookmarks and code/data kinds. **Import** requires
+matching image/layout metadata. Source maps, execution history and device state are not included.

@@ -13,7 +13,7 @@ permalink: /ssem/ssem-cpu
 SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit,
 arithmetic-logic unit (ALU), and memory (which actually is a CRT display too).
 
-The speed of CPU is around 700 instructions per second.
+The emulator targets about 700 instructions per second (1.44 ms per instruction). Actual speed depends on the host.
 
 The `ssem-cpu` plugin implements the control unit (instruction decoding and executing) and ALU.
 
@@ -23,12 +23,14 @@ Status panel is shown below:
 
 ![SSEM CPU Status panel GUI]({{ site.baseurl }}/assets/ssem/ssem-status-panel.png)
 
-Registers section shows hexadecimal, decimal and binary representation of the:
+The registers section shows hexadecimal, decimal, and binary representations of:
+
 - accumulator (`A`)
 - "control-instruction" (`CI`), the byte address of the current control line. The CPU increments it by four before
   fetching the next instruction; line `n` has byte address `4 * n`.
 
-Memory-snippet shows "actual" memory-cell values (hexadecimal, decimal and binary):
+The memory snippet shows the current cell values in hexadecimal, decimal, and binary:
+
 - `M[CI]`: memory cell value at `CI` (the current row with the instruction)
 - line part (correctly reversed) of the current instruction row
 - `M[line]`: memory cell value at `line` address

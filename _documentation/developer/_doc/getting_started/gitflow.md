@@ -10,17 +10,20 @@ permalink: /getting_started/gitflow
 
 # Git workflow
 
-Since emuStudio is available at GitHub, it is using `git` as the version control system (VCS).
+emuStudio uses Git and GitHub for version control and review.
 
-The basic workflow is a much-simplified version of the official [Git Flow model][gitflow]{:target="_blank"}.
-The simplifications are as follows:
+The application repository follows a simplified [Git Flow model][gitflow]{:target="_blank"}:
 
 - Development targets the current version on `develop`.
 - Releases use the stable `develop` branch directly, without separate release branches.
 
+These branch names and release steps describe the emuStudio application repository. Sibling repositories have their
+own branches and publishing workflows; in particular, Edigen and its Gradle plugin have `development` rather than
+`develop`. Follow the owning repository's instructions and the [contribution guidance]({{ site.baseurl }}/getting_started/contributing).
+
 ## Releases
 
-The release is performed in several steps.
+Release the application as follows:
 
 0. Pre-check everything. Build, documentation, etc.
 1. Merge `develop` branch into `master` branch

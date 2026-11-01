@@ -15,18 +15,16 @@ permalink: /introduction/
 New to emuStudio? [Run your first program]({{ site.baseurl }}/first-experiment/) for a guided path from installation
 to running and inspecting a bundled example.
 
-emuStudio is a toy-computer emulation platform and framework, targeting mainly academic sphere. A platform, because it
-supports full emulation "life-cycle". From writing and compiling programs for emulated machine, to running and
-debugging. A framework, because it provides API and documentation which encourages implementing your custom
-toy-computer, either real or abstract.
+emuStudio is a toy-computer emulation platform and framework for teaching, programming, and experimentation.
+It supports the full workflow: write a program, compile it, load it into an emulated computer, then run and debug it.
+Its plugin API lets developers implement real or abstract computers.
 
-There are already many emulators out there doing great job in preserving history (e.g. [MAME][mame]{:target="_blank"},
-or [simh][simh]{:target="_blank"}). While emuStudio is also trying to be accurate in technical details and historical 
-behavior of emulated computers, but the main focus is allowing comfortable programming and experimenting with emulated
-devices - in the style of "write program - load it into computer - emulate".
+Emulators such as [MAME][mame]{:target="_blank"} and [simh][simh]{:target="_blank"} preserve computing history.
+emuStudio also aims to reproduce technical details and historical behavior, with a focus on programming and
+experimenting with emulated devices. It provides a source editor, debugger, and virtual computer designer.
 
-That is why you can expect quite detailed documentation of rather usage and programming of the devices than used 
-emulation techniques. That brings along nice GUI, source code editor and virtual computer designer.
+The user guide explains how to use and program each computer. The
+[developer guide](/documentation/developer/) explains plugin APIs and implementation contracts.
 
 ## References
 

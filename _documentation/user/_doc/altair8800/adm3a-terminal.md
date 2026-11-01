@@ -16,7 +16,7 @@ It provided a keyboard and text display connected to a host computer over a seri
 
 The ADM-3A also has a lasting connection with Unix: Bill Joy used it at the University of California, Berkeley,
 when he developed the vi text editor around 1976. In his
-[1984 interview](https://begriffs.com/pdf/unix-review-bill-joy.pdf){:target="_blank"}, Joy recalled that obtaining
+[1984 interview](https://archive.org/details/interview-with-bill-joy){:target="_blank"}, Joy recalled that obtaining
 ADM-3A terminals prompted work on screen editing.
 
 Its keyboard explains one of vi's most recognizable features. With no separate arrow keys, the ADM-3A had arrows
@@ -185,7 +185,7 @@ The "settings" window is shown in the following image:
 | <span class="circle">1</span> | File name used for reading input (when redirected - in "no GUI" mode)
 | <span class="circle">2</span> | File name used for writing output (when redirected - in "no GUI" mode)
 | <span class="circle">3</span> | In automatic mode, how long the terminal should wait until it reads next input character from the file (in milliseconds)
-| <span class="circle">4</span> | Set terminal font. Original font has reduced character range to 256 characters; modern one supports full unicode.
+| <span class="circle">4</span> | Choose the original or modern font. Both display the same byte-oriented character set: ASCII and the CP437 extension described above. Changing the font does not enable Unicode input.
 | <span class="circle">5</span> | Whether every keystroke will also cause to display it. Programs don't always "echo" the characters back to the screen.
 | <span class="circle">6</span> | Whether terminal GUI should be always-on-top of other windows
 | <span class="circle">7</span> | Save settings and dispose the dialog

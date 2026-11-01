@@ -43,7 +43,7 @@ the full distribution and are using its configuration folder; see [Opening a com
 Choose **File → Open** and open `examples/brainc-brainduck/hello1.b` inside the unpacked emuStudio folder.
 The file contains comments followed by lines of `+`, `-`, and `.` instructions. Leave it unchanged.
 
-Click **Save & Compile** on the editor toolbar. Look for **Compile was successful.** in the output below the editor.
+Click **Save & Compile source file** on the editor toolbar. Look for **Compile was successful.** in the output below the editor.
 The compiled program is loaded into the computer's memory and the CPU is reset to its starting position;
 there is no separate load step.
 
@@ -66,7 +66,7 @@ compiled `hello1.b` successfully, opened its terminal window, and clicked **Run*
 
 ## 5. Inspect one instruction
 
-Return to the editor and click **Save & Compile** again to start with fresh program and data memory.
+Return to the editor and click **Save & Compile source file** again to start with fresh program and data memory.
 Return to **Debugger**, but do not click **Run** yet.
 
 In the CPU status panel, find `IP` (the next instruction's address) and `*P` (the value of the current data byte).

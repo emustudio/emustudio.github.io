@@ -64,8 +64,6 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#getClassType()" tabindex="0">getClassType()</a></li>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
-<li><a href="#isEditable()" tabindex="0">isEditable()</a></li>
-<li><a href="#setValue(int,java.lang.Object)" tabindex="0">setValue(int, Object)</a></li>
 <li><a href="#getValue(int)" tabindex="0">getValue(int)</a></li>
 </ol>
 </li>
@@ -137,17 +135,6 @@ The opcode means operating code - the formatted binary representation of the ins
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get opcode for instruction at specific location.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEditable()" class="member-name-link">isEditable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determines whether this column is editable by user.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setValue(int,java.lang.Object)" class="member-name-link">setValue</a><wbr>(int&nbsp;location,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Has no effect.</div>
-</div>
 </div>
 </div>
 </div>
@@ -156,7 +143,7 @@ The opcode means operating code - the formatted binary representation of the ins
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.runtime.ui.debugger.DebuggerColumn">Methods inherited from interface&nbsp;<a href="DebuggerColumn.html#method-summary" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></h3>
-<code><a href="DebuggerColumn.html#getDefaultWidth()" title="getDefaultWidth()">getDefaultWidth</a></code></div>
+<code><a href="DebuggerColumn.html#getDefaultWidth()" title="getDefaultWidth()">getDefaultWidth</a>, <a href="DebuggerColumn.html#isEditable()" title="isEditable()">isEditable</a>, <a href="DebuggerColumn.html#setValue(int,java.lang.Object)" title="setValue(int, Object)">setValue</a></code></div>
 </section>
 </li>
 </ul>
@@ -217,42 +204,6 @@ The opcode means operating code - the formatted binary representation of the ins
 <dd><code><a href="DebuggerColumn.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>title of this column</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="isEditable()">
-<h3>isEditable</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEditable</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="DebuggerColumn.html#isEditable()">DebuggerColumn</a></code></span></div>
-<div class="block">Determines whether this column is editable by user.
-<p>
-For example, a "mnemo" column shouldn't be editable, but "breakpoint" column can (and should).
-Note that the returned value holds to all cells in the column.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="DebuggerColumn.html#isEditable()">isEditable</a></code>&nbsp;in interface&nbsp;<code><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></dd>
-<dt>Returns:</dt>
-<dd>true if the column is editable, false otherwise</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setValue(int,java.lang.Object)">
-<h3>setValue</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setValue</span><wbr><span class="parameters">(int&nbsp;location,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
-<div class="block">Has no effect.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="DebuggerColumn.html#setValue(int,java.lang.Object)">setValue</a></code>&nbsp;in interface&nbsp;<code><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></dd>
-<dt>Parameters:</dt>
-<dd><code>location</code> - memory address (not row in debug table)</dd>
-<dd><code>value</code> - new value of the cell</dd>
 </dl>
 </div>
 </section>

@@ -10,25 +10,27 @@ permalink: /rasp/automation
 
 # Automation
 
-RASP computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--no-gui`),
-each abstract tape is redirected to a file. The format of the files is described in
+In headless automatic emulation (`auto --no-gui`), each abstract tape logs symbol writes to a file. The format is described in
 [abstract tape documentation]({{site.baseurl}}/ram/abstract-tape).
 
 ## Example
 
-Command line for starting non-interactive automatic emulation:
+The bundled factorial source expects an input value, but does not define an input tape. Copy
+`examples/raspc-rasp/factorial.rasp` to `factorial-input.rasp` in the installation directory, then add this line before
+`org 5`:
 
-    ./emuStudio -cf config/RandomAccessStoredProgramRASP.toml --input-file examples/raspc-rasp/factorial.rasp auto --no-gui
+```
+<input> 5
+```
+
+Run the prepared file from the installation directory:
+
+    ./emuStudio -cf config/RandomAccessStoredProgramRASP.toml --input-file factorial-input.rasp auto --no-gui
 
 - configuration `config/RandomAccessStoredProgramRASP.toml` will be loaded
-- input file for compiler is one of the standard examples
+- the input file is the factorial example with its input tape defined
 - (`auto`) automatic emulation will be executed
 - (`--no-gui`) non-interactive mode will be set
-
-{: .info}
-> If startup reports `Plugin class count does not match plugin configuration count`, the application's plugin loader
-> failed to create multiple tape instances. Compilation and emulation have not started. The
-> [standalone compiler]({{ site.baseurl }}/rasp/raspc-rasp#running-from-the-command-line) can still compile your program.
 
 The console reports progress similar to the following (plugin details and paths depend on the installation):
 
@@ -36,7 +38,7 @@ The console reports progress similar to the following (plugin details and paths 
 ```
 [INFO] Starting emulation automation...
 [INFO] Emulating computer: Random-Access Stored Program (RASP)
-[INFO] Compiling input file: examples/raspc-rasp/factorial.rasp
+[INFO] Compiling input file: factorial-input.rasp
 [INFO] Compiler started working.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
@@ -47,14 +49,20 @@ The console reports progress similar to the following (plugin details and paths 
 [INFO] Emulation completed
 ```
 
-Then, in the current working directory, there will be created two new files:
+The run creates two files in the current working directory:
 
-- `input_tape.out`: contains all input tape symbols
-- `output_tape.out`: contains all output tape symbols
+- `input_tape.out`: records input symbols loaded during reset
+- `output_tape.out`: records output symbols written by the program
 
-Content of each file is a human-readable text file, but also parseable by computer. Every row has format:
+With input `5`, `output_tape.out` contains `5! = 120` at position 0:
+
+```
+0 120
+```
+
+Each file is a text log. Every row has the format:
 
     position symbol
 
-where `position` is zero-based index of a symbol on particular tape, and `symbol` is the symbol on that position.
-Abstract tapes of RASP machine are left-bounded, therefore all positions start at 0.
+`position` is the zero-based symbol position on the tape, and `symbol` is the value written there. A position can occur
+more than once in a log. RASP tapes are left-bounded, so positions start at 0.

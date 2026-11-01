@@ -23,18 +23,16 @@ Project _emuStudio_ started in 2006 as a school project, then a master thesis, c
 Supervisor of the school project was [Slavomír Šimoňák][slavos]{:target="_blank"}, who could be understood as the
 first "product owner". I remember the times with nostalgia. Lots of good ideas came from discussions between us.
 
-The gaps which emuStudio want to fill up are as follows.
+emuStudio supports teaching and experimentation.
 
 ### Support academic process
 
-emuStudio can be used as a tool used in classes at schools. Teachers can use it for presenting vintage computers, or
-demonstrating working code running on emulated computers.
+Teachers can use emuStudio to present vintage computers and demonstrate programs running on them.
 
 Students can get programming assignments for vintage computers. The output of the assignments can be generated
 automatically using emulation automation.
 
-emuStudio is also a great as a base platform for school projects for writing custom vintage computer emulators, or
-extending existing ones.
+Students can also implement a computer emulator or extend an existing one as a school project.
 
 ### Support enthusiasts
 
@@ -50,7 +48,7 @@ some unknown contributor appears.
 
 How can you contribute? It's simpler than you think:
 
-- Provide a feedback to [the author](mailto:pjakubco@gmail.com) or
+- Provide feedback to [the author](mailto:pjakubco@gmail.com) or
   the [developer group](mailto:emustudio@googlegroups.com)
 - Fill
   an [issue/bug on GitHub](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=bug_report.md&title=){:target="_blank"}
@@ -58,12 +56,12 @@ How can you contribute? It's simpler than you think:
   a [feature](https://github.com/emustudio/emuStudio/issues/new?assignees=&labels=&template=feature_request.md&title=){:target="_blank"}
 - Fix a bug
 - Implement a feature
-- Implement emulator of a new computer
+- Implement an emulator of a new computer
 - Support the project [financially](https://github.com/sponsors/vbmacher){:target="_blank"} (it's a free time project)
 
 ## Getting help
 
-If you are seeking for a help with emuStudio, you have two options. The preferred way is to raise
+For help with emuStudio, raise
 an [issue at GitHub](https://github.com/emustudio/emuStudio/issues/new/choose){:target="_blank"}.
 The second option is to write an email to the [developer group](mailto:emustudio@googlegroups.com).
 

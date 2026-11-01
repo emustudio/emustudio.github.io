@@ -416,6 +416,10 @@ It is assumed the BCD has little endian.</div>
 <dd>
 <div class="block">Thrown if a value cannot be set to the cell in the debugger table.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/ui/debugger/CannotSetDebuggerValueException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">CannotSetDebuggerValueException(String)</a> - Constructor for exception class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/ui/debugger/CannotSetDebuggerValueException.html#%3Cinit%3E(java.lang.String,java.lang.Throwable)" class="member-name-link">CannotSetDebuggerValueException(String, Throwable)</a> - Constructor for exception class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/settings/CannotUpdateSettingException.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.settings">CannotUpdateSettingException</a> - Exception Class in <a href="net/emustudio/emulib/runtime/settings/package-summary.html">net.emustudio.emulib.runtime.settings</a></dt>
 <dd>
 <div class="block">Exception thrown when a setting cannot be updated.</div>
@@ -1598,6 +1602,8 @@ followed by specified location.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_SETTINGS" class="member-name-link">ICON_SETTINGS</a> - Static variable in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/StandardIcons.html" title="class in net.emustudio.emulib.runtime.ui">StandardIcons</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_SNAPSHOT" class="member-name-link">ICON_SNAPSHOT</a> - Static variable in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/StandardIcons.html" title="class in net.emustudio.emulib.runtime.ui">StandardIcons</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_STEP" class="member-name-link">ICON_STEP</a> - Static variable in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/StandardIcons.html" title="class in net.emustudio.emulib.runtime.ui">StandardIcons</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/StandardIcons.html#ICON_STEP_BACK" class="member-name-link">ICON_STEP_BACK</a> - Static variable in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/StandardIcons.html" title="class in net.emustudio.emulib.runtime.ui">StandardIcons</a></dt>
@@ -1720,18 +1726,12 @@ followed by specified location.</div>
 <dd>
 <div class="block">Determine whether breakpoints are supported by CPU.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
 <div class="block">Determines whether this column is editable by user.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/MnemoColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/MnemoColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">MnemoColumn</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">OpcodeColumn</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/Device.html#isGuiSupported()" class="member-name-link">isGuiSupported()</a> - Method in interface net.emustudio.emulib.plugins.device.<a href="net/emustudio/emulib/plugins/device/Device.html" title="interface in net.emustudio.emulib.plugins.device">Device</a></dt>
 <dd>
 <div class="block">Returns true if this device has GUI.</div>
@@ -1892,8 +1892,7 @@ to the operating memory.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.ui">MaxItemsCache&lt;V&gt;</a> - Class in <a href="net/emustudio/emulib/runtime/ui/package-summary.html">net.emustudio.emulib.runtime.ui</a></dt>
 <dd>
-<div class="block">Limited Cache
-A cache with max items limit, retaining most used items, and removing the least used items above given limit.</div>
+<div class="block">Bounded history of distinct values, ordered from most to least recently inserted.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html#%3Cinit%3E(int)" class="member-name-link">MaxItemsCache(int)</a> - Constructor for class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html" title="class in net.emustudio.emulib.runtime.ui">MaxItemsCache</a></dt>
 <dd>
@@ -2797,10 +2796,6 @@ events from this CPU.</div>
 <dd>
 <div class="block">Memory custom settings.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></dt>
-<dd>
-<div class="block">Has no effect.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
 <dd>
 <div class="block">Set or unset breakpoint to specific location.</div>
@@ -2808,14 +2803,6 @@ events from this CPU.</div>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
 <div class="block">Set a value to a column cell.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/MnemoColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/MnemoColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">MnemoColumn</a></dt>
-<dd>
-<div class="block">Has no effect.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">OpcodeColumn</a></dt>
-<dd>
-<div class="block">Has no effect.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/DialogBase.html#setVisible(boolean)" class="member-name-link">setVisible(boolean)</a> - Method in class net.emustudio.emulib.runtime.ui.components.<a href="net/emustudio/emulib/runtime/ui/components/DialogBase.html" title="class in net.emustudio.emulib.runtime.ui.components">DialogBase</a></dt>
 <dd>
@@ -3011,7 +2998,7 @@ events from this CPU.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#styleTable(javax.swing.JTable)" class="member-name-link">styleTable(JTable)</a> - Method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>
-<div class="block">Makes a JTable look modern.</div>
+<div class="block">Applies the host's table styling, preserving larger row heights and accommodating the current font.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#SYMBOL_DEFINITION" class="member-name-link">SYMBOL_DEFINITION</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>

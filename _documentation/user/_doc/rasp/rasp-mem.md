@@ -10,21 +10,19 @@ permalink: /rasp/rasp-mem
 
 # Memory "rasp-mem"
 
-RASP memory plug-in is the main store (operating memory) used in RASP virtual computer. RASP is an example of
-von-Neumann architecture, which implies that both program and data reside in the same memory.
+The `rasp-mem` plugin stores both program and data, following RASP's von Neumann architecture.
 
-After compilation of a RASP source code, the compiled program is loaded into RASP memory. During the process of the
-emulation, the CPU plug-in reads instructions and their operands from the memory and writes results back to the same
-memory (except reading inputs and writing outputs).
+Compilation loads the program into RASP memory. During execution, the CPU reads instructions and operands from this
+memory and writes results back to it. Inputs and outputs use the separate tapes.
 
 ## Graphical user interface (GUI)
 
-RASP memory has a simple window, which can be accessed from the debug panel in emuStudio:
+Open the memory window from the **Debugger** tab in emuStudio:
 
 ![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory.png)
 
 {: .list}
-| <span class="circle">1</span> | Open already compiled program into memory. The previous program will be dismissed. RASP binary files has extension `.brasp`.
+| <span class="circle">1</span> | Load a compiled program, replacing the previous one. RASP binary files have the extension `.brasp`.
 | <span class="circle">2</span> | Dump memory content into a file (either human-readable or `.brasp`).
 | <span class="circle">3</span> | Clears memory.
 

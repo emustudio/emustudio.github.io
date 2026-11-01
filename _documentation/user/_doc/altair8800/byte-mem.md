@@ -36,8 +36,7 @@ other emulators that can benefit from it.
 
 ## GUI overview
 
-To open the memory GUI (graphical user interface), click at the right-most icon in the debug toolbar, on the Emulator
-panel. The window is shown, as in the following image:
+On the **Debugger** tab, click **Show operating memory** in the toolbar to open the memory window:
 
 ![Byte operating memory]({{ site.baseurl }}/assets/altair8800/byte-mem.png)
 

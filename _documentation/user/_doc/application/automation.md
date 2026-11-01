@@ -43,8 +43,8 @@ each device determines its headless behavior. Terminals can use files; other dev
 resources (see the involved plugins' documentation).
 
 Argument `--waitmax 5000` waits at most 5 seconds for the running CPU to stop. When the deadline expires, the CPU is
-stopped when the virtual computer is closed. A CPU still running at the deadline is logged as `Invalid state
-(STATE_RUNNING)`. This limit does not include compilation or device initialization. Omit it to wait without a deadline.
+stopped when the virtual computer is closed. A CPU still running at the deadline is logged as `Invalid state (running)`.
+This limit does not include compilation or device initialization. Omit it to wait without a deadline.
 
 Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
 can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
@@ -97,4 +97,4 @@ operation, compilation error, unexpected CPU stop, or missing step-completion no
 Step completion has a five-second wait. The script runner uses synchronous stepping; `--waitmax` controls normal continuous
 automation and does not bound scripts. Use each RUN/STEP instruction limit to bound execution instead.
 
-See [Debugger analysis]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory-bank behavior.
+See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory-bank behavior.

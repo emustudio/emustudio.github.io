@@ -10,14 +10,14 @@ permalink: /ssem/automation
 
 # Automation
 
-SSEM computer will recognize if automatic emulation is executed. In the case of non-interactive mode (`--no-gui`),
-the memory final "snapshot" along with additional information is written to a file named `ssem.out`.
+In headless automatic emulation (`auto --no-gui`), SSEM writes the final memory snapshot and register values to `ssem.out`
+in the current working directory.
 
 The file is overwritten after each emulation "stop".
 
 ## Example
 
-The emulator automation can be run as follows:
+Run the bundled addition example from the emuStudio installation directory:
 
     ./emuStudio -cf config/SSEMBaby.toml --input-file examples/as-ssem/addition.ssem auto --no-gui
 
@@ -52,3 +52,12 @@ CI=0x18
 ```
 
 The result is also stored in memory line 31. `CI=0x18` corresponds to line 6, containing the stop instruction.
+
+## Running without a display
+
+On a Linux host without a graphical display, startup can fail with a display-related `java.awt.AWTError` even when
+`--no-gui` is set. Force Java's headless mode for this command:
+
+```sh
+JAVA_OPTS="-Djava.awt.headless=true" ./emuStudio -cf config/SSEMBaby.toml --input-file examples/as-ssem/addition.ssem auto --no-gui
+```

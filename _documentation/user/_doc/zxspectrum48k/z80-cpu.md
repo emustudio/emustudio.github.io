@@ -43,9 +43,11 @@ The standard ZX Spectrum 48K CPU frequency is **3500 kHz** (3.5 MHz).
 
 ## Loading snapshots
 
-When emulation is stopped, use the CPU's snapshot action to load a `.sna` or `.z80` file. The loader supports 48K SNA
+When emulation is stopped, click **Load snapshot...** in the CPU status panel to load a `.sna` or `.z80` file. The loader supports 48K SNA
 snapshots and Z80 versions 1, 2, and 3. It restores CPU registers, interrupt state, program counter, RAM, and border
 colour as one operation before execution resumes.
+
+![Z80 CPU status panel with Load snapshot action]({{ site.baseurl }}/assets/zxspectrum48k/z80-snapshot-action.png){: style="max-width: 324px; width: 100%;" }
 
 The 48K virtual computer intentionally rejects 128K and banked snapshots. A rejected or malformed file leaves the
 current machine state unchanged and reports the reason to the user.

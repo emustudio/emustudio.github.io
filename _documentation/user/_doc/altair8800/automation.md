@@ -44,11 +44,13 @@ After the program finishes, emuStudio is closed. The program output will be in t
 {:.code-example}
 ```
 Reversed text ...
+
 Enter text: Hello, world!
+
 !dlrow ,olleH
 ```
 
-Console will contain additional information about the emulation progress:
+The console reports emulation progress. Logging prefixes and plugin details depend on the logging configuration:
 
 {:.code-example}
 ```

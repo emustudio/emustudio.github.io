@@ -19,7 +19,13 @@ ZX Spectrum unique:
 - **Floating bus** — reading an unattached port during a ULA fetch returns the data byte the ULA is currently reading
 - **Interrupt duration** — holds the INT signal low for 32 T-states at each frame boundary
 
-The bus has no GUI and no user-configurable settings.
+The bus has no device window or settings dialog. Configure its hardware model in the computer’s TOML file:
+
+| Key | Type | Default | Supported value |
+|---|---|---|---|
+| `model` | String | `"ZX_SPECTRUM_48K"` | `"ZX_SPECTRUM_48K"` |
+
+Only the 48K model is implemented.
 
 ## Memory contention
 

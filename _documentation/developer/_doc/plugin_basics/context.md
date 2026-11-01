@@ -10,28 +10,24 @@ permalink: /plugin_basics/context
 
 # Plugin contexts
 
-Plugin contexts are answer to the question "how plugins communicate?". Plugin root classes are seen by emuStudio,
-but not by plugins. Instead, plugins can register custom objects (called "contexts") in
-the [ContextPool][contextPool]{:target="_blank"} object during plugin [instantiation][instantiation]
-(in the constructor). [ContextPool][contextPool]{:target="_blank"} is a shared container of all plugin contexts.
-Plugins can also obtain contexts of other plugins, during plugin [initialization][initialization]. Then, plugin
-communicate by calling regular Java methods on the plugin context objects, obtained from context pool.
+Plugins communicate through contexts rather than plugin root classes. Register context objects in the shared
+[ContextPool][contextPool]{:target="_blank"} during plugin [instantiation][instantiation] (in the constructor).
+Obtain connected plugins' contexts during [initialization][initialization], then call their Java methods.
 
 [ContextPool][contextPool]{:target="_blank"} is not thread-safe, so all operations on it should be performed in the same
 thread which called method [Plugin.initialize()][pluginInitialize]{:target="_blank"}.
 
-Each plugin context must implement a [Context][context]{:target="_blank"} interface (or it's derivative). Interfaces
-which extend [Context][context]{:target="_blank"} must be then annotated with 
+Each plugin context must implement [Context][context]{:target="_blank"} or a derived interface. Annotate derived interfaces with
 [PluginContext][pluginContext]{:target="_blank"} annotation.
 There are prepared some standard context interfaces in the API
 ([CompilerContext][compilerContext]{:target="_blank"}, [MemoryContext][memoryContext]{:target="_blank"}, [CPUContext][cpuContext]{:target="_blank"}
 and [DeviceContext][deviceContext]{:target="_blank"}), and those can be used when implementing plugin context class - or
 they can be further extended to provide customized versions of contexts.
 
-Plugin context objects are registered in [ContextPool][contextPool]{:target="_blank"} as key-value pair, where the key
-is an context interface which the context implements, and value is the context object. A plugin can register none, one
-or many contexts. Single context object can be registered multiple times, if the keys (context interfaces) are
-different. Multiple distinct context objects can also share an interface; their indices follow registration order.
+Registration pairs a context interface with an object that implements it. A plugin can register any number of contexts,
+and the same object can be registered under different interfaces. Multiple distinct objects can share an interface;
+their indices follow registration order, across all plugins registered under that interface. A connection permits
+lookup; it does not change those indices or renumber contexts that the caller cannot access.
 
 Lookup uses the exact registered Java interface class. Share that interface between plugins;
 redeclaring identical methods does not make two interfaces interchangeable. Register each
@@ -102,9 +98,8 @@ public class SampleDevice implements Device {
 }
 ```
 
-If the requested context could not be found, or the plugins were not connected, an exception is thrown.
-If the plugin needs to obtain the context, the plugin should let the exception propagate to the caller,
-otherwise it should be caught.
+Lookup throws an exception if the context is unavailable or the plugins are not connected. Let initialization fail when
+the context is required. For an optional context, catch the exception and disable the corresponding functionality.
 
 [instantiation]: {{ site.baseurl }}/plugin_basics/loading#plugin-instantiation
 [initialization]: {{ site.baseurl }}/plugin_basics/loading#plugin-initialization
