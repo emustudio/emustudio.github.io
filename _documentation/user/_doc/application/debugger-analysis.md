@@ -12,7 +12,8 @@ permalink: /application/debugger-analysis
 
 Open **Debugger** after compiling or loading a program. Pause to inspect or edit state. Selecting an instruction changes
 the inspected address; the PC stays put. Drag dividers to resize the workspace.
-8080/Z80 support registers, watchpoints and recording; other CPUs depend on their plugins.
+All bundled CPUs support instruction recording. Register sets and guest memory-access detail depend on the CPU: RAM
+records typed instructions and its instruction pointer, while device/tape state is outside instruction history.
 
 <details markdown="1">
 <summary>8080 example used in these screenshots</summary>
@@ -245,22 +246,46 @@ Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **
 Analysis uses the CPU's active bank and at most 256 reachable instructions; indirect targets may remain unresolved.
 Static references do not prove execution coverage.
 
-### Inspect a recorded write
+### Instruction recording
 
-![Recorded instruction 010D to 0110 shows A at 42 and WRITE bank 0:8001 = 42]({{ site.baseurl }}/assets/application/debugger-demo-history.png){: style="max-width: 886px; width: 100%; height: auto;" }
+Open **History** while paused. Set **Recent limit** and enable **Record recent instructions**, then run or step.
+The default limit is 1,024 instructions; choose up to 1,000,000. Recent history retains only the newest events within
+that limit. Choose **Record to file** for a continuous recording that can outlast the recent buffer, then
+**Stop file recording** to flush and finish the file. Use `.emutrace` for structured recording files.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Record**. Enable or disable the bounded instruction-history recorder. |
-| <span class="circle">2</span> | **Refresh**. Reload the recorded history. |
-| <span class="circle">3</span> | **Show unchanged registers**. Include registers whose values did not change. |
-| <span class="circle">4</span> | **Recorded instructions**. Select an executed instruction. |
-| <span class="circle">5</span> | **Recorded state**. Read the selected instruction’s registers and memory accesses; this is historical state. |
+| Control | Behavior |
+|---|---|
+| **Record recent instructions** / **Recent limit** | Enable bounded recent capture and set how many instructions to retain. |
+| **Record to file** / **Stop file recording** | Start or finish continuous recording independently of recent history. |
+| **Save recent recording** | Save the retained recent events as a structured recording. |
+| **Export displayed history as text** | Export the displayed recent history or recording page in readable form. |
+| **Export entire recording as text** | Stream the opened recording to readable text, including its completeness status, with bounded memory. |
+| **Open recording** | Inspect a saved recording without changing the live machine. |
+| **First page** / **Next page** | Read a recording in pages of up to 1,024 events. |
+| **Live history** | Return to the current computer's recent history. |
+| **Show unchanged registers** | Include unchanged values in the selected instruction's detail view. |
 
-Enable **Record last 1024 instructions** while paused, then run or step. Select `010D → 0110` to see
-`WRITE bank 0:8001 = 42`, register values and instruction fetches. Recording can reduce throughput and starts disabled;
-history is not saved. Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC.
+The table shows sequence numbers, physical banks, instruction addresses, captured instruction encoding and disassembly,
+changed registers and memory writes. Select an event to inspect all recorded before/after register values,
+raw flags, memory accesses and completion status. For the example above, the instruction at `010D` records
+`WRITE bank 0:8001 = 42`. Instruction text is captured before execution, so later memory edits or bank changes
+cannot change a recorded instruction. Opened recordings use their own captured values rather than the current
+computer's memory or labels.
+
+Use **PC from** / **PC through** to select an instruction-address range, **Changed register** to find changes to a
+named register, or **Memory address** with **Any access**, **Read** or **Write** to find memory accesses. Address
+fields accept decimal or `0x`-prefixed hexadecimal values. Filters apply to the current recording page or retained
+recent buffer; sequence numbers make gaps visible. **Previous recorded write** searches before the selected row for
+a write to **Memory address** within that same page or buffer. It cannot recover events outside that range.
+
+**Fold identical repeats** shortens repeated display rows. It preserves the underlying events; turn it off to inspect
+individual executions. Saving a recording keeps all events, including repeated execution.
+
+Recording starts disabled and can reduce throughput. File output uses bounded buffering, so slow storage can slow
+execution rather than silently dropping instructions. Cleanly stopped recordings include a completion marker;
+interrupted or truncated files are reported as incomplete. A recording's completeness is verified when its end is read.
+Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC; recording does not
+restore registers, memory, devices or external inputs.
 
 ## Repeatable debugger operations
 

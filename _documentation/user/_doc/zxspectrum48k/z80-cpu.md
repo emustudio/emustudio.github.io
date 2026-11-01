@@ -12,7 +12,7 @@ permalink: /zxspectrum48k/z80-cpu
 
 The ZX Spectrum 48K uses the same Z80 CPU plugin as the [MITS Altair8800]({{ site.baseurl }}/altair8800/z80-cpu).
 Please refer to the [z80-cpu documentation]({{ site.baseurl }}/altair8800/z80-cpu) for the complete CPU reference,
-including instruction dumping, configuration, and testing.
+including instruction recording, configuration, and testing.
 
 ## ZX Spectrum enhancements
 
@@ -33,9 +33,6 @@ implementation:
 |---
 |Name | Default value | Valid values | Description
 |-|-|-|-
-|`printCode`       | false | true / false | Whether to dump executed instructions to console
-|`printCodeFileName` | `"syserr"` | `"syserr"` or writable path | Startup trace destination
-|`printCodeUseCache`| false | true / false | Use cache to avoid dumping repeated blocks
 |`frequency_khz` | 4000 | > 0 | CPU plugin default in kHz; the Spectrum configuration sets 3500
 |---
 

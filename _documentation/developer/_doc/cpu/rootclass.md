@@ -140,7 +140,8 @@ Editable columns can throw `CannotSetDebuggerValueException(message, cause)` to 
 
 Override `getDebugger()` to return an optional `DebugCPU` port when the engine supports portable register access and
 instruction/access hooks. emuStudio owns the analysis UI, expression watches, named rules and recording. The bundled
-8080/Z80 plugins expose `DebugProbe`; plugins without the port retain their basic instruction debugger.
+CPU plugins expose `DebugProbe`, including byte, word and typed instruction-memory machines; third-party plugins without
+the port retain their basic instruction debugger.
 `getBreakpoints()` supplies an ordinary-breakpoint snapshot for persistence; `AbstractCPU` already implements it.
 See [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for paused-access and execution-hook contracts.
 

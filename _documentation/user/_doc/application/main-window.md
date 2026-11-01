@@ -115,11 +115,12 @@ according to the CPU's execution state and the plugins' capabilities.
 Pause the CPU to inspect memory, search for bytes, integers or text, compare captures, and edit labels, comments,
 bookmarks or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
-the CPU and memory plugins; 8080 and Z80 provide register access, watchpoints, conditions and recording.
+the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
 Selecting an instruction updates the inspection address. Browsing changes neither the program counter nor the CPU’s
 selected memory bank. A breakpoint hit opens **Memory** at its address; **Keep inspection while stepping** retains that
-selection across subsequent steps. History shows recorded state without restoring the live machine.
+selection across subsequent steps. History records recent execution, saves continuous recordings, and opens saved recordings
+for inspection without restoring the live machine.
 See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
 
 #### List of instructions
