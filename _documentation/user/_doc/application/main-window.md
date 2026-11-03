@@ -107,7 +107,7 @@ according to the CPU's execution state and the plugins' capabilities.
 | <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=198 y=0 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
 | <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=230 y=0 %} | **Move PC Back**. Move the instruction pointer to the debugger’s estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
 | <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=262 y=0 %} | **Jump to address**. Enter the address of the next instruction to execute.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint / inspect address...**. Open **Set breakpoint** to set or unset an address breakpoint, or choose **Inspect only** to view its live bytes. **Keep inspection while stepping** retains a breakpoint’s inspected address. Use the **Breakpoints** tab for named rules and watchpoints. Pause before editing.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint...**. Set or unset a CPU-address breakpoint. Use **Breakpoints** for named execution rules and **Watches** for memory-access watches. Pause before editing.
 | <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=332 y=0 %} | **Show operating memory**. Open the memory plugin’s window when available.
 
 #### Inspection pane
@@ -118,17 +118,20 @@ instructions. Watches remain beside CPU status while switching between inspectio
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
 Selecting an instruction updates the inspection address. Browsing changes neither the program counter nor the CPU’s
-selected memory bank. A breakpoint hit opens **Memory** at its address; **Keep inspection while stepping** retains that
-selection across subsequent steps. History records recent execution, saves continuous recordings, and opens saved recordings
+selected memory bank. A breakpoint hit opens **Memory** at its address; later steps follow the CPU unless the view was
+manually pinned. History records recent execution, saves continuous recordings, and opens saved recordings
 for inspection without restoring the live machine.
+To browse directly, pause, open **Memory**, enter a decimal or hexadecimal **Address** and choose **Bank**, then click
+**Inspect address** or press Enter in the address field. This changes neither the program counter nor the CPU's selected
+bank, and creates no breakpoint.
 See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
 
 #### List of instructions
 
 The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
 they show a breakpoint control, address, instruction, and opcode bytes, followed by user labels and comments. The red
-row marks the next instruction. Click the breakpoint control to cycle through off, enabled, and enabled with inspection
-kept while stepping. A further click removes it. Hover over the control to see its current state.
+row marks the next instruction. Click the breakpoint control to toggle the execution breakpoint on or off.
+Hover over the control to see its current state. Memory-bank selection and manual view pinning do not configure breakpoints.
 
 The number of visible rows follows the space available in the window. To change memory contents, use the memory
 plugin's window or compile another program; the instruction and opcode cells are read-only.

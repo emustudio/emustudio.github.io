@@ -155,6 +155,28 @@ After loading generated code, attach source positions through `memory.annotation
 assemblers remove annotations owned by their plugin ID and add positions for generated addresses, including included
 files. See [memory annotations]({{ site.baseurl }}/memory/#cell-type-size-and-annotations) for ownership and invalidation.
 
+### Source-position coordinates
+
+Compilers that emit memory source annotations declare their column unit through `getSourcePositionColumnUnit()`:
+
+```java
+@Override
+public SourceCodePosition.ColumnUnit getSourcePositionColumnUnit() {
+    return SourceCodePosition.ColumnUnit.CODE_POINT;
+}
+```
+
+`CODE_POINT` matches the bundled 8080/Z80 assemblers, whose ANTLR `CharStreams` count Unicode code points.
+Use `UTF16` when columns count Java `String` code units. Either declaration requires one-based lines, zero-based
+columns, and tabs counting as one column. The default is `UNKNOWN`: the host reports a diagnostic and excludes these
+positions from current source bindings. Lexical `Token` offsets always use UTF-16, independently of compiler columns.
+
+The host resolves positions against the exact captured source text, retaining file identity, source revision, and CRLF
+offsets. Included files need their own captured text; equal basenames do not identify the same document. Invalid or EOF
+coordinates produce diagnostics instead of clamped bindings. A point annotation covers one generated cell; it does not
+prove an instruction's full extent. Its source span is the exact resolved token, or one valid UTF-16 code unit when no
+token extent is available. Gaps remain unmapped.
+
 Lexer and parser are not shown here, but they are created using mentioned [ANTLR][antlr]{:target="_blank"}
 parser generator. Please check out this nice [ANTLR tutorial][antlr-tutorial]{:target="_blank"}.
 

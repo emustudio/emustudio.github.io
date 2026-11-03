@@ -23,8 +23,12 @@ notifications to speed up the emulation.
 ## Cell type, size, and annotations
 
 `MemoryContext<CellType>.getCellTypeClass()` identifies the cell type; byte-oriented consumers must check for
-`Byte.class` during initialization. `getSize()` reports allocated cells. The CPU independently reports its instruction
-address space through `CPU.getAddressSpaceSize()`, which the debugger uses for address validation and pagination.
+`Byte.class` during initialization. Addresses and ranges count cells, including for word and typed-instruction memory.
+`MemoryContext.getAddressSpaceSize()` reports the exclusive upper bound of valid addresses and defaults to `getSize()`
+for dense providers. Sparse providers must override it with their stable capacity: loading or clearing cells must not
+change the address layout. Bundled RAM/RASP contexts report `Integer.MAX_VALUE`, including when empty. Their existing
+`getSize()` occupancy/high-water behavior remains separate from address validation. The CPU independently reports its
+instruction domain through `CPU.getAddressSpaceSize()` for debugger pagination.
 
 Implement `annotations()` to expose a `MemoryContextAnnotations` store. emuLib's `Annotations` implements
 `MemoryAnnotations` and can be owned by the memory plugin and shared with its context. `AbstractMemoryContext` supplies
@@ -44,6 +48,11 @@ annotations.add(address, new SourceCodeAnnotation(
 The debugger uses these positions to open source files. In `byte-mem`, successful writes invalidate source annotations
 at the written addresses, including while notifications are disabled. Clearing memory removes all source annotations.
 An ignored ROM write leaves them intact. Annotations are keyed by address, without a bank identifier.
+
+Declare compiler column units as described in [source-position coordinates]({{ site.baseurl }}/compiler/#source-position-coordinates).
+The application's `ProgramIndex` combines source mappings, user annotations, execution-breakpoint presence, and indexed
+instruction flow for one image/layout. Plugins continue to use emuLib contracts; they do not import application index
+classes. Compiler reindexing preserves user annotations and other owners' metadata.
 
 Byte-memory image loaders and dumpers use a UTF-8 `.meta` sidecar to restore or save source positions. Sidecar addresses
 are absolute: loading a binary image at another address does not relocate its metadata.

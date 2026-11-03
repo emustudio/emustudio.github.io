@@ -41,23 +41,15 @@ db 'HELLO DEBUGGER',0
 
 ## Inspect an address
 
-![Set breakpoint dialog targeting 0x8000 in bank 0, with Inspect only, Unset and Set buttons]({{ site.baseurl }}/assets/application/debugger-demo-inspect.png){: style="max-width: 332px; width: 100%; height: auto;" }
+Pause the CPU, open **Memory**, enter `0x8000` in **Address** and choose **Bank**. Click **Inspect address** or press
+Enter in the address field. Addresses accept decimal or hexadecimal notation. Browsing changes neither the program
+counter nor the CPU's selected bank, and creates no breakpoint; common memory uses physical bank zero.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Address**. Enter the decimal or hexadecimal address to inspect. |
-| <span class="circle">2</span> | **Bank**. Select the memory bank to inspect; this does not change the CPU’s bank. |
-| <span class="circle">3</span> | **Keep inspection while stepping**. Keep the breakpoint’s inspected address as you step. |
-| <span class="circle">4</span> | **Inspect only**. Inspect the live bytes without setting a breakpoint. |
-| <span class="circle">5</span> | **Unset**. Remove the breakpoint at this address. |
-| <span class="circle">6</span> | **Set**. Set an execution breakpoint at this address. |
-
-Choose **Set breakpoint / inspect address...**, enter `0x8000`, then **Inspect only** to open live memory.
-**Bank** selects inspection memory without switching the CPU's bank; common memory uses physical bank zero.
-**Set** adds an execution breakpoint; hitting it opens **Memory**. With **Set**, enable **Keep inspection while stepping**
-to retain the inspected address during later steps. Instruction-table breakpoint controls cycle through off, enabled
-and keep-inspection states.
+Choose **Set breakpoint...** to configure a breakpoint. **Set** adds an execution breakpoint at the CPU-visible address,
+regardless of which bank supplies the instruction;
+**Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. Hitting a breakpoint opens
+**Memory** at its address; later steps follow the CPU normally unless the view was manually pinned. Instruction-table
+breakpoint controls toggle enabled/disabled.
 
 ## Memory and annotations
 
@@ -191,36 +183,24 @@ changed values receive a marker. **Follow value** opens the evaluated address. *
 
 ### Stop on a conditional memory write
 
-![Named WRITE rule at 0x8001 in all banks, conditioned on A == 0x42, with inspection kept while stepping]({{ site.baseurl }}/assets/application/debugger-demo-breakpoints.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Name**. Enter a descriptive rule name. |
-| <span class="circle">2</span> | **Kind**. Choose execution, read, write, or source matching. |
-| <span class="circle">3</span> | **Address**. Enter the address to match. |
-| <span class="circle">4</span> | **Bank**. Match a selected bank or all banks. |
-| <span class="circle">5</span> | **Add breakpoint**. Add the configured rule. |
-| <span class="circle">6</span> | **Advanced options**. Show the condition, hit count, and inspection controls. |
-| <span class="circle">7</span> | **Condition**. Evaluate this expression when the rule matches. |
-| <span class="circle">8</span> | **Stop from hit**. Stop after the specified matching hit count. |
-| <span class="circle">9</span> | **Keep inspection**. Keep the rule’s inspected address while stepping. |
-| <span class="circle">10</span> | **Enable / disable**. Toggle the selected rule. |
-| <span class="circle">11</span> | **Remove**. Delete the selected rule. |
-| <span class="circle">12</span> | **Add ordinary breakpoint**. Add a simple execution breakpoint. |
-| <span class="circle">13</span> | **Save settings**. Persist the breakpoint rules. |
-| <span class="circle">14</span> | **Reset hit counts**. Clear the accumulated rule hits. |
-| <span class="circle">15</span> | **Go to address**. Inspect the selected breakpoint’s address. |
-
-Before rerunning, open **Breakpoints**, enter a name, choose **WRITE**, and set the address to `0x8001`. Enter condition
-`A == 0x42`, leave **Bank** at `-1` and **Stop from hit** at `1`, enable **Keep inspection while stepping**, then click
-**Add breakpoint**. It stops after the writing instruction. Bank `-1` matches all banks; conditions use the CPU's selected logical bank.
+Before rerunning, open the memory-watch controls in **Watches**, enter a **Memory watch name** and set **Memory watch address**
+to `0x8001`. Select **Pause on writes**. Under **Memory watch options**, enter condition `A == 0x42` and leave
+**Memory watch stop from hit** at `1`, then click **Add memory watch**. It stops after the writing instruction.
+**Memory watch bank** selects a physical access bank; `-1` matches accesses in all banks. Conditions use the CPU's selected logical bank.
 Each qualifying instruction counts once, even with repeated accesses.
 
-**EXEC** stops before execution; **SOURCE** requires a file path and a one-based line with a current compiler mapping.
+Execution breakpoints in **Breakpoints** stop before the CPU-visible instruction address. They have no bank selection:
+the same address matches in every physical bank. Conditions and hit counts remain available through advanced options.
+**SOURCE** requires a file path and a one-based line with a current compiler mapping; resolved targets are CPU addresses,
+also independent of physical instruction bank.
 **READ** includes instruction fetches; **WRITE** includes attempted guest writes. Debugger reads trigger no access rules.
-Named rules stay separate from instruction-table breakpoints; **Add ordinary breakpoint** creates an unconditional one.
+Named rules stay separate from instruction-table breakpoints; instruction-table controls create unconditional execution breakpoints.
 Resuming skips the stopped EXEC/SOURCE rule once.
+
+SOURCE rules resolve mapped addresses before execution, including multiple generated addresses for one source line.
+Running or editing memory makes source mappings historical; already resolved targets can still stop the current run.
+Recompile to restore current source following or rebind a source rule. Source navigation uses explicit mapped cells;
+unmapped operand cells and gaps have no source match. Unsupported compiler coordinates appear in the source-mapping status.
 
 Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Watches and breakpoints persist in the computer's
 `.debugger` file; **Save settings** saves them explicitly. Hit counts restart at zero when reloading.
@@ -242,9 +222,11 @@ Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Wa
 | <span class="circle">6</span> | **References and graph**. Select a reference or graph node to inspect its address. Indirect targets may remain unresolved. |
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
-Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** searches callers.
-Analysis uses the CPU's active bank and at most 256 reachable instructions; indirect targets may remain unresolved.
-Static references do not prove execution coverage.
+Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
+calls and branches. Analysis captures the inspection bank without switching the CPU's bank and attempts at most 256
+reachable addresses. A partial-result notice means a work bound was reached; unresolved indirect targets remain unknown.
+Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
+CPUs without immutable decoder capture report analysis as unsupported. Static references do not prove execution coverage.
 
 ### Instruction recording
 

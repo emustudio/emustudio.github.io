@@ -59,6 +59,36 @@ Decode flow from opcodes and operands rather than mnemonic text. The 8080/Z80 pl
 Edigen disassembly; the current `.eds` grammar does not define semantic flow attributes. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary and bank context.
 
+### Immutable analysis capture
+
+Implement optional `Disassembler.capture(bank)` to support static analysis against an explicit inspection bank. It
+returns an `Optional<Disassembler>` backed by immutable captured cells. The returned decoder must read neither live
+memory nor the current selected bank. The default empty optional leaves ordinary disassembly available and reports
+stable analysis as unsupported.
+
+`SnapshotDisassembler` connects an existing decoder factory to live inspection and captured analysis. For byte cells,
+an identity copier is safe because `Byte` is immutable:
+
+```java
+public static Disassembler withSnapshotSupport(
+        MemoryContext<Byte> memory,
+        java.util.function.Function<MemoryContext<Byte>, Disassembler> factory) {
+    return new SnapshotDisassembler<>(memory, value -> value, factory);
+}
+```
+
+The factory must construct both instruction disassembly and flow decoding against the supplied context. emuLib's
+`MemorySnapshot` captures explicit-bank cells without changing bank selection and limits dense capture to 16M cells
+(at most 128 MiB of references, excluding payloads). Mutable typed cells need a deeply immutable copy. The bundled
+RAM/RASP decoders use their providers' sparse snapshots; RAM freezes decoder-visible instruction values and RASP copies
+label names. Capturing a decoder does not add structured flow metadata to a CPU that lacks `getFlow`.
+
+The application pauses execution while capturing, checks image/layout and memory/content revisions, performs graph
+discovery on a worker, then rejects late results after edits or session disposal. A provider-independent cell copy
+does not lock arbitrary external writers: the host must observe writes and validate revisions. Unobserved writes with
+notifications disabled require conservative invalidation before execution. An index snapshot alone does not freeze
+memory. Execution, source-mapping changes, and code/data edits make retained analysis stale; rebuild while paused.
+
 ## Decoder section
 
 ```

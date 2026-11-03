@@ -64,7 +64,10 @@ unconditional jumps, returns and stops do not. Do not derive targets by parsing 
 adds 8080/Z80 flow metadata while Edigen-generated disassembly remains unchanged.
 
 `CPU.getBreakpoints()` returns a snapshot of ordinary address breakpoints; `AbstractCPU` implements this. The default empty
-snapshot preserves plugins that do not expose breakpoint enumeration. Named debugger rules, watches, user annotations,
+snapshot preserves plugins that do not expose breakpoint enumeration. Execution and resolved source breakpoints match
+only the CPU-visible instruction address, regardless of the physical bank supplying that instruction. Their models and
+persistence contain no bank selector. The bank passed to instruction hooks still identifies inspection/recording context;
+read/write watchpoints continue matching the physical bank in guest access events. Named debugger rules, watches, user annotations,
 captures, persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
 from user labels/comments. True machine rewind requires coordinated device/CPU/memory checkpoints and input replay; instruction
 history alone does not provide restoration.
