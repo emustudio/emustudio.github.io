@@ -26,36 +26,18 @@ The following sites provide disk images, memory images, source code and manuals:
 Choose the setup family below for the software you want to run. Stop emulation before changing settings or
 loading images; reset before loading a bootloader or applying a memory patch.
 
-## Z80 with one memory bank and 88-DCDD
+## Z80 CP/M 2.2 with 88-DCDD
 
-![Computer schema for one-bank Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and VT100]({{ site.baseurl }}/assets/altair8800/software-schema-cpm22.png){:style="max-width:564px; width:100%"}
+![Computer schema for Z80 CP/M 2.2 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and VT100]({{ site.baseurl }}/assets/altair8800/software-schema-cpm22.png){:style="max-width:564px; width:100%"}
 
-Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in this section:
+Use this setup for CP/M 2.2, related CP/M systems and the applications in this section:
 
-1. Open **MITS Altair8800 (Z80)**. In byte-memory settings (the wrench button), set **65536 bytes** and
-   **1 memory bank**. Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
+1. Open **MITS Altair8800 (Z80)** and apply the [CP/M 2.2 memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles). Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
 2. In 88-SIO, pair status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
 3. Use VT100 for the applications below: in a copy of the computer configuration, replace `adm3A-terminal`
    with `vt100-terminal` and connect it to 88-SIO in both directions. Save and reopen the computer, then open
    the VT100 window. ADM-3A also works for the CP/M command prompt.
 4. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**. Keep enlarged Schorn images intact.
-
-![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
-| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
-| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
-| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
-| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
-| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
-| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
-| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
-| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
-| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
-| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
 
 ![88-SIO console port aliases for CP/M]({{ site.baseurl }}/assets/altair8800/software-88-sio-settings.png){: style="max-width: 484px; width: 100%; height: auto;" }
 
@@ -92,7 +74,7 @@ Use this setup for CP/M 2.2, the one-bank CP/M systems and the applications in t
 Schorn's [CP/M 2.2 archive][pkg-cpm2]{:target="_blank"} supplies `cpm2.dsk`, utilities and SIMH support.
 Use this disk for the application tables below.
 
-1. Reset and select memory bank 0. Load `examples/altair8800/boot/mdbl.bin` at `0xFF00` through byte-memory.
+1. Reset. Load `examples/altair8800/boot/mdbl.bin` at `0xFF00` through byte-memory.
 2. Mount `cpm2.dsk` in 88-DCDD drive `A:`. For Pascal MT+, PROLOGZ or SPL, mount `app.dsk` in `B:`.
 3. Jump to `0xFF00` and run. At `A>`, type `DIR` or `LS`. To inspect `app.dsk`, type `B:` then `DIR`.
 
@@ -114,9 +96,9 @@ The boot disk includes Microsoft BASIC, ELIZA, Star Trek, Othello and Ladder. Fo
 start ELIZA, or `OTHELLO` to start Othello. The optional `app.dsk` contains PROLOGZ, Pascal MT+ and SPL; see the
 programming-language table for their commands.
 
-### Other one-bank CP/M systems
+### Other CP/M systems
 
-Keep the one-bank Z80 setup. For each package, reset, select bank 0, mount the disks in the table, load the
+Keep the Z80 CP/M 2.2 setup. For each package, reset, mount the disks in the table, load the
 listed bootloader at `0xFF00`, then jump to `0xFF00` and run. Enter any listed startup command at `A>`.
 For packages with SIMH hard disks, configure 88-HDSK as described in the next subsection before booting.
 
@@ -156,10 +138,10 @@ These images use the SIMH interface; the MITS Hard Disk BASIC setup has differen
 
 ### CP/M applications
 
-Use the one-bank Z80 setup above, including VT100. Extract the chosen package and keep its overlays, libraries
+Use the Z80 CP/M 2.2 setup above, including VT100. Extract the chosen package and keep its overlays, libraries
 and data files with the application disk. Use a working copy of the disk image.
 
-1. Reset, select bank 0 and load `examples/altair8800/boot/mdbl.bin` at `0xFF00`.
+1. Reset and load `examples/altair8800/boot/mdbl.bin` at `0xFF00`.
 2. Mount `cpm2.dsk` from Schorn's CP/M 2.2 archive in `A:` and the chosen application disk in `B:`.
    For rows explicitly marked **in A:**, mount that package's bootable disk in `A:` instead.
 3. Jump to `0xFF00` and run. For a `B:` application, type `B:` at `A>`, then `DIR` and its listed command.
@@ -238,7 +220,7 @@ to the working disk, then run `DO BASCOM BLACKJAK` (`BASCOM.SUB` compiles, links
 
 #### Office applications
 
-With the one-bank Z80 and VT100 setup, load `mdbl.bin` at `0xFF00`, mount `cpm2.dsk` in `A:` and the listed
+With the Z80 CP/M 2.2 and VT100 setup, load `mdbl.bin` at `0xFF00`, mount `cpm2.dsk` in `A:` and the listed
 disk in `B:`, then run from `0xFF00`. At `A>`, type `B:`, then the package command below.
 
 |---
@@ -263,7 +245,7 @@ disk in `B:`, then run from `0xFF00`. At `A>`, type `B:`, then the package comma
 #### Games
 
 Mount [Games][pkg-games]{:target="_blank"} `games.dsk` in `B:` and boot `cpm2.dsk` from `A:`. Select VT100 for
-screen games and keep the complete disk mounted for their data files. Reset, select bank 0, load `mdbl.bin`
+screen games and keep the complete disk mounted for their data files. Reset, load `mdbl.bin`
 at `0xFF00` and run from `0xFF00`. At `A>`, type `B:`, then a game command below.
 
 |---
@@ -292,7 +274,7 @@ Native BASIC games instead use `MOUNT`, `FILES` and `RUN "name"`.
 
 #### Tools
 
-Mount [Tools][pkg-tools]{:target="_blank"} `tools.dsk` in `B:` and `cpm2.dsk` in `A:`. Reset, select bank 0,
+Mount [Tools][pkg-tools]{:target="_blank"} `tools.dsk` in `B:` and `cpm2.dsk` in `A:`. Reset,
 load `mdbl.bin` at `0xFF00` and run from `0xFF00`. Type `B:`, then `DDTZ27` (debugger) or `JOB15` (job utility).
 Read `DDTZ27.DOC` and `JOB.DOC` with `TYPE`.
 
@@ -341,45 +323,27 @@ MBASIC HELLO
 `A:R HELLO.BAS` imports a host file; `A:W HELLO.BAS` exports one to the working directory. `HDIR` is available in
 packages that include it. See the [SIMH pseudo-device page][simh-device]{:target="_blank"}.
 
-## Z80 with banked memory and 88-DCDD
+## Z80 CP/M 3 with 88-DCDD
 
-![Computer schema for banked Z80 CP/M with 88-DCDD, SIMH pseudo, PTR/PTP and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-cpm3.png){:style="max-width:569px; width:100%"}
+![Computer schema for Z80 CP/M 3 with 88-DCDD, SIMH pseudo, PTR/PTP and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-cpm3.png){:style="max-width:569px; width:100%"}
 
 Use this setup for CP/M 3, Z3PLUS and the RCL Z3PLUS collection:
 
-1. Open **MITS Altair8800 (Z80)**. Set byte-memory to **65536 bytes**, **8 banks** and
-   **common address `0xC000`**. Keep SIMH pseudo connected to CPU, memory and PTR/PTP so the BIOS can switch banks.
+1. Open **MITS Altair8800 (Z80)** and apply the [CP/M 3 memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles). Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
 2. Pair 88-SIO status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
    Open the connected terminal with half-duplex disabled; use VT100 for screen applications.
 3. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**.
 
 ### CP/M 3
 
-Schorn's [CP/M 3 archive][pkg-cpm3]{:target="_blank"} contains a banked system with an Altair BIOS.
+Schorn's [CP/M 3 archive][pkg-cpm3]{:target="_blank"} contains a system with an Altair BIOS.
 It needs the SIMH pseudo device and `mdbl.bin`.
 
-1. Reset, select bank 0 and load `examples/altair8800/boot/mdbl.bin` at `0xFF00`.
+1. Reset and load `examples/altair8800/boot/mdbl.bin` at `0xFF00`.
 2. Mount `cpm3.dsk` in 88-DCDD drive `A:`.
 3. Jump to `0xFF00` and run. At `A>`, type `DIR` or `HELP`.
 
-![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
-| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
-| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
-| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
-| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
-| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
-| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
-| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
-| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
-| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
-| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
-
-![Operating system CP/M 3 (banked version)]({{ site.baseurl }}/assets/altair8800/software-cpm3.png){: style="max-width: 900px; width: 100%; height: auto;" }
+![Operating system CP/M 3]({{ site.baseurl }}/assets/altair8800/software-cpm3.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
 {: .list .control-list .screenshot-controls}
 | Mark | Explanation |
@@ -387,12 +351,12 @@ It needs the SIMH pseudo device and `mdbl.bin`.
 | <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
 | <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
-The applications in the one-bank section use CP/M 2.2. See the [CP/M 3 manual][cpm3manual]{:target="_blank"}
+The applications in the CP/M 2.2 section use CP/M 2.2. See the [CP/M 3 manual][cpm3manual]{:target="_blank"}
 and [SIMH AltairZ80 manual][simhmanual]{:target="_blank"} for the BIOS and additional disk formats.
 
 ### Z3PLUS and RCL Z3PLUS
 
-Keep the eight-bank setup. Reset, select bank 0, mount the listed floppies, load `mdbl.bin` at `0xFF00`,
+Keep the CP/M 3 setup. Reset, mount the listed floppies, load `mdbl.bin` at `0xFF00`,
 then jump to `0xFF00` and run. Type `STARTZ3P` at `A>`.
 
 |---
@@ -406,13 +370,13 @@ Before booting Z3PLUS or RCL with optional `i.dsk` and `j.dsk`, select SIMH mode
 CPU and byte-memory in both directions, and reopen the computer. Mount the images in drives 0 and 1 with 32 sectors per track and
 128 bytes per sector. CP/M 3 exposes hard disks as `I:` through `L:`; use `DIR I:` and `DIR J:` for these two.
 
-## 8080 with one memory bank and 88-DCDD
+## 8080 with 88-DCDD
 
 ![Computer schema for 8080 floppy software with 88-DCDD and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-floppy.png){:style="max-width:569px; width:100%"}
 
 Use this setup for Altair DOS, native floppy Disk BASIC, Programming System II and 8080 CP/M diagnostics:
 
-1. Open **MITS Altair8800** with the 8080 CPU. Set byte-memory to **65536 bytes** and **1 memory bank**.
+1. Open **MITS Altair8800** with the 8080 CPU. Set byte-memory to **65536 bytes**.
 2. In 88-SIO, enable paired status/data ports `0x00`/`0x01` for DOS and Disk BASIC and `0x10`/`0x11` for 2SIO.
    Enable uppercase input and clear output bit 8; initially leave Delete and Backspace as `UNCHANGED`.
 3. Open the connected ADM-3A terminal with half-duplex disabled.
@@ -423,7 +387,7 @@ Use this setup for Altair DOS, native floppy Disk BASIC, Programming System II a
 Altair DOS is in [Original Altair software][pkg-altsw]{:target="_blank"} (`altdos.dsk`, `altdos2.dsk`). It runs directly
 on the computer, without CP/M.
 
-1. Reset and select bank 0. Load `examples/altair8800/boot/dbl.bin` at `0xFF00`.
+1. Reset. Load `examples/altair8800/boot/dbl.bin` at `0xFF00`.
 2. Mount `altdos.dsk` in 88-DCDD drive `A:`; mount `altdos2.dsk` in `B:` if you want the second disk.
 3. Jump to `0xFF00` and run, then answer each prompt:
 
@@ -457,7 +421,7 @@ can wrap around and report `INSUFFICIENT MEMORY`. The explicit answer above avoi
 MITS BASIC 4.1 is in [Original Altair software][pkg-altsw]{:target="_blank"} as `mbasic.dsk`.
 It runs directly on the 8080, unlike the CP/M program `MBASIC.COM`.
 
-1. Reset and select bank 0. Load `examples/altair8800/boot/dbl.bin` at `0xFF00`.
+1. Reset. Load `examples/altair8800/boot/dbl.bin` at `0xFF00`.
 2. Mount `mbasic.dsk` in 88-DCDD drive `A:`.
 3. Jump to `0xFF00` and run, then answer each prompt:
 
@@ -511,7 +475,7 @@ The same steps apply to the following native 8-inch floppy versions:
 Use the 8080 floppy setup above for `disbas50.bin` and `disbas50.dsk` from
 [Original Altair software][pkg-altsw]{:target="_blank"}. This version starts from a memory image instead of `dbl.bin`.
 
-1. Reset, select bank 0 and load `disbas50.bin` at `0x0000`.
+1. Reset and load `disbas50.bin` at `0x0000`.
 2. Replace `DB FF` at `0x534F` with `3E 08` and mount `disbas50.dsk` in 88-DCDD drive `A:`.
 3. Jump to `0x0000` and run. Answer memory `61440`, lineprinter `C`, highest disk `0`, files `3`, random files `2`.
 4. At `OK`, type `MOUNT 0`, then `FILES`.
@@ -521,7 +485,7 @@ Use the 8080 floppy setup above for `disbas50.bin` and `disbas50.dsk` from
 The [Programming System II floppy package][ps2-disk]{:target="_blank"} boots its monitor, editor, assembler and
 debugger from disk.
 
-1. Reset and select bank 0. Mount a working copy of `PS2DEMO.DSK` in 88-DCDD drive `A:`.
+1. Reset. Mount a working copy of `PS2DEMO.DSK` in 88-DCDD drive `A:`.
 2. Load `PS2PROM.HEX` through byte-memory at offset `0`; the HEX records supply the addresses.
 3. Jump to `0xF000` and run.
 
@@ -536,25 +500,25 @@ raw memory binaries. Do not load them at address zero just because their extensi
 ### Other 8-inch CP/M disks
 
 For a bootable Lifeboat image from [DeRamp's CP/M archive][deramp-cpm]{:target="_blank"}, keep the 8080 floppy
-setup, mount the image in `A:`, reset and select bank 0. Load the package's matching loader at `0xFF00`, then
+setup, mount the image in `A:`, reset. Load the package's matching loader at `0xFF00`, then
 jump to `0xFF00` and run. Application-only images need a boot disk whose BIOS supports their layout.
 
 ### 8080 CPU diagnostics under CP/M
 
 [CPU tests][cpu-tests]{:target="_blank"} include `TST8080.COM`, `8080PRE.COM`, `8080EXER.COM`, `8080EXM.COM` and
 `CPUTEST.COM`. Copy the chosen `.COM` to a working copy of `altcpm.dsk`
-with the bundled `88-dcdd` tool's `cpm2-simh` format. Mount that disk in `A:`, reset, select bank 0 and load
+with the bundled `88-dcdd` tool's `cpm2-simh` format. Mount that disk in `A:`, reset and load
 `examples/altair8800/boot/dbl.bin` at `0xFF00`. Jump to `0xFF00` and run, then type the test name without `.COM`
 at `A>` (for example, `TST8080`). Compare `8080EXER` CRCs with real hardware; its `Error` text alone
 does not prove a CPU defect. See the [test notes][cpu-test-notes]{:target="_blank"}; a full run can take hours.
 
-## 8080 with one memory bank and serial console
+## 8080 with serial console
 
 ![Computer schema for standalone 8080 software with 88-SIO and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-8080-serial.png){:style="max-width:569px; width:100%"}
 
 Use this setup for standalone BASIC, MINOL, VTL-2, FOCAL and serial monitors:
 
-1. Open the 8080 **MITS Altair8800**. Set byte-memory to **65536 bytes** and **1 memory bank**.
+1. Open the 8080 **MITS Altair8800**. Set byte-memory to **65536 bytes**.
 2. Enable paired 88-SIO status/data ports `0x10`/`0x11`, uppercase input and clear output bit 8.
 3. Open the connected ADM-3A terminal with half-duplex disabled. These memory images do not need a system disk.
 
@@ -563,7 +527,7 @@ Use this setup for standalone BASIC, MINOL, VTL-2, FOCAL and serial monitors:
 Download [Original Altair software][pkg-altsw]{:target="_blank"} (`altsw.zip`) and choose a binary below.
 These images read sense switches at port `0xFF`, which the standard computer lacks.
 
-1. Reset, select bank 0 and load the chosen binary at `0x0000` through byte-memory.
+1. Reset and load the chosen binary at `0x0000` through byte-memory.
 2. At each patch address in its row, replace bytes `DB FF` (`IN 0xFF`) with `3E 08` to select 2SIO.
 3. Jump to `0x0000` and run. Answer memory size `61440`, terminal width `80` if asked, and trigonometric functions `Y`.
 4. At `OK`, type `PRINT 2+2`; it should return `4`.
@@ -584,7 +548,7 @@ addresses. For a different image, use its supplied source and loader instruction
 
 Download the binaries from [MINOL / VTL-2][pkg-minolvtl]{:target="_blank"}.
 
-Reset and select bank 0 before loading either binary; reapply its patch after each reset.
+Reset before loading either binary; reapply its patch after each reset.
 
 Standalone VTL-2: load `mitsvtl2.bin` at `0xF800`, patch `DB FF` at `0xF820` to `3E 08`, then start at `0xF800`.
 Standalone MINOL: load `minol22.bin` at 0, patch `DB FF` at `0x0252` to `3E 00`, enable 2SIO `0x10`/`0x11`,
@@ -598,7 +562,7 @@ improved loader/monitor ROMs, have their own I/O and origin settings in the supp
 
 ### Standalone FOCAL
 
-The [FOCAL archive][pkg-focal]{:target="_blank"} supplies `focal.bin`: reset, select bank 0, load it at `0x0000`,
+The [FOCAL archive][pkg-focal]{:target="_blank"} supplies `focal.bin`: reset, load it at `0x0000`,
 then jump to `0x0000` and run. For `focal_ent.bin`, apply the I/O patches listed in the archive's `focal` script
 before starting; the patch offsets differ from those of the BASIC images above.
 
@@ -611,12 +575,12 @@ before starting; the patch offsets differ from those of the BASIC images above.
 Download [More original software][pkg-althdsw]{:target="_blank"} (`althdsw.zip`), which contains `mini0.dsk`
 through `mini4.dsk` and Mini-Disk BASIC 300-5-E.
 
-1. Open the 8080 **MITS Altair8800** with 65536 bytes and one bank. In a copied configuration, replace 88-DCDD
+1. Open the 8080 **MITS Altair8800** with 65536 bytes. In a copied configuration, replace 88-DCDD
    with **88-MDS** and connect it to CPU. Both controllers use `0x08`–`0x0A`; keep only 88-MDS connected.
    Save and reopen the computer.
 2. Enable 88-SIO `0x10`/`0x11`, uppercase input and clear output bit 8. Open ADM-3A with half-duplex disabled.
 3. Use 35 tracks, 16 sectors per track and 137 bytes per sector. Mount `mini0.dsk` through `mini4.dsk` in drives 0–4.
-4. Reset, select bank 0 and load [original `DBL.HEX`][mini-dbl]{:target="_blank"} through byte-memory at offset `0`.
+4. Reset and load [original `DBL.HEX`][mini-dbl]{:target="_blank"} through byte-memory at offset `0`.
    Replace `DB FF` at `0xFF22` with `3E 00` and set a breakpoint at `0x5452`.
 5. Jump to `0xFF00` and run. At the breakpoint, replace `DB FF` at `0x5452` with `3E 08`, remove the breakpoint
    and resume.
@@ -649,13 +613,13 @@ The [more original software archive][pkg-althdsw]{:target="_blank"} contains `hd
 `hdbasic-300-5-f.dsk`. More accounting and data images are in [DeRamp's hard-disk BASIC directory][deramp-hdbasic]{:target="_blank"}.
 These are original MITS platter images, not Schorn's SIMH `i.dsk`.
 
-1. Open the 8080 **MITS Altair8800** with **65536 bytes** and **1 memory bank**. Enable 88-SIO `0x10`/`0x11`,
+1. Open the 8080 **MITS Altair8800** with **65536 bytes**. Enable 88-SIO `0x10`/`0x11`,
    uppercase input and clear output bit 8; open ADM-3A with half-duplex disabled.
 2. In a copied configuration, select **MITS** mode for 88-HDSK and connect it to 88-4PIO and CPU.
    Set 88-4PIO to base `0xA0` with two PIAs. Save and reopen the computer.
 3. Mount `hdbasic-300-5-c-acct.dsk` as unit 0 removable (`image0`) and `hdbasic-300-5-f.dsk` as unit 0 fixed
    (`image1`). Use **406 cylinders**, **2 surfaces**, **24 sectors** and **256 bytes per sector**.
-4. Reset, select bank 0 and load [original `HDBL.HEX`][hdbl]{:target="_blank"} through byte-memory at offset `0`.
+4. Reset and load [original `HDBL.HEX`][hdbl]{:target="_blank"} through byte-memory at offset `0`.
 5. Set a breakpoint at `0x7289` for the `c-acct` image (`0x7286` for the `f` image). Jump to `0xFC00` and run.
    At the breakpoint, replace `DB FF` with `3E 08`, remove the breakpoint and resume.
 6. Answer memory `61440`, lineprinter `C`, highest disk `0`, files `6`. The accounting disk also asks for a date
@@ -677,7 +641,7 @@ cannot replace a missing controller or simulator service.
 | Download or family | Requirement and execution route
 |-|-
 | [Burcon CP/M][pkg-burcon]{:target="_blank"} | `DIR` returns `Bdos Err On A: Bad Sector` in emuStudio. Its BIOS requires additional sector validation.
-| [MP/M II][pkg-mpm]{:target="_blank"} | Requires banked memory (common boundary `0xB000`), `mpm.dsk`, SIMH `i.dsk` and four telnet terminals. The standard schema lacks its multi-terminal SIO setup.
+| [MP/M II][pkg-mpm]{:target="_blank"} | Requires the [MP/M memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles), `mpm.dsk`, SIMH `i.dsk` and four telnet terminals. The standard schema lacks its multi-terminal SIO setup.
 | [CP/NET and CPNOS][pkg-cpnet]{:target="_blank"} | Require SIMH's NET socket device; ordinary emuStudio SIO does not provide it.
 | [CompuPro CP/M Plus][pkg-cpmplus]{:target="_blank"} | Requires I8272, DISK1A/DISK2, SystemSupport1 serial devices and IMD media; distinct from runnable Schorn Altair `cpm3.dsk`.
 | [UCSD Pascal II.0][pkg-ucsd]{:target="_blank"} and [additional source disks][pkg-ucsddsk]{:target="_blank"} | Needs its special drive mapping: `ucsd.dsk` in floppy 4, `dsk0.dsk`/`dsk1.dsk` as SIMH hard disks, then `PASCAL`. Raw `.gz` source disks are not CP/M floppies.
@@ -691,7 +655,7 @@ cannot replace a missing controller or simulator service.
 
 ## When a program does not start
 
-If nothing appears, check the bootloader/entry address, drive 0 image, serial ports and memory banks. Match the
+If nothing appears, check the bootloader/entry address, drive 0 image, serial ports and the configured memory profile. Match the
 loader and BIOS to the disk: Schorn's current CP/M uses `mdbl.bin`, while MITS BASIC needs Disk BASIC. For garbled
 screens select the configured terminal (often VT100); for CP/M `NAME?`, check `DIR`, drive and user area. Missing
 application files usually mean overlays/data are on the wrong drive or the disk format is wrong. BASIC memory

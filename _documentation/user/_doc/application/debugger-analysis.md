@@ -41,12 +41,12 @@ db 'HELLO DEBUGGER',0
 
 ## Inspect an address
 
-Pause the CPU, open **Memory**, enter `0x8000` in **Address** and choose **Bank**. Click **Inspect address** or press
+Pause the CPU, open **Memory**, enter `0x8000` in **Address**. Click **Inspect address** or press
 Enter in the address field. Addresses accept decimal or hexadecimal notation. Browsing changes neither the program
-counter nor the CPU's selected bank, and creates no breakpoint; common memory uses physical bank zero.
+counter and creates no breakpoint.
 
 Choose **Set breakpoint...** to configure a breakpoint. **Set** adds an execution breakpoint at the CPU-visible address,
-regardless of which bank supplies the instruction;
+using the CPU-visible instruction address;
 **Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. Hitting a breakpoint opens
 **Memory** at its address; later steps follow the CPU normally unless the view was manually pinned. Instruction-table
 breakpoint controls toggle enabled/disabled.
@@ -55,7 +55,7 @@ breakpoint controls toggle enabled/disabled.
 
 ### Find bytes, integers or text
 
-Pause, choose the inspection bank, select **Bytes**, enter `41 42`, then **Find**. Wildcards work too:
+Pause, select **Bytes**, enter `41 42`, then **Find**. Wildcards work too:
 `3E ?? 32` or `A? ?F`. **Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
 Use **Previous** and **Next** to navigate matches, or **Show all addresses** to return to the full address list.
 
@@ -68,17 +68,17 @@ revisions before publishing their results.
 Choose **Find strings** to find printable ASCII runs of at least four bytes, including `HELLO DEBUGGER` at `8100`
 in the example. **String column** shows or hides the text found by that scan. Run the search again after changing memory.
 
-### Label and bookmark addresses
+### Label and comment on addresses
 
-Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **DATA**, enable
-**Bookmark**, then **Save annotation**. Check **Editing bank N:ADDR**; browsing leaves this edit target unchanged.
-Use **Filter**, **Bookmarks only** and **Go to annotation** to revisit entries. **Export annotations** and **Import**
-transfer annotation metadata; **Clear annotations** removes user annotations for this configured machine and layout.
+Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **Data**, then
+**Save annotation**. Annotations belong to CPU-visible addresses and ranges.
+Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
+for this configured machine and layout.
 
 Annotations persist beside the computer configuration. Their identity combines the CPU, normalized configuration path
 and memory layout, so labels survive reopening that configuration and loading another program with the same layout.
 Keep labels appropriate to the program you load. Import requires the same configured-machine/layout identity.
-Files from the former memory-snapshot export and annotations bound to a memory-content hash are unsupported.
+Files from the former memory-snapshot export, obsolete annotation formats and annotations bound to a memory-content hash are unsupported.
 Existing files remain untouched. Compiler source mappings stay separate and require their captured source revisions.
 
 ## Watches and breakpoints
@@ -93,9 +93,9 @@ Existing files remain untouched. Compiler source mappings stay separate and requ
 | <span class="circle">1</span> | **Expression**. Enter a register or memory expression. |
 | <span class="circle">2</span> | **Add watch**. Add the expression to the watch list. |
 | <span class="circle">3</span> | **Format**. Choose how watch values are displayed. |
-| <span class="circle">4</span> | **Watch list**. Inspect values in the selected bank; changed values remain marked until the next stop. |
+| <span class="circle">4</span> | **Watch list**. Inspect values through the CPU memory wiring; changed values remain marked until the next stop. |
 
-Enter an **Expression** and choose **Add**. Watches use the inspection bank. Choose **Hex + decimal**, **Binary** or **ASCII**;
+Enter an **Expression** and choose **Add**. Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary** or **ASCII**;
 changed values receive a marker. **Follow value** opens the evaluated address. **Edit register** reveals **Write register**.
 
 | Expression | Meaning |
@@ -111,13 +111,10 @@ changed values receive a marker. **Follow value** opens the evaluated address. *
 Before rerunning, open the memory-watch controls in **Watches**, enter a **Memory watch name** and set **Memory watch address**
 to `0x8001`. Select **Pause on writes**. Under **Memory watch options**, enter condition `A == 0x42` and leave
 **Memory watch stop from hit** at `1`, then click **Add memory watch**. It stops after the writing instruction.
-**Memory watch bank** selects a physical access bank; `-1` matches accesses in all banks. Conditions use the CPU's selected logical bank.
 Each qualifying instruction counts once, even with repeated accesses.
 
-Execution breakpoints in **Breakpoints** stop before the CPU-visible instruction address. They have no bank selection:
-the same address matches in every physical bank. Conditions and hit counts remain available through advanced options.
-**SOURCE** requires a file path and a one-based line with a current compiler mapping; resolved targets are CPU addresses,
-also independent of physical instruction bank.
+Execution breakpoints in **Breakpoints** stop before the CPU-visible instruction address. Conditions and hit counts remain available through advanced options.
+**SOURCE** requires a file path and a one-based line with a current compiler mapping; resolved targets are CPU addresses.
 **READ** includes instruction fetches; **WRITE** includes attempted guest writes. Debugger reads trigger no access rules.
 Named rules stay separate from instruction-table breakpoints; instruction-table controls create unconditional execution breakpoints.
 Resuming skips the stopped EXEC/SOURCE rule once.
@@ -148,8 +145,7 @@ Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Wa
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
 Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
-calls and branches. Analysis uses the CPU's decoder and current memory wiring, independently of the bank selected for
-memory inspection, and attempts at most 256 reachable addresses. A partial-result notice means a work bound was reached;
+calls and branches. Analysis uses the CPU's decoder and current memory wiring and attempts at most 256 reachable addresses. A partial-result notice means a work bound was reached;
 unresolved indirect targets remain unknown.
 Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
 Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
@@ -174,10 +170,10 @@ that limit. Choose **Record to file** for a continuous recording that can outlas
 | **Live history** | Return to the current computer's recent history. |
 | **Show unchanged registers** | Include unchanged values in the selected instruction's detail view. |
 
-The table shows sequence numbers, physical banks, instruction addresses, captured instruction encoding and disassembly,
+The table shows sequence numbers, CPU-visible instruction addresses, captured instruction encoding and disassembly,
 changed registers and memory writes. Select an event to inspect all recorded before/after register values,
 raw flags, memory accesses and completion status. For the example above, the instruction at `010D` records
-`WRITE bank 0:8001 = 42`. Instruction text is captured before execution, so later memory edits or bank changes
+`WRITE 8001 = 42`. Instruction text is captured before execution, so later memory edits or mapping changes
 cannot change a recorded instruction. Opened recordings use their own captured values rather than the current
 computer's memory or labels.
 

@@ -53,14 +53,10 @@ Command | Parameters | Return value | Description
 8       | 2 bytes (address of a 6-byte block in memory representing ZSDOS time in format YY MM DD HH MM SS) | N/A          | set the current time in ZSDOS format: reads the time from given address
 9       | N/A        | 5 bytes      | get the current time in CP/M 3 format: bytes 0-1: days since 31 Dec 1977 (16-bit little endian), bytes 2-4: BCD values for hour, minute, second
 10      | 2 bytes (address of a 5-byte block in memory representing CP/M 3 time in format: 0-1: days since 31 Dec 77, 2: HH, 3: MM, 4: SS)    | N/A | set the current time in CP/M 3 format: reads the time from given address
-11      | N/A        | 1 byte       | get the selected bank
-12      | 1 byte     | N/A          | set the selected bank
-13      | N/A        | 2 bytes      | get the base address of the common memory segment
 14      | N/A        | N/A          | clear the current command, timer stack, and host filenames list
 15      | N/A        | N/A          | show time difference to timer on top of stack on stdout, in milliseconds (does not pop the timer)
 16      | N/A        | 1 byte       | attach the PTP to the file named at the beginning of the CP/M command line; returns `0` on success or `1` on failure
 17      | N/A        | N/A          | detach the PTP file
-18      | N/A        | 1 byte       | determines whether machine has banked memory (returns number of memory banks)
 19      | N/A        | N/A          | set the CPU to a Z80 (NOT IMPLEMENTED)
 20      | N/A        | N/A          | set the CPU to an 8080 (NOT IMPLEMENTED)
 21      | N/A        | N/A          | start timer interrupts
@@ -96,13 +92,7 @@ calculate their offset against host local time, so on a host outside UTC their s
 host timezone offset. The CP/M 3 setter also interprets its day bytes as signed Java bytes; values with a high bit set
 in either byte do not round-trip correctly.
 
-#### Banked memory (commands 11-13, 18)
-
-Command 11 reads the active bank index, command 12 selects the bank given by its next output byte, command 13 reads
-the two-byte common boundary, and command 18 reads the bank count. Bank indices start at 0. Select only banks below
-`banksCount`; one bank is the normal unbanked configuration. Configure banks and the common region in
-[byte-mem]({{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching). Commands 11, 13, and 18 do not select a bank.
-The count is returned in one byte, so configurations of 256 or more banks cannot report their full count this way.
+Memory-control commands 11–13 and 18 are described with [byte-mem]({{ site.baseurl }}/altair8800/byte-mem#simh-memory-control).
 
 #### Paper tape commands (3-5, 16, 17)
 
@@ -228,8 +218,7 @@ to the terminal via 88-SIO (status port `0x10`, data port `0x11`).
 
 ### Example: Status page
 
-This program reads and displays the SIMH-pseudo device version, current time in ZSDOS format, selected memory bank, and
-CPU clock frequency.
+This program reads and displays the SIMH-pseudo device version, current time in ZSDOS format and CPU clock frequency.
 
 {:.code-example}
 ```
@@ -239,7 +228,6 @@ CPU clock frequency.
 ; SIMH-pseudo commands used:
 ;   6  - get SIMH version (8 bytes, null-terminated ASCII)
 ;   7  - get time in ZSDOS format (6 BCD bytes: YY MM DD HH MM SS)
-;   11 - get selected bank (1 byte)
 ;   31 - get CPU clock frequency (4 bytes, 32-bit little-endian kHz)
 
 SIOSTA  equ 0x10            ; 88-SIO status port
@@ -289,15 +277,6 @@ ver_end:
         call putch
         in a, (SIMH)        ; byte 5: second (BCD)
         call putbcd
-        call crlf
-
-        ; --- Print Memory Bank ---
-        ld hl, bank_msg
-        call puts
-        ld a, 11            ; cmd 11: get bank select
-        out (SIMH), a
-        in a, (SIMH)        ; 1 byte: bank number
-        call putd8
         call crlf
 
         ; --- Print CPU Frequency ---
@@ -420,7 +399,6 @@ putd8s: pop af
 
 ver_msg:  db "Version: ", 0
 time_msg: db "Time:    ", 0
-bank_msg: db "Bank:    ", 0
 freq_msg: db "CPU kHz:  0x", 0
 hz_msg:   db "h", 0
 freq:     db 0, 0, 0, 0
@@ -431,7 +409,6 @@ When run, the output might look like:
 ```
 Version: SIMH004
 Time:    26/03/21 14:05:33
-Bank:    0
 CPU kHz:  0x000007D0h
 ```
 

@@ -24,11 +24,13 @@ notifications to speed up the emulation.
 
 `MemoryContext<CellType>.getCellTypeClass()` identifies the cell type; byte-oriented consumers must check for
 `Byte.class` during initialization. Addresses and ranges count cells, including for word and typed-instruction memory.
-`MemoryContext.getAddressSpaceSize()` reports the exclusive upper bound of valid addresses and defaults to `getSize()`
-for dense providers. Sparse providers must override it with their stable capacity: loading or clearing cells must not
-change the address layout. Bundled RAM/RASP contexts report `Integer.MAX_VALUE`, including when empty. Their existing
-`getSize()` occupancy/high-water behavior remains separate from address validation. The CPU independently reports its
-instruction domain through `CPU.getAddressSpaceSize()` for debugger pagination.
+`CPU.getAddressSpaceSize()` reports the debugger's exclusive upper bound of valid CPU addresses.
+`MemoryContext.getSize()` reports the provider-defined size of its current storage. RAM/RASP retain their loaded
+occupancy/high-water behavior; their CPU plugins expose the logical instruction domain even before a program is loaded.
+
+`MemoryContext.peek(address)` reads through the provider's current CPU mapping without guest timing, device effects or
+access events. Pure memory can use its ordinary read; providers with execution side effects override this operation.
+CPU plugins wire inspection decoders through this view while execution continues through the normal memory interface.
 
 Implement `annotations()` to expose a `MemoryContextAnnotations` store. emuLib's `Annotations` implements
 `MemoryAnnotations` and can be owned by the memory plugin and shared with its context. `AbstractMemoryContext` supplies
@@ -47,30 +49,27 @@ annotations.add(address, new SourceCodeAnnotation(
 
 The debugger uses these positions to open source files. In `byte-mem`, successful writes invalidate source annotations
 at the written addresses, including while notifications are disabled. Clearing memory removes all source annotations.
-An ignored ROM write leaves them intact. Annotations are keyed by address, without a bank identifier.
+An ignored ROM write leaves them intact. Annotations are keyed by CPU-visible address.
 
 Declare compiler column units as described in [source-position coordinates]({{ site.baseurl }}/compiler/#source-position-coordinates).
 The application's `ProgramIndex` combines source mappings, user annotations, execution-breakpoint presence, and indexed
 instruction flow for one image/layout. Plugins continue to use emuLib contracts; they do not import application index
 classes. Compiler reindexing preserves user annotations and other owners' metadata.
 
-## Bank-aware inspection and guest accesses
-
-Expose `getBanksCount()`, `getSelectedBank()`, `getCommonBoundary()`, and `readBank(address, bank)` for bank-aware debugger
-inspection. Addresses below the common boundary are banked; addresses at or above it use physical bank zero. Inspection
-must keep bank selection and guest timing unchanged. The default context has one bank and delegates bank-zero inspection to
-`read`; memory-mapped providers must implement side-effect-free inspection themselves.
+## Guest accesses
 
 Memory-change listeners serve UI refresh. Guest read/write watchpoints use the CPU's execution probe, so they still work
 when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
 writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
 
 Compiler annotations remain address-based. The host's user labels/comments/bookmarks use separate
-configured-machine/layout identity and bank-aware metadata; they do not add bank semantics to `SourceCodeAnnotation`. See
-[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for bank identity and hook integration.
+configured-machine/layout identity and CPU-visible addresses.
+`ApplicationApi.getDebuggerMemory()` exposes labels, comments and the current instruction by CPU address. A plugin that
+displays physical memory decides whether its displayed cells belong to the current CPU mapping. See
+[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for hook integration.
 
 Debugger searches and string scans inspect paused live memory. Flow analysis uses the CPU's disassembler and its
-plugin-provided memory wiring, independently of the bank selected for memory inspection. These operations retain derived
+plugin-provided memory wiring. These operations retain derived
 addresses, strings or instruction metadata and reject results when session or memory revisions change.
 User annotation identity derives from the CPU, normalized configuration URI and layout; it does not hash or copy memory cells.
 Annotation import rejects the former memory-content identities and snapshot exports.

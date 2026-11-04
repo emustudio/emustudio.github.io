@@ -67,7 +67,7 @@ The abstract schema for emuStudio:
 1. Use `config/ZxSpectrum48K.toml` from the emuStudio installation directory.
    The supplied configuration is named **ZX Spectrum 48K + AY** in the computer selector.
 2. Place a legal 16 KB ZX Spectrum ROM image named `48.rom` in the installation directory, or set `imageName0`
-   in `[MEMORY.settings]` to its path. The configuration uses one memory bank, loads the image at address `0x0000`,
+   in `[MEMORY.settings]` to its path. The configuration loads the image at address `0x0000`,
    and protects `0x0000`–`0x3FFF` as ROM.
 3. Start the configured computer from the installation directory with
    `./emuStudio -cf config/ZxSpectrum48K.toml`.

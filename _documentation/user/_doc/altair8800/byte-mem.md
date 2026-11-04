@@ -284,3 +284,52 @@ public interface ByteMemoryContext extends MemoryContext<Byte> {
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [developerDoc]: /documentation/developer/introduction/
 [memoryBanks]: {{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching
+
+
+## Software memory profiles
+
+For CP/M 2.2 and the 8080 software examples, use 65536 bytes and one bank. For CP/M 3 and Z3PLUS, use 65536 bytes, eight banks and common boundary `0xC000`. MP/M II uses common boundary `0xB000`. Select bank zero before loading a bootloader after reset.
+
+![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
+
+![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
+
+## SIMH memory control
+
+Command 11 reads the active bank index, command 12 selects the bank given by its next output byte, command 13 reads
+the two-byte common boundary, and command 18 reads the bank count. Bank indices start at 0. Select only banks below
+`banksCount`; one bank is the normal unbanked configuration. Configure banks and the common region in
+[byte-mem]({{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching). Commands 11, 13, and 18 do not select a bank.
+The count is returned in one byte, so configurations of 256 or more banks cannot report their full count this way.
+
+For Space Invaders, use `memorySize = 65536`, `banksCount = 1`, `commonBoundary = 0`, and `imageBank0` through `imageBank3` set to `0`. The Spectrum startup ROM also uses `imageBank0 = 0`.

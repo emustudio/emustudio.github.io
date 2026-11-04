@@ -51,7 +51,7 @@ contains `settings = { }`, remove that inline table before adding `[CPU.settings
 
 Use **History** in the shared debugger to record recent instructions or continuously save execution to a file.
 Recorded instructions include their sequence, opcode bytes and disassembly captured before execution, before/after
-register values, raw flags, physical bank, memory accesses and completion status. Z80 register snapshots include
+register values, raw flags, memory accesses and completion status. Z80 register snapshots include
 alternate registers. See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording).
 
 For unattended startup runs, use the application's
@@ -129,7 +129,7 @@ The ZX Spectrum Next's Z80N instructions and additional hardware are outside thi
 
 #### Standalone Altair with serial console
 
-Use `as-z80`, `z80-cpu`, one 64 KiB writable memory bank and `88-sio` connected to a terminal.
+Use `as-z80`, `z80-cpu`, 64 KiB of writable memory and `88-sio` connected to a terminal.
 The SIO data port must include `11h`. This launcher provides only the CP/M output calls needed by the exercisers.
 
 1. Stop emulation and compile the following support code in the source editor:

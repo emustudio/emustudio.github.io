@@ -35,7 +35,6 @@ section:
 |-|-
 | `imageName0` | Path to the 16 KB ROM file (e.g. `examples/zxspectrum-48k/48.rom`)
 | `imageAddress0` | Load address for the ROM (must be `0`)
-| `imageBank0` | Memory bank (must be `0`)
 |---
 
 ### CPU (`z80-cpu`) settings

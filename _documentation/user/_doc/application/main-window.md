@@ -117,13 +117,10 @@ bookmarks or breakpoints. Select **References** for static flow and incoming ref
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
-Selecting an instruction updates the inspection address. Browsing changes neither the program counter nor the CPU’s
-selected memory bank. A breakpoint hit opens **Memory** at its address; later steps follow the CPU unless the view was
+Selecting an instruction updates the inspection address. Browsing does not change the program counter. A breakpoint hit inspects its address; later steps follow the CPU unless the view was
 manually pinned. History records recent execution, saves continuous recordings, and opens saved recordings
 for inspection without restoring the live machine.
-To browse directly, pause, open **Memory**, enter a decimal or hexadecimal **Address** and choose **Bank**, then click
-**Inspect address** or press Enter in the address field. This changes neither the program counter nor the CPU's selected
-bank, and creates no breakpoint.
+Use the configured memory plugin window to inspect or edit memory.
 See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
 
 #### List of instructions
@@ -131,7 +128,7 @@ See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }})
 The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
 they show a breakpoint control, address, instruction, and opcode bytes, followed by user labels and comments. The red
 row marks the next instruction. Click the breakpoint control to toggle the execution breakpoint on or off.
-Hover over the control to see its current state. Memory-bank selection and manual view pinning do not configure breakpoints.
+Hover over the control to see its current state. Manual view pinning does not configure breakpoints.
 
 The number of visible rows follows the space available in the window. To change memory contents, use the memory
 plugin's window or compile another program; the instruction and opcode cells are read-only.

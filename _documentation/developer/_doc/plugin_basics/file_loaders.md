@@ -51,7 +51,7 @@ loader.load(path, block -> {
 For TAP/TZX, byte-mem pairs Spectrum CODE headers with subsequent data blocks using shared
 packet/header decoding. The plugin validates checksums, declared lengths and complete turbo bytes;
 it ignores BASIC/arrays and rejects unsupported TZX blocks. Each load has fresh pairing state.
-Memory placement and banks are plugin responsibilities.
+Memory placement is a plugin responsibility.
 Direct loading does not execute BASIC or decode custom loaders and recordings into memory.
 
 ## Tape playback

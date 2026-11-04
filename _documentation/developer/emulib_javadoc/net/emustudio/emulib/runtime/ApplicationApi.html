@@ -63,6 +63,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#getDebuggerTable()" tabindex="0">getDebuggerTable()</a></li>
+<li><a href="#getDebuggerMemory()" tabindex="0">getDebuggerMemory()</a></li>
 <li><a href="#getContextPool()" tabindex="0">getContextPool()</a></li>
 <li><a href="#getDialogs()" tabindex="0">getDialogs()</a></li>
 <li><a href="#getGUI()" tabindex="0">getGUI()</a></li>
@@ -122,29 +123,34 @@ Plugins can use it for the communication with emuStudio.</div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get context pool.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDebuggerTable()" class="member-name-link">getDebuggerTable</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDebuggerMemory()" class="member-name-link">getDebuggerMemory</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns the debugger's memory information service, or null when unavailable.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDebuggerTable()" class="member-name-link">getDebuggerTable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get debugger table.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDialogs()" class="member-name-link">getDialogs</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDialogs()" class="member-name-link">getDialogs</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get dialogs object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getGUI()" class="member-name-link">getGUI</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getGUI()" class="member-name-link">getGUI</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get GUI object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getProgramLocation()" class="member-name-link">getProgramLocation</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getProgramLocation()" class="member-name-link">getProgramLocation</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Gets program start location (usually a memory address).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setProgramLocation(int)" class="member-name-link">setProgramLocation</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setProgramLocation(int)" class="member-name-link">setProgramLocation</a><wbr>(int&nbsp;location)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets program start location (usually a memory address).</div>
 </div>
 </div>
@@ -192,6 +198,20 @@ command-line interface).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>debugger table in emuStudio.</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getDebuggerMemory()">
+<h3>getDebuggerMemory</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></span>&nbsp;<span class="element-name">getDebuggerMemory</span>()</div>
+<div class="block">Returns the debugger's memory information service, or null when unavailable.
+The service remains valid for the lifetime of this application API.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>read-only debugger memory information</dd>
 </dl>
 </div>
 </section>

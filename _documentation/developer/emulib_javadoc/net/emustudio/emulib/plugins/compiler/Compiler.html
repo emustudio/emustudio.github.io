@@ -60,6 +60,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" tabindex="0">removeCompilerListener(CompilerListener)</a></li>
 <li><a href="#compile(java.nio.file.Path,java.util.Optional)" tabindex="0">compile(Path, Optional)</a></li>
 <li><a href="#createLexer()" tabindex="0">createLexer()</a></li>
+<li><a href="#getSourcePositionColumnUnit()" tabindex="0">getSourcePositionColumnUnit()</a></li>
 <li><a href="#getSourceFileExtensions()" tabindex="0">getSourceFileExtensions()</a></li>
 <li><a href="#isAutomationSupported()" tabindex="0">isAutomationSupported()</a></li>
 <li><a href="#convertInputToOutputPath(java.nio.file.Path,java.lang.String)" tabindex="0">convertInputToOutputPath(Path, String)</a></li>
@@ -141,14 +142,19 @@ meta-information for runtime, which can be used by other plugins.</div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get the list of source file extensions supported by the compiler.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSourcePositionColumnUnit()" class="member-name-link">getSourcePositionColumnUnit</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Coordinate convention of this compiler's memory source-position annotations.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Determine if automation is supported.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Removes CompilerListener object from the listeners list.</div>
 </div>
 </div>
@@ -226,6 +232,18 @@ Usually a successfully compiled program is loaded in memory.</div>
 <dt>Returns:</dt>
 <dd>new lexer object</dd>
 </dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSourcePositionColumnUnit()">
+<h3>getSourcePositionColumnUnit</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></span>&nbsp;<span class="element-name">getSourcePositionColumnUnit</span>()</div>
+<div class="block">Coordinate convention of this compiler's memory source-position annotations. Declaring a
+known unit also declares one-based lines, zero-based columns, and tabs counting as one
+column. UNKNOWN means the consumer cannot safely resolve positions to source offsets.
+Lexical Token offsets remain UTF-16 independently of this convention.</div>
 </div>
 </section>
 </li>

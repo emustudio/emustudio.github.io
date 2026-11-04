@@ -72,7 +72,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Disassembler</span></div>
-<div class="block">An instruction disassembler interface.</div>
+<div class="block">An instruction disassembler interface. The CPU plugin supplies the memory wiring used for
+decoding; addresses belong to that logical address space. The connected plugins implement memory mapping.</div>
 </div>
 </section>
 <section class="summary">

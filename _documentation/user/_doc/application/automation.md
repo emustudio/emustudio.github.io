@@ -113,4 +113,4 @@ operation, compilation error, unexpected CPU stop, or missing step-completion no
 Step completion has a five-second wait. The script runner uses synchronous stepping; `--waitmax` controls normal continuous
 automation and does not bound scripts. Use each RUN/STEP instruction limit to bound execution instead.
 
-See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory-bank behavior.
+See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory expressions.

@@ -20,7 +20,7 @@ to getters/setters with `register(name, bits, getter, setter)`. Widths are 1–6
 register width (64-bit values use the full `long` bit pattern). Register pairs can share bindings with their component registers. Inspection, edits and listener changes
 require a paused CPU; register getters must be side-effect-free.
 
-The probe exposes the original context through `memory()`. For byte memory, use `instrumentedMemory()` only for the CPU's execution memory reference. Word or raw-memory engines report numeric guest accesses with `access(address, bank, value, write)`;
+The probe exposes the original context through `memory()`. For byte memory, use `instrumentedMemory()` only for the CPU's execution memory reference. Word or raw-memory engines report numeric guest accesses with `access(address, value, write)`;
 typed instruction encodings remain text. Keep recording disassemblers on an inspection-only view such as
 `DebugProbe.inspectionMemory(memory)`, and keep existing bus-cycle interfaces on the original context. Configure
 `onActivityChanged` before exposing the probe to switch execution between the original and instrumented memory references.
@@ -36,25 +36,14 @@ accounting. Configure `onRegisterEdited` to notify existing CPU status listeners
 `AbstractCPU.notifyInternalStateChanged()` provides that notification without a run-state change.
 
 Probe listeners run on the execution thread. They must not call CPU lifecycle operations. Events contain immutable
-before/after register snapshots, the instruction's physical bank/address, guest memory accesses and completion status.
+before/after register snapshots, the CPU-visible instruction address, guest memory accesses and completion status.
 Each event also carries a monotonic sequence number and opcode/disassembly text captured before execution. Capture
 disassembly through side-effect-free inspection memory so it does not add guest access events; never reconstruct it from
-later live memory. This preserves historical instructions after self-modification or bank changes. Failed decoding must
+later live memory. This preserves historical instructions after self-modification or mapping changes. Failed decoding must
 remain explicit without preventing the instruction outcome from being recorded.
 Read accesses include instruction fetches; writes are attempted guest writes and do not prove that a ROM/device accepted
 them. Debugger inspection through the original context produces no guest access events. Access hooks work independently of
 UI memory-change notification settings. Listener registration order should not be used to coordinate separate tools.
-
-## Bank inspection
-
-`MemoryContext` defaults to one bank. Banked providers implement `getBanksCount`, `getSelectedBank`, `getCommonBoundary`
-and `readBank(address, bank)`. Addresses below the common boundary use the selected bank; the shared region uses physical
-bank zero. `getBank(address)` reports that physical bank. Inspecting a bank must not select it or advance guest bus timing.
-The default `readBank` delegates to normal reads for bank zero, so providers with memory-mapped side effects need their own
-inspection implementation. The Spectrum bus delegates bank inspection directly to its underlying memory.
-
-An instruction in common ROM has physical bank zero, while its memory expressions can still read the selected logical bank.
-Keep instruction-bank identity separate from expression evaluation context.
 
 ## Flow metadata and persistence
 
@@ -65,9 +54,8 @@ adds 8080/Z80 flow metadata while Edigen-generated disassembly remains unchanged
 
 `CPU.getBreakpoints()` returns a snapshot of ordinary address breakpoints; `AbstractCPU` implements this. The default empty
 snapshot preserves plugins that do not expose breakpoint enumeration. Execution and resolved source breakpoints match
-only the CPU-visible instruction address, regardless of the physical bank supplying that instruction. Their models and
-persistence contain no bank selector. The bank passed to instruction hooks still identifies inspection/recording context;
-read/write watchpoints continue matching the physical bank in guest access events. Named debugger rules, watches, live inspection,
+only the CPU-visible instruction address. Read/write watchpoints match CPU-visible guest access addresses.
+Named debugger rules, watches, live inspection,
 annotation persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
 from user labels/comments. True machine rewind requires coordinated device/CPU/memory checkpoints and input replay; instruction
 history alone does not provide restoration.
