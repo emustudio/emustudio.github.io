@@ -32,29 +32,29 @@ occupancy/high-water behavior; their CPU plugins expose the logical instruction 
 access events. Pure memory can use its ordinary read; providers with execution side effects override this operation.
 CPU plugins wire inspection decoders through this view while execution continues through the normal memory interface.
 
-Implement `annotations()` to expose a `MemoryContextAnnotations` store. emuLib's `Annotations` implements
-`MemoryAnnotations` and can be owned by the memory plugin and shared with its context. `AbstractMemoryContext` supplies
-listener management; the concrete context supplies storage and annotations.
+`AbstractMemoryContext` supplies listener management; concrete contexts supply memory storage. Annotations are
+independent of memory contexts: the application owns a live annotation engine for the loaded computer and exposes it
+through `ApplicationApi.getAnnotations()`. Its entries use CPU-visible addresses and half-open cell ranges. Plugins
+sharing the application API see the same annotations; physical banks do not own separate annotations.
 
-Annotations belong to the plugin ID in each annotation. Producers remove their own entries with `removeAll(pluginID)`
-when rebuilding them. Compilers can add `SourceCodeAnnotation` entries after writing generated cells:
+An annotation has an owner ID and an entry ID. After a successful compilation and load, a compiler can atomically
+replace its own source mappings, preserving annotations from other owners:
 
 ```java
-MemoryContextAnnotations annotations = memory.annotations();
-annotations.removeAll(pluginID);
-annotations.add(address, new SourceCodeAnnotation(
-        pluginID, SourceCodePosition.of(line, column, sourcePath.toString())
-));
+AnnotationEngine annotations = applicationApi.getAnnotations();
+AnnotationEngine.Entry mapping = new AnnotationEngine.Entry(
+        pluginID, entryId, address, address + 1, "source", "",
+        SourceCodePosition.of(line, column, sourcePath.toString()));
+annotations.replaceOwner(pluginID, List.of(mapping));
 ```
 
-The debugger uses these positions to open source files. In `byte-mem`, successful writes invalidate source annotations
-at the written addresses, including while notifications are disabled. Clearing memory removes all source annotations.
-An ignored ROM write leaves them intact. Annotations are keyed by CPU-visible address.
+Publish all mappings for the compiler in the same replacement, not one replacement per address. Failed compilation
+must leave existing compiler mappings intact. The debugger uses source positions to open source files; user-created
+annotations are managed and persisted by the application independently of compiler mappings.
 
 Declare compiler column units as described in [source-position coordinates]({{ site.baseurl }}/compiler/#source-position-coordinates).
-The application's `ProgramIndex` combines source mappings, user annotations, execution-breakpoint presence, and indexed
-instruction flow for one image/layout. Plugins continue to use emuLib contracts; they do not import application index
-classes. Compiler reindexing preserves user annotations and other owners' metadata.
+The application's `ProgramIndex` uses the live engine alongside execution-breakpoint presence and indexed instruction
+flow for one image/layout. Plugins use emuLib contracts; they do not import application index classes.
 
 ## Guest accesses
 
@@ -62,10 +62,10 @@ Memory-change listeners serve UI refresh. Guest read/write watchpoints use the C
 when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
 writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
 
-Compiler annotations remain address-based. The host's user labels/comments/bookmarks use separate
-configured-machine/layout identity and CPU-visible addresses.
-`ApplicationApi.getDebuggerMemory()` exposes labels, comments and the current instruction by CPU address. A plugin that
-displays physical memory decides whether its displayed cells belong to the current CPU mapping. See
+`ApplicationApi.getAnnotations()` provides live labels and source mappings. `ApplicationApi.getExecutionState()`
+provides the current instruction address and change listeners; `currentInstruction()` returns -1 when unavailable. Callbacks
+may occur outside the Swing event thread. A plugin displaying physical memory decides whether its displayed cells belong
+to the current CPU mapping. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for hook integration.
 
 Debugger searches and string scans inspect paused live memory. Flow analysis uses the CPU's disassembler and its

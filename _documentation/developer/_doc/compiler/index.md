@@ -151,13 +151,15 @@ source filename, line, and column, including for errors in included files.
 `AbstractCompiler` reads version and copyright from the plugin's `version.properties` resource as described in
 [plugin metadata]({{ site.baseurl }}/plugin_basics/#version-and-copyright-metadata).
 
-After loading generated code, attach source positions through `memory.annotations()`. The bundled 8080 and Z80
-assemblers remove annotations owned by their plugin ID and add positions for generated addresses, including included
-files. See [memory annotations]({{ site.baseurl }}/memory/#cell-type-size-and-annotations) for ownership and invalidation.
+After successfully loading generated code, publish all source positions through the live engine returned by
+`applicationApi.getAnnotations()`. The bundled 8080 and Z80 assemblers replace their plugin-owned entries in one
+`replaceOwner` call, including mappings for included files. Failed compilation leaves previous mappings intact, and
+replacement preserves user annotations and other owners' entries. See
+[annotations]({{ site.baseurl }}/memory/#cell-type-size-and-annotations) for the API and address semantics.
 
 ### Source-position coordinates
 
-Compilers that emit memory source annotations declare their column unit through `getSourcePositionColumnUnit()`:
+Compilers that emit source annotations declare their column unit through `getSourcePositionColumnUnit()`:
 
 ```java
 @Override
