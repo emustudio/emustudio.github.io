@@ -61,11 +61,6 @@ inspection. Addresses below the common boundary are banked; addresses at or abov
 must keep bank selection and guest timing unchanged. The default context has one bank and delegates bank-zero inspection to
 `read`; memory-mapped providers must implement side-effect-free inspection themselves.
 
-`MemoryContext.forBank(bank)` supplies a read-only live context whose logical reads use that explicit bank and whose
-common cells resolve to bank zero. Creating it reads no cells and does not select a CPU bank. Typed block reads use the
-same inspection path; writes and mutable annotation access are rejected. The caller still coordinates paused-state
-and revision checks because a live context does not freeze memory.
-
 Memory-change listeners serve UI refresh. Guest read/write watchpoints use the CPU's execution probe, so they still work
 when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
 writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
@@ -74,7 +69,8 @@ Compiler annotations remain address-based. The host's user labels/comments/bookm
 configured-machine/layout identity and bank-aware metadata; they do not add bank semantics to `SourceCodeAnnotation`. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for bank identity and hook integration.
 
-Debugger searches, string scans and flow analysis read paused live memory through inspection views. They retain derived
+Debugger searches and string scans inspect paused live memory. Flow analysis uses the CPU's disassembler and its
+plugin-provided memory wiring, independently of the bank selected for memory inspection. These operations retain derived
 addresses, strings or instruction metadata and reject results when session or memory revisions change.
 User annotation identity derives from the CPU, normalized configuration URI and layout; it does not hash or copy memory cells.
 Annotation import rejects the former memory-content identities and snapshot exports.

@@ -59,15 +59,15 @@ Decode flow from opcodes and operands rather than mnemonic text. The 8080/Z80 pl
 Edigen disassembly; the current `.eds` grammar does not define semantic flow attributes. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary and bank context.
 
-### Live bank-aware analysis
+### Live analysis through CPU wiring
 
-Implement optional `Disassembler.forBank(bank)` to supply a side-effect-free inspection decoder for an explicit bank.
-The returned decoder reads live cells through that bank's inspection view and must not change the CPU's selected bank
-or emit guest access events. It must construct instruction text, lengths and flow metadata against the same view.
-`BankedDisassembler<T>` connects an existing decoder factory to the logical context and live read-only contexts returned by
-`MemoryContext.forBank(bank)`.
-The default empty optional leaves ordinary disassembly available. The host can analyze the currently selected bank
-through that decoder while verifying that the mapping stays unchanged; other inspection banks require `forBank` support.
+The CPU plugin supplies the disassembler and its memory wiring. Instruction text, lengths, and flow metadata all use
+that logical address space. Read each address through the connected memory context; different addresses may map to
+different physical banks. Bank selection and address mapping belong to the connected plugins and can be invisible to
+the CPU. Decoders and disassemblers do not select or inspect banks.
+
+The host always uses the CPU's disassembler for flow analysis. Selecting a bank for memory inspection does not change
+the decoder or its wiring.
 
 The host runs analysis while paused, checks the session and memory/content revisions, and discards results after edits,
 execution or disposal. Results retain derived instruction metadata and graph edges. They do not retain a memory image.

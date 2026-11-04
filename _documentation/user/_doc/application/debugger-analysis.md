@@ -148,12 +148,12 @@ Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Wa
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
 Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
-calls and branches. Analysis reads the chosen inspection bank without switching the CPU's bank and attempts at most 256
-reachable addresses. A partial-result notice means a work bound was reached; unresolved indirect targets remain unknown.
+calls and branches. Analysis uses the CPU's decoder and current memory wiring, independently of the bank selected for
+memory inspection, and attempts at most 256 reachable addresses. A partial-result notice means a work bound was reached;
+unresolved indirect targets remain unknown.
 Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
 Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
-Other inspection banks require bank-aware decoding. Plugins without that view can analyze the CPU's currently selected
-bank while the mapping stays unchanged. Static references do not prove execution coverage.
+Static references do not prove execution coverage.
 
 ### Instruction recording
 
