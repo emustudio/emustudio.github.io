@@ -47,38 +47,7 @@ Use **Alt+Shift+Right** to expand a selection through a word, enclosing brackets
 
 ## Find and replace
 
-**Ctrl+F** or **Ctrl+R** opens the inline find/replace bar. It supports case-sensitive, whole-word and regex searches,
-capture-group replacement, a current/total match counter, and preserve-case replacement. **Selection** captures the
-current selection as the search boundary. Moving to another match keeps that boundary; switching source views clears it.
-Next/previous search shortcuts use the inline query, including after the bar is closed.
-
-![Inline find and replace showing search options and the current match count]({{ site.baseurl }}/assets/application/source-inline-search.png){: style="max-width: 1100px; width: 100%;" }
-
-Use **Previous / Next**, **Shift+F3 / F3**, or **Edit → Find previous / Find next** to move between matches. **Replace** replaces the
-selected match; **Replace all** replaces every match within the current search boundary in one undo step. The **×**
-in the search bar hides it without closing the file.
-
-Choose **Find / replace in files** or **Edit → Find / replace in files…** to search open tabs or a directory. Include/exclude globs use
-semicolon-separated patterns, for example `*.asm;*.inc`. Directory searches read UTF-8 text and use unsaved open buffers
-when available. Results show the file, line, matched text, and proposed replacement; double-click a result to navigate.
-Check the replacements to apply and choose **Apply checked replacements**. Changed snapshots abort replacement. Open
-buffers remain unsaved and support undo; replacements in closed files are written to disk.
-
-![Find and replace across open files with a selectable replacement preview]({{ site.baseurl }}/assets/application/source-search-files.png){: style="max-width: 486px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Find**. Enter the text or regular expression to search for. |
-| <span class="circle">2</span> | **Replace**. Enter the proposed replacement. |
-| <span class="circle">3</span> | **Match case**. Require matching letter case. |
-| <span class="circle">4</span> | **Whole word**. Match complete words. |
-| <span class="circle">5</span> | **Regex**. Interpret the query as a regular expression. |
-| <span class="circle">6</span> | **Preserve case**. Adapt replacements to the matched text’s case. |
-| <span class="circle">7</span> | **Scope**. Search open files or a selected directory. |
-| <span class="circle">8</span> | **Preview**. Review matches and check the replacements to apply; double-click a row to navigate. |
-| <span class="circle">9</span> | **Search**. Build the match and replacement preview. |
-| <span class="circle">10</span> | **Apply checked replacements**. Apply only the checked changes. |
+Use the inline search bar to find or replace text in the active source view. See [Find and replace]({{ site.baseurl }}/application/find-replace) for controls, selection scope, and regular expression examples.
 
 ## Text and indentation
 

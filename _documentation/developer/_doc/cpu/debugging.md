@@ -67,8 +67,8 @@ adds 8080/Z80 flow metadata while Edigen-generated disassembly remains unchanged
 snapshot preserves plugins that do not expose breakpoint enumeration. Execution and resolved source breakpoints match
 only the CPU-visible instruction address, regardless of the physical bank supplying that instruction. Their models and
 persistence contain no bank selector. The bank passed to instruction hooks still identifies inspection/recording context;
-read/write watchpoints continue matching the physical bank in guest access events. Named debugger rules, watches, user annotations,
-captures, persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
+read/write watchpoints continue matching the physical bank in guest access events. Named debugger rules, watches, live inspection,
+annotation persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
 from user labels/comments. True machine rewind requires coordinated device/CPU/memory checkpoints and input replay; instruction
 history alone does not provide restoration.
 

@@ -35,9 +35,6 @@ The **Set 1** and **Set 2** tabs show the main and alternate registers and flags
 - **CPU Frequency** sets the target clock in kHz. Pause or stop emulation before changing it.
   The change lasts for the current session; edit `frequency_khz` to make it persistent.
 - **Runtime frequency** shows the measured execution rate.
-- **Load snapshot...** restores a ZX Spectrum 48K `.sna` or `.z80` snapshot while emulation is paused or stopped.
-  Use it with the [ZX Spectrum computer]({{ site.baseurl }}/zxspectrum48k/z80-cpu), whose ROM, bus and ULA
-  provide the hardware expected by the snapshot. After loading, run emulation to resume the program.
 
 ## Configuration file
 
@@ -112,8 +109,8 @@ tests. For the emulated 48K computer, use these programs from `Tests/ZX48_ZX128`
    so the expected output depends on the selected program.
 
 For example, to build the block-flags test yourself, install [sjasmplus][sjasmplus]{:target="_blank"},
-then run `sjasmplus z80_block_flags_test.asm` from its directory. This produces `z80bltst.tap` and `z80bltst.sna`.
-The SNA can also be opened with the CPU panel's **Load snapshot...** button, then resumed with **Run**.
+then run `sjasmplus z80_block_flags_test.asm` from its directory. Load the resulting `z80bltst.tap` through
+the tape player as described above.
 
 The ZX Spectrum Next's Z80N instructions and additional hardware are outside this plugin's Z80/48K setup.
 

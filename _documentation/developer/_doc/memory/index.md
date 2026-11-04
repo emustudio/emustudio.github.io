@@ -54,9 +54,6 @@ The application's `ProgramIndex` combines source mappings, user annotations, exe
 instruction flow for one image/layout. Plugins continue to use emuLib contracts; they do not import application index
 classes. Compiler reindexing preserves user annotations and other owners' metadata.
 
-Byte-memory image loaders and dumpers use a UTF-8 `.meta` sidecar to restore or save source positions. Sidecar addresses
-are absolute: loading a binary image at another address does not relocate its metadata.
-
 ## Bank-aware inspection and guest accesses
 
 Expose `getBanksCount()`, `getSelectedBank()`, `getCommonBoundary()`, and `readBank(address, bank)` for bank-aware debugger
@@ -64,13 +61,23 @@ inspection. Addresses below the common boundary are banked; addresses at or abov
 must keep bank selection and guest timing unchanged. The default context has one bank and delegates bank-zero inspection to
 `read`; memory-mapped providers must implement side-effect-free inspection themselves.
 
+`MemoryContext.forBank(bank)` supplies a read-only live context whose logical reads use that explicit bank and whose
+common cells resolve to bank zero. Creating it reads no cells and does not select a CPU bank. Typed block reads use the
+same inspection path; writes and mutable annotation access are rejected. The caller still coordinates paused-state
+and revision checks because a live context does not freeze memory.
+
 Memory-change listeners serve UI refresh. Guest read/write watchpoints use the CPU's execution probe, so they still work
 when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
 writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
 
-Compiler annotations and their `.meta` sidecars remain address-based. The host's user labels/comments/bookmarks use separate
-image-identity and bank-aware metadata; they do not add bank semantics to `SourceCodeAnnotation`. See
+Compiler annotations remain address-based. The host's user labels/comments/bookmarks use separate
+configured-machine/layout identity and bank-aware metadata; they do not add bank semantics to `SourceCodeAnnotation`. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for bank identity and hook integration.
+
+Debugger searches, string scans and flow analysis read paused live memory through inspection views. They retain derived
+addresses, strings or instruction metadata and reject results when session or memory revisions change.
+User annotation identity derives from the CPU, normalized configuration URI and layout; it does not hash or copy memory cells.
+Annotation import rejects the former memory-content identities and snapshot exports.
 
 ## Shared GUI actions
 
@@ -78,8 +85,7 @@ Memory plugins with Swing interfaces can use emuLib's `GUI.runInBackground` for 
 disables the supplied action, runs the task outside the event-dispatch thread, invokes success or error callbacks on
 completion, and re-enables the action only after those callbacks finish. Errors are unwrapped before delivery.
 
-Each memory plugin keeps its own clear-and-refresh (erase memory) action and its format-specific load and dump
-operations.
+Each memory plugin keeps its own clear-and-refresh (erase memory) action and format-specific program-image loader.
 
 [memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
 [memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html

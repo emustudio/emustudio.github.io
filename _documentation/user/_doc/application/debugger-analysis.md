@@ -55,106 +55,31 @@ breakpoint controls toggle enabled/disabled.
 
 ### Find bytes, integers or text
 
-![Byte search for 41 42 finds one match at 8000, labeled output]({{ site.baseurl }}/assets/application/debugger-demo-search.png){: style="max-width: 886px; width: 100%; height: auto;" }
+Pause, choose the inspection bank, select **Bytes**, enter `41 42`, then **Find**. Wildcards work too:
+`3E ?? 32` or `A? ?F`. **Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
+Use **Previous** and **Next** to navigate matches, or **Show all addresses** to return to the full address list.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
-
-After running the example, choose **Bytes**, enter `41 42`, then **Find**. Wildcards work too: `3E ?? 32` or `A? ?F`.
-**Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
-
-**Rescan** filters previous matches by Changed, Equal, Increased or Decreased, retaining the original bank, width and byte
-order. Results show captured bytes; **Live memory** returns to current bytes.
-
-### Compare before and after execution
-
-![Baseline comparison shows 41 at 8000, 42 at 8001, and return-address bytes at 8FFE and 8FFF]({{ site.baseurl }}/assets/application/debugger-demo-compare.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
-
-Open **Compare / strings** and **Capture baseline** before running. Pause, then **Compare baseline**.
-Here, `STA` changed `8000–8001`; `CALL` left its return address at `8FFE–8FFF` after `RET` restored SP.
-**Compare binary** accepts a full-size raw image of the inspected bank. Baseline capture preserves annotations.
+Search reads live memory while paused. Results retain matching addresses; displayed bytes come from current memory.
+Execution, memory edits and metadata changes clear outdated results. Background searches check the session and memory
+revisions before publishing their results.
 
 ### Find readable strings
 
-![String scan finds HELLO DEBUGGER at 8100 and shows its message label]({{ site.baseurl }}/assets/application/debugger-demo-strings.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
-
-Choose **Find strings** under **Compare / strings**. It finds printable ASCII runs of at least four bytes,
-including `HELLO DEBUGGER` at `8100`. Displayed text comes from the scan's capture.
+Choose **Find strings** to find printable ASCII runs of at least four bytes, including `HELLO DEBUGGER` at `8100`
+in the example. **String column** shows or hides the text found by that scan. Run the search again after changing memory.
 
 ### Label and bookmark addresses
 
-![Annotation editor labels bank 0 address 8000 as output, marks it DATA and bookmarks it]({{ site.baseurl }}/assets/application/debugger-demo-annotations.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Filter**. Find annotations by their text. |
-| <span class="circle">2</span> | **Bookmarks only**. Show bookmarked annotations. |
-| <span class="circle">3</span> | **Go to annotation**. Navigate to the selected entry. |
-| <span class="circle">4</span> | **Delete**. Remove the selected annotation. |
-| <span class="circle">5</span> | **Annotate inspected address**. Start an annotation at the current inspected address. |
-| <span class="circle">6</span> | **Label**. Enter the address label. |
-| <span class="circle">7</span> | **Comment**. Enter the address comment. |
-| <span class="circle">8</span> | **Kind**. Mark the address as code, data, or unspecified. |
-| <span class="circle">9</span> | **Bookmark**. Mark this annotation for quick retrieval. |
-| <span class="circle">10</span> | **Save annotation**. Save edits at the displayed editing address. |
-| <span class="circle">11</span> | **Export annotations**. Save the annotation metadata. |
-| <span class="circle">12</span> | **Import**. Read annotations from a saved file. |
-| <span class="circle">13</span> | **Clear annotations**. Remove all annotations from this image. |
-| <span class="circle">14</span> | **Export memory and metadata**. Save the captured bytes and their annotation sidecar. |
-
 Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **DATA**, enable
 **Bookmark**, then **Save annotation**. Check **Editing bank N:ADDR**; browsing leaves this edit target unchanged.
-Use **Filter**, **Bookmarks only** and **Go to annotation** to revisit entries.
+Use **Filter**, **Bookmarks only** and **Go to annotation** to revisit entries. **Export annotations** and **Import**
+transfer annotation metadata; **Clear annotations** removes user annotations for this configured machine and layout.
 
-Annotations persist beside the computer configuration, bound to a captured image and bank layout. After loading another
-program, **Take snapshot** saves the old annotations and loads those matching the new capture. **Save**/**Import** transfer
-metadata for the same image. Compiler source mappings remain separate.
+Annotations persist beside the computer configuration. Their identity combines the CPU, normalized configuration path
+and memory layout, so labels survive reopening that configuration and loading another program with the same layout.
+Keep labels appropriate to the program you load. Import requires the same configured-machine/layout identity.
+Files from the former memory-snapshot export and annotations bound to a memory-content hash are unsupported.
+Existing files remain untouched. Compiler source mappings stay separate and require their captured source revisions.
 
 ## Watches and breakpoints
 
@@ -223,10 +148,12 @@ Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Wa
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
 Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
-calls and branches. Analysis captures the inspection bank without switching the CPU's bank and attempts at most 256
+calls and branches. Analysis reads the chosen inspection bank without switching the CPU's bank and attempts at most 256
 reachable addresses. A partial-result notice means a work bound was reached; unresolved indirect targets remain unknown.
+Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
 Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
-CPUs without immutable decoder capture report analysis as unsupported. Static references do not prove execution coverage.
+Other inspection banks require bank-aware decoding. Plugins without that view can analyze the CPU's currently selected
+bank while the mapping stays unchanged. Static references do not prove execution coverage.
 
 ### Instruction recording
 
@@ -277,16 +204,8 @@ Run the same check with `auto --debug-script FILE` after compiling the example:
 RUN 0x010B 20
 ASSERT A == 0x42
 ASSERT mem16[0x8000] == 0x4241
-CAPTURE result.bin
 ```
 
-`RUN` stops before `HLT` at `010B`, within 20 instructions. `CAPTURE` writes the selected logical bank beside the script.
+`RUN` stops before `HLT` at `010B`, within 20 instructions.
 Failed assertions return a nonzero exit status. See [Debug scripts]({{ site.baseurl }}/application/automation#debug-scripts)
 for the command line and operation limits.
-
-## Export memory and metadata
-
-In **Annotations**, choose **Export memory and metadata** to write `memory-bank-N.bin` and `memory-bank-N.properties`.
-The binary contains the annotation image's captured bytes, even after live memory changes. The UTF-8 properties file
-records image identity, processor, bank layout, labels, comments, bookmarks and code/data kinds. **Import** requires
-matching image/layout metadata. Source maps, execution history and device state are not included.

@@ -303,6 +303,9 @@ The stream reads the specified slice without copying it, so keep that array unch
 provides numeric and quoted-string parsing, label extraction, and identifier normalization. Grammar, AST, semantic
 analysis, and code generation remain the compiler plugin's responsibility.
 
+The host retains exact compiler input text and source revisions to validate source mappings. These mappings describe
+generated cell coverage and source provenance; debugger memory inspection reads current cells.
+
 ### Generic editing metadata
 
 The desktop editor consumes generic token categories and optional `LexicalAnalyzer` operations. Keep assembler keywords,

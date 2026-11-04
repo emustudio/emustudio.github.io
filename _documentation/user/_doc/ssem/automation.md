@@ -10,7 +10,7 @@ permalink: /ssem/automation
 
 # Automation
 
-In headless automatic emulation (`auto --no-gui`), SSEM writes the final memory snapshot and register values to `ssem.out`
+In headless automatic emulation (`auto --no-gui`), SSEM writes the final memory dump and register values to `ssem.out`
 in the current working directory.
 
 The file is overwritten after each emulation "stop".
@@ -43,7 +43,7 @@ The console reports compilation and execution progress:
 ```
 
 The addition example computes `5 + 3`. The file `ssem.out` starts with the final accumulator and byte control address,
-followed by a 32-line memory snapshot:
+followed by a 32-line memory dump:
 
 {:.code-example}
 ```

@@ -17,30 +17,9 @@ memory and writes results back to it. Inputs and outputs use the separate tapes.
 
 ## Graphical user interface (GUI)
 
-Open the memory window from the **Debugger** tab in emuStudio:
-
-![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory.png){: style="max-width: 261px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
-| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
-| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
-| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |
-
-The table with memory content is editable. By double-clicking on a row you can simply edit the value. You confirm your
-changes by the `ENTER` key:
-
-![RASP memory window]({{ site.baseurl }}/assets/rasp/rasp-memory-edit.png){: style="max-width: 261px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
-| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
-| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
-| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |
+Open the memory window from the **Debugger** tab in emuStudio. Use **Load image file...** to load a compiled program
+or **Erase memory** to clear it. Double-click an editable memory-table cell to change its value, then press Enter
+to confirm.
 
 NOTE: By editing an opcode cell (a cell that contains an instruction opcode), the instruction is changed. It is also possible
 to set invalid opcode values, which stop emulation with "instruction fallout".

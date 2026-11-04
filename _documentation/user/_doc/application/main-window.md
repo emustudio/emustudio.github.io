@@ -89,8 +89,8 @@ or stops.
 Double-click an instruction with source information to open its source file at the corresponding line. The 8080 and
 Z80 assemblers attach this information when compiling into memory. The file opens in an editor tab, including when it
 is an included source file. Writing to an annotated address invalidates its source information, even while running;
-annotations at other addresses remain available. Erasing memory removes all source positions. Saved byte-memory images
-can restore positions from their `.meta` sidecars; a raw image without annotations cannot provide this navigation.
+annotations at other addresses remain available. Erasing memory removes all source positions. A raw image without
+source annotations cannot provide this navigation.
 
 #### Debugger toolbar
 
@@ -112,7 +112,7 @@ according to the CPU's execution state and the plugins' capabilities.
 
 #### Inspection pane
 
-Pause the CPU to inspect memory, search for bytes, integers or text, compare captures, and edit labels, comments,
+Pause the CPU to inspect live memory, search for bytes, integers or text, find strings, and edit labels, comments,
 bookmarks or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
