@@ -62,10 +62,10 @@ are read from their current contents on disk. The compiler output pane shows com
 positions supplied by the compiler. Stop running emulation before compiling.
 
 Compiled code can produce a binary file (for example a HEX file) and is loaded into operating memory by the compiler.
-**Save & Compile source file** resets the memory plugin before invoking the compiler and resets the CPU afterwards.
-Memory contents
-then depend on the memory plugin's reset behavior and the compiler: the 8080 and Z80 assemblers write generated
+**Save & Compile source file** does not reset memory before compiling. It resets the CPU only when compilation
+reports no errors. Memory contents depend on the compiler: the 8080 and Z80 assemblers write generated
 addresses, while BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading successful output.
+Other compilers may use different loading behavior.
 
 ## Debugger tab
 
