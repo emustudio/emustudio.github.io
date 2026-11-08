@@ -17,10 +17,9 @@ Obtain connected plugins' contexts during [initialization][initialization], then
 [ContextPool][contextPool]{:target="_blank"} is not thread-safe, so all operations on it should be performed in the same
 thread which called method [Plugin.initialize()][pluginInitialize]{:target="_blank"}.
 
-Each plugin context must implement [Context][context]{:target="_blank"} or a derived interface. Annotate derived interfaces with
-[PluginContext][pluginContext]{:target="_blank"} annotation.
+A context is a plain Java interface extending [Context][context]{:target="_blank"}; no annotation is needed.
 There are prepared some standard context interfaces in the API
-([CompilerContext][compilerContext]{:target="_blank"}, [MemoryContext][memoryContext]{:target="_blank"}, [CPUContext][cpuContext]{:target="_blank"}
+([MemoryContext][memoryContext]{:target="_blank"}, [CPUContext][cpuContext]{:target="_blank"}
 and [DeviceContext][deviceContext]{:target="_blank"}), and those can be used when implementing plugin context class - or
 they can be further extended to provide customized versions of contexts.
 
@@ -33,12 +32,14 @@ Lookup uses the exact registered Java interface class. Share that interface betw
 redeclaring identical methods does not make two interfaces interchangeable. Register each
 supported interface explicitly, including base interfaces and empty subinterfaces.
 
+`register` throws `IllegalArgumentException` if the class is not an interface or the object does not implement it,
+and `IllegalStateException` if the context is already registered. Both are unchecked: they signal programming errors.
+`unregister(pluginID, interface)` removes all of the plugin's contexts registered under the interface.
+
 Sample custom context might be created like this:
 
 {:.code-example}
 ```java
-
-@PluginContext
 public interface SampleContext extends CPUContext {
 
     // custom methods...
@@ -60,10 +61,10 @@ Registration of this context might look as follows:
 {:.code-example}
 ```java
 @PluginRoot(type = PLUGIN_TYPE.CPU, title = "Sample CPU emulator")
-public class SamplePlugin implements CPU {
+public class SamplePlugin extends AbstractCPU {
 
-    public SamplePlugin(long pluginID, ApplicationApi emustudio, PluginSettings settings)
-            throws InvalidContextException, ContextAlreadyRegisteredException {
+    public SamplePlugin(long pluginID, ApplicationApi emustudio, PluginSettings settings) {
+        super(pluginID, emustudio, settings);
         ContextPool contextPool = emustudio.getContextPool();
 
         SampleContext context = new SampleContextImpl();
@@ -72,6 +73,8 @@ public class SamplePlugin implements CPU {
         contextPool.register(pluginID, context, CPUContext.class);
         contextPool.register(pluginID, context, SampleContext.class);
     }
+
+    ...
 }
 ```
 
@@ -81,15 +84,17 @@ If another plugin wants to obtain the context, it should do it in the
 {:.code-example}
 ```java
 @PluginRoot(type = PLUGIN_TYPE.DEVICE, title = "Sample device")
-public class SampleDevice implements Device {
+public class SampleDevice extends AbstractPlugin implements Device {
 
     ...
 
     @Override
     public void initialize() throws PluginInitializationException {
+        ContextPool contextPool = applicationApi.getContextPool();
 
-        // This device requires the context; initialization failures propagate
-        SampleContext cpuContext = contextPool.getCPUContext(pluginID, SampleContext.class);
+        // This device requires the contexts; initialization failures propagate
+        SampleContext cpuContext = contextPool.get(pluginID, SampleContext.class);
+        MemoryContext<Byte> memory = contextPool.getMemory(pluginID, Byte.class);
 
         ...
     }
@@ -98,16 +103,20 @@ public class SampleDevice implements Device {
 }
 ```
 
-Lookup throws an exception if the context is unavailable or the plugins are not connected. Let initialization fail when
-the context is required. For an optional context, catch the exception and disable the corresponding functionality.
+`get(pluginID, interface)` returns the first accessible context; `get(pluginID, interface, index)` selects one by index.
+`getMemory(pluginID, cellType)` and `getDevice(pluginID, dataType)` look up a `MemoryContext` or `DeviceContext` and
+also check its cell or data type, so the result is correctly typed. Memory and device plugins should therefore register
+their contexts under `MemoryContext` or `DeviceContext` as well as any custom interface.
+
+Lookup throws `ContextNotFoundException` if the context is unavailable, has an unexpected type, or the plugins are not
+connected. The exception extends `PluginInitializationException`, so let initialization fail when the context is
+required. For an optional context, catch the exception and disable the corresponding functionality.
 
 [instantiation]: {{ site.baseurl }}/plugin_basics/loading#plugin-instantiation
 [initialization]: {{ site.baseurl }}/plugin_basics/loading#plugin-initialization
 [contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ContextPool.html
 [pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [context]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Context.html
-[pluginContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/annotations/PluginContext.html
-[compilerContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/CompilerContext.html
 [deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/DeviceContext.html
 [cpuContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPUContext.html
 [memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html

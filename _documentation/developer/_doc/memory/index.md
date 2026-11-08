@@ -9,8 +9,9 @@ permalink: /memory/
 
 # Writing a memory
 
-A memory plugin root implements [Memory][memory]{:target="_blank"}, usually by extending
-[AbstractMemory][abstractMemory]{:target="_blank"}.
+A memory plugin root usually extends [AbstractPlugin][abstractPlugin]{:target="_blank"} and implements
+[Memory][memory]{:target="_blank"}. Register the memory context in the constructor under `MemoryContext` (and any
+custom interface), so that other plugins can obtain it with `contextPool.getMemory(pluginID, cellType)`.
 
 Memory is often stored as an array whose indices are addresses and whose elements are cell values. emuStudio exposes
 it through [MemoryContext][memoryContext]{:target="_blank"}; cells can have any Java type, not just `Byte`.
@@ -22,8 +23,8 @@ notifications to speed up the emulation.
 
 ## Cell type, size, and annotations
 
-`MemoryContext<CellType>.getCellTypeClass()` identifies the cell type; byte-oriented consumers must check for
-`Byte.class` during initialization. Addresses and ranges count cells, including for word and typed-instruction memory.
+`MemoryContext<CellType>.getCellTypeClass()` identifies the cell type. Byte-oriented consumers obtain the memory
+with `contextPool.getMemory(pluginID, Byte.class)` during initialization, which checks the cell type. Addresses and ranges count cells, including for word and typed-instruction memory.
 `CPU.getAddressSpaceSize()` reports the debugger's exclusive upper bound of valid CPU addresses.
 `MemoryContext.getSize()` reports the provider-defined size of its current storage. RAM/RASP retain their loaded
 occupancy/high-water behavior; their CPU plugins expose the logical instruction domain even before a program is loaded.
@@ -76,14 +77,13 @@ Annotation import rejects the former memory-content identities and snapshot expo
 
 ## Shared GUI actions
 
-Memory plugins with Swing interfaces can use emuLib's `GUI.runInBackground` for file and other blocking work. It
-disables the supplied action, runs the task outside the event-dispatch thread, invokes success or error callbacks on
-completion, and re-enables the action only after those callbacks finish. Errors are unwrapped before delivery.
+Memory plugins with Swing interfaces should run file and other blocking work outside the event-dispatch thread
+(e.g. with a `SwingWorker`), disabling the triggering action until the work and its result handling finish.
 
 Each memory plugin keeps its own clear-and-refresh (erase memory) action and format-specific program-image loader.
 
 [memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
 [memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
-[abstractMemory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemory.html
+[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/AbstractPlugin.html
 [abstractMemoryContext]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html
 [memoryListener]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html
