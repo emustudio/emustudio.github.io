@@ -19,7 +19,6 @@ extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
   execution runs on a separate CPU worker. Callers, including Swing's
   [event-dispatch thread][swingthread]{:target="_blank"}, wait for the control action to complete.
 - implements notification of run states (see next chapter)
-- implements breakpoints management
 
 Sample implementation follows (only core methods are implemented):
 
@@ -142,7 +141,8 @@ Override `getDebugger()` to return an optional `DebugCPU` port when the engine s
 instruction/access hooks. emuStudio owns the analysis UI, expression watches, named rules and recording. The bundled
 CPU plugins expose `DebugProbe`, including byte, word and typed instruction-memory machines; third-party plugins without
 the port retain their basic instruction debugger.
-`getBreakpoints()` supplies an ordinary-breakpoint snapshot for persistence; `AbstractCPU` already implements it.
+The application owns breakpoint state and persistence. CPU plugins honor stop requests through the execution hooks;
+neither `CPU` nor `AbstractCPU` stores breakpoints.
 See [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for paused-access and execution-hook contracts.
 
 ## CPU Context

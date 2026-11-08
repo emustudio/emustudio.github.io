@@ -120,7 +120,8 @@ loadScripts(document, 'script');</script>
 <h3>beforeInstruction</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">beforeInstruction</span><wbr><span class="parameters">(int&nbsp;address)</span></div>
-<div class="block">Return true to stop before executing this instruction.</div>
+<div class="block">Return true to stop before executing this instruction. Breakpoint state and policy
+belong to the application; the CPU invokes this hook and honors the stop decision.</div>
 </div>
 </section>
 </li>

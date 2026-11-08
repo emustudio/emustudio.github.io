@@ -8,9 +8,10 @@ permalink: /cpu/debugging
 
 # Optional debugging ports
 
-`CPU.getDebugger()` optionally exposes emuLib's `DebugCPU` port. The host uses it for portable register watches/edits,
-conditional breakpoints, guest read/write watchpoints and instruction history. Plugins without this port retain their
-existing debugger. All bundled CPU engines implement it with `DebugProbe`; third-party CPU plugins can use the same interface.
+`CPU.getDebugger()` optionally exposes emuLib's `DebugCPU` port. The host uses it for address breakpoints,
+register watches/edits, guest read/write watchpoints and instruction history. Plugins without this port support
+instruction inspection but cannot stop at application breakpoints. All bundled CPU engines implement it with
+`DebugProbe`; third-party CPU plugins can use the same interface.
 
 ## Register access and execution hooks
 
@@ -52,9 +53,11 @@ and explicit direct targets. Use an empty target list for unresolved indirect ju
 unconditional jumps, returns and stops do not. Do not derive targets by parsing mnemonic text. The bundled opcode adapter
 adds 8080/Z80 flow metadata while Edigen-generated disassembly remains unchanged.
 
-`CPU.getBreakpoints()` returns a snapshot of ordinary address breakpoints; `AbstractCPU` implements this. The default empty
-snapshot preserves plugins that do not expose breakpoint enumeration. Execution and resolved source breakpoints match
-only the CPU-visible instruction address. Read/write watchpoints match CPU-visible guest access addresses.
+The application owns breakpoint storage, editing, enabled state and persistence. CPU plugins keep no breakpoint store
+and expose no breakpoint CRUD methods. They call `DebugProbe.begin(pc)` before execution and stop when it returns false;
+the application's `DebugCPU.Listener.beforeInstruction(pc)` makes the stop decision. The application also handles
+resuming past a breakpoint once, so the CPU must not add a second breakpoint check or skip.
+Execution breakpoints match the CPU-visible instruction address. Read/write watchpoints match CPU-visible guest access addresses.
 Named debugger rules, watches, live inspection,
 annotation persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
 from user labels/comments. True machine rewind requires coordinated device/CPU/memory checkpoints and input replay; instruction

@@ -20,18 +20,38 @@ A pseudo-algorithm for emulator engine can look as follows (using [interpretatio
 
 ```java
 public class EmulatorEngine {
-    private final CPU cpu;
+    private final DebugProbe debugger;
     private final MemoryContext<Byte> memory;
+    private boolean debugStopped;
 
     // internal CPU registers
     private int currentInstruction;
 
-    EmulatorEngine(MemoryContext<Byte> memory, CPU cpu) {
+    EmulatorEngine(MemoryContext<Byte> memory, DebugProbe debugger) {
         this.memory = Objects.requireNonNull(memory);
-        this.cpu = Objects.requireNonNull(cpu);
+        this.debugger = Objects.requireNonNull(debugger);
     }
 
     CPU.RunState step() {
+        debugStopped = false;
+        boolean active = debugger.isActive();
+        if (active && !debugger.begin(currentInstruction)) {
+            debugStopped = true;
+            return CPU.RunState.STATE_STOPPED_BREAK;
+        }
+        CPU.RunState result;
+        boolean completed = false;
+        try {
+            result = stepInstruction();
+            completed = result == CPU.RunState.STATE_STOPPED_BREAK
+                    || result == CPU.RunState.STATE_STOPPED_NORMAL;
+        } finally {
+            if (active && debugger.end(completed)) debugStopped = true;
+        }
+        return debugStopped ? CPU.RunState.STATE_STOPPED_BREAK : result;
+    }
+
+    private CPU.RunState stepInstruction() {
         int instruction = memory.read(currentInstruction);
         currentInstruction = currentInstruction + 1;
 
@@ -52,11 +72,8 @@ public class EmulatorEngine {
     CPU.RunState run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                if (cpu.isBreakpointSet(currentInstruction)) {
-                    return CPU.RunState.STATE_STOPPED_BREAK;
-                }
                 CPU.RunState result = step();
-                if (result != CPU.RunState.STATE_STOPPED_BREAK) {
+                if (debugStopped || result != CPU.RunState.STATE_STOPPED_BREAK) {
                     return result;
                 }
             } catch (IndexOutOfBoundsException e) {
@@ -70,8 +87,11 @@ public class EmulatorEngine {
 }
 ```
 
-This is illustrative pseudocode; the instruction bodies depend on your CPU. Check breakpoints before fetching the next
-instruction. Continuous execution must also respond to thread interruption so `AbstractCPU.pause()` and `stop()` can
+This is illustrative pseudocode; the instruction bodies depend on your CPU. The plugin supplies the probe and exposes it
+through `CPU.getDebugger()`. The application owns breakpoint state and registers its stop listener. Invoke the probe before
+fetching the next instruction, including during single stepping. See [Optional debugging ports]({{ '/cpu/debugging' | relative_url }})
+for probe setup, register descriptors and guest-access instrumentation.
+Continuous execution must also respond to thread interruption so `AbstractCPU.pause()` and `stop()` can
 cancel it. The engine's `run()` is called by the plugin's `call()`; the public CPU method is `execute()`.
 
 ## Data-driven opcode dispatch
@@ -151,13 +171,10 @@ public class EmulatorEngine {
                 () -> (double) context.getCPUFrequency(),
                 () -> {
                     try {
-                        if (cpu.isBreakpointSet(PC)) {
-                            currentRunState = CPU.RunState.STATE_STOPPED_BREAK;
-                        } else {
-                            int cycles = dispatch(); // this will update currentRunState
-                            preciseRunner.addExecutedCycles(cycles); // this is very much needed!
-                            context.passedCycles(cycles);
-                        }
+                        // dispatch invokes the probe hooks and updates currentRunState.
+                        int cycles = dispatch();
+                        preciseRunner.addExecutedCycles(cycles);
+                        context.passedCycles(cycles);
                     } catch (IndexOutOfBoundsException e) {
                         LOGGER.error("Unexpected error", e);
                         currentRunState = CPU.RunState.STATE_STOPPED_ADDR_FALLOUT;
