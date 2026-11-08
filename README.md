@@ -77,18 +77,6 @@ bundle exec rake serve
 bundle exec rake lint
 ```
 
-## Lint checks
-
-The following automated checks are run during `rake build` to catch common authoring mistakes:
-
-| Check | Phase | What it verifies |
-|---|---|---|
-| `target_blank` | pre-build | Every reference-style markdown link in `_documentation/**/*.md` is followed by `{:target="_blank"}` (with a configurable exclusion list for internal references). |
-| `link_spaces` | pre-build | No accidental whitespace between a link and `{:target="_blank"}`. |
-| `baseurl_slash` | pre-build | Every `{{ site.baseurl }}` in templates/pages is followed by `/`. |
-| `broken_links` | pre-build | Relative markdown links point to files that actually exist. |
-| `imagepath` | post-build | No unreplaced `{imagepath}` placeholders remain in the generated HTML. |
-
 ## Tools
 
 - Logo: MetaPost
