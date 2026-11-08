@@ -45,27 +45,23 @@ emuStudio does not distribute the copyrighted arcade ROMs. Supply legally obtain
 ### Configure the ROMs
 
 1. Close the virtual computer before editing `config/SpaceInvaders.toml`.
-2. In `[MEMORY.settings]`, set `memorySize = 65536` (64 KiB) and keep `banksCount = 1` and `commonBoundary = 0`.
+2. In `[MEMORY.settings]`, set `memorySize = 65536` (64 KiB).
    The game needs the full 8080 address space, including addresses beyond the framebuffer.
-3. Uncomment the twelve `imageName`, `imageAddress`, and `imageBank` lines by removing their leading `#`.
+3. Uncomment the `imageName` and `imageAddress` lines by removing their leading `#`.
    Set each `imageName` to the path of its ROM file. Absolute paths avoid dependence on the launch directory.
-   Keep the addresses and bank numbers shown below.
+   Keep the addresses shown below. Additional memory settings are described with [byte-mem]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles).
 
 The image settings belong inside the existing `[MEMORY.settings]` section; do not add a second section with that name:
 
 ```toml
 imageName0 = "/path/to/roms/invaders.h"
 imageAddress0 = 0
-imageBank0 = 0
 imageName1 = "/path/to/roms/invaders.g"
 imageAddress1 = 2048
-imageBank1 = 0
 imageName2 = "/path/to/roms/invaders.f"
 imageAddress2 = 4096
-imageBank2 = 0
 imageName3 = "/path/to/roms/invaders.e"
 imageAddress3 = 6144
-imageBank3 = 0
 ```
 
 Replace `/path/to/roms/` with your directory. On Windows, TOML literal strings such as

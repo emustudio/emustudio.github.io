@@ -41,128 +41,49 @@ db 'HELLO DEBUGGER',0
 
 ## Inspect an address
 
-![Set breakpoint dialog targeting 0x8000 in bank 0, with Inspect only, Unset and Set buttons]({{ site.baseurl }}/assets/application/debugger-demo-inspect.png){: style="max-width: 332px; width: 100%; height: auto;" }
+Pause the CPU, open **Memory**, enter `0x8000` in **Address**. Click **Inspect address** or press
+Enter in the address field. Addresses accept decimal or hexadecimal notation. Browsing changes neither the program
+counter and creates no breakpoint.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Address**. Enter the decimal or hexadecimal address to inspect. |
-| <span class="circle">2</span> | **Bank**. Select the memory bank to inspect; this does not change the CPU’s bank. |
-| <span class="circle">3</span> | **Keep inspection while stepping**. Keep the breakpoint’s inspected address as you step. |
-| <span class="circle">4</span> | **Inspect only**. Inspect the live bytes without setting a breakpoint. |
-| <span class="circle">5</span> | **Unset**. Remove the breakpoint at this address. |
-| <span class="circle">6</span> | **Set**. Set an execution breakpoint at this address. |
-
-Choose **Set breakpoint / inspect address...**, enter `0x8000`, then **Inspect only** to open live memory.
-**Bank** selects inspection memory without switching the CPU's bank; common memory uses physical bank zero.
-**Set** adds an execution breakpoint; hitting it opens **Memory**. With **Set**, enable **Keep inspection while stepping**
-to retain the inspected address during later steps. Instruction-table breakpoint controls cycle through off, enabled
-and keep-inspection states.
+Choose **Set breakpoint...** to configure a breakpoint. **Set** adds an execution breakpoint at the CPU-visible address,
+using the CPU-visible instruction address;
+**Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. Hitting a breakpoint opens
+**Memory** at its address; later steps follow the CPU normally unless the view was manually pinned. Instruction-table
+breakpoint controls toggle enabled/disabled.
 
 ## Memory and annotations
 
 ### Find bytes, integers or text
 
-![Byte search for 41 42 finds one match at 8000, labeled output]({{ site.baseurl }}/assets/application/debugger-demo-search.png){: style="max-width: 886px; width: 100%; height: auto;" }
+Pause, select **Bytes**, enter `41 42`, then **Find**. Wildcards work too:
+`3E ?? 32` or `A? ?F`. **Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
+Use **Previous** and **Next** to navigate matches, or **Show all addresses** to return to the full address list.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
-
-After running the example, choose **Bytes**, enter `41 42`, then **Find**. Wildcards work too: `3E ?? 32` or `A? ?F`.
-**Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
-
-**Rescan** filters previous matches by Changed, Equal, Increased or Decreased, retaining the original bank, width and byte
-order. Results show captured bytes; **Live memory** returns to current bytes.
-
-### Compare before and after execution
-
-![Baseline comparison shows 41 at 8000, 42 at 8001, and return-address bytes at 8FFE and 8FFF]({{ site.baseurl }}/assets/application/debugger-demo-compare.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
-
-Open **Compare / strings** and **Capture baseline** before running. Pause, then **Compare baseline**.
-Here, `STA` changed `8000–8001`; `CALL` left its return address at `8FFE–8FFF` after `RET` restored SP.
-**Compare binary** accepts a full-size raw image of the inspected bank. Baseline capture preserves annotations.
+Search reads live memory while paused. Results retain matching addresses; displayed bytes come from current memory.
+Execution, memory edits and metadata changes clear outdated results. Background searches check the session and memory
+revisions before publishing their results.
 
 ### Find readable strings
 
-![String scan finds HELLO DEBUGGER at 8100 and shows its message label]({{ site.baseurl }}/assets/application/debugger-demo-strings.png){: style="max-width: 886px; width: 100%; height: auto;" }
+Choose **Find strings** to find printable ASCII runs of at least four bytes, including `HELLO DEBUGGER` at `8100`
+in the example. **String column** shows or hides the text found by that scan. Run the search again after changing memory.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Search type**. Search for byte patterns, integers, or text. |
-| <span class="circle">2</span> | **Search value**. Enter the pattern, integer, or text to find. |
-| <span class="circle">3</span> | **Find**. Capture memory and search the selected bank. |
-| <span class="circle">4</span> | **Previous result**. Select the preceding match. |
-| <span class="circle">5</span> | **Next result**. Select the following match. |
-| <span class="circle">6</span> | **Rescan**. Filter existing candidates against a new memory capture. |
-| <span class="circle">7</span> | **Live memory**. Return to the current live bytes. |
-| <span class="circle">8</span> | **Compare / strings**. Show string scanning and baseline tools. |
-| <span class="circle">9</span> | **Find strings**. Find ASCII strings in a memory capture. |
-| <span class="circle">10</span> | **Capture baseline**. Save a baseline for later comparisons. |
-| <span class="circle">11</span> | **Compare baseline**. Show bytes that differ from the baseline. |
-| <span class="circle">12</span> | **Results**. Inspect matching addresses, captured values, strings, or baseline differences. |
+### Label and comment on addresses
 
-Choose **Find strings** under **Compare / strings**. It finds printable ASCII runs of at least four bytes,
-including `HELLO DEBUGGER` at `8100`. Displayed text comes from the scan's capture.
+Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **Data**, then
+**Save annotation**. Annotations belong to CPU-visible addresses and ranges.
+Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
+for this configured machine and layout.
 
-### Label and bookmark addresses
+emuStudio loads annotations, watches and rules together when opening a computer. For `/path/computer.toml`, the automatic
+metadata file is `/path/computer.toml.debugger`. Each save writes all three together atomically. Computers without a
+saved configuration keep this metadata in memory.
 
-![Annotation editor labels bank 0 address 8000 as output, marks it DATA and bookmarks it]({{ site.baseurl }}/assets/application/debugger-demo-annotations.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Filter**. Find annotations by their text. |
-| <span class="circle">2</span> | **Bookmarks only**. Show bookmarked annotations. |
-| <span class="circle">3</span> | **Go to annotation**. Navigate to the selected entry. |
-| <span class="circle">4</span> | **Delete**. Remove the selected annotation. |
-| <span class="circle">5</span> | **Annotate inspected address**. Start an annotation at the current inspected address. |
-| <span class="circle">6</span> | **Label**. Enter the address label. |
-| <span class="circle">7</span> | **Comment**. Enter the address comment. |
-| <span class="circle">8</span> | **Kind**. Mark the address as code, data, or unspecified. |
-| <span class="circle">9</span> | **Bookmark**. Mark this annotation for quick retrieval. |
-| <span class="circle">10</span> | **Save annotation**. Save edits at the displayed editing address. |
-| <span class="circle">11</span> | **Export annotations**. Save the annotation metadata. |
-| <span class="circle">12</span> | **Import**. Read annotations from a saved file. |
-| <span class="circle">13</span> | **Clear annotations**. Remove all annotations from this image. |
-| <span class="circle">14</span> | **Export memory and metadata**. Save the captured bytes and their annotation sidecar. |
-
-Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **DATA**, enable
-**Bookmark**, then **Save annotation**. Check **Editing bank N:ADDR**; browsing leaves this edit target unchanged.
-Use **Filter**, **Bookmarks only** and **Go to annotation** to revisit entries.
-
-Annotations persist beside the computer configuration, bound to a captured image and bank layout. After loading another
-program, **Take snapshot** saves the old annotations and loads those matching the new capture. **Save**/**Import** transfer
-metadata for the same image. Compiler source mappings remain separate.
+Explicit annotation import and export remain available through **Manage…**. Annotation export uses format 4; import
+requires the same configured-machine/layout identity, derived from the CPU, normalized configuration path and memory
+layout. Keep labels appropriate to the program you load.
+Files from the former memory-snapshot export, obsolete annotation formats and annotations bound to a memory-content hash are unsupported.
+Existing files remain untouched. Compiler source mappings stay separate and require their captured source revisions.
 
 ## Watches and breakpoints
 
@@ -176,9 +97,9 @@ metadata for the same image. Compiler source mappings remain separate.
 | <span class="circle">1</span> | **Expression**. Enter a register or memory expression. |
 | <span class="circle">2</span> | **Add watch**. Add the expression to the watch list. |
 | <span class="circle">3</span> | **Format**. Choose how watch values are displayed. |
-| <span class="circle">4</span> | **Watch list**. Inspect values in the selected bank; changed values remain marked until the next stop. |
+| <span class="circle">4</span> | **Watch list**. Inspect values through the CPU memory wiring; changed values remain marked until the next stop. |
 
-Enter an **Expression** and choose **Add**. Watches use the inspection bank. Choose **Hex + decimal**, **Binary** or **ASCII**;
+Enter an **Expression** and choose **Add**. Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary** or **ASCII**;
 changed values receive a marker. **Follow value** opens the evaluated address. **Edit register** reveals **Write register**.
 
 | Expression | Meaning |
@@ -191,39 +112,25 @@ changed values receive a marker. **Follow value** opens the evaluated address. *
 
 ### Stop on a conditional memory write
 
-![Named WRITE rule at 0x8001 in all banks, conditioned on A == 0x42, with inspection kept while stepping]({{ site.baseurl }}/assets/application/debugger-demo-breakpoints.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Name**. Enter a descriptive rule name. |
-| <span class="circle">2</span> | **Kind**. Choose execution, read, write, or source matching. |
-| <span class="circle">3</span> | **Address**. Enter the address to match. |
-| <span class="circle">4</span> | **Bank**. Match a selected bank or all banks. |
-| <span class="circle">5</span> | **Add breakpoint**. Add the configured rule. |
-| <span class="circle">6</span> | **Advanced options**. Show the condition, hit count, and inspection controls. |
-| <span class="circle">7</span> | **Condition**. Evaluate this expression when the rule matches. |
-| <span class="circle">8</span> | **Stop from hit**. Stop after the specified matching hit count. |
-| <span class="circle">9</span> | **Keep inspection**. Keep the rule’s inspected address while stepping. |
-| <span class="circle">10</span> | **Enable / disable**. Toggle the selected rule. |
-| <span class="circle">11</span> | **Remove**. Delete the selected rule. |
-| <span class="circle">12</span> | **Add ordinary breakpoint**. Add a simple execution breakpoint. |
-| <span class="circle">13</span> | **Save settings**. Persist the breakpoint rules. |
-| <span class="circle">14</span> | **Reset hit counts**. Clear the accumulated rule hits. |
-| <span class="circle">15</span> | **Go to address**. Inspect the selected breakpoint’s address. |
-
-Before rerunning, open **Breakpoints**, enter a name, choose **WRITE**, and set the address to `0x8001`. Enter condition
-`A == 0x42`, leave **Bank** at `-1` and **Stop from hit** at `1`, enable **Keep inspection while stepping**, then click
-**Add breakpoint**. It stops after the writing instruction. Bank `-1` matches all banks; conditions use the CPU's selected logical bank.
+Before rerunning, open the memory-watch controls in **Watches**, enter a **Memory watch name** and set **Memory watch address**
+to `0x8001`. Select **Pause on writes**. Under **Memory watch options**, enter condition `A == 0x42` and leave
+**Memory watch stop from hit** at `1`, then click **Add memory watch**. It stops after the writing instruction.
 Each qualifying instruction counts once, even with repeated accesses.
 
-**EXEC** stops before execution; **SOURCE** requires a file path and a one-based line with a current compiler mapping.
+Execution breakpoints in **Breakpoints** stop before the CPU-visible instruction address. Conditions and hit counts remain available through advanced options.
+**SOURCE** requires a file path and a one-based line with a current compiler mapping; resolved targets are CPU addresses.
 **READ** includes instruction fetches; **WRITE** includes attempted guest writes. Debugger reads trigger no access rules.
-Named rules stay separate from instruction-table breakpoints; **Add ordinary breakpoint** creates an unconditional one.
+Named rules stay separate from instruction-table breakpoints; instruction-table controls create unconditional execution breakpoints.
 Resuming skips the stopped EXEC/SOURCE rule once.
 
-Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Watches and breakpoints persist in the computer's
-`.debugger` file; **Save settings** saves them explicitly. Hit counts restart at zero when reloading.
+SOURCE rules resolve mapped addresses before execution, including multiple generated addresses for one source line.
+Running or editing memory makes source mappings historical; already resolved targets can still stop the current run.
+Recompile to restore current source following or rebind a source rule. Source navigation uses explicit mapped cells;
+unmapped operand cells and gaps have no source match. Unsupported compiler coordinates appear in the source-mapping status.
+
+Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. **Save settings** saves watches and rules
+together with annotations in the computer's `.debugger` file. Temporary errors and hit counts are not saved; hit counts
+restart at zero when reopening the computer.
 
 ## References, flow and history
 
@@ -242,8 +149,11 @@ Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Wa
 | <span class="circle">6</span> | **References and graph**. Select a reference or graph node to inspect its address. Indirect targets may remain unresolved. |
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
-Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** searches callers.
-Analysis uses the CPU's active bank and at most 256 reachable instructions; indirect targets may remain unresolved.
+Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
+calls and branches. Analysis uses the CPU's decoder and current memory wiring and attempts at most 256 reachable addresses. A partial-result notice means a work bound was reached;
+unresolved indirect targets remain unknown.
+Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
+Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
 Static references do not prove execution coverage.
 
 ### Instruction recording
@@ -265,10 +175,10 @@ that limit. Choose **Record to file** for a continuous recording that can outlas
 | **Live history** | Return to the current computer's recent history. |
 | **Show unchanged registers** | Include unchanged values in the selected instruction's detail view. |
 
-The table shows sequence numbers, physical banks, instruction addresses, captured instruction encoding and disassembly,
+The table shows sequence numbers, CPU-visible instruction addresses, captured instruction encoding and disassembly,
 changed registers and memory writes. Select an event to inspect all recorded before/after register values,
 raw flags, memory accesses and completion status. For the example above, the instruction at `010D` records
-`WRITE bank 0:8001 = 42`. Instruction text is captured before execution, so later memory edits or bank changes
+`WRITE 8001 = 42`. Instruction text is captured before execution, so later memory edits or mapping changes
 cannot change a recorded instruction. Opened recordings use their own captured values rather than the current
 computer's memory or labels.
 
@@ -295,16 +205,8 @@ Run the same check with `auto --debug-script FILE` after compiling the example:
 RUN 0x010B 20
 ASSERT A == 0x42
 ASSERT mem16[0x8000] == 0x4241
-CAPTURE result.bin
 ```
 
-`RUN` stops before `HLT` at `010B`, within 20 instructions. `CAPTURE` writes the selected logical bank beside the script.
+`RUN` stops before `HLT` at `010B`, within 20 instructions.
 Failed assertions return a nonzero exit status. See [Debug scripts]({{ site.baseurl }}/application/automation#debug-scripts)
 for the command line and operation limits.
-
-## Export memory and metadata
-
-In **Annotations**, choose **Export memory and metadata** to write `memory-bank-N.bin` and `memory-bank-N.properties`.
-The binary contains the annotation image's captured bytes, even after live memory changes. The UTF-8 properties file
-records image identity, processor, bank layout, labels, comments, bookmarks and code/data kinds. **Import** requires
-matching image/layout metadata. Source maps, execution history and device state are not included.

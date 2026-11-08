@@ -91,7 +91,6 @@ RUN 5 10
 ASSERT PC == 5
 ASSERT A == 0x42
 ASSERT mem[0x100] == 0x42
-CAPTURE result.bin
 ```
 
 Run it from the emuStudio installation directory:
@@ -101,19 +100,17 @@ Run it from the emuStudio installation directory:
 ```
 
 RUN stops before the instruction at address 5 after at most ten instructions. The assertions check the accumulator and
-stored byte; CAPTURE writes the selected logical bank to `result.bin` beside `probe.debug` (64 KiB for the default Altair
-memory). A failing assertion returns exit status 1 and identifies the script line in `logs/automation.log`.
+stored byte. A failing assertion returns exit status 1 and identifies the script line in `logs/automation.log`.
 
 | Operation | Behavior |
 |---|---|
 | `STEP count` | Execute 1–1,000,000 instructions. |
 | `RUN address max-instructions` | Step until PC equals the address, with a limit of 1–1,000,000 instructions. If PC already matches, execute none. |
 | `ASSERT expression` | Require a nonzero numeric result; use the same expression syntax as watches. |
-| `CAPTURE filename` | Save the selected byte-memory bank, including its common region. Relative paths start at the script directory; an existing file is replaced. |
 
 Blank lines and lines starting with `#` are ignored. Addresses and counts accept decimal or `0x` prefixes. A failed
 operation, compilation error, unexpected CPU stop, or missing step-completion notification returns a nonzero exit status.
 Step completion has a five-second wait. The script runner uses synchronous stepping; `--waitmax` controls normal continuous
 automation and does not bound scripts. Use each RUN/STEP instruction limit to bound execution instead.
 
-See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory-bank behavior.
+See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory expressions.

@@ -15,14 +15,5 @@ RAM memory is a part of RAM simulator and acts as the "program memory" (it holds
 The RAM CPU reads instructions from this memory and data from abstract tapes. Compile source code or load a compiled
 binary image to populate program memory.
 
-The memory plugin contains a simple graphical window, which can be seen in the following image:
-
-![RAM memory window]({{ site.baseurl }}/assets/ram/ram-memory.png){: style="max-width: 473px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
-| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
-| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
-| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |
+The memory window provides **Load image file...** for compiled programs and **Erase memory** to clear the content.
+Inspect values in the memory table; double-click an editable cell and press Enter to confirm a change.

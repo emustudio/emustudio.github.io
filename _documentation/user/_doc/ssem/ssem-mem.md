@@ -39,17 +39,8 @@ computer). The rest of bits are unused, and thus were often used as data store.
 
 ## Graphical user interface (GUI)
 
-The memory window looks as follows:
-
-![SSEM Memory GUI sample look]({{ site.baseurl }}/assets/ssem/ssem-memory.png){: style="max-width: 961px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Load image**. Load a compiled memory image. |
-| <span class="circle">2</span> | **Dump memory**. Save the current memory content. |
-| <span class="circle">3</span> | **Erase memory**. Clear the memory content. |
-| <span class="circle">4</span> | **Memory table**. Inspect memory values; double-click an editable cell and press Enter to confirm the change. |
+Use **Load image file...** in the memory window to load a compiled program, or **Erase memory** to clear it.
+The memory table presents bit, hexadecimal, decimal and character values for inspection and editing.
 
 Double-click a bit cell to edit it. Accepted values are `1` and `0`; press **Delete** to clear a bit to `0`.
 

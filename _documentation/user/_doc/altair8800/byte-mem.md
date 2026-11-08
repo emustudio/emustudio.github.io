@@ -26,7 +26,7 @@ Besides, the memory supports these additional features:
 
 There are also some "interactive" features:
 
-- Manual loading/saving memory images in either binary or Intel HEX format
+- Manual loading of program images in either binary or Intel HEX format
 - Ability to automatically load a memory image at startup
 - Intuitive control using keystrokes, and nice visual presentation of the data
 
@@ -38,24 +38,13 @@ other emulators that can benefit from it.
 
 On the **Debugger** tab, click **Show operating memory** in the toolbar to open the memory window:
 
-![Byte operating memory]({{ site.baseurl }}/assets/altair8800/byte-mem.png){: style="max-width: 794px; width: 100%; height: auto;" }
+Use **Load image file...** to load binary or Intel HEX data, **Go to address** to select a cell, and **Find sequence**
+to search for text or bytes. **Find next** and **Find previous** move between matches. **ASCII mode** switches between
+characters and byte values. **Erase memory** clears the content, and **Settings** opens bank, ROM and startup-image
+settings.
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Load image**. Load binary or Intel HEX data into memory. |
-| <span class="circle">2</span> | **Dump memory**. Save the memory image and its annotation sidecar. |
-| <span class="circle">3</span> | **Go to address**. Select an address in the memory table. |
-| <span class="circle">4</span> | **Find sequence**. Search for text or bytes. |
-| <span class="circle">5</span> | **Find next**. Select the next matching sequence. |
-| <span class="circle">6</span> | **Find previous**. Select the previous matching sequence. |
-| <span class="circle">7</span> | **ASCII mode**. Toggle between characters and byte values. |
-| <span class="circle">8</span> | **Erase memory**. Clear all memory content. |
-| <span class="circle">9</span> | **Settings**. Open bank, ROM, and startup-image settings. |
-| <span class="circle">10</span> | **Memory cells**. Select a cell or double-click to edit its value. |
-| <span class="circle">11</span> | **Page**. Select the displayed memory page. |
-| <span class="circle">12</span> | **Bank**. Select the bank to inspect without switching the CPU’s active bank. |
-| <span class="circle">13</span> | **Selected cell**. Read its address, byte value, and character representation. |
+The memory table supports page navigation and shows the selected cell's address, byte value and character.
+The **Bank** selector changes the inspection bank without switching the CPU's active bank.
 
 Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
 letter/number key, a small text field appears allowing to edit the current value. When editing
@@ -67,15 +56,8 @@ The Find dialog accepts either text or a byte sequence. After the first match, p
 match or <kbd>Shift</kbd>+<kbd>F3</kbd> to select the previous one. Search wraps at both ends of memory. The status text
 shows the current match number and total count, making repeated data easy to navigate without reopening the dialog.
 
-Loading and dumping can take place in the background. The selected action stays disabled until both the file operation
+Loading can take place in the background. The selected action stays disabled until both the file operation
 and its completion callback finish, preventing an accidental second request while the GUI is still updating.
-
-### Source information in saved images
-
-A memory dump also writes a UTF-8 `.meta` file beside the image, for example `program.bin.meta`. This stores source
-positions for annotated addresses. Keep it beside the image when copying it: loading the image automatically imports
-the sidecar so debugger source navigation remains available. An image without a sidecar still loads normally.
-Loading at a different binary address does not relocate the stored source positions.
 
 ## Memory settings
 
@@ -302,3 +284,52 @@ public interface ByteMemoryContext extends MemoryContext<Byte> {
 [pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
 [developerDoc]: /documentation/developer/introduction/
 [memoryBanks]: {{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching
+
+
+## Software memory profiles
+
+For CP/M 2.2 and the 8080 software examples, use 65536 bytes and one bank. For CP/M 3 and Z3PLUS, use 65536 bytes, eight banks and common boundary `0xC000`. MP/M II uses common boundary `0xB000`. Select bank zero before loading a bootloader after reset.
+
+![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
+
+![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
+
+{: .list .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
+| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
+| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
+| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
+| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
+| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
+| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
+| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
+| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
+| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
+| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
+
+## SIMH memory control
+
+Command 11 reads the active bank index, command 12 selects the bank given by its next output byte, command 13 reads
+the two-byte common boundary, and command 18 reads the bank count. Bank indices start at 0. Select only banks below
+`banksCount`; one bank is the normal unbanked configuration. Configure banks and the common region in
+[byte-mem]({{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching). Commands 11, 13, and 18 do not select a bank.
+The count is returned in one byte, so configurations of 256 or more banks cannot report their full count this way.
+
+For Space Invaders, use `memorySize = 65536`, `banksCount = 1`, `commonBoundary = 0`, and `imageBank0` through `imageBank3` set to `0`. The Spectrum startup ROM also uses `imageBank0 = 0`.

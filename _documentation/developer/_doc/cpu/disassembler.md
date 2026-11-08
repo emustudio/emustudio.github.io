@@ -57,7 +57,18 @@ jump. Conditional jumps and returns retain fall-through; calls also retain the n
 
 Decode flow from opcodes and operands rather than mnemonic text. The 8080/Z80 plugins use an opcode adapter around generated
 Edigen disassembly; the current `.eds` grammar does not define semantic flow attributes. See
-[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary and bank context.
+[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary.
+
+### Live analysis through CPU wiring
+
+The CPU plugin supplies the disassembler and its memory wiring. Instruction text, lengths, and flow metadata all use
+that logical address space. Read each address through the connected memory context. The connected plugins implement
+address mapping; the host uses the CPU's disassembler and preserves its wiring for flow analysis.
+
+The host runs analysis while paused, checks the session and memory/content revisions, and discards results after edits,
+execution or disposal. Results retain derived instruction metadata and graph edges. They do not retain a memory image.
+A ProgramIndex metadata snapshot does not freeze decoder reads. Providers must report writes reliably; notification-disabled
+or raw-array mutations require the session mutation seam or explicit invalidation. Rebuild stale analysis while paused.
 
 ## Decoder section
 

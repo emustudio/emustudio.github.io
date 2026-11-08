@@ -109,11 +109,11 @@ interface, that can be useful in the programming of the own memory context.</div
 <dd>
 <div class="block">Accepts <code>length</code> valid bytes from the start of the buffer.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#access(int,int,int,boolean)" class="member-name-link">access(int, int, int, boolean)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
+<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#access(int,int,boolean)" class="member-name-link">access(int, int, boolean)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
 <dd>
 <div class="block">Report a guest access for CPUs whose memory cells are not bytes or use a raw execution view.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html#%3Cinit%3E(int,int,int,boolean)" class="member-name-link">Access(int, int, int, boolean)</a> - Constructor for class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a></dt>
+<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html#%3Cinit%3E(int,int,boolean)" class="member-name-link">Access(int, int, boolean)</a> - Constructor for class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#accesses" class="member-name-link">accesses</a> - Variable in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
 <dd>&nbsp;</dd>
@@ -174,6 +174,10 @@ interface, that can be useful in the programming of the own memory context.</div
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" class="member-name-link">addKeyListenerRecursively(Component, KeyListener)</a> - Static method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>
 <div class="block">Adds a KeyListener to given component recursively.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#addListener(java.lang.Runnable)" class="member-name-link">addListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dd>
+<div class="block">Registers a listener invoked when debugger information changes, possibly off the Swing thread.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#addListener(java.util.function.Consumer)" class="member-name-link">addListener(Consumer)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
 <dd>
@@ -306,12 +310,6 @@ interface, that can be useful in the programming of the own memory context.</div
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html#bank" class="member-name-link">bank</a> - Variable in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#bank" class="member-name-link">bank</a> - Variable in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
-<dd>
-<div class="block">Executed instruction location (interrupted location for acknowledge-only events).</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/settings/BasicSettings.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a> - Interface in <a href="net/emustudio/emulib/runtime/settings/package-summary.html">net.emustudio.emulib.runtime.settings</a></dt>
 <dd>
 <div class="block">Basic settings of a plugin.</div>
@@ -323,16 +321,12 @@ It is assumed the BCD has little endian.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#before" class="member-name-link">before</a> - Variable in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Listener.html#beforeInstruction(int,int)" class="member-name-link">beforeInstruction(int, int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Listener.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Listener</a></dt>
+<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Listener.html#beforeInstruction(int)" class="member-name-link">beforeInstruction(int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Listener.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Listener</a></dt>
 <dd>
 <div class="block">Return true to stop before executing this instruction.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#begin(int)" class="member-name-link">begin(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#begin(int,int)" class="member-name-link">begin(int, int)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
-<dd>
-<div class="block">Begin execution in an explicit physical bank, e.g.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.Strategy.html#BIG_ENDIAN" class="member-name-link">BIG_ENDIAN</a> - Static variable in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils.Strategy</a></dt>
 <dd>
 <div class="block">Bytes are read/written in the big endian</div>
@@ -362,14 +356,6 @@ It is assumed the BCD has little endian.</div>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#BLOCK_START" class="member-name-link">BLOCK_START</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
 <div class="block">Opening and closing tokens of a foldable source block.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a> - Class in <a href="net/emustudio/emulib/runtime/ui/debugger/package-summary.html">net.emustudio.emulib.runtime.ui.debugger</a></dt>
-<dd>
-<div class="block">Represents the "breakpoint" column in the debug table.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#%3Cinit%3E(net.emustudio.emulib.plugins.cpu.CPU)" class="member-name-link">BreakpointColumn(CPU)</a> - Constructor for class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>
-<div class="block">Constructs a new BreakpointColumn.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/DialogBase.html#buildContent()" class="member-name-link">buildContent()</a> - Method in class net.emustudio.emulib.runtime.ui.components.<a href="net/emustudio/emulib/runtime/ui/components/DialogBase.html" title="class in net.emustudio.emulib.runtime.ui.components">DialogBase</a></dt>
 <dd>
@@ -458,7 +444,7 @@ It is assumed the BCD has little endian.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#captureInstruction(int,java.lang.String)" class="member-name-link">captureInstruction(int, String)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
 <dd>
-<div class="block">Capture the actual instruction address and bank, including an ISR instruction after an
+<div class="block">Capture the actual CPU-visible instruction address, including an ISR instruction after an
 acknowledge.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/recording/RecordingSession.html#captureVideo(java.awt.image.BufferedImage)" class="member-name-link">captureVideo(BufferedImage)</a> - Method in class net.emustudio.emulib.runtime.recording.<a href="net/emustudio/emulib/runtime/recording/RecordingSession.html" title="class in net.emustudio.emulib.runtime.recording">RecordingSession</a></dt>
@@ -525,9 +511,15 @@ acknowledge.</div>
 <dd>
 <div class="block">Discards this recording and releases its files.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html#CODE_POINT" class="member-name-link">CODE_POINT</a> - Enum constant in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html#column" class="member-name-link">column</a> - Variable in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a></dt>
 <dd>
 <div class="block">Column</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#comment(int)" class="member-name-link">comment(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dd>
+<div class="block">Returns the comment at this location, or an empty string when none exists.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#COMMENT" class="member-name-link">COMMENT</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
@@ -676,6 +668,10 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn&lt;T&gt;</a> - Interface in <a href="net/emustudio/emulib/runtime/ui/debugger/package-summary.html">net.emustudio.emulib.runtime.ui.debugger</a></dt>
 <dd>
 <div class="block">Column in the debugger table.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a> - Interface in <a href="net/emustudio/emulib/runtime/package-summary.html">net.emustudio.emulib.runtime</a></dt>
+<dd>
+<div class="block">Read-only debugger information at CPU-visible addresses.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerTable.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a> - Interface in <a href="net/emustudio/emulib/runtime/ui/debugger/package-summary.html">net.emustudio.emulib.runtime.ui.debugger</a></dt>
 <dd>
@@ -1038,12 +1034,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Get an array from settings.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getBank(int)" class="member-name-link">getBank(int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getBanksCount()" class="member-name-link">getBanksCount()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>
-<div class="block">Optional bank inspection.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/settings/BasicSettings.html#getBoolean(java.lang.String)" class="member-name-link">getBoolean(String)</a> - Method in interface net.emustudio.emulib.runtime.settings.<a href="net/emustudio/emulib/runtime/settings/BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></dt>
 <dd>
 <div class="block">Get a boolean value from settings.</div>
@@ -1052,14 +1042,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Get a boolean value from settings.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#getBreakpoints()" class="member-name-link">getBreakpoints()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">This class support breakpoints.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#getBreakpoints()" class="member-name-link">getBreakpoints()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Immutable snapshot of ordinary execution breakpoints; empty when enumeration is unsupported.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getBytes()" class="member-name-link">getBytes()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getCellTypeClass()" class="member-name-link">getCellTypeClass()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
@@ -1067,8 +1049,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="block">Get memory cell type class.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html#getClassType()" class="member-name-link">getClassType()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#getClassType()" class="member-name-link">getClassType()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#getClassType()" class="member-name-link">getClassType()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
@@ -1086,8 +1066,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Gets column</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getCommonBoundary()" class="member-name-link">getCommonBoundary()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ContextPool.html#getCompilerContext(long)" class="member-name-link">getCompilerContext(long)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ContextPool.html" title="interface in net.emustudio.emulib.runtime">ContextPool</a></dt>
 <dd>
 <div class="block">Get registered Compiler context.</div>
@@ -1142,12 +1120,14 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Optional portable debugging capabilities.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getDebuggerMemory()" class="member-name-link">getDebuggerMemory()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
+<dd>
+<div class="block">Returns the debugger's memory information service, or null when unavailable.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getDebuggerTable()" class="member-name-link">getDebuggerTable()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
 <dd>
 <div class="block">Get debugger table.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#getDefaultWidth()" class="member-name-link">getDefaultWidth()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#getDefaultWidth()" class="member-name-link">getDefaultWidth()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
 <div class="block">Get default width of the column in pixels.</div>
@@ -1343,8 +1323,6 @@ followed by specified location.</div>
 <dd>
 <div class="block">Scope searched for the referenced declaration.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#getSelectedBank()" class="member-name-link">getSelectedBank()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/CachedComboBoxModel.html#getSelectedItem()" class="member-name-link">getSelectedItem()</a> - Method in class net.emustudio.emulib.runtime.ui.components.<a href="net/emustudio/emulib/runtime/ui/components/CachedComboBoxModel.html" title="class in net.emustudio.emulib.runtime.ui.components">CachedComboBoxModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/ShortenedString.html#getShortenedString()" class="member-name-link">getShortenedString()</a> - Method in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/ShortenedString.html" title="class in net.emustudio.emulib.runtime.ui">ShortenedString</a></dt>
@@ -1371,6 +1349,10 @@ followed by specified location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html#getSourceName()" class="member-name-link">getSourceName()</a> - Method in class net.emustudio.emulib.plugins.compiler.antlr.<a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/Compiler.html#getSourcePositionColumnUnit()" class="member-name-link">getSourcePositionColumnUnit()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></dt>
+<dd>
+<div class="block">Coordinate convention of this compiler's memory source-position annotations.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getSpectrumHeader()" class="member-name-link">getSpectrumHeader()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
 <dd>
 <div class="block">Spectrum header metadata, if this packet has flag zero and a 17-byte header.</div>
@@ -1427,8 +1409,6 @@ followed by specified location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html#getTitle()" class="member-name-link">getTitle()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#getTitle()" class="member-name-link">getTitle()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#getTitle()" class="member-name-link">getTitle()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
 <div class="block">Gets title of the column.</div>
@@ -1458,10 +1438,6 @@ followed by specified location.</div>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html#getValue(int)" class="member-name-link">getValue(int)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></dt>
 <dd>
 <div class="block">Return formatted address into hexadecimal digit, aligned to 4 digits.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#getValue(int)" class="member-name-link">getValue(int)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>
-<div class="block">Determine if a breakpoint is set at specific location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#getValue(int)" class="member-name-link">getValue(int)</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
@@ -1673,9 +1649,9 @@ followed by specified location.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#inspectionMemory(net.emustudio.emulib.plugins.memory.MemoryContext)" class="member-name-link">inspectionMemory(MemoryContext)</a> - Static method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
 <dd>
-<div class="block">Read-only disassembler view using physical-bank inspection rather than guest bus reads.</div>
+<div class="block">Read-only disassembler view of the CPU's uninstrumented memory wiring.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#%3Cinit%3E(long,int,int,java.lang.String,java.lang.String,java.util.Map,java.util.Map,java.util.List,boolean)" class="member-name-link">Instruction(long, int, int, String, String, Map, Map, List, boolean)</a> - Constructor for class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
+<dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#%3Cinit%3E(long,int,java.lang.String,java.lang.String,java.util.Map,java.util.Map,java.util.List,boolean)" class="member-name-link">Instruction(long, int, String, String, Map, Map, List, boolean)</a> - Constructor for class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.cpu">InstructionFlow</a> - Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
@@ -1739,20 +1715,10 @@ followed by specified location.</div>
 <dd>
 <div class="block">Determines if this plugin supports emulation automation</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#isBreakpointSet(int)" class="member-name-link">isBreakpointSet(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#isBreakpointSet(int)" class="member-name-link">isBreakpointSet(int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#isCurrentInstruction(int)" class="member-name-link">isCurrentInstruction(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
 <dd>
-<div class="block">Determine if a breakpoint is set at a memory location.</div>
+<div class="block">Returns whether this location is the current instruction.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#isBreakpointSupported()" class="member-name-link">isBreakpointSupported()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#isBreakpointSupported()" class="member-name-link">isBreakpointSupported()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Determine whether breakpoints are supported by CPU.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
 <div class="block">Determines whether this column is editable by user.</div>
@@ -1812,6 +1778,10 @@ followed by specified location.</div>
 <dl class="index">
 <dt><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html#LA(int)" class="member-name-link">LA(int)</a> - Method in class net.emustudio.emulib.plugins.compiler.antlr.<a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#label(int)" class="member-name-link">label(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dd>
+<div class="block">Returns the label at this location, or an empty string when none exists.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#label(java.lang.String)" class="member-name-link">label(String)</a> - Method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>
 <div class="block">Creates a JLabel with given text.</div>
@@ -2358,6 +2328,10 @@ paused.</div>
 <dd>
 <div class="block">Pauses the CPU emulation.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#peek(int)" class="member-name-link">peek(int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
+<dd>
+<div class="block">Inspect a CPU-visible cell without guest timing, device effects, or access events.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html#play(K,boolean)" class="member-name-link">play(K, boolean)</a> - Method in class net.emustudio.emulib.runtime.audio.<a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html" title="class in net.emustudio.emulib.runtime.audio">SamplePlayer</a></dt>
 <dd>
 <div class="block">Restarts the identified sample, optionally looping it until stopped.</div>
@@ -2475,10 +2449,6 @@ radixes.</div>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#read(int,int)" class="member-name-link">read(int, int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
 <dd>
 <div class="block">Reads one or more adjacent cells from a memory.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#readBank(int,int)" class="member-name-link">readBank(int, int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>
-<div class="block">Inspect a bank without selecting it.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.html#readBits(byte%5B%5D,int,int,int)" class="member-name-link">readBits(byte[], int, int, int)</a> - Static method in class net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/NumberUtils.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils</a></dt>
 <dd>
@@ -2625,6 +2595,10 @@ events from this CPU.</div>
 <dd>
 <div class="block">Removes given KeyListener from a component recursively.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#removeListener(java.lang.Runnable)" class="member-name-link">removeListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dd>
+<div class="block">Unregisters a previously registered listener.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#removeListener(java.util.function.Consumer)" class="member-name-link">removeListener(Consumer)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
 <dd>
 <div class="block">Removes a listener for frequency changes.</div>
@@ -2767,12 +2741,6 @@ events from this CPU.</div>
 <dd>
 <div class="block">Set a boolean value to the settings.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#setBreakpoint(int)" class="member-name-link">setBreakpoint(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#setBreakpoint(int)" class="member-name-link">setBreakpoint(int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Set a breakpoint at a memory location.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerTable.html#setDebuggerColumns(java.util.List)" class="member-name-link">setDebuggerColumns(List)</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></dt>
 <dd>
 <div class="block">Set custom columns in the debugger table.</div>
@@ -2832,10 +2800,6 @@ events from this CPU.</div>
 <dt><a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html#settings" class="member-name-link">settings</a> - Variable in class net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemory</a></dt>
 <dd>
 <div class="block">Memory custom settings.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in class net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/BreakpointColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">BreakpointColumn</a></dt>
-<dd>
-<div class="block">Set or unset breakpoint to specific location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#setValue(int,java.lang.Object)" class="member-name-link">setValue(int, Object)</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
@@ -2934,6 +2898,10 @@ events from this CPU.</div>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html#%3Cinit%3E(int,int,java.lang.String)" class="member-name-link">SourceCodePosition(int, int, String)</a> - Constructor for class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a></dt>
 <dd>
 <div class="block">Creates new SourceCodePosition object</div>
+</dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a> - Enum Class in <a href="net/emustudio/emulib/plugins/compiler/package-summary.html">net.emustudio.emulib.plugins.compiler</a></dt>
+<dd>
+<div class="block">Column units for compiler source mappings; adapters translate to UTF-16 using captured text.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceToken.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.compiler">SourceToken</a> - Class in <a href="net/emustudio/emulib/plugins/compiler/package-summary.html">net.emustudio.emulib.plugins.compiler</a></dt>
 <dd>
@@ -3175,16 +3143,14 @@ events from this CPU.</div>
 <dd>
 <div class="block">A runnable that can throw checked exceptions.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html#UNKNOWN" class="member-name-link">UNKNOWN</a> - Enum constant in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ContextPool.html#unregister(long,java.lang.Class)" class="member-name-link">unregister(long, Class)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ContextPool.html" title="interface in net.emustudio.emulib.runtime">ContextPool</a></dt>
 <dd>
 <div class="block">Unregisters all contexts registered under given context interface.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#unsetBreakpoint(int)" class="member-name-link">unsetBreakpoint(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html#UTF16" class="member-name-link">UTF16</a> - Enum constant in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#unsetBreakpoint(int)" class="member-name-link">unsetBreakpoint(int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Unset a breakpoint at a memory location.</div>
-</dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
@@ -3195,6 +3161,10 @@ events from this CPU.</div>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.MessageType.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
@@ -3224,6 +3194,11 @@ events from this CPU.</div>
 the order they are declared.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.MessageType.html#values()" class="member-name-link">values()</a> - Static method in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html#values()" class="member-name-link">values()</a> - Static method in enum class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>

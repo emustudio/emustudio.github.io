@@ -1,93 +1,106 @@
 ---
 layout: default
-title: Optional debugging ports
+title: Optional machine debugging
 nav_order: 5
 parent: Writing a CPU
 permalink: /cpu/debugging
 ---
 
-# Optional debugging ports
+# Optional machine debugging
 
-`CPU.getDebugger()` optionally exposes emuLib's `DebugCPU` port. The host uses it for portable register watches/edits,
-conditional breakpoints, guest read/write watchpoints and instruction history. Plugins without this port retain their
-existing debugger. All bundled CPU engines implement it with `DebugProbe`; third-party CPU plugins can use the same interface.
+A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their machines; emuStudio owns rule policy,
+watches, history, recording and execution control. Real processors can show registers; abstract machines can show tapes
+and symbolic values. The shared CPU interface defines neither representation.
 
-## Register access and execution hooks
+## Two operations
 
-Create a probe with `DebugProbe(processor, memory, disassembler)`, using the CPU's memory context (including word or typed instruction memory) and
-a disassembler that reads the actual execution view without guest side effects. Bind named register descriptors
-to getters/setters with `register(name, bits, getter, setter)`. Widths are 1–64 bits; edits reject values outside the unsigned
-register width (64-bit values use the full `long` bit pattern). Register pairs can share bindings with their component registers. Inspection, edits and listener changes
-require a paused CPU; register getters must be side-effect-free.
+```java
+public interface Debugging {
+    Expression compile(String source);
+    AutoCloseable observe(Observer observer, boolean capture);
 
-The probe exposes the original context through `memory()`. For byte memory, use `instrumentedMemory()` only for the CPU's execution memory reference. Word or raw-memory engines report numeric guest accesses with `access(address, bank, value, write)`;
-typed instruction encodings remain text. Keep recording disassemblers on an inspection-only view such as
-`DebugProbe.inspectionMemory(memory)`, and keep existing bus-cycle interfaces on the original context. Configure
-`onActivityChanged` before exposing the probe to switch execution between the original and instrumented memory references.
-Cache the active flag in the engine so disabled instruction dispatch only needs a boolean check.
+    interface Expression {
+        boolean test();
+        ValueView display();
+    }
 
-When active, call `begin(pc)` before dispatch. A false return requests a breakpoint stop without executing the instruction.
-After a successful begin, call `end(completed)` in `finally`; its return requests a stop after the instruction. Set completed
-only when dispatch finishes normally. `begin` captures instruction text before execution. Nested dispatches are grouped
-into their outer instruction. Interrupt adapters use `describeInterrupt` for injected operations, or `captureInstruction`
-for the instruction actually dispatched at a vector, rather than attributing the interrupted PC's bytes to the interrupt.
-Preserve existing cycle
-accounting. Configure `onRegisterEdited` to notify existing CPU status listeners after successful edits;
-`AbstractCPU.notifyInternalStateChanged()` provides that notification without a run-state change.
+    interface Observer {
+        boolean beforeStep();
+        boolean afterStep(boolean completed, Optional<StepView> capture);
+        default void failed(String message) {}
+    }
+}
+```
 
-Probe listeners run on the execution thread. They must not call CPU lifecycle operations. Events contain immutable
-before/after register snapshots, the instruction's physical bank/address, guest memory accesses and completion status.
-Each event also carries a monotonic sequence number and opcode/disassembly text captured before execution. Capture
-disassembly through side-effect-free inspection memory so it does not add guest access events; never reconstruct it from
-later live memory. This preserves historical instructions after self-modification or bank changes. Failed decoding must
-remain explicit without preventing the instruction outcome from being recorded.
-Read accesses include instruction fetches; writes are attempted guest writes and do not prove that a ROM/device accepted
-them. Debugger inspection through the original context produces no guest access events. Access hooks work independently of
-UI memory-change notification settings. Listener registration order should not be used to coordinate separate tools.
+Implement the interface directly on the plugin root and delegate to a plugin-owned adapter. `DebuggingSupport` can
+share observer mechanics, and `ExpressionParser` can share expression syntax with plugin-defined name/function resolvers.
+Resolve names during compilation without reading guest state; evaluation and display happen at the execution seam.
 
-## Bank inspection
+Use the existing `applicationApi.getExecutionState().update(change)` service for live edits. It queues changes between
+semantic steps or on the idle CPU worker, without a pause/resume transition. Compile expressions and attach/detach
+observers through that same service. Keep Swing work on its event thread. `Debugging` adds no update protocol.
 
-`MemoryContext` defaults to one bank. Banked providers implement `getBanksCount`, `getSelectedBank`, `getCommonBoundary`
-and `readBank(address, bank)`. Addresses below the common boundary use the selected bank; the shared region uses physical
-bank zero. `getBank(address)` reports that physical bank. Inspecting a bank must not select it or advance guest bus timing.
-The default `readBank` delegates to normal reads for bank zero, so providers with memory-mapped side effects need their own
-inspection implementation. The Spectrum bus delegates bank inspection directly to its underlying memory.
+## Engine integration
 
-An instruction in common ROM has physical bank zero, while its memory expressions can still read the selected logical bank.
-Keep instruction-bank identity separate from expression evaluation context.
+Every outer semantic step drains `ExecutionState.processUpdates()`, including the inactive fast path. This makes live
+attachment and edits possible without waiting for a continuous run to end. The host supplies the worker; do not create
+another execution controller.
 
-## Flow metadata and persistence
+Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
+or failed outcome, plus presentation only when capture is requested. Record the stopping step before honoring a
+post-step watchpoint. A refused before-step produces no executed row.
 
-`Disassembler.getFlow(address)` optionally returns `InstructionFlow`: kind, next sequential address, conditional fall-through
-and explicit direct targets. Use an empty target list for unresolved indirect jumps. Calls normally retain fall-through;
-unconditional jumps, returns and stops do not. Do not derive targets by parsing mnemonic text. The bundled opcode adapter
-adds 8080/Z80 flow metadata while Edigen-generated disassembly remains unchanged.
+The host owns breakpoints, hit counts, persistence and one-step continuation. It skips before-step rules once for Manual
+Step or direct Continue from a breakpoint, then rearms them. Reset, jump and machine edits clear continuation. Plugins
+must not implement a second breakpoint store or independent skip policy.
 
-`CPU.getBreakpoints()` returns a snapshot of ordinary address breakpoints; `AbstractCPU` implements this. The default empty
-snapshot preserves plugins that do not expose breakpoint enumeration. Named debugger rules, watches, user annotations,
-captures, persistence and instruction recording belong to the emuStudio host. Compiler source-position annotations remain separate
-from user labels/comments. True machine rewind requires coordinated device/CPU/memory checkpoints and input replay; instruction
-history alone does not provide restoration.
+At computer open, `DebugSession` loads annotations, watches and rules once from the configuration's `.debugger` file:
+`/path/computer.toml` uses `/path/computer.toml.debugger`. One atomic save writes all three together. Computers without
+a saved configuration keep this metadata in memory. Compiler mappings, temporary diagnostics and hit counts are not
+saved. Explicit annotation import/export remains separate and uses annotation format 4.
 
-## Recording ownership
+Preserve actual guest-step granularity. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
+must not invent extra operations or attach unrelated program locations. Inspection must use side-effect-free reads and
+must not generate guest accesses. Failed/attempted writes must be described honestly.
 
-The host consumes the same events for bounded recent history, continuous file recording and headless automation.
-CPU plugins do not format or write recording files. Preserve the inactive-probe path: no instruction snapshots or
-recording allocations when no listeners are attached. Sequence numbers identify execution order independently of
-host timestamps and remain visible when the UI filters or folds events.
+## Values and recorded presentation
 
-The application writes a versioned structured recording with processor/register definitions and captured event values.
-Its reader uses bounded pages, so opening a long recording does not load the entire file into memory. Text export is
-for inspection and comparison; structured recordings retain the information needed by History. Reopened recordings use
-their captured instruction text and values rather than the current machine's memory or source annotations.
+`ValueView` supplies formatted watch text, supported formats and change indication. `StepView` supplies summary,
+fold identity, optional program location and immutable `ViewRow` details. Rows carry group, label, before/after
+text, change marker, opaque search tags and `NavLink` navigation. There are no mandatory registers, widths or byte opcodes.
 
-Continuous recording uses bounded buffered writes on the execution thread. This applies backpressure instead of
-silently dropping events. File failures and incomplete recordings must be reported; clean closure flushes output and
-writes a completion marker. Historical inspection remains read-only and does not restore machine state.
+For previous-write navigation, a plugin tags its write row and supplies a `new NavLink(label, tag)` on the access row.
+The host finds the earlier matching tag relative to that row's original event ordinal, including within folded groups.
+It never parses displayed values or understands machine-specific tag meaning.
 
-## API reference
+The host explicitly serializes this fixed presentation and its ordinal/completion envelope in bounded
+recordings. Offline details, filtering, folding, links and text export require no CPU plugin, live memory or Swing.
+File limits belong to the codec; shared display values contain no validation framework or public size limits.
+Source links use available current mappings; recordings do not reconstruct historical sources or restore machine state.
 
-The generated reference documents [DebugCPU]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html),
-[DebugProbe]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html),
-[InstructionFlow]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/InstructionFlow.html), and
-[MemoryContext]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html).
+Keep machine-specific editing in plugin controls within the shared debugger workspace. Expose only meaningful
+capabilities; unsupported conditions remain visibly inactive rather than fabricating registers or memory.
+
+## Failure behavior
+
+Accept and save invalid expressions, but deactivate only the affected rule/watch. Report temporary nonmodal diagnostics;
+clear them when corrected. Runtime evaluation and presentation failures never request an emulation pause.
+
+Recording open/write/close failure stops only the recorder, preserves any incomplete file and reports the problem.
+Other debugging and emulation continue. There is no automatic restart or file-repair logic; a later recording starts
+a fresh file. Recorder failures do not change the headless emulation result. A false script `ASSERT` still fails the script.
+
+Active capture may slow execution through bounded synchronous writing. It must not silently drop requested events.
+With observation inactive, retain original execution memory and avoid presentation allocations.
+
+## Flow metadata
+
+`Disassembler.getFlow(address)` still returns optional `InstructionFlow` for addressed programs. Unresolved indirect
+targets stay unresolved; do not parse mnemonics to invent destinations. Source mappings, labels and program analysis
+remain separate from machine-state presentation.
+
+## Reference
+
+See [Debugging]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/debugger/Debugging.html),
+[StepView]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/debugger/StepView.html), and
+[InstructionFlow]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/InstructionFlow.html).

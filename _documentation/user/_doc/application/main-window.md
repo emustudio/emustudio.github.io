@@ -62,10 +62,10 @@ are read from their current contents on disk. The compiler output pane shows com
 positions supplied by the compiler. Stop running emulation before compiling.
 
 Compiled code can produce a binary file (for example a HEX file) and is loaded into operating memory by the compiler.
-**Save & Compile source file** resets the memory plugin before invoking the compiler and resets the CPU afterwards.
-Memory contents
-then depend on the memory plugin's reset behavior and the compiler: the 8080 and Z80 assemblers write generated
+**Save & Compile source file** does not reset memory before compiling. It resets the CPU only when compilation
+reports no errors. Memory contents depend on the compiler: the 8080 and Z80 assemblers write generated
 addresses, while BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading successful output.
+Other compilers may use different loading behavior.
 
 ## Debugger tab
 
@@ -89,8 +89,8 @@ or stops.
 Double-click an instruction with source information to open its source file at the corresponding line. The 8080 and
 Z80 assemblers attach this information when compiling into memory. The file opens in an editor tab, including when it
 is an included source file. Writing to an annotated address invalidates its source information, even while running;
-annotations at other addresses remain available. Erasing memory removes all source positions. Saved byte-memory images
-can restore positions from their `.meta` sidecars; a raw image without annotations cannot provide this navigation.
+annotations at other addresses remain available. Erasing memory removes all source positions. A raw image without
+source annotations cannot provide this navigation.
 
 #### Debugger toolbar
 
@@ -107,28 +107,28 @@ according to the CPU's execution state and the plugins' capabilities.
 | <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=198 y=0 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
 | <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=230 y=0 %} | **Move PC Back**. Move the instruction pointer to the debugger’s estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
 | <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=262 y=0 %} | **Jump to address**. Enter the address of the next instruction to execute.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint / inspect address...**. Open **Set breakpoint** to set or unset an address breakpoint, or choose **Inspect only** to view its live bytes. **Keep inspection while stepping** retains a breakpoint’s inspected address. Use the **Breakpoints** tab for named rules and watchpoints. Pause before editing.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint...**. Set or unset a CPU-address breakpoint. Use **Breakpoints** for named execution rules and **Watches** for memory-access watches. Pause before editing.
 | <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=332 y=0 %} | **Show operating memory**. Open the memory plugin’s window when available.
 
 #### Inspection pane
 
-Pause the CPU to inspect memory, search for bytes, integers or text, compare captures, and edit labels, comments,
+Pause the CPU to inspect live memory, search for bytes, integers or text, find strings, and edit labels, comments,
 bookmarks or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
-Selecting an instruction updates the inspection address. Browsing changes neither the program counter nor the CPU’s
-selected memory bank. A breakpoint hit opens **Memory** at its address; **Keep inspection while stepping** retains that
-selection across subsequent steps. History records recent execution, saves continuous recordings, and opens saved recordings
+Selecting an instruction updates the inspection address. Browsing does not change the program counter. A breakpoint hit inspects its address; later steps follow the CPU unless the view was
+manually pinned. History records recent execution, saves continuous recordings, and opens saved recordings
 for inspection without restoring the live machine.
+Use the configured memory plugin window to inspect or edit memory.
 See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
 
 #### List of instructions
 
 The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
 they show a breakpoint control, address, instruction, and opcode bytes, followed by user labels and comments. The red
-row marks the next instruction. Click the breakpoint control to cycle through off, enabled, and enabled with inspection
-kept while stepping. A further click removes it. Hover over the control to see its current state.
+row marks the next instruction. Click the breakpoint control to toggle the execution breakpoint on or off.
+Hover over the control to see its current state. Manual view pinning does not configure breakpoints.
 
 The number of visible rows follows the space available in the window. To change memory contents, use the memory
 plugin's window or compile another program; the instruction and opcode cells are read-only.

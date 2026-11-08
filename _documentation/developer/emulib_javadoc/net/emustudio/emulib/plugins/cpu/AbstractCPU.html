@@ -74,11 +74,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
 <li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
 <li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
-<li><a href="#getBreakpoints()" tabindex="0">getBreakpoints()</a></li>
-<li><a href="#isBreakpointSupported()" tabindex="0">isBreakpointSupported()</a></li>
-<li><a href="#setBreakpoint(int)" tabindex="0">setBreakpoint(int)</a></li>
-<li><a href="#unsetBreakpoint(int)" tabindex="0">unsetBreakpoint(int)</a></li>
-<li><a href="#isBreakpointSet(int)" tabindex="0">isBreakpointSet(int)</a></li>
 <li><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">addCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">removeCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#destroy()" tabindex="0">destroy()</a></li>
@@ -117,7 +112,6 @@ loadScripts(document, 'script');</script>
 implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html" title="class or interface in java.util.concurrent" class="external-link">Callable</a>&lt;<a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a>&gt;</span></div>
 <div class="block">Implements fundamental functionality useful for most of the CPU plugins. Features include:
 <p>
-- support of breakpoints
 - thread safe controlling of run states
 - managing CPU listeners</div>
 </div>
@@ -208,65 +202,45 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs CPU emulation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBreakpoints()" class="member-name-link">getBreakpoints</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This class support breakpoints.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get run-time title of this plugin.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSet(int)" class="member-name-link">isBreakpointSet</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine if a breakpoint is set at a memory location.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBreakpointSupported()" class="member-name-link">isBreakpointSupported</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine whether breakpoints are supported by CPU.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This class does not support showing settings</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected final void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInternalStateChanged()" class="member-name-link">notifyInternalStateChanged</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInternalStateChanged()" class="member-name-link">notifyInternalStateChanged</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Pauses the CPU emulation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Remove CPU listener object from the list of stateObservers.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reset plugin.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Resets the CPU and sets instruction position to given program location.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#resetInternal(int)" class="member-name-link">resetInternal</a><wbr>(int&nbsp;startPos)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#resetInternal(int)" class="member-name-link">resetInternal</a><wbr>(int&nbsp;startPos)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Performs specific CPU reset.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBreakpoint(int)" class="member-name-link">setBreakpoint</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set a breakpoint at a memory location.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</code></div>
@@ -287,11 +261,6 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Stops the CPU emulation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unsetBreakpoint(int)" class="member-name-link">unsetBreakpoint</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Unset a breakpoint at a memory location.</div>
 </div>
 </div>
 </div>
@@ -424,109 +393,6 @@ once, and each instance can have different title assigned at runtime.</div>
 <dd><code><a href="../Plugin.html#isShowSettingsSupported()">isShowSettingsSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 <dt>Returns:</dt>
 <dd>false</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getBreakpoints()">
-<h3>getBreakpoints</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getBreakpoints</span>()</div>
-<div class="block">This class support breakpoints.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#getBreakpoints()">getBreakpoints</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Returns:</dt>
-<dd>true</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="isBreakpointSupported()">
-<h3>isBreakpointSupported</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBreakpointSupported</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#isBreakpointSupported()">CPU</a></code></span></div>
-<div class="block">Determine whether breakpoints are supported by CPU.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#isBreakpointSupported()">isBreakpointSupported</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Returns:</dt>
-<dd>true if breakpoints are supported, false otherwise</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setBreakpoint(int)">
-<h3>setBreakpoint</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setBreakpoint</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#setBreakpoint(int)">CPU</a></code></span></div>
-<div class="block">Set a breakpoint at a memory location.
-<p>
-Does nothing if breakpoints are not supported.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#setBreakpoint(int)">setBreakpoint</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>location</code> - memory location where the breakpoint will be set</dd>
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="CPU.html#isBreakpointSupported()"><code>CPU.isBreakpointSupported()</code></a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="unsetBreakpoint(int)">
-<h3>unsetBreakpoint</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">unsetBreakpoint</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#unsetBreakpoint(int)">CPU</a></code></span></div>
-<div class="block">Unset a breakpoint at a memory location.
-<p>
-Does nothing if breakpoints are not supported.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#unsetBreakpoint(int)">unsetBreakpoint</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>location</code> - memory location from where the breakpoint will be unset</dd>
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="CPU.html#isBreakpointSupported()"><code>CPU.isBreakpointSupported()</code></a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="isBreakpointSet(int)">
-<h3>isBreakpointSet</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBreakpointSet</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#isBreakpointSet(int)">CPU</a></code></span></div>
-<div class="block">Determine if a breakpoint is set at a memory location.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#isBreakpointSet(int)">isBreakpointSet</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>location</code> - memory location, from where the breakpoint will be determined</dd>
-<dt>Returns:</dt>
-<dd>true if breakpoint is set in the location, false otherwise or if breakpoints are not supported.</dd>
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="CPU.html#isBreakpointSupported()"><code>CPU.isBreakpointSupported()</code></a></li>
-</ul>
-</dd>
 </dl>
 </div>
 </section>
