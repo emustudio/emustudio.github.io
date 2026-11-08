@@ -54,6 +54,11 @@ The host owns breakpoints, hit counts, persistence and one-step continuation. It
 Step or direct Continue from a breakpoint, then rearms them. Reset, jump and machine edits clear continuation. Plugins
 must not implement a second breakpoint store or independent skip policy.
 
+At computer open, `DebugSession` loads annotations, watches and rules once from the configuration's `.debugger` file:
+`/path/computer.toml` uses `/path/computer.toml.debugger`. One atomic save writes all three together. Computers without
+a saved configuration keep this metadata in memory. Compiler mappings, temporary diagnostics and hit counts are not
+saved. Explicit annotation import/export remains separate and uses annotation format 4.
+
 Preserve actual guest-step granularity. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
 must not invent extra operations or attach unrelated program locations. Inspection must use side-effect-free reads and
 must not generate guest accesses. Failed/attempted writes must be described honestly.

@@ -75,9 +75,13 @@ Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Ent
 Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
 for this configured machine and layout.
 
-Annotations persist beside the computer configuration. Their identity combines the CPU, normalized configuration path
-and memory layout, so labels survive reopening that configuration and loading another program with the same layout.
-Keep labels appropriate to the program you load. Import requires the same configured-machine/layout identity.
+emuStudio loads annotations, watches and rules together when opening a computer. For `/path/computer.toml`, the automatic
+metadata file is `/path/computer.toml.debugger`. Each save writes all three together atomically. Computers without a
+saved configuration keep this metadata in memory.
+
+Explicit annotation import and export remain available through **Manage…**. Annotation export uses format 4; import
+requires the same configured-machine/layout identity, derived from the CPU, normalized configuration path and memory
+layout. Keep labels appropriate to the program you load.
 Files from the former memory-snapshot export, obsolete annotation formats and annotations bound to a memory-content hash are unsupported.
 Existing files remain untouched. Compiler source mappings stay separate and require their captured source revisions.
 
@@ -124,8 +128,9 @@ Running or editing memory makes source mappings historical; already resolved tar
 Recompile to restore current source following or rebind a source rule. Source navigation uses explicit mapped cells;
 unmapped operand cells and gaps have no source match. Unsupported compiler coordinates appear in the source-mapping status.
 
-Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. Watches and breakpoints persist in the computer's
-`.debugger` file; **Save settings** saves them explicitly. Hit counts restart at zero when reloading.
+Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. **Save settings** saves watches and rules
+together with annotations in the computer's `.debugger` file. Temporary errors and hit counts are not saved; hit counts
+restart at zero when reopening the computer.
 
 ## References, flow and history
 
