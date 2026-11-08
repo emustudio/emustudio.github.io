@@ -53,6 +53,11 @@ calls the engine's `step()`. The host supplies execution threads and interruptio
 actual terminal states. See [Optional machine debugging]({{ '/cpu/debugging' | relative_url }}) for expression,
 presentation and failure contracts.
 
+Continuous execution must respond to thread interruption so the host can request pause, stop, reset, or close.
+The engine's `run()` is called directly by the plugin's synchronous `execute()` method on the host-owned CPU worker.
+Neither the plugin nor `AbstractCPU` creates a worker or watcher. Returning from `execute()` acknowledges actual loop
+exit; the host waits for that acknowledgement before resetting or destroying machine resources.
+
 ## Data-driven opcode dispatch
 
 The bundled Intel 8080 and Z80 engines keep opcode-to-handler mappings in `dispatch-tables.txt` resources beside their

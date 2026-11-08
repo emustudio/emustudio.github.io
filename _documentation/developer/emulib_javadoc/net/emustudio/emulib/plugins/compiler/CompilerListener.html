@@ -69,11 +69,15 @@ loadScripts(document, 'script');</script>
 <h1 title="Interface CompilerListener" class="title">Interface CompilerListener</h1>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Functional Interface:</dt>
+<dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
+</dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">CompilerListener</span></div>
-<div class="block">This is an interface that should be implemented by the emuStudio,
-and/or other plugins that want to process the output of the compiler.</div>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">CompilerListener</span></div>
+<div class="block">Compiler listener. Only <a href="#onMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)"><code>onMessage(CompilerMessage)</code></a> is mandatory.</div>
 </div>
 </section>
 <section class="summary">
@@ -83,26 +87,26 @@ and/or other plugins that want to process the output of the compiler.</div>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onFinish()" class="member-name-link">onFinish</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">This method is called whenever the compiler finishes the compilation.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onFinish()" class="member-name-link">onFinish</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Called when a compilation finishes (successfully or not).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)" class="member-name-link">onMessage</a><wbr>(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;compilerMessage)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)" class="member-name-link">onMessage</a><wbr>(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;message)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Method will be invoked when compiler would like to print info message.</div>
+<div class="block">Called when the compiler emits a message.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onStart()" class="member-name-link">onStart</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">This method is called whenever a compiler begins to work.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onStart()" class="member-name-link">onStart</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Called when a compilation begins.</div>
 </div>
 </div>
 </div>
@@ -122,8 +126,8 @@ and/or other plugins that want to process the output of the compiler.</div>
 <section class="detail" id="onStart()">
 <h3>onStart</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onStart</span>()</div>
-<div class="block">This method is called whenever a compiler begins to work.</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onStart</span>()</div>
+<div class="block">Called when a compilation begins.</div>
 </div>
 </section>
 </li>
@@ -131,11 +135,11 @@ and/or other plugins that want to process the output of the compiler.</div>
 <section class="detail" id="onMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)">
 <h3>onMessage</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;compilerMessage)</span></div>
-<div class="block">Method will be invoked when compiler would like to print info message.</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;message)</span></div>
+<div class="block">Called when the compiler emits a message.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>compilerMessage</code> - Message from the compiler</dd>
+<dd><code>message</code> - message from the compiler</dd>
 </dl>
 </div>
 </section>
@@ -144,8 +148,8 @@ and/or other plugins that want to process the output of the compiler.</div>
 <section class="detail" id="onFinish()">
 <h3>onFinish</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onFinish</span>()</div>
-<div class="block">This method is called whenever the compiler finishes the compilation.</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onFinish</span>()</div>
+<div class="block">Called when a compilation finishes (successfully or not).</div>
 </div>
 </section>
 </li>

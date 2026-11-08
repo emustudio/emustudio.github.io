@@ -5,7 +5,7 @@
 <title>FileLoader.SpectrumHeader (emuLib 12.1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, interface: FileLoader, class: SpectrumHeader">
+<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, class: FileLoader, class: SpectrumHeader">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/stylesheet.css">
@@ -62,7 +62,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#getDataLength()" tabindex="0">getDataLength()</a></li>
 <li><a href="#getParameter1()" tabindex="0">getParameter1()</a></li>
 <li><a href="#getParameter2()" tabindex="0">getParameter2()</a></li>
-<li><a href="#getVariable()" tabindex="0">getVariable()</a></li>
 </ol>
 </li>
 </ol>
@@ -77,14 +76,14 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
-<dt>Enclosing interface:</dt>
-<dd><code><a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></code></dd>
+<dt>Enclosing class:</dt>
+<dd><code><a href="FileLoader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public static final class </span><span class="element-name type-name-label">FileLoader.SpectrumHeader</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Spectrum header fields decoded independently of their destination.</div>
+<div class="block">ZX Spectrum tape header (the 17 bytes after flag 0).</div>
 </div>
 </section>
 <section class="summary">
@@ -115,9 +114,6 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>char</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVariable()" class="member-name-link">getVariable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -140,6 +136,10 @@ loadScripts(document, 'script');</script>
 <h3>getType</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getType</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>0 = program, 1 = number array, 2 = character array, 3 = code (memory block)</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -148,6 +148,10 @@ loadScripts(document, 'script');</script>
 <h3>getFileName</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFileName</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>file name, padded with spaces to 10 characters</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -156,6 +160,10 @@ loadScripts(document, 'script');</script>
 <h3>getDataLength</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getDataLength</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>length of the following data block</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -164,6 +172,10 @@ loadScripts(document, 'script');</script>
 <h3>getParameter1</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getParameter1</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>autostart line (program), variable name in high byte (arrays) or start address (code)</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -172,14 +184,10 @@ loadScripts(document, 'script');</script>
 <h3>getParameter2</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getParameter2</span>()</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getVariable()">
-<h3>getVariable</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">char</span>&nbsp;<span class="element-name">getVariable</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>program length without variables (program) or 32768 (code)</dd>
+</dl>
 </div>
 </section>
 </li>

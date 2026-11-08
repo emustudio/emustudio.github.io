@@ -68,7 +68,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#ICON_CONNECTION" tabindex="0">ICON_CONNECTION</a></li>
 <li><a href="#ICON_COPY" tabindex="0">ICON_COPY</a></li>
 <li><a href="#ICON_CPU" tabindex="0">ICON_CPU</a></li>
-<li><a href="#ICON_CUT" tabindex="0">ICON_CUT</a></li>
 <li><a href="#ICON_DELETE" tabindex="0">ICON_DELETE</a></li>
 <li><a href="#ICON_DEVICE" tabindex="0">ICON_DEVICE</a></li>
 <li><a href="#ICON_DISK_EMPTY" tabindex="0">ICON_DISK_EMPTY</a></li>
@@ -95,7 +94,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#ICON_PAGE_FIRST" tabindex="0">ICON_PAGE_FIRST</a></li>
 <li><a href="#ICON_PAGE_SEEK_BACKWARD" tabindex="0">ICON_PAGE_SEEK_BACKWARD</a></li>
 <li><a href="#ICON_PAGE_SEEK_FORWARD" tabindex="0">ICON_PAGE_SEEK_FORWARD</a></li>
-<li><a href="#ICON_PASTE" tabindex="0">ICON_PASTE</a></li>
 <li><a href="#ICON_PAUSE" tabindex="0">ICON_PAUSE</a></li>
 <li><a href="#ICON_RECORD" tabindex="0">ICON_RECORD</a></li>
 <li><a href="#ICON_REDO" tabindex="0">ICON_REDO</a></li>
@@ -134,8 +132,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">StandardIcons</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Resource paths of icons shared by emuStudio and its plugins.
-<code>ICON_*</code> icons are 22x22 with <code>@2x</code> variants; load them with <a href="GUI.html#loadIcon(java.lang.String)"><code>GUI.loadIcon(String)</code></a>
-or pass them to <a href="GUI.html" title="interface in net.emustudio.emulib.runtime.ui"><code>GUI</code></a> factory methods. File names follow constant names.</div>
+<code>ICON_*</code> icons are 22x22 with <code>@2x</code> variants; load them with <a href="GUI.html#loadIcon(java.lang.String,java.lang.Class)"><code>GUI.loadIcon(String, Class)</code></a>.
+File names follow constant names.</div>
 </div>
 </section>
 <section class="summary">
@@ -180,91 +178,85 @@ or pass them to <a href="GUI.html" title="interface in net.emustudio.emulib.runt
 <div class="col-second odd-row-color"><code><a href="#ICON_CPU" class="member-name-link">ICON_CPU</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_CUT" class="member-name-link">ICON_CUT</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_DELETE" class="member-name-link">ICON_DELETE</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_DELETE" class="member-name-link">ICON_DELETE</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_DEVICE" class="member-name-link">ICON_DEVICE</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_DEVICE" class="member-name-link">ICON_DEVICE</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_DISK_EMPTY" class="member-name-link">ICON_DISK_EMPTY</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_DISK_EMPTY" class="member-name-link">ICON_DISK_EMPTY</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_DISK_MOUNTED" class="member-name-link">ICON_DISK_MOUNTED</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_DISK_MOUNTED" class="member-name-link">ICON_DISK_MOUNTED</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_EJECT" class="member-name-link">ICON_EJECT</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_EJECT" class="member-name-link">ICON_EJECT</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_ERASE_MEMORY" class="member-name-link">ICON_ERASE_MEMORY</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_ERASE_MEMORY" class="member-name-link">ICON_ERASE_MEMORY</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_FAVICON" class="member-name-link">ICON_FAVICON</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_FAVICON" class="member-name-link">ICON_FAVICON</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_FIND" class="member-name-link">ICON_FIND</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_FIND" class="member-name-link">ICON_FIND</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_GRID" class="member-name-link">ICON_GRID</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_GRID" class="member-name-link">ICON_GRID</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_INDICATOR_BLUE" class="member-name-link">ICON_INDICATOR_BLUE</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_INDICATOR_BLUE" class="member-name-link">ICON_INDICATOR_BLUE</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_INDICATOR_GREEN" class="member-name-link">ICON_INDICATOR_GREEN</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_INDICATOR_GREEN" class="member-name-link">ICON_INDICATOR_GREEN</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_INDICATOR_RED" class="member-name-link">ICON_INDICATOR_RED</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_INDICATOR_RED" class="member-name-link">ICON_INDICATOR_RED</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_JUMP" class="member-name-link">ICON_JUMP</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_JUMP" class="member-name-link">ICON_JUMP</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_JUMP_TO_BEGINNING" class="member-name-link">ICON_JUMP_TO_BEGINNING</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_JUMP_TO_BEGINNING" class="member-name-link">ICON_JUMP_TO_BEGINNING</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_LOAD" class="member-name-link">ICON_LOAD</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_LOAD" class="member-name-link">ICON_LOAD</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_MEMORY" class="member-name-link">ICON_MEMORY</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_MEMORY" class="member-name-link">ICON_MEMORY</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_MOTHERBOARD" class="member-name-link">ICON_MOTHERBOARD</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_MOTHERBOARD" class="member-name-link">ICON_MOTHERBOARD</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_MOVE_DOWN" class="member-name-link">ICON_MOVE_DOWN</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_MOVE_DOWN" class="member-name-link">ICON_MOVE_DOWN</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_MOVE_UP" class="member-name-link">ICON_MOVE_UP</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_MOVE_UP" class="member-name-link">ICON_MOVE_UP</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_NEW_FILE" class="member-name-link">ICON_NEW_FILE</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_NEW_FILE" class="member-name-link">ICON_NEW_FILE</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_OPEN_FILE" class="member-name-link">ICON_OPEN_FILE</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_OPEN_FILE" class="member-name-link">ICON_OPEN_FILE</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_BACK" class="member-name-link">ICON_PAGE_BACK</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_PAGE_BACK" class="member-name-link">ICON_PAGE_BACK</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_PAGE_CURRENT" class="member-name-link">ICON_PAGE_CURRENT</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_CURRENT" class="member-name-link">ICON_PAGE_CURRENT</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_FIRST" class="member-name-link">ICON_PAGE_FIRST</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_PAGE_FIRST" class="member-name-link">ICON_PAGE_FIRST</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_PAGE_FORWARD" class="member-name-link">ICON_PAGE_FORWARD</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_FORWARD" class="member-name-link">ICON_PAGE_FORWARD</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_SEEK_BACKWARD" class="member-name-link">ICON_PAGE_SEEK_BACKWARD</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_PAGE_SEEK_BACKWARD" class="member-name-link">ICON_PAGE_SEEK_BACKWARD</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ICON_PAGE_SEEK_FORWARD" class="member-name-link">ICON_PAGE_SEEK_FORWARD</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ICON_PASTE" class="member-name-link">ICON_PASTE</a></code></div>
+<div class="col-second even-row-color"><code><a href="#ICON_PAGE_SEEK_FORWARD" class="member-name-link">ICON_PAGE_SEEK_FORWARD</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#ICON_PAUSE" class="member-name-link">ICON_PAUSE</a></code></div>
@@ -517,22 +509,6 @@ or pass them to <a href="GUI.html" title="interface in net.emustudio.emulib.runt
 <dd>
 <ul class="tag-list">
 <li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.StandardIcons.ICON_CPU">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="ICON_CUT">
-<h3>ICON_CUT</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ICON_CUT</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.StandardIcons.ICON_CUT">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>
@@ -949,22 +925,6 @@ or pass them to <a href="GUI.html" title="interface in net.emustudio.emulib.runt
 <dd>
 <ul class="tag-list">
 <li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PAGE_SEEK_FORWARD">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="ICON_PASTE">
-<h3>ICON_PASTE</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ICON_PASTE</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.StandardIcons.ICON_PASTE">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>

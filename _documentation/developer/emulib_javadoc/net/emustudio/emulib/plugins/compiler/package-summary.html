@@ -80,49 +80,48 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><a href="../cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><a href="../device/package-summary.html">net.emustudio.emulib.plugins.device</a></div>
+<div class="col-first even-row-color"><a href="../debugger/package-summary.html">net.emustudio.emulib.plugins.debugger</a></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><a href="../memory/package-summary.html">net.emustudio.emulib.plugins.memory</a></div>
+<div class="col-first odd-row-color"><a href="../device/package-summary.html">net.emustudio.emulib.plugins.device</a></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><a href="../memory/package-summary.html">net.emustudio.emulib.plugins.memory</a></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </div>
 </li>
 <li>
 <div id="class-summary">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button><button id="class-summary-tab5" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab5', 2)" class="table-tab">Exception Classes</button></div>
 <div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler">AbstractCompiler</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Implements fundamental functionality useful for most of the compiler plugins.</div>
+<div class="block">Compiler base.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="AbstractCompiler.Factory.html" title="interface in net.emustudio.emulib.plugins.compiler">AbstractCompiler.Factory</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Compiler plugin constructor.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab5"><a href="CompileException.html" title="class in net.emustudio.emulib.plugins.compiler">CompileException</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab5">
+<div class="block">Compilation error at a source position.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Compiler plugin root interface.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="CompilerContext.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerContext</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Compiler context can be used to provide additional meta-information for runtime, which can be used by other plugins.</div>
+<div class="block">Compiler listener.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
-<div class="block">This is an interface that should be implemented by the emuStudio,
-and/or other plugins that want to process the output of the compiler.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Messages are passed to compiler listeners when the compiler wishes to say something.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab3">
-<div class="block">Message type.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileExtension.html" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">A file extension with description.</div>
-</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">&nbsp;</div>
 <div class="col-first odd-row-color class-summary class-summary-tab1"><a href="LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Lexical analyzer.</div>

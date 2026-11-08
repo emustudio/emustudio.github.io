@@ -61,9 +61,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#compile(java.nio.file.Path,java.util.Optional)" tabindex="0">compile(Path, Optional)</a></li>
 <li><a href="#createLexer()" tabindex="0">createLexer()</a></li>
 <li><a href="#getSourcePositionColumnUnit()" tabindex="0">getSourcePositionColumnUnit()</a></li>
-<li><a href="#getSourceFileExtensions()" tabindex="0">getSourceFileExtensions()</a></li>
+<li><a href="#getSourceFileTypes()" tabindex="0">getSourceFileTypes()</a></li>
 <li><a href="#isAutomationSupported()" tabindex="0">isAutomationSupported()</a></li>
-<li><a href="#convertInputToOutputPath(java.nio.file.Path,java.lang.String)" tabindex="0">convertInputToOutputPath(Path, String)</a></li>
 </ol>
 </li>
 </ol>
@@ -89,17 +88,7 @@ extends <a href="../Plugin.html" title="interface in net.emustudio.emulib.plugin
 <div class="block">Compiler plugin root interface.
 <p>
 Should be implemented by a plugin. There should exist just one implementation.
-<p>
-Compiler can define a "compiler context", which can specify e.g. a format of compiled file, or other additional
-meta-information for runtime, which can be used by other plugins.</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="CompilerContext.html" title="interface in net.emustudio.emulib.plugins.compiler"><code>CompilerContext</code></a></li>
-</ul>
-</dd>
-</dl>
+Compilers usually extend <a href="AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler"><code>AbstractCompiler</code></a>.</div>
 </div>
 </section>
 <section class="summary">
@@ -118,7 +107,7 @@ meta-information for runtime, which can be used by other plugins.</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">addCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Adds CompilerListener object into list of listeners.</div>
+<div class="block">Adds compiler listener.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#compile(java.nio.file.Path,java.util.Optional)" class="member-name-link">compile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;inputPath,
@@ -126,36 +115,30 @@ meta-information for runtime, which can be used by other plugins.</div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Compile given input file.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#convertInputToOutputPath(java.nio.file.Path,java.lang.String)" class="member-name-link">convertInputToOutputPath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;inputPath,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputExtension)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Converts input path to output path.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createLexer()" class="member-name-link">createLexer</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createLexer()" class="member-name-link">createLexer</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Creates a lexical analyzer.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="FileExtension.html" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSourceFileExtensions()" class="member-name-link">getSourceFileExtensions</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get the list of source file extensions supported by the compiler.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../../runtime/io/FileType.html" title="class in net.emustudio.emulib.runtime.io">FileType</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSourceFileTypes()" class="member-name-link">getSourceFileTypes</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Get source file types supported by the compiler.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSourcePositionColumnUnit()" class="member-name-link">getSourcePositionColumnUnit</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SourceCodePosition.ColumnUnit.html" title="enum class in net.emustudio.emulib.plugins.compiler">SourceCodePosition.ColumnUnit</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getSourcePositionColumnUnit()" class="member-name-link">getSourcePositionColumnUnit</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Coordinate convention of this compiler's memory source-position annotations.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Determine if automation is supported.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Removes CompilerListener object from the listeners list.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Removes compiler listener.</div>
 </div>
 </div>
 </div>
@@ -179,12 +162,10 @@ meta-information for runtime, which can be used by other plugins.</div>
 <h3>addCompilerListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addCompilerListener</span><wbr><span class="parameters">(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</span></div>
-<div class="block">Adds CompilerListener object into list of listeners.
-If some event is occurred in the compiler, listeners methods will be
-called.</div>
+<div class="block">Adds compiler listener.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>listener</code> - CompilerListener object</dd>
+<dd><code>listener</code> - compiler listener</dd>
 </dl>
 </div>
 </section>
@@ -194,10 +175,10 @@ called.</div>
 <h3>removeCompilerListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">removeCompilerListener</span><wbr><span class="parameters">(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</span></div>
-<div class="block">Removes CompilerListener object from the listeners list.</div>
+<div class="block">Removes compiler listener.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>listener</code> - CompilerListener object</dd>
+<dd><code>listener</code> - compiler listener</dd>
 </dl>
 </div>
 </section>
@@ -210,9 +191,7 @@ called.</div>
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;outputPath)</span></div>
 <div class="block">Compile given input file.
 <p>
-Output file name (if the compiler has any output and if it is not given here), is derived by the compiler itself.
-Usually, the extension of the input file is replaced by another one, denoting compiled file. It is compiler-specific.
-<p>
+If output path is not given, it is derived by replacing the source file extension of the input path.
 Usually a successfully compiled program is loaded in memory.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -248,14 +227,14 @@ Lexical Token offsets remain UTF-16 independently of this convention.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getSourceFileExtensions()">
-<h3>getSourceFileExtensions</h3>
+<section class="detail" id="getSourceFileTypes()">
+<h3>getSourceFileTypes</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="FileExtension.html" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a>&gt;</span>&nbsp;<span class="element-name">getSourceFileExtensions</span>()</div>
-<div class="block">Get the list of source file extensions supported by the compiler.</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../runtime/io/FileType.html" title="class in net.emustudio.emulib.runtime.io">FileType</a>&gt;</span>&nbsp;<span class="element-name">getSourceFileTypes</span>()</div>
+<div class="block">Get source file types supported by the compiler.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>list of supported source file extensions</dd>
+<dd>supported source file types</dd>
 </dl>
 </div>
 </section>
@@ -271,28 +250,6 @@ Lexical Token offsets remain UTF-16 independently of this convention.</div>
 <dd><code><a href="../Plugin.html#isAutomationSupported()">isAutomationSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 <dt>Returns:</dt>
 <dd>true by default</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="convertInputToOutputPath(java.nio.file.Path,java.lang.String)">
-<h3>convertInputToOutputPath</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">convertInputToOutputPath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;inputPath,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputExtension)</span></div>
-<div class="block">Converts input path to output path.
-<p>
-The conversion is performed by stripping off known source file extension from the input path
-(by calling <a href="#getSourceFileExtensions()"><code>getSourceFileExtensions()</code></a> method), and appending
-output extension. If the input path doesn't end with any known source file extension, just the output extension
-is appended to given input path.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>inputPath</code> - input path</dd>
-<dd><code>outputExtension</code> - output extension (e.g. ".hex")</dd>
-<dt>Returns:</dt>
-<dd>input path converted</dd>
 </dl>
 </div>
 </section>

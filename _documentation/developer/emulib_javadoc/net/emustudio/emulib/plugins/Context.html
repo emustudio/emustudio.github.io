@@ -63,7 +63,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Known Subinterfaces:</dt>
-<dd><code><a href="compiler/CompilerContext.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerContext</a>, <a href="cpu/CPUContext.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext</a>, <a href="device/DeviceContext.html" title="interface in net.emustudio.emulib.plugins.device">DeviceContext</a>&lt;DataType&gt;, <a href="memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;CellType&gt;</code></dd>
+<dd><code><a href="cpu/CPUContext.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext</a>, <a href="device/DeviceContext.html" title="interface in net.emustudio.emulib.plugins.device">DeviceContext</a>&lt;DataType&gt;, <a href="memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;CellType&gt;</code></dd>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
@@ -83,8 +83,6 @@ the abstract schema, and the contexts must be compatible.
 <p>
 Each plugin can implement none, one or more contexts. Implementing the same interface multiple times is allowed.
 A plugin can also extend this context interface (directly or indirectly).
-<p>
-Another requirement is to annotate custom context interfaces with <a href="annotations/PluginContext.html" title="annotation interface in net.emustudio.emulib.plugins.annotations"><code>PluginContext</code></a> annotation.
 <p>
 Contexts should be thread-safe, since there's no guarantee in which threads plugins communicate.</div>
 </div>

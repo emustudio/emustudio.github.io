@@ -5,7 +5,7 @@
 <title>FileLoader (emuLib 12.1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, interface: FileLoader">
+<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, class: FileLoader">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/stylesheet.css">
@@ -57,10 +57,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getFormat()" tabindex="0">getFormat()</a></li>
-<li><a href="#forFormat(net.emustudio.emulib.runtime.io.FileLoader.Format)" tabindex="0">forFormat(FileLoader.Format)</a></li>
-<li><a href="#forPath(java.nio.file.Path)" tabindex="0">forPath(Path)</a></li>
-<li><a href="#load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Listener,net.emustudio.emulib.runtime.io.FileLoader.Options)" tabindex="0">load(Path, FileLoader.Listener, FileLoader.Options)</a></li>
+<li><a href="#load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Format,net.emustudio.emulib.runtime.io.FileLoader.Listener)" tabindex="0">load(Path, FileLoader.Format, FileLoader.Listener)</a></li>
 </ol>
 </li>
 </ol>
@@ -68,18 +65,23 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<h1 title="Interface FileLoader" class="title">Interface FileLoader</h1>
+<h1 title="Class FileLoader" class="title">Class FileLoader</h1>
+</div>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance">net.emustudio.emulib.runtime.io.FileLoader</div>
 </div>
 <section class="class-description" id="class-description">
-<dl class="notes">
-<dt>All Known Implementing Classes:</dt>
-<dd><code><a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></code></dd>
-</dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">FileLoader</span></div>
-<div class="block">Common synchronous loader contract for BIN, I8HEX, TAP and TZX. Format instances are
-stateless and reusable. It emits immutable blocks; callers decide how to use their bytes and metadata.</div>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">FileLoader</span>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Synchronous loader of memory images (BIN, Intel HEX) and tapes (TAP, TZX).
+<p>
+A file is split into immutable <a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io"><code>FileLoader.Block</code></a>s which are passed to a <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io"><code>FileLoader.Listener</code></a> in playback order:
+TZX jumps, loops and call sequences are followed (the control blocks themselves are passed too).
+Loading is cancelled by interrupting the loading thread; it then throws <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InterruptedIOException.html" title="class or interface in java.io" class="external-link"><code>InterruptedIOException</code></a>.
+<p>
+For tape playback, use <a href="TapeListener.html" title="interface in net.emustudio.emulib.runtime.io"><code>TapeListener</code></a> which decodes tape blocks into signal callbacks.</div>
 </div>
 </section>
 <section class="summary">
@@ -91,32 +93,27 @@ stateless and reusable. It emits immutable blocks; callers decide how to use the
 <div class="caption"><span>Nested Classes</span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Interface</div>
+<div class="table-header col-second">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="FileLoader.Block.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Immutable format block.</div>
+<div class="block">Immutable block of a file.</div>
 </div>
 <div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="FileLoader.Format.html" class="type-name-link" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">File encodings and their extensions.</div>
+<div class="block">Supported file formats and their extensions.</div>
 </div>
 <div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="FileLoader.Listener.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
+<div class="block">Receives blocks synchronously, on the loading thread.</div>
 </div>
 <div class="col-first odd-row-color"><code>static final class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="FileLoader.Options.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></code></div>
+<div class="col-second odd-row-color"><code><a href="FileLoader.SpectrumHeader.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Per-load traversal and cancellation.</div>
-</div>
-<div class="col-first even-row-color"><code>static final class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="FileLoader.SpectrumHeader.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Spectrum header fields decoded independently of their destination.</div>
+<div class="block">ZX Spectrum tape header (the 17 bytes after flag 0).</div>
 </div>
 </div>
 </section>
@@ -126,33 +123,25 @@ stateless and reusable. It emits immutable blocks; callers decide how to use the
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#forFormat(net.emustudio.emulib.runtime.io.FileLoader.Format)" class="member-name-link">forFormat</a><wbr>(<a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a>&nbsp;format)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#forPath(java.nio.file.Path)" class="member-name-link">forPath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Unknown extensions have no fallback; callers can explicitly select BIN.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getFormat()" class="member-name-link">getFormat</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Listener,net.emustudio.emulib.runtime.io.FileLoader.Options)" class="member-name-link">load</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
- <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a>&nbsp;listener,
- <a href="FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a>&nbsp;options)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Emits blocks to the listener; completion is omitted on failure or cancellation.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Format,net.emustudio.emulib.runtime.io.FileLoader.Listener)" class="member-name-link">load</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
+ <a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a>&nbsp;format,
+ <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Loads a file and passes its blocks to the listener.</div>
 </div>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -165,42 +154,28 @@ stateless and reusable. It emits immutable blocks; callers decide how to use the
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getFormat()">
-<h3>getFormat</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></span>&nbsp;<span class="element-name">getFormat</span>()</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="forFormat(net.emustudio.emulib.runtime.io.FileLoader.Format)">
-<h3>forFormat</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></span>&nbsp;<span class="element-name">forFormat</span><wbr><span class="parameters">(<a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a>&nbsp;format)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="forPath(java.nio.file.Path)">
-<h3>forPath</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a>&gt;</span>&nbsp;<span class="element-name">forPath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
-<div class="block">Unknown extensions have no fallback; callers can explicitly select BIN.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Listener,net.emustudio.emulib.runtime.io.FileLoader.Options)">
+<section class="detail" id="load(java.nio.file.Path,net.emustudio.emulib.runtime.io.FileLoader.Format,net.emustudio.emulib.runtime.io.FileLoader.Listener)">
 <h3>load</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">load</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
- <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a>&nbsp;listener,
- <a href="FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a>&nbsp;options)</span>
-           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Emits blocks to the listener; completion is omitted on failure or cancellation.</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">load</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
+ <a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a>&nbsp;format,
+ <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a>&nbsp;listener)</span>
+                 throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Loads a file and passes its blocks to the listener.
+<ul>
+    <li>BIN: one unaddressed block with the whole file</li>
+    <li>HEX: one addressed block per contiguous address range</li>
+    <li>TAP: one block (ID 0x10) per tape block</li>
+    <li>TZX: one block per TZX block, in playback order</li>
+</ul></div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>path</code> - file to load</dd>
+<dd><code>format</code> - file format</dd>
+<dd><code>listener</code> - receiver of blocks</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be read or is malformed, or the listener fails;
+                    <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InterruptedIOException.html" title="class or interface in java.io" class="external-link"><code>InterruptedIOException</code></a> if the thread was interrupted</dd>
 </dl>
 </div>
 </section>

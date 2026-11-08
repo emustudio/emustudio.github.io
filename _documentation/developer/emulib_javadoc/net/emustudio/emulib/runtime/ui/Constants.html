@@ -57,17 +57,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
-<li><a href="#FONT_DEFAULT_SIZE" tabindex="0">FONT_DEFAULT_SIZE</a></li>
-<li><a href="#FONT_BIG_SIZE" tabindex="0">FONT_BIG_SIZE</a></li>
 <li><a href="#FONT_MONOSPACED" tabindex="0">FONT_MONOSPACED</a></li>
-<li><a href="#FONT_MONOSPACED_BOLD" tabindex="0">FONT_MONOSPACED_BOLD</a></li>
 <li><a href="#FONT_MONOSPACED_BIG_BOLD" tabindex="0">FONT_MONOSPACED_BIG_BOLD</a></li>
-<li><a href="#FONT_COMMON" tabindex="0">FONT_COMMON</a></li>
-<li><a href="#FONT_TITLE_BORDER" tabindex="0">FONT_TITLE_BORDER</a></li>
 <li><a href="#CPU_RUN_STATE_COLOR" tabindex="0">CPU_RUN_STATE_COLOR</a></li>
 <li><a href="#TABLE_COLOR_ROW_EVEN" tabindex="0">TABLE_COLOR_ROW_EVEN</a></li>
 <li><a href="#TABLE_COLOR_ROW_ODD" tabindex="0">TABLE_COLOR_ROW_ODD</a></li>
-<li><a href="#TABLE_COLOR_TABLE_GRID" tabindex="0">TABLE_COLOR_TABLE_GRID</a></li>
 </ol>
 </li>
 </ol>
@@ -83,11 +77,9 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Constants</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Constants</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">GUI constants
-<p>
-Default constants for emuStudio GUI</div>
+<div class="block">Shared fonts and colors for plugin GUIs.</div>
 </div>
 </section>
 <section class="summary">
@@ -104,57 +96,27 @@ Default constants for emuStudio GUI</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></code></div>
 <div class="col-second even-row-color"><code><a href="#CPU_RUN_STATE_COLOR" class="member-name-link">CPU_RUN_STATE_COLOR</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">CPU Run state color (can be used in CPU status GUIs)</div>
-</div>
-<div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#FONT_BIG_SIZE" class="member-name-link">FONT_BIG_SIZE</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Big font size</div>
-</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second even-row-color"><code><a href="#FONT_COMMON" class="member-name-link">FONT_COMMON</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Default dialog font</div>
-</div>
-<div class="col-first odd-row-color"><code>static final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#FONT_DEFAULT_SIZE" class="member-name-link">FONT_DEFAULT_SIZE</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Default font size</div>
-</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second even-row-color"><code><a href="#FONT_MONOSPACED" class="member-name-link">FONT_MONOSPACED</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Default monospaced font</div>
+<div class="block">CPU run state color (can be used in CPU status GUIs).</div>
 </div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#FONT_MONOSPACED_BIG_BOLD" class="member-name-link">FONT_MONOSPACED_BIG_BOLD</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#FONT_MONOSPACED" class="member-name-link">FONT_MONOSPACED</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Default bigger monospaced BOLD font</div>
+<div class="block">Default monospaced font (plain, 12 pt).</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second even-row-color"><code><a href="#FONT_MONOSPACED_BOLD" class="member-name-link">FONT_MONOSPACED_BOLD</a></code></div>
+<div class="col-second even-row-color"><code><a href="#FONT_MONOSPACED_BIG_BOLD" class="member-name-link">FONT_MONOSPACED_BIG_BOLD</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Default monospaced BOLD font</div>
-</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#FONT_TITLE_BORDER" class="member-name-link">FONT_TITLE_BORDER</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Default TitleBorder font</div>
-</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></code></div>
-<div class="col-second even-row-color"><code><a href="#TABLE_COLOR_ROW_EVEN" class="member-name-link">TABLE_COLOR_ROW_EVEN</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Default table row color for even rows</div>
+<div class="block">Big bold monospaced font (18 pt), e.g.</div>
 </div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#TABLE_COLOR_ROW_ODD" class="member-name-link">TABLE_COLOR_ROW_ODD</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#TABLE_COLOR_ROW_EVEN" class="member-name-link">TABLE_COLOR_ROW_EVEN</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Default table row color for odd rows</div>
+<div class="block">Table row color for even rows.</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></code></div>
-<div class="col-second even-row-color"><code><a href="#TABLE_COLOR_TABLE_GRID" class="member-name-link">TABLE_COLOR_TABLE_GRID</a></code></div>
+<div class="col-second even-row-color"><code><a href="#TABLE_COLOR_ROW_ODD" class="member-name-link">TABLE_COLOR_ROW_ODD</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Default table grid color</div>
+<div class="block">Table row color for odd rows.</div>
 </div>
 </div>
 </section>
@@ -178,54 +140,11 @@ Default constants for emuStudio GUI</div>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="FONT_DEFAULT_SIZE">
-<h3>FONT_DEFAULT_SIZE</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">FONT_DEFAULT_SIZE</span></div>
-<div class="block">Default font size</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.Constants.FONT_DEFAULT_SIZE">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="FONT_BIG_SIZE">
-<h3>FONT_BIG_SIZE</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">FONT_BIG_SIZE</span></div>
-<div class="block">Big font size</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="../../../../../constant-values.html#net.emustudio.emulib.runtime.ui.Constants.FONT_BIG_SIZE">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="FONT_MONOSPACED">
 <h3>FONT_MONOSPACED</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">FONT_MONOSPACED</span></div>
-<div class="block">Default monospaced font</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="FONT_MONOSPACED_BOLD">
-<h3>FONT_MONOSPACED_BOLD</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">FONT_MONOSPACED_BOLD</span></div>
-<div class="block">Default monospaced BOLD font</div>
+<div class="block">Default monospaced font (plain, 12 pt).</div>
 </div>
 </section>
 </li>
@@ -234,25 +153,7 @@ Default constants for emuStudio GUI</div>
 <h3>FONT_MONOSPACED_BIG_BOLD</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">FONT_MONOSPACED_BIG_BOLD</span></div>
-<div class="block">Default bigger monospaced BOLD font</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="FONT_COMMON">
-<h3>FONT_COMMON</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">FONT_COMMON</span></div>
-<div class="block">Default dialog font</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="FONT_TITLE_BORDER">
-<h3>FONT_TITLE_BORDER</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">FONT_TITLE_BORDER</span></div>
-<div class="block">Default TitleBorder font</div>
+<div class="block">Big bold monospaced font (18 pt), e.g. for CPU run state.</div>
 </div>
 </section>
 </li>
@@ -261,7 +162,7 @@ Default constants for emuStudio GUI</div>
 <h3>CPU_RUN_STATE_COLOR</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></span>&nbsp;<span class="element-name">CPU_RUN_STATE_COLOR</span></div>
-<div class="block">CPU Run state color (can be used in CPU status GUIs)</div>
+<div class="block">CPU run state color (can be used in CPU status GUIs).</div>
 </div>
 </section>
 </li>
@@ -270,7 +171,7 @@ Default constants for emuStudio GUI</div>
 <h3>TABLE_COLOR_ROW_EVEN</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></span>&nbsp;<span class="element-name">TABLE_COLOR_ROW_EVEN</span></div>
-<div class="block">Default table row color for even rows</div>
+<div class="block">Table row color for even rows.</div>
 </div>
 </section>
 </li>
@@ -279,16 +180,7 @@ Default constants for emuStudio GUI</div>
 <h3>TABLE_COLOR_ROW_ODD</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></span>&nbsp;<span class="element-name">TABLE_COLOR_ROW_ODD</span></div>
-<div class="block">Default table row color for odd rows</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="TABLE_COLOR_TABLE_GRID">
-<h3>TABLE_COLOR_TABLE_GRID</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></span>&nbsp;<span class="element-name">TABLE_COLOR_TABLE_GRID</span></div>
-<div class="block">Default table grid color</div>
+<div class="block">Table row color for odd rows.</div>
 </div>
 </section>
 </li>

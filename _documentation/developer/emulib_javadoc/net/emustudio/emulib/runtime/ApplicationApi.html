@@ -62,8 +62,8 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getDebuggerTable()" tabindex="0">getDebuggerTable()</a></li>
-<li><a href="#getDebuggerMemory()" tabindex="0">getDebuggerMemory()</a></li>
+<li><a href="#getAnnotations()" tabindex="0">getAnnotations()</a></li>
+<li><a href="#getExecutionState()" tabindex="0">getExecutionState()</a></li>
 <li><a href="#getContextPool()" tabindex="0">getContextPool()</a></li>
 <li><a href="#getDialogs()" tabindex="0">getDialogs()</a></li>
 <li><a href="#getGUI()" tabindex="0">getGUI()</a></li>
@@ -102,7 +102,7 @@ Plugins can use it for the communication with emuStudio.</div>
 <div class="col-first even-row-color"><code>static final <a href="ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
 <div class="col-second even-row-color"><code><a href="#UNAVAILABLE" class="member-name-link">UNAVAILABLE</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">"Unavailable" instance of ApplicationApi.</div>
+<div class="block">Unavailable API; all services are null.</div>
 </div>
 </div>
 </section>
@@ -118,25 +118,25 @@ Plugins can use it for the communication with emuStudio.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ContextPool.html" title="interface in net.emustudio.emulib.runtime">ContextPool</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContextPool()" class="member-name-link">getContextPool</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="annotations/MemoryAnnotations.html" title="class in net.emustudio.emulib.runtime.annotations">MemoryAnnotations</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAnnotations()" class="member-name-link">getAnnotations</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns the active computer's live annotations, or null when unavailable.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ContextPool.html" title="interface in net.emustudio.emulib.runtime">ContextPool</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContextPool()" class="member-name-link">getContextPool</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get context pool.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDebuggerMemory()" class="member-name-link">getDebuggerMemory</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns the debugger's memory information service, or null when unavailable.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDebuggerTable()" class="member-name-link">getDebuggerTable</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDialogs()" class="member-name-link">getDialogs</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get debugger table.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDialogs()" class="member-name-link">getDialogs</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get dialogs object.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getExecutionState()" class="member-name-link">getExecutionState</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns current execution state, or null when unavailable.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getGUI()" class="member-name-link">getGUI</a>()</code></div>
@@ -172,12 +172,7 @@ Plugins can use it for the communication with emuStudio.</div>
 <h3>UNAVAILABLE</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></span>&nbsp;<span class="element-name">UNAVAILABLE</span></div>
-<div class="block">"Unavailable" instance of ApplicationApi.
-<p>
-It means that all methods return dummy or null values.
-<p>
-The instance might be useful when creating plugin object without emuStudio (e.g. a plugin wants to support
-command-line interface).</div>
+<div class="block">Unavailable API; all services are null. Useful for creating plugins outside emuStudio (e.g. tests, listing).</div>
 </div>
 </section>
 </li>
@@ -190,29 +185,20 @@ command-line interface).</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getDebuggerTable()">
-<h3>getDebuggerTable</h3>
+<section class="detail" id="getAnnotations()">
+<h3>getAnnotations</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></span>&nbsp;<span class="element-name">getDebuggerTable</span>()</div>
-<div class="block">Get debugger table.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>debugger table in emuStudio.</dd>
-</dl>
+<div class="member-signature"><span class="return-type"><a href="annotations/MemoryAnnotations.html" title="class in net.emustudio.emulib.runtime.annotations">MemoryAnnotations</a></span>&nbsp;<span class="element-name">getAnnotations</span>()</div>
+<div class="block">Returns the active computer's live annotations, or null when unavailable.</div>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getDebuggerMemory()">
-<h3>getDebuggerMemory</h3>
+<section class="detail" id="getExecutionState()">
+<h3>getExecutionState</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></span>&nbsp;<span class="element-name">getDebuggerMemory</span>()</div>
-<div class="block">Returns the debugger's memory information service, or null when unavailable.
-The service remains valid for the lifetime of this application API.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>read-only debugger memory information</dd>
-</dl>
+<div class="member-signature"><span class="return-type"><a href="ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></span>&nbsp;<span class="element-name">getExecutionState</span>()</div>
+<div class="block">Returns current execution state, or null when unavailable.</div>
 </div>
 </section>
 </li>
