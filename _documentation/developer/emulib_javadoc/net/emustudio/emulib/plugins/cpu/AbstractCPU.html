@@ -74,19 +74,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
 <li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
 <li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
-<li><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">addCPUListener(CPU.CPUListener)</a></li>
-<li><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">removeCPUListener(CPU.CPUListener)</a></li>
+<li><a href="#observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">observeExecution(CPU.CPUListener)</a></li>
+<li><a href="#reset()" tabindex="0">reset()</a></li>
 <li><a href="#destroy()" tabindex="0">destroy()</a></li>
 <li><a href="#destroyInternal()" tabindex="0">destroyInternal()</a></li>
-<li><a href="#notifyInternalStateChanged()" tabindex="0">notifyInternalStateChanged()</a></li>
-<li><a href="#reset()" tabindex="0">reset()</a></li>
-<li><a href="#reset(int)" tabindex="0">reset(int)</a></li>
-<li><a href="#execute()" tabindex="0">execute()</a></li>
-<li><a href="#pause()" tabindex="0">pause()</a></li>
-<li><a href="#stop()" tabindex="0">stop()</a></li>
-<li><a href="#step()" tabindex="0">step()</a></li>
-<li><a href="#stepInternal()" tabindex="0">stepInternal()</a></li>
-<li><a href="#resetInternal(int)" tabindex="0">resetInternal(int)</a></li>
 </ol>
 </li>
 </ol>
@@ -102,18 +93,14 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html" title="class or interface in java.util.concurrent" class="external-link">Callable</a>&lt;<a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a>&gt;, <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a>, <a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
+<dd><code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a>, <a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@ThreadSafe
-</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractCPU</span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractCPU</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html" title="class or interface in java.util.concurrent" class="external-link">Callable</a>&lt;<a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a>&gt;</span></div>
-<div class="block">Implements fundamental functionality useful for most of the CPU plugins. Features include:
-<p>
-- thread safe controlling of run states
-- managing CPU listeners</div>
+implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></span></div>
+<div class="block">Plugin conveniences; execution and lifecycle ordering belong to the host.</div>
 </div>
 </section>
 <section class="summary">
@@ -138,19 +125,13 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected final <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
 <div class="col-second even-row-color"><code><a href="#applicationApi" class="member-name-link">applicationApi</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">emuStudio API.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>protected final long</code></div>
 <div class="col-second odd-row-color"><code><a href="#pluginID" class="member-name-link">pluginID</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Plugin ID assigned by emuStudio</div>
-</div>
+<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>protected final <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
 <div class="col-second even-row-color"><code><a href="#settings" class="member-name-link">settings</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">CPU custom settings.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -165,9 +146,7 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(long,net.emustudio.emulib.runtime.ApplicationApi,net.emustudio.emulib.runtime.settings.PluginSettings)" class="member-name-link">AbstractCPU</a><wbr>(long&nbsp;pluginID,
  <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a>&nbsp;applicationApi,
  <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&nbsp;settings)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates new instance of CPU.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -182,26 +161,14 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">addCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#destroy()" class="member-name-link">destroy</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add new CPU listener to the list of stateObservers.</div>
+<div class="block">Host calls only after actual execution exit.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#destroy()" class="member-name-link">destroy</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Destroys all plugin resources.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#destroyInternal()" class="member-name-link">destroyInternal</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Called by original destroy() method.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#execute()" class="member-name-link">execute</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Runs CPU emulation.</div>
-</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#destroyInternal()" class="member-name-link">destroyInternal</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -210,57 +177,22 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This class does not support showing settings</div>
+<div class="block">Check if showSettings() is supported by this plugin.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected final void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInternalStateChanged()" class="member-name-link">notifyInternalStateChanged</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">observeExecution</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
+<div class="block">Registers a host observer for this plugin's lifetime, during initialization or panel creation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Pauses the CPU emulation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Remove CPU listener object from the list of stateObservers.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reset plugin.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Resets the CPU and sets instruction position to given program location.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#resetInternal(int)" class="member-name-link">resetInternal</a><wbr>(int&nbsp;startPos)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Performs specific CPU reset.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step()" class="member-name-link">step</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Perform one step of CPU emulation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stepInternal()" class="member-name-link">stepInternal</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Perform one emulation step in synchronized context.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Stops the CPU emulation.</div>
+<div class="block">Show GUI of plugin settings, if it is provided.</div>
 </div>
 </div>
 </div>
@@ -269,11 +201,8 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.util.concurrent.Callable">Methods inherited from interface&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html#method-summary" title="class or interface in java.util.concurrent" class="external-link">Callable</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Callable.html#call()" title="class or interface in java.util.concurrent" class="external-link">call</a></code></div>
-<div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.cpu.CPU">Methods inherited from interface&nbsp;<a href="CPU.html#method-summary" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></h3>
-<code><a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDebugger()" title="getDebugger()">getDebugger</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a></code></div>
+<code><a href="CPU.html#execute()" title="execute()">execute</a>, <a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDebugger()" title="getDebugger()">getDebugger</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#reset(int)" title="reset(int)">reset</a>, <a href="CPU.html#sampleFrequency()" title="sampleFrequency()">sampleFrequency</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a>, <a href="CPU.html#step()" title="step()">step</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.Plugin">Methods inherited from interface&nbsp;<a href="../Plugin.html#method-summary" title="interface in net.emustudio.emulib.plugins">Plugin</a></h3>
 <code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a></code></div>
@@ -293,7 +222,6 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h3>pluginID</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">pluginID</span></div>
-<div class="block">Plugin ID assigned by emuStudio</div>
 </div>
 </section>
 </li>
@@ -302,7 +230,6 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h3>applicationApi</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></span>&nbsp;<span class="element-name">applicationApi</span></div>
-<div class="block">emuStudio API.</div>
 </div>
 </section>
 </li>
@@ -311,7 +238,6 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h3>settings</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">settings</span></div>
-<div class="block">CPU custom settings.</div>
 </div>
 </section>
 </li>
@@ -330,13 +256,6 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AbstractCPU</span><wbr><span class="parameters">(long&nbsp;pluginID,
  <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a>&nbsp;applicationApi,
  <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&nbsp;settings)</span></div>
-<div class="block">Creates new instance of CPU.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pluginID</code> - plugin ID</dd>
-<dd><code>applicationApi</code> - emuStudio API</dd>
-<dd><code>settings</code> - plugin custom settings</dd>
-</dl>
 </div>
 </section>
 </li>
@@ -372,7 +291,13 @@ once, and each instance can have different title assigned at runtime.</div>
 <h3>showSettings</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showSettings</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</span></div>
-<div class="block">Does nothing. Should be overridden.</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#showSettings(javax.swing.JFrame)">Plugin</a></code></span></div>
+<div class="block">Show GUI of plugin settings, if it is provided.
+<p>
+Each plugin can have a nice GUI for settings manipulation. plugins should display the GUI, if they support it.
+Note that each window should be properly disposed when method <a href="../Plugin.html#destroy()"><code>Plugin.destroy()</code></a> is called.
+<p>
+In the case of memory plugin, show GUI of a memory. Each memory plugin should have a GUI, but it is not a must.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Plugin.html#showSettings(javax.swing.JFrame)">showSettings</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
@@ -387,89 +312,23 @@ once, and each instance can have different title assigned at runtime.</div>
 <h3>isShowSettingsSupported</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isShowSettingsSupported</span>()</div>
-<div class="block">This class does not support showing settings</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#isShowSettingsSupported()">Plugin</a></code></span></div>
+<div class="block">Check if showSettings() is supported by this plugin.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Plugin.html#isShowSettingsSupported()">isShowSettingsSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 <dt>Returns:</dt>
-<dd>false</dd>
+<dd>true if the plugin has a GUI for settings; false otherwise</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
-<h3>addCPUListener</h3>
+<section class="detail" id="observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
+<h3>observeExecution</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCPUListener</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
-<div class="block">Add new CPU listener to the list of stateObservers. CPU listener is an
-implementation object of CPUListener interface. The methods are
-called when some events are occured on CPU.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">addCPUListener</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>listener</code> - CPUListener object</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
-<h3>removeCPUListener</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeCPUListener</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
-<div class="block">Remove CPU listener object from the list of stateObservers. If the listener
-is not included in the list, nothing will be done.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">removeCPUListener</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>listener</code> - CPUListener object</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="destroy()">
-<h3>destroy</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroy</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#destroy()">Plugin</a></code></span></div>
-<div class="block">Destroys all plugin resources.
-<p>
-This method is called immediately after user closes the emulator.
-<p>
-Inside the method, the plugin should:
-- unregister all registered contexts for this plugin
-- execute clean-up/destroy code for used resources (timers, threads, sockets, memory, etc).
-- dispose all GUIs
-<p>
-NOTE: If not all resources are properly cleared, emuStudio will forcibly exit anyway, which may cause unexpected
-damage.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#destroy()">destroy</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="destroyInternal()">
-<h3>destroyInternal</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroyInternal</span>()</div>
-<div class="block">Called by original destroy() method. Do not override the original destroy() method. Subsequent calls of
-destroy() will call this only once.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyInternalStateChanged()">
-<h3>notifyInternalStateChanged</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyInternalStateChanged</span>()</div>
-<div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">observeExecution</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
+<div class="block">Registers a host observer for this plugin's lifetime, during initialization or panel creation.</div>
 </div>
 </section>
 </li>
@@ -477,7 +336,7 @@ destroy() will call this only once.</div>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#reset()">Plugin</a></code></span></div>
 <div class="block">Reset plugin.
 <p>
@@ -490,125 +349,23 @@ destroy() will call this only once.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="reset(int)">
-<h3>reset</h3>
+<section class="detail" id="destroy()">
+<h3>destroy</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#reset(int)">CPU</a></code></span></div>
-<div class="block">Resets the CPU and sets instruction position to given program location.</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroy</span>()</div>
+<div class="block">Host calls only after actual execution exit. No stop request or thread waiting occurs here.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="CPU.html#reset(int)">reset</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>location</code> - Program location in memory</dd>
+<dd><code><a href="../Plugin.html#destroy()">destroy</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="execute()">
-<h3>execute</h3>
+<section class="detail" id="destroyInternal()">
+<h3>destroyInternal</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#execute()">CPU</a></code></span></div>
-<div class="block">Runs CPU emulation. Change state of CPU to "running" and start
-instruction fetch/decode/execute loop.
-<p>
-The emuStudio creates separate thread for this purpose.
-<p>
-While CPU is running, the emuStudio will not allow to call method
-<code>step()</code>.
-<p>
-A good CPU should perform right timing for instructions here.
-Debug window should not be updated after each instruction execution,
-in order to the execution loop would be faster.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#execute()">execute</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="pause()">
-<h3>pause</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">pause</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#pause()">CPU</a></code></span></div>
-<div class="block">Pauses the CPU emulation. If a thread was used for CPU execution
-and is running, then it should be stopped (destroyed) but the CPU state
-has to be saved for future run. CPU changes it state to "breakpoint".</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#pause()">pause</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="stop()">
-<h3>stop</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#stop()">CPU</a></code></span></div>
-<div class="block">Stops the CPU emulation. If a thread was used for CPU execution
-and is running, then it should be stopped (destroyed) but the CPU state
-can be saved. CPU changes its state to "stopped" and main module should
-now forbid execution any of methods <code>step()</code>, <code>pause()</code>,
-<code>execute()</code> until user resets the CPU. Debug window in main
-module should be updated with saved CPU state.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#stop()">stop</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="step()">
-<h3>step</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPU.html#step()">CPU</a></code></span></div>
-<div class="block">Perform one step of CPU emulation. It means that one instruction should
-be executed. CPU state changes to state "running", then it executes one
-instruction, and then it should return to state "breakpoint" or "stopped".
-Correct timing of executed instruction isn't so important.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="CPU.html#step()">step</a></code>&nbsp;in interface&nbsp;<code><a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="stepInternal()">
-<h3>stepInternal</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></span>&nbsp;<span class="element-name">stepInternal</span>()
-                                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Perform one emulation step in synchronized context.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>new CPU state. If nothing bad happened, it should return RunState.STATE_STOPPED_BREAK.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - The emulator is allowed to throw any exception</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="resetInternal(int)">
-<h3>resetInternal</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resetInternal</span><wbr><span class="parameters">(int&nbsp;startPos)</span></div>
-<div class="block">Performs specific CPU reset.
-<p>
-CONTRACT: If this method throws an exception, the behavior is undefined.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>startPos</code> - starting position (similar to calling <code>reset(pos)</code>)</dd>
-</dl>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroyInternal</span>()</div>
 </div>
 </section>
 </li>

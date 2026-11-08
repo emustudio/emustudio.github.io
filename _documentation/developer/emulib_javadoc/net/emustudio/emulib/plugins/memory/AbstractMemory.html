@@ -61,7 +61,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#pluginID" tabindex="0">pluginID</a></li>
 <li><a href="#applicationApi" tabindex="0">applicationApi</a></li>
 <li><a href="#settings" tabindex="0">settings</a></li>
-<li><a href="#annotations" tabindex="0">annotations</a></li>
 </ol>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
@@ -74,7 +73,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#initialize()" tabindex="0">initialize()</a></li>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
 <li><a href="#reset()" tabindex="0">reset()</a></li>
-<li><a href="#getAnnotations()" tabindex="0">getAnnotations()</a></li>
 </ol>
 </li>
 </ol>
@@ -111,24 +109,19 @@ implements <a href="Memory.html" title="interface in net.emustudio.emulib.plugin
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></code></div>
-<div class="col-second even-row-color"><code><a href="#annotations" class="member-name-link">annotations</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
+<div class="col-second even-row-color"><code><a href="#applicationApi" class="member-name-link">applicationApi</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Memory annotations.</div>
-</div>
-<div class="col-first odd-row-color"><code>protected final <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#applicationApi" class="member-name-link">applicationApi</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">emuStudio API.</div>
 </div>
-<div class="col-first even-row-color"><code>protected final long</code></div>
-<div class="col-second even-row-color"><code><a href="#pluginID" class="member-name-link">pluginID</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>protected final long</code></div>
+<div class="col-second odd-row-color"><code><a href="#pluginID" class="member-name-link">pluginID</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Plugin ID assigned by emuStudio</div>
 </div>
-<div class="col-first odd-row-color"><code>protected final <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#settings" class="member-name-link">settings</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>protected final <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
+<div class="col-second even-row-color"><code><a href="#settings" class="member-name-link">settings</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Memory custom settings.</div>
 </div>
 </div>
@@ -162,24 +155,19 @@ implements <a href="Memory.html" title="interface in net.emustudio.emulib.plugin
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAnnotations()" class="member-name-link">getAnnotations</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get memory annotations</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get run-time title of this plugin.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">No-operation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">No-operation.</div>
 </div>
 </div>
@@ -229,15 +217,6 @@ implements <a href="Memory.html" title="interface in net.emustudio.emulib.plugin
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">settings</span></div>
 <div class="block">Memory custom settings.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="annotations">
-<h3>annotations</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></span>&nbsp;<span class="element-name">annotations</span></div>
-<div class="block">Memory annotations.</div>
 </div>
 </section>
 </li>
@@ -318,22 +297,6 @@ once, and each instance can have different title assigned at runtime.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Plugin.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getAnnotations()">
-<h3>getAnnotations</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></span>&nbsp;<span class="element-name">getAnnotations</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Memory.html#getAnnotations()">Memory</a></code></span></div>
-<div class="block">Get memory annotations</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Memory.html#getAnnotations()">getAnnotations</a></code>&nbsp;in interface&nbsp;<code><a href="Memory.html" title="interface in net.emustudio.emulib.plugins.memory">Memory</a></code></dd>
-<dt>Returns:</dt>
-<dd>memory annotations</dd>
 </dl>
 </div>
 </section>

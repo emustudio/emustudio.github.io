@@ -76,8 +76,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public static interface </span><span class="element-name type-name-label">CPU.CPUListener</span></div>
-<div class="block">Interface for receiving CPU events. The class which is interested in processing CPU events implements this
-interface, and the object created with that class is registered with a CPU, using the CPU's addCPUListener method.
+<div class="block">Interface for receiving host-owned CPU execution events. Register observers through
+<a href="../../runtime/ExecutionState.html#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)"><code>ExecutionState.addCPUListener(CPUListener)</code></a>.
 When the CPU event occurs, that:
 <ul>
     <li>if the event is CPU's state change, then object's <code>internalStateChanged()</code>
@@ -86,8 +86,7 @@ When the CPU event occurs, that:
         method is invoked.</li>
 </ul>
 <p>
-CONTRACT: Never call further actions on CPU (start,stop,step,reset) from the same thread as from which these
-methods are called.</div>
+CONTRACT: Callbacks must not execute CPU primitives or wait for another machine command.</div>
 </div>
 </section>
 <section class="summary">

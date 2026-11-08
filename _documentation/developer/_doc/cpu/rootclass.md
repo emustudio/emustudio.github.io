@@ -18,6 +18,11 @@ program location and idempotent destruction, which calls `destroyInternal()`.
 The host owns command scheduling, CPU-worker execution and run-state publication. `execute()` and `step()` run
 synchronously on that worker; they return their actual `RunState`. Continuous execution responds to thread interruption.
 Views subscribe to immutable `ExecutionState.Snapshot` values and close their subscriptions when disposed.
+The plugin implements `reset(int)` on the same worker; execution never runs on Swing's
+[event-dispatch thread][swingthread]{:target="_blank"}.
+
+The host owns command scheduling, run-state transitions, cancellation, and notifications. GUI, automation, and scripts
+share the same execution module. Do not create a second executor or watcher in the plugin. See [Run states]({{ '/cpu/runstate' | relative_url }}).
 
 Sample implementation follows (only core methods are implemented):
 

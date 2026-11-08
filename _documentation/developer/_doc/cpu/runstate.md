@@ -10,8 +10,9 @@ permalink: /cpu/runstate
 
 # Run states
 
-CPU execution is represented by a run state. `AbstractCPU` starts in `STATE_STOPPED_NORMAL`; resetting the CPU puts it
-in `STATE_STOPPED_BREAK`, ready to execute or single-step.
+CPU execution is represented by a run state owned by emuStudio's execution module. Resetting the machine puts it in
+`STATE_STOPPED_BREAK`, ready to execute or single-step. CPU plugins return instruction outcomes; they do not own the
+host's lifecycle state or start execution threads.
 
 The state machine, how it should work, can be seen in the following diagram:
 
@@ -32,26 +33,47 @@ public static enum RunState {
 }
 ```
 
-`AbstractCPU` implements the following controls:
+The host implements the following controls:
 
-- `reset()` stops execution, resets the engine and selects `STATE_STOPPED_BREAK`.
+- `reset()` requests execution to stop, waits for actual loop exit, then resets memory, devices, and CPU before selecting
+  `STATE_STOPPED_BREAK`.
 - `execute()` starts continuous execution only from `STATE_STOPPED_BREAK` and selects `STATE_RUNNING`.
-- `step()` executes one instruction only from `STATE_STOPPED_BREAK`. An engine result of `STATE_RUNNING` becomes
+- `step()` invokes the plugin's synchronous step only from `STATE_STOPPED_BREAK`. An engine result of `STATE_RUNNING` becomes
   `STATE_STOPPED_BREAK`; normal stops and errors are preserved.
-- `pause()` interrupts a running engine and returns to `STATE_STOPPED_BREAK`, unless the engine reports a terminal
+- `pause()` requests interruption and returns to `STATE_STOPPED_BREAK` after execution exits, unless the engine reports a terminal
   stop or error.
-- `stop()` interrupts execution and changes running or breakpoint states to `STATE_STOPPED_NORMAL`. Existing terminal
+- `stop()` requests interruption and changes running or breakpoint states to `STATE_STOPPED_NORMAL` after execution exits. Existing terminal
   errors are preserved.
 
 The engine reports `STATE_STOPPED_ADDR_FALLOUT` for an invalid memory address and `STATE_STOPPED_BAD_INSTR` for an
 invalid instruction. A halt may report `STATE_STOPPED_NORMAL`, or remain running while waiting for an interrupt if
-that is how the emulated processor works. Continuous execution must check thread interruption so pause and stop can
-finish. CPU listeners may run outside Swing's event-dispatch thread; dispatch GUI updates onto that thread.
+that is how the emulated processor works. An actual halt or failure wins a race with a pause or stop request.
 
-If the CPU plugin root class implements [CPU][cpu]{:target="_blank"} interface, it is its responsibility to notify CPU
-run state changes and manage run state "listeners". But if the plugin root class extends 
-[AbstractCPU][abstractCPU]{:target="_blank"}, it does not have care about listeners and run state notifications,
-because the class implements it.
+## Thread ownership and completion
+
+Each machine has one command scheduler and one CPU worker. Continuous `CPU.execute()` runs on the worker and returns
+only after its instruction loop exits. `CPU.step()` returns the result of one instruction; `CPU.reset(int)` completes
+inline. The host keeps the scheduler available for cancellation while the worker is occupied. A separate watcher thread
+is unnecessary. Timed stepping waits its configured delay after each completed step, preventing a backlog of timer ticks.
+Manual step, pause, stop, reset, replacement timed runs, and close cancel the previous timed sequence.
+
+Stopping is cooperative: check thread interruption in the instruction loop and preserve interruption when handling
+interruptible waits. There is no force kill or timeout. Pause, stop, reset, and close remain pending until the loop actually
+exits. Future cancellation alone does not prove exit. Until then, memory and device resources remain intact; the host
+rejects new start, step, reset, and debugger-edit requests. GUI commands are asynchronous, so waiting does not block Swing.
+
+The host publishes `CPU.CPUListener` notifications through `ApplicationApi.getExecutionState()`; listener callbacks are
+observations, not command acknowledgements. Register with `addCPUListener()` and unregister with `removeCPUListener()`
+when the plugin is destroyed. Callbacks may run outside Swing's event-dispatch thread; dispatch GUI updates onto Swing
+and never block a callback waiting for an execution command.
+
+Debugger register, instruction-location, and memory edits go through `ExecutionState.mutate(Runnable)`. The host accepts
+them only while paused, rejects edits invalidated by intervening execution, and reports completion asynchronously. Do not
+write CPU state directly from Swing callbacks. Existing debugger guards still protect concurrent analysis and publication.
+
+For CPUs that measure executed frequency, `sampleFrequency()` is called by the existing command scheduler. Sampling
+must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
+`AccurateFrequencyRunner` loop.
 
 [runstate]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.RunState.html
 [cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html

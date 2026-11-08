@@ -70,7 +70,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#removeMemoryListener(net.emustudio.emulib.plugins.memory.MemoryContext.MemoryListener)" tabindex="0">removeMemoryListener(MemoryContext.MemoryListener)</a></li>
 <li><a href="#setMemoryNotificationsEnabled(boolean)" tabindex="0">setMemoryNotificationsEnabled(boolean)</a></li>
 <li><a href="#areMemoryNotificationsEnabled()" tabindex="0">areMemoryNotificationsEnabled()</a></li>
-<li><a href="#annotations()" tabindex="0">annotations()</a></li>
 </ol>
 </li>
 </ol>
@@ -102,11 +101,7 @@ extends <a href="../Context.html" title="interface in net.emustudio.emulib.plugi
 It provides the basic memory functionality, such as reading/writing memory cells. The memory cell can be of any Java
 type, thus a "byte", as the lowest addressable unit, is not enforced.
 <p>
-The memory context must be extended in a memory plugin in order to support additional functionality.
-<p>
-Memory context supports annotations - a possibility to annotate any memory cell with supplemental information. Usual
-annotations are: breakpoints, text information, position in source code, or any custom annotation. Annotation API
-is accessible by using <a href="#annotations()"><code>annotations()</code></a> method.</div>
+The memory context must be extended in a memory plugin in order to support additional functionality.</div>
 </div>
 </section>
 <section class="summary">
@@ -144,74 +139,69 @@ is accessible by using <a href="#annotations()"><code>annotations()</code></a> m
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Adds a memory listener</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#annotations()" class="member-name-link">annotations</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#areMemoryNotificationsEnabled()" class="member-name-link">areMemoryNotificationsEnabled</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get memory context annotations API.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#areMemoryNotificationsEnabled()" class="member-name-link">areMemoryNotificationsEnabled</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Determine if notifications of memory changes are globally enabled or disabled.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Clears the memory content.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a><wbr>&lt;<a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getCellTypeClass()" class="member-name-link">getCellTypeClass</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a><wbr>&lt;<a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getCellTypeClass()" class="member-name-link">getCellTypeClass</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get memory cell type class.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSize()" class="member-name-link">getSize</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSize()" class="member-name-link">getSize</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get memory size</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#peek(int)" class="member-name-link">peek</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#peek(int)" class="member-name-link">peek</a><wbr>(int&nbsp;location)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Inspect a CPU-visible cell without guest timing, device effects, or access events.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#read(int)" class="member-name-link">read</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#read(int)" class="member-name-link">read</a><wbr>(int&nbsp;location)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Reads one memory cell at given location.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#read(int,int)" class="member-name-link">read</a><wbr>(int&nbsp;location,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#read(int,int)" class="member-name-link">read</a><wbr>(int&nbsp;location,
  int&nbsp;count)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Reads one or more adjacent cells from a memory.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeMemoryListener(net.emustudio.emulib.plugins.memory.MemoryContext.MemoryListener)" class="member-name-link">removeMemoryListener</a><wbr>(<a href="MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a>&nbsp;listener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeMemoryListener(net.emustudio.emulib.plugins.memory.MemoryContext.MemoryListener)" class="member-name-link">removeMemoryListener</a><wbr>(<a href="MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Removes a memory listener</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setMemoryNotificationsEnabled(boolean)" class="member-name-link">setMemoryNotificationsEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setMemoryNotificationsEnabled(boolean)" class="member-name-link">setMemoryNotificationsEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Enable/disable notifications of memory changes globally.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Write a value to a memory cell at given location.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#write(int,CellType%5B%5D)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#write(int,CellType%5B%5D)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]&nbsp;values)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Write several cell values at once to a given location.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType%5B%5D,int)" class="member-name-link">write</a><wbr>(int&nbsp;location,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#write(int,CellType%5B%5D,int)" class="member-name-link">write</a><wbr>(int&nbsp;location,
  <a href="#type-param-CellType" title="type parameter in MemoryContext">CellType</a>[]&nbsp;values,
  int&nbsp;count)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Write several cell values at once to a given location.</div>
 </div>
 </div>
@@ -441,22 +431,6 @@ Enabled by default. Usually it is disabled by CPU when in a "running" state.</di
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if notifications are enabled, false if disabled.</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="annotations()">
-<h3>annotations</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></span>&nbsp;<span class="element-name">annotations</span>()</div>
-<div class="block">Get memory context annotations API.
-<p>
-Annotations is a possibility to annotate any memory cell with supplemental information. Usual
-annotations are: breakpoints, text information, position in source code, or any custom annotation.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>memory context annotations API</dd>
 </dl>
 </div>
 </section>

@@ -62,12 +62,12 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#start()" tabindex="0">start()</a></li>
 <li><a href="#passedCycles(long)" tabindex="0">passedCycles(long)</a></li>
+<li><a href="#stop()" tabindex="0">stop()</a></li>
+<li><a href="#sample()" tabindex="0">sample()</a></li>
 <li><a href="#addListener(java.util.function.Consumer)" tabindex="0">addListener(Consumer)</a></li>
 <li><a href="#removeListener(java.util.function.Consumer)" tabindex="0">removeListener(Consumer)</a></li>
-<li><a href="#stop()" tabindex="0">stop()</a></li>
-<li><a href="#start()" tabindex="0">start()</a></li>
-<li><a href="#close()" tabindex="0">close()</a></li>
 </ol>
 </li>
 </ol>
@@ -83,24 +83,16 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Closeable.html" title="class or interface in java.io" class="external-link">Closeable</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a>, <a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></code></dd>
+<dd><code><a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@ThreadSafe
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">FrequencyCalculator</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">FrequencyCalculator</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Closeable.html" title="class or interface in java.io" class="external-link">Closeable</a></span></div>
-<div class="block">CPU real frequency calculator
-<p>
-Calculates frequency of CPU cycles in kHZ. Internally it is using a separate thread for cycles sampling,
-running each second.
-<p>
-Over time, CPU executes instructions which take a few cycles. CPU notifies this calculator independently.
-If we sample how many cycles were executed each second, we can compute cycles per second, which is the frequency in Hz.
-<p>
-In order to improve the accuracy, each second the executed cycles sample is added to "global" cycles counter, divided
-by "global" time period (counted from frequency calculator start to now).</div>
+implements <a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></span></div>
+<div class="block">Measures average CPU frequency in kHz without owning a thread. The CPU worker calls start,
+passedCycles, and stop; the host scheduler calls sample. Cycle publication is batched to keep
+atomic updates out of the instruction loop. Lifecycle/sample locking never covers callbacks.</div>
 </div>
 </section>
 <section class="summary">
@@ -114,9 +106,7 @@ by "global" time period (counted from frequency calculator start to now).</div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">FrequencyCalculator</a>()</code></div>
-<div class="col-last even-row-color">
-<div class="block">Constructs a new FrequencyCalculator.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -133,31 +123,29 @@ by "global" time period (counted from frequency calculator start to now).</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addListener(java.util.function.Consumer)" class="member-name-link">addListener</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a listener for frequency changes.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#passedCycles(long)" class="member-name-link">passedCycles</a><wbr>(long&nbsp;cyclesDelta)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notifies the context that CPU has executed given number of cycles.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeListener(java.util.function.Consumer)" class="member-name-link">removeListener</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#passedCycles(long)" class="member-name-link">passedCycles</a><wbr>(long&nbsp;cyclesDelta)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Removes a listener for frequency changes.</div>
+<div class="block">Called only by the CPU worker, including start/stop ordering.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeListener(java.util.function.Consumer)" class="member-name-link">removeListener</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sample()" class="member-name-link">sample</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called by the host's existing scheduler; never schedules work itself.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Starts the frequency calculator.</div>
+<div class="block">Starts a measurement on the CPU worker.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Stops the frequency calculator.</div>
+<div class="block">Publishes the final partial batch after actual execution exit.</div>
 </div>
 </div>
 </div>
@@ -184,7 +172,6 @@ by "global" time period (counted from frequency calculator start to now).</div>
 <h3>FrequencyCalculator</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FrequencyCalculator</span>()</div>
-<div class="block">Constructs a new FrequencyCalculator.</div>
 </div>
 </section>
 </li>
@@ -197,13 +184,20 @@ by "global" time period (counted from frequency calculator start to now).</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="start()">
+<h3>start</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Starts a measurement on the CPU worker.</div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="passedCycles(long)">
 <h3>passedCycles</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">passedCycles</span><wbr><span class="parameters">(long&nbsp;cyclesDelta)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="CPUContext.PassedCyclesListener.html#passedCycles(long)">CPUContext.PassedCyclesListener</a></code></span></div>
-<div class="block">Notifies the context that CPU has executed given number of cycles.
-Consumer is responsible for handling overflows.</div>
+<div class="block">Called only by the CPU worker, including start/stop ordering.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="CPUContext.PassedCyclesListener.html#passedCycles(long)">passedCycles</a></code>&nbsp;in interface&nbsp;<code><a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></code></dd>
@@ -214,15 +208,28 @@ Consumer is responsible for handling overflows.</div>
 </section>
 </li>
 <li>
+<section class="detail" id="stop()">
+<h3>stop</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+<div class="block">Publishes the final partial batch after actual execution exit.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="sample()">
+<h3>sample</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sample</span>()</div>
+<div class="block">Called by the host's existing scheduler; never schedules work itself.</div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="addListener(java.util.function.Consumer)">
 <h3>addListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addListener</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</span></div>
-<div class="block">Adds a listener for frequency changes.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>listener</code> - the listener</dd>
-</dl>
 </div>
 </section>
 </li>
@@ -231,43 +238,6 @@ Consumer is responsible for handling overflows.</div>
 <h3>removeListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeListener</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</span></div>
-<div class="block">Removes a listener for frequency changes.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>listener</code> - the listener</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="stop()">
-<h3>stop</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
-<div class="block">Stops the frequency calculator.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="start()">
-<h3>start</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
-<div class="block">Starts the frequency calculator.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="close()">
-<h3>close</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">close</span>()</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html#close()" title="class or interface in java.lang" class="external-link">close</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a></code></dd>
-<dt>Specified by:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Closeable.html#close()" title="class or interface in java.io" class="external-link">close</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Closeable.html" title="class or interface in java.io" class="external-link">Closeable</a></code></dd>
-</dl>
 </div>
 </section>
 </li>

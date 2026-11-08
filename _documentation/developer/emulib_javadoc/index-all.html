@@ -66,12 +66,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a> - Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
-<div class="block">Implements fundamental functionality useful for most of the CPU plugins.</div>
+<div class="block">Plugin conveniences; execution and lifecycle ordering belong to the host.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#%3Cinit%3E(long,net.emustudio.emulib.runtime.ApplicationApi,net.emustudio.emulib.runtime.settings.PluginSettings)" class="member-name-link">AbstractCPU(long, ApplicationApi, PluginSettings)</a> - Constructor for class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Creates new instance of CPU.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPUContext.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPUContext</a> - Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
 <div class="block">Abstract CPU context.</div>
@@ -133,12 +131,6 @@ interface, that can be useful in the programming of the own memory context.</div
 <dd>
 <div class="block">Adds sequential bytes into the code table.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#add(int,net.emustudio.emulib.plugins.memory.annotations.Annotation)" class="member-name-link">add(int, Annotation)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#add(int,net.emustudio.emulib.plugins.memory.annotations.Annotation)" class="member-name-link">add(int, Annotation)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Adds annotation at given memory location.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/io/IntelHEX.html#add(java.lang.String)" class="member-name-link">add(String)</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></dt>
 <dd>
 <div class="block">Adds sequential bytes into the code table.</div>
@@ -159,13 +151,9 @@ interface, that can be useful in the programming of the own memory context.</div
 <dd>
 <div class="block">Adds CompilerListener object into list of listeners.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">addCPUListener(CPU.CPUListener)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">addCPUListener(CPU.CPUListener)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
 <dd>
-<div class="block">Add new CPU listener to the list of stateObservers.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">addCPUListener(CPU.CPUListener)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Adds the specified CPU listener to receive CPU events from this CPU.</div>
+<div class="block">Observers are notified by the host, outside Swing and without lifecycle locks held.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AccurateFrequencyRunner.html#addExecutedCycles(long)" class="member-name-link">addExecutedCycles(long)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AccurateFrequencyRunner.html" title="class in net.emustudio.emulib.plugins.cpu">AccurateFrequencyRunner</a></dt>
 <dd>
@@ -175,14 +163,14 @@ interface, that can be useful in the programming of the own memory context.</div
 <dd>
 <div class="block">Adds a KeyListener to given component recursively.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#addListener(java.lang.Runnable)" class="member-name-link">addListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#addListener(java.lang.Runnable)" class="member-name-link">addListener(Runnable)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#addListener(java.lang.Runnable)" class="member-name-link">addListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
 <dd>
-<div class="block">Registers a listener invoked when debugger information changes, possibly off the Swing thread.</div>
+<div class="block">Registers a listener; notifications may occur outside the Swing thread.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#addListener(java.util.function.Consumer)" class="member-name-link">addListener(Consumer)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
-<dd>
-<div class="block">Adds a listener for frequency changes.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html#addListener(net.emustudio.emulib.plugins.cpu.debug.DebugCPU.Listener)" class="member-name-link">addListener(DebugCPU.Listener)</a> - Method in interface net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#addListener(net.emustudio.emulib.plugins.cpu.debug.DebugCPU.Listener)" class="member-name-link">addListener(DebugCPU.Listener)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
@@ -229,33 +217,23 @@ interface, that can be useful in the programming of the own memory context.</div
 <dd>
 <div class="block">Return true to stop after the completed instruction.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#all()" class="member-name-link">all()</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>
+<div class="block">Returns all entries currently in the engine.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html#analyze(java.lang.String)" class="member-name-link">analyze(String)</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></dt>
 <dd>
 <div class="block">Analyze an entire source snapshot for editing.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a> - Class in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a> - Class in <a href="net/emustudio/emulib/runtime/annotations/package-summary.html">net.emustudio.emulib.runtime.annotations</a></dt>
 <dd>
-<div class="block">Memory cell annotation.</div>
+<div class="block">Thread-safe live annotations at CPU-visible addresses.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html#%3Cinit%3E(long)" class="member-name-link">Annotation(long)</a> - Constructor for class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#%3Cinit%3E()" class="member-name-link">AnnotationEngine()</a> - Constructor for class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a> - Class in <a href="net/emustudio/emulib/runtime/annotations/package-summary.html">net.emustudio.emulib.runtime.annotations</a></dt>
 <dd>
-<div class="block">Creates new memory annotation.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html#annotations" class="member-name-link">annotations</a> - Variable in class net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemory</a></dt>
-<dd>
-<div class="block">Memory annotations.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#annotations()" class="member-name-link">annotations()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
-<dd>
-<div class="block">Get memory context annotations API.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a> - Class in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
-<dd>
-<div class="block">Default implementation of <a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations"><code>MemoryAnnotations</code></a>.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#%3Cinit%3E()" class="member-name-link">Annotations()</a> - Constructor for class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>
-<div class="block">Constructs new annotations container.</div>
+<div class="block">An annotation covers the half-open address range [start, end).</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html#ANSWER_CANCEL" class="member-name-link">ANSWER_CANCEL</a> - Enum constant in enum class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html" title="enum class in net.emustudio.emulib.runtime.ui">Dialogs.DialogAnswer</a></dt>
 <dd>
@@ -274,9 +252,7 @@ interface, that can be useful in the programming of the own memory context.</div
 <div class="block">emuStudio API.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#applicationApi" class="member-name-link">applicationApi</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">emuStudio API.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/AbstractDevice.html#applicationApi" class="member-name-link">applicationApi</a> - Variable in class net.emustudio.emulib.plugins.device.<a href="net/emustudio/emulib/plugins/device/AbstractDevice.html" title="class in net.emustudio.emulib.plugins.device">AbstractDevice</a></dt>
 <dd>
 <div class="block">emuStudio API.</div>
@@ -302,6 +278,10 @@ interface, that can be useful in the programming of the own memory context.</div
 <dt><a href="net/emustudio/emulib/runtime/ui/Dialogs.html#ask(java.lang.String,java.lang.String)" class="member-name-link">ask(String, String)</a> - Method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></dt>
 <dd>
 <div class="block">Ask user for a confirmation.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#at(int)" class="member-name-link">at(int)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>
+<div class="block">Returns current entries covering the given address.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/AudioSink.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.audio">AudioSink</a> - Interface in <a href="net/emustudio/emulib/runtime/audio/package-summary.html">net.emustudio.emulib.runtime.audio</a></dt>
 <dd>
@@ -483,12 +463,6 @@ acknowledge.</div>
 <dd>
 <div class="block">Ask user to choose a file.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#clear()" class="member-name-link">clear()</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html#clear()" class="member-name-link">clear()</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></dt>
-<dd>
-<div class="block">Clears all annotations</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#clear()" class="member-name-link">clear()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
 <dd>
 <div class="block">Clears the memory content.</div>
@@ -497,7 +471,7 @@ acknowledge.</div>
 <dd>
 <div class="block">Clears the cache</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#close()" class="member-name-link">close()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#clearOwner(long)" class="member-name-link">clearOwner(long)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/AudioSink.html#close()" class="member-name-link">close()</a> - Method in interface net.emustudio.emulib.runtime.audio.<a href="net/emustudio/emulib/runtime/audio/AudioSink.html" title="interface in net.emustudio.emulib.runtime.audio">AudioSink</a></dt>
 <dd>
@@ -517,13 +491,13 @@ acknowledge.</div>
 <dd>
 <div class="block">Column</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#comment(int)" class="member-name-link">comment(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
-<dd>
-<div class="block">Returns the comment at this location, or an empty string when none exists.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#COMMENT" class="member-name-link">COMMENT</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
 <div class="block">Token is a comment.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#compareAndReplaceOwner(long,long,java.util.Collection)" class="member-name-link">compareAndReplaceOwner(long, long, Collection)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>
+<div class="block">Replaces an owner's entries only if the engine revision is still current.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Compiler.html#compile(java.nio.file.Path,java.util.Optional)" class="member-name-link">compile(Path, Optional)</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></dt>
 <dd>
@@ -632,7 +606,7 @@ and/or other plugins that want to process the output of the compiler.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.CPUListener.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a> - Interface in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
-<div class="block">Interface for receiving CPU events.</div>
+<div class="block">Interface for receiving host-owned CPU execution events.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.RunState.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a> - Enum Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
@@ -649,6 +623,10 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Compiler.html#createLexer()" class="member-name-link">createLexer()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></dt>
 <dd>
 <div class="block">Creates a lexical analyzer.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#currentInstruction()" class="member-name-link">currentInstruction()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
+<dd>
+<div class="block">Returns the current CPU-visible instruction address, or -1 when unavailable.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -668,10 +646,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn&lt;T&gt;</a> - Interface in <a href="net/emustudio/emulib/runtime/ui/debugger/package-summary.html">net.emustudio.emulib.runtime.ui.debugger</a></dt>
 <dd>
 <div class="block">Column in the debugger table.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a> - Interface in <a href="net/emustudio/emulib/runtime/package-summary.html">net.emustudio.emulib.runtime</a></dt>
-<dd>
-<div class="block">Read-only debugger information at CPU-visible addresses.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerTable.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a> - Interface in <a href="net/emustudio/emulib/runtime/ui/debugger/package-summary.html">net.emustudio.emulib.runtime.ui.debugger</a></dt>
 <dd>
@@ -716,15 +690,15 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="block">Does nothing.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#destroy()" class="member-name-link">destroy()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Host calls only after actual execution exit.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/Plugin.html#destroy()" class="member-name-link">destroy()</a> - Method in interface net.emustudio.emulib.plugins.<a href="net/emustudio/emulib/plugins/Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></dt>
 <dd>
 <div class="block">Destroys all plugin resources.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#destroyInternal()" class="member-name-link">destroyInternal()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Called by original destroy() method.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/Device.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.device">Device</a> - Interface in <a href="net/emustudio/emulib/plugins/device/package-summary.html">net.emustudio.emulib.plugins.device</a></dt>
 <dd>
 <div class="block">Device plugin root interface.</div>
@@ -788,7 +762,13 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">EmuStudio key prefix.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#end" class="member-name-link">end</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#end(boolean)" class="member-name-link">end(boolean)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#%3Cinit%3E(long,long,int,int,java.lang.String,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" class="member-name-link">Entry(long, long, int, int, String, String, SourceCodePosition)</a> - Constructor for class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#entryId" class="member-name-link">entryId</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#EOF" class="member-name-link">EOF</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
@@ -800,19 +780,17 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DecodedInstruction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">SourceCodeAnnotation</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#ERROR" class="member-name-link">ERROR</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
 <div class="block">Token is of unknown type.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#execute()" class="member-name-link">execute()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#execute()" class="member-name-link">execute()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
-<div class="block">Runs CPU emulation.</div>
+<div class="block">Runs the instruction loop synchronously until natural completion or cooperative interruption.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime">ExecutionState</a> - Interface in <a href="net/emustudio/emulib/runtime/package-summary.html">net.emustudio.emulib.runtime</a></dt>
+<dd>
+<div class="block">Host-owned machine execution state, observations, and serialized paused edits.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html#extract(java.lang.String,int,int,java.lang.String,java.lang.String)" class="member-name-link">extract(String, int, int, String, String)</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></dt>
 <dd>
@@ -955,12 +933,10 @@ and/or other plugins that want to process the output of the compiler.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a> - Class in <a href="net/emustudio/emulib/plugins/cpu/package-summary.html">net.emustudio.emulib.plugins.cpu</a></dt>
 <dd>
-<div class="block">CPU real frequency calculator</div>
+<div class="block">Measures average CPU frequency in kHz without owning a thread.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#%3Cinit%3E()" class="member-name-link">FrequencyCalculator()</a> - Constructor for class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
-<dd>
-<div class="block">Constructs a new FrequencyCalculator.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html#fromPath(java.nio.file.Path)" class="member-name-link">fromPath(Path)</a> - Static method in enum class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></dt>
 <dd>
 <div class="block">Recognizes the last extension of the filename, independent of parent directories.</div>
@@ -976,24 +952,8 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Generates a Intel Hex file based on the cached program map.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#get(int,java.lang.Class)" class="member-name-link">get(int, Class)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#get(long,long)" class="member-name-link">get(long, long)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#get(int,java.lang.Class)" class="member-name-link">get(int, Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Get annotations of given type at given memory location</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#get(long,int)" class="member-name-link">get(long, int)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#get(long,int)" class="member-name-link">get(long, int)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Get annotations at given memory location owned by given plugin ID</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#get(long,int,java.lang.Class)" class="member-name-link">get(long, int, Class)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#get(long,int,java.lang.Class)" class="member-name-link">get(long, int, Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Get annotations of given type at given memory location owned by given plugin ID</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html#getAddress()" class="member-name-link">getAddress()</a> - Method in class net.emustudio.emulib.runtime.io.<a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></dt>
 <dd>
 <div class="block">Embedded HEX address; empty for BIN and tape blocks.</div>
@@ -1002,29 +962,9 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Get the number of addressable instruction locations exposed by this CPU.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#getAll(long)" class="member-name-link">getAll(long)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#getAll(long)" class="member-name-link">getAll(long)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getAnnotations()" class="member-name-link">getAnnotations()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
 <dd>
-<div class="block">Get all annotations owned by given plugin ID</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#getAll(long,java.lang.Class)" class="member-name-link">getAll(long, Class)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#getAll(long,java.lang.Class)" class="member-name-link">getAll(long, Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Get all annotations of given type owned by given pluginId</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#getAll(java.lang.Class)" class="member-name-link">getAll(Class)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#getAll(java.lang.Class)" class="member-name-link">getAll(Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Get all annotations of given type</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html#getAnnotations()" class="member-name-link">getAnnotations()</a> - Method in class net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemory</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/Memory.html#getAnnotations()" class="member-name-link">getAnnotations()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/Memory.html" title="interface in net.emustudio.emulib.plugins.memory">Memory</a></dt>
-<dd>
-<div class="block">Get memory annotations</div>
+<div class="block">Returns the active computer's live annotations, or null when unavailable.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/settings/BasicSettings.html#getArray(java.lang.String)" class="member-name-link">getArray(String)</a> - Method in interface net.emustudio.emulib.runtime.settings.<a href="net/emustudio/emulib/runtime/settings/BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></dt>
 <dd>
@@ -1120,10 +1060,6 @@ and/or other plugins that want to process the output of the compiler.</div>
 <dd>
 <div class="block">Optional portable debugging capabilities.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getDebuggerMemory()" class="member-name-link">getDebuggerMemory()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
-<dd>
-<div class="block">Returns the debugger's memory information service, or null when unavailable.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getDebuggerTable()" class="member-name-link">getDebuggerTable()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
 <dd>
 <div class="block">Get debugger table.</div>
@@ -1170,6 +1106,10 @@ and/or other plugins that want to process the output of the compiler.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/components/CachedComboBoxModel.html#getElementAt(int)" class="member-name-link">getElementAt(int)</a> - Method in class net.emustudio.emulib.runtime.ui.components.<a href="net/emustudio/emulib/runtime/ui/components/CachedComboBoxModel.html" title="class in net.emustudio.emulib.runtime.ui.components">CachedComboBoxModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getExecutionState()" class="member-name-link">getExecutionState()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
+<dd>
+<div class="block">Returns current execution state, or null when unavailable.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/FileExtension.html#getExtension()" class="member-name-link">getExtension()</a> - Method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/FileExtension.html" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a></dt>
 <dd>
 <div class="block">Returns the file extension.</div>
@@ -1295,17 +1235,9 @@ followed by specified location.</div>
 <dd>
 <div class="block">Gets the plugin that caused this exception, if available.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html#getPluginId()" class="member-name-link">getPluginId()</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a></dt>
-<dd>
-<div class="block">Get owner plugin ID.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></dt>
 <dd>
 <div class="block">Get source code position</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">SourceCodeAnnotation</a></dt>
-<dd>
-<div class="block">Gets the source code position.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ApplicationApi.html#getProgramLocation()" class="member-name-link">getProgramLocation()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></dt>
 <dd>
@@ -1478,10 +1410,6 @@ followed by specified location.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DecodedInstruction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">SourceCodeAnnotation</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html#hasNext()" class="member-name-link">hasNext()</a> - Method in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></dt>
 <dd>
 <div class="block">Determines if a next token is available on the input at the current lexer position.</div>
@@ -1619,6 +1547,10 @@ followed by specified location.</div>
 <dd>
 <div class="block">Token is an identifier (e.g.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#ifRevision(long,java.lang.Runnable)" class="member-name-link">ifRevision(long, Runnable)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>
+<div class="block">Runs an action while updates are excluded, if the expected revision is still current.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html#image" class="member-name-link">image</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DecodedInstruction</a></dt>
 <dd>
 <div class="block">Instruction image</div>
@@ -1715,9 +1647,9 @@ followed by specified location.</div>
 <dd>
 <div class="block">Determines if this plugin supports emulation automation</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#isCurrentInstruction(int)" class="member-name-link">isCurrentInstruction(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#isBusy()" class="member-name-link">isBusy()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
 <dd>
-<div class="block">Returns whether this location is the current instruction.</div>
+<div class="block">True while a machine command is pending, including cooperative stop and close.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html#isEditable()" class="member-name-link">isEditable()</a> - Method in interface net.emustudio.emulib.runtime.ui.debugger.<a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a></dt>
 <dd>
@@ -1740,9 +1672,7 @@ followed by specified location.</div>
 <div class="block">Return false.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">This class does not support showing settings</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/Plugin.html#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported()</a> - Method in interface net.emustudio.emulib.plugins.<a href="net/emustudio/emulib/plugins/Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></dt>
 <dd>
 <div class="block">Check if showSettings() is supported by this plugin.</div>
@@ -1773,15 +1703,13 @@ followed by specified location.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html#kind" class="member-name-link">kind</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html" title="class in net.emustudio.emulib.plugins.cpu">InstructionFlow</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#kind" class="member-name-link">kind</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
 <dt><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html#LA(int)" class="member-name-link">LA(int)</a> - Method in class net.emustudio.emulib.plugins.compiler.antlr.<a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#label(int)" class="member-name-link">label(int)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
-<dd>
-<div class="block">Returns the label at this location, or an empty string when none exists.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#label(java.lang.String)" class="member-name-link">label(String)</a> - Method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>
 <div class="block">Creates a JLabel with given text.</div>
@@ -1905,10 +1833,6 @@ to the operating memory.</div>
 <dd>
 <div class="block">Memory plugin.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a> - Interface in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
-<dd>
-<div class="block">Memory annotations.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html#memoryContentChanged(int,int)" class="member-name-link">memoryContentChanged(int, int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a></dt>
 <dd>
 <div class="block">Invoked when memory content changed.</div>
@@ -1920,10 +1844,6 @@ to the operating memory.</div>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a> - Interface in <a href="net/emustudio/emulib/plugins/memory/package-summary.html">net.emustudio.emulib.plugins.memory</a></dt>
 <dd>
 <div class="block">A listener for receiving memory related events.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a> - Interface in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
-<dd>
-<div class="block">Annotations for memory context.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html#memorySizeChanged()" class="member-name-link">memorySizeChanged()</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext.MemoryListener</a></dt>
 <dd>
@@ -1948,6 +1868,10 @@ to the operating memory.</div>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html#mnemonic" class="member-name-link">mnemonic</a> - Variable in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></dt>
 <dd>
 <div class="block">Captured before execution; opcode bytes are represented as a hexadecimal sequence.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#mutate(java.lang.Runnable)" class="member-name-link">mutate(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
+<dd>
+<div class="block">Executes a paused edit on the CPU worker; rejects running, busy, or stale requests.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
@@ -1986,9 +1910,9 @@ to the operating memory.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/package-summary.html">net.emustudio.emulib.plugins.memory</a> - package net.emustudio.emulib.plugins.memory</dt>
 <dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a> - package net.emustudio.emulib.plugins.memory.annotations</dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/package-summary.html">net.emustudio.emulib.runtime</a> - package net.emustudio.emulib.runtime</dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/package-summary.html">net.emustudio.emulib.runtime.annotations</a> - package net.emustudio.emulib.runtime.annotations</dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/package-summary.html">net.emustudio.emulib.runtime.audio</a> - package net.emustudio.emulib.runtime.audio</dt>
 <dd>&nbsp;</dd>
@@ -2042,10 +1966,6 @@ the compile process.</div>
 <dd>
 <div class="block">Notifies information message</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#notifyInternalStateChanged()" class="member-name-link">notifyInternalStateChanged()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Notify observers after a paused debugger edit, without changing the run state.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html#notifyMemoryContentChanged(int)" class="member-name-link">notifyMemoryContentChanged(int)</a> - Method in class net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemoryContext</a></dt>
 <dd>
 <div class="block">Notify all listeners that memory content has changed at given positions.</div>
@@ -2098,6 +2018,10 @@ something out (a message).</div>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
+<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">observeExecution(CPU.CPUListener)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
+<dd>
+<div class="block">Registers a host observer for this plugin's lifetime, during initialization or panel creation.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html#of(int,int,java.lang.String)" class="member-name-link">of(int, int, String)</a> - Static method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a></dt>
 <dd>
 <div class="block">Creates new SourceCodePosition object</div>
@@ -2271,6 +2195,8 @@ paused.</div>
 <dd>
 <div class="block">Token is a operator (e.g.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#ownerId" class="member-name-link">ownerId</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
@@ -2321,12 +2247,8 @@ paused.</div>
 <div class="block">Notifies the context that CPU has executed given number of cycles.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#passedCycles(long)" class="member-name-link">passedCycles(long)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#pause()" class="member-name-link">pause()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#pause()" class="member-name-link">pause()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
-<div class="block">Pauses the CPU emulation.</div>
+<div class="block">Called only by the CPU worker, including start/stop ordering.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html#peek(int)" class="member-name-link">peek(int)</a> - Method in interface net.emustudio.emulib.plugins.memory.<a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a></dt>
 <dd>
@@ -2354,18 +2276,12 @@ paused.</div>
 <dd>
 <div class="block">Indicates that the annotated interface represent plugin context.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html#pluginId" class="member-name-link">pluginId</a> - Variable in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotation</a></dt>
-<dd>
-<div class="block">Owner plugin ID.</div>
-</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html#pluginID" class="member-name-link">pluginID</a> - Variable in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler">AbstractCompiler</a></dt>
 <dd>
 <div class="block">Plugin ID assigned by emuStudio</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#pluginID" class="member-name-link">pluginID</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Plugin ID assigned by emuStudio</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/AbstractDevice.html#pluginID" class="member-name-link">pluginID</a> - Variable in class net.emustudio.emulib.plugins.device.<a href="net/emustudio/emulib/plugins/device/AbstractDevice.html" title="class in net.emustudio.emulib.plugins.device">AbstractDevice</a></dt>
 <dd>
 <div class="block">Plugin ID assigned by emuStudio</div>
@@ -2429,6 +2345,8 @@ paused.</div>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html#processor()" class="member-name-link">processor()</a> - Method in interface net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#processor()" class="member-name-link">processor()</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#put(net.emustudio.emulib.runtime.annotations.AnnotationEngine.Entry)" class="member-name-link">put(AnnotationEngine.Entry)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html#put(V)" class="member-name-link">put(V)</a> - Method in class net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html" title="class in net.emustudio.emulib.runtime.ui">MaxItemsCache</a></dt>
 <dd>
@@ -2552,27 +2470,11 @@ radixes.</div>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html#release(int)" class="member-name-link">release(int)</a> - Method in class net.emustudio.emulib.plugins.compiler.antlr.<a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#remove(long,long)" class="member-name-link">remove(long, long)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/settings/BasicSettings.html#remove(java.lang.String)" class="member-name-link">remove(String)</a> - Method in interface net.emustudio.emulib.runtime.settings.<a href="net/emustudio/emulib/runtime/settings/BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></dt>
 <dd>
 <div class="block">Remove key from settings if present.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#removeAll(long)" class="member-name-link">removeAll(long)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#removeAll(long)" class="member-name-link">removeAll(long)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Removes all annotations owned by given pluginId.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#removeAll(long,int)" class="member-name-link">removeAll(long, int)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html#removeAll(long,int)" class="member-name-link">removeAll(long, int)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryContextAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryContextAnnotations</a></dt>
-<dd>
-<div class="block">Removes all annotations at given memory location owned by given pluginId</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html#removeAll(java.lang.Class)" class="member-name-link">removeAll(Class)</a> - Method in class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/Annotations.html" title="class in net.emustudio.emulib.plugins.memory.annotations">Annotations</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html#removeAll(java.lang.Class)" class="member-name-link">removeAll(Class)</a> - Method in interface net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/MemoryAnnotations.html" title="interface in net.emustudio.emulib.plugins.memory.annotations">MemoryAnnotations</a></dt>
-<dd>
-<div class="block">Removes all annotations of given annotation class</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener(CompilerListener)</a> - Method in class net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler">AbstractCompiler</a></dt>
 <dd>
@@ -2582,27 +2484,20 @@ radixes.</div>
 <dd>
 <div class="block">Removes CompilerListener object from the listeners list.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener(CPU.CPUListener)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Remove CPU listener object from the list of stateObservers.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener(CPU.CPUListener)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Removes the specified CPU listener so that it no longer receives CPU
-events from this CPU.</div>
-</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener(CPU.CPUListener)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#removeKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" class="member-name-link">removeKeyListenerRecursively(Component, KeyListener)</a> - Static method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>
 <div class="block">Removes given KeyListener from a component recursively.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/runtime/DebuggerMemory.html#removeListener(java.lang.Runnable)" class="member-name-link">removeListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/DebuggerMemory.html" title="interface in net.emustudio.emulib.runtime">DebuggerMemory</a></dt>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#removeListener(java.lang.Runnable)" class="member-name-link">removeListener(Runnable)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#removeListener(java.lang.Runnable)" class="member-name-link">removeListener(Runnable)</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
 <dd>
-<div class="block">Unregisters a previously registered listener.</div>
+<div class="block">Removes a previously registered listener.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#removeListener(java.util.function.Consumer)" class="member-name-link">removeListener(Consumer)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
-<dd>
-<div class="block">Removes a listener for frequency changes.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html#removeListener(net.emustudio.emulib.plugins.cpu.debug.DebugCPU.Listener)" class="member-name-link">removeListener(DebugCPU.Listener)</a> - Method in interface net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html#removeListener(net.emustudio.emulib.plugins.cpu.debug.DebugCPU.Listener)" class="member-name-link">removeListener(DebugCPU.Listener)</a> - Method in class net.emustudio.emulib.plugins.cpu.debug.<a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></dt>
@@ -2620,6 +2515,10 @@ events from this CPU.</div>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPUContext.html#removePassedCyclesListener(net.emustudio.emulib.plugins.cpu.CPUContext.PassedCyclesListener)" class="member-name-link">removePassedCyclesListener(CPUContext.PassedCyclesListener)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPUContext.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext</a></dt>
 <dd>
 <div class="block">Removes given passed cycles listener</div>
+</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#replaceOwner(long,java.util.Collection)" class="member-name-link">replaceOwner(long, Collection)</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>
+<div class="block">Replaces all entries for an owner in one atomic update.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/Token.html#RESERVED" class="member-name-link">RESERVED</a> - Static variable in interface net.emustudio.emulib.plugins.compiler.<a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></dt>
 <dd>
@@ -2647,15 +2546,9 @@ events from this CPU.</div>
 <dd>
 <div class="block">Reset this lexical analyzer with new input.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#reset(int)" class="member-name-link">reset(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#reset(int)" class="member-name-link">reset(int)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
-<div class="block">Resets the CPU and sets instruction position to given program location.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#resetInternal(int)" class="member-name-link">resetInternal(int)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Performs specific CPU reset.</div>
+<div class="block">Resets the CPU synchronously after the host has acknowledged actual execution exit.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.Kind.html#RETURN" class="member-name-link">RETURN</a> - Enum constant in enum class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.Kind.html" title="enum class in net.emustudio.emulib.plugins.cpu">InstructionFlow.Kind</a></dt>
 <dd>&nbsp;</dd>
@@ -2679,6 +2572,8 @@ events from this CPU.</div>
 <dd>
 <div class="block">Reverses the bytes.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html#revision()" class="member-name-link">revision()</a> - Method in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/helpers/Unchecked.RunnableWhichCanThrow.html#run()" class="member-name-link">run()</a> - Method in interface net.emustudio.emulib.runtime.helpers.<a href="net/emustudio/emulib/runtime/helpers/Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a></dt>
 <dd>
 <div class="block">Runs the action.</div>
@@ -2700,6 +2595,8 @@ events from this CPU.</div>
 <dd>
 <div class="block">Runs the CPU without "sleeping".</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/ExecutionState.html#runState()" class="member-name-link">runState()</a> - Method in interface net.emustudio.emulib.runtime.<a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.CPUListener.html#runStateChanged(net.emustudio.emulib.plugins.cpu.CPU.RunState)" class="member-name-link">runStateChanged(CPU.RunState)</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a></dt>
 <dd>
 <div class="block">Invoked when an CPU's run state changes.</div>
@@ -2707,6 +2604,14 @@ events from this CPU.</div>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#sample()" class="member-name-link">sample()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
+<dd>
+<div class="block">Called by the host's existing scheduler; never schedules work itself.</div>
+</dd>
+<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#sampleFrequency()" class="member-name-link">sampleFrequency()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
+<dd>
+<div class="block">Optional host-scheduled frequency observation.</div>
+</dd>
 <dt><a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.audio">SamplePlayer&lt;K&gt;</a> - Class in <a href="net/emustudio/emulib/runtime/audio/package-summary.html">net.emustudio.emulib.runtime.audio</a></dt>
 <dd>
 <div class="block">Loads and plays independent samples identified by caller-defined keys.</div>
@@ -2790,9 +2695,7 @@ events from this CPU.</div>
 <div class="block">Compiler custom settings.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#settings" class="member-name-link">settings</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">CPU custom settings.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/device/AbstractDevice.html#settings" class="member-name-link">settings</a> - Variable in class net.emustudio.emulib.plugins.device.<a href="net/emustudio/emulib/plugins/device/AbstractDevice.html" title="class in net.emustudio.emulib.plugins.device">AbstractDevice</a></dt>
 <dd>
 <div class="block">Device custom settings.</div>
@@ -2858,9 +2761,7 @@ events from this CPU.</div>
 <div class="block">Does nothing.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings(JFrame)</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Does nothing.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/Plugin.html#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings(JFrame)</a> - Method in interface net.emustudio.emulib.plugins.<a href="net/emustudio/emulib/plugins/Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></dt>
 <dd>
 <div class="block">Show GUI of plugin settings, if it is provided.</div>
@@ -2883,14 +2784,8 @@ events from this CPU.</div>
 <dd>
 <div class="block">Throws a checked exception as an unchecked one.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.memory.annotations">SourceCodeAnnotation</a> - Class in <a href="net/emustudio/emulib/plugins/memory/annotations/package-summary.html">net.emustudio.emulib.plugins.memory.annotations</a></dt>
-<dd>
-<div class="block">Source-code position annotation.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html#%3Cinit%3E(long,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" class="member-name-link">SourceCodeAnnotation(long, SourceCodePosition)</a> - Constructor for class net.emustudio.emulib.plugins.memory.annotations.<a href="net/emustudio/emulib/plugins/memory/annotations/SourceCodeAnnotation.html" title="class in net.emustudio.emulib.plugins.memory.annotations">SourceCodeAnnotation</a></dt>
-<dd>
-<div class="block">Constructs a new SourceCodeAnnotation.</div>
-</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#source" class="member-name-link">source</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" class="type-name-link" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a> - Class in <a href="net/emustudio/emulib/plugins/compiler/package-summary.html">net.emustudio.emulib.plugins.compiler</a></dt>
 <dd>
 <div class="block">Position in the source code.</div>
@@ -2931,9 +2826,11 @@ events from this CPU.</div>
 <dd>
 <div class="block">Resource paths of icons shared by emuStudio and its plugins.</div>
 </dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#start" class="member-name-link">start</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#start()" class="member-name-link">start()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
 <dd>
-<div class="block">Starts the frequency calculator.</div>
+<div class="block">Starts a measurement on the CPU worker.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.RunState.html#STATE_RUNNING" class="member-name-link">STATE_RUNNING</a> - Enum constant in enum class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></dt>
 <dd>
@@ -2955,25 +2852,13 @@ events from this CPU.</div>
 <dd>
 <div class="block">CPU is stopped (naturally or by user) and should not be run until it is reset.</div>
 </dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#step()" class="member-name-link">step()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#step()" class="member-name-link">step()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
 <dd>
-<div class="block">Perform one step of CPU emulation.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#stepInternal()" class="member-name-link">stepInternal()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>
-<div class="block">Perform one emulation step in synchronized context.</div>
-</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html#stop()" class="member-name-link">stop()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="net/emustudio/emulib/plugins/cpu/CPU.html#stop()" class="member-name-link">stop()</a> - Method in interface net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></dt>
-<dd>
-<div class="block">Stops the CPU emulation.</div>
+<div class="block">Executes one instruction synchronously on the host's CPU worker and returns its result.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html#stop()" class="member-name-link">stop()</a> - Method in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></dt>
 <dd>
-<div class="block">Stops the frequency calculator.</div>
+<div class="block">Publishes the final partial batch after actual execution exit.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/runtime/recording/RecordingSession.html#stop(java.nio.file.Path)" class="member-name-link">stop(Path)</a> - Method in class net.emustudio.emulib.runtime.recording.<a href="net/emustudio/emulib/runtime/recording/RecordingSession.html" title="class in net.emustudio.emulib.runtime.recording">RecordingSession</a></dt>
 <dd>
@@ -3033,6 +2918,8 @@ events from this CPU.</div>
 <div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
 </dd>
 <dt><a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html#targets" class="member-name-link">targets</a> - Variable in class net.emustudio.emulib.plugins.cpu.<a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html" title="class in net.emustudio.emulib.plugins.cpu">InstructionFlow</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html#text" class="member-name-link">text</a> - Variable in class net.emustudio.emulib.runtime.annotations.<a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="net/emustudio/emulib/runtime/ui/GUI.html#textAreaReadOnly(int,int)" class="member-name-link">textAreaReadOnly(int, int)</a> - Method in interface net.emustudio.emulib.runtime.ui.<a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></dt>
 <dd>

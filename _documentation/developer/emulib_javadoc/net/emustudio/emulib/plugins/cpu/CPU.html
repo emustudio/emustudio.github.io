@@ -58,12 +58,9 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#getDebugger()" tabindex="0">getDebugger()</a></li>
-<li><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">addCPUListener(CPU.CPUListener)</a></li>
-<li><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">removeCPUListener(CPU.CPUListener)</a></li>
 <li><a href="#step()" tabindex="0">step()</a></li>
 <li><a href="#execute()" tabindex="0">execute()</a></li>
-<li><a href="#pause()" tabindex="0">pause()</a></li>
-<li><a href="#stop()" tabindex="0">stop()</a></li>
+<li><a href="#sampleFrequency()" tabindex="0">sampleFrequency()</a></li>
 <li><a href="#getStatusPanel()" tabindex="0">getStatusPanel()</a></li>
 <li><a href="#reset(int)" tabindex="0">reset(int)</a></li>
 <li><a href="#getInstructionLocation()" tabindex="0">getInstructionLocation()</a></li>
@@ -123,7 +120,7 @@ to plugins.</div>
 <div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="CPU.CPUListener.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Interface for receiving CPU events.</div>
+<div class="block">Interface for receiving host-owned CPU execution events.</div>
 </div>
 <div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="CPU.RunState.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
@@ -144,76 +141,60 @@ to plugins.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">addCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#execute()" class="member-name-link">execute</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Adds the specified CPU listener to receive CPU events from this CPU.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#execute()" class="member-name-link">execute</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Runs CPU emulation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAddressSpaceSize()" class="member-name-link">getAddressSpaceSize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get the number of addressable instruction locations exposed by this CPU.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDebugger()" class="member-name-link">getDebugger</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Optional portable debugging capabilities.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDisassembler()" class="member-name-link">getDisassembler</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Get disassembler.</div>
+<div class="block">Runs the instruction loop synchronously until natural completion or cooperative interruption.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getInstructionLocation()" class="member-name-link">getInstructionLocation</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAddressSpaceSize()" class="member-name-link">getAddressSpaceSize</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Get the number of addressable instruction locations exposed by this CPU.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDebugger()" class="member-name-link">getDebugger</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Optional portable debugging capabilities.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDisassembler()" class="member-name-link">getDisassembler</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Get disassembler.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getInstructionLocation()" class="member-name-link">getInstructionLocation</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get memory location of an instruction which will be emulated as next.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getStatusPanel()" class="member-name-link">getStatusPanel</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getStatusPanel()" class="member-name-link">getStatusPanel</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get CPU status panel.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Determines if this plugin supports emulation automation</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Pauses the CPU emulation.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">removeCPUListener</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Removes the specified CPU listener so that it no longer receives CPU
-events from this CPU.</div>
+<div class="block">Resets the CPU synchronously after the host has acknowledged actual execution exit.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Resets the CPU and sets instruction position to given program location.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#sampleFrequency()" class="member-name-link">sampleFrequency</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Optional host-scheduled frequency observation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setInstructionLocation(int)" class="member-name-link">setInstructionLocation</a><wbr>(int&nbsp;location)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Set memory location of an instruction which will be emulated as next.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#step()" class="member-name-link">step</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Perform one step of CPU emulation.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Stops the CPU emulation.</div>
+<div class="block">Executes one instruction synchronously on the host's CPU worker and returns its result.</div>
 </div>
 </div>
 </div>
@@ -242,51 +223,16 @@ events from this CPU.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="addCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
-<h3>addCPUListener</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addCPUListener</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
-<div class="block">Adds the specified CPU listener to receive CPU events from this CPU.
-<p>
-CPU events occur when CPU changes its state, or run state. CPU state
-events don't occur if CPU is running, only happens with run state changes.
-If listener is <code>null</code>, no exception is thrown and no action is
-performed.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>listener</code> - the CPU listener</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="removeCPUListener(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
-<h3>removeCPUListener</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">removeCPUListener</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
-<div class="block">Removes the specified CPU listener so that it no longer receives CPU
-events from this CPU.
-<p>
-CPU events occur when CPU changes its state, or run
-state. CPU state events don't occur if CPU is running, only happens with
-run state changes. If listener is <code>null</code>, no exception is
-thrown and no action is performed.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>listener</code> - the CPU listener to be removed</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="step()">
 <h3>step</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">step</span>()</div>
-<div class="block">Perform one step of CPU emulation. It means that one instruction should
-be executed. CPU state changes to state "running", then it executes one
-instruction, and then it should return to state "breakpoint" or "stopped".
-Correct timing of executed instruction isn't so important.</div>
+<div class="member-signature"><span class="return-type"><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></span>&nbsp;<span class="element-name">step</span>()
+           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Executes one instruction synchronously on the host's CPU worker and returns its result.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
 </div>
 </section>
 </li>
@@ -294,43 +240,25 @@ Correct timing of executed instruction isn't so important.</div>
 <section class="detail" id="execute()">
 <h3>execute</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
-<div class="block">Runs CPU emulation. Change state of CPU to "running" and start
-instruction fetch/decode/execute loop.
-<p>
-The emuStudio creates separate thread for this purpose.
-<p>
-While CPU is running, the emuStudio will not allow to call method
-<code>step()</code>.
-<p>
-A good CPU should perform right timing for instructions here.
-Debug window should not be updated after each instruction execution,
-in order to the execution loop would be faster.</div>
+<div class="member-signature"><span class="return-type"><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></span>&nbsp;<span class="element-name">execute</span>()
+              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Runs the instruction loop synchronously until natural completion or cooperative interruption.
+The host supplies the worker thread, serializes CPU mutations, and publishes lifecycle events.
+Return STATE_RUNNING when interrupted without another terminal reason; the host applies the requested
+pause/stop state. Natural halt, breakpoint, and failures must retain their actual result.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="pause()">
-<h3>pause</h3>
+<section class="detail" id="sampleFrequency()">
+<h3>sampleFrequency</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">pause</span>()</div>
-<div class="block">Pauses the CPU emulation. If a thread was used for CPU execution
-and is running, then it should be stopped (destroyed) but the CPU state
-has to be saved for future run. CPU changes it state to "breakpoint".</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="stop()">
-<h3>stop</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
-<div class="block">Stops the CPU emulation. If a thread was used for CPU execution
-and is running, then it should be stopped (destroyed) but the CPU state
-can be saved. CPU changes its state to "stopped" and main module should
-now forbid execution any of methods <code>step()</code>, <code>pause()</code>,
-<code>execute()</code> until user resets the CPU. Debug window in main
-module should be updated with saved CPU state.</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sampleFrequency</span>()</div>
+<div class="block">Optional host-scheduled frequency observation. Must not execute instructions or create threads.</div>
 </div>
 </section>
 </li>
@@ -359,7 +287,7 @@ CPU itself should take care about updating the panel when it is appropriate.</di
 <h3>reset</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">reset</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block">Resets the CPU and sets instruction position to given program location.</div>
+<div class="block">Resets the CPU synchronously after the host has acknowledged actual execution exit.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>location</code> - Program location in memory</dd>

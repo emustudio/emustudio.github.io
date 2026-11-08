@@ -96,7 +96,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Implements fundamental functionality useful for most of the CPU plugins.</div>
+<div class="block">Plugin conveniences; execution and lifecycle ordering belong to the host.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="AbstractCPUContext.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPUContext</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
@@ -112,7 +112,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab1"><a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Interface for receiving CPU events.</div>
+<div class="block">Interface for receiving host-owned CPU execution events.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab3"><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab3">
@@ -144,7 +144,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">CPU real frequency calculator</div>
+<div class="block">Measures average CPU frequency in kHz without owning a thread.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="InstructionFlow.html" title="class in net.emustudio.emulib.plugins.cpu">InstructionFlow</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
