@@ -13,12 +13,10 @@ permalink: /cpu/rootclass
 A CPU plugin root class must implement either a [CPU][cpu]{:target="_blank"} interface, or
 extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
 
-[AbstractCPU][abstractCPU]{:target="_blank"} implements several mechanisms which save developer time, like:
-
-- control methods (`execute`, `step`, `stop`, `pause`, `reset`) are serialized by a control executor. Continuous
-  execution runs on a separate CPU worker. Callers, including Swing's
-  [event-dispatch thread][swingthread]{:target="_blank"}, wait for the control action to complete.
-- implements notification of run states (see next chapter)
+[AbstractCPU][abstractCPU]{:target="_blank"} supplies plugin metadata, default reset location and destruction.
+The host owns command scheduling, CPU-worker execution and run-state publication. `execute()` and `step()` run
+synchronously on that worker; they return their actual `RunState`. Continuous execution responds to thread interruption.
+Views subscribe to immutable `ExecutionState.Snapshot` values and close their subscriptions when disposed.
 
 Sample implementation follows (only core methods are implemented):
 
@@ -70,12 +68,12 @@ public class CpuImpl extends AbstractCPU {
     }
 
     @Override
-    public void resetInternal(int location) {
+    public void reset(int location) {
         engine.reset(location);
     }
 
     @Override
-    protected RunState stepInternal() throws Exception {
+    public RunState step() throws Exception {
         return engine.step();
     }
 
@@ -88,8 +86,8 @@ public class CpuImpl extends AbstractCPU {
     }
 
     @Override
-    public RunState call() {
-        return engine.run(this);
+    public RunState execute() {
+        return engine.run();
     }
 
     @Override
@@ -137,13 +135,13 @@ Custom instruction-table columns implement `DebuggerColumn<T>` and are read-only
 editable columns. The location is an instruction address, not a table row number.
 Editable columns can throw `CannotSetDebuggerValueException(message, cause)` to report an edit failure through the host.
 
-Override `getDebugger()` to return an optional `DebugCPU` port when the engine supports portable register access and
-instruction/access hooks. emuStudio owns the analysis UI, expression watches, named rules and recording. The bundled
-CPU plugins expose `DebugProbe`, including byte, word and typed instruction-memory machines; third-party plugins without
-the port retain their basic instruction debugger.
-The application owns breakpoint state and persistence. CPU plugins honor stop requests through the execution hooks;
+Implement the optional `Debugging` interface directly when the plugin supports machine-specific expressions and
+execution observation. emuStudio owns shared rules, watches and recording. Plugins supply presentation and their own
+inspection/edit controls; they expose no universal register model. All live edits use the execution update seam.
+
+The application owns breakpoint state and persistence. CPU plugins honor intentional stop decisions from observers;
 neither `CPU` nor `AbstractCPU` stores breakpoints.
-See [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for paused-access and execution-hook contracts.
+See [Optional machine debugging]({{ '/cpu/debugging' | relative_url }}) for the interface and step-seam contract.
 
 ## CPU Context
 

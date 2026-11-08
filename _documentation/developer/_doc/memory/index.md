@@ -41,8 +41,8 @@ An annotation has an owner ID and an entry ID. After a successful compilation an
 replace its own source mappings, preserving annotations from other owners:
 
 ```java
-AnnotationEngine annotations = applicationApi.getAnnotations();
-AnnotationEngine.Entry mapping = new AnnotationEngine.Entry(
+MemoryAnnotations annotations = applicationApi.getAnnotations();
+MemoryAnnotations.Entry mapping = new MemoryAnnotations.Entry(
         pluginID, entryId, address, address + 1, "source", "",
         SourceCodePosition.of(line, column, sourcePath.toString()));
 annotations.replaceOwner(pluginID, List.of(mapping));

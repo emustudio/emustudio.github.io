@@ -10,89 +10,48 @@ permalink: /cpu/engine
 
 # Emulator engine
 
-Emulator engine is the core of the emulator. It interprets binary-encoded instructions stored in a memory (emuStudio
-assumes it's a von-Neumann-like CPU). Execution of one instruction involves four basic steps: fetch, decode and execute,
-and store, executed in order. Those steps can overlap in the implementation.
-
-A pseudo-algorithm for emulator engine can look as follows (using [interpretation technique][interpreter]{:target="_blank"}):
-
-{:.code-example}
+The engine implements the machine's semantic operations. A real CPU may fetch/decode binary instructions; an
+abstract machine may execute typed instructions or transform tape symbols. The host does not impose a universal machine
+state. The following sketch uses a plugin-local `MachineDebugging` adapter:
 
 ```java
-public class EmulatorEngine {
-    private final DebugProbe debugger;
-    private final MemoryContext<Byte> memory;
-    private boolean debugStopped;
-
-    // internal CPU registers
-    private int currentInstruction;
-
-    EmulatorEngine(MemoryContext<Byte> memory, DebugProbe debugger) {
-        this.memory = Objects.requireNonNull(memory);
-        this.debugger = Objects.requireNonNull(debugger);
-    }
-
-    CPU.RunState step() {
-        debugStopped = false;
-        boolean active = debugger.isActive();
-        if (active && !debugger.begin(currentInstruction)) {
-            debugStopped = true;
-            return CPU.RunState.STATE_STOPPED_BREAK;
-        }
-        CPU.RunState result;
-        boolean completed = false;
-        try {
-            result = stepInstruction();
-            completed = result == CPU.RunState.STATE_STOPPED_BREAK
-                    || result == CPU.RunState.STATE_STOPPED_NORMAL;
-        } finally {
-            if (active && debugger.end(completed)) debugStopped = true;
-        }
-        return debugStopped ? CPU.RunState.STATE_STOPPED_BREAK : result;
-    }
-
-    private CPU.RunState stepInstruction() {
-        int instruction = memory.read(currentInstruction);
-        currentInstruction = currentInstruction + 1;
-
-        switch (instruction) {
-            case 0: // ADD
-                ...
-                return CPU.RunState.STATE_STOPPED_BREAK;
-            case 4: // JMP
-                ...
-                return CPU.RunState.STATE_STOPPED_BREAK;
-            case 99: // HLT
-                return CPU.RunState.STATE_STOPPED_NORMAL;
-            default:
-                return CPU.RunState.STATE_STOPPED_BAD_INSTR;
-        }
-    }
-
-    CPU.RunState run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
-                CPU.RunState result = step();
-                if (debugStopped || result != CPU.RunState.STATE_STOPPED_BREAK) {
-                    return result;
-                }
-            } catch (IndexOutOfBoundsException e) {
-                return CPU.RunState.STATE_STOPPED_ADDR_FALLOUT;
-            }
-        }
+CPU.RunState step() {
+    debugger.boundary(); // drains host updates even when observation is inactive
+    boolean active = debugger.isActive();
+    if (active && !debugger.begin(currentInstruction)) {
+        debugStopped = true;
         return CPU.RunState.STATE_STOPPED_BREAK;
     }
+    CPU.RunState result;
+    boolean completed = false;
+    try {
+        result = executeMachineOperation();
+        completed = result == CPU.RunState.STATE_STOPPED_BREAK
+                || result == CPU.RunState.STATE_STOPPED_NORMAL;
+    } finally {
+        if (active) debugStopped = debugger.end(completed);
+    }
+    return result; // preserve actual halt/failure; run() also checks debugStopped
+}
 
-    ...
+CPU.RunState run() {
+    while (!Thread.currentThread().isInterrupted()) {
+        debugStopped = false;
+        CPU.RunState result = step();
+        if (debugStopped || result != CPU.RunState.STATE_STOPPED_BREAK) return result;
+    }
+    return CPU.RunState.STATE_RUNNING; // host applies requested pause/stop
 }
 ```
 
-This is illustrative pseudocode; the instruction bodies depend on your CPU. The plugin supplies the probe and exposes it
-through `CPU.getDebugger()`. The application owns breakpoint state and registers its stop listener. Invoke the probe before
-fetching the next instruction, including during single stepping. See [Optional debugging ports]({{ '/cpu/debugging' | relative_url }})
-for probe setup, register descriptors and guest-access instrumentation.
-Continuous execution must also respond to thread interruption so `AbstractCPU.pause()` and `stop()` can
-cancel it. The engine's `run()` is called by the plugin's `call()`; the public CPU method is `execute()`.
+This is illustrative; the plugin owns `MachineDebugging`, its values, inspection and capture implementation.
+Wire the adapter's outer boundary to `applicationApi.getExecutionState()::processUpdates`, and live edits to
+`applicationApi.getExecutionState()::update`. The adapter may use emuLib's model-neutral `DebuggingSupport`.
+
+The root plugin implements `Debugging` alongside `CPU`; its `execute()` calls the engine's `run()`, and `step()`
+calls the engine's `step()`. The host supplies execution threads and interruption. Preserve cycle accounting and
+actual terminal states. See [Optional machine debugging]({{ '/cpu/debugging' | relative_url }}) for expression,
+presentation and failure contracts.
 
 ## Data-driven opcode dispatch
 
@@ -110,7 +69,7 @@ opcode and `EmulatorEngine` method pairs:
 The loader binds those names with `MethodHandles.findVirtual` during class initialization. Blank lines and comments
 beginning with `#` are ignored; a missing resource, malformed row, unknown table, or missing handler fails initialization
 instead of silently assigning an opcode. Add or change bundled CPU mappings in this resource, not in a hand-written
-static assignment block. This is an implementation convention for the bundled engines, not a new plugin API.
+static assignment block. This is an implementation convention for the bundled engines, not a new plugin interface.
 
 ## Emulating accurate timing
 
@@ -171,7 +130,7 @@ public class EmulatorEngine {
                 () -> (double) context.getCPUFrequency(),
                 () -> {
                     try {
-                        // dispatch invokes the probe hooks and updates currentRunState.
+                        // dispatch invokes plugin observation hooks and updates currentRunState.
                         int cycles = dispatch();
                         preciseRunner.addExecutedCycles(cycles);
                         context.passedCycles(cycles);
