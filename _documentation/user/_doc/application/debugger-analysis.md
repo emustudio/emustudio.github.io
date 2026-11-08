@@ -196,17 +196,3 @@ execution rather than silently dropping instructions. Cleanly stopped recordings
 interrupted or truncated files are reported as incomplete. A recording's completeness is verified when its end is read.
 Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC; recording does not
 restore registers, memory, devices or external inputs.
-
-## Repeatable debugger operations
-
-Run the same check with `auto --debug-script FILE` after compiling the example:
-
-```text
-RUN 0x010B 20
-ASSERT A == 0x42
-ASSERT mem16[0x8000] == 0x4241
-```
-
-`RUN` stops before `HLT` at `010B`, within 20 instructions.
-Failed assertions return a nonzero exit status. See [Debug scripts]({{ site.baseurl }}/application/automation#debug-scripts)
-for the command line and operation limits.

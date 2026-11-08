@@ -54,10 +54,6 @@ Recorded instructions include their sequence, opcode bytes and disassembly captu
 register values, raw flags, memory accesses and completion status. Z80 register snapshots include
 alternate registers. See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording).
 
-For unattended startup runs, use the application's
-[automation recording]({{ site.baseurl }}/application/automation#instruction-recording) option. Recording belongs
-to the application rather than the CPU configuration or status panel.
-
 ## Testing the CPU
 
 Choose a computer that provides the environment required by the test program:

@@ -48,69 +48,7 @@ This limit does not include compilation or device initialization. Omit it to wai
 
 Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
 can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
-Check `logs/automation.log` and the device output to determine whether the run completed normally. Compilation and
-debug-script failures return a nonzero exit status.
+Check `logs/automation.log` and the device output to determine whether the run completed normally. Compilation failures
+return a nonzero exit status.
 Other run outcomes, including normal execution timeouts, are recorded in the logs.
 
-
-## Instruction recording
-
-Add `--record-instructions FILE` after `auto` to save a continuous instruction recording, including in `--no-gui` mode:
-
-```sh
-./emuStudio -cf config/MITSAltair8800.toml -i probe.asm auto --no-gui -p 0 --waitmax 5000 --record-instructions probe.emutrace
-```
-
-Recording starts after optional compilation and CPU reset, before the first instruction executes. The CPU must expose
-the optional debugging port; all bundled CPU plugins support it. This option also works with `--debug-script`.
-Open the saved file from **History** in the interactive debugger to inspect it, or export readable text there.
-Relative recording paths start at the launch directory.
-
-Continuous recording uses bounded buffered output. Slow storage can slow execution; recording errors are reported
-instead of silently losing instructions. Stopping recording or closing the computer flushes the file and writes its
-completion marker. A file interrupted before clean closure is reported as incomplete when inspected.
-See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording) for the recorded fields
-and offline inspection workflow.
-
-## Debug scripts
-
-Use `auto --debug-script FILE` to execute bounded debugger operations after optional compilation and CPU reset. Select
-the computer before `auto`; put `--debug-script`, `--no-gui`, and `-p` after it. For example, save this 8080 program as `probe.asm`:
-
-```text
-org 0
-mvi a, 42h
-sta 0100h
-hlt
-```
-
-Save its experiment as `probe.debug`:
-
-```text
-RUN 5 10
-ASSERT PC == 5
-ASSERT A == 0x42
-ASSERT mem[0x100] == 0x42
-```
-
-Run it from the emuStudio installation directory:
-
-```sh
-./emuStudio -cf config/MITSAltair8800.toml -i probe.asm auto --no-gui -p 0 --debug-script probe.debug
-```
-
-RUN stops before the instruction at address 5 after at most ten instructions. The assertions check the accumulator and
-stored byte. A failing assertion returns exit status 1 and identifies the script line in `logs/automation.log`.
-
-| Operation | Behavior |
-|---|---|
-| `STEP count` | Execute 1–1,000,000 instructions. |
-| `RUN address max-instructions` | Step until PC equals the address, with a limit of 1–1,000,000 instructions. If PC already matches, execute none. |
-| `ASSERT expression` | Require a nonzero numeric result; use the same expression syntax as watches. |
-
-Blank lines and lines starting with `#` are ignored. Addresses and counts accept decimal or `0x` prefixes. A failed
-operation, compilation error, unexpected CPU stop, or missing step-completion notification returns a nonzero exit status.
-Step completion has a five-second wait. The script runner uses synchronous stepping; `--waitmax` controls normal continuous
-automation and does not bound scripts. Use each RUN/STEP instruction limit to bound execution instead.
-
-See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for expression syntax and memory expressions.
