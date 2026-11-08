@@ -8,7 +8,7 @@ permalink: /cpu/debugging
 
 # Optional machine debugging
 
-A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their machines; emuStudio owns rule policy,
+A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their machines; emuStudio owns breakpoints,
 watches, history, recording and execution control. Real processors can show registers; abstract machines can show tapes
 and symbolic values. The shared CPU interface defines neither representation.
 
@@ -47,17 +47,18 @@ attachment and edits possible without waiting for a continuous run to end. The h
 another execution controller.
 
 Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
-or failed outcome, plus presentation only when capture is requested. Record the stopping step before honoring a
-post-step watchpoint. A refused before-step produces no executed row.
+or failed outcome, plus presentation only when capture is requested. Memory watches are passive and never stop
+execution. A refused before-step produces no executed row.
 
-The host owns breakpoints, hit counts, persistence and one-step continuation. It skips before-step rules once for Manual
+The host owns breakpoints, persistence and one-step continuation. It skips breakpoints once for Manual
 Step or direct Continue from a breakpoint, then rearms them. Reset, jump and machine edits clear continuation. Plugins
 must not implement a second breakpoint store or independent skip policy.
 
-At computer open, `DebugSession` loads annotations, watches and rules once from the configuration's `.debugger` file:
-`/path/computer.toml` uses `/path/computer.toml.debugger`. One atomic save writes all three together. Computers without
-a saved configuration keep this metadata in memory. Compiler mappings, temporary diagnostics and hit counts are not
-saved. Explicit annotation import/export remains separate and uses annotation format 4.
+At computer open, `DebugSession` loads user annotations, watches, breakpoints and memory watches once from the
+configuration's `.debugger` file: `/path/computer.toml` uses `/path/computer.toml.debugger`. One atomic save writes them
+together. Computers without a saved configuration keep this metadata in memory. Compiler annotations, mappings and
+temporary diagnostics are not saved. Explicit annotation import/export remains separate and appends annotations,
+skipping exact duplicates.
 
 Preserve actual guest-step granularity. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
 must not invent extra operations or attach unrelated program locations. Inspection must use side-effect-free reads and
@@ -83,7 +84,7 @@ capabilities; unsupported conditions remain visibly inactive rather than fabrica
 
 ## Failure behavior
 
-Accept and save invalid expressions, but deactivate only the affected rule/watch. Report temporary nonmodal diagnostics;
+Accept and save invalid expressions, but deactivate only the affected watch. Report temporary nonmodal diagnostics;
 clear them when corrected. Runtime evaluation and presentation failures never request an emulation pause.
 
 Recording open/write/close failure stops only the recorder, preserves any incomplete file and reports the problem.

@@ -35,6 +35,7 @@ plugin root; absolute plugin paths remain unchanged. These options also work aft
 | `useSchemaGrid` | `true` / `false` | `true` | Show the grid and snap placement and movement to it in the schema editor. |
 | `schemaGridGap` | positive integer | `20` | Grid spacing in pixels; the editor's slider offers values from `5` to `100`. |
 | `theme` | `"LIGHT"`, `"DARK"`, `"INTELLIJ"` | `"INTELLIJ"` | Window and control appearance. Change the file and restart emuStudio. |
+| `flowAnalysisLimit` | positive integer | `1000` | Maximum number of instructions visited by debugger flow analysis. Invalid values use `1000`. |
 
 ### Source editor preferences
 

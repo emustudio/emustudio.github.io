@@ -73,7 +73,7 @@ Other compilers may use different loading behavior.
 
 The left workspace has **Instructions**, **Memory**, **Annotations**, **Breakpoints**, **References** and **History**
 tabs. **Instructions** disassembles memory using the CPU plugin; switch tabs to search or compare bytes, annotate
-addresses, manage breakpoint rules, follow references, or inspect recorded instructions.
+addresses, manage breakpoints, follow references, or inspect recorded instructions.
 
 The right column holds the CPU plugin's status/register panel, expression watches, and **Peripheral devices**, in that
 order. Select a device and click **Show device**, or double-click it, to open its GUI when supported. **Show settings**
@@ -107,7 +107,7 @@ according to the CPU's execution state and the plugins' capabilities.
 | <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=198 y=0 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
 | <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=230 y=0 %} | **Move PC Back**. Move the instruction pointer to the debugger’s estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
 | <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=262 y=0 %} | **Jump to address**. Enter the address of the next instruction to execute.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint...**. Set or unset a CPU-address breakpoint. Use **Breakpoints** for named execution rules and **Watches** for memory-access watches. Pause before editing.
+| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint...**. Set or unset a CPU-address breakpoint. Use **Breakpoints** to manage breakpoints and **Watches** for memory-access watches. Pause before editing.
 | <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=332 y=0 %} | **Show operating memory**. Open the memory plugin’s window when available.
 
 #### Inspection pane
@@ -117,7 +117,7 @@ or breakpoints. Select **References** for static flow and incoming references, o
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
-Selecting an instruction updates the inspection address. Browsing does not change the program counter. A breakpoint hit inspects its address; later steps follow the CPU unless the view was
+Selecting an instruction updates the inspection address. Browsing does not change the program counter. When a breakpoint stops execution, the status shows `Breakpoint: XXXX` and the debugger inspects its address; later steps follow the CPU unless the view was
 manually pinned. History records recent execution, saves continuous recordings, and opens saved recordings
 for inspection without restoring the live machine.
 Use the configured memory plugin window to inspect or edit memory.
