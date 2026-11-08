@@ -66,8 +66,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#passedCycles(long)" tabindex="0">passedCycles(long)</a></li>
 <li><a href="#stop()" tabindex="0">stop()</a></li>
 <li><a href="#sample()" tabindex="0">sample()</a></li>
-<li><a href="#addListener(java.util.function.Consumer)" tabindex="0">addListener(Consumer)</a></li>
-<li><a href="#removeListener(java.util.function.Consumer)" tabindex="0">removeListener(Consumer)</a></li>
 </ol>
 </li>
 </ol>
@@ -92,7 +90,7 @@ loadScripts(document, 'script');</script>
 implements <a href="CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></span></div>
 <div class="block">Measures average CPU frequency in kHz without owning a thread. The CPU worker calls start,
 passedCycles, and stop; the host scheduler calls sample. Cycle publication is batched to keep
-atomic updates out of the instruction loop. Lifecycle/sample locking never covers callbacks.</div>
+atomic updates out of the instruction loop. Sampling returns a value; execution notifications belong to the host.</div>
 </div>
 </section>
 <section class="summary">
@@ -122,17 +120,11 @@ atomic updates out of the instruction loop. Lifecycle/sample locking never cover
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addListener(java.util.function.Consumer)" class="member-name-link">addListener</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#passedCycles(long)" class="member-name-link">passedCycles</a><wbr>(long&nbsp;cyclesDelta)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#passedCycles(long)" class="member-name-link">passedCycles</a><wbr>(long&nbsp;cyclesDelta)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called only by the CPU worker, including start/stop ordering.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeListener(java.util.function.Consumer)" class="member-name-link">removeListener</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sample()" class="member-name-link">sample</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called by the host's existing scheduler; never schedules work itself.</div>
@@ -220,24 +212,8 @@ atomic updates out of the instruction loop. Lifecycle/sample locking never cover
 <section class="detail" id="sample()">
 <h3>sample</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sample</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">sample</span>()</div>
 <div class="block">Called by the host's existing scheduler; never schedules work itself.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="addListener(java.util.function.Consumer)">
-<h3>addListener</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addListener</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="removeListener(java.util.function.Consumer)">
-<h3>removeListener</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeListener</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;listener)</span></div>
 </div>
 </section>
 </li>

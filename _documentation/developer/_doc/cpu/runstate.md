@@ -62,14 +62,16 @@ interruptible waits. There is no force kill or timeout. Pause, stop, reset, and 
 exits. Future cancellation alone does not prove exit. Until then, memory and device resources remain intact; the host
 rejects new start, step, reset, and debugger-edit requests. GUI commands are asynchronous, so waiting does not block Swing.
 
-The host publishes `CPU.CPUListener` notifications through `ApplicationApi.getExecutionState()`; listener callbacks are
-observations, not command acknowledgements. Register with `addCPUListener()` and unregister with `removeCPUListener()`
-when the plugin is destroyed. Callbacks may run outside Swing's event-dispatch thread; dispatch GUI updates onto Swing
-and never block a callback waiting for an execution command.
+`ApplicationApi.getExecutionState()` exposes the host's immutable `ExecutionState.Snapshot`. Read the current value with
+`snapshot()` and observe later publications with `subscribe(listener)`. Close the returned subscription when the view or
+plugin is disposed. Notifications are observations, not command acknowledgements. Callbacks may run outside Swing's
+event-dispatch thread; dispatch GUI updates onto Swing and never block a callback waiting for an execution command.
 
-Debugger register, instruction-location, and memory edits go through `ExecutionState.mutate(Runnable)`. The host accepts
-them only while paused, rejects edits invalidated by intervening execution, and reports completion asynchronously. Do not
-write CPU state directly from Swing callbacks. Existing debugger guards still protect concurrent analysis and publication.
+Use `ExecutionState.update(Runnable)` for live debugger register, instruction-location, and memory edits. The host
+serializes these changes between semantic steps, or on the idle CPU worker, and reports completion asynchronously.
+CPU engines must drain `processUpdates()` at every semantic boundary, even when debugging is inactive. Use
+`mutate(Runnable)` for operations that require a paused machine; it rejects running, busy, or stale requests.
+Do not write CPU state directly from Swing callbacks. Existing debugger guards still protect concurrent analysis and publication.
 
 For CPUs that measure executed frequency, `sampleFrequency()` is called by the existing command scheduler. Sampling
 must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's

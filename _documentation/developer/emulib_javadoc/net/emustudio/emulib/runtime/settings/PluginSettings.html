@@ -63,6 +63,19 @@ loadScripts(document, 'script');</script>
 <li><a href="#UNAVAILABLE" tabindex="0">UNAVAILABLE</a></li>
 </ol>
 </li>
+<li><a href="#method-detail" tabindex="0">Method Details</a>
+<ol class="toc-list">
+<li><a href="#getString(java.lang.String)" tabindex="0">getString(String)</a></li>
+<li><a href="#getBoolean(java.lang.String)" tabindex="0">getBoolean(String)</a></li>
+<li><a href="#getInt(java.lang.String)" tabindex="0">getInt(String)</a></li>
+<li><a href="#getLong(java.lang.String)" tabindex="0">getLong(String)</a></li>
+<li><a href="#getDouble(java.lang.String)" tabindex="0">getDouble(String)</a></li>
+<li><a href="#getArray(java.lang.String)" tabindex="0">getArray(String)</a></li>
+<li><a href="#getSubSettings(java.lang.String)" tabindex="0">getSubSettings(String)</a></li>
+<li><a href="#setSubSettings(java.lang.String)" tabindex="0">setSubSettings(String)</a></li>
+<li><a href="#set(java.lang.String,java.lang.Object)" tabindex="0">set(String, Object)</a></li>
+</ol>
+</li>
 </ol>
 <button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
 <main role="main">
@@ -71,23 +84,17 @@ loadScripts(document, 'script');</script>
 <h1 title="Interface PluginSettings" class="title">Interface PluginSettings</h1>
 </div>
 <section class="class-description" id="class-description">
-<dl class="notes">
-<dt>All Superinterfaces:</dt>
-<dd><code><a href="BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></code></dd>
-</dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PluginSettings</span><span class="extends-implements">
-extends <a href="BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></span></div>
-<div class="block">The class provides methods for reading/writing plugin settings.
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PluginSettings</span></div>
+<div class="block">Plugin settings (hierarchical key-value store).
 <p>
 It is implemented by emuStudio. Plugins obtain this object in the constructor.
+Getters return empty Optional if the key is missing or the value has a different type.
+Use <code>orElse(default)</code> for default values. Keys are case-sensitive.
 <p>
-NOTE: Keys are case-sensitive.
-<p>
-Keys which are put into settings must not start with <a href="#EMUSTUDIO_PREFIX"><code>EMUSTUDIO_PREFIX</code></a>. This prefix is
-reserved for emuStudio settings and might be overridden by emuStudio.
-However, there are some emuStudio settings obtainable by plugins.</div>
+Keys must not start with <a href="#EMUSTUDIO_PREFIX"><code>EMUSTUDIO_PREFIX</code></a>. This prefix is reserved for emuStudio settings, some of which
+are readable by plugins.</div>
 </div>
 </section>
 <section class="summary">
@@ -104,22 +111,20 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#EMUSTUDIO_AUTO" class="member-name-link">EMUSTUDIO_AUTO</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Setting key defining if emuStudio runs in "Auto" (non-interactive) mode.</div>
+<div class="block">Boolean: emuStudio runs automatic emulation.</div>
 </div>
 <div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#EMUSTUDIO_NO_GUI" class="member-name-link">EMUSTUDIO_NO_GUI</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Setting key defining if emuStudio runs in "No GUI" mode.</div>
+<div class="block">Boolean: emuStudio runs without GUI.</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#EMUSTUDIO_PREFIX" class="member-name-link">EMUSTUDIO_PREFIX</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">EmuStudio key prefix.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#UNAVAILABLE" class="member-name-link">UNAVAILABLE</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">"Unavailable" instance of PluginSettings.</div>
+<div class="block">Settings which contain nothing and ignore updates.</div>
 </div>
 </div>
 </section>
@@ -128,9 +133,48 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-net.emustudio.emulib.runtime.settings.BasicSettings">Methods inherited from interface&nbsp;<a href="BasicSettings.html#method-summary" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></h3>
-<code><a href="BasicSettings.html#contains(java.lang.String)" title="contains(String)">contains</a>, <a href="BasicSettings.html#getArray(java.lang.String)" title="getArray(String)">getArray</a>, <a href="BasicSettings.html#getArray(java.lang.String,java.util.List)" title="getArray(String, List)">getArray</a>, <a href="BasicSettings.html#getBoolean(java.lang.String)" title="getBoolean(String)">getBoolean</a>, <a href="BasicSettings.html#getBoolean(java.lang.String,boolean)" title="getBoolean(String, boolean)">getBoolean</a>, <a href="BasicSettings.html#getDouble(java.lang.String)" title="getDouble(String)">getDouble</a>, <a href="BasicSettings.html#getDouble(java.lang.String,double)" title="getDouble(String, double)">getDouble</a>, <a href="BasicSettings.html#getInt(java.lang.String)" title="getInt(String)">getInt</a>, <a href="BasicSettings.html#getInt(java.lang.String,int)" title="getInt(String, int)">getInt</a>, <a href="BasicSettings.html#getLong(java.lang.String)" title="getLong(String)">getLong</a>, <a href="BasicSettings.html#getLong(java.lang.String,long)" title="getLong(String, long)">getLong</a>, <a href="BasicSettings.html#getString(java.lang.String)" title="getString(String)">getString</a>, <a href="BasicSettings.html#getString(java.lang.String,java.lang.String)" title="getString(String, String)">getString</a>, <a href="BasicSettings.html#getSubSettings(java.lang.String)" title="getSubSettings(String)">getSubSettings</a>, <a href="BasicSettings.html#remove(java.lang.String)" title="remove(String)">remove</a>, <a href="BasicSettings.html#setArray(java.lang.String,java.util.List)" title="setArray(String, List)">setArray</a>, <a href="BasicSettings.html#setBoolean(java.lang.String,boolean)" title="setBoolean(String, boolean)">setBoolean</a>, <a href="BasicSettings.html#setDouble(java.lang.String,double)" title="setDouble(String, double)">setDouble</a>, <a href="BasicSettings.html#setInt(java.lang.String,int)" title="setInt(String, int)">setInt</a>, <a href="BasicSettings.html#setLong(java.lang.String,long)" title="setLong(String, long)">setLong</a>, <a href="BasicSettings.html#setString(java.lang.String,java.lang.String)" title="setString(String, String)">setString</a>, <a href="BasicSettings.html#setSubSettings(java.lang.String)" title="setSubSettings(String)">setSubSettings</a></code></div>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getArray(java.lang.String)" class="member-name-link">getArray</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getBoolean(java.lang.String)" class="member-name-link">getBoolean</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDouble(java.lang.String)" class="member-name-link">getDouble</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getInt(java.lang.String)" class="member-name-link">getInt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getLong(java.lang.String)" class="member-name-link">getLong</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getString(java.lang.String)" class="member-name-link">getString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSubSettings(java.lang.String)" class="member-name-link">getSubSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#set(java.lang.String,java.lang.Object)" class="member-name-link">set</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets or removes a setting.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setSubSettings(java.lang.String)" class="member-name-link">setSubSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Creates (or replaces) nested settings.</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </li>
 </ul>
@@ -147,7 +191,6 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <h3>EMUSTUDIO_PREFIX</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">EMUSTUDIO_PREFIX</span></div>
-<div class="block">EmuStudio key prefix.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -164,7 +207,7 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <h3>EMUSTUDIO_NO_GUI</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">EMUSTUDIO_NO_GUI</span></div>
-<div class="block">Setting key defining if emuStudio runs in "No GUI" mode.</div>
+<div class="block">Boolean: emuStudio runs without GUI.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -181,7 +224,7 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <h3>EMUSTUDIO_AUTO</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">EMUSTUDIO_AUTO</span></div>
-<div class="block">Setting key defining if emuStudio runs in "Auto" (non-interactive) mode.</div>
+<div class="block">Boolean: emuStudio runs automatic emulation.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -198,12 +241,118 @@ However, there are some emuStudio settings obtainable by plugins.</div>
 <h3>UNAVAILABLE</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">UNAVAILABLE</span></div>
-<div class="block">"Unavailable" instance of PluginSettings.
-<p>
-It means that all methods return dummy or null values.
-<p>
-The instance might be useful when creating plugin object without emuStudio (e.g. a plugin wants to support
-command-line interface).</div>
+<div class="block">Settings which contain nothing and ignore updates. Used when emuStudio is not available (e.g. in tests).</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="getString(java.lang.String)">
+<h3>getString</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getBoolean(java.lang.String)">
+<h3>getBoolean</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">getBoolean</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getInt(java.lang.String)">
+<h3>getInt</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getLong(java.lang.String)">
+<h3>getLong</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name">getLong</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getDouble(java.lang.String)">
+<h3>getDouble</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;</span>&nbsp;<span class="element-name">getDouble</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getArray(java.lang.String)">
+<h3>getArray</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - setting key</dd>
+<dt>Returns:</dt>
+<dd>list of strings, empty if the key is missing</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSubSettings(java.lang.String)">
+<h3>getSubSettings</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&gt;</span>&nbsp;<span class="element-name">getSubSettings</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - setting key</dd>
+<dt>Returns:</dt>
+<dd>nested settings, if present</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setSubSettings(java.lang.String)">
+<h3>setSubSettings</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">setSubSettings</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key)</span></div>
+<div class="block">Creates (or replaces) nested settings.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - setting key</dd>
+<dt>Returns:</dt>
+<dd>new empty nested settings</dd>
+<dt>Throws:</dt>
+<dd><code><a href="CannotUpdateSettingException.html" title="class in net.emustudio.emulib.runtime.settings">CannotUpdateSettingException</a></code> - if the settings cannot be updated</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="set(java.lang.String,java.lang.Object)">
+<h3>set</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="block">Sets or removes a setting.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - setting key</dd>
+<dd><code>value</code> - String, Boolean, Integer, Long, Double, or List of Strings; null removes the setting</dd>
+<dt>Throws:</dt>
+<dd><code><a href="CannotUpdateSettingException.html" title="class in net.emustudio.emulib.runtime.settings">CannotUpdateSettingException</a></code> - if the settings cannot be updated</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value type is not supported</dd>
+</dl>
 </div>
 </section>
 </li>

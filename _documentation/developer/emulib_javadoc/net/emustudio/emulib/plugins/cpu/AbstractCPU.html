@@ -57,13 +57,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
-<li><a href="#field-detail" tabindex="0">Field Details</a>
-<ol class="toc-list">
-<li><a href="#pluginID" tabindex="0">pluginID</a></li>
-<li><a href="#applicationApi" tabindex="0">applicationApi</a></li>
-<li><a href="#settings" tabindex="0">settings</a></li>
-</ol>
-</li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E(long,net.emustudio.emulib.runtime.ApplicationApi,net.emustudio.emulib.runtime.settings.PluginSettings)" tabindex="0">AbstractCPU(long, ApplicationApi, PluginSettings)</a></li>
@@ -71,10 +64,6 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
-<li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
-<li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
-<li><a href="#observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" tabindex="0">observeExecution(CPU.CPUListener)</a></li>
 <li><a href="#reset()" tabindex="0">reset()</a></li>
 <li><a href="#destroy()" tabindex="0">destroy()</a></li>
 <li><a href="#destroyInternal()" tabindex="0">destroyInternal()</a></li>
@@ -88,7 +77,9 @@ loadScripts(document, 'script');</script>
 <h1 title="Class AbstractCPU" class="title">Class AbstractCPU</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance"><a href="../AbstractPlugin.html" title="class in net.emustudio.emulib.plugins">net.emustudio.emulib.plugins.AbstractPlugin</a>
 <div class="inheritance">net.emustudio.emulib.plugins.cpu.AbstractCPU</div>
+</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -98,7 +89,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractCPU</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+<span class="extends-implements">extends <a href="../AbstractPlugin.html" title="class in net.emustudio.emulib.plugins">AbstractPlugin</a>
 implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></span></div>
 <div class="block">Plugin conveniences; execution and lifecycle ordering belong to the host.</div>
 </div>
@@ -111,28 +102,16 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h2>Nested Class Summary</h2>
 <div class="inherited-list">
 <h3 id="nested-classes-inherited-from-class-net.emustudio.emulib.plugins.cpu.CPU">Nested classes/interfaces inherited from interface&nbsp;<a href="CPU.html#nested-class-summary" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></h3>
-<code><a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>, <a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
+<code><a href="CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
 </section>
 </li>
 <!-- =========== FIELD SUMMARY =========== -->
 <li>
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
-<div class="col-second even-row-color"><code><a href="#applicationApi" class="member-name-link">applicationApi</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final long</code></div>
-<div class="col-second odd-row-color"><code><a href="#pluginID" class="member-name-link">pluginID</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected final <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
-<div class="col-second even-row-color"><code><a href="#settings" class="member-name-link">settings</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-net.emustudio.emulib.plugins.AbstractPlugin">Fields inherited from class&nbsp;<a href="../AbstractPlugin.html#field-summary" title="class in net.emustudio.emulib.plugins">AbstractPlugin</a></h3>
+<code><a href="../AbstractPlugin.html#applicationApi">applicationApi</a>, <a href="../AbstractPlugin.html#pluginID">pluginID</a>, <a href="../AbstractPlugin.html#settings">settings</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -146,7 +125,9 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(long,net.emustudio.emulib.runtime.ApplicationApi,net.emustudio.emulib.runtime.settings.PluginSettings)" class="member-name-link">AbstractCPU</a><wbr>(long&nbsp;pluginID,
  <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a>&nbsp;applicationApi,
  <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&nbsp;settings)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates new instance of CPU.</div>
+</div>
 </div>
 </section>
 </li>
@@ -169,30 +150,10 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#destroyInternal()" class="member-name-link">destroyInternal</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get run-time title of this plugin.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Check if showSettings() is supported by this plugin.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected final void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)" class="member-name-link">observeExecution</a><wbr>(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Registers a host observer for this plugin's lifetime, during initialization or panel creation.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Reset plugin.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Show GUI of plugin settings, if it is provided.</div>
+<div class="block">Reset plugin to its "initial state", as it was after calling <a href="../Plugin.html#initialize()"><code>Plugin.initialize()</code></a>.</div>
 </div>
 </div>
 </div>
@@ -202,48 +163,16 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.cpu.CPU">Methods inherited from interface&nbsp;<a href="CPU.html#method-summary" title="interface in net.emustudio.emulib.plugins.cpu">CPU</a></h3>
-<code><a href="CPU.html#execute()" title="execute()">execute</a>, <a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDebugger()" title="getDebugger()">getDebugger</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#reset(int)" title="reset(int)">reset</a>, <a href="CPU.html#sampleFrequency()" title="sampleFrequency()">sampleFrequency</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a>, <a href="CPU.html#step()" title="step()">step</a></code></div>
+<code><a href="CPU.html#execute()" title="execute()">execute</a>, <a href="CPU.html#getAddressSpaceSize()" title="getAddressSpaceSize()">getAddressSpaceSize</a>, <a href="CPU.html#getDebuggerColumns()" title="getDebuggerColumns()">getDebuggerColumns</a>, <a href="CPU.html#getDisassembler()" title="getDisassembler()">getDisassembler</a>, <a href="CPU.html#getInstructionLocation()" title="getInstructionLocation()">getInstructionLocation</a>, <a href="CPU.html#getStatusPanel()" title="getStatusPanel()">getStatusPanel</a>, <a href="CPU.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a>, <a href="CPU.html#reset(int)" title="reset(int)">reset</a>, <a href="CPU.html#sampleFrequency()" title="sampleFrequency()">sampleFrequency</a>, <a href="CPU.html#setInstructionLocation(int)" title="setInstructionLocation(int)">setInstructionLocation</a>, <a href="CPU.html#step()" title="step()">step</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.Plugin">Methods inherited from interface&nbsp;<a href="../Plugin.html#method-summary" title="interface in net.emustudio.emulib.plugins">Plugin</a></h3>
-<code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a></code></div>
+<code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getTitle()" title="getTitle()">getTitle</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a>, <a href="../Plugin.html#isShowSettingsSupported()" title="isShowSettingsSupported()">isShowSettingsSupported</a>, <a href="../Plugin.html#showSettings(javax.swing.JFrame)" title="showSettings(JFrame)">showSettings</a></code></div>
 </section>
 </li>
 </ul>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="pluginID">
-<h3>pluginID</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">pluginID</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="applicationApi">
-<h3>applicationApi</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></span>&nbsp;<span class="element-name">applicationApi</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="settings">
-<h3>settings</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">settings</span></div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -256,6 +185,13 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AbstractCPU</span><wbr><span class="parameters">(long&nbsp;pluginID,
  <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a>&nbsp;applicationApi,
  <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a>&nbsp;settings)</span></div>
+<div class="block">Creates new instance of CPU.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>pluginID</code> - plugin ID</dd>
+<dd><code>applicationApi</code> - emuStudio API</dd>
+<dd><code>settings</code> - plugin custom settings</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -268,79 +204,12 @@ implements <a href="CPU.html" title="interface in net.emustudio.emulib.plugins.c
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getTitle()">
-<h3>getTitle</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTitle</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#getTitle()">Plugin</a></code></span></div>
-<div class="block">Get run-time title of this plugin.
-<p>
-The title is a matter of change during runtime - for example there might exist a device instantiated more than
-once, and each instance can have different title assigned at runtime.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>run-time title of the plugin</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="showSettings(javax.swing.JFrame)">
-<h3>showSettings</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showSettings</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#showSettings(javax.swing.JFrame)">Plugin</a></code></span></div>
-<div class="block">Show GUI of plugin settings, if it is provided.
-<p>
-Each plugin can have a nice GUI for settings manipulation. plugins should display the GUI, if they support it.
-Note that each window should be properly disposed when method <a href="../Plugin.html#destroy()"><code>Plugin.destroy()</code></a> is called.
-<p>
-In the case of memory plugin, show GUI of a memory. Each memory plugin should have a GUI, but it is not a must.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#showSettings(javax.swing.JFrame)">showSettings</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>parent</code> - emuStudio main window (if plugin wants to show a dialog which has a parent)</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="isShowSettingsSupported()">
-<h3>isShowSettingsSupported</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isShowSettingsSupported</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#isShowSettingsSupported()">Plugin</a></code></span></div>
-<div class="block">Check if showSettings() is supported by this plugin.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#isShowSettingsSupported()">isShowSettingsSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>true if the plugin has a GUI for settings; false otherwise</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="observeExecution(net.emustudio.emulib.plugins.cpu.CPU.CPUListener)">
-<h3>observeExecution</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">observeExecution</span><wbr><span class="parameters">(<a href="CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a>&nbsp;listener)</span></div>
-<div class="block">Registers a host observer for this plugin's lifetime, during initialization or panel creation.</div>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#reset()">Plugin</a></code></span></div>
-<div class="block">Reset plugin.
-<p>
-"Reset" means to bring the plugin to its "initial state", as it was after calling <a href="../Plugin.html#initialize()"><code>Plugin.initialize()</code></a>.</div>
+<div class="block">Reset plugin to its "initial state", as it was after calling <a href="../Plugin.html#initialize()"><code>Plugin.initialize()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Plugin.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>

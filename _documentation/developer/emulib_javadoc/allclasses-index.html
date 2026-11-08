@@ -57,56 +57,48 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.html" title="class in net.emustudio.emulib.plugins.compiler">AbstractCompiler</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Implements fundamental functionality useful for most of the compiler plugins.</div>
+<div class="block">Compiler base.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/AbstractCompiler.Factory.html" title="interface in net.emustudio.emulib.plugins.compiler">AbstractCompiler.Factory</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Compiler plugin constructor.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/AbstractCPU.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPU</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Plugin conveniences; execution and lifecycle ordering belong to the host.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/AbstractCPUContext.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPUContext</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/AbstractCPUContext.html" title="class in net.emustudio.emulib.plugins.cpu">AbstractCPUContext</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Abstract CPU context.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/device/AbstractDevice.html" title="class in net.emustudio.emulib.plugins.device">AbstractDevice</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Implements fundamental functionality useful for most of the device plugins.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/memory/AbstractMemory.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemory</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemoryContext&lt;CellType&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Implements fundamental functionality useful for most of the memory plugins.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html" title="class in net.emustudio.emulib.plugins.memory">AbstractMemoryContext&lt;CellType&gt;</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">This class implements some fundamental functionality of MemoryContext
 interface, that can be useful in the programming of the own memory context.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/AbstractPlugin.html" title="class in net.emustudio.emulib.plugins">AbstractPlugin</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Base class of every plugin root class.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/AccurateFrequencyRunner.html" title="class in net.emustudio.emulib.plugins.cpu">AccurateFrequencyRunner</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Accurate Frequency Runner.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/debugger/AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/AntlrLexicalAnalyzer.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">AntlrLexicalAnalyzer</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Represents the "address" column in the debug table.</div>
+<div class="block">Lexical analyzer backed by ANTLR lexer.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/AntlrLexicalAnalyzer.EmuToken.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">AntlrLexicalAnalyzer.EmuToken</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Thread-safe live annotations at CPU-visible addresses.</div>
+<div class="block">ANTLR token implementing emuLib <a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler"><code>Token</code></a>.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/annotations/AnnotationEngine.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">AnnotationEngine.Entry</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">An annotation covers the half-open address range [start, end).</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">emuStudio application API.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/audio/AudioSink.html" title="interface in net.emustudio.emulib.runtime.audio">AudioSink</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Receives interleaved, signed 16-bit little-endian PCM frames.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/settings/BasicSettings.html" title="interface in net.emustudio.emulib.runtime.settings">BasicSettings</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/audio/AudioSink.html" title="interface in net.emustudio.emulib.runtime.audio">AudioSink</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Basic settings of a plugin.</div>
+<div class="block">Receives interleaved, signed 16-bit little-endian PCM frames.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/Bits.html" title="class in net.emustudio.emulib.runtime.helpers">Bits</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -114,52 +106,41 @@ interface, that can be useful in the programming of the own memory context.</div
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/components/CachedComboBoxModel.html" title="class in net.emustudio.emulib.runtime.ui.components">CachedComboBoxModel&lt;T&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Cached ComboBox model.</div>
+<div class="block">Combo box model keeping the 10 most recently added items, most recent first.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/ui/debugger/CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/settings/CannotUpdateSettingException.html" title="class in net.emustudio.emulib.runtime.settings">CannotUpdateSettingException</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
-<div class="block">Thrown if a value cannot be set to the cell in the debugger table.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/settings/CannotUpdateSettingException.html" title="class in net.emustudio.emulib.runtime.settings">CannotUpdateSettingException</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab5">
 <div class="block">Exception thrown when a setting cannot be updated.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/CharArrayCharStream.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">CharArrayCharStream</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A zero-copy <code>CharStream</code> backed directly by a <code>char[]</code> slice.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/plugins/compiler/CompileException.html" title="class in net.emustudio.emulib.plugins.compiler">CompileException</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
+<div class="block">Compilation error at a source position.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Compiler plugin root interface.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/CompilerContext.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerContext</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Compiler context can be used to provide additional meta-information for runtime, which can be used by other plugins.</div>
+<div class="block">Compiler listener.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">This is an interface that should be implemented by the emuStudio,
-and/or other plugins that want to process the output of the compiler.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Messages are passed to compiler listeners when the compiler wishes to say something.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
-<div class="block">Message type.</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/plugins/compiler/CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/Constants.html" title="class in net.emustudio.emulib.runtime.ui">Constants</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Shared fonts and colors for plugin GUIs.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/Constants.html" title="class in net.emustudio.emulib.runtime.ui">Constants</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">GUI constants</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/Context.html" title="interface in net.emustudio.emulib.plugins">Context</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/Context.html" title="interface in net.emustudio.emulib.plugins">Context</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">A plugin context is a runtime structure implemented and used by plugins in order to communicate between each other.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/ContextAlreadyRegisteredException.html" title="class in net.emustudio.emulib.runtime">ContextAlreadyRegisteredException</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
-<div class="block">Raised when a plugin tries to register a context which is already registered.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/ContextNotFoundException.html" title="class in net.emustudio.emulib.runtime">ContextNotFoundException</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab5">
@@ -173,45 +154,33 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">CPU plugin root interface.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/CPU.CPUListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Interface for receiving host-owned CPU execution events.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/plugins/cpu/CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/plugins/cpu/CPU.RunState.html" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
 <div class="block">The run state of the CPU.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/CPUContext.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/CPUContext.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">CPU context can be used by plugins which are connected to CPU.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/CPUContext.PassedCyclesListener.html" title="interface in net.emustudio.emulib.plugins.cpu">CPUContext.PassedCyclesListener</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Listener for passed CPU cycles</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Optional CPU debugging port.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Access.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Access</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Instruction.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Instruction</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Listener.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Listener</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugCPU.Register.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugCPU.Register</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn&lt;T&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Column in the debugger table.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ui/debugger/DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerTable</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/debugger/Debugging.html" title="interface in net.emustudio.emulib.plugins.debugger">Debugging</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Debugger table in emuStudio.</div>
+<div class="block">Optional machine-specific debugging, implemented directly by the CPU plugin root.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/debug/DebugProbe.html" title="class in net.emustudio.emulib.plugins.cpu.debug">DebugProbe</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/debugger/Debugging.Expression.html" title="interface in net.emustudio.emulib.plugins.debugger">Debugging.Expression</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/debugger/Debugging.Observer.html" title="interface in net.emustudio.emulib.plugins.debugger">Debugging.Observer</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/DebuggingSupport.html" title="class in net.emustudio.emulib.plugins.debugger">DebuggingSupport</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Reusable instruction probe; no register snapshots or events when no listeners are attached.</div>
+<div class="block">Serialized observer mechanics only.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/DecodedInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DecodedInstruction</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -235,12 +204,10 @@ and/or other plugins that want to process the output of the compiler.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ui/Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">This class provides dialogs used by emuStudio and plugins.</div>
+<div class="block">Dialogs used by emuStudio and plugins.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/runtime/ui/Dialogs.DialogAnswer.html" title="enum class in net.emustudio.emulib.runtime.ui">Dialogs.DialogAnswer</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
-<div class="block">Possible answers for dialogs.</div>
-</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/runtime/ui/Dialogs.Answer.html" title="enum class in net.emustudio.emulib.runtime.ui">Dialogs.Answer</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/DisassembledInstruction.html" title="class in net.emustudio.emulib.plugins.cpu">DisassembledInstruction</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">This class represents disassembled instruction.</div>
@@ -251,41 +218,41 @@ and/or other plugins that want to process the output of the compiler.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ExecutionState.html" title="interface in net.emustudio.emulib.runtime">ExecutionState</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Host-owned machine execution state, observations, and serialized paused edits.</div>
+<div class="block">One host-owned execution snapshot and notification stream for application and plugin views.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/FileExtension.html" title="class in net.emustudio.emulib.plugins.compiler">FileExtension</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ExecutionState.Snapshot.html" title="class in net.emustudio.emulib.runtime">ExecutionState.Snapshot</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">A file extension with description.</div>
+<div class="block">Immutable values from one host publication.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/components/FileExtensionsFilter.html" title="class in net.emustudio.emulib.runtime.ui.components">FileExtensionsFilter</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ExecutionState.Subscription.html" title="interface in net.emustudio.emulib.runtime">ExecutionState.Subscription</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/ExpressionParser.html" title="class in net.emustudio.emulib.plugins.debugger">ExpressionParser</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Common syntax only.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Definition of supported file extensions of one "filter" when choosing files.</div>
+<div class="block">Synchronous loader of memory images (BIN, Intel HEX) and tapes (TAP, TZX).</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Immutable block of a file.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
+<div class="block">Supported file formats and their extensions.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Common synchronous loader contract for BIN, I8HEX, TAP and TZX.</div>
+<div class="block">Receives blocks synchronously, on the loading thread.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Immutable format block.</div>
+<div class="block">ZX Spectrum tape header (the 17 bytes after flag 0).</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/runtime/io/FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
-<div class="block">File encodings and their extensions.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/io/FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileType.html" title="class in net.emustudio.emulib.runtime.io">FileType</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Per-load traversal and cancellation.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="net/emustudio/emulib/runtime/io/FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Spectrum header fields decoded independently of their destination.</div>
+<div class="block">File type: a description and file extensions (without dot).</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/FrequencyCalculator.html" title="class in net.emustudio.emulib.plugins.cpu">FrequencyCalculator</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
@@ -293,11 +260,11 @@ and/or other plugins that want to process the output of the compiler.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/ui/GUI.html" title="interface in net.emustudio.emulib.runtime.ui">GUI</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">GUI interface providing factory methods for common Swing components.</div>
+<div class="block">Factory of host-styled Swing components for plugins, plus static Swing helpers.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/GUI.KeyListenerContainerAdapter.html" title="class in net.emustudio.emulib.runtime.ui">GUI.KeyListenerContainerAdapter</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">ContainerListener that automatically adds/removes a KeyListener to/from dynamically added/removed children.</div>
+<div class="block">Container listener propagating a key listener to added children and removing it from removed ones.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/cpu/InstructionFlow.html" title="class in net.emustudio.emulib.plugins.cpu">InstructionFlow</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -307,27 +274,27 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/io/IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Generator and loader of 16-bit Intel Hex files (I8HEX).</div>
+<div class="block">Program code of 16-bit Intel HEX files (I8HEX): built by compilers, written into a file, parsed or loaded into memory.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/runtime/InvalidContextException.html" title="class in net.emustudio.emulib.runtime">InvalidContextException</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/plugins/cpu/InvalidInstructionException.html" title="class in net.emustudio.emulib.plugins.cpu">InvalidInstructionException</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab5">
-<div class="block">Raised when a plugin context does not fulfill the requirements.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/plugins/cpu/InvalidInstructionException.html" title="class in net.emustudio.emulib.plugins.cpu">InvalidInstructionException</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
 <div class="block">An exception representing an unsuccessful decoding process.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/LexicalAnalyzer.html" title="interface in net.emustudio.emulib.plugins.compiler">LexicalAnalyzer</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Lexical analyzer.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/MaxItemsCache.html" title="class in net.emustudio.emulib.runtime.ui">MaxItemsCache&lt;V&gt;</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Bounded history of distinct values, ordered from most to least recently inserted.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/memory/Memory.html" title="interface in net.emustudio.emulib.plugins.memory">Memory</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Memory plugin root interface.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/annotations/MemoryAnnotations.html" title="class in net.emustudio.emulib.runtime.annotations">MemoryAnnotations</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Thread-safe live annotations at CPU-visible addresses.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/annotations/MemoryAnnotations.Entry.html" title="class in net.emustudio.emulib.runtime.annotations">MemoryAnnotations.Entry</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">An annotation covers the half-open address range [start, end).</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext&lt;CellType&gt;</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
@@ -337,24 +304,26 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">A listener for receiving memory related events.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/debugger/MnemoColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">MnemoColumn</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/NavLink.html" title="class in net.emustudio.emulib.plugins.debugger">NavLink</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">This class represents "mnemo" column in the debug table.</div>
+<div class="block">Finds an earlier retained event carrying the opaque tag; no live machine reference.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">A number utility class with various useful operations on numbers and number arrays.</div>
+<div class="block">Bit, byte-order and BCD operations on numbers and memory cells.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils.Strategy</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Strategy defining how to manipulate with bytes.</div>
+<div class="block">Strategy defining how bytes are combined into a number.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/debugger/OpcodeColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">OpcodeColumn</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/ParserErrorListener.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">ParserErrorListener</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">This class represents "opcode" column in the debug table.</div>
+<div class="block">ANTLR error listener which throws <a href="net/emustudio/emulib/plugins/compiler/CompileException.html" title="class in net.emustudio.emulib.plugins.compiler"><code>CompileException</code></a> on first syntax error.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/antlr/ParsingUtils.html" title="class in net.emustudio.emulib.plugins.compiler.antlr">ParsingUtils</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Conversions of common ANTLR literal tokens shared by emuStudio compilers.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Plugin main interface.</div>
@@ -363,46 +332,37 @@ and/or other plugins that want to process the output of the compiler.</div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab3">
 <div class="block">Indicates type of the plugin.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="net/emustudio/emulib/plugins/annotations/PluginContext.html" title="annotation interface in net.emustudio.emulib.plugins.annotations">PluginContext</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
-<div class="block">Indicates that the annotated interface represent plugin context.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/plugins/PluginInitializationException.html" title="class in net.emustudio.emulib.plugins">PluginInitializationException</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="net/emustudio/emulib/plugins/PluginInitializationException.html" title="class in net.emustudio.emulib.plugins">PluginInitializationException</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab5">
 <div class="block">Exception representing general plugin initialization error.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="net/emustudio/emulib/plugins/annotations/PluginRoot.html" title="annotation interface in net.emustudio.emulib.plugins.annotations">PluginRoot</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab6"><a href="net/emustudio/emulib/plugins/annotations/PluginRoot.html" title="annotation interface in net.emustudio.emulib.plugins.annotations">PluginRoot</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab6">
 <div class="block">Indicates that the class is a plugin's main class.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">The class provides methods for reading/writing plugin settings.</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Plugin settings (hierarchical key-value store).</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">The class contains several methods used for work with numbers in various
-radixes.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/ReadWriteLockSupport.html" title="class in net.emustudio.emulib.runtime.helpers">ReadWriteLockSupport</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Read/write lock support for more comfortable work with a ReentrantReadWriteLock.</div>
+<div class="block">Parsing and formatting of numbers in the radixes common in system programming.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/recording/RecordingSession.html" title="class in net.emustudio.emulib.runtime.recording">RecordingSession</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/ReadWriteLockSupport.html" title="class in net.emustudio.emulib.runtime.helpers">ReadWriteLockSupport</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Thread-safe MP4 video and audio recording, with H.264 encoding on a dedicated worker.</div>
+<div class="block">Runs actions under a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link"><code>ReentrantReadWriteLock</code></a>.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html" title="class in net.emustudio.emulib.runtime.audio">SamplePlayer&lt;K&gt;</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/recording/RecordingSession.html" title="class in net.emustudio.emulib.runtime.recording">RecordingSession</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Thread-safe, one-time MP4 recording of video (H.264) and audio (PCM).</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/audio/SamplePlayer.html" title="class in net.emustudio.emulib.runtime.audio">SamplePlayer&lt;K&gt;</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Loads and plays independent samples identified by caller-defined keys.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/ui/ShortenedString.html" title="class in net.emustudio.emulib.runtime.ui">ShortenedString&lt;T&gt;</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">A shortened string from a value.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/SleepUtils.html" title="class in net.emustudio.emulib.runtime.helpers">SleepUtils</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Sleeping and time measurement utilities.</div>
+<div class="block">Precise sleeping.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/compiler/SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
@@ -420,25 +380,39 @@ radixes.</div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Resource paths of icons shared by emuStudio and its plugins.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/StepView.html" title="class in net.emustudio.emulib.plugins.debugger">StepView</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Immutable capture; contains no machine objects and can be rendered without the plugin.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/io/TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Tape signal callbacks, decoded from TAP/TZX blocks by <a href="net/emustudio/emulib/runtime/io/FileLoader.html" title="class in net.emustudio.emulib.runtime.io"><code>FileLoader</code></a>.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/plugins/compiler/Token.html" title="interface in net.emustudio.emulib.plugins.compiler">Token</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">Interface that identifies a token.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.html" title="class in net.emustudio.emulib.runtime.helpers">Unchecked</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Unchecked running/ calling.</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.html" title="class in net.emustudio.emulib.runtime.helpers">Unchecked</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Runs actions which can throw checked exceptions, rethrowing them unchanged without declaring them ("sneaky throw").</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow&lt;T&gt;</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">A callable that can throw checked exceptions.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow&lt;T&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">A runnable that can throw checked exceptions.</div>
+<div class="block">An action with a result which can throw checked exceptions.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="net/emustudio/emulib/runtime/helpers/Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">An action which can throw checked exceptions.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/ValueView.html" title="class in net.emustudio.emulib.plugins.debugger">ValueView</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Already formatted watch value.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/ValueView.Format.html" title="class in net.emustudio.emulib.plugins.debugger">ValueView.Format</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="net/emustudio/emulib/plugins/debugger/ViewRow.html" title="class in net.emustudio.emulib.plugins.debugger">ViewRow</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Passive detail row; tags are opaque identities and links belong to this row's event.</div>
 </div>
 </div>
 </div>

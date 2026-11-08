@@ -58,7 +58,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
 <li><a href="#SLEEP_PRECISION" tabindex="0">SLEEP_PRECISION</a></li>
-<li><a href="#SPIN_YIELD_PRECISION" tabindex="0">SPIN_YIELD_PRECISION</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
@@ -79,9 +78,9 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SleepUtils</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">SleepUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Sleeping and time measurement utilities.</div>
+<div class="block">Precise sleeping.</div>
 </div>
 </section>
 <section class="summary">
@@ -98,12 +97,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>static final long</code></div>
 <div class="col-second even-row-color"><code><a href="#SLEEP_PRECISION" class="member-name-link">SLEEP_PRECISION</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Sleep precision in nanoseconds (determined automatically).</div>
-</div>
-<div class="col-first odd-row-color"><code>static final long</code></div>
-<div class="col-second odd-row-color"><code><a href="#SPIN_YIELD_PRECISION" class="member-name-link">SPIN_YIELD_PRECISION</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Spin yield precision in nanoseconds (half of sleep precision).</div>
+<div class="block">Average duration of <code>Thread.sleep(1)</code> in nanoseconds (measured when the class is loaded).</div>
 </div>
 </div>
 </section>
@@ -122,7 +116,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preciseSleepNanos(long)" class="member-name-link">preciseSleepNanos</a><wbr>(long&nbsp;nanoDuration)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Accurately sleeps on all platforms (Linux, Win, Mac).</div>
+<div class="block">Accurately sleeps on all platforms (Linux, Win, Mac); more precise than <code>LockSupport.parkNanos</code>.</div>
 </div>
 </div>
 </div>
@@ -146,16 +140,7 @@ loadScripts(document, 'script');</script>
 <h3>SLEEP_PRECISION</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">SLEEP_PRECISION</span></div>
-<div class="block">Sleep precision in nanoseconds (determined automatically).</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="SPIN_YIELD_PRECISION">
-<h3>SPIN_YIELD_PRECISION</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">SPIN_YIELD_PRECISION</span></div>
-<div class="block">Spin yield precision in nanoseconds (half of sleep precision).</div>
+<div class="block">Average duration of <code>Thread.sleep(1)</code> in nanoseconds (measured when the class is loaded).</div>
 </div>
 </section>
 </li>
@@ -172,14 +157,11 @@ loadScripts(document, 'script');</script>
 <h3>preciseSleepNanos</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">preciseSleepNanos</span><wbr><span class="parameters">(long&nbsp;nanoDuration)</span></div>
-<div class="block">Accurately sleeps on all platforms (Linux, Win, Mac).
-Sleep precision: SLEEP_PRECISION (determined automatically)
+<div class="block">Accurately sleeps on all platforms (Linux, Win, Mac); more precise than <code>LockSupport.parkNanos</code>.
 <p>
-It is more precise than LockSupport::sleepNanos
-<p>
-See:
-- <a href="https://stackoverflow.com/questions/824110/accurate-sleep-for-java-on-windows">accurate sleep for java</a>
-- <a href="https://andy-malakov.blogspot.com/2010/06/alternative-to-threadsleep.html">alternative to Thread.sleep</a></div>
+Sleeps while the remaining time exceeds <a href="#SLEEP_PRECISION"><code>SLEEP_PRECISION</code></a>, then spin-waits. Returns early if the
+thread is interrupted (the interrupt flag is kept). See
+<a href="https://andy-malakov.blogspot.com/2010/06/alternative-to-threadsleep.html">alternative to Thread.sleep</a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>nanoDuration</code> - nanoseconds</dd>

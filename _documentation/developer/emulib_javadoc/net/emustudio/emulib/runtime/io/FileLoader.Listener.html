@@ -5,7 +5,7 @@
 <title>FileLoader.Listener (emuLib 12.1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, interface: FileLoader, interface: Listener">
+<meta name="description" content="declaration: package: net.emustudio.emulib.runtime.io, class: FileLoader, interface: Listener">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="../../../../../resource-files/stylesheet.css">
@@ -57,8 +57,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" tabindex="0">onBlock(FileLoader.Block)</a></li>
 <li><a href="#onFileStart()" tabindex="0">onFileStart()</a></li>
+<li><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" tabindex="0">onBlock(FileLoader.Block)</a></li>
 <li><a href="#onFileEnd()" tabindex="0">onFileEnd()</a></li>
 </ol>
 </li>
@@ -75,8 +75,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></code></dd>
 </dl>
 <dl class="notes">
-<dt>Enclosing interface:</dt>
-<dd><code><a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></code></dd>
+<dt>Enclosing class:</dt>
+<dd><code><a href="FileLoader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader</a></code></dd>
 </dl>
 <dl class="notes">
 <dt>Functional Interface:</dt>
@@ -86,7 +86,7 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public static interface </span><span class="element-name type-name-label">FileLoader.Listener</span></div>
-<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
+<div class="block">Receives blocks synchronously, on the loading thread.</div>
 </div>
 </section>
 <section class="summary">
@@ -104,11 +104,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" class="member-name-link">onBlock</a><wbr>(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Called for each block.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onFileEnd()" class="member-name-link">onFileEnd</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Called only after successful traversal, never after failure or cancellation.</div>
+<div class="block">Called only after successful loading, never after failure or cancellation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onFileStart()" class="member-name-link">onFileStart</a>()</code></div>
@@ -130,19 +132,6 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">
-<h3>onBlock</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onBlock</span><wbr><span class="parameters">(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</span>
-      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<dl class="notes">
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="onFileStart()">
 <h3>onFileStart</h3>
 <div class="horizontal-scroll">
@@ -151,7 +140,23 @@ loadScripts(document, 'script');</script>
 <div class="block">Called before the first block; reusable listeners should reset per-file state here.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - to abort loading</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">
+<h3>onBlock</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onBlock</span><wbr><span class="parameters">(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</span>
+      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Called for each block.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>block</code> - the block</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - to abort loading</dd>
 </dl>
 </div>
 </section>
@@ -162,10 +167,10 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onFileEnd</span>()
                 throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Called only after successful traversal, never after failure or cancellation.</div>
+<div class="block">Called only after successful loading, never after failure or cancellation.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - to abort loading</dd>
 </dl>
 </div>
 </section>

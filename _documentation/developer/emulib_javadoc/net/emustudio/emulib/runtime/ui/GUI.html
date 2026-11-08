@@ -57,43 +57,24 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#loadIcon(java.lang.String)" tabindex="0">loadIcon(String)</a></li>
 <li><a href="#loadIcon(java.lang.String,java.lang.Class)" tabindex="0">loadIcon(String, Class)</a></li>
 <li><a href="#loadFontResource(java.lang.String,java.lang.Class,int)" tabindex="0">loadFontResource(String, Class, int)</a></li>
-<li><a href="#runInBackground(javax.swing.Action,net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow,java.lang.Runnable,java.util.function.Consumer)" tabindex="0">runInBackground(Action, Unchecked.RunnableWhichCanThrow, Runnable, Consumer)</a></li>
+<li><a href="#shortenToFit(java.lang.String,java.awt.Component,int)" tabindex="0">shortenToFit(String, Component, int)</a></li>
 <li><a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" tabindex="0">addKeyListenerRecursively(Component, KeyListener)</a></li>
 <li><a href="#removeKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" tabindex="0">removeKeyListenerRecursively(Component, KeyListener)</a></li>
-<li><a href="#toolbarButton(java.util.function.Consumer,java.lang.String,java.lang.String)" tabindex="0">toolbarButton(Consumer, String, String)</a></li>
 <li><a href="#toolbarButton(javax.swing.Action)" tabindex="0">toolbarButton(Action)</a></li>
-<li><a href="#toolbarButton(javax.swing.Action,java.lang.String,java.lang.String)" tabindex="0">toolbarButton(Action, String, String)</a></li>
-<li><a href="#toolbarToggleButton(java.util.function.Consumer,java.util.function.Consumer,java.lang.String,java.lang.String)" tabindex="0">toolbarToggleButton(Consumer, Consumer, String, String)</a></li>
-<li><a href="#toolbarToggleButton(java.util.function.Consumer,java.lang.String,java.lang.String)" tabindex="0">toolbarToggleButton(Consumer, String, String)</a></li>
 <li><a href="#label(java.lang.String)" tabindex="0">label(String)</a></li>
 <li><a href="#labelBold(java.lang.String)" tabindex="0">labelBold(String)</a></li>
-<li><a href="#labelTitle(java.lang.String)" tabindex="0">labelTitle(String)</a></li>
-<li><a href="#labelPadded(java.lang.String,int,int,int,int)" tabindex="0">labelPadded(String, int, int, int, int)</a></li>
-<li><a href="#buttonMakePrimary(javax.swing.JButton)" tabindex="0">buttonMakePrimary(JButton)</a></li>
 <li><a href="#button(java.lang.String)" tabindex="0">button(String)</a></li>
-<li><a href="#button(java.lang.String,java.lang.Runnable)" tabindex="0">button(String, Runnable)</a></li>
-<li><a href="#button(java.lang.String,java.lang.String,java.lang.Runnable)" tabindex="0">button(String, String, Runnable)</a></li>
-<li><a href="#button(java.lang.String,java.awt.event.ActionListener)" tabindex="0">button(String, ActionListener)</a></li>
-<li><a href="#buttonBrowseDirectories(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,java.util.function.Consumer)" tabindex="0">buttonBrowseDirectories(Dialogs, String, String, Consumer)</a></li>
-<li><a href="#buttonBrowseFiles(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,boolean,java.util.function.Consumer,net.emustudio.emulib.runtime.ui.components.FileExtensionsFilter...)" tabindex="0">buttonBrowseFiles(Dialogs, String, String, boolean, Consumer, FileExtensionsFilter...)</a></li>
-<li><a href="#menuItem(javax.swing.Action)" tabindex="0">menuItem(Action)</a></li>
-<li><a href="#textField(java.lang.String)" tabindex="0">textField(String)</a></li>
+<li><a href="#buttonMakePrimary(javax.swing.JButton)" tabindex="0">buttonMakePrimary(JButton)</a></li>
 <li><a href="#textField(java.lang.String,int)" tabindex="0">textField(String, int)</a></li>
 <li><a href="#textAreaReadOnly(int,int)" tabindex="0">textAreaReadOnly(int, int)</a></li>
 <li><a href="#toolBar()" tabindex="0">toolBar()</a></li>
-<li><a href="#toolBarVertical()" tabindex="0">toolBarVertical()</a></li>
-<li><a href="#splitPane()" tabindex="0">splitPane()</a></li>
-<li><a href="#splitPaneLeftToRight(java.awt.Component,java.awt.Component,java.lang.Double)" tabindex="0">splitPaneLeftToRight(Component, Component, Double)</a></li>
-<li><a href="#splitPaneTopToBottom(java.awt.Component,java.awt.Component,java.lang.Double)" tabindex="0">splitPaneTopToBottom(Component, Component, Double)</a></li>
+<li><a href="#splitPane(int,java.awt.Component,java.awt.Component,double)" tabindex="0">splitPane(int, Component, Component, double)</a></li>
 <li><a href="#scrollPane(java.awt.Component)" tabindex="0">scrollPane(Component)</a></li>
 <li><a href="#panel(java.lang.String,java.lang.String,java.lang.String)" tabindex="0">panel(String, String, String)</a></li>
-<li><a href="#panelHorizontal()" tabindex="0">panelHorizontal()</a></li>
-<li><a href="#styleTable(javax.swing.JTable)" tabindex="0">styleTable(JTable)</a></li>
-<li><a href="#styleList(javax.swing.JList)" tabindex="0">styleList(JList)</a></li>
 <li><a href="#section(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" tabindex="0">section(String, String, String, String)</a></li>
+<li><a href="#styleTable(javax.swing.JTable)" tabindex="0">styleTable(JTable)</a></li>
 </ol>
 </li>
 </ol>
@@ -107,15 +88,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">GUI</span></div>
-<div class="block">GUI interface providing factory methods for common Swing components.
+<div class="block">Factory of host-styled Swing components for plugins, plus static Swing helpers.
 <p>
-Implementations are provided by the host application (e.g., emuStudio) and made available to plugins via
-<a href="../ApplicationApi.html#getGUI()"><code>ApplicationApi.getGUI()</code></a>.
-<p>
-Static utility methods (<a href="#loadIcon(java.lang.String)"><code>loadIcon(String)</code></a>, <a href="#loadFontResource(java.lang.String,java.lang.Class,int)"><code>loadFontResource(String, Class, int)</code></a>, <a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>addKeyListenerRecursively(Component, KeyListener)</code></a>,
-<a href="#removeKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>removeKeyListenerRecursively(Component, KeyListener)</code></a>) are provided directly on this interface and do not depend on any
-external layout or look-and-feel libraries.
-Toolbar factories provide accessible names from their tooltip or action name; callers can override them.</div>
+The host application (e.g., emuStudio) implements the factory methods and provides the instance via
+<a href="../ApplicationApi.html#getGUI()"><code>ApplicationApi.getGUI()</code></a>. Panel layout constraints are MigLayout strings.</div>
 </div>
 </section>
 <section class="summary">
@@ -132,7 +108,7 @@ Toolbar factories provide accessible names from their tooltip or action name; ca
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="GUI.KeyListenerContainerAdapter.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.ui">GUI.KeyListenerContainerAdapter</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">ContainerListener that automatically adds/removes a KeyListener to/from dynamically added/removed children.</div>
+<div class="block">Container listener propagating a key listener to added children and removing it from removed ones.</div>
 </div>
 </div>
 </section>
@@ -152,231 +128,108 @@ Toolbar factories provide accessible names from their tooltip or action name; ca
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" class="member-name-link">addKeyListenerRecursively</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/KeyListener.html" title="class or interface in java.awt.event" class="external-link">KeyListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Adds a KeyListener to given component recursively.</div>
+<div class="block">Adds a KeyListener to the component and all its descendants, including children added later.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#button(java.lang.String)" class="member-name-link">button</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JButton with given text.</div>
+<div class="block">Creates a button; add listeners with <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/AbstractButton.html#addActionListener(java.awt.event.ActionListener)" title="class or interface in javax.swing" class="external-link"><code>AbstractButton.addActionListener(ActionListener)</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#button(java.lang.String,java.awt.event.ActionListener)" class="member-name-link">button</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionListener.html" title="class or interface in java.awt.event" class="external-link">ActionListener</a>&nbsp;action)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#buttonMakePrimary(javax.swing.JButton)" class="member-name-link">buttonMakePrimary</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a>&nbsp;button)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JButton with given text and action.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#button(java.lang.String,java.lang.Runnable)" class="member-name-link">button</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JButton with given text and action.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#button(java.lang.String,java.lang.String,java.lang.Runnable)" class="member-name-link">button</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JButton with given icon, text and action.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#buttonBrowseDirectories(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,java.util.function.Consumer)" class="member-name-link">buttonBrowseDirectories</a><wbr>(<a href="Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a>&nbsp;dialogs,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dialogTitle,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;approveButtonText,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;onApprove)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a browse button for directory selection.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#buttonBrowseFiles(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,boolean,java.util.function.Consumer,net.emustudio.emulib.runtime.ui.components.FileExtensionsFilter...)" class="member-name-link">buttonBrowseFiles</a><wbr>(<a href="Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a>&nbsp;dialogs,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dialogTitle,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;approveButtonText,
- boolean&nbsp;appendMissingExtensions,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;onApprove,
- <a href="components/FileExtensionsFilter.html" title="class in net.emustudio.emulib.runtime.ui.components">FileExtensionsFilter</a>...&nbsp;filters)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a browse button for file selection.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#buttonMakePrimary(javax.swing.JButton)" class="member-name-link">buttonMakePrimary</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a>&nbsp;button)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Makes a JButton look like a primary button.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#label(java.lang.String)" class="member-name-link">label</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JLabel with given text.</div>
+<div class="block">Styles a button as the primary (default) button of a dialog.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#labelBold(java.lang.String)" class="member-name-link">labelBold</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#label(java.lang.String)" class="member-name-link">label</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a bold JLabel with given text.</div>
+<div class="block">Creates a plain label.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#labelPadded(java.lang.String,int,int,int,int)" class="member-name-link">labelPadded</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- int&nbsp;top,
- int&nbsp;left,
- int&nbsp;bottom,
- int&nbsp;right)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#labelBold(java.lang.String)" class="member-name-link">labelBold</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JLabel with given text and padding (empty border).</div>
+<div class="block">Creates a bold label.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#labelTitle(java.lang.String)" class="member-name-link">labelTitle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a title JLabel with given text (bold, larger font).</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#loadFontResource(java.lang.String,java.lang.Class,int)" class="member-name-link">loadFontResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#loadFontResource(java.lang.String,java.lang.Class,int)" class="member-name-link">loadFontResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;resourceClass,
  int&nbsp;size)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Loads a true-type font from a resource.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/ImageIcon.html" title="class or interface in javax.swing" class="external-link">ImageIcon</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#loadIcon(java.lang.String)" class="member-name-link">loadIcon</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resource)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Loads an icon from a resource, using the caller's class for resource lookup.</div>
+<div class="block">Loads and registers a plain true-type font with kerning enabled.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/ImageIcon.html" title="class or interface in javax.swing" class="external-link">ImageIcon</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#loadIcon(java.lang.String,java.lang.Class)" class="member-name-link">loadIcon</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;callerClass)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;resourceClass)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Loads an icon from a resource using the given class for resource lookup.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JMenuItem.html" title="class or interface in javax.swing" class="external-link">JMenuItem</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#menuItem(javax.swing.Action)" class="member-name-link">menuItem</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JMenuItem from a Swing Action.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#panel(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">panel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layoutConstraints,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;colConstraints,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rowConstraints)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JPanel with custom layout constraints.</div>
+<div class="block">Loads an icon from a resource.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#panelHorizontal()" class="member-name-link">panelHorizontal</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#panel(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">panel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layoutConstraints,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;colConstraints,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rowConstraints)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JPanel in a horizontal arrangement.</div>
+<div class="block">Creates a panel with MigLayout.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#removeKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)" class="member-name-link">removeKeyListenerRecursively</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/KeyListener.html" title="class or interface in java.awt.event" class="external-link">KeyListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Removes given KeyListener from a component recursively.</div>
+<div class="block">Removes a KeyListener added by <a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>addKeyListenerRecursively(Component, KeyListener)</code></a> from the component and its descendants.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#runInBackground(javax.swing.Action,net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow,java.lang.Runnable,java.util.function.Consumer)" class="member-name-link">runInBackground</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action,
- <a href="../helpers/Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;task,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onSuccess,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;&nbsp;onError)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Runs a (potentially long-running, exception-throwing) task off the Event Dispatch Thread using a
-<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/SwingWorker.html" title="class or interface in javax.swing" class="external-link"><code>SwingWorker</code></a>, with a consistent enable/disable and error-handling policy.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JScrollPane.html" title="class or interface in javax.swing" class="external-link">JScrollPane</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#scrollPane(java.awt.Component)" class="member-name-link">scrollPane</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;view)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Creates a borderless scroll pane.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JScrollPane.html" title="class or interface in javax.swing" class="external-link">JScrollPane</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#scrollPane(java.awt.Component)" class="member-name-link">scrollPane</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;view)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JScrollPane with no border around the viewport.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#section(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">section</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#section(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">section</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layoutConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;colConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rowConstraints)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a titled section panel.</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Creates a panel with MigLayout and a titled border.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#shortenToFit(java.lang.String,java.awt.Component,int)" class="member-name-link">shortenToFit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
+ int&nbsp;width)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Shortens text to fit the given width when rendered with the component's font.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#splitPane()" class="member-name-link">splitPane</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#splitPane(int,java.awt.Component,java.awt.Component,double)" class="member-name-link">splitPane</a><wbr>(int&nbsp;orientation,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;first,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;second,
+ double&nbsp;resizeWeight)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JSplitPane with no border, one-touch expandable and continuous layout.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#splitPaneLeftToRight(java.awt.Component,java.awt.Component,java.lang.Double)" class="member-name-link">splitPaneLeftToRight</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;left,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;right,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&nbsp;resizeWeight)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a horizontal JSplitPane with left and right components.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#splitPaneTopToBottom(java.awt.Component,java.awt.Component,java.lang.Double)" class="member-name-link">splitPaneTopToBottom</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;top,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;bottom,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&nbsp;resizeWeight)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a vertical JSplitPane with top and bottom components.</div>
+<div class="block">Creates a split pane.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#styleList(javax.swing.JList)" class="member-name-link">styleList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JList.html" title="class or interface in javax.swing" class="external-link">JList</a>&lt;?&gt;&nbsp;list)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#styleTable(javax.swing.JTable)" class="member-name-link">styleTable</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Makes a JList look modern.</div>
+<div class="block">Applies the host's table styling.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#styleTable(javax.swing.JTable)" class="member-name-link">styleTable</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextArea.html" title="class or interface in javax.swing" class="external-link">JTextArea</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#textAreaReadOnly(int,int)" class="member-name-link">textAreaReadOnly</a><wbr>(int&nbsp;rows,
+ int&nbsp;columns)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Applies the host's table styling, preserving larger row heights and accommodating the current font.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextArea.html" title="class or interface in javax.swing" class="external-link">JTextArea</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#textAreaReadOnly(int,int)" class="member-name-link">textAreaReadOnly</a><wbr>(int&nbsp;columns,
- int&nbsp;rows)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a non-editable JTextArea with given columns and rows.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#textField(java.lang.String)" class="member-name-link">textField</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JTextField with given text.</div>
+<div class="block">Creates a non-editable text area.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#textField(java.lang.String,int)" class="member-name-link">textField</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
  int&nbsp;columns)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a JTextField with given text.</div>
+<div class="block">Creates a text field.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToolBar.html" title="class or interface in javax.swing" class="external-link">JToolBar</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolBar()" class="member-name-link">toolBar</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a non-floatable, rollover JToolBar with no border painted.</div>
+<div class="block">Creates a horizontal, non-floatable toolbar.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarButton(java.util.function.Consumer,java.lang.String,java.lang.String)" class="member-name-link">toolbarButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarButton(javax.swing.Action)" class="member-name-link">toolbarButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarButton(javax.swing.Action)" class="member-name-link">toolbarButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarButton(javax.swing.Action,java.lang.String,java.lang.String)" class="member-name-link">toolbarButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToggleButton.html" title="class or interface in javax.swing" class="external-link">JToggleButton</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarToggleButton(java.util.function.Consumer,java.lang.String,java.lang.String)" class="member-name-link">toolbarToggleButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Toolbar toggle button - a JToggleButton ready to add to a toolbar.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToggleButton.html" title="class or interface in javax.swing" class="external-link">JToggleButton</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolbarToggleButton(java.util.function.Consumer,java.util.function.Consumer,java.lang.String,java.lang.String)" class="member-name-link">toolbarToggleButton</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ItemEvent.html" title="class or interface in java.awt.event" class="external-link">ItemEvent</a>&gt;&nbsp;itemAction,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Toolbar toggle button - a JToggleButton ready to add to a toolbar.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToolBar.html" title="class or interface in javax.swing" class="external-link">JToolBar</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#toolBarVertical()" class="member-name-link">toolBarVertical</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Creates a vertical JToolBar.</div>
+<div class="block">Creates a toolbar button from an action.</div>
 </div>
 </div>
 </div>
@@ -393,38 +246,17 @@ Toolbar factories provide accessible names from their tooltip or action name; ca
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="loadIcon(java.lang.String)">
-<h3>loadIcon</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/ImageIcon.html" title="class or interface in javax.swing" class="external-link">ImageIcon</a></span>&nbsp;<span class="element-name">loadIcon</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resource)</span></div>
-<div class="block">Loads an icon from a resource, using the caller's class for resource lookup.
-<p>
-Uses <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StackWalker.html" title="class or interface in java.lang" class="external-link"><code>StackWalker</code></a> to determine the caller's class so that the correct classloader is used
-for plugin resources.
-If present, a matching resource with <code>@2x</code> before the file extension (e.g.,
-<code>icon@2x.png</code> for <code>icon.png</code>) is used for high-resolution rendering.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>resource</code> - resource path</dd>
-<dt>Returns:</dt>
-<dd>loaded icon, or null if the icon could not be loaded</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="loadIcon(java.lang.String,java.lang.Class)">
 <h3>loadIcon</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/ImageIcon.html" title="class or interface in javax.swing" class="external-link">ImageIcon</a></span>&nbsp;<span class="element-name">loadIcon</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;callerClass)</span></div>
-<div class="block">Loads an icon from a resource using the given class for resource lookup.
-If present, a matching resource with <code>@2x</code> before the file extension is combined
-with the base image in a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BaseMultiResolutionImage.html" title="class or interface in java.awt.image" class="external-link"><code>BaseMultiResolutionImage</code></a>. Otherwise, only the base image is used.</div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;resourceClass)</span></div>
+<div class="block">Loads an icon from a resource. If a matching resource with <code>@2x</code> before the file extension exists
+(e.g. <code>icon@2x.png</code> for <code>icon.png</code>), it is used for high-resolution rendering.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>resource</code> - resource path</dd>
-<dd><code>callerClass</code> - the class whose classloader should be used for resource lookup</dd>
+<dd><code>resource</code> - resource path; relative paths are resolved against <code>resourceClass</code></dd>
+<dd><code>resourceClass</code> - class whose classloader is used for resource lookup</dd>
 <dt>Returns:</dt>
 <dd>loaded icon, or null if the base resource could not be found</dd>
 </dl>
@@ -438,39 +270,36 @@ with the base image in a <a href="https://docs.oracle.com/en/java/javase/25/docs
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Font.html" title="class or interface in java.awt" class="external-link">Font</a></span>&nbsp;<span class="element-name">loadFontResource</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;resourceClass,
  int&nbsp;size)</span></div>
-<div class="block">Loads a true-type font from a resource. The font is derived true-type, plain with given size and kerning enabled.</div>
+<div class="block">Loads and registers a plain true-type font with kerning enabled.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>path</code> - Resource path</dd>
-<dd><code>resourceClass</code> - class where to look for resources</dd>
-<dd><code>size</code> - Default font size</dd>
+<dd><code>path</code> - resource path; relative paths are resolved against <code>resourceClass</code></dd>
+<dd><code>resourceClass</code> - class whose classloader is used for resource lookup</dd>
+<dd><code>size</code> - font size</dd>
 <dt>Returns:</dt>
-<dd>loaded font, or <code>Font.MONOSPACED</code> if the font could not be loaded</dd>
+<dd>loaded font, or a plain <code>Font.MONOSPACED</code> font if the font could not be loaded</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="runInBackground(javax.swing.Action,net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow,java.lang.Runnable,java.util.function.Consumer)">
-<h3>runInBackground</h3>
+<section class="detail" id="shortenToFit(java.lang.String,java.awt.Component,int)">
+<h3>shortenToFit</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">runInBackground</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action,
- <a href="../helpers/Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;task,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onSuccess,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&gt;&nbsp;onError)</span></div>
-<div class="block">Runs a (potentially long-running, exception-throwing) task off the Event Dispatch Thread using a
-<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/SwingWorker.html" title="class or interface in javax.swing" class="external-link"><code>SwingWorker</code></a>, with a consistent enable/disable and error-handling policy.
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">shortenToFit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
+ int&nbsp;width)</span></div>
+<div class="block">Shortens text to fit the given width when rendered with the component's font.
 <p>
-The given action is disabled before the task starts and re-enabled when it finishes (whether it
-succeeds or fails). On success <code>onSuccess</code> is invoked on the EDT; on failure <code>onError</code>
-is invoked on the EDT with the unwrapped cause.
-Calls from other threads are queued on the EDT. Calls while the action is disabled are ignored.</div>
+The text is cut in the middle, keeping a prefix and suffix around "..."; Unicode characters (grapheme
+clusters) are kept intact. If even "..." does not fit, only the dots that fit are returned.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>action</code> - the action to disable while the task runs (e.g. the invoking <code>AbstractAction</code>)</dd>
-<dd><code>task</code> - the work to perform on a background thread</dd>
-<dd><code>onSuccess</code> - callback invoked on the EDT after the task completes successfully</dd>
-<dd><code>onError</code> - callback invoked on the EDT with the unwrapped cause if the task fails</dd>
+<dd><code>text</code> - text to shorten</dd>
+<dd><code>component</code> - component whose font is used for measuring</dd>
+<dd><code>width</code> - available width in pixels; non-positive widths produce an empty string</dd>
+<dt>Returns:</dt>
+<dd>text, or its shortened form that fits the width</dd>
 </dl>
 </div>
 </section>
@@ -481,8 +310,8 @@ Calls from other threads are queued on the EDT. Calls while the action is disabl
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addKeyListenerRecursively</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/KeyListener.html" title="class or interface in java.awt.event" class="external-link">KeyListener</a>&nbsp;listener)</span></div>
-<div class="block">Adds a KeyListener to given component recursively.
-Also installs a ContainerListener so that dynamically added children automatically get the KeyListener.</div>
+<div class="block">Adds a KeyListener to the component and all its descendants, including children added later.
+Adding the same listener twice has no effect.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>component</code> - GUI component</dd>
@@ -497,8 +326,7 @@ Also installs a ContainerListener so that dynamically added children automatical
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeKeyListenerRecursively</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;component,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/KeyListener.html" title="class or interface in java.awt.event" class="external-link">KeyListener</a>&nbsp;listener)</span></div>
-<div class="block">Removes given KeyListener from a component recursively.
-Also removes the ContainerListener that was installed by <a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>addKeyListenerRecursively(Component, KeyListener)</code></a>.</div>
+<div class="block">Removes a KeyListener added by <a href="#addKeyListenerRecursively(java.awt.Component,java.awt.event.KeyListener)"><code>addKeyListenerRecursively(Component, KeyListener)</code></a> from the component and its descendants.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>component</code> - GUI component</dd>
@@ -508,94 +336,17 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 </section>
 </li>
 <li>
-<section class="detail" id="toolbarButton(java.util.function.Consumer,java.lang.String,java.lang.String)">
-<h3>toolbarButton</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">toolbarButton</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</span></div>
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>action</code> - button action</dd>
-<dd><code>iconResource</code> - icon resource path</dd>
-<dd><code>tooltipText</code> - tooltip text</dd>
-<dt>Returns:</dt>
-<dd>the toolbar button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="toolbarButton(javax.swing.Action)">
 <h3>toolbarButton</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">toolbarButton</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action)</span></div>
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
+<div class="block">Creates a toolbar button from an action. The action provides the icon (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html#SMALL_ICON" title="class or interface in javax.swing" class="external-link"><code>Action.SMALL_ICON</code></a>),
+tooltip and accessible name (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html#SHORT_DESCRIPTION" title="class or interface in javax.swing" class="external-link"><code>Action.SHORT_DESCRIPTION</code></a>) and enabled state; the text is hidden.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>action</code> - button action</dd>
 <dt>Returns:</dt>
 <dd>the toolbar button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="toolbarButton(javax.swing.Action,java.lang.String,java.lang.String)">
-<h3>toolbarButton</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">toolbarButton</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</span></div>
-<div class="block">Toolbar button - a JButton ready to add to a toolbar.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>action</code> - button action</dd>
-<dd><code>iconResource</code> - icon resource path</dd>
-<dd><code>tooltipText</code> - tooltip text</dd>
-<dt>Returns:</dt>
-<dd>the toolbar button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="toolbarToggleButton(java.util.function.Consumer,java.util.function.Consumer,java.lang.String,java.lang.String)">
-<h3>toolbarToggleButton</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToggleButton.html" title="class or interface in javax.swing" class="external-link">JToggleButton</a></span>&nbsp;<span class="element-name">toolbarToggleButton</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ItemEvent.html" title="class or interface in java.awt.event" class="external-link">ItemEvent</a>&gt;&nbsp;itemAction,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</span></div>
-<div class="block">Toolbar toggle button - a JToggleButton ready to add to a toolbar.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>action</code> - button action</dd>
-<dd><code>itemAction</code> - item state change action</dd>
-<dd><code>iconResource</code> - icon resource path</dd>
-<dd><code>tooltipText</code> - tooltip text</dd>
-<dt>Returns:</dt>
-<dd>the toolbar toggle button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="toolbarToggleButton(java.util.function.Consumer,java.lang.String,java.lang.String)">
-<h3>toolbarToggleButton</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToggleButton.html" title="class or interface in javax.swing" class="external-link">JToggleButton</a></span>&nbsp;<span class="element-name">toolbarToggleButton</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionEvent.html" title="class or interface in java.awt.event" class="external-link">ActionEvent</a>&gt;&nbsp;action,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tooltipText)</span></div>
-<div class="block">Toolbar toggle button - a JToggleButton ready to add to a toolbar.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>action</code> - button action</dd>
-<dd><code>iconResource</code> - icon resource path</dd>
-<dd><code>tooltipText</code> - tooltip text</dd>
-<dt>Returns:</dt>
-<dd>the toolbar toggle button</dd>
 </dl>
 </div>
 </section>
@@ -605,12 +356,12 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>label</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></span>&nbsp;<span class="element-name">label</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">Creates a JLabel with given text.</div>
+<div class="block">Creates a plain label.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>text</code> - label text</dd>
 <dt>Returns:</dt>
-<dd>the JLabel</dd>
+<dd>the label</dd>
 </dl>
 </div>
 </section>
@@ -620,65 +371,12 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>labelBold</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></span>&nbsp;<span class="element-name">labelBold</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">Creates a bold JLabel with given text.</div>
+<div class="block">Creates a bold label.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>text</code> - label text</dd>
 <dt>Returns:</dt>
-<dd>the bold JLabel</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="labelTitle(java.lang.String)">
-<h3>labelTitle</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></span>&nbsp;<span class="element-name">labelTitle</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">Creates a title JLabel with given text (bold, larger font).</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>text</code> - label text</dd>
-<dt>Returns:</dt>
-<dd>the title JLabel</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="labelPadded(java.lang.String,int,int,int,int)">
-<h3>labelPadded</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JLabel.html" title="class or interface in javax.swing" class="external-link">JLabel</a></span>&nbsp;<span class="element-name">labelPadded</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- int&nbsp;top,
- int&nbsp;left,
- int&nbsp;bottom,
- int&nbsp;right)</span></div>
-<div class="block">Creates a JLabel with given text and padding (empty border).</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>text</code> - label text</dd>
-<dd><code>top</code> - top padding in pixels</dd>
-<dd><code>left</code> - left padding in pixels</dd>
-<dd><code>bottom</code> - bottom padding in pixels</dd>
-<dd><code>right</code> - right padding in pixels</dd>
-<dt>Returns:</dt>
-<dd>the padded JLabel</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="buttonMakePrimary(javax.swing.JButton)">
-<h3>buttonMakePrimary</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">buttonMakePrimary</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a>&nbsp;button)</span></div>
-<div class="block">Makes a JButton look like a primary button.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>button</code> - the JButton</dd>
-<dt>Returns:</dt>
-<dd>the same JButton with modified properties</dd>
+<dd>the bold label</dd>
 </dl>
 </div>
 </section>
@@ -688,141 +386,27 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>button</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">button</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">Creates a JButton with given text.</div>
+<div class="block">Creates a button; add listeners with <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/AbstractButton.html#addActionListener(java.awt.event.ActionListener)" title="class or interface in javax.swing" class="external-link"><code>AbstractButton.addActionListener(ActionListener)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>text</code> - button text</dd>
 <dt>Returns:</dt>
-<dd>the JButton</dd>
+<dd>the button</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="button(java.lang.String,java.lang.Runnable)">
-<h3>button</h3>
+<section class="detail" id="buttonMakePrimary(javax.swing.JButton)">
+<h3>buttonMakePrimary</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">button</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</span></div>
-<div class="block">Creates a JButton with given text and action.</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">buttonMakePrimary</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a>&nbsp;button)</span></div>
+<div class="block">Styles a button as the primary (default) button of a dialog.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>text</code> - button text</dd>
-<dd><code>action</code> - button action</dd>
+<dd><code>button</code> - the button</dd>
 <dt>Returns:</dt>
-<dd>the JButton</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="button(java.lang.String,java.lang.String,java.lang.Runnable)">
-<h3>button</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">button</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;iconResource,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</span></div>
-<div class="block">Creates a JButton with given icon, text and action.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>iconResource</code> - icon resource path</dd>
-<dd><code>text</code> - button text</dd>
-<dd><code>action</code> - button action</dd>
-<dt>Returns:</dt>
-<dd>the JButton</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="button(java.lang.String,java.awt.event.ActionListener)">
-<h3>button</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">button</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/event/ActionListener.html" title="class or interface in java.awt.event" class="external-link">ActionListener</a>&nbsp;action)</span></div>
-<div class="block">Creates a JButton with given text and action.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>text</code> - button text</dd>
-<dd><code>action</code> - button action</dd>
-<dt>Returns:</dt>
-<dd>the JButton</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="buttonBrowseDirectories(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,java.util.function.Consumer)">
-<h3>buttonBrowseDirectories</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">buttonBrowseDirectories</span><wbr><span class="parameters">(<a href="Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a>&nbsp;dialogs,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dialogTitle,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;approveButtonText,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;onApprove)</span></div>
-<div class="block">Creates a browse button for directory selection.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>dialogs</code> - emuStudio dialogs</dd>
-<dd><code>dialogTitle</code> - Open/Save dialog title</dd>
-<dd><code>approveButtonText</code> - Approve button text</dd>
-<dd><code>onApprove</code> - Approved path consumer</dd>
-<dt>Returns:</dt>
-<dd>the browse button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="buttonBrowseFiles(net.emustudio.emulib.runtime.ui.Dialogs,java.lang.String,java.lang.String,boolean,java.util.function.Consumer,net.emustudio.emulib.runtime.ui.components.FileExtensionsFilter...)">
-<h3>buttonBrowseFiles</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JButton.html" title="class or interface in javax.swing" class="external-link">JButton</a></span>&nbsp;<span class="element-name">buttonBrowseFiles</span><wbr><span class="parameters">(<a href="Dialogs.html" title="interface in net.emustudio.emulib.runtime.ui">Dialogs</a>&nbsp;dialogs,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dialogTitle,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;approveButtonText,
- boolean&nbsp;appendMissingExtensions,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;onApprove,
- <a href="components/FileExtensionsFilter.html" title="class in net.emustudio.emulib.runtime.ui.components">FileExtensionsFilter</a>...&nbsp;filters)</span></div>
-<div class="block">Creates a browse button for file selection.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>dialogs</code> - emuStudio dialogs</dd>
-<dd><code>dialogTitle</code> - Open/Save dialog title</dd>
-<dd><code>approveButtonText</code> - Approve button text</dd>
-<dd><code>appendMissingExtensions</code> - Append extension to selected file if it doesn't have it</dd>
-<dd><code>onApprove</code> - Approved path consumer</dd>
-<dd><code>filters</code> - list of file filters</dd>
-<dt>Returns:</dt>
-<dd>the browse button</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="menuItem(javax.swing.Action)">
-<h3>menuItem</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JMenuItem.html" title="class or interface in javax.swing" class="external-link">JMenuItem</a></span>&nbsp;<span class="element-name">menuItem</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/Action.html" title="class or interface in javax.swing" class="external-link">Action</a>&nbsp;action)</span></div>
-<div class="block">Creates a JMenuItem from a Swing Action.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>action</code> - the action for the menu item</dd>
-<dt>Returns:</dt>
-<dd>the JMenuItem</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="textField(java.lang.String)">
-<h3>textField</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a></span>&nbsp;<span class="element-name">textField</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">Creates a JTextField with given text. The columns count is set to 20.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>text</code> - initial text</dd>
-<dt>Returns:</dt>
-<dd>the JTextField</dd>
+<dd>the same button</dd>
 </dl>
 </div>
 </section>
@@ -833,13 +417,13 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a></span>&nbsp;<span class="element-name">textField</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
  int&nbsp;columns)</span></div>
-<div class="block">Creates a JTextField with given text.</div>
+<div class="block">Creates a text field.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>text</code> - initial text</dd>
 <dd><code>columns</code> - number of columns</dd>
 <dt>Returns:</dt>
-<dd>the JTextField</dd>
+<dd>the text field</dd>
 </dl>
 </div>
 </section>
@@ -848,15 +432,15 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <section class="detail" id="textAreaReadOnly(int,int)">
 <h3>textAreaReadOnly</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextArea.html" title="class or interface in javax.swing" class="external-link">JTextArea</a></span>&nbsp;<span class="element-name">textAreaReadOnly</span><wbr><span class="parameters">(int&nbsp;columns,
- int&nbsp;rows)</span></div>
-<div class="block">Creates a non-editable JTextArea with given columns and rows.</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTextArea.html" title="class or interface in javax.swing" class="external-link">JTextArea</a></span>&nbsp;<span class="element-name">textAreaReadOnly</span><wbr><span class="parameters">(int&nbsp;rows,
+ int&nbsp;columns)</span></div>
+<div class="block">Creates a non-editable text area.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>columns</code> - number of columns</dd>
 <dd><code>rows</code> - number of rows</dd>
+<dd><code>columns</code> - number of columns</dd>
 <dt>Returns:</dt>
-<dd>the non-editable JTextArea</dd>
+<dd>the text area</dd>
 </dl>
 </div>
 </section>
@@ -866,74 +450,32 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>toolBar</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToolBar.html" title="class or interface in javax.swing" class="external-link">JToolBar</a></span>&nbsp;<span class="element-name">toolBar</span>()</div>
-<div class="block">Creates a non-floatable, rollover JToolBar with no border painted.</div>
+<div class="block">Creates a horizontal, non-floatable toolbar. Use <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToolBar.html#setOrientation(int)" title="class or interface in javax.swing" class="external-link"><code>JToolBar.setOrientation(int)</code></a> for a vertical one.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the JToolBar</dd>
+<dd>the toolbar</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="toolBarVertical()">
-<h3>toolBarVertical</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JToolBar.html" title="class or interface in javax.swing" class="external-link">JToolBar</a></span>&nbsp;<span class="element-name">toolBarVertical</span>()</div>
-<div class="block">Creates a vertical JToolBar.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the vertical JToolBar</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="splitPane()">
+<section class="detail" id="splitPane(int,java.awt.Component,java.awt.Component,double)">
 <h3>splitPane</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></span>&nbsp;<span class="element-name">splitPane</span>()</div>
-<div class="block">Creates a JSplitPane with no border, one-touch expandable and continuous layout.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the JSplitPane</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="splitPaneLeftToRight(java.awt.Component,java.awt.Component,java.lang.Double)">
-<h3>splitPaneLeftToRight</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></span>&nbsp;<span class="element-name">splitPaneLeftToRight</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;left,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;right,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&nbsp;resizeWeight)</span></div>
-<div class="block">Creates a horizontal JSplitPane with left and right components.</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></span>&nbsp;<span class="element-name">splitPane</span><wbr><span class="parameters">(int&nbsp;orientation,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;first,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;second,
+ double&nbsp;resizeWeight)</span></div>
+<div class="block">Creates a split pane.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>left</code> - left component</dd>
-<dd><code>right</code> - right component</dd>
-<dd><code>resizeWeight</code> - resize weight</dd>
+<dd><code>orientation</code> - <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html#HORIZONTAL_SPLIT" title="class or interface in javax.swing" class="external-link"><code>JSplitPane.HORIZONTAL_SPLIT</code></a> (left to right) or
+                    <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html#VERTICAL_SPLIT" title="class or interface in javax.swing" class="external-link"><code>JSplitPane.VERTICAL_SPLIT</code></a> (top to bottom)</dd>
+<dd><code>first</code> - left or top component</dd>
+<dd><code>second</code> - right or bottom component</dd>
+<dd><code>resizeWeight</code> - how extra space is distributed (0 = all to second, 1 = all to first)</dd>
 <dt>Returns:</dt>
-<dd>the JSplitPane</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="splitPaneTopToBottom(java.awt.Component,java.awt.Component,java.lang.Double)">
-<h3>splitPaneTopToBottom</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JSplitPane.html" title="class or interface in javax.swing" class="external-link">JSplitPane</a></span>&nbsp;<span class="element-name">splitPaneTopToBottom</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;top,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;bottom,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&nbsp;resizeWeight)</span></div>
-<div class="block">Creates a vertical JSplitPane with top and bottom components.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>top</code> - top component</dd>
-<dd><code>bottom</code> - bottom component</dd>
-<dd><code>resizeWeight</code> - resize weight</dd>
-<dt>Returns:</dt>
-<dd>the JSplitPane</dd>
+<dd>the split pane</dd>
 </dl>
 </div>
 </section>
@@ -943,12 +485,12 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <h3>scrollPane</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JScrollPane.html" title="class or interface in javax.swing" class="external-link">JScrollPane</a></span>&nbsp;<span class="element-name">scrollPane</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">Component</a>&nbsp;view)</span></div>
-<div class="block">Creates a JScrollPane with no border around the viewport.</div>
+<div class="block">Creates a borderless scroll pane.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>view</code> - the component to be displayed in the scroll pane</dd>
+<dd><code>view</code> - the scrolled component</dd>
 <dt>Returns:</dt>
-<dd>the JScrollPane</dd>
+<dd>the scroll pane</dd>
 </dl>
 </div>
 </section>
@@ -960,54 +502,14 @@ Also removes the ContainerListener that was installed by <a href="#addKeyListene
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></span>&nbsp;<span class="element-name">panel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layoutConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;colConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rowConstraints)</span></div>
-<div class="block">Creates a JPanel with custom layout constraints.</div>
+<div class="block">Creates a panel with MigLayout.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>layoutConstraints</code> - layout constraints</dd>
 <dd><code>colConstraints</code> - column constraints</dd>
 <dd><code>rowConstraints</code> - row constraints</dd>
 <dt>Returns:</dt>
-<dd>the JPanel</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="panelHorizontal()">
-<h3>panelHorizontal</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JPanel.html" title="class or interface in javax.swing" class="external-link">JPanel</a></span>&nbsp;<span class="element-name">panelHorizontal</span>()</div>
-<div class="block">Creates a JPanel in a horizontal arrangement.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the JPanel in a horizontal arrangement</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="styleTable(javax.swing.JTable)">
-<h3>styleTable</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">styleTable</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</span></div>
-<div class="block">Applies the host's table styling, preserving larger row heights and accommodating the current font.
-Reapplying the style must not keep increasing row heights.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>table</code> - the JTable</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="styleList(javax.swing.JList)">
-<h3>styleList</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">styleList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JList.html" title="class or interface in javax.swing" class="external-link">JList</a>&lt;?&gt;&nbsp;list)</span></div>
-<div class="block">Makes a JList look modern.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>list</code> - the JList</dd>
+<dd>the panel</dd>
 </dl>
 </div>
 </section>
@@ -1020,7 +522,7 @@ Reapplying the style must not keep increasing row heights.</div>
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layoutConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;colConstraints,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rowConstraints)</span></div>
-<div class="block">Creates a titled section panel.</div>
+<div class="block">Creates a panel with MigLayout and a titled border.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>title</code> - section title</dd>
@@ -1028,7 +530,20 @@ Reapplying the style must not keep increasing row heights.</div>
 <dd><code>colConstraints</code> - column constraints</dd>
 <dd><code>rowConstraints</code> - row constraints</dd>
 <dt>Returns:</dt>
-<dd>JPanel with a titled border</dd>
+<dd>the titled panel</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="styleTable(javax.swing.JTable)">
+<h3>styleTable</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">styleTable</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JTable.html" title="class or interface in javax.swing" class="external-link">JTable</a>&nbsp;table)</span></div>
+<div class="block">Applies the host's table styling. Reapplying the style must not keep increasing row heights.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>table</code> - the table</dd>
 </dl>
 </div>
 </section>

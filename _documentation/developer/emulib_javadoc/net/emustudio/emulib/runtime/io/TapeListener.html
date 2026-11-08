@@ -56,36 +56,14 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" tabindex="0">onBlock(FileLoader.Block)</a></li>
-<li><a href="#onFileStart()" tabindex="0">onFileStart()</a></li>
-<li><a href="#onHeaderStart()" tabindex="0">onHeaderStart()</a></li>
-<li><a href="#onDataStart()" tabindex="0">onDataStart()</a></li>
-<li><a href="#onBlockFlag(int)" tabindex="0">onBlockFlag(int)</a></li>
-<li><a href="#onBlockData(byte%5B%5D)" tabindex="0">onBlockData(byte[])</a></li>
-<li><a href="#onBlockChecksum(byte)" tabindex="0">onBlockChecksum(byte)</a></li>
-<li><a href="#onFileEnd()" tabindex="0">onFileEnd()</a></li>
-<li><a href="#onProgram(java.lang.String,int,int,int)" tabindex="0">onProgram(String, int, int, int)</a></li>
-<li><a href="#onNumberArray(java.lang.String,int,char)" tabindex="0">onNumberArray(String, int, char)</a></li>
-<li><a href="#onStringArray(java.lang.String,int,char)" tabindex="0">onStringArray(String, int, char)</a></li>
-<li><a href="#onMemoryBlock(java.lang.String,int,int)" tabindex="0">onMemoryBlock(String, int, int)</a></li>
-<li><a href="#onTurboSpeedData(int,int,int,int,int,int,int,int,byte%5B%5D)" tabindex="0">onTurboSpeedData(int, int, int, int, int, int, int, int, byte[])</a></li>
-<li><a href="#onPureTone(int,int)" tabindex="0">onPureTone(int, int)</a></li>
-<li><a href="#onPulseSequence(int%5B%5D)" tabindex="0">onPulseSequence(int[])</a></li>
-<li><a href="#onPureData(int,int,int,int,byte%5B%5D)" tabindex="0">onPureData(int, int, int, int, byte[])</a></li>
-<li><a href="#onDirectRecording(int,int,int,byte%5B%5D)" tabindex="0">onDirectRecording(int, int, int, byte[])</a></li>
-<li><a href="#onCswRecording(int,int,int,long,byte%5B%5D)" tabindex="0">onCswRecording(int, int, int, long, byte[])</a></li>
-<li><a href="#onGeneralizedData(int,byte%5B%5D)" tabindex="0">onGeneralizedData(int, byte[])</a></li>
+<li><a href="#onStandardData(byte%5B%5D)" tabindex="0">onStandardData(byte[])</a></li>
+<li><a href="#onPulses(int%5B%5D)" tabindex="0">onPulses(int[])</a></li>
+<li><a href="#onPureData(int,int,int,byte%5B%5D)" tabindex="0">onPureData(int, int, int, byte[])</a></li>
+<li><a href="#onDirectRecording(int,int,byte%5B%5D)" tabindex="0">onDirectRecording(int, int, byte[])</a></li>
 <li><a href="#onPause(int)" tabindex="0">onPause(int)</a></li>
-<li><a href="#onGroupStart(java.lang.String)" tabindex="0">onGroupStart(String)</a></li>
-<li><a href="#onGroupEnd()" tabindex="0">onGroupEnd()</a></li>
-<li><a href="#onStopIfIn48KMode()" tabindex="0">onStopIfIn48KMode()</a></li>
 <li><a href="#onSetSignalLevel(int)" tabindex="0">onSetSignalLevel(int)</a></li>
-<li><a href="#onTextDescription(java.lang.String)" tabindex="0">onTextDescription(String)</a></li>
-<li><a href="#onMessage(java.lang.String,int)" tabindex="0">onMessage(String, int)</a></li>
-<li><a href="#onArchiveInfo(java.util.List)" tabindex="0">onArchiveInfo(List)</a></li>
-<li><a href="#onHardwareInfo(java.util.List)" tabindex="0">onHardwareInfo(List)</a></li>
-<li><a href="#onCustomInfo(java.lang.String,byte%5B%5D)" tabindex="0">onCustomInfo(String, byte[])</a></li>
-<li><a href="#onGlueBlock()" tabindex="0">onGlueBlock()</a></li>
+<li><a href="#onInfo(java.lang.String,java.lang.String)" tabindex="0">onInfo(String, String)</a></li>
+<li><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" tabindex="0">onBlock(FileLoader.Block)</a></li>
 </ol>
 </li>
 </ol>
@@ -104,7 +82,10 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">TapeListener</span><span class="extends-implements">
 extends <a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></span></div>
-<div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
+<div class="block">Tape signal callbacks, decoded from TAP/TZX blocks by <a href="FileLoader.html" title="class in net.emustudio.emulib.runtime.io"><code>FileLoader</code></a>.
+<p>
+Usage: <code>FileLoader.load(path, format, tapeListener)</code>. Pulse lengths are in Z80 T-states (3.5 MHz),
+bits are sent from the most significant one. Blocks which cannot be played are reported by <a href="#onInfo(java.lang.String,java.lang.String)"><code>onInfo(String, String)</code></a>.</div>
 </div>
 </section>
 <section class="summary">
@@ -121,188 +102,60 @@ extends <a href="FileLoader.Listener.html" title="interface in net.emustudio.emu
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onArchiveInfo(java.util.List)" class="member-name-link">onArchiveInfo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&gt;&nbsp;entries)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" class="member-name-link">onBlock</a><wbr>(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x32 - Archive Info.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)" class="member-name-link">onBlock</a><wbr>(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onBlockChecksum(byte)" class="member-name-link">onBlockChecksum</a><wbr>(byte&nbsp;checksum)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">On block checksum</div>
+<div class="block">Decodes a tape block into the callbacks of this listener.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onBlockData(byte%5B%5D)" class="member-name-link">onBlockData</a><wbr>(byte[]&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Raw data block.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onBlockFlag(int)" class="member-name-link">onBlockFlag</a><wbr>(int&nbsp;flag)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Block flag (0 - header, 255- data)</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onCswRecording(int,int,int,long,byte%5B%5D)" class="member-name-link">onCswRecording</a><wbr>(int&nbsp;pauseAfterMs,
- int&nbsp;sampleRate,
- int&nbsp;compressionType,
- long&nbsp;storedPulseCount,
- byte[]&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x18 - CSW Recording.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onCustomInfo(java.lang.String,byte%5B%5D)" class="member-name-link">onCustomInfo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- byte[]&nbsp;data)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x35 - Custom Info Block.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onDataStart()" class="member-name-link">onDataStart</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Data block starts</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onDirectRecording(int,int,int,byte%5B%5D)" class="member-name-link">onDirectRecording</a><wbr>(int&nbsp;tstatesPerSample,
- int&nbsp;pauseAfterMs,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onDirectRecording(int,int,byte%5B%5D)" class="member-name-link">onDirectRecording</a><wbr>(int&nbsp;tstatesPerSample,
  int&nbsp;usedBitsInLastByte,
  byte[]&nbsp;samples)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Direct recording (TZX 0x15): each bit is the signal level of one sample.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onInfo(java.lang.String,java.lang.String)" class="member-name-link">onInfo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;details)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x15 - Direct Recording.</div>
+<div class="block">Human-readable information about the tape: Spectrum headers ("PROGRAM", "NUMBER ARRAY", "STRING ARRAY",
+"MEMORY BLOCK"), TZX informational blocks ("TEXT", "MESSAGE", "ARCHIVE", "HARDWARE", "CUSTOM", "GROUP",
+"GROUP END", "GLUE", "STOP 48K"), unsupported blocks ("CSW REC", "GEN DATA", "SELECT") and "ERROR".</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onFileEnd()" class="member-name-link">onFileEnd</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onPause(int)" class="member-name-link">onPause</a><wbr>(int&nbsp;durationMs)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Called only after successful traversal, never after failure or cancellation.</div>
+<div class="block">Silence (TZX 0x20, or the pause after a TZX data block).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onFileStart()" class="member-name-link">onFileStart</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onPulses(int%5B%5D)" class="member-name-link">onPulses</a><wbr>(int[]&nbsp;pulseLengths)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Called before the first block; reusable listeners should reset per-file state here.</div>
+<div class="block">Sequence of pulses (TZX 0x12 pure tone, 0x13 pulse sequence, pilot and sync pulses of 0x11 turbo data).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onGeneralizedData(int,byte%5B%5D)" class="member-name-link">onGeneralizedData</a><wbr>(int&nbsp;pauseAfterMs,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onPureData(int,int,int,byte%5B%5D)" class="member-name-link">onPureData</a><wbr>(int&nbsp;zeroBitPulseLen,
+ int&nbsp;oneBitPulseLen,
+ int&nbsp;usedBitsInLastByte,
  byte[]&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x19 - Generalized Data Block.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onGlueBlock()" class="member-name-link">onGlueBlock</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x5A - Glue Block.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onGroupEnd()" class="member-name-link">onGroupEnd</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x22 - Group End.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onGroupStart(java.lang.String)" class="member-name-link">onGroupStart</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x21 - Group Start.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onHardwareInfo(java.util.List)" class="member-name-link">onHardwareInfo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;int[]&gt;&nbsp;entries)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x33 - Hardware Type.</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Data without pilot and sync pulses (TZX 0x14, data of 0x11 turbo data).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onHeaderStart()" class="member-name-link">onHeaderStart</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onSetSignalLevel(int)" class="member-name-link">onSetSignalLevel</a><wbr>(int&nbsp;level)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Header block starts</div>
+<div class="block">Sets signal level (TZX 0x2B).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMemoryBlock(java.lang.String,int,int)" class="member-name-link">onMemoryBlock</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- int&nbsp;startAddress)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onStandardData(byte%5B%5D)" class="member-name-link">onStandardData</a><wbr>(byte[]&nbsp;packet)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Data block will be a memory block</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onMessage(java.lang.String,int)" class="member-name-link">onMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- int&nbsp;displayTimeSeconds)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x31 - Message Block.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onNumberArray(java.lang.String,int,char)" class="member-name-link">onNumberArray</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- char&nbsp;variable)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Data block will be a number array variable</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onPause(int)" class="member-name-link">onPause</a><wbr>(int&nbsp;durationMs)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x20 - Pause (Silence) or Stop the Tape.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onProgram(java.lang.String,int,int,int)" class="member-name-link">onProgram</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- int&nbsp;dataLength,
- int&nbsp;autoStart,
- int&nbsp;programLength)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Data block will be a program in BASIC.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onPulseSequence(int%5B%5D)" class="member-name-link">onPulseSequence</a><wbr>(int[]&nbsp;pulseLengths)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x13 - Pulse Sequence.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onPureData(int,int,int,int,byte%5B%5D)" class="member-name-link">onPureData</a><wbr>(int&nbsp;zeroBitPulseLen,
- int&nbsp;oneBitPulseLen,
- int&nbsp;usedBitsInLastByte,
- int&nbsp;pauseAfterMs,
- byte[]&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x14 - Pure Data Block.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onPureTone(int,int)" class="member-name-link">onPureTone</a><wbr>(int&nbsp;pulseLength,
- int&nbsp;pulseCount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x12 - Pure Tone.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onSetSignalLevel(int)" class="member-name-link">onSetSignalLevel</a><wbr>(int&nbsp;level)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x2B - Set Signal Level.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onStopIfIn48KMode()" class="member-name-link">onStopIfIn48KMode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x2A - Stop the tape if in 48K mode.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onStringArray(java.lang.String,int,char)" class="member-name-link">onStringArray</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- char&nbsp;variable)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Data block will be a String array variable</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onTextDescription(java.lang.String)" class="member-name-link">onTextDescription</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x30 - Text Description.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#onTurboSpeedData(int,int,int,int,int,int,int,int,byte%5B%5D)" class="member-name-link">onTurboSpeedData</a><wbr>(int&nbsp;pilotPulseLen,
- int&nbsp;sync1PulseLen,
- int&nbsp;sync2PulseLen,
- int&nbsp;zeroBitPulseLen,
- int&nbsp;oneBitPulseLen,
- int&nbsp;pilotToneCount,
- int&nbsp;usedBitsInLastByte,
- int&nbsp;pauseAfterMs,
- byte[]&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">TZX Block 0x11 - Turbo Speed Data Block.</div>
+<div class="block">Standard-speed ROM data block (TAP block or TZX 0x10): pilot tone (8063 pulses if flag &lt; 0x80, otherwise
+3223 pulses), sync pulses and the packet bits.</div>
 </div>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-net.emustudio.emulib.runtime.io.FileLoader.Listener">Methods inherited from interface&nbsp;<a href="FileLoader.Listener.html#method-summary" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></h3>
+<code><a href="FileLoader.Listener.html#onFileEnd()" title="onFileEnd()">onFileEnd</a>, <a href="FileLoader.Listener.html#onFileStart()" title="onFileStart()">onFileStart</a></code></div>
 </section>
 </li>
 </ul>
@@ -315,309 +168,64 @@ extends <a href="FileLoader.Listener.html" title="interface in net.emustudio.emu
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">
-<h3>onBlock</h3>
+<section class="detail" id="onStandardData(byte[])">
+<h3>onStandardData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onBlock</span><wbr><span class="parameters">(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</span>
-              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="FileLoader.Listener.html#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">onBlock</a></code>&nbsp;in interface&nbsp;<code><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></code></dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onFileStart()">
-<h3>onFileStart</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onFileStart</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="FileLoader.Listener.html#onFileStart()">FileLoader.Listener</a></code></span></div>
-<div class="block">Called before the first block; reusable listeners should reset per-file state here.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="FileLoader.Listener.html#onFileStart()">onFileStart</a></code>&nbsp;in interface&nbsp;<code><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onHeaderStart()">
-<h3>onHeaderStart</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onHeaderStart</span>()</div>
-<div class="block">Header block starts</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onDataStart()">
-<h3>onDataStart</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onDataStart</span>()</div>
-<div class="block">Data block starts</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onBlockFlag(int)">
-<h3>onBlockFlag</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onBlockFlag</span><wbr><span class="parameters">(int&nbsp;flag)</span></div>
-<div class="block">Block flag (0 - header, 255- data)</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onStandardData</span><wbr><span class="parameters">(byte[]&nbsp;packet)</span></div>
+<div class="block">Standard-speed ROM data block (TAP block or TZX 0x10): pilot tone (8063 pulses if flag &lt; 0x80, otherwise
+3223 pulses), sync pulses and the packet bits.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>flag</code> - block flag</dd>
+<dd><code>packet</code> - flag, data and checksum</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="onBlockData(byte[])">
-<h3>onBlockData</h3>
+<section class="detail" id="onPulses(int[])">
+<h3>onPulses</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onBlockData</span><wbr><span class="parameters">(byte[]&nbsp;data)</span></div>
-<div class="block">Raw data block. The type is determined by a previous onXXX call</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onPulses</span><wbr><span class="parameters">(int[]&nbsp;pulseLengths)</span></div>
+<div class="block">Sequence of pulses (TZX 0x12 pure tone, 0x13 pulse sequence, pilot and sync pulses of 0x11 turbo data).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>data</code> - data</dd>
+<dd><code>pulseLengths</code> - pulse lengths in T-states</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="onBlockChecksum(byte)">
-<h3>onBlockChecksum</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onBlockChecksum</span><wbr><span class="parameters">(byte&nbsp;checksum)</span></div>
-<div class="block">On block checksum</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>checksum</code> - block checksum</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onFileEnd()">
-<h3>onFileEnd</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onFileEnd</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="FileLoader.Listener.html#onFileEnd()">FileLoader.Listener</a></code></span></div>
-<div class="block">Called only after successful traversal, never after failure or cancellation.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="FileLoader.Listener.html#onFileEnd()">onFileEnd</a></code>&nbsp;in interface&nbsp;<code><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onProgram(java.lang.String,int,int,int)">
-<h3>onProgram</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onProgram</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- int&nbsp;dataLength,
- int&nbsp;autoStart,
- int&nbsp;programLength)</span></div>
-<div class="block">Data block will be a program in BASIC.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>fileName</code> - BASIC file name</dd>
-<dd><code>dataLength</code> - data block length</dd>
-<dd><code>autoStart</code> - line number</dd>
-<dd><code>programLength</code> - program length = start of variable area</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onNumberArray(java.lang.String,int,char)">
-<h3>onNumberArray</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onNumberArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- char&nbsp;variable)</span></div>
-<div class="block">Data block will be a number array variable</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>filename</code> - BASIC file name</dd>
-<dd><code>dataLength</code> - data block length</dd>
-<dd><code>variable</code> - variable name 'A'..'Z'</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onStringArray(java.lang.String,int,char)">
-<h3>onStringArray</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onStringArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- char&nbsp;variable)</span></div>
-<div class="block">Data block will be a String array variable</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>filename</code> - BASIC file name</dd>
-<dd><code>dataLength</code> - data block length</dd>
-<dd><code>variable</code> - variable name 'A'..'Z'</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onMemoryBlock(java.lang.String,int,int)">
-<h3>onMemoryBlock</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onMemoryBlock</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- int&nbsp;dataLength,
- int&nbsp;startAddress)</span></div>
-<div class="block">Data block will be a memory block</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>filename</code> - BASIC file name</dd>
-<dd><code>dataLength</code> - data block length</dd>
-<dd><code>startAddress</code> - starting address in memory</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onTurboSpeedData(int,int,int,int,int,int,int,int,byte[])">
-<h3>onTurboSpeedData</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onTurboSpeedData</span><wbr><span class="parameters">(int&nbsp;pilotPulseLen,
- int&nbsp;sync1PulseLen,
- int&nbsp;sync2PulseLen,
- int&nbsp;zeroBitPulseLen,
- int&nbsp;oneBitPulseLen,
- int&nbsp;pilotToneCount,
- int&nbsp;usedBitsInLastByte,
- int&nbsp;pauseAfterMs,
- byte[]&nbsp;data)</span></div>
-<div class="block">TZX Block 0x11 - Turbo Speed Data Block.
-Like standard speed data but with custom timing parameters.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pilotPulseLen</code> - length of pilot pulse in T-states</dd>
-<dd><code>sync1PulseLen</code> - length of first sync pulse in T-states</dd>
-<dd><code>sync2PulseLen</code> - length of second sync pulse in T-states</dd>
-<dd><code>zeroBitPulseLen</code> - length of zero bit pulse in T-states</dd>
-<dd><code>oneBitPulseLen</code> - length of one bit pulse in T-states</dd>
-<dd><code>pilotToneCount</code> - number of pilot pulses</dd>
-<dd><code>usedBitsInLastByte</code> - used bits in the last byte (1-8)</dd>
-<dd><code>pauseAfterMs</code> - pause after this block in ms</dd>
-<dd><code>data</code> - data bytes (including flag + data + checksum, as in TAP)</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onPureTone(int,int)">
-<h3>onPureTone</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onPureTone</span><wbr><span class="parameters">(int&nbsp;pulseLength,
- int&nbsp;pulseCount)</span></div>
-<div class="block">TZX Block 0x12 - Pure Tone.
-Generates a sequence of pulses of the same length.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pulseLength</code> - length of each pulse in T-states</dd>
-<dd><code>pulseCount</code> - number of pulses</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onPulseSequence(int[])">
-<h3>onPulseSequence</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onPulseSequence</span><wbr><span class="parameters">(int[]&nbsp;pulseLengths)</span></div>
-<div class="block">TZX Block 0x13 - Pulse Sequence.
-Generates a sequence of pulses of different lengths.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pulseLengths</code> - array of pulse lengths in T-states</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onPureData(int,int,int,int,byte[])">
+<section class="detail" id="onPureData(int,int,int,byte[])">
 <h3>onPureData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onPureData</span><wbr><span class="parameters">(int&nbsp;zeroBitPulseLen,
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onPureData</span><wbr><span class="parameters">(int&nbsp;zeroBitPulseLen,
  int&nbsp;oneBitPulseLen,
  int&nbsp;usedBitsInLastByte,
- int&nbsp;pauseAfterMs,
  byte[]&nbsp;data)</span></div>
-<div class="block">TZX Block 0x14 - Pure Data Block.
-Data block without pilot tone or sync pulses.</div>
+<div class="block">Data without pilot and sync pulses (TZX 0x14, data of 0x11 turbo data). Each bit is two pulses.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>zeroBitPulseLen</code> - length of zero bit pulse in T-states</dd>
-<dd><code>oneBitPulseLen</code> - length of one bit pulse in T-states</dd>
-<dd><code>usedBitsInLastByte</code> - used bits in the last byte (1-8)</dd>
-<dd><code>pauseAfterMs</code> - pause after this block in ms</dd>
-<dd><code>data</code> - raw data bytes</dd>
+<dd><code>zeroBitPulseLen</code> - length of a pulse of bit 0</dd>
+<dd><code>oneBitPulseLen</code> - length of a pulse of bit 1</dd>
+<dd><code>usedBitsInLastByte</code> - number of bits used in the last byte (1-8)</dd>
+<dd><code>data</code> - data bytes</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="onDirectRecording(int,int,int,byte[])">
+<section class="detail" id="onDirectRecording(int,int,byte[])">
 <h3>onDirectRecording</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onDirectRecording</span><wbr><span class="parameters">(int&nbsp;tstatesPerSample,
- int&nbsp;pauseAfterMs,
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onDirectRecording</span><wbr><span class="parameters">(int&nbsp;tstatesPerSample,
  int&nbsp;usedBitsInLastByte,
  byte[]&nbsp;samples)</span></div>
-<div class="block">TZX Block 0x15 - Direct Recording.
-Raw sample data at a given sample rate.</div>
+<div class="block">Direct recording (TZX 0x15): each bit is the signal level of one sample.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>tstatesPerSample</code> - T-states per sample</dd>
-<dd><code>pauseAfterMs</code> - pause after this block in ms</dd>
-<dd><code>usedBitsInLastByte</code> - used bits in the last byte (1-8)</dd>
-<dd><code>samples</code> - raw sample data (each bit = one sample)</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onCswRecording(int,int,int,long,byte[])">
-<h3>onCswRecording</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onCswRecording</span><wbr><span class="parameters">(int&nbsp;pauseAfterMs,
- int&nbsp;sampleRate,
- int&nbsp;compressionType,
- long&nbsp;storedPulseCount,
- byte[]&nbsp;data)</span></div>
-<div class="block">TZX Block 0x18 - CSW Recording.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pauseAfterMs</code> - pause after this block in ms</dd>
-<dd><code>sampleRate</code> - sample rate in Hz</dd>
-<dd><code>compressionType</code> - 1=RLE, 2=Z-RLE</dd>
-<dd><code>storedPulseCount</code> - number of stored pulses (after decompression)</dd>
-<dd><code>data</code> - compressed pulse data</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onGeneralizedData(int,byte[])">
-<h3>onGeneralizedData</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGeneralizedData</span><wbr><span class="parameters">(int&nbsp;pauseAfterMs,
- byte[]&nbsp;data)</span></div>
-<div class="block">TZX Block 0x19 - Generalized Data Block.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>pauseAfterMs</code> - pause after this block in ms</dd>
-<dd><code>data</code> - block data (symbol tables + pilot/data streams)</dd>
+<dd><code>tstatesPerSample</code> - length of one sample</dd>
+<dd><code>usedBitsInLastByte</code> - number of samples used in the last byte (1-8)</dd>
+<dd><code>samples</code> - samples</dd>
 </dl>
 </div>
 </section>
@@ -626,44 +234,12 @@ Raw sample data at a given sample rate.</div>
 <section class="detail" id="onPause(int)">
 <h3>onPause</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onPause</span><wbr><span class="parameters">(int&nbsp;durationMs)</span></div>
-<div class="block">TZX Block 0x20 - Pause (Silence) or Stop the Tape.
-If durationMs is 0, it means "stop the tape" and wait for user to resume.</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onPause</span><wbr><span class="parameters">(int&nbsp;durationMs)</span></div>
+<div class="block">Silence (TZX 0x20, or the pause after a TZX data block).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>durationMs</code> - duration of silence in ms (0 = stop the tape)</dd>
+<dd><code>durationMs</code> - pause in milliseconds; 0 means "stop the tape"</dd>
 </dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onGroupStart(java.lang.String)">
-<h3>onGroupStart</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGroupStart</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">TZX Block 0x21 - Group Start.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>name</code> - group name</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onGroupEnd()">
-<h3>onGroupEnd</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGroupEnd</span>()</div>
-<div class="block">TZX Block 0x22 - Group End.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onStopIfIn48KMode()">
-<h3>onStopIfIn48KMode</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onStopIfIn48KMode</span>()</div>
-<div class="block">TZX Block 0x2A - Stop the tape if in 48K mode.</div>
 </div>
 </section>
 </li>
@@ -671,91 +247,48 @@ If durationMs is 0, it means "stop the tape" and wait for user to resume.</div>
 <section class="detail" id="onSetSignalLevel(int)">
 <h3>onSetSignalLevel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onSetSignalLevel</span><wbr><span class="parameters">(int&nbsp;level)</span></div>
-<div class="block">TZX Block 0x2B - Set Signal Level.</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onSetSignalLevel</span><wbr><span class="parameters">(int&nbsp;level)</span></div>
+<div class="block">Sets signal level (TZX 0x2B).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>level</code> - signal level (0=low, 1=high)</dd>
+<dd><code>level</code> - 0 = low, otherwise high</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="onTextDescription(java.lang.String)">
-<h3>onTextDescription</h3>
+<section class="detail" id="onInfo(java.lang.String,java.lang.String)">
+<h3>onInfo</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onTextDescription</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
-<div class="block">TZX Block 0x30 - Text Description.</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onInfo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;details)</span></div>
+<div class="block">Human-readable information about the tape: Spectrum headers ("PROGRAM", "NUMBER ARRAY", "STRING ARRAY",
+"MEMORY BLOCK"), TZX informational blocks ("TEXT", "MESSAGE", "ARCHIVE", "HARDWARE", "CUSTOM", "GROUP",
+"GROUP END", "GLUE", "STOP 48K"), unsupported blocks ("CSW REC", "GEN DATA", "SELECT") and "ERROR".</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>text</code> - description text</dd>
+<dd><code>type</code> - information type</dd>
+<dd><code>details</code> - details</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="onMessage(java.lang.String,int)">
-<h3>onMessage</h3>
+<section class="detail" id="onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">
+<h3>onBlock</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onMessage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- int&nbsp;displayTimeSeconds)</span></div>
-<div class="block">TZX Block 0x31 - Message Block.</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onBlock</span><wbr><span class="parameters">(<a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a>&nbsp;block)</span>
+              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Decodes a tape block into the callbacks of this listener. TZX control-flow blocks are ignored here
+(the loader follows them).</div>
 <dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="FileLoader.Listener.html#onBlock(net.emustudio.emulib.runtime.io.FileLoader.Block)">onBlock</a></code>&nbsp;in interface&nbsp;<code><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>message</code> - message text</dd>
-<dd><code>displayTimeSeconds</code> - display time in seconds</dd>
+<dd><code>block</code> - tape block</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the block is not a tape block, or is malformed</dd>
 </dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onArchiveInfo(java.util.List)">
-<h3>onArchiveInfo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onArchiveInfo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&gt;&nbsp;entries)</span></div>
-<div class="block">TZX Block 0x32 - Archive Info.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>entries</code> - list of [type_description, value] pairs</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onHardwareInfo(java.util.List)">
-<h3>onHardwareInfo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onHardwareInfo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;int[]&gt;&nbsp;entries)</span></div>
-<div class="block">TZX Block 0x33 - Hardware Type.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>entries</code> - list of [hwType, hwId, hwInfo] entries</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onCustomInfo(java.lang.String,byte[])">
-<h3>onCustomInfo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onCustomInfo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- byte[]&nbsp;data)</span></div>
-<div class="block">TZX Block 0x35 - Custom Info Block.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>id</code> - identification string (up to 16 chars)</dd>
-<dd><code>data</code> - custom info data</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="onGlueBlock()">
-<h3>onGlueBlock</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGlueBlock</span>()</div>
-<div class="block">TZX Block 0x5A - Glue Block.
-Used to merge multiple TZX files together. Should be skipped by players.</div>
 </div>
 </section>
 </li>

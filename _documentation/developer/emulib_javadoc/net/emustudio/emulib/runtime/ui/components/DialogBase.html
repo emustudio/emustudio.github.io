@@ -59,8 +59,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E(java.awt.Frame,java.lang.String,boolean)" tabindex="0">DialogBase(Frame, String, boolean)</a></li>
-<li><a href="#%3Cinit%3E(java.awt.Dialog,java.lang.String,boolean)" tabindex="0">DialogBase(Dialog, String, boolean)</a></li>
+<li><a href="#%3Cinit%3E(java.awt.Window,java.lang.String,boolean)" tabindex="0">DialogBase(Window, String, boolean)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
@@ -170,15 +169,10 @@ of their constructor. The dialog is packed, centered on its parent, disposed on 
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected </code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.awt.Dialog,java.lang.String,boolean)" class="member-name-link">DialogBase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link">Dialog</a>&nbsp;parent,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.awt.Window,java.lang.String,boolean)" class="member-name-link">DialogBase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html" title="class or interface in java.awt" class="external-link">Window</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected </code></div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.awt.Frame,java.lang.String,boolean)" class="member-name-link">DialogBase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link">Frame</a>&nbsp;parent,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
- boolean&nbsp;modal)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -249,33 +243,17 @@ of their constructor. The dialog is packed, centered on its parent, disposed on 
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.awt.Frame,java.lang.String,boolean)">
+<section class="detail" id="&lt;init&gt;(java.awt.Window,java.lang.String,boolean)">
 <h3>DialogBase</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DialogBase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Frame.html" title="class or interface in java.awt" class="external-link">Frame</a>&nbsp;parent,
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DialogBase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Window.html" title="class or interface in java.awt" class="external-link">Window</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  boolean&nbsp;modal)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>parent</code> - parent frame, or <code>null</code></dd>
+<dd><code>parent</code> - parent window; <code>null</code> uses the shared Swing owner frame</dd>
 <dd><code>title</code> - dialog title</dd>
-<dd><code>modal</code> - whether the dialog is modal</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.awt.Dialog,java.lang.String,boolean)">
-<h3>DialogBase</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DialogBase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/Dialog.html" title="class or interface in java.awt" class="external-link">Dialog</a>&nbsp;parent,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
- boolean&nbsp;modal)</span></div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>parent</code> - parent dialog</dd>
-<dd><code>title</code> - dialog title</dd>
-<dd><code>modal</code> - whether the dialog is modal</dd>
+<dd><code>modal</code> - whether the dialog is application-modal</dd>
 </dl>
 </div>
 </section>

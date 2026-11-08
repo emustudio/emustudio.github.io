@@ -57,7 +57,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getDebugger()" tabindex="0">getDebugger()</a></li>
 <li><a href="#step()" tabindex="0">step()</a></li>
 <li><a href="#execute()" tabindex="0">execute()</a></li>
 <li><a href="#sampleFrequency()" tabindex="0">sampleFrequency()</a></li>
@@ -67,6 +66,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#setInstructionLocation(int)" tabindex="0">setInstructionLocation(int)</a></li>
 <li><a href="#getAddressSpaceSize()" tabindex="0">getAddressSpaceSize()</a></li>
 <li><a href="#getDisassembler()" tabindex="0">getDisassembler()</a></li>
+<li><a href="#getDebuggerColumns()" tabindex="0">getDebuggerColumns()</a></li>
 <li><a href="#isAutomationSupported()" tabindex="0">isAutomationSupported()</a></li>
 </ol>
 </li>
@@ -117,14 +117,9 @@ to plugins.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Interface</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="CPU.CPUListener.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.cpu">CPU.CPUListener</a></code></div>
+<div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="CPU.RunState.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Interface for receiving host-owned CPU execution events.</div>
-</div>
-<div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="CPU.RunState.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.cpu">CPU.RunState</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">The run state of the CPU.</div>
 </div>
 </div>
@@ -151,10 +146,10 @@ to plugins.</div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Get the number of addressable instruction locations exposed by this CPU.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDebugger()" class="member-name-link">getDebugger</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../../runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;?&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDebuggerColumns()" class="member-name-link">getDebuggerColumns</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Optional portable debugging capabilities.</div>
+<div class="block">Get custom columns of the debugger table.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDisassembler()" class="member-name-link">getDisassembler</a>()</code></div>
@@ -174,14 +169,14 @@ to plugins.</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isAutomationSupported()" class="member-name-link">isAutomationSupported</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Determines if this plugin supports emulation automation</div>
+<div class="block">Determines if this plugin supports emulation automation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#reset(int)" class="member-name-link">reset</a><wbr>(int&nbsp;location)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Resets the CPU synchronously after the host has acknowledged actual execution exit.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#sampleFrequency()" class="member-name-link">sampleFrequency</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Optional host-scheduled frequency observation.</div>
@@ -213,15 +208,6 @@ to plugins.</div>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
-<li>
-<section class="detail" id="getDebugger()">
-<h3>getDebugger</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="debug/DebugCPU.html" title="interface in net.emustudio.emulib.plugins.cpu.debug">DebugCPU</a>&gt;</span>&nbsp;<span class="element-name">getDebugger</span>()</div>
-<div class="block">Optional portable debugging capabilities. Unsupported plugins keep the empty default.</div>
-</div>
-</section>
-</li>
 <li>
 <section class="detail" id="step()">
 <h3>step</h3>
@@ -257,7 +243,7 @@ pause/stop state. Natural halt, breakpoint, and failures must retain their actua
 <section class="detail" id="sampleFrequency()">
 <h3>sampleFrequency</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sampleFrequency</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">sampleFrequency</span>()</div>
 <div class="block">Optional host-scheduled frequency observation. Must not execute instructions or create threads.</div>
 </div>
 </section>
@@ -358,12 +344,25 @@ EmuStudio uses it for filling up the debugger table.</div>
 </section>
 </li>
 <li>
+<section class="detail" id="getDebuggerColumns()">
+<h3>getDebuggerColumns</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../runtime/ui/debugger/DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">getDebuggerColumns</span>()</div>
+<div class="block">Get custom columns of the debugger table.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>debugger columns; empty list means default columns (address, mnemo, opcode)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="isAutomationSupported()">
 <h3>isAutomationSupported</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isAutomationSupported</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../Plugin.html#isAutomationSupported()">Plugin</a></code></span></div>
-<div class="block">Determines if this plugin supports emulation automation</div>
+<div class="block">Determines if this plugin supports emulation automation.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Plugin.html#isAutomationSupported()">isAutomationSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>

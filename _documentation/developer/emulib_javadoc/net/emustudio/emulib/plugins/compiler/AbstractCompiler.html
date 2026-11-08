@@ -53,16 +53,10 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
+<li><a href="#nested-class-summary" tabindex="0">Nested Class Summary</a></li>
 <li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
-<li><a href="#field-detail" tabindex="0">Field Details</a>
-<ol class="toc-list">
-<li><a href="#pluginID" tabindex="0">pluginID</a></li>
-<li><a href="#applicationApi" tabindex="0">applicationApi</a></li>
-<li><a href="#settings" tabindex="0">settings</a></li>
-</ol>
-</li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E(long,net.emustudio.emulib.runtime.ApplicationApi,net.emustudio.emulib.runtime.settings.PluginSettings)" tabindex="0">AbstractCompiler(long, ApplicationApi, PluginSettings)</a></li>
@@ -70,23 +64,16 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#initialize()" tabindex="0">initialize()</a></li>
-<li><a href="#destroy()" tabindex="0">destroy()</a></li>
-<li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
-<li><a href="#showSettings(javax.swing.JFrame)" tabindex="0">showSettings(JFrame)</a></li>
-<li><a href="#isShowSettingsSupported()" tabindex="0">isShowSettingsSupported()</a></li>
+<li><a href="#compile(java.nio.file.Path,java.nio.file.Path)" tabindex="0">compile(Path, Path)</a></li>
+<li><a href="#getOutputExtension()" tabindex="0">getOutputExtension()</a></li>
+<li><a href="#compile(java.nio.file.Path,java.util.Optional)" tabindex="0">compile(Path, Optional)</a></li>
 <li><a href="#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" tabindex="0">addCompilerListener(CompilerListener)</a></li>
 <li><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" tabindex="0">removeCompilerListener(CompilerListener)</a></li>
-<li><a href="#notifyCompileStart()" tabindex="0">notifyCompileStart()</a></li>
-<li><a href="#notifyCompileFinish()" tabindex="0">notifyCompileFinish()</a></li>
-<li><a href="#notifyOnMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)" tabindex="0">notifyOnMessage(CompilerMessage)</a></li>
-<li><a href="#notifyError(java.lang.String)" tabindex="0">notifyError(String)</a></li>
-<li><a href="#notifyError(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" tabindex="0">notifyError(SourceCodePosition, String)</a></li>
-<li><a href="#notifyInfo(java.lang.String)" tabindex="0">notifyInfo(String)</a></li>
-<li><a href="#notifyInfo(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" tabindex="0">notifyInfo(SourceCodePosition, String)</a></li>
-<li><a href="#notifyWarning(java.lang.String)" tabindex="0">notifyWarning(String)</a></li>
-<li><a href="#notifyWarning(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" tabindex="0">notifyWarning(SourceCodePosition, String)</a></li>
-<li><a href="#reset()" tabindex="0">reset()</a></li>
+<li><a href="#error(java.lang.String)" tabindex="0">error(String)</a></li>
+<li><a href="#error(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" tabindex="0">error(SourceCodePosition, String)</a></li>
+<li><a href="#warning(java.lang.String)" tabindex="0">warning(String)</a></li>
+<li><a href="#info(java.lang.String)" tabindex="0">info(String)</a></li>
+<li><a href="#runCommandLine(java.lang.String,java.lang.String%5B%5D,net.emustudio.emulib.plugins.compiler.AbstractCompiler.Factory)" tabindex="0">runCommandLine(String, String[], AbstractCompiler.Factory)</a></li>
 </ol>
 </li>
 </ol>
@@ -97,7 +84,9 @@ loadScripts(document, 'script');</script>
 <h1 title="Class AbstractCompiler" class="title">Class AbstractCompiler</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance"><a href="../AbstractPlugin.html" title="class in net.emustudio.emulib.plugins">net.emustudio.emulib.plugins.AbstractPlugin</a>
 <div class="inheritance">net.emustudio.emulib.plugins.compiler.AbstractCompiler</div>
+</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -106,40 +95,45 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NotThreadSafe
-</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractCompiler</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractCompiler</span>
+<span class="extends-implements">extends <a href="../AbstractPlugin.html" title="class in net.emustudio.emulib.plugins">AbstractPlugin</a>
 implements <a href="Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></span></div>
-<div class="block">Implements fundamental functionality useful for most of the compiler plugins.</div>
+<div class="block">Compiler base. Implements listeners and the compilation workflow:
+<ol>
+    <li>listeners are notified about the start; title and version are reported</li>
+    <li>output path is resolved (replacing source file extension by <a href="#getOutputExtension()"><code>getOutputExtension()</code></a>)</li>
+    <li><a href="#compile(java.nio.file.Path,java.nio.file.Path)"><code>compile(Path, Path)</code></a> is called; <a href="CompileException.html" title="class in net.emustudio.emulib.plugins.compiler"><code>CompileException</code></a> or any other exception is reported
+    as an error</li>
+    <li>listeners are notified about the finish</li>
+</ol></div>
 </div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="AbstractCompiler.Factory.html" class="type-name-link" title="interface in net.emustudio.emulib.plugins.compiler">AbstractCompiler.Factory</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Compiler plugin constructor.</div>
+</div>
+</div>
+</section>
+</li>
 <!-- =========== FIELD SUMMARY =========== -->
 <li>
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></code></div>
-<div class="col-second even-row-color"><code><a href="#applicationApi" class="member-name-link">applicationApi</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">emuStudio API.</div>
-</div>
-<div class="col-first odd-row-color"><code>protected final long</code></div>
-<div class="col-second odd-row-color"><code><a href="#pluginID" class="member-name-link">pluginID</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Plugin ID assigned by emuStudio</div>
-</div>
-<div class="col-first even-row-color"><code>protected final <a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></code></div>
-<div class="col-second even-row-color"><code><a href="#settings" class="member-name-link">settings</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Compiler custom settings.</div>
-</div>
-</div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-net.emustudio.emulib.plugins.AbstractPlugin">Fields inherited from class&nbsp;<a href="../AbstractPlugin.html#field-summary" title="class in net.emustudio.emulib.plugins">AbstractPlugin</a></h3>
+<code><a href="../AbstractPlugin.html#applicationApi">applicationApi</a>, <a href="../AbstractPlugin.html#pluginID">pluginID</a>, <a href="../AbstractPlugin.html#settings">settings</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -164,7 +158,7 @@ implements <a href="Compiler.html" title="interface in net.emustudio.emulib.plug
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
@@ -173,94 +167,50 @@ implements <a href="Compiler.html" title="interface in net.emustudio.emulib.plug
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">addCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a listener onto compilerListeners list</div>
+<div class="block">Adds compiler listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#destroy()" class="member-name-link">destroy</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#compile(java.nio.file.Path,java.nio.file.Path)" class="member-name-link">compile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;output)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Compiles the input file into the output file.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#compile(java.nio.file.Path,java.util.Optional)" class="member-name-link">compile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;inputPath,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;outputPath)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get plugin title</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShowSettingsSupported()" class="member-name-link">isShowSettingsSupported</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return false.</div>
+<div class="block">Compile given input file.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyCompileFinish()" class="member-name-link">notifyCompileFinish</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This method notifies all compilerListeners that the compiler finished
-the compile process right now.</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#error(java.lang.String)" class="member-name-link">error</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#error(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" class="member-name-link">error</a><wbr>(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOutputExtension()" class="member-name-link">getOutputExtension</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Output file extension (without dot), used when output path is not given.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyCompileStart()" class="member-name-link">notifyCompileStart</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This method notifies all compilerListeners that the compiler is starting
-the compile process.</div>
-</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#info(java.lang.String)" class="member-name-link">info</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyError(java.lang.String)" class="member-name-link">notifyError</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notifies the error message.</div>
+<div class="block">Removes compiler listener.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyError(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" class="member-name-link">notifyError</a><wbr>(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notifies the error message.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#runCommandLine(java.lang.String,java.lang.String%5B%5D,net.emustudio.emulib.plugins.compiler.AbstractCompiler.Factory)" class="member-name-link">runCommandLine</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jarName,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args,
+ <a href="AbstractCompiler.Factory.html" title="interface in net.emustudio.emulib.plugins.compiler">AbstractCompiler.Factory</a>&nbsp;factory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Command-line runner for compilers.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInfo(java.lang.String)" class="member-name-link">notifyInfo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notifies information message</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyInfo(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" class="member-name-link">notifyInfo</a><wbr>(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Notifies information message</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyOnMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)" class="member-name-link">notifyOnMessage</a><wbr>(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;compilerMessage)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This method notifies all compilerListeners that the compiler wants to print
-something out (a message).</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyWarning(java.lang.String)" class="member-name-link">notifyWarning</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Fires warning message</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyWarning(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)" class="member-name-link">notifyWarning</a><wbr>(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Fires warning message</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)" class="member-name-link">removeCompilerListener</a><wbr>(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Removes the listener from compilerListeners list</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showSettings(javax.swing.JFrame)" class="member-name-link">showSettings</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing.</div>
-</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#warning(java.lang.String)" class="member-name-link">warning</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -269,51 +219,16 @@ something out (a message).</div>
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.compiler.Compiler">Methods inherited from interface&nbsp;<a href="Compiler.html#method-summary" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></h3>
-<code><a href="Compiler.html#compile(java.nio.file.Path,java.util.Optional)" title="compile(Path, Optional)">compile</a>, <a href="Compiler.html#convertInputToOutputPath(java.nio.file.Path,java.lang.String)" title="convertInputToOutputPath(Path, String)">convertInputToOutputPath</a>, <a href="Compiler.html#createLexer()" title="createLexer()">createLexer</a>, <a href="Compiler.html#getSourceFileExtensions()" title="getSourceFileExtensions()">getSourceFileExtensions</a>, <a href="Compiler.html#getSourcePositionColumnUnit()" title="getSourcePositionColumnUnit()">getSourcePositionColumnUnit</a>, <a href="Compiler.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a></code></div>
+<code><a href="Compiler.html#createLexer()" title="createLexer()">createLexer</a>, <a href="Compiler.html#getSourceFileTypes()" title="getSourceFileTypes()">getSourceFileTypes</a>, <a href="Compiler.html#getSourcePositionColumnUnit()" title="getSourcePositionColumnUnit()">getSourcePositionColumnUnit</a>, <a href="Compiler.html#isAutomationSupported()" title="isAutomationSupported()">isAutomationSupported</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-net.emustudio.emulib.plugins.Plugin">Methods inherited from interface&nbsp;<a href="../Plugin.html#method-summary" title="interface in net.emustudio.emulib.plugins">Plugin</a></h3>
-<code><a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a></code></div>
+<code><a href="../Plugin.html#destroy()" title="destroy()">destroy</a>, <a href="../Plugin.html#getCopyright()" title="getCopyright()">getCopyright</a>, <a href="../Plugin.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Plugin.html#getTitle()" title="getTitle()">getTitle</a>, <a href="../Plugin.html#getVersion()" title="getVersion()">getVersion</a>, <a href="../Plugin.html#initialize()" title="initialize()">initialize</a>, <a href="../Plugin.html#isShowSettingsSupported()" title="isShowSettingsSupported()">isShowSettingsSupported</a>, <a href="../Plugin.html#reset()" title="reset()">reset</a>, <a href="../Plugin.html#showSettings(javax.swing.JFrame)" title="showSettings(JFrame)">showSettings</a></code></div>
 </section>
 </li>
 </ul>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="pluginID">
-<h3>pluginID</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">pluginID</span></div>
-<div class="block">Plugin ID assigned by emuStudio</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="applicationApi">
-<h3>applicationApi</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/ApplicationApi.html" title="interface in net.emustudio.emulib.runtime">ApplicationApi</a></span>&nbsp;<span class="element-name">applicationApi</span></div>
-<div class="block">emuStudio API.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="settings">
-<h3>settings</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../../runtime/settings/PluginSettings.html" title="interface in net.emustudio.emulib.runtime.settings">PluginSettings</a></span>&nbsp;<span class="element-name">settings</span></div>
-<div class="block">Compiler custom settings.</div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -345,75 +260,55 @@ something out (a message).</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="initialize()">
-<h3>initialize</h3>
+<section class="detail" id="compile(java.nio.file.Path,java.nio.file.Path)">
+<h3>compile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span>()
-                throws <span class="exceptions"><a href="../PluginInitializationException.html" title="class in net.emustudio.emulib.plugins">PluginInitializationException</a></span></div>
-<div class="block">Does nothing. Should be overridden.</div>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">compile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;output)</span>
+                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Compiles the input file into the output file.
+<p>
+Errors can be reported either by <a href="#error(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)"><code>error(SourceCodePosition, String)</code></a> or by throwing an exception.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#initialize()">initialize</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Throws:</dt>
-<dd><code><a href="../PluginInitializationException.html" title="class in net.emustudio.emulib.plugins">PluginInitializationException</a></code> - thrown when initialization process was not successful</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="destroy()">
-<h3>destroy</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">destroy</span>()</div>
-<div class="block">Does nothing. Should be overridden.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#destroy()">destroy</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getTitle()">
-<h3>getTitle</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTitle</span>()</div>
-<div class="block">Get plugin title</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>title from the <a href="../annotations/PluginRoot.html" title="annotation interface in net.emustudio.emulib.plugins.annotations"><code>PluginRoot</code></a> annotation</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="showSettings(javax.swing.JFrame)">
-<h3>showSettings</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showSettings</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JFrame.html" title="class or interface in javax.swing" class="external-link">JFrame</a>&nbsp;parent)</span></div>
-<div class="block">Does nothing. Should be overridden.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#showSettings(javax.swing.JFrame)">showSettings</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>parent</code> - emuStudio main window (if plugin wants to show a dialog which has a parent)</dd>
+<dd><code>input</code> - input file path (source code)</dd>
+<dd><code>output</code> - output file path</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - on compilation error</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="isShowSettingsSupported()">
-<h3>isShowSettingsSupported</h3>
+<section class="detail" id="getOutputExtension()">
+<h3>getOutputExtension</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isShowSettingsSupported</span>()</div>
-<div class="block">Return false. Should be overridden.</div>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getOutputExtension</span>()</div>
+<div class="block">Output file extension (without dot), used when output path is not given.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>output file extension, e.g. "hex"</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="compile(java.nio.file.Path,java.util.Optional)">
+<h3>compile</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">compile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;inputPath,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&gt;&nbsp;outputPath)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Compiler.html#compile(java.nio.file.Path,java.util.Optional)">Compiler</a></code></span></div>
+<div class="block">Compile given input file.
+<p>
+If output path is not given, it is derived by replacing the source file extension of the input path.
+Usually a successfully compiled program is loaded in memory.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#isShowSettingsSupported()">isShowSettingsSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
-<dt>Returns:</dt>
-<dd>false</dd>
+<dd><code><a href="Compiler.html#compile(java.nio.file.Path,java.util.Optional)">compile</a></code>&nbsp;in interface&nbsp;<code><a href="Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>inputPath</code> - input file path (source code)</dd>
+<dd><code>outputPath</code> - optional output file path</dd>
 </dl>
 </div>
 </section>
@@ -423,12 +318,13 @@ something out (a message).</div>
 <h3>addCompilerListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCompilerListener</span><wbr><span class="parameters">(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</span></div>
-<div class="block">Adds a listener onto compilerListeners list</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Compiler.html#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)">Compiler</a></code></span></div>
+<div class="block">Adds compiler listener.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Compiler.html#addCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)">addCompilerListener</a></code>&nbsp;in interface&nbsp;<code><a href="Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>listener</code> - listener object</dd>
+<dd><code>listener</code> - compiler listener</dd>
 </dl>
 </div>
 </section>
@@ -438,151 +334,71 @@ something out (a message).</div>
 <h3>removeCompilerListener</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeCompilerListener</span><wbr><span class="parameters">(<a href="CompilerListener.html" title="interface in net.emustudio.emulib.plugins.compiler">CompilerListener</a>&nbsp;listener)</span></div>
-<div class="block">Removes the listener from compilerListeners list</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Compiler.html#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)">Compiler</a></code></span></div>
+<div class="block">Removes compiler listener.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Compiler.html#removeCompilerListener(net.emustudio.emulib.plugins.compiler.CompilerListener)">removeCompilerListener</a></code>&nbsp;in interface&nbsp;<code><a href="Compiler.html" title="interface in net.emustudio.emulib.plugins.compiler">Compiler</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>listener</code> - listener object</dd>
+<dd><code>listener</code> - compiler listener</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="notifyCompileStart()">
-<h3>notifyCompileStart</h3>
+<section class="detail" id="error(java.lang.String)">
+<h3>error</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyCompileStart</span>()</div>
-<div class="block">This method notifies all compilerListeners that the compiler is starting
-the compile process.
-<p>
-This method should be called whenever the compiler begins to run.</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">error</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="notifyCompileFinish()">
-<h3>notifyCompileFinish</h3>
+<section class="detail" id="error(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)">
+<h3>error</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyCompileFinish</span>()</div>
-<div class="block">This method notifies all compilerListeners that the compiler finished
-the compile process right now.
-<p>
-This method should be called whenever the compiler ends the execution.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyOnMessage(net.emustudio.emulib.plugins.compiler.CompilerMessage)">
-<h3>notifyOnMessage</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyOnMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.html" title="class in net.emustudio.emulib.plugins.compiler">CompilerMessage</a>&nbsp;compilerMessage)</span></div>
-<div class="block">This method notifies all compilerListeners that the compiler wants to print
-something out (a message).
-<p>
-This method should be called when the compiler wants to notify the user
-about some warning or error during compilation; or wants to inform the
-user of something else (e.g. copyright information).</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">error</span><wbr><span class="parameters">(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>compilerMessage</code> - The message</dd>
+<dd><code>position</code> - source position, or null</dd>
+<dd><code>message</code> - message</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="notifyError(java.lang.String)">
-<h3>notifyError</h3>
+<section class="detail" id="warning(java.lang.String)">
+<h3>warning</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyError</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Notifies the error message.</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warning</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="info(java.lang.String)">
+<h3>info</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">info</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="runCommandLine(java.lang.String,java.lang.String[],net.emustudio.emulib.plugins.compiler.AbstractCompiler.Factory)">
+<h3>runCommandLine</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">runCommandLine</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jarName,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args,
+ <a href="AbstractCompiler.Factory.html" title="interface in net.emustudio.emulib.plugins.compiler">AbstractCompiler.Factory</a>&nbsp;factory)</span></div>
+<div class="block">Command-line runner for compilers. Usage: <code>[-o outputFile] inputFile</code>, <code>--version</code>, <code>--help</code>.
+Messages are printed to standard error output.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyError(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)">
-<h3>notifyError</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyError</span><wbr><span class="parameters">(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Notifies the error message.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>position</code> - position in the source code</dd>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyInfo(java.lang.String)">
-<h3>notifyInfo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyInfo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Notifies information message</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyInfo(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)">
-<h3>notifyInfo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyInfo</span><wbr><span class="parameters">(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Notifies information message</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>position</code> - position in the source code</dd>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyWarning(java.lang.String)">
-<h3>notifyWarning</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyWarning</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Fires warning message</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="notifyWarning(net.emustudio.emulib.plugins.compiler.SourceCodePosition,java.lang.String)">
-<h3>notifyWarning</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyWarning</span><wbr><span class="parameters">(<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;msg)</span></div>
-<div class="block">Fires warning message</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>position</code> - position in the source code</dd>
-<dd><code>msg</code> - text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="reset()">
-<h3>reset</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
-<div class="block">Does nothing.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Plugin.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="../Plugin.html" title="interface in net.emustudio.emulib.plugins">Plugin</a></code></dd>
+<dd><code>jarName</code> - jar file name used in help</dd>
+<dd><code>args</code> - command-line arguments</dd>
+<dd><code>factory</code> - compiler constructor, e.g. <code>MyCompiler::new</code></dd>
+<dt>Returns:</dt>
+<dd>exit code: 0 if successful, 1 if there were errors</dd>
 </dl>
 </div>
 </section>

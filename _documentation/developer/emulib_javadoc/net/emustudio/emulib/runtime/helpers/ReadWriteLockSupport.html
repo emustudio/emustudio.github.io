@@ -82,11 +82,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="annotations">@ThreadSafe
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">ReadWriteLockSupport</span>
+</span><span class="modifiers">public final class </span><span class="element-name type-name-label">ReadWriteLockSupport</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Read/write lock support for more comfortable work with a ReentrantReadWriteLock.
+<div class="block">Runs actions under a <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html" title="class or interface in java.util.concurrent.locks" class="external-link"><code>ReentrantReadWriteLock</code></a>.
 <p>
-Runnables/callables can throw any exceptions.</div>
+Actions can throw checked exceptions; they are rethrown unchanged (see <a href="Unchecked.html" title="class in net.emustudio.emulib.runtime.helpers"><code>Unchecked</code></a>).</div>
 </div>
 </section>
 <section class="summary">
@@ -100,9 +100,7 @@ Runnables/callables can throw any exceptions.</div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ReadWriteLockSupport</a>()</code></div>
-<div class="col-last even-row-color">
-<div class="block">Constructs a new ReadWriteLockSupport.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -118,24 +116,24 @@ Runnables/callables can throw any exceptions.</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)" class="member-name-link">lockRead</a><wbr>(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;r)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)" class="member-name-link">lockRead</a><wbr>(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Acquires read lock and calls the given callable.</div>
+<div class="block">Calls the action under the read lock.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow)" class="member-name-link">lockRead</a><wbr>(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Acquires read lock and runs the given runnable.</div>
+<div class="block">Runs the action under the read lock.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)" class="member-name-link">lockWrite</a><wbr>(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;r)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)" class="member-name-link">lockWrite</a><wbr>(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Acquires write lock and calls the given callable.</div>
+<div class="block">Calls the action under the write lock.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow)" class="member-name-link">lockWrite</a><wbr>(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Acquires write lock and runs the given runnable.</div>
+<div class="block">Runs the action under the write lock.</div>
 </div>
 </div>
 </div>
@@ -159,7 +157,6 @@ Runnables/callables can throw any exceptions.</div>
 <h3>ReadWriteLockSupport</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ReadWriteLockSupport</span>()</div>
-<div class="block">Constructs a new ReadWriteLockSupport.</div>
 </div>
 </section>
 </li>
@@ -176,10 +173,10 @@ Runnables/callables can throw any exceptions.</div>
 <h3>lockWrite</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">lockWrite</span><wbr><span class="parameters">(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</span></div>
-<div class="block">Acquires write lock and runs the given runnable.</div>
+<div class="block">Runs the action under the write lock.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>r</code> - the runnable to run under write lock</dd>
+<dd><code>r</code> - the action</dd>
 </dl>
 </div>
 </section>
@@ -188,15 +185,15 @@ Runnables/callables can throw any exceptions.</div>
 <section class="detail" id="lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)">
 <h3>lockWrite</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">lockWrite</span><wbr><span class="parameters">(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;r)</span></div>
-<div class="block">Acquires write lock and calls the given callable.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">lockWrite</span><wbr><span class="parameters">(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</span></div>
+<div class="block">Calls the action under the write lock.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><span id="lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the return type</span></dd>
+<dd><span id="lockWrite(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the result type</span></dd>
 <dt>Parameters:</dt>
-<dd><code>r</code> - the callable to call under write lock</dd>
+<dd><code>c</code> - the action</dd>
 <dt>Returns:</dt>
-<dd>the result of the callable</dd>
+<dd>the action result</dd>
 </dl>
 </div>
 </section>
@@ -206,10 +203,10 @@ Runnables/callables can throw any exceptions.</div>
 <h3>lockRead</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">lockRead</span><wbr><span class="parameters">(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</span></div>
-<div class="block">Acquires read lock and runs the given runnable.</div>
+<div class="block">Runs the action under the read lock.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>r</code> - the runnable to run under read lock</dd>
+<dd><code>r</code> - the action</dd>
 </dl>
 </div>
 </section>
@@ -218,15 +215,15 @@ Runnables/callables can throw any exceptions.</div>
 <section class="detail" id="lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)">
 <h3>lockRead</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">lockRead</span><wbr><span class="parameters">(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;r)</span></div>
-<div class="block">Acquires read lock and calls the given callable.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">lockRead</span><wbr><span class="parameters">(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</span></div>
+<div class="block">Calls the action under the read lock.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><span id="lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the return type</span></dd>
+<dd><span id="lockRead(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the result type</span></dd>
 <dt>Parameters:</dt>
-<dd><code>r</code> - the callable to call under read lock</dd>
+<dd><code>c</code> - the action</dd>
 <dt>Returns:</dt>
-<dd>the result of the callable</dd>
+<dd>the action result</dd>
 </dl>
 </div>
 </section>

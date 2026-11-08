@@ -84,39 +84,37 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="FileLoader.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Common synchronous loader contract for BIN, I8HEX, TAP and TZX.</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileLoader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Synchronous loader of memory images (BIN, Intel HEX) and tapes (TAP, TZX).</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="FileLoader.Block.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Block</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Immutable format block.</div>
+<div class="block">Immutable block of a file.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab3"><a href="FileLoader.Format.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Format</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab3">
-<div class="block">File encodings and their extensions.</div>
+<div class="block">Supported file formats and their extensions.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab1"><a href="FileLoader.Listener.html" title="interface in net.emustudio.emulib.runtime.io">FileLoader.Listener</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab1">
-<div class="block">Receives blocks synchronously; a listener need not be thread-safe.</div>
+<div class="block">Receives blocks synchronously, on the loading thread.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileLoader.Options.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.Options</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Per-load traversal and cancellation.</div>
-</div>
-<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="FileLoader.Options.Traversal.html" title="enum class in net.emustudio.emulib.runtime.io">FileLoader.Options.Traversal</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab3">&nbsp;</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="FileLoader.SpectrumHeader.html" title="class in net.emustudio.emulib.runtime.io">FileLoader.SpectrumHeader</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Spectrum header fields decoded independently of their destination.</div>
+<div class="block">ZX Spectrum tape header (the 17 bytes after flag 0).</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="FileType.html" title="class in net.emustudio.emulib.runtime.io">FileType</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Generator and loader of 16-bit Intel Hex files (I8HEX).</div>
+<div class="block">File type: a description and file extensions (without dot).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Decoded tape callbacks for FileLoader; application state is outside this contract.</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Program code of 16-bit Intel HEX files (I8HEX): built by compilers, written into a file, parsed or loaded into memory.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="TapeListener.html" title="interface in net.emustudio.emulib.runtime.io">TapeListener</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Tape signal callbacks, decoded from TAP/TZX blocks by <a href="FileLoader.html" title="class in net.emustudio.emulib.runtime.io"><code>FileLoader</code></a>.</div>
 </div>
 </div>
 </div>
