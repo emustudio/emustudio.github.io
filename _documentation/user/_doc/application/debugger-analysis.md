@@ -47,9 +47,9 @@ counter and creates no breakpoint.
 
 Choose **Set breakpoint...** to configure a breakpoint. **Set** adds an execution breakpoint at the CPU-visible address,
 using the CPU-visible instruction address;
-**Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. Hitting a breakpoint opens
-**Memory** at its address; later steps follow the CPU normally unless the view was manually pinned. Instruction-table
-breakpoint controls toggle enabled/disabled.
+**Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. When a breakpoint stops
+execution, the status shows `Breakpoint: XXXX` and the debugger opens **Memory** at its address; later steps follow
+the CPU normally unless the view was manually pinned. Instruction-table breakpoint controls toggle enabled/disabled.
 
 ## Memory and annotations
 
@@ -75,15 +75,22 @@ Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Ent
 Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
 for this configured machine and layout.
 
-emuStudio loads annotations, watches and rules together when opening a computer. For `/path/computer.toml`, the automatic
-metadata file is `/path/computer.toml.debugger`. Each save writes all three together atomically. Computers without a
-saved configuration keep this metadata in memory.
+emuStudio loads annotations, watches, breakpoints and memory watches together when opening a computer. For
+`/path/computer.toml`, the automatic debugger settings file is `/path/computer.toml.debugger`. Each save writes them
+together atomically. Computers without a saved configuration keep these settings in memory. Only user annotations are
+saved; compiler-provided annotations are not. Saved settings are always restored, regardless of the loaded program.
+Keep labels appropriate to the program you load.
 
-Explicit annotation import and export remain available through **Manage…**. Annotation export uses format 4; import
-requires the same configured-machine/layout identity, derived from the CPU, normalized configuration path and memory
-layout. Keep labels appropriate to the program you load.
-Files from the former memory-snapshot export, obsolete annotation formats and annotations bound to a memory-content hash are unsupported.
-Existing files remain untouched. Compiler source mappings stay separate and require their captured source revisions.
+If the settings file cannot be read, emuStudio deletes it and shows a warning. Invalid entries are skipped with a
+warning (`Skipped N invalid debugger setting(s) …`). Settings saved by older versions are migrated: execution rules
+become breakpoints and read/write rules become memory watches. Breakpoint conditions are removed with a warning
+(`Removed N unsupported breakpoint condition(s) …`) and hit counts are dropped.
+
+Explicit annotation import and export remain available through **Manage…**. Each annotation is stored as
+`entry.N.address`, `entry.N.end`, `entry.N.label` and `entry.N.kind`. Import appends annotations and skips exact
+duplicates (same range, kind and label); invalid entries are skipped with a warning. Annotation colors are derived from
+the annotated range, so they stay the same across sessions. Compiler source mappings stay separate and require their
+captured source revisions.
 
 ## Watches and breakpoints
 
@@ -102,6 +109,9 @@ Existing files remain untouched. Compiler source mappings stay separate and requ
 Enter an **Expression** and choose **Add**. Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary** or **ASCII**;
 changed values receive a marker. **Follow value** opens the evaluated address. **Edit register** reveals **Write register**.
 
+Watch expressions are not evaluated while emulation is running. They refresh when execution stops (after a step,
+breakpoint, pause or the end of a timed run) and when you edit a watch while stopped.
+
 | Expression | Meaning |
 |---|---|
 | `A` or `reg(A)` | Accumulator. |
@@ -110,27 +120,25 @@ changed values receive a marker. **Follow value** opens the evaluated address. *
 | `mem16be[0x8000]` | Big-endian word: `0x4142`; `mem32`/`mem32be` read four bytes. |
 | `(mem[0x8000] & 1) != 0` | Test bit 0. Arithmetic, shifts, comparisons and short-circuit `&&`/`||` are supported. |
 
-### Stop on a conditional memory write
+### Monitor memory access
 
-Before rerunning, open the memory-watch controls in **Watches**, enter a **Memory watch name** and set **Memory watch address**
-to `0x8001`. Select **Pause on writes**. Under **Memory watch options**, enter condition `A == 0x42` and leave
-**Memory watch stop from hit** at `1`, then click **Add memory watch**. It stops after the writing instruction.
-Each qualifying instruction counts once, even with repeated accesses.
+Open **Memory access** in **Watches**, enter `0x8001` in **Memory watch address** and choose **Add**. Memory watches
+only monitor accesses; they never stop execution. Each row shows the current value and the last read and last write,
+with the PC of the accessing instruction and the value, for example `= 62 · last read @0000 (62) · last write —`.
+A new memory watch shows **Pending** until it is first evaluated, and **Unavailable** when the CPU does not support
+debugging. Select a row and choose **Remove** to delete it.
 
-Execution breakpoints in **Breakpoints** stop before the CPU-visible instruction address. Conditions and hit counts remain available through advanced options.
-**SOURCE** requires a file path and a one-based line with a current compiler mapping; resolved targets are CPU addresses.
-**READ** includes instruction fetches; **WRITE** includes attempted guest writes. Debugger reads trigger no access rules.
-Named rules stay separate from instruction-table breakpoints; instruction-table controls create unconditional execution breakpoints.
-Resuming skips the stopped EXEC/SOURCE rule once.
+### Breakpoints
 
-SOURCE rules resolve mapped addresses before execution, including multiple generated addresses for one source line.
-Running or editing memory makes source mappings historical; already resolved targets can still stop the current run.
-Recompile to restore current source following or rebind a source rule. Source navigation uses explicit mapped cells;
-unmapped operand cells and gaps have no source match. Unsupported compiler coordinates appear in the source-mapping status.
+Breakpoints in **Breakpoints** stop before the CPU-visible instruction address. A breakpoint has only an address and an
+enabled state. Resuming skips the stopped breakpoint once.
 
-Use **Enable / disable**, **Remove** or **Reset hit counts** to manage rules. **Save settings** saves watches and rules
-together with annotations in the computer's `.debugger` file. Temporary errors and hit counts are not saved; hit counts
-restart at zero when reopening the computer.
+Running or editing memory makes source mappings historical. Recompile to restore current source following. Source
+navigation uses explicit mapped cells; unmapped operand cells and gaps have no source match. Unsupported compiler
+coordinates appear in the source-mapping status.
+
+Use **Enable / disable** or **Remove** to manage breakpoints. **Save settings** saves watches, breakpoints and memory
+watches together with user annotations in the computer's `.debugger` file.
 
 ## References, flow and history
 
@@ -150,8 +158,11 @@ restart at zero when reopening the computer.
 
 Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
 Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
-calls and branches. Analysis uses the CPU's decoder and current memory wiring and attempts at most 256 reachable addresses. A partial-result notice means a work bound was reached;
-unresolved indirect targets remain unknown.
+calls and branches. Analysis uses the CPU's decoder and current memory wiring and visits at most `flowAnalysisLimit`
+instructions (default 1000, see [Configuration]({{ site.baseurl }}/application/configuration-file#application-settings)).
+When the limit is reached, the origin label shows `Truncated at N instructions`. Instructions that cannot be decoded
+appear as unknown nodes with a dashed box and the tooltip `Not decoded: <reason>`. Instructions inside DATA annotations
+are still analyzed but marked as data with a dashed box (`DATA`, `Data region`). Unresolved indirect targets remain unknown.
 Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
 Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
 Static references do not prove execution coverage.
@@ -196,17 +207,3 @@ execution rather than silently dropping instructions. Cleanly stopped recordings
 interrupted or truncated files are reported as incomplete. A recording's completeness is verified when its end is read.
 Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC; recording does not
 restore registers, memory, devices or external inputs.
-
-## Repeatable debugger operations
-
-Run the same check with `auto --debug-script FILE` after compiling the example:
-
-```text
-RUN 0x010B 20
-ASSERT A == 0x42
-ASSERT mem16[0x8000] == 0x4241
-```
-
-`RUN` stops before `HLT` at `010B`, within 20 instructions.
-Failed assertions return a nonzero exit status. See [Debug scripts]({{ site.baseurl }}/application/automation#debug-scripts)
-for the command line and operation limits.

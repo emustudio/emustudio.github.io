@@ -60,12 +60,7 @@ step. With no selection, these case commands leave the text unchanged.
 controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
 uses generic block markers supplied by the compiler.
 
-## Bookmarks and navigation
-
-Click the bookmark gutter or press **Ctrl+F2** to toggle a bookmark. **F2** and **Shift+F2** move between bookmarks.
-**Edit → Navigate → Name / number bookmark** assigns a name or digit; **Ctrl+Alt+0–9** jumps to numbered bookmarks in
-open files. **Edit → Navigate → Bookmarks…** lists bookmarks across open tabs. Bookmarks follow edits and are restored
-for saved files.
+## Navigation
 
 **Ctrl+G** opens go-to-line/column, using `line:column` with both numbers starting at 1. **Edit → Navigate → Back**,
 **Forward**, and **Previous edit** revisit source locations.
@@ -91,7 +86,7 @@ Display and indentation preferences are saved in application settings.
 file…** places two open files side by side. **Close split** restores the tab views. File operations use the focused
 source view. Closing a file or opening another file also restores the tab views.
 
-![Two views of the same source with compiler-defined folds, a bookmark, and visible whitespace]({{ site.baseurl }}/assets/application/source-split-view.png){: style="max-width: 1100px; width: 100%;" }
+![Two views of the same source with compiler-defined folds and visible whitespace]({{ site.baseurl }}/assets/application/source-split-view.png){: style="max-width: 1100px; width: 100%;" }
 
 ## Rename and extraction
 
@@ -140,9 +135,6 @@ subroutine extraction because the generated call, jump, and return change the pr
 | **Alt+Shift+drag** | Make a rectangular selection |
 | **Alt+Shift+Right / Left** | Expand / shrink selection |
 | **Ctrl+G** | Go to line / column |
-| **Ctrl+F2** | Toggle bookmark |
-| **F2 / Shift+F2** | Next / previous bookmark |
-| **Ctrl+Alt+0–9** | Go to a numbered bookmark across open files |
 | **Ctrl+Shift+M** | Replay editing macro |
 | **Ctrl+mouse wheel / Ctrl++ / Ctrl+-** | Change font size |
 | **Escape** | Clear additional carets and marked occurrences |
