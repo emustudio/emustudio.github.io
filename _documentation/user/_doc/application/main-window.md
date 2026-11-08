@@ -34,7 +34,7 @@ The source code editor supports the following features:
 - undo/redo
 - inline search/replace, selection search, and find/replace across files
 - cut/copy/paste text
-- multiple carets, rectangular editing, folding, bookmarks, and split views
+- multiple carets, rectangular editing, folding, and split views
 - text transformations, editing macros, navigation history, and compiler-supported rename and extraction
 - whitespace and indentation settings and token colors
 - <kbd>Ctrl</kbd> + mouse wheel changes font size
@@ -112,8 +112,8 @@ according to the CPU's execution state and the plugins' capabilities.
 
 #### Inspection pane
 
-Pause the CPU to inspect live memory, search for bytes, integers or text, find strings, and edit labels, comments,
-bookmarks or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
+Pause the CPU to inspect live memory, search for bytes, integers or text, find strings, and edit labels, comments
+or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
 instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
 the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
 
