@@ -15,9 +15,10 @@ extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
 
 [AbstractCPU][abstractCPU]{:target="_blank"} extends `AbstractPlugin`. It supplies plugin metadata, `reset()` to the
 program location and idempotent destruction, which calls `destroyInternal()`.
-The host owns command scheduling, CPU-worker execution and run-state publication. `execute()` and `step()` run
+The host owns command scheduling and CPU-worker execution. `execute()` and `step()` run
 synchronously on that worker; they return their actual `RunState`. Continuous execution responds to thread interruption.
-Views read immutable `CPUSnapshot` values from `CPUContext` and register `CPUContext.CPUListener` notifications.
+Views read run state, instruction location and measured frequency directly from `CPUContext` and register
+`CPUContext.CPUListener` notifications.
 Remove listeners when their views are disposed. State publication belongs to the CPU plugin implementation.
 The plugin implements `reset(int)` on the same worker; execution never runs on Swing's
 [event-dispatch thread][swingthread]{:target="_blank"}.

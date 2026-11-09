@@ -62,7 +62,8 @@ interruptible waits. There is no force kill or timeout. Pause, stop, reset, and 
 exits. Future cancellation alone does not prove exit. Until then, memory and device resources remain intact; the host
 rejects new start, step, and reset requests. GUI commands are asynchronous, so waiting does not block Swing.
 
-`CPUContext.snapshot()` exposes immutable `CPUSnapshot` values. Register a `CPUContext.CPUListener` using
+`CPUContext` exposes `getRunState()`, `getInstructionLocation()` and `getMeasuredFrequencyKhz()` directly.
+Register a `CPUContext.CPUListener` using
 `addCPUListener` to receive `runStateChanged` and `internalStateChanged` notifications. Call `removeCPUListener` when
 the view or plugin is disposed. CPU plugins emit notifications internally; the public context has no state setter or
 notification methods. Callbacks may run outside Swing's event-dispatch thread; dispatch GUI updates onto Swing and
