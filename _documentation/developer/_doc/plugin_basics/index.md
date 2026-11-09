@@ -131,6 +131,11 @@ split and scroll panes, MigLayout panels and titled sections. `gui.styleTable(ta
 applying it repeatedly does not keep increasing row height. Keep long-running file operations off Swing's
 event-dispatch thread (EDT), e.g. with a `SwingWorker`.
 
+`DialogBase` refreshes its layout against actual native window insets whenever it is shown, including modal dialogs
+and dialogs reopened after disposal. For other Swing windows, call `GUI.relayoutOnShow(window)`
+once on the EDT before the first show. The helper prevents temporary decoration gaps
+without changing the window size or repacking its contents.
+
 For paths and other long labels, `GUI.shortenToFit(text, component, width)` measures the component's font and inserts a
 middle ellipsis, keeping Unicode characters intact. Call it again after the value, font, or width changes. Zero or
 negative widths produce empty text; very narrow widths show only the dots that fit. Keep the full value available
