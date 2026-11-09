@@ -50,15 +50,13 @@ Resolve names during compilation without reading guest state; evaluation and dis
 Use `INSTRUCTION` for the default observed graph, `ACCESSES` when memory watches need guest accesses, and `FULL` only
 for history or recording. Closing the observer handle removes its capture request.
 
-Use the existing `applicationApi.getExecutionState().update(change)` service for live edits. It queues changes between
-semantic steps or on the idle CPU worker, without a pause/resume transition. Compile expressions and attach/detach
-observers through that same service. Keep Swing work on its event thread. `Debugging` adds no update protocol.
+Plugin editors apply register and memory changes directly, including while the CPU runs. The host does not queue
+edits or coordinate them with execution steps. Keep Swing work on its event thread. `Debugging` adds no update protocol.
 
 ## Engine integration
 
-Every outer semantic step drains `ExecutionState.processUpdates()`, including the inactive fast path. This makes live
-attachment and edits possible without waiting for a continuous run to end. The host supplies the worker; do not create
-another execution controller.
+The host supplies the execution worker; do not create another execution controller. CPU engines do not drain a host
+edit queue before executing instructions.
 
 Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
 or failed outcome, captured instruction when available, and truthful actual next address. Full recorded presentation
@@ -66,7 +64,7 @@ belongs only to `Capture.FULL`. Memory watches are passive and never stop
 execution. A refused before-step produces no executed row.
 
 The host owns breakpoints, persistence and one-step continuation. It skips breakpoints once for Manual
-Step or direct Continue from a breakpoint, then rearms them. Reset, jump and machine edits clear continuation. Plugins
+Step or direct Continue from a breakpoint, then rearms them. Host reset and jump commands clear continuation. Plugins
 must not implement a second breakpoint store or independent skip policy.
 
 At computer open, `DebuggerSession` loads user annotations, watches, breakpoints and memory watches once from the
@@ -115,7 +113,7 @@ With observation inactive, retain original execution memory and avoid presentati
 `DecodedInstruction` has no flow metadata. The observer's `nextAddress` reports where execution actually went, including
 conditional and indirect transfers; it is never inferred from length or presentation text.
 
-The host accumulates observed instruction transitions until CPU reset. Reset clears the graph and retains annotations.
+The host accumulates observed instruction transitions until a successful CPU reset, which clears the graph and retains annotations.
 Memory edits, source changes, annotations, and resuming execution do not clear observations. Unexecuted alternatives
 are not predicted. Mnemonic/opcode classification, static target declarations, and `.eds` flow syntax are absent.
 

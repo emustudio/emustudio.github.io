@@ -60,21 +60,21 @@ Manual step, pause, stop, reset, replacement timed runs, and close cancel the pr
 Stopping is cooperative: check thread interruption in the instruction loop and preserve interruption when handling
 interruptible waits. There is no force kill or timeout. Pause, stop, reset, and close remain pending until the loop actually
 exits. Future cancellation alone does not prove exit. Until then, memory and device resources remain intact; the host
-rejects new start, step, reset, and debugger-edit requests. GUI commands are asynchronous, so waiting does not block Swing.
+rejects new start, step, and reset requests. GUI commands are asynchronous, so waiting does not block Swing.
 
-`ApplicationApi.getExecutionState()` exposes the host's immutable `ExecutionState.Snapshot`. Read the current value with
-`snapshot()` and observe later publications with `subscribe(listener)`. Close the returned subscription when the view or
-plugin is disposed. Notifications are observations, not command acknowledgements. Callbacks may run outside Swing's
-event-dispatch thread; dispatch GUI updates onto Swing and never block a callback waiting for an execution command.
+`CPUContext` exposes `getRunState()`, `getInstructionLocation()` and `getCpuFrequencyKhz()` directly.
+Register a `CPUContext.CPUListener` using
+`addCPUListener` to receive `runStateChanged` and `internalStateChanged` notifications. Call `removeCPUListener` when
+the view or plugin is disposed. CPU plugins emit notifications internally; the public context has no state setter or
+notification methods. Callbacks may run outside Swing's event-dispatch thread; dispatch GUI updates onto Swing and
+never block a callback waiting for an execution command.
 
-Use `ExecutionState.update(Runnable)` for live debugger register, instruction-location, and memory edits. The host
-serializes these changes between semantic steps, or on the idle CPU worker, and reports completion asynchronously.
-CPU engines must drain `processUpdates()` at every semantic boundary, even when debugging is inactive. Use
-`mutate(Runnable)` for operations that require a paused machine; it rejects running, busy, or stale requests.
-Do not write CPU state directly from Swing callbacks. Existing debugger guards still protect concurrent analysis and publication.
+Register and memory editors write directly, including from Swing callbacks while the CPU runs. The host does not
+queue these changes, pause execution, or coordinate edits with instruction steps. Host commands that require a paused
+machine keep their own validation.
 
-For CPUs that measure executed frequency, `sampleFrequency()` is called by the existing command scheduler. Sampling
-must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
+For CPUs that measure executed frequency, `CPUContext.getCpuFrequencyKhz()` reads the current measurement.
+Status panels refresh the display with a Swing timer; reads must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
 `AccurateFrequencyRunner` loop.
 
 [runstate]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.RunState.html

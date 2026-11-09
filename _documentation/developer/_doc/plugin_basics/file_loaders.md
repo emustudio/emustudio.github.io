@@ -44,7 +44,7 @@ For BIN and HEX, a plugin can consume the same API directly:
 ```java
 FileLoader.load(path, format, block -> {
     int address = block.getAddress().orElse(startAddress);
-    memory.write(address, NumberUtils.nativeBytesToBytes(block.getData()));
+    memory.write(address, Numbers.nativeBytesToBytes(block.getData()));
 });
 ```
 

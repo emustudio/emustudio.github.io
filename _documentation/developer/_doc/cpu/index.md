@@ -34,7 +34,7 @@ _Emulator DIsassembler GENerator_. The [Edigen Gradle plugin][edigen-gradle]{:ta
 with Java compilation; see [Gradle integration]({{ site.baseurl }}/cpu/disassembler#gradle-integration).
 
 Optional runtime `Debugging` observations report the instruction and actual next address. The debugger accumulates
-observed flow until CPU reset; annotations survive reset. Decoder specifications contain no flow declarations.
+observed flow until a successful CPU reset; annotations survive reset. Decoder specifications contain no flow declarations.
 
 ## Testing instructions
 

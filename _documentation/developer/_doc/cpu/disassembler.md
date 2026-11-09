@@ -71,7 +71,7 @@ Listing recovery may show an undecodable cell and advance one cell. A decode res
 
 Flow comes from runtime observations through `Debugging`, not the decoder or `.eds` specification. After a semantic
 step, the CPU reports the captured instruction and actual next address. The host accumulates these observed transitions
-until CPU reset. Unexecuted paths remain unknown; mnemonic text and opcode patterns are never used to infer edges.
+until a successful CPU reset. Unexecuted paths remain unknown; mnemonic text and opcode patterns are never used to infer edges.
 
 The actual next address already reflects the outcome of branches, calls, returns, indirect transfers, and CPU address
 wrapping. Instruction length only describes occupied cells. It is not an execution successor, and there is no
@@ -86,7 +86,7 @@ The CPU plugin supplies the decoder and its memory wiring. Instruction text and 
 that logical address space. Read each address through the connected memory context. The connected plugins implement
 address mapping; decoding preserves that wiring. Runtime next addresses come from the executed machine state.
 
-Memory edits, annotations, source changes, and continuing execution do not erase the observed graph. CPU reset clears
+Memory edits, annotations, source changes, and continuing execution do not erase the observed graph. Successful CPU reset clears
 the graph while preserving annotations. Captured instruction facts describe the bytes or cells observed at that step;
 they are not a frozen live-memory image. Listing refresh still validates its own memory view independently.
 

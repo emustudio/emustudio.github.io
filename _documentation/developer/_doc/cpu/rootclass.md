@@ -15,14 +15,17 @@ extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
 
 [AbstractCPU][abstractCPU]{:target="_blank"} extends `AbstractPlugin`. It supplies plugin metadata, `reset()` to the
 program location and idempotent destruction, which calls `destroyInternal()`.
-The host owns command scheduling, CPU-worker execution and run-state publication. `execute()` and `step()` run
+The host owns command scheduling and CPU-worker execution. `execute()` and `step()` run
 synchronously on that worker; they return their actual `RunState`. Continuous execution responds to thread interruption.
-Views subscribe to immutable `ExecutionState.Snapshot` values and close their subscriptions when disposed.
+Views read run state, instruction location and measured frequency directly from `CPUContext` and register
+`CPUContext.CPUListener` notifications.
+Remove listeners when their views are disposed. State publication belongs to the CPU plugin implementation.
 The plugin implements `reset(int)` on the same worker; execution never runs on Swing's
 [event-dispatch thread][swingthread]{:target="_blank"}.
 
-The host owns command scheduling, run-state transitions, cancellation, and notifications. GUI, automation, and scripts
-share the same execution module. Do not create a second executor or watcher in the plugin. See [Run states]({{ '/cpu/runstate' | relative_url }}).
+The host schedules commands, supplies the execution worker, and handles cancellation. CPU plugins publish execution
+notifications through their contexts. GUI, automation, and scripts share the same execution module. Do not create a
+second executor or watcher in the plugin. See [Run states]({{ '/cpu/runstate' | relative_url }}).
 
 Sample implementation follows (only core methods are implemented):
 
@@ -43,6 +46,7 @@ public class CpuImpl extends AbstractCPU {
     public CpuImpl(long pluginID, ApplicationApi applicationApi, PluginSettings settings) {
         super(pluginID, applicationApi, settings);
         applicationApi.getContextPool().register(pluginID, context, MyCpuContext.class);
+        applicationApi.getContextPool().register(pluginID, context, CPUContext.class);
     }
 
     @Override
@@ -84,11 +88,6 @@ public class CpuImpl extends AbstractCPU {
     @Override
     public Decoder getDecoder() {
         return decoder;
-    }
-
-    @Override
-    public int getInstructionLocation() {
-        return engine.PC;
     }
 
     @Override
@@ -141,9 +140,10 @@ The location is an instruction address, not a table row number. `setValue` throw
 report an edit failure through the host.
 
 Implement the optional `Debugging` interface directly when the plugin supports machine-specific expressions and
-execution observation. Runtime instruction/actual-next observations supply the execution graph until CPU reset; annotations
+execution observation. Runtime instruction/actual-next observations supply the execution graph until successful CPU reset; annotations
 survive reset. emuStudio owns shared rules, watches and recording. Plugins supply presentation and their own
-inspection/edit controls; they expose no universal register model. All live edits use the execution update seam.
+inspection/edit controls; they expose no universal register model. Plugin editors apply live changes directly, including
+while the CPU runs.
 
 The application owns breakpoint state and persistence. CPU plugins honor intentional stop decisions from observers;
 neither `CPU` nor `AbstractCPU` stores breakpoints.
@@ -152,7 +152,7 @@ See [Optional machine debugging]({{ '/cpu/debugging' | relative_url }}) for the 
 ## CPU Context
 
 A CPU context is a way how to bring CPU-specific features to other plugins. Remember, plugins communicate only using
-contexts. A CPU context is a plain interface extending `net.emustudio.emulib.plugins.cpu.CPUContext`. In order a CPU context could be used by another plugins, it must be registered in a context pool
+contexts. A CPU context is a plain interface extending `net.emustudio.emulib.plugin.cpu.CPUContext`. In order a CPU context could be used by another plugins, it must be registered in a context pool
 obtained in plugin root class constructor (the registration must be performed in the same constructor).
 
 Therefore, a CPU context is often a pair of interface and implementation, for example context for 8080 CPU looks as follows:
