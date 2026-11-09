@@ -63,9 +63,10 @@ Memory-change listeners serve UI refresh. Guest read/write watchpoints use the C
 when those notifications are disabled. Instruction fetches count as reads and write events describe attempts, including
 writes rejected by ROM. Inspectors and disassemblers retain the original context and do not emit guest access events.
 
-`ApplicationApi.getAnnotations()` provides live labels and source mappings. `ApplicationApi.getExecutionState()`
-provides the current instruction address and change listeners; `currentInstruction()` returns -1 when unavailable. Callbacks
-may occur outside the Swing event thread. A plugin displaying physical memory decides whether its displayed cells belong
+`ApplicationApi.getAnnotations()` provides live labels and source mappings. `CPUContext.snapshot()` provides a
+`CPUSnapshot` whose `currentInstruction()` returns -1 when unavailable. Register a `CPUContext.CPUListener` for
+run-state and internal-state changes, and remove it when the view is disposed. Callbacks may occur outside the Swing
+event thread. A plugin displaying physical memory decides whether its displayed cells belong
 to the current CPU mapping. See
 [Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for hook integration.
 
