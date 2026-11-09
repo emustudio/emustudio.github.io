@@ -56,15 +56,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getInstance()" tabindex="0">getInstance()</a></li>
-<li><a href="#convertToRadix(byte%5B%5D,int,boolean)" tabindex="0">convertToRadix(byte[], int, boolean)</a></li>
 <li><a href="#parseRadix(java.lang.String)" tabindex="0">parseRadix(String)</a></li>
-<li><a href="#formatByteHexString(int)" tabindex="0">formatByteHexString(int)</a></li>
-<li><a href="#formatWordHexString(int)" tabindex="0">formatWordHexString(int)</a></li>
-<li><a href="#formatWordHexString(short,short)" tabindex="0">formatWordHexString(short, short)</a></li>
-<li><a href="#formatDwordHexString(int)" tabindex="0">formatDwordHexString(int)</a></li>
-<li><a href="#formatBinaryString(int,int,int,boolean)" tabindex="0">formatBinaryString(int, int, int, boolean)</a></li>
-<li><a href="#formatBinaryString(int,int)" tabindex="0">formatBinaryString(int, int)</a></li>
+<li><a href="#formatHex(int,int)" tabindex="0">formatHex(int, int)</a></li>
+<li><a href="#formatBinary(int,int)" tabindex="0">formatBinary(int, int)</a></li>
+<li><a href="#formatBinary(int,int,int)" tabindex="0">formatBinary(int, int, int)</a></li>
 </ol>
 </li>
 </ol>
@@ -80,15 +75,10 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations">@NotThreadSafe
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">RadixUtils</span>
+<div class="type-signature"><span class="annotations">@ThreadSafe
+</span><span class="modifiers">public final class </span><span class="element-name type-name-label">RadixUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">The class contains several methods used for work with numbers in various
-radixes.
-<p>
-Numbers represented in various radixes are used widely in system programming
-in all times. This class tries to make parsing, converting and working with
-various number radixes easier.</div>
+<div class="block">Parsing and formatting of numbers in the radixes common in system programming.</div>
 </div>
 </section>
 <section class="summary">
@@ -98,63 +88,35 @@ various number radixes easier.</div>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertToRadix(byte%5B%5D,int,boolean)" class="member-name-link">convertToRadix</a><wbr>(byte[]&nbsp;number,
- int&nbsp;toRadix,
- boolean&nbsp;littleEndian)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinary(int,int)" class="member-name-link">formatBinary</a><wbr>(int&nbsp;value,
+ int&nbsp;bits)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts number in any length to a number with specified radix.</div>
+<div class="block">Formats a value as a binary number, left-padded with zeros.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
- int&nbsp;length)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinary(int,int,int)" class="member-name-link">formatBinary</a><wbr>(int&nbsp;value,
+ int&nbsp;bits,
+ int&nbsp;groupBits)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted binary string of given number.</div>
+<div class="block">Formats a value as a binary number, left-padded with zeros, with bit groups separated by a space.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatBinaryString(int,int,int,boolean)" class="member-name-link">formatBinaryString</a><wbr>(int&nbsp;number,
- int&nbsp;length,
- int&nbsp;spacePerBits,
- boolean&nbsp;spacesFromLeft)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatHex(int,int)" class="member-name-link">formatHex</a><wbr>(int&nbsp;value,
+ int&nbsp;digits)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted binary string of given number.</div>
+<div class="block">Formats a value as an uppercase hexadecimal number, left-padded with zeros.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatByteHexString(int)" class="member-name-link">formatByteHexString</a><wbr>(int&nbsp;byteNumber)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseRadix(java.lang.String)" class="member-name-link">parseRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted string of a byte.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatDwordHexString(int)" class="member-name-link">formatDwordHexString</a><wbr>(int&nbsp;number)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted string of a dword.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(int)" class="member-name-link">formatWordHexString</a><wbr>(int&nbsp;wordNumber)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted string of a word.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatWordHexString(short,short)" class="member-name-link">formatWordHexString</a><wbr>(short&nbsp;upper,
- short&nbsp;lower)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get formatted string of a word.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getInstance()" class="member-name-link">getInstance</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Gets the singleton instance of RadixUtils.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseRadix(java.lang.String)" class="member-name-link">parseRadix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Parses a number in known radix into integer.</div>
+<div class="block">Parses an integer written in assembler-style notation.</div>
 </div>
 </div>
 </div>
@@ -174,169 +136,89 @@ various number radixes easier.</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getInstance()">
-<h3>getInstance</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="RadixUtils.html" title="class in net.emustudio.emulib.runtime.helpers">RadixUtils</a></span>&nbsp;<span class="element-name">getInstance</span>()</div>
-<div class="block">Gets the singleton instance of RadixUtils.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>RadixUtils instance</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="convertToRadix(byte[],int,boolean)">
-<h3>convertToRadix</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">convertToRadix</span><wbr><span class="parameters">(byte[]&nbsp;number,
- int&nbsp;toRadix,
- boolean&nbsp;littleEndian)</span></div>
-<div class="block">Converts number in any length to a number with specified radix.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - any-length number. Array of number components stored in
-                    little endian.</dd>
-<dd><code>toRadix</code> - the radix of converted number</dd>
-<dd><code>littleEndian</code> - If the number is in little endian (true), or big endian (false)</dd>
-<dt>Returns:</dt>
-<dd>String of a number in specified radix</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="parseRadix(java.lang.String)">
 <h3>parseRadix</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseRadix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</span>
-               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
-<div class="block">Parses a number in known radix into integer.</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseRadix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</span>
+                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
+<div class="block">Parses an integer written in assembler-style notation.
+<p>
+Accepted syntax (case-insensitive, no surrounding whitespace): optional sign <code>+</code>/<code>-</code>, followed by
+<ul>
+  <li><code>0x</code> prefix: hexadecimal (<code>0x1F</code>)</li>
+  <li><code>h</code> suffix: hexadecimal (<code>1Fh</code>)</li>
+  <li><code>b</code> suffix or <code>0b</code> prefix: binary (<code>101b</code>, <code>0b101</code>)</li>
+  <li><code>o</code> or <code>q</code> suffix: octal (<code>17o</code>, <code>17q</code>)</li>
+  <li><code>d</code> suffix or no affix: decimal (<code>12d</code>, <code>12</code>; leading zeros are decimal too)</li>
+</ul>
+The result must fit into a signed 32-bit integer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>number</code> - number in some known radix</dd>
+<dd><code>number</code> - the number text</dd>
 <dt>Returns:</dt>
-<dd>parsed integer</dd>
+<dd>parsed value</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if the number is not in known format</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if the text is not a number in a recognized format, or it overflows</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="formatByteHexString(int)">
-<h3>formatByteHexString</h3>
+<section class="detail" id="formatHex(int,int)">
+<h3>formatHex</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatByteHexString</span><wbr><span class="parameters">(int&nbsp;byteNumber)</span></div>
-<div class="block">Get formatted string of a byte.
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatHex</span><wbr><span class="parameters">(int&nbsp;value,
+ int&nbsp;digits)</span></div>
+<div class="block">Formats a value as an uppercase hexadecimal number, left-padded with zeros.
 <p>
-Formatting is using pattern "%02X".</div>
+The result is never truncated: if the value needs more digits, all are emitted (negative values have 8 digits).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>byteNumber</code> - a number, assumed size is a byte</dd>
+<dd><code>value</code> - the value</dd>
+<dd><code>digits</code> - minimal number of digits (e.g. 2 for a byte, 4 for a word, 8 for a dword)</dd>
 <dt>Returns:</dt>
-<dd>formatted string as a hexadecimal number, with string length=2</dd>
+<dd>hexadecimal string without prefix or suffix</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="formatWordHexString(int)">
-<h3>formatWordHexString</h3>
+<section class="detail" id="formatBinary(int,int)">
+<h3>formatBinary</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatWordHexString</span><wbr><span class="parameters">(int&nbsp;wordNumber)</span></div>
-<div class="block">Get formatted string of a word.
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatBinary</span><wbr><span class="parameters">(int&nbsp;value,
+ int&nbsp;bits)</span></div>
+<div class="block">Formats a value as a binary number, left-padded with zeros.
 <p>
-Formatting is using pattern "%04X".</div>
+The result is never truncated: if the value needs more bits, all are emitted (negative values have 32 bits).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>wordNumber</code> - a number, assumed size is a word (2 bytes)</dd>
+<dd><code>value</code> - the value</dd>
+<dd><code>bits</code> - minimal number of bits</dd>
 <dt>Returns:</dt>
-<dd>formatted string as a hexadecimal number, with string length=4</dd>
+<dd>binary string without prefix or suffix</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="formatWordHexString(short,short)">
-<h3>formatWordHexString</h3>
+<section class="detail" id="formatBinary(int,int,int)">
+<h3>formatBinary</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatWordHexString</span><wbr><span class="parameters">(short&nbsp;upper,
- short&nbsp;lower)</span></div>
-<div class="block">Get formatted string of a word.
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatBinary</span><wbr><span class="parameters">(int&nbsp;value,
+ int&nbsp;bits,
+ int&nbsp;groupBits)</span></div>
+<div class="block">Formats a value as a binary number, left-padded with zeros, with bit groups separated by a space.
 <p>
-Formatting is using pattern "%04X".</div>
+Groups are counted from the least significant bit, e.g. <code>formatBinary(0x2F, 10, 4)</code> is
+<code>"00 0010 1111"</code>. The result is never truncated (negative values have 32 bits).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>upper</code> - high order byte (high 8 bits)</dd>
-<dd><code>lower</code> - low order byte (low 8bits)</dd>
+<dd><code>value</code> - the value</dd>
+<dd><code>bits</code> - minimal number of bits</dd>
+<dd><code>groupBits</code> - number of bits in a space-separated group; if &lt;= 0, bits are not grouped</dd>
 <dt>Returns:</dt>
-<dd>formatted string as a hexadecimal number, with string length=4</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="formatDwordHexString(int)">
-<h3>formatDwordHexString</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatDwordHexString</span><wbr><span class="parameters">(int&nbsp;number)</span></div>
-<div class="block">Get formatted string of a dword.
-<p>
-Formatting is using pattern "%08X".</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - a number, assumed size is a double word (4 bytes)</dd>
-<dt>Returns:</dt>
-<dd>formatted string as a hexadecimal number, with string length=8</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="formatBinaryString(int,int,int,boolean)">
-<h3>formatBinaryString</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatBinaryString</span><wbr><span class="parameters">(int&nbsp;number,
- int&nbsp;length,
- int&nbsp;spacePerBits,
- boolean&nbsp;spacesFromLeft)</span></div>
-<div class="block">Get formatted binary string of given number.
-<p>
-The formatted string is possibly prepended with zeroes to ensure that the string has given length.
-<p>
-Also, groups of some bits can be separated by single space. The number of space-separated bits is specified
-by the `spacesPerBits` parameter.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - number to format</dd>
-<dd><code>length</code> - resulting string length (number of bits)</dd>
-<dd><code>spacePerBits</code> - number of space-separated bits. If &lt;= 0 then bits are never separated with space.</dd>
-<dd><code>spacesFromLeft</code> - whether the group of bits to be space-separated should be counted from left or from right side</dd>
-<dt>Returns:</dt>
-<dd>formatted string as a binary number, with given string length</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="formatBinaryString(int,int)">
-<h3>formatBinaryString</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatBinaryString</span><wbr><span class="parameters">(int&nbsp;number,
- int&nbsp;length)</span></div>
-<div class="block">Get formatted binary string of given number.
-<p>
-The formatted string is possibly prepended with zeroes to ensure that the string has given length.
-<p>
-Bits are not separated by spaces.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>number</code> - number to format</dd>
-<dd><code>length</code> - resulting string length (number of bits)</dd>
-<dt>Returns:</dt>
-<dd>formatted string as a binary number, with given string length</dd>
+<dd>binary string without prefix or suffix</dd>
 </dl>
 </div>
 </section>

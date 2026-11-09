@@ -58,10 +58,14 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#getClassType()" tabindex="0">getClassType()</a></li>
 <li><a href="#getTitle()" tabindex="0">getTitle()</a></li>
+<li><a href="#getValue(int)" tabindex="0">getValue(int)</a></li>
 <li><a href="#isEditable()" tabindex="0">isEditable()</a></li>
 <li><a href="#setValue(int,java.lang.Object)" tabindex="0">setValue(int, Object)</a></li>
-<li><a href="#getValue(int)" tabindex="0">getValue(int)</a></li>
 <li><a href="#getDefaultWidth()" tabindex="0">getDefaultWidth()</a></li>
+<li><a href="#text(java.lang.String,java.util.function.IntFunction)" tabindex="0">text(String, IntFunction)</a></li>
+<li><a href="#address(java.lang.String)" tabindex="0">address(String)</a></li>
+<li><a href="#mnemo(net.emustudio.emulib.plugins.cpu.Disassembler)" tabindex="0">mnemo(Disassembler)</a></li>
+<li><a href="#opcode(net.emustudio.emulib.plugins.cpu.Disassembler)" tabindex="0">opcode(Disassembler)</a></li>
 </ol>
 </li>
 </ol>
@@ -76,22 +80,10 @@ loadScripts(document, 'script');</script>
 <dt>Type Parameters:</dt>
 <dd><span id="type-param-T"><code>T</code> - Java type of this column</span></dd>
 </dl>
-<dl class="notes">
-<dt>All Known Implementing Classes:</dt>
-<dd><code><a href="AddressColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">AddressColumn</a>, <a href="MnemoColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">MnemoColumn</a>, <a href="OpcodeColumn.html" title="class in net.emustudio.emulib.runtime.ui.debugger">OpcodeColumn</a></code></dd>
-</dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">DebuggerColumn&lt;T&gt;</span></div>
-<div class="block">Column in the debugger table.</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="DebuggerTable.html" title="interface in net.emustudio.emulib.runtime.ui.debugger"><code>DebuggerTable</code></a></li>
-</ul>
-</dd>
-</dl>
+<div class="block">Column in the debugger table. CPUs provide custom columns with <a href="../../../plugins/cpu/CPU.html#getDebuggerColumns()"><code>CPU.getDebuggerColumns()</code></a>.</div>
 </div>
 </section>
 <section class="summary">
@@ -101,42 +93,57 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a><wbr>&lt;<a href="#type-param-T" title="type parameter in DebuggerColumn">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getClassType()" class="member-name-link">getClassType</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#address(java.lang.String)" class="member-name-link">address</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;format)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Creates "address" column.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a><wbr>&lt;<a href="#type-param-T" title="type parameter in DebuggerColumn">T</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getClassType()" class="member-name-link">getClassType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDefaultWidth()" class="member-name-link">getDefaultWidth</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-T" title="type parameter in DebuggerColumn">T</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getValue(int)" class="member-name-link">getValue</a><wbr>(int&nbsp;location)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Gets class type of the column.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getDefaultWidth()" class="member-name-link">getDefaultWidth</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Get default width of the column in pixels.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Gets title of the column.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#type-param-T" title="type parameter in DebuggerColumn">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getValue(int)" class="member-name-link">getValue</a><wbr>(int&nbsp;location)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Gets a value from the column cell.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isEditable()" class="member-name-link">isEditable</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Determines whether this column is editable by user.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setValue(int,java.lang.Object)" class="member-name-link">setValue</a><wbr>(int&nbsp;location,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isEditable()" class="member-name-link">isEditable</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Set a value to a column cell.</div>
+<div class="block">Determines whether cells of this column are editable by user.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#mnemo(net.emustudio.emulib.plugins.cpu.Disassembler)" class="member-name-link">mnemo</a><wbr>(<a href="../../../plugins/cpu/Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a>&nbsp;disassembler)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Creates "instruction" column showing instruction mnemonics.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#opcode(net.emustudio.emulib.plugins.cpu.Disassembler)" class="member-name-link">opcode</a><wbr>(<a href="../../../plugins/cpu/Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a>&nbsp;disassembler)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Creates "opcode" column showing formatted binary representation of instructions.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setValue(int,java.lang.Object)" class="member-name-link">setValue</a><wbr>(int&nbsp;location,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Set a value to a column cell of an editable column.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#text(java.lang.String,java.util.function.IntFunction)" class="member-name-link">text</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/IntFunction.html" title="class or interface in java.util.function" class="external-link">IntFunction</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;values)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Creates read-only text column.</div>
 </div>
 </div>
 </div>
@@ -157,7 +164,6 @@ loadScripts(document, 'script');</script>
 <h3>getClassType</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;<a href="#type-param-T" title="type parameter in DebuggerColumn">T</a>&gt;</span>&nbsp;<span class="element-name">getClassType</span>()</div>
-<div class="block">Gets class type of the column.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>Java type of this column</dd>
@@ -170,10 +176,24 @@ loadScripts(document, 'script');</script>
 <h3>getTitle</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTitle</span>()</div>
-<div class="block">Gets title of the column.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>title of this column</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getValue(int)">
+<h3>getValue</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="return-type"><a href="#type-param-T" title="type parameter in DebuggerColumn">T</a></span>&nbsp;<span class="element-name">getValue</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
+<div class="block">Gets a value from the column cell.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>location</code> - Cell index (usually memory address). It is not a "row number" in the debugger table.</dd>
+<dt>Returns:</dt>
+<dd>cell value</dd>
 </dl>
 </div>
 </section>
@@ -183,10 +203,7 @@ loadScripts(document, 'script');</script>
 <h3>isEditable</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEditable</span>()</div>
-<div class="block">Determines whether this column is editable by user.
-<p>
-For example, a "mnemo" column shouldn't be editable, but "breakpoint" column can (and should).
-Note that the returned value holds to all cells in the column. Columns are read-only by default.</div>
+<div class="block">Determines whether cells of this column are editable by user. Columns are read-only by default.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if the column is editable, false otherwise</dd>
@@ -199,38 +216,14 @@ Note that the returned value holds to all cells in the column. Columns are read-
 <h3>setValue</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setValue</span><wbr><span class="parameters">(int&nbsp;location,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span>
-               throws <span class="exceptions"><a href="CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></span></div>
-<div class="block">Set a value to a column cell.
-<p>
-It is called by emuStudio when user sets a value to a cell in the debugger table. It is used only if
-the column is editable (see <a href="#isEditable()"><code>isEditable</code></a> method).
-<p>
-NOTE: This method should ensure proper changes in CPU's internal state, if necessary.
-The default implementation has no effect; editable columns must override it.</div>
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="block">Set a value to a column cell of an editable column.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>location</code> - Cell index (usually memory address). It is not a "row number" in the debugger table.</dd>
 <dd><code>value</code> - new value assigned to the cell</dd>
 <dt>Throws:</dt>
-<dd><code><a href="CannotSetDebuggerValueException.html" title="class in net.emustudio.emulib.runtime.ui.debugger">CannotSetDebuggerValueException</a></code> - if the value cannot be assigned, for any reason</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getValue(int)">
-<h3>getValue</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="return-type"><a href="#type-param-T" title="type parameter in DebuggerColumn">T</a></span>&nbsp;<span class="element-name">getValue</span><wbr><span class="parameters">(int&nbsp;location)</span></div>
-<div class="block">Gets a value from the column cell.
-<p>
-It is called by emuStudio when rendering the debugger table.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>location</code> - Cell index (usually memory address). It is not a "row number" in the debugger table.</dd>
-<dt>Returns:</dt>
-<dd>cell value</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value cannot be assigned</dd>
 </dl>
 </div>
 </section>
@@ -240,12 +233,71 @@ It is called by emuStudio when rendering the debugger table.</div>
 <h3>getDefaultWidth</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getDefaultWidth</span>()</div>
-<div class="block">Get default width of the column in pixels.
-<p>
-If it is not known, this method should return -1.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>default width of the column in pixels or -1 if it is not known</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="text(java.lang.String,java.util.function.IntFunction)">
+<h3>text</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">text</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/IntFunction.html" title="class or interface in java.util.function" class="external-link">IntFunction</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;values)</span></div>
+<div class="block">Creates read-only text column.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>title</code> - column title</dd>
+<dd><code>values</code> - cell value by location</dd>
+<dt>Returns:</dt>
+<dd>new column</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="address(java.lang.String)">
+<h3>address</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">address</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;format)</span></div>
+<div class="block">Creates "address" column.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>format</code> - address format for <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#format(java.lang.String,java.lang.Object...)" title="class or interface in java.lang" class="external-link"><code>String.format(String, Object...)</code></a>, e.g. <code>"%04X"</code></dd>
+<dt>Returns:</dt>
+<dd>new column</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="mnemo(net.emustudio.emulib.plugins.cpu.Disassembler)">
+<h3>mnemo</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">mnemo</span><wbr><span class="parameters">(<a href="../../../plugins/cpu/Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a>&nbsp;disassembler)</span></div>
+<div class="block">Creates "instruction" column showing instruction mnemonics.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>disassembler</code> - the disassembler</dd>
+<dt>Returns:</dt>
+<dd>new column</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="opcode(net.emustudio.emulib.plugins.cpu.Disassembler)">
+<h3>opcode</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="DebuggerColumn.html" title="interface in net.emustudio.emulib.runtime.ui.debugger">DebuggerColumn</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">opcode</span><wbr><span class="parameters">(<a href="../../../plugins/cpu/Disassembler.html" title="interface in net.emustudio.emulib.plugins.cpu">Disassembler</a>&nbsp;disassembler)</span></div>
+<div class="block">Creates "opcode" column showing formatted binary representation of instructions.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>disassembler</code> - the disassembler</dd>
+<dt>Returns:</dt>
+<dd>new column</dd>
 </dl>
 </div>
 </section>

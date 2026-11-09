@@ -75,14 +75,9 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Unchecked</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Unchecked</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Unchecked running/ calling.
-Unchecked means Runnable or Callable can throw exceptions (which don't need to extend RuntimeException).
-<p>
-This code was borrowed from:
-<p>
-<a href="http://stackoverflow.com/questions/19757300/java-8-lambda-streams-filter-by-method-with-exception">exceptions in lambda</a></div>
+<div class="block">Runs actions which can throw checked exceptions, rethrowing them unchanged without declaring them ("sneaky throw").</div>
 </div>
 </section>
 <section class="summary">
@@ -99,12 +94,12 @@ This code was borrowed from:
 <div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="Unchecked.CallableWithCanThrow.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;<a href="Unchecked.CallableWithCanThrow.html#type-param-T" title="type parameter in Unchecked.CallableWithCanThrow">T</a>&gt;</code></div>
 <div class="col-last even-row-color">
-<div class="block">A callable that can throw checked exceptions.</div>
+<div class="block">An action with a result which can throw checked exceptions.</div>
 </div>
 <div class="col-first odd-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="Unchecked.RunnableWhichCanThrow.html" class="type-name-link" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">A runnable that can throw checked exceptions.</div>
+<div class="block">An action which can throw checked exceptions.</div>
 </div>
 </div>
 </section>
@@ -123,17 +118,17 @@ This code was borrowed from:
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#call(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)" class="member-name-link">call</a><wbr>(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Calls a callable that can throw checked exceptions.</div>
+<div class="block">Calls the action; checked exceptions are rethrown unchanged.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#run(net.emustudio.emulib.runtime.helpers.Unchecked.RunnableWhichCanThrow)" class="member-name-link">run</a><wbr>(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Runs a runnable that can throw checked exceptions.</div>
+<div class="block">Runs the action; checked exceptions are rethrown unchanged.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sneakyThrow(java.lang.Throwable)" class="member-name-link">sneakyThrow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;e)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Throws a checked exception as an unchecked one.</div>
+<div class="block">Throws any exception without declaring it.</div>
 </div>
 </div>
 </div>
@@ -157,10 +152,10 @@ This code was borrowed from:
 <h3>run</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span><wbr><span class="parameters">(<a href="Unchecked.RunnableWhichCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.RunnableWhichCanThrow</a>&nbsp;r)</span></div>
-<div class="block">Runs a runnable that can throw checked exceptions.</div>
+<div class="block">Runs the action; checked exceptions are rethrown unchanged.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>r</code> - the runnable</dd>
+<dd><code>r</code> - the action</dd>
 </dl>
 </div>
 </section>
@@ -170,14 +165,14 @@ This code was borrowed from:
 <h3>call</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">call</span><wbr><span class="parameters">(<a href="Unchecked.CallableWithCanThrow.html" title="interface in net.emustudio.emulib.runtime.helpers">Unchecked.CallableWithCanThrow</a>&lt;T&gt;&nbsp;c)</span></div>
-<div class="block">Calls a callable that can throw checked exceptions.</div>
+<div class="block">Calls the action; checked exceptions are rethrown unchanged.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><span id="call(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the return type</span></dd>
+<dd><span id="call(net.emustudio.emulib.runtime.helpers.Unchecked.CallableWithCanThrow)-type-param-T"><code>T</code> - the result type</span></dd>
 <dt>Parameters:</dt>
-<dd><code>c</code> - the callable</dd>
+<dd><code>c</code> - the action</dd>
 <dt>Returns:</dt>
-<dd>the result of the callable</dd>
+<dd>the action result</dd>
 </dl>
 </div>
 </section>
@@ -187,14 +182,14 @@ This code was borrowed from:
 <h3>sneakyThrow</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">sneakyThrow</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;e)</span></div>
-<div class="block">Throws a checked exception as an unchecked one.</div>
+<div class="block">Throws any exception without declaring it.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><span id="sneakyThrow(java.lang.Throwable)-type-param-T"><code>T</code> - the return type</span></dd>
+<dd><span id="sneakyThrow(java.lang.Throwable)-type-param-T"><code>T</code> - the "return" type, allowing <code>return sneakyThrow(e);</code></span></dd>
 <dt>Parameters:</dt>
 <dd><code>e</code> - the exception</dd>
 <dt>Returns:</dt>
-<dd>never returns, always throws</dd>
+<dd>never returns</dd>
 </dl>
 </div>
 </section>

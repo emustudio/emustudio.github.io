@@ -132,7 +132,7 @@ Samples can overlap, restart or loop; playback calls do not wait for effects to 
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>byte[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#captureAudio(int)" class="member-name-link">captureAudio</a><wbr>(int&nbsp;frameCount)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Mixes effects at their current playback positions for recording.</div>
+<div class="block">Mixes samples at their current playback positions for recording.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
@@ -141,9 +141,7 @@ Samples can overlap, restart or loop; playback calls do not wait for effects to 
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVolumePercent()" class="member-name-link">getVolumePercent</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the current volume, from 0 to 100.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#load(K,java.nio.file.Path)" class="member-name-link">load</a><wbr>(<a href="#type-param-K" title="type parameter in SamplePlayer">K</a>&nbsp;key,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</code></div>
@@ -169,7 +167,7 @@ Samples can overlap, restart or loop; playback calls do not wait for effects to 
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAll()" class="member-name-link">stopAll</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Stops all effects without unloading them.</div>
+<div class="block">Stops all samples without unloading them.</div>
 </div>
 </div>
 </div>
@@ -255,6 +253,10 @@ Unknown sample identifiers are silent.</div>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span><wbr><span class="parameters">(<a href="#type-param-K" title="type parameter in SamplePlayer">K</a>&nbsp;key)</span></div>
 <div class="block">Stops one sample; unknown identifiers are ignored.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - sample identifier</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -263,7 +265,7 @@ Unknown sample identifiers are silent.</div>
 <h3>stopAll</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopAll</span>()</div>
-<div class="block">Stops all effects without unloading them.</div>
+<div class="block">Stops all samples without unloading them.</div>
 </div>
 </section>
 </li>
@@ -272,7 +274,10 @@ Unknown sample identifiers are silent.</div>
 <h3>getVolumePercent</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getVolumePercent</span>()</div>
-<div class="block">Returns the current volume, from 0 to 100.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current volume, from 0 to 100</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -282,6 +287,10 @@ Unknown sample identifiers are silent.</div>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setVolumePercent</span><wbr><span class="parameters">(int&nbsp;volumePercent)</span></div>
 <div class="block">Sets the volume for loaded and future samples, clamped to 0..100.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>volumePercent</code> - volume in percent</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -290,9 +299,9 @@ Unknown sample identifiers are silent.</div>
 <h3>captureAudio</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">captureAudio</span><wbr><span class="parameters">(int&nbsp;frameCount)</span></div>
-<div class="block">Mixes effects at their current playback positions for recording.
+<div class="block">Mixes samples at their current playback positions for recording.
 Returns signed 16-bit little-endian stereo PCM with identical left/right channels,
-applying the current volume and saturating overlapping effects. Missing or stopped samples
+applying the current volume and saturating overlapping samples. Missing or stopped samples
 contribute silence. This reads playback positions; it does not advance them.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

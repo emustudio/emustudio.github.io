@@ -21,12 +21,13 @@ Sample implementation of a compiler might look as follows (just some methods are
 ```java
 @PluginRoot(
         type = PLUGIN_TYPE.COMPILER,
-        title = "Sample compiler"
+        title = "Sample compiler",
+        description = "Sample compiler"
 )
 public class CompilerImpl extends AbstractCompiler {
     private final static Logger LOGGER = LoggerFactory.getLogger(CompilerImpl.class);
-    private final static List<FileExtension> SOURCE_FILE_EXTENSIONS = List.of(
-            new FileExtension("asm", "Assembler source file")
+    private final static List<FileType> SOURCE_FILE_TYPES = List.of(
+            new FileType("Assembler source file", "asm")
     );
 
     private MemoryContext<Byte> memory;
@@ -35,79 +36,67 @@ public class CompilerImpl extends AbstractCompiler {
         super(pluginID, applicationApi, settings);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void initialize() throws PluginInitializationException {
+    public void initialize() {
         Optional.ofNullable(applicationApi.getContextPool()).ifPresent(pool -> {
             try {
-                memory = pool.getMemoryContext(pluginID, MemoryContext.class);
-                if (memory.getCellTypeClass() != Byte.class) {
-                    throw new InvalidContextException(
-                            "Unexpected memory cell type. Expected Byte but was: " + memory.getCellTypeClass()
-                    );
-                }
-            } catch (InvalidContextException | ContextNotFoundException e) {
-                memory = null;
+                memory = pool.getMemory(pluginID, Byte.class);
+            } catch (ContextNotFoundException e) {
                 LOGGER.warn("Memory is not available", e);
             }
         });
     }
 
     @Override
-    public void compile(Path inputPath, Optional<Path> outputPath) {
-        notifyCompileStart();
-        notifyInfo(getTitle() + ", version " + getVersion());
-
-        Path finalOutputPath = outputPath.orElse(convertInputToOutputPath(inputPath, ".hex"));
+    protected void compile(Path inputPath, Path outputPath) throws Exception {
+        String fileName = inputPath.toString();
         try (Reader reader = Files.newBufferedReader(inputPath, StandardCharsets.UTF_8)) {
             SampleLexer lexer = createLexer(CharStreams.fromReader(reader));
-            lexer.addErrorListener(new ParserErrorListener());
+            lexer.addErrorListener(new ParserErrorListener(fileName));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
 
             SampleParser parser = createParser(tokens);
-            parser.addErrorListener(new ParserErrorListener());
+            parser.addErrorListener(new ParserErrorListener(fileName));
 
             Program program = new Program(); // TODO: Create your AST
-            program.setFileName(inputPath.toString());
+            program.setFileName(fileName);
             new CreateProgramVisitor(program).visit(parser.rStart()); // TODO: Create AST creator visitor
 
             IntelHEX hex = new IntelHEX();
             NodeVisitor[] visitors = new NodeVisitor[]{
                     // TODO: create your semantic analysis and code generating visitors
             };
-
             for (NodeVisitor visitor : visitors) {
                 visitor.visit(program);
             }
 
-            if (program.env().hasNoErrors()) {
-                hex.generate(finalOutputPath);
-                int programLocation = hex.findProgramLocation();
-                applicationApi.setProgramLocation(programLocation);
-
-                notifyInfo(String.format(
-                        "Compile was successful.\n\tOutput: %s\n\tProgram starts at 0x%s",
-                        finalOutputPath, RadixUtils.formatWordHexString(programLocation)
-                ));
-
-                if (memory != null) {
-                    hex.loadIntoMemory(memory, b -> b);
-                    notifyInfo("Compiled file was loaded into memory.");
-                } else {
-                    notifyWarning("Memory is not available.");
-                }
-            } else {
+            if (!program.env().hasNoErrors()) {
                 for (CompileError error : program.env().getErrors()) {
-                    notifyError(error.position, error.msg);
+                    error(error.position, error.msg);
                 }
+                return;
             }
-        } catch (CompileException e) {
-            notifyError(e.position, e.getMessage());
-        } catch (IOException e) {
-            notifyError("Compilation error: " + e);
-        } finally {
-            notifyCompileFinish();
+
+            hex.generate(outputPath);
+            int programLocation = hex.findProgramLocation();
+            applicationApi.setProgramLocation(programLocation);
+            info(String.format(
+                    "Compile was successful.\n\tOutput: %s\n\tProgram starts at 0x%s",
+                    outputPath, RadixUtils.formatHex(programLocation, 4)
+            ));
+
+            if (memory != null) {
+                hex.loadIntoMemory(memory);
+                info("Compiled file was loaded into memory.");
+            } else {
+                warning("Memory is not available.");
+            }
         }
+    }
+
+    @Override
+    protected String getOutputExtension() {
+        return "hex";
     }
 
     @Override
@@ -116,13 +105,8 @@ public class CompilerImpl extends AbstractCompiler {
     }
 
     @Override
-    public List<FileExtension> getSourceFileExtensions() {
-        return SOURCE_FILE_EXTENSIONS;
-    }
-
-    @Override
-    public String getDescription() {
-        return "Sample compiler";
+    public List<FileType> getSourceFileTypes() {
+        return SOURCE_FILE_TYPES;
     }
 
     private SampleLexer createLexer(CharStream input) {
@@ -143,10 +127,17 @@ The compiler does not register any plugin context, but when initialized, it obta
 memory must have cells of `Byte` type). If the memory is available, after compilation the program will be
 loaded in the memory.
 
-`compile(Path inputPath, Optional<Path> outputPath)` reports results through compiler listeners. Use
-`convertInputToOutputPath(inputPath, ".hex")` when no output path is supplied, and always pair `notifyCompileStart()`
-with `notifyCompileFinish()` in a `finally` block. Error positions are `SourceCodePosition` objects containing the
-source filename, line, and column, including for errors in included files.
+`AbstractCompiler` implements the public `compile(Path inputPath, Optional<Path> outputPath)` as a template method. It
+notifies listeners about the start, reports the compiler title and version, and derives a missing output path from the
+input by replacing a source extension with `getOutputExtension()` (or appending it). Then it calls the plugin's
+`compile(Path input, Path output)` and notifies listeners about the finish, even on failure. A thrown
+`CompileException` is reported as an error at its position; any other exception is reported as a compilation error.
+Inside `compile`, report messages with `error(...)`, `warning(...)` and `info(...)`. Error positions are
+`SourceCodePosition` objects containing the source filename, line, and column, including for errors in included files.
+
+`AbstractCompiler.runCommandLine(jarName, args, CompilerImpl::new)` implements a command-line interface
+(`[-o outputFile] inputFile`, `--version`, `--help`) and returns the exit code, so a launcher class only needs
+`System.exit(AbstractCompiler.runCommandLine("as-sample", args, CompilerImpl::new))`.
 
 `AbstractCompiler` reads version and copyright from the plugin's `version.properties` resource as described in
 [plugin metadata]({{ site.baseurl }}/plugin_basics/#version-and-copyright-metadata).
@@ -201,109 +192,52 @@ emuStudio application uses standardized token types in order to support syntax h
 kind. It is thus required to provide a lexer which returns emuStudio-like token types:
 
 ```java
-public interface LexicalAnalyzer extends Iterable<Token> {
+public interface LexicalAnalyzer {
     Token next();
 
     boolean hasNext();
 
     void reset(char[] array, int offset, int length);
+
+    // ... optional default methods for editing metadata (see below)
 }
 ```
 
-The implementation is usually manual, tokens generated by ANTLR are converted into the standardized variants, e.g.:
+For ANTLR lexers, extend `AntlrLexicalAnalyzer` and supply a map converting ANTLR token types into the standardized
+`Token` types, plus the line comment opening text (or `null`):
 
 ```java
-public class LexicalAnalyzerImpl implements LexicalAnalyzer {
+public class LexicalAnalyzerImpl extends AntlrLexicalAnalyzer {
     public static final int[] tokenMap = new int[SampleLexer.EOL + 1]; // EOL has the highest number in this case
 
     static { // TODO: not complete
         tokenMap[COMMENT] = Token.COMMENT;
         tokenMap[EOL] = Token.WHITESPACE;
         tokenMap[WS] = Token.WHITESPACE;
-        
-        tokenMap[OPCODE_ADC] = Token.RESERVED;
-        tokenMap[OPCODE_AND] = Token.RESERVED;
-        tokenMap[OPCODE_ADD] = Token.RESERVED;
-        
-        tokenMap[PREP_ORG] = Token.PREPROCESSOR;
-        tokenMap[PREP_EQU] = Token.PREPROCESSOR;
-        tokenMap[PREP_VAR] = Token.PREPROCESSOR;
-        
-        tokenMap[REG_A] = Token.REGISTER;
-        tokenMap[REG_B] = Token.REGISTER;
-        tokenMap[REG_C] = Token.REGISTER;
-        
-        tokenMap[SEP_LPAR] = Token.SEPARATOR;
-        tokenMap[SEP_RPAR] = Token.SEPARATOR;
-        tokenMap[SEP_COMMA] = Token.SEPARATOR;
-        
-        tokenMap[OP_ADD] = Token.OPERATOR;
-        tokenMap[OP_SUBTRACT] = Token.OPERATOR;
-        tokenMap[OP_MULTIPLY] = Token.OPERATOR;
-        tokenMap[OP_DIVIDE] = Token.OPERATOR;
-        
-        tokenMap[LIT_NUMBER] = Token.LITERAL;
-        tokenMap[LIT_HEXNUMBER] = Token.LITERAL;
-        tokenMap[LIT_OCTNUMBER] = Token.LITERAL;
-        tokenMap[LIT_STRING] = Token.LITERAL;
 
+        tokenMap[OPCODE_ADC] = Token.RESERVED;
+        tokenMap[PREP_ORG] = Token.PREPROCESSOR;
+        tokenMap[REG_A] = Token.REGISTER;
+        tokenMap[SEP_COMMA] = Token.SEPARATOR;
+        tokenMap[OP_ADD] = Token.OPERATOR;
+        tokenMap[LIT_NUMBER] = Token.LITERAL;
+        tokenMap[LIT_STRING] = Token.LITERAL;
         tokenMap[ID_IDENTIFIER] = Token.IDENTIFIER;
         tokenMap[ID_LABEL] = Token.LABEL;
-
         tokenMap[ERROR] = Token.ERROR;
     }
 
-    private final SampleLexer lexer;
-    
     public LexicalAnalyzerImpl(SampleLexer lexer) {
-        this.lexer = Objects.requireNonNull(lexer);
-    }
-
-    @Override
-    public Token next() {
-        org.antlr.v4.runtime.Token token = lexer.nextToken();
-        return new Token() {
-            @Override
-            public int getType() {
-                return convertLexerTokenType(token.getType());
-            }
-
-            @Override
-            public int getOffset() {
-                return token.getStartIndex();
-            }
-
-            @Override
-            public String getText() {
-                return token.getText();
-            }
-        };
-    }
-
-    @Override
-    public boolean hasNext() {
-        return !lexer._hitEOF;
-    }
-
-    @Override
-    public void reset(char[] array, int offset, int length) {
-        lexer.setInputStream(new CharArrayCharStream(array, offset, length));
-    }
-
-
-    private int convertLexerTokenType(int tokenType) {
-        if (tokenType == EOF) {
-            return Token.EOF;
-        }
-        return tokenMap[tokenType];
+        super(lexer, tokenMap, ";");
     }
 }
 ```
 
-`CharArrayCharStream` and literal parsing helpers are provided by `net.emustudio.emulib.plugins.compiler.antlr`.
-The stream reads the specified slice without copying it, so keep that array unchanged while lexing. `ParsingUtils`
-provides numeric and quoted-string parsing, label extraction, and identifier normalization. Grammar, AST, semantic
-analysis, and code generation remain the compiler plugin's responsibility.
+The `net.emustudio.emulib.plugins.compiler.antlr` package provides further ANTLR helpers. `CharArrayCharStream` reads
+the specified slice without copying it, so keep that array unchanged while lexing. `ParserErrorListener(fileName)`
+turns syntax errors into a `CompileException` with the source position. `ParsingUtils` provides number parsing
+(`parseNumber`, using `RadixUtils.parseRadix` syntax), quoted-string parsing, label extraction, and identifier
+normalization. Grammar, AST, semantic analysis, and code generation remain the compiler plugin's responsibility.
 
 The host retains exact compiler input text and source revisions to validate source mappings. These mappings describe
 generated cell coverage and source provenance; debugger memory inspection reads current cells.

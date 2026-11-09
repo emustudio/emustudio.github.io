@@ -62,18 +62,13 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#add(java.lang.String)" tabindex="0">add(String)</a></li>
 <li><a href="#add(byte...)" tabindex="0">add(byte...)</a></li>
-<li><a href="#add(byte)" tabindex="0">add(byte)</a></li>
-<li><a href="#add(java.util.Map)" tabindex="0">add(Map)</a></li>
-<li><a href="#getCode()" tabindex="0">getCode()</a></li>
 <li><a href="#setNextAddress(int)" tabindex="0">setNextAddress(int)</a></li>
-<li><a href="#loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)" tabindex="0">loadIntoMemory(MemoryContext, Function)</a></li>
-<li><a href="#generate(java.nio.file.Path)" tabindex="0">generate(Path)</a></li>
-<li><a href="#generate(java.io.Writer)" tabindex="0">generate(Writer)</a></li>
+<li><a href="#getCode()" tabindex="0">getCode()</a></li>
 <li><a href="#findProgramLocation()" tabindex="0">findProgramLocation()</a></li>
-<li><a href="#parse(java.io.File)" tabindex="0">parse(File)</a></li>
-<li><a href="#loadIntoMemory(java.io.File,net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)" tabindex="0">loadIntoMemory(File, MemoryContext, Function)</a></li>
+<li><a href="#loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext)" tabindex="0">loadIntoMemory(MemoryContext)</a></li>
+<li><a href="#generate(java.nio.file.Path)" tabindex="0">generate(Path)</a></li>
+<li><a href="#parse(java.nio.file.Path)" tabindex="0">parse(Path)</a></li>
 </ol>
 </li>
 </ol>
@@ -92,7 +87,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="annotations">@NotThreadSafe
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">IntelHEX</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Generator and loader of 16-bit Intel Hex files (I8HEX).
+<div class="block">Program code of 16-bit Intel HEX files (I8HEX): built by compilers, written into a file, parsed or loaded into memory.
 <p>
 File format is described here: <a href="https://en.wikipedia.org/wiki/Intel_HEX">Intel HEX</a></div>
 </div>
@@ -108,9 +103,7 @@ File format is described here: <a href="https://en.wikipedia.org/wiki/Intel_HEX"
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">IntelHEX</a>()</code></div>
-<div class="col-last even-row-color">
-<div class="block">Constructs new Intel HEX generator/loader.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -125,70 +118,36 @@ File format is described here: <a href="https://en.wikipedia.org/wiki/Intel_HEX"
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(byte)" class="member-name-link">add</a><wbr>(byte&nbsp;data)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(byte...)" class="member-name-link">add</a><wbr>(byte...&nbsp;data)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add code byte into the code table.</div>
+<div class="block">Adds bytes at the next address, in the given order.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(byte...)" class="member-name-link">add</a><wbr>(byte...&nbsp;data)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds sequential bytes into the code table.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(java.lang.String)" class="member-name-link">add</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;hexData)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds sequential bytes into the code table.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(java.util.Map)" class="member-name-link">add</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;hexCodeMap)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds code (encoded as hex String) into the code table.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findProgramLocation()" class="member-name-link">findProgramLocation</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Finds program location in memory.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generate(java.io.Writer)" class="member-name-link">generate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Writer.html" title="class or interface in java.io" class="external-link">Writer</a>&nbsp;writer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Generates a Intel Hex file based on the cached program map.</div>
-</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findProgramLocation()" class="member-name-link">findProgramLocation</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generate(java.nio.file.Path)" class="member-name-link">generate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;outputPath)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Generates a Intel Hex file based on the cached program map.</div>
+<div class="block">Writes the program into an Intel HEX file.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCode()" class="member-name-link">getCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get the program hex code, encoded as map of addresses/bytes.</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext)" class="member-name-link">loadIntoMemory</a><wbr>(<a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;&nbsp;memory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Writes the program into memory.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;<br>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#loadIntoMemory(java.io.File,net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)" class="member-name-link">loadIntoMemory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file,
- <a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;T&gt;&nbsp;memory,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>,<wbr>T&gt;&nbsp;convert)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Parse Intel HEX file and load it into memory.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parse(java.nio.file.Path)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;file)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses an Intel HEX file.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;<br>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)" class="member-name-link">loadIntoMemory</a><wbr>(<a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;T&gt;&nbsp;mem,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>,<wbr>T&gt;&nbsp;convert)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Method is similar to generateHex() method in that way, that compiled
-program is also transformed into chunk of bytes, but not to hex file but
-to the operating memory.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parse(java.io.File)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Parses Intel HEX file.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNextAddress(int)" class="member-name-link">setNextAddress</a><wbr>(int&nbsp;address)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the next address where the next value will be assigned.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNextAddress(int)" class="member-name-link">setNextAddress</a><wbr>(int&nbsp;address)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the address where the next byte will be added.</div>
 </div>
 </div>
 </div>
@@ -212,7 +171,6 @@ to the operating memory.</div>
 <h3>IntelHEX</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IntelHEX</span>()</div>
-<div class="block">Constructs new Intel HEX generator/loader.</div>
 </div>
 </section>
 </li>
@@ -225,80 +183,14 @@ to the operating memory.</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="add(java.lang.String)">
-<h3>add</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;hexData)</span></div>
-<div class="block">Adds sequential bytes into the code table.
-The bytes are encoded as hex String, each byte consuming exactly 2 hex digits.
-<p>
-For example, <code>0A0B10</code> represents 3 bytes: <code>0x0A</code>, <code>0x0B</code> and <code>0x10</code>.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>hexData</code> - Hexadecimal representation of binary code</dd>
-<dt>Returns:</dt>
-<dd>next address</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="add(byte...)">
 <h3>add</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(byte...&nbsp;data)</span></div>
-<div class="block">Adds sequential bytes into the code table.
-<p>
-The bytes are added in the same order as they appear (i.e. they are not converted to different endian).</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(byte...&nbsp;data)</span></div>
+<div class="block">Adds bytes at the next address, in the given order. Existing bytes are overwritten.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>data</code> - sequential bytes to add</dd>
-<dt>Returns:</dt>
-<dd>next address</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="add(byte)">
-<h3>add</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(byte&nbsp;data)</span></div>
-<div class="block">Add code byte into the code table.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>data</code> - byte to add</dd>
-<dt>Returns:</dt>
-<dd>next address</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="add(java.util.Map)">
-<h3>add</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;hexCodeMap)</span></div>
-<div class="block">Adds code (encoded as hex String) into the code table.
-The code is added in the order from lowest to highest address found in the map.
-<p>
-Keys of the map represent addresses and values represent code.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>hexCodeMap</code> - sub-table with addresses and codes</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getCode()">
-<h3>getCode</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;</span>&nbsp;<span class="element-name">getCode</span>()</div>
-<div class="block">Get the program hex code, encoded as map of addresses/bytes.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>mutable map of program bytes, iterated in ascending address order</dd>
+<dd><code>data</code> - bytes to add</dd>
 </dl>
 </div>
 </section>
@@ -308,7 +200,7 @@ Keys of the map represent addresses and values represent code.</div>
 <h3>setNextAddress</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setNextAddress</span><wbr><span class="parameters">(int&nbsp;address)</span></div>
-<div class="block">Set the next address where the next value will be assigned.</div>
+<div class="block">Sets the address where the next byte will be added.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>address</code> - next address</dd>
@@ -317,20 +209,38 @@ Keys of the map represent addresses and values represent code.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)">
+<section class="detail" id="getCode()">
+<h3>getCode</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;</span>&nbsp;<span class="element-name">getCode</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>unmodifiable view of program bytes by address, in ascending address order</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="findProgramLocation()">
+<h3>findProgramLocation</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">findProgramLocation</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the lowest address of the program, or 0 if the program is empty</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext)">
 <h3>loadIntoMemory</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">loadIntoMemory</span><wbr><span class="parameters">(<a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;T&gt;&nbsp;mem,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>,<wbr>T&gt;&nbsp;convert)</span></div>
-<div class="block">Method is similar to generateHex() method in that way, that compiled
-program is also transformed into chunk of bytes, but not to hex file but
-to the operating memory.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">loadIntoMemory</span><wbr><span class="parameters">(<a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>&gt;&nbsp;memory)</span></div>
+<div class="block">Writes the program into memory.</div>
 <dl class="notes">
-<dt>Type Parameters:</dt>
-<dd><span id="loadIntoMemory(net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)-type-param-T"><code>T</code> - Specific memory type</span></dd>
 <dt>Parameters:</dt>
-<dd><code>mem</code> - context of operating memory</dd>
-<dd><code>convert</code> - conversion of byte to T</dd>
+<dd><code>memory</code> - target memory</dd>
 </dl>
 </div>
 </section>
@@ -341,88 +251,33 @@ to the operating memory.</div>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;outputPath)</span>
               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Generates a Intel Hex file based on the cached program map.</div>
+<div class="block">Writes the program into an Intel HEX file. Records hold up to 16 bytes and break at address gaps.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>outputPath</code> - output file</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the HEX file could not be written</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file could not be written</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="generate(java.io.Writer)">
-<h3>generate</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">generate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/Writer.html" title="class or interface in java.io" class="external-link">Writer</a>&nbsp;writer)</span>
-              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Generates a Intel Hex file based on the cached program map.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>writer</code> - Writer used to store the Intel HEX content</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the HEX file could not be written</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="findProgramLocation()">
-<h3>findProgramLocation</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">findProgramLocation</span>()</div>
-<div class="block">Finds program location in memory.
-<p>
-It is the lowest address in the program, or zero if the program is empty.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>program memory location</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parse(java.io.File)">
+<section class="detail" id="parse(java.nio.file.Path)">
 <h3>parse</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></span>&nbsp;<span class="element-name">parse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</span>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IntelHEX.html" title="class in net.emustudio.emulib.runtime.io">IntelHEX</a></span>&nbsp;<span class="element-name">parse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;file)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Parses Intel HEX file.
+<div class="block">Parses an Intel HEX file.
 <p>
-Blank lines and lines starting with ; after leading whitespace are ignored.
-Input checksums are ignored. Malformed data records report their line number.</div>
+Blank lines and lines starting with ';' (after leading whitespace) are ignored, as are input checksums
+and empty records. Only data records are supported. Later records overwrite earlier ones.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>file</code> - file</dd>
+<dd><code>file</code> - input file</dd>
 <dt>Returns:</dt>
-<dd>new instance of IntelHEX</dd>
+<dd>parsed program</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be parsed</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="loadIntoMemory(java.io.File,net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)">
-<h3>loadIntoMemory</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">loadIntoMemory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file,
- <a href="../../plugins/memory/MemoryContext.html" title="interface in net.emustudio.emulib.plugins.memory">MemoryContext</a>&lt;T&gt;&nbsp;memory,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>,<wbr>T&gt;&nbsp;convert)</span>
-                                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Parse Intel HEX file and load it into memory.</div>
-<dl class="notes">
-<dt>Type Parameters:</dt>
-<dd><span id="loadIntoMemory(java.io.File,net.emustudio.emulib.plugins.memory.MemoryContext,java.util.function.Function)-type-param-T"><code>T</code> - memory cell type</span></dd>
-<dt>Parameters:</dt>
-<dd><code>file</code> - file</dd>
-<dd><code>memory</code> - target memory</dd>
-<dd><code>convert</code> - conversion of byte to T</dd>
-<dt>Returns:</dt>
-<dd>program start address</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be parsed</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if the file cannot be read or is malformed (the message contains the line number)</dd>
 </dl>
 </div>
 </section>

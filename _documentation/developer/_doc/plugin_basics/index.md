@@ -65,16 +65,21 @@ A sample plugin root class might look like this:
 
 {:.code-example}
 ```java
-@PluginRoot(type = PLUGIN_TYPE.CPU, title = "Sample CPU emulator")
-public class SamplePlugin implements CPU {
+@PluginRoot(type = PLUGIN_TYPE.DEVICE, title = "Sample device", description = "Does nothing useful")
+public class SamplePlugin extends AbstractPlugin implements Device {
 
     public SamplePlugin(long pluginId, ApplicationApi emustudio, PluginSettings settings) {
-        ...
+        super(pluginId, emustudio, settings);
     }
 
     ...
 }
 ```
+
+[AbstractPlugin][abstractPlugin]{:target="_blank"} stores the constructor arguments in the protected fields
+`pluginID`, `applicationApi` and `settings`. `getTitle()` and `getDescription()` return the `PluginRoot` values.
+The lifecycle methods `initialize()`, `reset()`, `destroy()` and `showSettings(parent)` are no-ops by default, and
+`isShowSettingsSupported()` returns `false`. Override only what the plugin needs.
 
 If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
 If there are more classes like this, the plugin might not work correctly.
@@ -103,9 +108,9 @@ The constructor parameters have the following meaning:
 
 ### Settings
 
-`PluginSettings` extends `BasicSettings`: typed getters, setters, arrays, and nested settings use the same API.
-Unprefixed keys belong to the plugin's TOML settings table. Setters persist changes immediately; use getter defaults
-for optional keys.
+`PluginSettings` provides typed getters returning `Optional`, a single `set(key, value)` method, arrays, and nested
+settings. Unprefixed keys belong to the plugin's TOML settings table. `set` persists changes immediately; setting
+`null` removes the key.
 
 Keys beginning with `emustudio.` read application settings and are read-only to plugins. In particular,
 `PluginSettings.EMUSTUDIO_NO_GUI` and `PluginSettings.EMUSTUDIO_AUTO` report the active launch mode. These values come
@@ -113,46 +118,42 @@ from the running application, so writing `nogui` or `auto` into TOML does not se
 when GUI mode is enabled, and close resources acquired by the plugin during destruction.
 
 ```java
-boolean headless = settings.getBoolean(PluginSettings.EMUSTUDIO_NO_GUI, false);
-boolean automated = settings.getBoolean(PluginSettings.EMUSTUDIO_AUTO, false);
-int scale = settings.getInt("scale", 2);
-settings.setInt("scale", scale);
+boolean headless = settings.getBoolean(PluginSettings.EMUSTUDIO_NO_GUI).orElse(false);
+boolean automated = settings.getBoolean(PluginSettings.EMUSTUDIO_AUTO).orElse(false);
+int scale = settings.getInt("scale").orElse(2);
+settings.set("scale", scale);
 ```
 
 ### Shared Swing helpers
+
+`applicationApi.getGUI()` returns a factory of host-styled Swing components: labels, buttons, text fields, toolbars,
+split and scroll panes, MigLayout panels and titled sections. `gui.styleTable(table)` applies the host's table style;
+applying it repeatedly does not keep increasing row height. Keep long-running file operations off Swing's
+event-dispatch thread (EDT), e.g. with a `SwingWorker`.
 
 `DialogBase` refreshes its layout against actual native window insets whenever it is shown, including modal dialogs
 and dialogs reopened after disposal. For other Swing windows, call `GUI.relayoutOnShow(window)`
 once on the EDT before the first show. The helper prevents temporary decoration gaps
 without changing the window size or repacking its contents.
 
-Use `GUI.runInBackground(action, task, onSuccess, onError)` for file operations that must keep the interface responsive.
-The task runs off Swing's event-dispatch thread (EDT); action enablement and both callbacks run on the EDT.
-Calls from another thread are queued on the EDT. A disabled action ignores new requests until its current operation
-finishes. Completion re-enables the action after the callback, including when the task or callback fails.
-Use `onError` to report the supplied exception; task exceptions retain their original cause and message.
-
-For paths and other long labels, `ShortenedString` measures the actual font and keeps Unicode character sequences intact
-when inserting a middle ellipsis. Call `deriveMaxStringLength(component, availableWidth)` after the value, font, or width
-changes. Zero or negative widths produce empty text; very narrow widths show only the dots that fit. Keep the full value
-available through a tooltip or another appropriate control. `MaxItemsCache` accepts non-null history values and a
-non-negative capacity; capacity zero retains no entries.
+For paths and other long labels, `GUI.shortenToFit(text, component, width)` measures the component's font and inserts a
+middle ellipsis, keeping Unicode characters intact. Call it again after the value, font, or width changes. Zero or
+negative widths produce empty text; very narrow widths show only the dots that fit. Keep the full value available
+through a tooltip or another appropriate control.
 
 ### GUI icons
 
-Use `GUI.loadIcon("icons/clear.png")` to load an icon from the calling class's package in the plugin JAR.
-For sharper rendering on high-resolution displays, include `icons/clear@2x.png` at twice the base image's width
-and height. The loader combines both images in a `BaseMultiResolutionImage` wrapped in an `ImageIcon`, keeping
-the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base resource is
-absent, it returns `null`. Use `GUI.loadIcon(resource, PluginClass.class)` to specify the resource lookup class.
+Use `GUI.loadIcon("icons/clear.png", MyPanel.class)` to load an icon from the plugin JAR; relative paths are resolved
+against the given class. For sharper rendering on high-resolution displays, include `icons/clear@2x.png` at twice the
+base image's width and height. The loader combines both images in a `BaseMultiResolutionImage` wrapped in an
+`ImageIcon`, keeping the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base
+resource is absent, it returns `null`.
 
 Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
-Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE)`.
+Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE, MyPanel.class)`.
 
-Toolbar buttons and toggles created by `GUI` use the tooltip as their default accessible name, or the action name when
-no tooltip is provided. These defaults follow action metadata changes; an explicit accessible name set by the plugin
-takes precedence. Supply a descriptive tooltip for icon-only controls. `GUI.styleTable(table)` accommodates the current
-font and preserves a larger default row height; applying it repeatedly does not keep increasing row height.
+`gui.toolbarButton(action)` takes its icon from the action's `SMALL_ICON`, and its tooltip and accessible name from
+`SHORT_DESCRIPTION`. Supply a descriptive short description for icon-only buttons.
 
 ## Third-party dependencies
 
@@ -220,4 +221,5 @@ when a tool depends on another plugin. Application libraries under `lib/` are ad
 [memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
 [pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/annotations/PluginRoot.html  
+[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/AbstractPlugin.html
 [toml]: https://toml.io/en/v0.5.0

@@ -58,9 +58,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" tabindex="0">CompilerMessage(CompilerMessage.MessageType, String, SourceCodePosition)</a></li>
-<li><a href="#%3Cinit%3E(java.lang.String)" tabindex="0">CompilerMessage(String)</a></li>
-<li><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String)" tabindex="0">CompilerMessage(CompilerMessage.MessageType, String)</a></li>
+<li><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.Type,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" tabindex="0">CompilerMessage(CompilerMessage.Type, String, SourceCodePosition)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
@@ -68,7 +66,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getFormattedMessage()" tabindex="0">getFormattedMessage()</a></li>
 <li><a href="#getPosition()" tabindex="0">getPosition()</a></li>
 <li><a href="#getMessage()" tabindex="0">getMessage()</a></li>
-<li><a href="#getMessageType()" tabindex="0">getMessageType()</a></li>
+<li><a href="#getType()" tabindex="0">getType()</a></li>
 <li><a href="#toString()" tabindex="0">toString()</a></li>
 </ol>
 </li>
@@ -85,7 +83,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CompilerMessage</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">CompilerMessage</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Messages are passed to compiler listeners when the compiler wishes to say something.</div>
 </div>
@@ -102,10 +100,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="CompilerMessage.MessageType.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Message type.</div>
-</div>
+<div class="col-second even-row-color"><code><a href="CompilerMessage.Type.html" class="type-name-link" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -117,21 +113,10 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">CompilerMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
-<div class="col-last even-row-color">
-<div class="block">This constructor creates the Message object.</div>
-</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String)" class="member-name-link">CompilerMessage</a><wbr>(<a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a>&nbsp;type,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">This constructor creates the Message object.</div>
-</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" class="member-name-link">CompilerMessage</a><wbr>(<a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a>&nbsp;messageType,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(net.emustudio.emulib.plugins.compiler.CompilerMessage.Type,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)" class="member-name-link">CompilerMessage</a><wbr>(<a href="CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a>&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
  <a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position)</code></div>
-<div class="col-last even-row-color">
-<div class="block">This constructor creates the Message object.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -148,24 +133,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFormattedMessage()" class="member-name-link">getFormattedMessage</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return formatted string that represents this Message object.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMessage()" class="member-name-link">getMessage</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get the text of the message.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMessageType()" class="member-name-link">getMessageType</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get the type of the message.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPosition()" class="member-name-link">getPosition</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get source code position</div>
-</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPosition()" class="member-name-link">getPosition</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -187,49 +164,17 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)">
+<section class="detail" id="&lt;init&gt;(net.emustudio.emulib.plugins.compiler.CompilerMessage.Type,java.lang.String,net.emustudio.emulib.plugins.compiler.SourceCodePosition)">
 <h3>CompilerMessage</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CompilerMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a>&nbsp;messageType,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CompilerMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a>&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
  <a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&nbsp;position)</span></div>
-<div class="block">This constructor creates the Message object. Messages are created by
-compiler.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>messageType</code> - Type of the message</dd>
-<dd><code>message</code> - Text of the message</dd>
-<dd><code>position</code> - Source code position (nullable)</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.lang.String)">
-<h3>CompilerMessage</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CompilerMessage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
-<div class="block">This constructor creates the Message object. Messages are created by
-compiler.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>message</code> - Text of the message</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(net.emustudio.emulib.plugins.compiler.CompilerMessage.MessageType,java.lang.String)">
-<h3>CompilerMessage</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CompilerMessage</span><wbr><span class="parameters">(<a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a>&nbsp;type,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
-<div class="block">This constructor creates the Message object. Messages are created by
-compiler.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>type</code> - Type of the message.</dd>
-<dd><code>message</code> - Text of the message</dd>
+<dd><code>type</code> - message type</dd>
+<dd><code>message</code> - message text</dd>
+<dd><code>position</code> - source position, or null if the message is not related to a source position</dd>
 </dl>
 </div>
 </section>
@@ -247,10 +192,9 @@ compiler.</div>
 <h3>getFormattedMessage</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFormattedMessage</span>()</div>
-<div class="block">Return formatted string that represents this Message object.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>formatted message</dd>
+<dd>message text prefixed with the source position, if present</dd>
 </dl>
 </div>
 </section>
@@ -260,10 +204,9 @@ compiler.</div>
 <h3>getPosition</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="SourceCodePosition.html" title="class in net.emustudio.emulib.plugins.compiler">SourceCodePosition</a>&gt;</span>&nbsp;<span class="element-name">getPosition</span>()</div>
-<div class="block">Get source code position</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>position in the source code</dd>
+<dd>source position, if present</dd>
 </dl>
 </div>
 </section>
@@ -273,23 +216,21 @@ compiler.</div>
 <h3>getMessage</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getMessage</span>()</div>
-<div class="block">Get the text of the message.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>text of the message</dd>
+<dd>message text</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getMessageType()">
-<h3>getMessageType</h3>
+<section class="detail" id="getType()">
+<h3>getType</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CompilerMessage.MessageType.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.MessageType</a></span>&nbsp;<span class="element-name">getMessageType</span>()</div>
-<div class="block">Get the type of the message.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CompilerMessage.Type.html" title="enum class in net.emustudio.emulib.plugins.compiler">CompilerMessage.Type</a></span>&nbsp;<span class="element-name">getType</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the message type</dd>
+<dd>message type</dd>
 </dl>
 </div>
 </section>

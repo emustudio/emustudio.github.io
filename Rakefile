@@ -190,9 +190,11 @@ namespace :build do
 
     FileUtils.rm_rf(destination)
     FileUtils.cp_r(generated, destination)
-    # Javadoc itself emits trailing whitespace. Normalize it during import so
-    # the generated tree passes git diff --check without hand-editing HTML.
-    find_files(destination, 'html').each do |file|
+    # Javadoc emits trailing whitespace in HTML and bundled license notices.
+    # Normalize it during import so the generated tree passes git diff --check.
+    text_files = find_files(destination, 'html') +
+                 Dir.glob(File.join(destination, 'legal', '*')).select { |file| File.file?(file) }
+    text_files.each do |file|
       text = File.read(file, encoding: 'utf-8')
       File.write(file, text.gsub(/[ \t]+$/, ''))
     end

@@ -60,23 +60,9 @@ loadScripts(document, 'script');</script>
 <li><a href="#reverseBits(int,int)" tabindex="0">reverseBits(int, int)</a></li>
 <li><a href="#reverseBits(long,int)" tabindex="0">reverseBits(long, int)</a></li>
 <li><a href="#readBits(byte%5B%5D,int,int,int)" tabindex="0">readBits(byte[], int, int, int)</a></li>
-<li><a href="#readInt(java.lang.Byte%5B%5D,int)" tabindex="0">readInt(Byte[], int)</a></li>
-<li><a href="#readInt(byte%5B%5D,int)" tabindex="0">readInt(byte[], int)</a></li>
-<li><a href="#readInt(byte%5B%5D,int,int,int)" tabindex="0">readInt(byte[], int, int, int)</a></li>
-<li><a href="#readInt(java.lang.Integer%5B%5D,int)" tabindex="0">readInt(Integer[], int)</a></li>
-<li><a href="#readInt(int%5B%5D,int)" tabindex="0">readInt(int[], int)</a></li>
-<li><a href="#writeInt(int,java.lang.Integer%5B%5D,int)" tabindex="0">writeInt(int, Integer[], int)</a></li>
-<li><a href="#writeInt(int,int%5B%5D,int)" tabindex="0">writeInt(int, int[], int)</a></li>
+<li><a href="#readInt(java.lang.Number%5B%5D,int)" tabindex="0">readInt(Number[], int)</a></li>
 <li><a href="#writeInt(int,java.lang.Byte%5B%5D,int)" tabindex="0">writeInt(int, Byte[], int)</a></li>
-<li><a href="#writeInt(int,byte%5B%5D,int)" tabindex="0">writeInt(int, byte[], int)</a></li>
-<li><a href="#writeInt(int,java.lang.Short%5B%5D,int)" tabindex="0">writeInt(int, Short[], int)</a></li>
-<li><a href="#numbersToBytes(java.lang.Number%5B%5D)" tabindex="0">numbersToBytes(Number[])</a></li>
-<li><a href="#numbersToNativeBytes(java.lang.Number%5B%5D)" tabindex="0">numbersToNativeBytes(Number[])</a></li>
-<li><a href="#nativeIntsToNativeBytes(int%5B%5D)" tabindex="0">nativeIntsToNativeBytes(int[])</a></li>
-<li><a href="#nativeShortsToBytes(short%5B%5D)" tabindex="0">nativeShortsToBytes(short[])</a></li>
-<li><a href="#nativeShortsToShorts(short%5B%5D)" tabindex="0">nativeShortsToShorts(short[])</a></li>
 <li><a href="#nativeBytesToBytes(byte%5B%5D)" tabindex="0">nativeBytesToBytes(byte[])</a></li>
-<li><a href="#listToNativeInts(java.util.List)" tabindex="0">listToNativeInts(List)</a></li>
 <li><a href="#bcd2bin(int)" tabindex="0">bcd2bin(int)</a></li>
 <li><a href="#bin2bcd(int)" tabindex="0">bin2bcd(int)</a></li>
 </ol>
@@ -95,9 +81,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="annotations">@ThreadSafe
-</span><span class="modifiers">public class </span><span class="element-name type-name-label">NumberUtils</span>
+</span><span class="modifiers">public final class </span><span class="element-name type-name-label">NumberUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">A number utility class with various useful operations on numbers and number arrays.</div>
+<div class="block">Bit, byte-order and BCD operations on numbers and memory cells.</div>
 </div>
 </section>
 <section class="summary">
@@ -114,7 +100,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>static final class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="NumberUtils.Strategy.html" class="type-name-link" title="class in net.emustudio.emulib.runtime.helpers">NumberUtils.Strategy</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Strategy defining how to manipulate with bytes.</div>
+<div class="block">Strategy defining how bytes are combined into a number.</div>
 </div>
 </div>
 </section>
@@ -133,88 +119,31 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#bcd2bin(int)" class="member-name-link">bcd2bin</a><wbr>(int&nbsp;bcd)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts packed BCD code (1 byte, 2 BCD digits) to binary
-It is assumed the BCD has little endian.</div>
+<div class="block">Converts packed BCD code (1 byte, 2 BCD digits) to binary.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#bin2bcd(int)" class="member-name-link">bin2bcd</a><wbr>(int&nbsp;bin)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts a binary number into packed BCD (1 byte, 2 BCD digits)</div>
+<div class="block">Converts a binary number into packed BCD (1 byte, 2 BCD digits).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#listToNativeInts(java.util.List)" class="member-name-link">listToNativeInts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;list)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeBytesToBytes(byte%5B%5D)" class="member-name-link">nativeBytesToBytes</a><wbr>(byte[]&nbsp;array)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts list of Integers into array of native ints.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeBytesToBytes(byte%5B%5D)" class="member-name-link">nativeBytesToBytes</a><wbr>(byte[]&nbsp;array)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native byte[] array to boxed Byte[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeIntsToNativeBytes(int%5B%5D)" class="member-name-link">nativeIntsToNativeBytes</a><wbr>(int[]&nbsp;numbers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native short[] array to native byte[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToBytes(short%5B%5D)" class="member-name-link">nativeShortsToBytes</a><wbr>(short[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native short[] array to Byte[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nativeShortsToShorts(short%5B%5D)" class="member-name-link">nativeShortsToShorts</a><wbr>(short[]&nbsp;numbers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts native short[] array to Short[] array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#numbersToBytes(java.lang.Number%5B%5D)" class="member-name-link">numbersToBytes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts Number[] array to Byte[] array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#numbersToNativeBytes(java.lang.Number%5B%5D)" class="member-name-link">numbersToNativeBytes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;numbers)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Converts Number[] array to native byte[] array.</div>
+<div class="block">Converts native byte[] array to boxed Byte[] array (e.g.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readBits(byte%5B%5D,int,int,int)" class="member-name-link">readBits</a><wbr>(byte[]&nbsp;bytes,
  int&nbsp;start,
  int&nbsp;length,
- int&nbsp;bytesStrategy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an arbitrary number of bits from bytes.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(byte%5B%5D,int)" class="member-name-link">readInt</a><wbr>(byte[]&nbsp;word,
- int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an integer from the array of numbers.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(byte%5B%5D,int,int,int)" class="member-name-link">readInt</a><wbr>(byte[]&nbsp;word,
- int&nbsp;startOffset,
- int&nbsp;length,
  int&nbsp;strategy)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an integer from the array of numbers.</div>
+<div class="block">Reads an arbitrary number of bits (max 32) from bytes.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(int%5B%5D,int)" class="member-name-link">readInt</a><wbr>(int[]&nbsp;word,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(java.lang.Number%5B%5D,int)" class="member-name-link">readInt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;word,
  int&nbsp;strategy)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an integer from the array of numbers.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(java.lang.Byte%5B%5D,int)" class="member-name-link">readInt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;word,
- int&nbsp;strategy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an integer from the array of numbers.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readInt(java.lang.Integer%5B%5D,int)" class="member-name-link">readInt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;word,
- int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads an integer from the array of numbers.</div>
+<div class="block">Combines up to 4 memory cells into an integer.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reverseBits(int,int)" class="member-name-link">reverseBits</a><wbr>(int&nbsp;value,
@@ -229,39 +158,11 @@ It is assumed the BCD has little endian.</div>
 <div class="block">Reverse bits in long (max 64-bit) value.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- byte[]&nbsp;output,
- int&nbsp;strategy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,int%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- int[]&nbsp;output,
- int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Byte%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;output,
  int&nbsp;strategy)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Integer%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;output,
- int&nbsp;strategy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#writeInt(int,java.lang.Short%5B%5D,int)" class="member-name-link">writeInt</a><wbr>(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;output,
- int&nbsp;strategy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Split the value into 4 bytes.</div>
+<div class="block">Splits an integer into 4 bytes.</div>
 </div>
 </div>
 </div>
@@ -305,13 +206,12 @@ It is assumed the BCD has little endian.</div>
  int&nbsp;numberOfBits)</span></div>
 <div class="block">Reverse bits in long (max 64-bit) value.
 <p>
-Note: this overload behaves differently from <a href="#reverseBits(int,int)"><code>reverseBits(int, int)</code></a> by design. Only the lowest
-<code>numberOfBits</code> bits are kept and reversed; any higher bits of <code>value</code> are discarded (not
-preserved), and <code>numberOfBits &lt;= 0</code> yields <code>0</code>.</div>
+Unlike <a href="#reverseBits(int,int)"><code>reverseBits(int, int)</code></a>, higher bits of <code>value</code> are discarded (not preserved), and
+<code>numberOfBits &lt;= 0</code> yields <code>0</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - value which bits will be reversed</dd>
-<dd><code>numberOfBits</code> - how many bits should be reversed. If the value has more bits, the rest will be ignored.</dd>
+<dd><code>numberOfBits</code> - how many lowest bits should be reversed</dd>
 <dt>Returns:</dt>
 <dd>value with the lowest <code>numberOfBits</code> bits reversed and higher bits cleared</dd>
 </dl>
@@ -325,160 +225,39 @@ preserved), and <code>numberOfBits &lt;= 0</code> yields <code>0</code>.</div>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readBits</span><wbr><span class="parameters">(byte[]&nbsp;bytes,
  int&nbsp;start,
  int&nbsp;length,
- int&nbsp;bytesStrategy)</span></div>
-<div class="block">Reads an arbitrary number of bits from bytes.
-If bytesStrategy is LITTLE_ENDIAN, bits are read from LSB to MSB. If the strategy is BIG_ENDIAN, bits are read
-from MSB to LSB.</div>
+ int&nbsp;strategy)</span></div>
+<div class="block">Reads an arbitrary number of bits (max 32) from bytes.
+<p>
+If the strategy is LITTLE_ENDIAN, bits are read from LSB to MSB. If it is BIG_ENDIAN, bits are read from MSB
+to LSB.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>bytes</code> - bytes</dd>
-<dd><code>start</code> - the number of bits from the start of the current instruction</dd>
+<dd><code>start</code> - the bit index where reading starts</dd>
 <dd><code>length</code> - the number of bits to read</dd>
-<dd><code>bytesStrategy</code> - strategy for how to read bytes</dd>
+<dd><code>strategy</code> - combination of <a href="NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers"><code>NumberUtils.Strategy</code></a> flags</dd>
 <dt>Returns:</dt>
-<dd>the bytes read</dd>
+<dd>the bits read</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="readInt(java.lang.Byte[],int)">
+<section class="detail" id="readInt(java.lang.Number[],int)">
 <h3>readInt</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;word,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;word,
  int&nbsp;strategy)</span></div>
-<div class="block">Reads an integer from the array of numbers.
+<div class="block">Combines up to 4 memory cells into an integer.
 <p>
-Uses direct bit assembly. The array must have 4 items - because integer has 4 bytes.</div>
+Each cell represents one byte; higher-order bits of a cell are cut. If there are more than 4 cells, only the
+first 4 are used. If there are fewer, the missing most significant bytes are zero.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>word</code> - the array of 4 bytes</dd>
-<dd><code>strategy</code> - strategy how to deal with the array. See <code>Strategy</code> class for more information.</dd>
+<dd><code>word</code> - the cells (e.g. <code>Byte[]</code>, <code>Short[]</code> or <code>Integer[]</code>)</dd>
+<dd><code>strategy</code> - combination of <a href="NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers"><code>NumberUtils.Strategy</code></a> flags</dd>
 <dt>Returns:</dt>
-<dd>Single integer number which combines the array of bytes into one 32-bit value</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="readInt(byte[],int)">
-<h3>readInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(byte[]&nbsp;word,
- int&nbsp;strategy)</span></div>
-<div class="block">Reads an integer from the array of numbers.
-<p>
-Uses direct bit assembly. The array must have exactly 4 items - because integer has 4 bytes. If the array
-has more bytes, they are ignored. Which ones are ignored depends on the byte ordering (=strategy).</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>word</code> - the array of 4 bytes</dd>
-<dd><code>strategy</code> - strategy how to deal with the array. See <code>Strategy</code> class for more information.</dd>
-<dt>Returns:</dt>
-<dd>Single integer number which combines the array of bytes into one 32-bit value</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="readInt(byte[],int,int,int)">
-<h3>readInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(byte[]&nbsp;word,
- int&nbsp;startOffset,
- int&nbsp;length,
- int&nbsp;strategy)</span></div>
-<div class="block">Reads an integer from the array of numbers.
-<p>
-Uses direct bit assembly. The array should have up to 4 items, each one represents a byte. If the length is
-less than 4, the array for reading is padded with zeroes from the left (in case of big endian) or from the
-right (in case of little endian), so that the array size is 4.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>word</code> - the array of 4 bytes</dd>
-<dd><code>startOffset</code> - starting offset in the array</dd>
-<dd><code>length</code> - length in the array</dd>
-<dd><code>strategy</code> - strategy how to deal with the array. See <code>Strategy</code> class for more information.</dd>
-<dt>Returns:</dt>
-<dd>Single integer number which combines the array of bytes into one 32-bit value</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="readInt(java.lang.Integer[],int)">
-<h3>readInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;word,
- int&nbsp;strategy)</span></div>
-<div class="block">Reads an integer from the array of numbers.
-<p>
-Uses direct bit assembly. The array must have 4 items, each one must represent a byte. If the value in the
-array is larger than a byte, the higher-order bits are cut.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>word</code> - the array of 4 bytes</dd>
-<dd><code>strategy</code> - strategy how to deal with the array. See <code>Strategy</code> class for more information.</dd>
-<dt>Returns:</dt>
-<dd>Single integer number which combines the array of bytes into one 32-bit value</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="readInt(int[],int)">
-<h3>readInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">readInt</span><wbr><span class="parameters">(int[]&nbsp;word,
- int&nbsp;strategy)</span></div>
-<div class="block">Reads an integer from the array of numbers.
-<p>
-Uses direct bit assembly. The array must have 4 items, each one must represent a byte. If the value in the
-array is larger than a byte, the higher-order bits are cut.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>word</code> - the array of 4 bytes</dd>
-<dd><code>strategy</code> - strategy how to deal with the array. See <code>Strategy</code> class for more information.</dd>
-<dt>Returns:</dt>
-<dd>Single integer number which combines the array of bytes into one 32-bit value</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="writeInt(int,java.lang.Integer[],int)">
-<h3>writeInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">writeInt</span><wbr><span class="parameters">(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[]&nbsp;output,
- int&nbsp;strategy)</span></div>
-<div class="block">Split the value into 4 bytes.
-<p>
-Uses direct bit shifts.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - The value which should be split into bytes. It is assumed that it is always in native little endian.</dd>
-<dd><code>output</code> - The output array. Must have space for 4 bytes. If the array is larger, other elements are ignored.</dd>
-<dd><code>strategy</code> - strategy for how to save the value. See <code>Strategy</code> class for more information.</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="writeInt(int,int[],int)">
-<h3>writeInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">writeInt</span><wbr><span class="parameters">(int&nbsp;value,
- int[]&nbsp;output,
- int&nbsp;strategy)</span></div>
-<div class="block">Split the value into 4 bytes.
-<p>
-Uses direct bit shifts.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - The value which should be split into bytes. It is assumed that it is always in native little endian.</dd>
-<dd><code>output</code> - The output array. Must have space for 4 bytes. If the array is larger, other elements are ignored.</dd>
-<dd><code>strategy</code> - strategy for how to save the value. See <code>Strategy</code> class for more information.</dd>
+<dd>32-bit value</dd>
 </dl>
 </div>
 </section>
@@ -490,132 +269,12 @@ Uses direct bit shifts.</div>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">writeInt</span><wbr><span class="parameters">(int&nbsp;value,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]&nbsp;output,
  int&nbsp;strategy)</span></div>
-<div class="block">Split the value into 4 bytes.
-<p>
-Uses direct bit shifts.</div>
+<div class="block">Splits an integer into 4 bytes. It is the inverse of <a href="#readInt(java.lang.Number%5B%5D,int)"><code>readInt(Number[], int)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>value</code> - The value which should be split into bytes. It is assumed that it is always in native little endian.</dd>
-<dd><code>output</code> - The output array. Must have space for 4 bytes. If the array is larger, other elements are ignored.</dd>
-<dd><code>strategy</code> - strategy for how to save the value. See <code>Strategy</code> class for more information.</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="writeInt(int,byte[],int)">
-<h3>writeInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">writeInt</span><wbr><span class="parameters">(int&nbsp;value,
- byte[]&nbsp;output,
- int&nbsp;strategy)</span></div>
-<div class="block">Split the value into 4 bytes.
-<p>
-Uses direct bit shifts.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - The value which should be split into bytes. It is assumed that it is always in native little endian.</dd>
-<dd><code>output</code> - The output array. Must have space for 4 bytes. If the array is larger, other elements are ignored.</dd>
-<dd><code>strategy</code> - strategy for how to save the value. See <code>Strategy</code> class for more information.</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="writeInt(int,java.lang.Short[],int)">
-<h3>writeInt</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">writeInt</span><wbr><span class="parameters">(int&nbsp;value,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]&nbsp;output,
- int&nbsp;strategy)</span></div>
-<div class="block">Split the value into 4 bytes.
-<p>
-Uses direct bit shifts.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - The value which should be split into bytes. It is assumed that it is always in native little endian.</dd>
-<dd><code>output</code> - The output array. Must have space for 4 bytes. If the array is larger, other elements are ignored.</dd>
-<dd><code>strategy</code> - strategy for how to save the value. See <code>Strategy</code> class for more information.</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="numbersToBytes(java.lang.Number[])">
-<h3>numbersToBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</span>&nbsp;<span class="element-name">numbersToBytes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;numbers)</span></div>
-<div class="block">Converts Number[] array to Byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>boxed Byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="numbersToNativeBytes(java.lang.Number[])">
-<h3>numbersToNativeBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">numbersToNativeBytes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>[]&nbsp;numbers)</span></div>
-<div class="block">Converts Number[] array to native byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>native byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeIntsToNativeBytes(int[])">
-<h3>nativeIntsToNativeBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">nativeIntsToNativeBytes</span><wbr><span class="parameters">(int[]&nbsp;numbers)</span></div>
-<div class="block">Converts native short[] array to native byte[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>native byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeShortsToBytes(short[])">
-<h3>nativeShortsToBytes</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</span>&nbsp;<span class="element-name">nativeShortsToBytes</span><wbr><span class="parameters">(short[]&nbsp;numbers)</span></div>
-<div class="block">Converts native short[] array to Byte[] array.
-Every number is converted to byte using number &amp; 0xFF</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>boxed Byte[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="nativeShortsToShorts(short[])">
-<h3>nativeShortsToShorts</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Short.html" title="class or interface in java.lang" class="external-link">Short</a>[]</span>&nbsp;<span class="element-name">nativeShortsToShorts</span><wbr><span class="parameters">(short[]&nbsp;numbers)</span></div>
-<div class="block">Converts native short[] array to Short[] array.
-Every number is converted to byte using number.byteValue() call.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>numbers</code> - numbers array</dd>
-<dt>Returns:</dt>
-<dd>boxed Short[] array</dd>
+<dd><code>value</code> - the value</dd>
+<dd><code>output</code> - the output; must have space for 4 bytes. Other elements are untouched.</dd>
+<dd><code>strategy</code> - combination of <a href="NumberUtils.Strategy.html" title="class in net.emustudio.emulib.runtime.helpers"><code>NumberUtils.Strategy</code></a> flags</dd>
 </dl>
 </div>
 </section>
@@ -625,7 +284,7 @@ Every number is converted to byte using number.byteValue() call.</div>
 <h3>nativeBytesToBytes</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Byte.html" title="class or interface in java.lang" class="external-link">Byte</a>[]</span>&nbsp;<span class="element-name">nativeBytesToBytes</span><wbr><span class="parameters">(byte[]&nbsp;array)</span></div>
-<div class="block">Converts native byte[] array to boxed Byte[] array.</div>
+<div class="block">Converts native byte[] array to boxed Byte[] array (e.g. for writing into memory).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>array</code> - native byte[] array</dd>
@@ -636,27 +295,11 @@ Every number is converted to byte using number.byteValue() call.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="listToNativeInts(java.util.List)">
-<h3>listToNativeInts</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">listToNativeInts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;list)</span></div>
-<div class="block">Converts list of Integers into array of native ints.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>list</code> - list of integers</dd>
-<dt>Returns:</dt>
-<dd>native int[] array</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="bcd2bin(int)">
 <h3>bcd2bin</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">bcd2bin</span><wbr><span class="parameters">(int&nbsp;bcd)</span></div>
-<div class="block">Converts packed BCD code (1 byte, 2 BCD digits) to binary
-It is assumed the BCD has little endian.</div>
+<div class="block">Converts packed BCD code (1 byte, 2 BCD digits) to binary.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>bcd</code> - packed BCD code</dd>
@@ -671,12 +314,12 @@ It is assumed the BCD has little endian.</div>
 <h3>bin2bcd</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">bin2bcd</span><wbr><span class="parameters">(int&nbsp;bin)</span></div>
-<div class="block">Converts a binary number into packed BCD (1 byte, 2 BCD digits)</div>
+<div class="block">Converts a binary number into packed BCD (1 byte, 2 BCD digits).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>bin</code> - binary number (0-99)</dd>
 <dt>Returns:</dt>
-<dd>number in packed BCD code, little endian</dd>
+<dd>number in packed BCD code</dd>
 </dl>
 </div>
 </section>

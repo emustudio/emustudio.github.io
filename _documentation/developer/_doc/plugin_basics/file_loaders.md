@@ -17,35 +17,35 @@ The loader emits immutable blocks. The caller decides how to use them.
 ## Reading blocks
 
 ```java
-FileLoader loader = FileLoader.forPath(path)
-        .orElseGet(() -> FileLoader.forFormat(FileLoader.Format.BIN));
-loader.load(path, block -> {
-    byte[] bytes = block.getBytes();
+FileLoader.Format format = FileLoader.Format.fromPath(path).orElse(FileLoader.Format.BIN);
+FileLoader.load(path, format, block -> {
+    byte[] bytes = block.getData();
     // Inspect, export or consume the block's bytes and metadata.
-}, FileLoader.Options.fileOrder());
+});
 ```
 
-BIN returns raw bytes without an address. HEX preserves embedded addresses and sparse gaps.
-TAP/TZX preserve block IDs and original body bytes, including timing fields, flags and checksums.
-`getData()` extracts standard/turbo Spectrum packets, including flag and checksum.
-`getSpectrumHeader()` exposes header metadata; `hasValidChecksum()` reports packet validity.
-These methods do not write to memory or require a destination.
+BIN produces one block with the whole file and no address. HEX produces one addressed block per contiguous address
+range. TAP blocks have ID `0x10`; TZX blocks keep their IDs. For tape blocks, `getData()` returns the standard/turbo
+Spectrum packet, including flag and checksum. `getSpectrumHeader()` exposes header metadata; `hasValidChecksum()`
+reports packet validity. These methods do not write to memory or require a destination.
 
-Format recognition is case-insensitive. `.com`, `.out` and `.rom` identify BIN.
+`Format.fromPath` recognizes the extension case-insensitively; `.com`, `.out` and `.rom` identify BIN.
 Unknown extensions return an empty Optional; the caller chooses whether to fall back to BIN.
-The existing `IntelHEX` generation API remains available. `getCode()` returns a mutable map that
-iterates in ascending address order. Generation writes records incrementally; malformed input reports
-an `IOException` with a line number. Its I8HEX reader retains its current checksum policy.
+`Listener.onFileStart()` and `onFileEnd()` have empty defaults; `onFileEnd()` is called only after successful loading.
+
+The separate `IntelHEX` class generates and parses Intel HEX files. Its `getCode()` returns an unmodifiable map that
+iterates in ascending address order. Parsing ignores checksums; malformed input reports an `IOException` with a line
+number.
 
 ## Loading into memory
 
 For BIN and HEX, a plugin can consume the same API directly:
 
 ```java
-loader.load(path, block -> {
+FileLoader.load(path, format, block -> {
     int address = block.getAddress().orElse(startAddress);
     memory.write(address, NumberUtils.nativeBytesToBytes(block.getData()));
-}, FileLoader.Options.fileOrder());
+});
 ```
 
 For TAP/TZX, byte-mem pairs Spectrum CODE headers with subsequent data blocks using shared
@@ -57,20 +57,20 @@ Direct loading does not execute BASIC or decode custom loaders and recordings in
 ## Tape playback
 
 ```java
-FileLoader loader = FileLoader.forPath(path)
-        .filter(candidate -> candidate.getFormat().isTape())
+FileLoader.Format format = FileLoader.Format.fromPath(path)
+        .filter(FileLoader.Format::isTape)
         .orElseThrow(() -> new IOException("Unsupported tape file"));
-TapeListener listener = playbackListener;
-loader.load(path, listener, FileLoader.Options.playback());
+FileLoader.load(path, format, tapeListener);
 ```
 
-`TapeListener` extends `FileLoader.Listener`. Its default `onBlock` method emits data, timing,
-pause and metadata callbacks. Playback traversal follows TZX jumps, loops and call sequences.
+`TapeListener` extends `FileLoader.Listener`. Its default `onBlock` method decodes each block into signal callbacks:
+`onStandardData(packet)`, `onPulses(pulseLengths)`, `onPureData(...)`, `onDirectRecording(...)`, `onPause(ms)` and
+`onSetSignalLevel(level)`. Pulse lengths are in Z80 T-states. `onInfo(type, details)` reports headers, informational
+blocks and unsupported blocks (CSW and generalized data); it does nothing by default.
+The loader delivers blocks in playback order, following TZX jumps, loops and call sequences.
 The plugin owns CPU scheduling, device output and cassette state.
-CSW/generalized recording bytes are preserved; consumers must implement playback support themselves.
 
-`FileLoader.Options.fileOrder()` visits physical blocks once. Thread interruption always cancels loading;
-`withCancellation(...)` adds a caller-provided cancellation signal. Failure/cancellation omits `onFileEnd()`.
-Create separate stateful listeners for concurrent loads.
+Interrupting the loading thread cancels loading with an `InterruptedIOException`. Create separate stateful listeners
+for concurrent loads.
 
 [fileloader]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/io/FileLoader.html

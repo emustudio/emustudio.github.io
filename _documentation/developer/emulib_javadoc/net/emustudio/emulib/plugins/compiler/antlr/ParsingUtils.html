@@ -53,21 +53,11 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
-<li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
-<li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
-<ol class="toc-list">
-<li><a href="#%3Cinit%3E()" tabindex="0">ParsingUtils()</a></li>
-</ol>
-</li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#parseNumber(org.antlr.v4.runtime.Token)" tabindex="0">parseNumber(Token)</a></li>
 <li><a href="#parseLitString(org.antlr.v4.runtime.Token)" tabindex="0">parseLitString(Token)</a></li>
-<li><a href="#parseLitHex1(org.antlr.v4.runtime.Token)" tabindex="0">parseLitHex1(Token)</a></li>
-<li><a href="#parseLitHex2(org.antlr.v4.runtime.Token)" tabindex="0">parseLitHex2(Token)</a></li>
-<li><a href="#parseLitOct(org.antlr.v4.runtime.Token)" tabindex="0">parseLitOct(Token)</a></li>
-<li><a href="#parseLitDec(org.antlr.v4.runtime.Token)" tabindex="0">parseLitDec(Token)</a></li>
-<li><a href="#parseLitBin(org.antlr.v4.runtime.Token)" tabindex="0">parseLitBin(Token)</a></li>
 <li><a href="#parseLabel(org.antlr.v4.runtime.Token)" tabindex="0">parseLabel(Token)</a></li>
 <li><a href="#normalizeId(java.lang.String)" tabindex="0">normalizeId(String)</a></li>
 </ol>
@@ -85,25 +75,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParsingUtils</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">ParsingUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Conversions of common ANTLR literal tokens shared by emuStudio compilers.</div>
 </div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<li>
-<section class="constructor-summary" id="constructor-summary">
-<h2>Constructor Summary</h2>
-<div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
-<div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ParsingUtils</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -117,28 +95,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#normalizeId(java.lang.String)" class="member-name-link">normalizeId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Normalizes an identifier for case-insensitive lookup.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLabel(org.antlr.v4.runtime.Token)" class="member-name-link">parseLabel</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitBin(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitBin</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Strips the trailing colon of a label definition token (<code>label:</code>).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitString(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitString</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Strips the quotes of a string literal token (<code>'text'</code> or <code>"text"</code>).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitDec(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitDec</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitHex1(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitHex1</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitHex2(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitHex2</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitOct(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitOct</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseLitString(org.antlr.v4.runtime.Token)" class="member-name-link">parseLitString</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseNumber(org.antlr.v4.runtime.Token)" class="member-name-link">parseNumber</a><wbr>(org.antlr.v4.runtime.Token&nbsp;token)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses a number literal token, e.g.</div>
+</div>
 </div>
 </div>
 </div>
@@ -151,72 +125,41 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<li>
-<section class="constructor-details" id="constructor-detail">
-<h2>Constructor Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="&lt;init&gt;()">
-<h3>ParsingUtils</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParsingUtils</span>()</div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ============ METHOD DETAIL ========== -->
 <li>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="parseNumber(org.antlr.v4.runtime.Token)">
+<h3>parseNumber</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseNumber</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
+<div class="block">Parses a number literal token, e.g. <code>-0x1F</code>, <code>1Fh</code>, <code>101b</code>, <code>17o</code>, <code>17q</code>,
+<code>12d</code> or <code>12</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>token</code> - number token</dd>
+<dt>Returns:</dt>
+<dd>parsed value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if the token is not a number; see <a href="../../../runtime/helpers/RadixUtils.html#parseRadix(java.lang.String)"><code>RadixUtils.parseRadix(String)</code></a></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="parseLitString(org.antlr.v4.runtime.Token)">
 <h3>parseLitString</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseLitString</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseLitHex1(org.antlr.v4.runtime.Token)">
-<h3>parseLitHex1</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseLitHex1</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseLitHex2(org.antlr.v4.runtime.Token)">
-<h3>parseLitHex2</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseLitHex2</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseLitOct(org.antlr.v4.runtime.Token)">
-<h3>parseLitOct</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseLitOct</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseLitDec(org.antlr.v4.runtime.Token)">
-<h3>parseLitDec</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseLitDec</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="parseLitBin(org.antlr.v4.runtime.Token)">
-<h3>parseLitBin</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parseLitBin</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
+<div class="block">Strips the quotes of a string literal token (<code>'text'</code> or <code>"text"</code>).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>token</code> - string token</dd>
+<dt>Returns:</dt>
+<dd>the string without quotes</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -225,6 +168,13 @@ loadScripts(document, 'script');</script>
 <h3>parseLabel</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseLabel</span><wbr><span class="parameters">(org.antlr.v4.runtime.Token&nbsp;token)</span></div>
+<div class="block">Strips the trailing colon of a label definition token (<code>label:</code>).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>token</code> - label token</dd>
+<dt>Returns:</dt>
+<dd>the label name</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -233,6 +183,13 @@ loadScripts(document, 'script');</script>
 <h3>normalizeId</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">normalizeId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<div class="block">Normalizes an identifier for case-insensitive lookup.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - identifier</dd>
+<dt>Returns:</dt>
+<dd>lower-case identifier</dd>
+</dl>
 </div>
 </section>
 </li>

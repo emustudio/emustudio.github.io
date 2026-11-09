@@ -64,7 +64,6 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#captureVideo(java.awt.image.BufferedImage)" tabindex="0">captureVideo(BufferedImage)</a></li>
 <li><a href="#captureAudio(byte%5B%5D,int)" tabindex="0">captureAudio(byte[], int)</a></li>
-<li><a href="#capture(java.awt.image.BufferedImage,byte%5B%5D)" tabindex="0">capture(BufferedImage, byte[])</a></li>
 <li><a href="#getFailure()" tabindex="0">getFailure()</a></li>
 <li><a href="#stop(java.nio.file.Path)" tabindex="0">stop(Path)</a></li>
 <li><a href="#close()" tabindex="0">close()</a></li>
@@ -91,15 +90,15 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public final class </span><span class="element-name type-name-label">RecordingSession</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a></span></div>
-<div class="block">Thread-safe MP4 video and audio recording, with H.264 encoding on a dedicated worker.
+<div class="block">Thread-safe, one-time MP4 recording of video (H.264) and audio (PCM).
 
-<p>Video and audio may arrive independently, or together through <a href="#capture(java.awt.image.BufferedImage,byte%5B%5D)"><code>capture(BufferedImage, byte[])</code></a>.
-Inputs are copied before returning, so producers may reuse their buffers. Capture never waits for the worker;
-exceeding the bounded queue fails the session instead of slowing emulation or retaining unlimited frames.
-Check <a href="#getFailure()"><code>getFailure()</code></a> when capture returns false.
+<p>Video frames and audio arrive independently. Inputs are copied before returning, so producers may reuse their
+buffers. Video is encoded on a dedicated worker into a temporary file; audio is stored compressed in another
+temporary file and muxed in on <a href="#stop(java.nio.file.Path)"><code>stop(Path)</code></a>. Capture never waits for the worker: exceeding the bounded
+queue fails the session instead of slowing emulation. Check <a href="#getFailure()"><code>getFailure()</code></a> when capture returns false.
 
 <p>Audio is signed 16-bit little-endian stereo PCM at the configured sample rate. Producers own frame pacing,
-synthesis and mixing. The session does not change audio samples or round the rational video frame rate.
+synthesis and mixing.
 
 <p><a href="#stop(java.nio.file.Path)"><code>stop(Path)</code></a> and <a href="#close()"><code>close()</code></a> wait for the worker and file I/O. Call them off the UI thread.</div>
 </div>
@@ -120,7 +119,7 @@ synthesis and mixing. The session does not change audio samples or round the rat
  int&nbsp;videoRate,
  int&nbsp;audioSampleRate)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates one recording.</div>
+<div class="block">Starts a recording.</div>
 </div>
 </div>
 </section>
@@ -137,36 +136,28 @@ synthesis and mixing. The session does not change audio samples or round the rat
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#capture(java.awt.image.BufferedImage,byte%5B%5D)" class="member-name-link">capture</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BufferedImage.html" title="class or interface in java.awt.image" class="external-link">BufferedImage</a>&nbsp;frame,
- byte[]&nbsp;pcmSamples)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#captureAudio(byte%5B%5D,int)" class="member-name-link">captureAudio</a><wbr>(byte[]&nbsp;pcmSamples,
+ int&nbsp;length)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Captures a video frame and its PCM together, in one queue entry.</div>
+<div class="block">Captures the first length bytes of PCM audio.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#captureAudio(byte%5B%5D,int)" class="member-name-link">captureAudio</a><wbr>(byte[]&nbsp;pcmSamples,
- int&nbsp;length)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#captureVideo(java.awt.image.BufferedImage)" class="member-name-link">captureVideo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BufferedImage.html" title="class or interface in java.awt.image" class="external-link">BufferedImage</a>&nbsp;frame)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Captures the first length bytes of PCM.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#captureVideo(java.awt.image.BufferedImage)" class="member-name-link">captureVideo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BufferedImage.html" title="class or interface in java.awt.image" class="external-link">BufferedImage</a>&nbsp;frame)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Captures one video frame.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Discards this recording and releases its files.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFailure()" class="member-name-link">getFailure</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFailure()" class="member-name-link">getFailure</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop(java.nio.file.Path)" class="member-name-link">stop</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;target)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the capture failure, or null while healthy.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop(java.nio.file.Path)" class="member-name-link">stop</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;target)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Stops accepting capture and saves MP4 to target, or discards it when target is null.</div>
+<div class="block">Stops accepting capture and saves MP4 to target, or discards the recording when target is null.</div>
 </div>
 </div>
 </div>
@@ -195,7 +186,7 @@ synthesis and mixing. The session does not change audio samples or round the rat
  int&nbsp;videoRate,
  int&nbsp;audioSampleRate)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Creates one recording. Dimensions must be positive and even for H.264.</div>
+<div class="block">Starts a recording. Dimensions must be positive and even for H.264.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>width</code> - video width in pixels</dd>
@@ -223,7 +214,13 @@ synthesis and mixing. The session does not change audio samples or round the rat
 <h3>captureVideo</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">captureVideo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BufferedImage.html" title="class or interface in java.awt.image" class="external-link">BufferedImage</a>&nbsp;frame)</span></div>
-<div class="block">Captures one video frame. Null frames are ignored. Returns false if ignored, stopped or failed.</div>
+<div class="block">Captures one video frame.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>frame</code> - video frame of the recording size; null frames are ignored</dd>
+<dt>Returns:</dt>
+<dd>false if the frame was ignored, or the session is stopped or failed</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -233,13 +230,13 @@ synthesis and mixing. The session does not change audio samples or round the rat
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">captureAudio</span><wbr><span class="parameters">(byte[]&nbsp;pcmSamples,
  int&nbsp;length)</span></div>
-<div class="block">Captures the first length bytes of PCM. Empty chunks are ignored; returns false if stopped or failed.</div>
+<div class="block">Captures the first length bytes of PCM audio. Empty chunks are ignored.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>pcmSamples</code> - PCM buffer, which may be reused after this call</dd>
 <dd><code>length</code> - number of bytes, containing only whole stereo PCM frames</dd>
 <dt>Returns:</dt>
-<dd>whether capture was accepted</dd>
+<dd>false if the session is stopped or failed</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - if an active producer passes a null buffer</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IndexOutOfBoundsException.html" title="class or interface in java.lang" class="external-link">IndexOutOfBoundsException</a></code> - if length is outside the buffer</dd>
@@ -248,21 +245,14 @@ synthesis and mixing. The session does not change audio samples or round the rat
 </section>
 </li>
 <li>
-<section class="detail" id="capture(java.awt.image.BufferedImage,byte[])">
-<h3>capture</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">capture</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/image/BufferedImage.html" title="class or interface in java.awt.image" class="external-link">BufferedImage</a>&nbsp;frame,
- byte[]&nbsp;pcmSamples)</span></div>
-<div class="block">Captures a video frame and its PCM together, in one queue entry. Both inputs are copied.</div>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="getFailure()">
 <h3>getFailure</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span>&nbsp;<span class="element-name">getFailure</span>()</div>
-<div class="block">Returns the capture failure, or null while healthy. Safe to poll from producer/UI threads.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the capture failure, or null while healthy. Safe to poll from producer/UI threads.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -272,14 +262,14 @@ synthesis and mixing. The session does not change audio samples or round the rat
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;target)</span>
           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Stops accepting capture and saves MP4 to target, or discards it when target is null.
+<div class="block">Stops accepting capture and saves MP4 to target, or discards the recording when target is null.
 Saving drains accepted captures; discarding drops pending captures. Repeated calls do nothing.
-All temporary files are released, including after failed capture or export.</div>
+Temporary files are always deleted; an existing target is kept if export fails.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>target</code> - destination MP4, or null to discard</dd>
+<dd><code>target</code> - destination MP4 (parent directories are created), or null to discard</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if capture/export failed or stopping was interrupted</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if capture or export failed, the recording has no frames, or stopping was interrupted</dd>
 </dl>
 </div>
 </section>
