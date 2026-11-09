@@ -36,22 +36,20 @@ Implement the interface directly on the plugin root and delegate to a plugin-own
 share observer mechanics, and `ExpressionParser` can share expression syntax with plugin-defined name/function resolvers.
 Resolve names during compilation without reading guest state; evaluation and display happen at the execution seam.
 
-Use the existing `applicationApi.getExecutionState().update(change)` service for live edits. It queues changes between
-semantic steps or on the idle CPU worker, without a pause/resume transition. Compile expressions and attach/detach
-observers through that same service. Keep Swing work on its event thread. `Debugging` adds no update protocol.
+Plugin editors apply register and memory changes directly, including while the CPU runs. The host does not queue
+edits or coordinate them with execution steps. Keep Swing work on its event thread. `Debugging` adds no update protocol.
 
 ## Engine integration
 
-Every outer semantic step drains `ExecutionState.processUpdates()`, including the inactive fast path. This makes live
-attachment and edits possible without waiting for a continuous run to end. The host supplies the worker; do not create
-another execution controller.
+The host supplies the execution worker; do not create another execution controller. CPU engines do not drain a host
+edit queue before executing instructions.
 
 Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
 or failed outcome, plus presentation only when capture is requested. Memory watches are passive and never stop
 execution. A refused before-step produces no executed row.
 
 The host owns breakpoints, persistence and one-step continuation. It skips breakpoints once for Manual
-Step or direct Continue from a breakpoint, then rearms them. Reset, jump and machine edits clear continuation. Plugins
+Step or direct Continue from a breakpoint, then rearms them. Host reset and jump commands clear continuation. Plugins
 must not implement a second breakpoint store or independent skip policy.
 
 At computer open, `DebugSession` loads user annotations, watches, breakpoints and memory watches once from the

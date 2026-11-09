@@ -118,10 +118,10 @@ provides its own operation pipeline and value formatting (character, string, dec
 ## Number utilities
 
 Class name
-: [net.emustudio.emulib.runtime.helpers.NumberUtils][emulib_numberutils]{:target="_blank"}
+: `net.emustudio.emulib.Numbers`
 
 Usage
-: Lot of useful conversions between various number types.
+: Thread-safe static methods for number conversions, bit operations, parsing and formatting.
 
 Few useful operations:
 
@@ -133,17 +133,9 @@ Few useful operations:
 - `static int reverseBits(int value, int numberOfBits)`: Reverse bits in integer (max 32-bit) value; a `long` variant exists.
 - `static void writeInt(int value, Byte[] output, int strategy)`: Split the value into 4 bytes.
 
-The `strategy` is a combination of `NumberUtils.Strategy.LITTLE_ENDIAN`, `BIG_ENDIAN` and `REVERSE_BITS`.
+The `strategy` is a combination of `Numbers.Strategy.LITTLE_ENDIAN`, `BIG_ENDIAN` and `REVERSE_BITS`.
 
-## Radix utilities
-
-Class name
-: [net.emustudio.emulib.runtime.helpers.RadixUtils][emulib_radixutils]{:target="_blank"}
-
-Usage
-: Utility functions for various radix conversions. 
-
-All methods are static and thread-safe:
+The same class also parses and formats numbers in common radixes:
 
 - `static int parseRadix(String number)`: Parses an optionally signed number. It recognizes hexadecimal (`0x1F`, `1Fh`),
   binary (`0b101`, `101b`), octal (`37o`, `37q`) and decimal (`31`, `31d`) numbers. The input is not trimmed and the
@@ -182,8 +174,5 @@ through the CPU context as described in [cycle listeners]({{ site.baseurl }}/cpu
 
 [emulib_bits]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/Bits.html
 [edigen]: https://github.com/emustudio/edigen
-
-[emulib_numberutils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/NumberUtils.html
-[emulib_radixutils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/RadixUtils.html
 
 [emulib_sleeputils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/SleepUtils.html

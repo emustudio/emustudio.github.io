@@ -82,7 +82,7 @@ public class CompilerImpl extends AbstractCompiler {
             applicationApi.setProgramLocation(programLocation);
             info(String.format(
                     "Compile was successful.\n\tOutput: %s\n\tProgram starts at 0x%s",
-                    outputPath, RadixUtils.formatHex(programLocation, 4)
+                    outputPath, Numbers.formatHex(programLocation, 4)
             ));
 
             if (memory != null) {
@@ -236,7 +236,7 @@ public class LexicalAnalyzerImpl extends AntlrLexicalAnalyzer {
 The `net.emustudio.emulib.plugins.compiler.antlr` package provides further ANTLR helpers. `CharArrayCharStream` reads
 the specified slice without copying it, so keep that array unchanged while lexing. `ParserErrorListener(fileName)`
 turns syntax errors into a `CompileException` with the source position. `ParsingUtils` provides number parsing
-(`parseNumber`, using `RadixUtils.parseRadix` syntax), quoted-string parsing, label extraction, and identifier
+(`parseNumber`, using `Numbers.parseRadix` syntax), quoted-string parsing, label extraction, and identifier
 normalization. Grammar, AST, semantic analysis, and code generation remain the compiler plugin's responsibility.
 
 The host retains exact compiler input text and source revisions to validate source mappings. These mappings describe

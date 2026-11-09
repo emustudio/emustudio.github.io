@@ -15,9 +15,11 @@ extend [AbstractCPU][abstractCPU]{:target="_blank"} class.
 
 [AbstractCPU][abstractCPU]{:target="_blank"} extends `AbstractPlugin`. It supplies plugin metadata, `reset()` to the
 program location and idempotent destruction, which calls `destroyInternal()`.
-The host owns command scheduling, CPU-worker execution and run-state publication. `execute()` and `step()` run
+The host owns command scheduling and CPU-worker execution. `execute()` and `step()` run
 synchronously on that worker; they return their actual `RunState`. Continuous execution responds to thread interruption.
-Views subscribe to immutable `ExecutionState.Snapshot` values and close their subscriptions when disposed.
+Views read run state, instruction location and measured frequency directly from `CPUContext` and register
+`CPUContext.CPUListener` notifications.
+Remove listeners when their views are disposed. State publication belongs to the CPU plugin implementation.
 The plugin implements `reset(int)` on the same worker; execution never runs on Swing's
 [event-dispatch thread][swingthread]{:target="_blank"}.
 
@@ -87,11 +89,6 @@ public class CpuImpl extends AbstractCPU {
     }
 
     @Override
-    public int getInstructionLocation() {
-        return engine.PC;
-    }
-
-    @Override
     public boolean setInstructionLocation(int position) {
         if (position < 0) {
             return false;
@@ -143,7 +140,8 @@ report an edit failure through the host.
 
 Implement the optional `Debugging` interface directly when the plugin supports machine-specific expressions and
 execution observation. emuStudio owns shared rules, watches and recording. Plugins supply presentation and their own
-inspection/edit controls; they expose no universal register model. All live edits use the execution update seam.
+inspection/edit controls; they expose no universal register model. Plugin editors apply live changes directly, including
+while the CPU runs.
 
 The application owns breakpoint state and persistence. CPU plugins honor intentional stop decisions from observers;
 neither `CPU` nor `AbstractCPU` stores breakpoints.
