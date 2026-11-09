@@ -62,7 +62,7 @@ interruptible waits. There is no force kill or timeout. Pause, stop, reset, and 
 exits. Future cancellation alone does not prove exit. Until then, memory and device resources remain intact; the host
 rejects new start, step, and reset requests. GUI commands are asynchronous, so waiting does not block Swing.
 
-`CPUContext` exposes `getRunState()`, `getInstructionLocation()` and `getMeasuredFrequencyKhz()` directly.
+`CPUContext` exposes `getRunState()`, `getInstructionLocation()` and `getCpuFrequencyKhz()` directly.
 Register a `CPUContext.CPUListener` using
 `addCPUListener` to receive `runStateChanged` and `internalStateChanged` notifications. Call `removeCPUListener` when
 the view or plugin is disposed. CPU plugins emit notifications internally; the public context has no state setter or
@@ -73,8 +73,8 @@ Register and memory editors write directly, including from Swing callbacks while
 queue these changes, pause execution, or coordinate edits with instruction steps. Host commands that require a paused
 machine keep their own validation.
 
-For CPUs that measure executed frequency, `sampleFrequency()` is called by the existing command scheduler. Sampling
-must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
+For CPUs that measure executed frequency, `CPUContext.getCpuFrequencyKhz()` reads the current measurement.
+Status panels refresh the display with a Swing timer; reads must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
 `AccurateFrequencyRunner` loop.
 
 [runstate]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.RunState.html

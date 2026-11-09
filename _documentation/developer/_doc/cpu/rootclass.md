@@ -89,11 +89,6 @@ public class CpuImpl extends AbstractCPU {
     }
 
     @Override
-    public int getInstructionLocation() {
-        return engine.PC;
-    }
-
-    @Override
     public boolean setInstructionLocation(int position) {
         if (position < 0) {
             return false;
