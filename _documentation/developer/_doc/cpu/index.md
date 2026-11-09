@@ -19,19 +19,22 @@ Emulation "engine"
 options, so usually either interpretation or threaded dispatch are used, both described e.g.
 [here][interpretation]{:target="_blank"} or [here][bario]{:target="_blank"}.
 
-Disassembler
-: It will be used by emuStudio for creating the list of instructions in the debugger panel.
+Instruction decoder
+: It supplies immutable instruction address, occupied-cell length, mnemonic, and encoding for the debugger.
 
 Java Swing GUI panel
 : It should implement the visualization of CPU registers, possibly current frequency and CPU run state.
 
-Create one disassembler during plugin [instantiation][instantiation] or [initialization][initialization]. Create and
+Create one decoder during plugin [instantiation][instantiation] or [initialization][initialization]. Create and
 cache the status panel in [CPU.getStatusPanel()][getStatusPanel]{:target="_blank"}; the application calls it from
 Swing's [event-dispatch thread][swingthread]{:target="_blank"} when constructing the debugger.
 
-You can generate the disassembler from a specification with [Edigen][edigen]{:target="_blank"}, short for
+You can generate the decoder from a specification with [Edigen][edigen]{:target="_blank"}, short for
 _Emulator DIsassembler GENerator_. The [Edigen Gradle plugin][edigen-gradle]{:target="_blank"} integrates generation
 with Java compilation; see [Gradle integration]({{ site.baseurl }}/cpu/disassembler#gradle-integration).
+
+Optional runtime `Debugging` observations report the instruction and actual next address. The debugger accumulates
+observed flow until a successful CPU reset; annotations survive reset. Decoder specifications contain no flow declarations.
 
 ## Testing instructions
 

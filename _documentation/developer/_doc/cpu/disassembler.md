@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Disassembler
+title: Instruction decoder
 nav_order: 4
 parent: Writing a CPU
 permalink: /cpu/disassembler
@@ -8,23 +8,23 @@ permalink: /cpu/disassembler
 
 {% include analytics.html category="developer" %}
 
-# Disassembler
+# Instruction decoder
 
-A disassembler lets emuStudio display instructions in the debugger. Implement emuLib's
-[Disassembler][disassembler]{:target="_blank"} interface directly, or generate an implementation with
+A decoder supplies captured instruction facts for debugger listings and recording. Implement emuLib's
+[Decoder][decoder]{:target="_blank"} interface directly, or generate an implementation with
 [Edigen][edigen]{:target="_blank"}.
 
 [Edigen][edigen]{:target="_blank"} works similarly as parser generator: developer writes a specification file.
 Then, [Edigen][edigen]{:target="_blank"} (either from the command line or using
-[Gradle][edigen-gradle]{:target="_blank"}) generates disassembler and decoder of the source code, using predefined
-templates, bundled in [Edigen][edigen]{:target="_blank"}.
+[Gradle][edigen-gradle]{:target="_blank"}) generates one decoder, including private instruction formatting,
+using a template bundled in [Edigen][edigen]{:target="_blank"}.
 
 Specification files have `.eds` file extension. Let's have a look at the following sample CPU specification file:
 
 {:.code-example}
 ```
 # decoder
-root: instruction, data;
+root instruction, data;
 
 instruction =
     "add": 0xE dst_reg(2) src_reg(2) |
@@ -48,27 +48,47 @@ src_reg, dst_reg =
 The specification file might look a bit cryptic at first sight, but it's quite easy. The content is divided into two
 sections (_decoder_ and _disassembler_), separated with two `%%` chars on a separate line.
 
-## Structured instruction flow
+## Decoded instruction
 
-Implement optional `getFlow(address)` metadata to support callers/targets and control-flow navigation. `InstructionFlow`
-contains a kind (`LINEAR`, `JUMP`, `CALL`, `RETURN`, or `STOP`), the next sequential address, a fall-through flag, and direct
-target addresses. An empty optional means metadata is unavailable; an empty target list represents an unresolved indirect
-jump. Conditional jumps and returns retain fall-through; calls also retain the next sequential address.
+Expose `CPU.getDecoder()` and decode each instruction once:
 
-Decode flow from opcodes and operands rather than mnemonic text. The 8080/Z80 plugins use an opcode adapter around generated
-Edigen disassembly; the current `.eds` grammar does not define semantic flow attributes. See
-[Optional debugging ports]({{ '/cpu/debugging' | relative_url }}) for the host/engine boundary.
+```java
+DecodedInstruction instruction = cpu.getDecoder().decode(address);
+int length = instruction.length();
+String mnemonic = instruction.mnemonic();
+String encoding = instruction.encoding();
+```
 
-### Live analysis through CPU wiring
+`DecodedInstruction` has four accessors: `address()`, `length()`, `mnemonic()`, and `encoding()`.
+Length counts addressable memory cells, not necessarily bytes. RAM uses object cells; RASP uses integer cells.
+The text describes captured input and never rereads live memory. There is no public Edigen rule payload or
+separate disassembler interface.
 
-The CPU plugin supplies the disassembler and its memory wiring. Instruction text, lengths, and flow metadata all use
+Invalid encodings fail decoding with `InvalidInstructionException`; inaccessible or truncated memory is a read failure.
+Listing recovery may show an undecodable cell and advance one cell. A decode result does not predict execution.
+
+## Observed instruction flow
+
+Flow comes from runtime observations through `Debugging`, not the decoder or `.eds` specification. After a semantic
+step, the CPU reports the captured instruction and actual next address. The host accumulates these observed transitions
+until a successful CPU reset. Unexecuted paths remain unknown; mnemonic text and opcode patterns are never used to infer edges.
+
+The actual next address already reflects the outcome of branches, calls, returns, indirect transfers, and CPU address
+wrapping. Instruction length only describes occupied cells. It is not an execution successor, and there is no
+`sequentialAddress()` accessor.
+
+Edigen syntax remains unchanged: decoding rules and rendering formats only. Handwritten decoders expose the same four
+instruction accessors. See [Optional machine debugging]({{ '/cpu/debugging' | relative_url }}) for runtime observations.
+
+### CPU memory wiring and graph lifetime
+
+The CPU plugin supplies the decoder and its memory wiring. Instruction text and lengths use
 that logical address space. Read each address through the connected memory context. The connected plugins implement
-address mapping; the host uses the CPU's disassembler and preserves its wiring for flow analysis.
+address mapping; decoding preserves that wiring. Runtime next addresses come from the executed machine state.
 
-The host runs analysis while paused, checks the session and memory/content revisions, and discards results after edits,
-execution or disposal. Results retain derived instruction metadata and graph edges. They do not retain a memory image.
-A ProgramIndex metadata snapshot does not freeze decoder reads. Providers must report writes reliably; notification-disabled
-or raw-array mutations require the session mutation seam or explicit invalidation. Rebuild stale analysis while paused.
+Memory edits, annotations, source changes, and continuing execution do not erase the observed graph. Successful CPU reset clears
+the graph while preserving annotations. Captured instruction facts describe the bytes or cells observed at that step;
+they are not a frozen live-memory image. Listing refresh still validates its own memory view independently.
 
 ## Decoder section
 
@@ -112,7 +132,8 @@ A **subrule** is a reference to another rule (which might or might not be explic
 a name (without quotes), followed by optional pre-pattern enclosed in square brackets, and optionally length in bits -
 e.g., `dst_reg[1](2)`. This means that `dst_reg` will match two bits only if the two-bit sequence starts with binary 1.
 
-The result of decoding is an associative array in the form `{rule: value, ...}`.
+The generator internally tracks recognized values in the form `{rule: value, ...}`; these values are private and
+are not exposed through `DecodedInstruction`.
 
 For example, let us decode the instruction `1111 0100 0000 0011`, The second variant of the rule `instruction` is
 matched, since `0xF` is `1111`. So far, the result is `{instruction: "sub"}`. The following bits (`01`) are passed to
@@ -168,12 +189,11 @@ plugins {
 
 edigen {
     decoderName = 'example.cpu.DecoderImpl'
-    disassemblerName = 'example.cpu.DisassemblerImpl'
 }
 ```
 
 Put the specification in `src/main/edigen/cpu.eds`, or set `specification` in the `edigen` block. `generateSources`
-writes Java files under `build/generated-sources/edigen/` by default and registers those directories with the Java
+writes the decoder Java file under `build/generated-sources/edigen/` by default and registers that directory with the Java
 source set. A separate `compileJava.dependsOn` declaration is unnecessary. In emuStudio, the snapshot plugin resolves
 through the repositories already declared in `settings.gradle`.
 
@@ -185,7 +205,7 @@ version without that metadata, clean the old generated output once (`clean` cove
 ## Formatting in rule names
 
 This feature allows to specify formatting directly in variant names. This capability is enabled only in case a default
-disassembler template is used. An example follows (partial Z80 CPU decoder):
+decoder template is used. An example follows (partial Z80 CPU decoder):
 
 ```
 root instruction;
@@ -248,4 +268,4 @@ for `%X` just do `%%X`.
 [eds-language]: https://github.com/emustudio/edigen/blob/development/docs/_eds-language.adoc
 [edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
 [ssem]: https://en.wikipedia.org/wiki/Manchester_Baby
-[disassembler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/Disassembler.html
+[decoder]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/Decoder.html
