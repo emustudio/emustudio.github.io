@@ -67,10 +67,10 @@ rejects new start, step, reset, and debugger-edit requests. GUI commands are asy
 plugin is disposed. Notifications are observations, not command acknowledgements. Callbacks may run outside Swing's
 event-dispatch thread; dispatch GUI updates onto Swing and never block a callback waiting for an execution command.
 
-Use `ExecutionState.update(Runnable)` for live debugger register, instruction-location, and memory edits. The host
-serializes these changes between semantic steps, or on the idle CPU worker, and reports completion asynchronously.
-CPU engines must drain `processUpdates()` at every semantic boundary, even when debugging is inactive. Use
-`mutate(Runnable)` for operations that require a paused machine; it rejects running, busy, or stale requests.
+Use `ExecutionState.update(Runnable)` for live debugger register, instruction-location, memory, and CPU-frequency edits.
+The host serializes these changes between semantic steps, or on the idle CPU worker, and reports completion asynchronously.
+The host installs a callback through `Debugging.onBoundary(Runnable)` before execution starts. CPU engines invoke it
+before every outer semantic step, even when debugging is inactive. Paused-only command validation belongs to the host.
 Do not write CPU state directly from Swing callbacks. Existing debugger guards still protect concurrent analysis and publication.
 
 For CPUs that measure executed frequency, `sampleFrequency()` is called by the existing command scheduler. Sampling

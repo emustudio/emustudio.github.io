@@ -45,8 +45,9 @@ CPU.RunState run() {
 ```
 
 This is illustrative; the plugin owns `MachineDebugging`, its values, inspection and capture implementation.
-Wire the adapter's outer boundary to `applicationApi.getExecutionState()::processUpdates`, and live edits to
-`applicationApi.getExecutionState()::update`. The adapter may use emuLib's model-neutral `DebuggingSupport`.
+Implement `Debugging.onBoundary(Runnable)` on the CPU root by forwarding the host-supplied callback to the adapter's
+outer boundary. Invoke it even with debugging inactive. Wire live edits to `applicationApi.getExecutionState()::update`.
+The adapter may use emuLib's model-neutral `DebuggingSupport`.
 
 The root plugin implements `Debugging` alongside `CPU`; its `execute()` calls the engine's `run()`, and `step()`
 calls the engine's `step()`. The host supplies execution threads and interruption. Preserve cycle accounting and

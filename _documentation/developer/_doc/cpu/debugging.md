@@ -12,10 +12,11 @@ A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their 
 watches, history, recording and execution control. Real processors can show registers; abstract machines can show tapes
 and symbolic values. The shared CPU interface defines neither representation.
 
-## Two operations
+## CPU debugging contract
 
 ```java
 public interface Debugging {
+    void onBoundary(Runnable callback);
     Expression compile(String source);
     AutoCloseable observe(Observer observer, boolean capture);
 
@@ -38,12 +39,13 @@ Resolve names during compilation without reading guest state; evaluation and dis
 
 Use the existing `applicationApi.getExecutionState().update(change)` service for live edits. It queues changes between
 semantic steps or on the idle CPU worker, without a pause/resume transition. Compile expressions and attach/detach
-observers through that same service. Keep Swing work on its event thread. `Debugging` adds no update protocol.
+observers through that same service. Keep Swing work on its event thread.
 
 ## Engine integration
 
-Every outer semantic step drains `ExecutionState.processUpdates()`, including the inactive fast path. This makes live
-attachment and edits possible without waiting for a continuous run to end. The host supplies the worker; do not create
+The host installs `Debugging.onBoundary(Runnable)` before execution starts. Invoke that callback before every outer
+semantic step, including the inactive fast path. This makes live attachment and edits possible without waiting for a
+continuous run to end. The host supplies the worker; do not create
 another execution controller.
 
 Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
