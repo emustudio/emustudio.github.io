@@ -121,6 +121,11 @@ settings.setInt("scale", scale);
 
 ### Shared Swing helpers
 
+`DialogBase` refreshes its layout against actual native window insets whenever it is shown, including modal dialogs
+and dialogs reopened after disposal. For other Swing windows, call `GUI.relayoutOnShow(window)`
+once on the EDT before the first show. The helper prevents temporary decoration gaps
+without changing the window size or repacking its contents.
+
 Use `GUI.runInBackground(action, task, onSuccess, onError)` for file operations that must keep the interface responsive.
 The task runs off Swing's event-dispatch thread (EDT); action enablement and both callbacks run on the EDT.
 Calls from another thread are queued on the EDT. A disabled action ignores new requests until its current operation
