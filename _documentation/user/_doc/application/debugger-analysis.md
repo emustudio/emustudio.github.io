@@ -71,7 +71,7 @@ in the example. **String column** shows or hides the text found by that scan. Ru
 ### Label and comment on addresses
 
 Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **Data**, then
-**Save annotation**. Annotations belong to CPU-visible addresses and ranges.
+**Save annotation**. Annotations belong to CPU-visible addresses and ranges. Choose **Code** (the default) or **Data**.
 Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
 for this configured machine and layout.
 
@@ -87,7 +87,7 @@ become breakpoints and read/write rules become memory watches. Breakpoint condit
 (`Removed N unsupported breakpoint condition(s) …`) and hit counts are dropped.
 
 Explicit annotation import and export remain available through **Manage…**. Each annotation is stored as
-`entry.N.address`, `entry.N.end`, `entry.N.label` and `entry.N.kind`. Import appends annotations and skips exact
+`annotation.N.address`, `annotation.N.end`, `annotation.N.label` and `annotation.N.kind`. Import appends annotations and skips exact
 duplicates (same range, kind and label); invalid entries are skipped with a warning. Annotation colors are derived from
 the annotated range, so they stay the same across sessions. Compiler source mappings stay separate and require their
 captured source revisions.
