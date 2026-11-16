@@ -22,6 +22,10 @@ debugger listing. Instruction recording adds detailed state capture; pausing or 
 flow observation active. A completed **Keep first** buffer also releases detailed capture unless file recording is
 still active. Folding changes presentation only. Existing flow history remains available until the CPU is reset.
 
+BrainDuck keeps safe instruction grouping and copy/clear/scan-loop optimizations during normal **Run**, while
+reporting every executed instruction and transition to the flow graph. Breakpoints and detailed recording use
+individual instruction execution. Single steps and timed steps also keep their original instruction boundaries.
+
 <details markdown="1">
 <summary>8080 example used in these screenshots</summary>
 

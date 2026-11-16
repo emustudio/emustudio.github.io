@@ -32,6 +32,10 @@ public interface Debugging {
                           Optional<DecodedInstruction> instruction,
                           OptionalInt nextAddress,
                           Optional<StepView> capture);
+        default boolean canBatchInstructions() { return false; }
+        default void afterBlock(ExecutedBlock block) {
+            throw new UnsupportedOperationException("Instruction batching is not supported");
+        }
         default void failed(String message) {}
     }
 }
@@ -73,7 +77,7 @@ together. Computers without a saved configuration keep this metadata in memory. 
 temporary diagnostics are not saved. Explicit annotation import/export remains separate and appends annotations,
 skipping exact duplicates.
 
-Preserve actual guest-step granularity. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
+Preserve actual guest-step granularity when stopping or detailed capture requires it. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
 must not invent extra operations or attach unrelated program locations. Inspection must use side-effect-free reads and
 must not generate guest accesses. Failed/attempted writes must be described honestly.
 
@@ -120,6 +124,25 @@ are not predicted. Mnemonic/opcode classification, static target declarations, a
 Runtime flow capture uses lightweight instruction observation; enabling the graph does not enable full recording.
 `StepView` and the `.emutrace` recording format stay unchanged. Source mappings and labels remain separate from captured
 machine-state presentation.
+
+### Optimized execution
+
+Flow observation stays active during Run. An engine may replace individual callbacks with one `ExecutedBlock` only
+after `DebuggingSupport.begin()` allows execution and `canBatchInstructions()` returns true, before guest effects.
+Support permits batches only for `Capture.INSTRUCTION` and an explicitly opted-in observer. Existing observers
+default to individual instruction callbacks. The host declines batching while breakpoints or detailed recording
+require exact boundaries. Manual and timed steps retain individual execution.
+
+`ExecutedBlock` contains immutable decoded facts for instructions actually executed, explicit observed transitions,
+the final executed address and the resulting PC. Include the final address-to-PC transition. Repeated paths may be
+represented once: this is a complete graph contribution, not a chronological event log or a count of executions.
+Do not report skipped loop bodies or infer transfers from instruction length. Call `endBlock(block)` after committing
+the authorized block, instead of `end(...)`. Settings changed during that block apply at its next boundary.
+
+Plugins own optimization eligibility, code validation and bounded execution. Fall back to original instructions when
+an optimization cannot preserve faults, device effects or requested observations. Keep scan chunks bounded so pause
+and settings changes reach a real guest boundary promptly. Never synthesize intermediate register values or recorded
+`StepView` events from a bulk result. BrainDuck supplies this protocol for safe repeat, copy/clear and scan operations.
 
 ## Reference
 
