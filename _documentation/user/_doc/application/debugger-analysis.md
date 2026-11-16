@@ -15,6 +15,13 @@ the inspected address; the PC stays put. Drag dividers to resize the workspace.
 All bundled CPUs support instruction recording. Register sets and guest memory-access detail depend on the CPU: RAM
 records typed instructions and its instruction pointer, while device/tape state is outside instruction history.
 
+### Instruction flow
+
+**Run**, timed steps and single steps always observe executed instructions and transitions for the flow graph and
+debugger listing. Instruction recording adds detailed state capture; pausing or stopping recording keeps instruction
+flow observation active. A completed **Keep first** buffer also releases detailed capture unless file recording is
+still active. Folding changes presentation only. Existing flow history remains available until the CPU is reset.
+
 <details markdown="1">
 <summary>8080 example used in these screenshots</summary>
 
