@@ -149,8 +149,10 @@ base image's width and height. The loader combines both images in a `BaseMultiRe
 `ImageIcon`, keeping the base icon's logical size. If the `@2x` resource is absent, it uses the base image; if the base
 resource is absent, it returns `null`.
 
-Application and common plugin icons (file, edit, emulation, debugger, media, disk and indicator icons) are bundled in emuLib.
-Prefer them over plugin copies: `GUI.loadIcon(StandardIcons.ICON_OPEN_FILE, MyPanel.class)`.
+Package icons in the application or plugin that uses them, including artwork used by several modules.
+Reference the owning module's resources directly, for example `GUI.loadIcon("icons/open-file.png", MyPanel.class)`.
+emuLib provides icon loading and high-resolution support; it contains no application or plugin artwork.
+The emuStudio repository's `resources/icons/manifest.json` maps each module's packaged resources to SVG sources.
 
 `gui.toolbarButton(action)` takes its icon from the action's `SMALL_ICON`, and its tooltip and accessible name from
 `SHORT_DESCRIPTION`. Supply a descriptive short description for icon-only buttons.
