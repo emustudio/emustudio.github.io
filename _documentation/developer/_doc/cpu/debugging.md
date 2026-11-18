@@ -136,13 +136,18 @@ require exact boundaries. Manual and timed steps retain individual execution.
 `ExecutedBlock` contains immutable decoded facts for instructions actually executed, explicit observed transitions,
 the final executed address and the resulting PC. Include the final address-to-PC transition. Repeated paths may be
 represented once: this is a complete graph contribution, not a chronological event log or a count of executions.
+An engine may omit unchanged facts already reported to the same observer. Consumers accumulate contributions;
+every contribution still contains its actual final instruction and final transition. A new observer or CPU reset
+requires fresh reporting, and code changes must update captured facts even for previously visited addresses.
 Do not report skipped loop bodies or infer transfers from instruction length. Call `endBlock(block)` after committing
 the authorized block, instead of `end(...)`. Settings changed during that block apply at its next boundary.
 
 Plugins own optimization eligibility, code validation and bounded execution. Fall back to original instructions when
 an optimization cannot preserve faults, device effects or requested observations. Keep scan chunks bounded so pause
 and settings changes reach a real guest boundary promptly. Never synthesize intermediate register values or recorded
-`StepView` events from a bulk result. BrainDuck supplies this protocol for safe repeat, copy/clear and scan operations.
+`StepView` events from a bulk result. BrainDuck groups ordinary operations and safe repeat, copy/clear and scan
+operations into batches capped at 4,096 operations, with regular interrupt and elapsed-time checks. I/O, stopping
+instructions and potentially failing steps retain individual callbacks.
 
 ## Reference
 

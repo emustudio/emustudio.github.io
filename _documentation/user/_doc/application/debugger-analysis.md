@@ -17,13 +17,12 @@ records typed instructions and its instruction pointer, while device/tape state 
 
 ### Instruction flow
 
-**Run**, timed steps and single steps always observe executed instructions and transitions for the flow graph and
-debugger listing. Instruction recording adds detailed state capture; pausing or stopping recording keeps instruction
+**Run**, timed steps and single steps always observe executed instructions and transitions for the debugger listing. Instruction recording adds detailed state capture; pausing or stopping recording keeps instruction
 flow observation active. A completed **Keep first** buffer also releases detailed capture unless file recording is
 still active. Folding changes presentation only. Existing flow history remains available until the CPU is reset.
 
 BrainDuck keeps safe instruction grouping and copy/clear/scan-loop optimizations during normal **Run**, while
-reporting every executed instruction and transition to the flow graph. Breakpoints and detailed recording use
+reporting every executed instruction and transition for listing arrows and folding. Breakpoints and detailed recording use
 individual instruction execution. Single steps and timed steps also keep their original instruction boundaries.
 
 <details markdown="1">
@@ -151,32 +150,7 @@ coordinates appear in the source-mapping status.
 Use **Enable / disable** or **Remove** to manage breakpoints. **Save settings** saves watches, breakpoints and memory
 watches together with user annotations in the computer's `.debugger` file.
 
-## References, flow and history
-
-### Follow a call
-
-![Static reference list shows the call from 0108 to 010C beside the decoded instruction graph]({{ site.baseurl }}/assets/application/debugger-demo-references.png){: style="max-width: 886px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Analyze from address**. Decode reachable instructions from the inspected address. |
-| <span class="circle">2</span> | **Find incoming references**. Search for references to the inspected address. |
-| <span class="circle">3</span> | **Go to reference**. Inspect the selected reference’s address. |
-| <span class="circle">4</span> | **Instruction**. Select a decoded instruction. |
-| <span class="circle">5</span> | **Go to instruction**. Inspect the selected decoded instruction. |
-| <span class="circle">6</span> | **References and graph**. Select a reference or graph node to inspect its address. Indirect targets may remain unresolved. |
-
-Select `0100`, open **References**, then **Analyze from address**. The call links `0108` to `010C`.
-Choose a graph node or **Go to reference**/**Go to instruction** to navigate. **Find incoming references** shows incoming
-calls and branches. Analysis uses the CPU's decoder and current memory wiring and visits at most `flowAnalysisLimit`
-instructions (default 1000, see [Configuration]({{ site.baseurl }}/application/configuration-file#application-settings)).
-When the limit is reached, the origin label shows `Truncated at N instructions`. Instructions that cannot be decoded
-appear as unknown nodes with a dashed box and the tooltip `Not decoded: <reason>`. Instructions inside DATA annotations
-are still analyzed but marked as data with a dashed box (`DATA`, `Data region`). Unresolved indirect targets remain unknown.
-Analysis runs on a worker against paused live memory and checks session, memory and metadata revisions before publication.
-Running, editing memory, or changing source/code/data metadata invalidates analysis. Pause and analyze again to refresh it.
-Static references do not prove execution coverage.
+## Execution history
 
 ### Instruction recording
 
