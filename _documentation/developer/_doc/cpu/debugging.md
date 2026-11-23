@@ -91,9 +91,12 @@ For previous-write navigation, a plugin tags its write row and supplies a `new N
 The host finds the earlier matching tag relative to that row's original event ordinal, including within folded groups.
 It never parses displayed values or understands machine-specific tag meaning.
 
-The host explicitly serializes this fixed presentation and its ordinal/completion envelope in bounded
-recordings. Offline details, filtering, folding, links and text export require no CPU plugin, live memory or Swing.
-File limits belong to the codec; shared display values contain no validation framework or public size limits.
+All bundled CPUs use `PackedCapture` to store before/after state and ordered accesses in primitive chunks.
+Repeated instructions share their descriptions, and the recorder formats rows on demand. The 8080 and Z80
+derive register pairs from captured bytes. RASP preserves signed memory words, and RAM preserves numeric
+and symbolic tape values, including the tape identity and the values before and after a write.
+Version 5 of `.emutrace` supports packed events and presentation rows. The reader also opens version 4 files.
+Offline details, filtering, folding, links and text export require no CPU plugin, live memory or Swing.
 Source links use available current mappings; recordings do not reconstruct historical sources or restore machine state.
 
 Keep machine-specific editing in plugin controls within the shared debugger workspace. Expose only meaningful
@@ -122,8 +125,7 @@ Memory edits, source changes, annotations, and resuming execution do not clear o
 are not predicted. Mnemonic/opcode classification, static target declarations, and `.eds` flow syntax are absent.
 
 Runtime flow capture uses lightweight instruction observation; enabling the graph does not enable full recording.
-`StepView` and the `.emutrace` recording format stay unchanged. Source mappings and labels remain separate from captured
-machine-state presentation.
+Source mappings and labels remain separate from captured machine-state presentation.
 
 ### Optimized execution
 
