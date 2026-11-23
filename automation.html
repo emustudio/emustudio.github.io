@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How emuStudio coordinates automatic emulation and which host and plugin conventions make a run work.">
+<title>Automatic emulation architecture</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: #edf2f6;
+        color: #1e3148;
+        font: 1rem/1.65 system-ui, sans-serif;
+    }
+    a { color: #205789; text-underline-offset: .16em; }
+    a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+    code {
+        font: .9em ui-monospace, monospace;
+        overflow-wrap: anywhere;
+    }
+    .automation-review {
+        --diagram-ink: #1e3148;
+        --diagram-line: #52677b;
+        --diagram-accent: #205789;
+        --diagram-soft: #eff6ff;
+        --diagram-border: #c4d2df;
+        max-width: 72rem;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: clamp(1rem, 4vw, 3rem);
+        background: #fff;
+    }
+    .automation-review h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.15;
+        letter-spacing: -.025em;
+    }
+    .automation-review h2 { margin: 2.5rem 0 1rem; line-height: 1.25; }
+    .automation-review h3 { margin: 1.45rem 0 .5rem; line-height: 1.35; }
+    .automation-review p { max-width: 78ch; margin: 0 0 1rem; }
+    .automation-review figure { margin: 1.25rem 0; }
+    .automation-review .review-scope,
+    .automation-review .source-links,
+    .automation-review figcaption { font-size: .94rem; line-height: 1.55; }
+    .automation-review .review-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .25rem 1.35rem;
+        padding: .7rem 0;
+        border-block: 1px solid var(--diagram-border);
+    }
+    .automation-review [id] { scroll-margin-top: 1rem; }
+    .automation-review :target > h2,
+    .automation-review :target > h3 { color: var(--diagram-accent); }
+    .automation-review .diagram-frame {
+        overflow-x: auto;
+        background: #f8fafc;
+        border: 1px solid var(--diagram-border);
+        border-radius: .5rem;
+    }
+    .automation-review .diagram {
+        display: block;
+        width: 100%;
+        min-width: 800px;
+        height: auto;
+        font: 16px system-ui, sans-serif;
+        fill: var(--diagram-ink);
+    }
+    .automation-review .diagram .boundary { fill: #fff; stroke: #8196ac; stroke-dasharray: 6 4; }
+    .automation-review .diagram .box { fill: var(--diagram-soft); stroke: var(--diagram-accent); }
+    .automation-review .diagram .external { fill: #f1f4f7; stroke: #75889b; }
+    .automation-review .diagram .plugin { fill: #eaf6ef; stroke: #467458; }
+    .automation-review .diagram .title { font-weight: 700; }
+    .automation-review .diagram .label { font-size: 13px; }
+    .automation-review .diagram .edge { fill: none; stroke: var(--diagram-line); stroke-width: 1.5; }
+    .automation-review .diagram .arrow { fill: var(--diagram-line); }
+    .automation-review .diagram a { text-decoration: none; }
+    .automation-review .diagram a:hover .box,
+    .automation-review .diagram a:focus-visible .box {
+        fill: #d7e9ff;
+        stroke: var(--diagram-accent);
+        stroke-width: 3;
+    }
+    .automation-review .diagram a:focus-visible { outline: none; }
+    .automation-review figcaption { margin-top: .45rem; }
+    .automation-review ol { padding-left: 1.6rem; }
+    .automation-review li { max-width: 80ch; margin-bottom: .55rem; }
+    .automation-review .convention {
+        max-width: 81ch;
+        border-left: 3px solid var(--diagram-border);
+        padding: .05rem 0 .05rem 1rem;
+        margin: 1.25rem 0;
+    }
+    .automation-review .convention:target { border-color: var(--diagram-accent); background: var(--diagram-soft); }
+    .automation-review .convention h3 { margin-top: .6rem; }
+    .automation-review .convention p { padding-right: .6rem; }
+    .automation-review .interaction-modes { width: 100%; margin: 1rem 0; border-collapse: collapse; }
+    .automation-review .interaction-modes caption { text-align: left; margin-bottom: .4rem; }
+    .automation-review .interaction-modes th,
+    .automation-review .interaction-modes td {
+        border-bottom: 1px solid var(--diagram-border);
+        padding: .55rem .6rem;
+        text-align: left;
+        vertical-align: top;
+    }
+    .automation-review .interaction-modes thead { background: var(--diagram-soft); }
+    @media print {
+        body { background: #fff; }
+        .automation-review { padding: 0; }
+        .automation-review .diagram { min-width: 0; }
+        .automation-review figure { break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<main class="automation-review">
+    <header>
+        <h1>Automatic emulation architecture</h1>
+        <p>emuStudio loads a virtual computer, optionally compiles a source file, and runs its CPU without the main window.
+            The host controls execution and shutdown. A usable run also depends on agreements about how plugins wire
+            themselves together, load runnable code, and handle input, output, and interruption.</p>
+        <p>A compiler can produce a file without loading the CPU's memory. A timed run can exceed its observation
+            limit during shutdown. In both cases, the CLI can return success.</p>
+        <p class="review-scope">Implementation reviewed against the emuStudio <code>fix-454-debugger-editor-state</code>
+            checkout and the emuLib <code>develop</code> API. The source links pin the reviewed revisions.
+            <a href="https://github.com/emustudio/emuStudio/issues/433">Release QA #433</a> ·
+            <a href="https://www.emustudio.net/documentation/user/application/automation.html">User guide</a></p>
+        <nav class="review-nav" aria-label="On this page">
+            <a href="#views">Architecture</a>
+            <a href="#run">Run sequence</a>
+            <a href="#communication">Communication</a>
+            <a href="#conventions">Unenforced conventions</a>
+            <a href="#ownership">Application ownership</a>
+            <a href="#review-priorities">Review priorities</a>
+        </nav>
+    </header>
+
+    <section id="views">
+        <h2>Architecture</h2>
+        <figure id="context-view">
+            <div class="diagram-frame">
+                <svg class="diagram" viewBox="0 0 960 238" role="group" aria-labelledby="context-title context-desc">
+                    <title id="context-title">C4 system context for automatic emulation</title>
+                    <desc id="context-desc">An operator or script invokes emuStudio. The process reads host files and its plugins emit host files. Select a box to explore its role.</desc>
+                    <defs>
+                        <marker id="context-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                            <path class="arrow" d="M0 0 10 5 0 10Z"/>
+                        </marker>
+                    </defs>
+                    <path class="edge" d="M230 121H358" marker-end="url(#context-arrow)"/>
+                    <path class="edge" d="M602 151H725" marker-end="url(#context-arrow)"/>
+                    <path class="edge" d="M725 105H602" marker-end="url(#context-arrow)"/>
+                    <g class="label" text-anchor="middle">
+                        <text x="294" y="110">Invokes CLI</text>
+                        <text x="663" y="94">Inputs</text>
+                        <text x="663" y="140">Outputs</text>
+                    </g>
+                    <a href="#run" aria-label="Operator or script. Open the run sequence.">
+                        <rect class="box external" x="26" y="66" width="204" height="110" rx="7"/>
+                        <text x="43" y="104" class="title">Operator or script</text>
+                        <text x="43" y="132" class="label">Starts the run and reads</text>
+                        <text x="43" y="152" class="label">the outcome and artifacts</text>
+                    </a>
+                    <a href="#component-view" aria-label="emuStudio. Open the component diagram.">
+                        <rect class="box" x="358" y="66" width="244" height="110" rx="7"/>
+                        <text x="375" y="104" class="title">emuStudio</text>
+                        <text x="375" y="132" class="label">Runs the configured machine</text>
+                        <text x="375" y="152" class="label">with optional device windows</text>
+                    </a>
+                    <a href="#io" aria-label="Host files. Open device input and output conventions.">
+                        <rect class="box external" x="725" y="66" width="209" height="110" rx="7"/>
+                        <text x="742" y="104" class="title">Host files</text>
+                        <text x="742" y="132" class="label">TOML, JARs, source, images,</text>
+                        <text x="742" y="152" class="label">device files and logs</text>
+                    </a>
+                </svg>
+            </div>
+            <figcaption>System context. Select a box to follow the run, zoom into emuStudio, or inspect file I/O.
+                On narrow screens, scroll the diagrams horizontally.</figcaption>
+        </figure>
+
+        <figure id="component-view">
+            <div class="diagram-frame">
+                <svg class="diagram" viewBox="0 0 960 454" role="group" aria-labelledby="component-title component-desc">
+                    <title id="component-title">C4 component view of the emuStudio JVM</title>
+                    <desc id="component-desc">The command manages the virtual computer and invokes Automation. The virtual computer supplies shared application services. The controller runs the CPU, the compiler loads memory, and the CPU accesses memory and devices. Blue boxes are host components and green boxes are example plugins.</desc>
+                    <defs>
+                        <marker id="component-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                            <path class="arrow" d="M0 0 10 5 0 10Z"/>
+                        </marker>
+                    </defs>
+                    <rect class="boundary" x="16" y="18" width="928" height="418" rx="9"/>
+                    <text class="title" x="35" y="47">emuStudio JVM · Java application container</text>
+                    <g marker-end="url(#component-arrow)" class="edge">
+                        <path d="M260 112H368"/><path d="M592 112H700"/>
+                        <path d="M148 150V205"/><path d="M260 243H368"/>
+                        <path d="M812 150V205"/><path d="M700 243H592"/>
+                        <path d="M480 340V281"/><path d="M812 281V340"/>
+                        <path d="M260 378H368"/><path d="M700 270H662V366H592"/>
+                    </g>
+                    <g class="label" text-anchor="middle">
+                        <text x="314" y="101">Invokes</text>
+                        <text x="646" y="101">Commands</text>
+                        <text x="196" y="183">Loads / closes</text>
+                        <text x="314" y="232">Binds pool</text>
+                        <text x="857" y="183">Executes</text>
+                        <text x="646" y="232">Looks up</text>
+                        <text x="432" y="316">Registers</text>
+                        <text x="836" y="316">I/O</text>
+                        <text x="314" y="367">Loads</text>
+                        <text x="624" y="355">Fetches</text>
+                    </g>
+                    <a href="#run" aria-label="AutomationCommand. Open the run sequence.">
+                        <rect class="box" x="36" y="74" width="224" height="76" rx="6"/>
+                        <text x="52" y="105" class="title">AutomationCommand</text>
+                        <text x="52" y="129" class="label">CLI, settings and lifetime</text>
+                    </a>
+                    <a href="#outcome" aria-label="Automation. Open the outcome conventions.">
+                        <rect class="box" x="368" y="74" width="224" height="76" rx="6"/>
+                        <text x="384" y="105" class="title">Automation</text>
+                        <text x="384" y="129" class="label">Prepares and reports the run</text>
+                    </a>
+                    <a href="#shutdown" aria-label="EmulationController. Open shutdown conventions.">
+                        <rect class="box" x="700" y="74" width="224" height="76" rx="6"/>
+                        <text x="716" y="105" class="title">EmulationController</text>
+                        <text x="716" y="129" class="label">Serializes machine operations</text>
+                    </a>
+                    <a href="#topology" aria-label="VirtualComputer. Open wiring conventions.">
+                        <rect class="box" x="36" y="205" width="224" height="76" rx="6"/>
+                        <text x="52" y="236" class="title">VirtualComputer</text>
+                        <text x="52" y="260" class="label">Loads and initializes plugins</text>
+                    </a>
+                    <a href="#communication" aria-label="ApplicationApi and ContextPool. Open the communication model.">
+                        <rect class="box" x="368" y="205" width="224" height="76" rx="6"/>
+                        <text x="384" y="236" class="title">Application services</text>
+                        <text x="384" y="260" class="label">ApplicationApi, ContextPool</text>
+                    </a>
+                    <a href="#shutdown" aria-label="CPU plugin. Open the execution and shutdown contract.">
+                        <rect class="box plugin" x="700" y="205" width="224" height="76" rx="6"/>
+                        <text x="716" y="236" class="title">CPU plugin</text>
+                        <text x="716" y="260" class="label">BrainDuck instruction loop</text>
+                    </a>
+                    <a href="#program" aria-label="Compiler plugin. Open the compiler handoff conventions.">
+                        <rect class="box plugin" x="36" y="340" width="224" height="76" rx="6"/>
+                        <text x="52" y="371" class="title">Compiler plugin</text>
+                        <text x="52" y="395" class="label">Brainc loads compiled code</text>
+                    </a>
+                    <a href="#reset" aria-label="Memory plugin. Open reset and program image conventions.">
+                        <rect class="box plugin" x="368" y="340" width="224" height="76" rx="6"/>
+                        <text x="384" y="371" class="title">Memory plugin</text>
+                        <text x="384" y="395" class="label">byte-mem stores the image</text>
+                    </a>
+                    <a href="#io" aria-label="Device plugin. Open device input and output conventions.">
+                        <rect class="box plugin" x="700" y="340" width="224" height="76" rx="6"/>
+                        <text x="716" y="371" class="title">Device plugin</text>
+                        <text x="716" y="395" class="label">VT100 keyboard and display</text>
+                    </a>
+                </svg>
+            </div>
+            <figcaption>Component view. Blue boxes are host components. Green boxes are BrainDuck plugins.
+                Arrows show selected calls in the JVM. Select a component to inspect its contract.
+                <a href="#context-view">Back to system context</a></figcaption>
+        </figure>
+        <p>The CLI, controller, and plugin JARs share one JVM. emuLib supplies the Java interfaces used across that
+            boundary. TOML describes the machine assembled inside the process.
+            <a href="https://c4model.com/diagrams">C4 diagram levels</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/VirtualComputer.java">VirtualComputer</a></p>
+    </section>
+
+    <section id="run">
+        <h2>Run sequence</h2>
+        <ol>
+            <li><strong>Select and load.</strong> <code>automation</code> (alias <code>auto</code>) selects the TOML
+                by name, file, or index. GUI mode can ask the operator to choose. Headless mode requires explicit
+                selection. The command supplies <code>EMUSTUDIO_AUTO</code> and <code>EMUSTUDIO_NO_GUI</code> as
+                separate flags. The loader constructs all plugins, initializes compiler → memory → CPU → devices,
+                then resets compiler → memory → devices → CPU.</li>
+            <li><strong>Prepare the program.</strong> If both source and compiler are present, the controller runs
+                compilation and then resets only the CPU. Otherwise, for a machine with a CPU, the same controller
+                operation skips compilation and resets only the CPU. <code>-p</code> supplies an explicit CPU reset
+                address. Without it, the host calls <code>cpu.reset()</code>, which <code>AbstractCPU</code> implements
+                by reading <code>ApplicationApi.getProgramLocation()</code>. The host initializes this location to zero.</li>
+            <li><strong>Start and observe.</strong> In GUI mode, automation calls <code>showGUI(null)</code> on
+                devices that report GUI support. The controller starts <code>CPU.execute()</code> on its machine worker.
+                The caller waits on <code>runCompletion()</code> until the CPU returns or the optional
+                <code>--waitmax</code> elapses. With the flag omitted, it waits indefinitely. The GUI progress
+                window's Stop button sends a stop request to the same controller.</li>
+            <li><strong>Report and close.</strong> Automation logs the observed state and instruction location. The command
+                closes the virtual computer, which waits for the controller to finish before closing the debugger session,
+                destroying devices in reverse order, destroying CPU → memory → compiler, and releasing the class loader
+                and configuration.</li>
+        </ol>
+        <p class="source-links"><a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/cmdline/AutomationCommand.java">AutomationCommand</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/cmdline/Utils.java">Utils.loadComputer</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/Automation.java">Automation</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/EmulationController.java">EmulationController</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/VirtualComputer.java">VirtualComputer</a> ·
+            <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/cpu/AbstractCPU.java">AbstractCPU</a></p>
+    </section>
+
+    <section id="communication">
+        <h2>Communication model and enforced contracts</h2>
+        <p><strong>Host calls and replies.</strong> The loader checks the plugin role and constructor
+            <code>(long, ApplicationApi, PluginSettings)</code>. It injects the instance ID, services, and settings.
+            The controller's command executor serializes lifecycle transitions. A separate worker performs reset,
+            compilation, and CPU execution. Completion futures carry the observed <code>RunState</code> or an
+            exception back to the caller. The controller also publishes state to its execution listeners.
+            Compiler diagnostics use <code>CompilerListener</code> callbacks. Plugin contexts can publish their own
+            notifications, such as the CPU context events used by SSEM's snapshot writer.
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/VirtualComputer.java">VirtualComputer</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/EmulationController.java">EmulationController</a> ·
+            <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/compiler/Compiler.java">Compiler</a></p>
+        <p><strong>Plugin lookup and direct calls.</strong> A plugin registers a context instance under an interface.
+            The pool verifies the instance implements that interface and checks the caller's connection to the provider
+            at lookup. A TOML edge authorizes a lookup from <code>from</code> to <code>to</code>.
+            <code>bidirectional</code> also permits the reverse lookup. The host's reserved ID <code>0</code>
+            can look up any registered context. Once resolved, the caller holds a Java reference and calls it directly.
+            The pool is outside subsequent memory reads, writes, and device calls.
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/ContextPoolImpl.java">ContextPoolImpl</a> ·
+            <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/VirtualComputer.java">VirtualComputer.isConnected</a> ·
+            <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/application/ContextPool.java">ContextPool</a></p>
+    </section>
+
+    <section id="conventions">
+        <h2>Unenforced conventions</h2>
+        <p>Some expectations are documented in emuLib. The gaps below identify where runtime behavior still depends on
+            the application, configuration author, or plugin honoring those expectations.</p>
+
+        <section class="convention" id="topology">
+            <h3>1. Publish contexts before consumers bind</h3>
+            <p><strong>Application and configuration.</strong> The host constructs all instances before
+                <code>initialize()</code>, installs the topology, and uses a fixed order by role. It expects a CPU plugin
+                to expose a <code>CPUContext</code> for host execution, even if peers use a more specific interface.
+                The configuration must grant each consumer access to the intended provider.</p>
+            <p><strong>Plugins.</strong> emuLib documents registration during construction and lookup in
+                <code>initialize()</code>. Registration checks type, and lookup checks connectivity when it happens.
+                The loader has no dependency declaration to verify early registration, required connections, or provider
+                identity. A no-index lookup chooses the first accessible instance registered under that interface.
+                An explicit index counts all entries under that interface. The typed helpers check the selected context's
+                cell or data class after selection, so another accessible entry with the expected class can go unused.</p>
+            <p><strong>Observed in BrainDuck.</strong> Brainc requests <code>MemoryContext&lt;Byte&gt;</code>, the CPU
+                requests <code>ByteMemoryContext</code>, and VT100 requests <code>BrainCPUContext</code> to attach
+                itself as the CPU's device. The configured edges and matching interfaces make those calls reach the
+                intended objects. A valid edge alone cannot verify that the compiler and CPU use the same memory instance.</p>
+            <p class="source-links"><a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/Plugin.java">Plugin lifecycle</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/application/ContextPool.java">Typed lookup helpers</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/ContextPoolImpl.java">Lookup implementation</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/files/config/BrainDuck.toml">BrainDuck.toml</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/compiler/brainc-brainduck/src/main/java/net/emustudio/plugins/compiler/brainduck/CompilerBrainduck.java">Brainc</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/cpu/brainduck-cpu/src/main/java/net/emustudio/plugins/cpu/brainduck/CpuImpl.java">BrainDuck CPU</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/DeviceImpl.java">VT100 attachment</a></p>
+        </section>
+
+        <section class="convention" id="program">
+            <h3>2. Hand off a runnable image and entry point</h3>
+            <p><strong>Application.</strong> The host calls <code>compile(input, Optional.empty())</code> and counts
+                <code>ERROR</code> diagnostics while that call is active. It assumes a return without an exception or
+                error means the image is ready. It neither receives a typed compile result nor inspects the generated
+                file before starting the CPU. The host parses <code>-p</code> as an integer and passes it to CPU reset
+                without checking the machine's address range or alignment.</p>
+            <p><strong>Plugins.</strong> The compiler must complete its image writes, entry-point update, and diagnostics
+                before returning. The CPU must interpret the location in the compiler's address units and boot from the
+                same memory. Brainc writes a HEX file, sets the shared program location, and loads memory when available.
+                It emits a warning when memory is unavailable. A machine can therefore pass the compile error gate with
+                an artifact on disk and no new image in the CPU's memory. A late diagnostic can also miss the gate.
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/Automation.java">Compilation gate</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/compiler/Compiler.java">Compiler contract</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/compiler/brainc-brainduck/src/main/java/net/emustudio/plugins/compiler/brainduck/CompilerBrainduck.java">Brainc image load</a></p>
+        </section>
+
+        <section class="convention" id="reset">
+            <h3>3. Preserve the state needed for boot</h3>
+            <p><strong>Application.</strong> The host performs one full reset at load and a CPU-only reset just before
+                the run. An omitted source relies on memory already being bootable after the first reset.
+                CPU-only reset after compilation preserves the compiled image if the CPU honors that scope.</p>
+            <p><strong>Plugins.</strong> Memory must restore any configured boot image at the right phase. Devices must
+                preserve or refill staged inputs across the initial reset. VT100 consumes the headless input file during
+                <code>initialize()</code>. Its reset resets the display and leaves the keyboard queue intact.
+                Clearing that queue on the initial reset would remove input before the CPU reads it. The lifecycle has
+                no readiness check for boot images or staged input.
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/EmulationController.java">Reset and compile order</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/DeviceImpl.java">VT100 initialization and reset</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/api/ContextVt100.java">VT100 input queue</a></p>
+        </section>
+
+        <section class="convention" id="io">
+            <h3>4. Supply headless I/O and finish output</h3>
+            <p><strong>Application.</strong> <code>EMUSTUDIO_AUTO</code> describes automation mode.
+                <code>EMUSTUDIO_NO_GUI</code> describes window availability. The host avoids opening device windows
+                in headless mode and supplies a null GUI service. The launch path never checks
+                <code>isAutomationSupported()</code>. It has no per-machine validation of required devices, file
+                paths, or whether the run can proceed without user input. <code>--input-file</code> goes to the
+                compiler. Guest input is configured on the device.</p>
+            <p><strong>Plugins.</strong> Each plugin chooses how to honor the flags and when output is ready.
+                BrainDuck's VT100 uses <code>inputFileName</code> and <code>outputFileName</code> in headless mode.
+                Its file reader logs a missing input file, and a later CPU read waits on the queue. The reader provides
+                no EOF marker. The display logs file open and write failures, so an apparently successful guest run can
+                produce missing or incomplete output. With <code>EMUSTUDIO_AUTO</code>, the SSEM CPU observes its
+                own context's stop notifications and writes a register and memory snapshot to <code>ssem.out</code>.
+                RAM's abstract tape starts symbol logging during reset when both automation and headless mode are enabled.</p>
+            <p class="source-links"><a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/settings/AppSettings.java">Mode flags</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/Plugin.java">Automation capability</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/interaction/KeyboardFromFile.java">VT100 file input</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/interaction/DisplayImpl.java">VT100 file output</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/cpu/ssem-cpu/src/main/java/net/emustudio/plugins/cpu/ssem/AutomaticEmulation.java">SSEM snapshot</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/abstract-tape/src/main/java/net/emustudio/plugins/device/abstracttape/AbstractTape.java">Abstract tape reset</a></p>
+        </section>
+
+        <section class="convention" id="shutdown">
+            <h3>5. Return from the worker when interrupted</h3>
+            <p><strong>Application.</strong> <code>--waitmax</code> bounds the wait for the running CPU's result.
+                Configuration, initialization, reset, compilation, and device-window setup all precede that wait.
+                On expiry, automation samples the state and proceeds toward close. Close interrupts active execution
+                and waits for it to return before destroying plugins. There is no teardown deadline.</p>
+            <p><strong>Plugins.</strong> The CPU API requires synchronous execution and prescribes
+                <code>STATE_RUNNING</code> for a cooperative return after interruption without another terminal reason.
+                The controller then resolves the requested stop or pause. Devices reached by the CPU worker must let
+                interruption propagate through blocking I/O, and plugins must release their resources in
+                <code>destroy()</code>. For example, VT100 restores the interrupt flag if its input queue wait is
+                interrupted, so BrainDuck's loop can exit. A CPU loop or device call that ignores the interrupt can
+                hold close indefinitely despite <code>--waitmax</code>.
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/cpu/CPU.java">CPU.execute contract</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/EmulationController.java">Stop and close</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/api/ContextVt100.java">Interruptible input</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/cpu/brainduck-cpu/src/main/java/net/emustudio/plugins/cpu/brainduck/CpuImpl.java">BrainDuck execution loop</a></p>
+        </section>
+
+        <section class="convention" id="outcome">
+            <h3>6. Interpret success with context</h3>
+            <p><strong>Application.</strong> Automation returns failure for compilation errors, execution exceptions,
+                address fallout, and bad instructions. A normal stop, breakpoint, or an elapsed wait with the CPU
+                still running can all return exit code <code>0</code>. A missing CPU skips execution. A missing compiler
+                skips compilation even when the supplied source path exists. Plugin destruction errors are logged by
+                <code>VirtualComputer</code> and can leave the exit status unchanged.</p>
+            <p><strong>Plugins and callers.</strong> CPUs must return a faithful stop reason. Plugins must surface
+                failures that should invalidate the run. Scripts that require a completed workload also need to
+                verify its stop reason and expected output. The CLI currently has no single result containing phase,
+                termination reason, and artifact status.
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/Automation.java">Run and result handling</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/cmdline/AutomationCommand.java">Exit status</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/VirtualComputer.java">Plugin destruction</a></p>
+        </section>
+    </section>
+
+    <section id="ownership">
+        <h2>What emuStudio needs to own</h2>
+        <p>One application-owned session should decide when the machine starts, which windows open, whether operator
+            input is allowed, and when the result is final. Plugins implement the machine's behavior and contribute
+            views, prompts, device input and output, and artifacts through interfaces the application controls.</p>
+
+        <section class="convention" id="window-ownership">
+            <h3>Widget factories leave window ownership with plugins</h3>
+            <p><code>ApplicationApi.getGUI()</code> returns either the host's Swing widget factory or <code>null</code>.
+                The <code>GUI</code> interface returns Swing objects such as <code>JPanel</code> and <code>JButton</code>.
+                It cannot schedule, veto, or close top-level windows created by plugin code. <code>Device.showGUI(JFrame)</code>
+                and <code>Plugin.showSettings(JFrame)</code> explicitly let plugins show their own windows. VT100 uses
+                the factory to build content and still creates, shows, and disposes its own terminal dialog. Memory erase
+                actions even call <code>JOptionPane</code> directly for errors.</p>
+            <p>The audio tape player can call <code>showGUI(null)</code> from <code>initialize()</code> when
+                <code>showGuiAtStartup</code> is set. That happens before the automation runner reaches its device-window
+                phase. The flag prevents the bundled plugin from doing so in headless mode because the plugin reads it.
+                The loader has no enforcement for another plugin that ignores the flag.</p>
+            <p><strong>Change.</strong> Let plugins contribute content and request presentation by role, such as primary
+                device view or settings. Let emuStudio create and own the window, resolve parenting, bring it forward,
+                route close events, and dispose it. Supply the Swing <code>GUI</code> factory only when constructing
+                desktop content on the event dispatch thread (EDT). Keep guest display and keyboard models usable when
+                the host chooses to attach no desktop view.</p>
+            <p class="source-links"><a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/application/ApplicationApi.java">ApplicationApi</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/application/ui/GUI.java">GUI widget factory</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/device/Device.java">Device.showGUI</a> ·
+                <a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/plugin/Plugin.java">Plugin.showSettings</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/gui/TerminalWindow.java">VT100 window</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/DeviceImpl.java">VT100 window lifetime</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/memory/byte-mem/src/main/java/net/emustudio/plugins/memory/bytemem/gui/EraseMemoryAction.java">Direct Swing dialog</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/audiotape-player/src/main/java/net/emustudio/plugins/device/audiotapeplayer/DeviceImpl.java">Tape startup window</a></p>
+        </section>
+
+        <section class="convention" id="operator-interaction">
+            <h3>Dialogs already defines the operator interface</h3>
+            <p><code>AutomationCommand</code> supplies <code>DialogsGui</code> with Swing or <code>DialogsNoGui</code>
+                with a null GUI. <code>DialogsNoGui</code> logs messages, returns <code>CANCEL</code> for confirmation,
+                and returns empty values for text, numbers, files, and directories. It never reads a terminal.
+                Callers can receive the same empty value for user cancellation, invalid input, or prompts unavailable in
+                their mode. A plugin that treats cancellation as an ordinary choice can continue with no operator ever
+                seeing the request.</p>
+            <p><strong>Change.</strong> Keep <code>Dialogs</code> as the host-provided interface for information,
+                errors, confirmation, typed input, and path selection. Provide a terminal implementation that prompts on
+                an attached terminal, parses answers, and requests paths as text. Let users explicitly allow operator
+                interaction during automation. Use the same policy for machine selection. An interactive terminal can
+                offer a list of computers, while batch mode requires an explicit selection. Report a required unanswered
+                batch prompt as a run failure. Define how the interface conveys cancellation, invalid input, EOF, and
+                interaction denied. Keep prompt text and diagnostics off any stream designated for machine output.</p>
+            <p><strong>Keep guest I/O distinct.</strong> A plugin asking which tape to mount is an operator prompt.
+                Characters a guest reads from a VT100 or pixels it writes to a display are machine traffic. The host
+                can attach a window, terminal stream, file, or no backend to a device's supported I/O. If operator and
+                guest input share a terminal, give one host-owned reader control and route bytes to the active recipient.
+                Define guest EOF and terminal cancellation explicitly.</p>
+            <p class="source-links"><a href="https://github.com/vbmacher/emuLib/blob/c08bc0f37c2cf42289fca2ec859724dcf433f852/src/main/java/net/emustudio/emulib/application/ui/Dialogs.java">Dialogs</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/gui/framework/DialogsGui.java">DialogsGui</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/gui/framework/DialogsNoGui.java">DialogsNoGui</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/cmdline/AutomationCommand.java">Current adapter selection</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/vt100-terminal/src/main/java/net/emustudio/plugins/device/vt100/api/ContextVt100.java">Guest input queue</a></p>
+        </section>
+
+        <section class="convention" id="lifecycle-ownership">
+            <h3>Device startup, cancellation, and completion need one owner</h3>
+            <p><strong>Startup gap.</strong> In headless automation, the tape player's <code>reset()</code> creates its
+                <code>AutomationController</code>. Stored tape events start from the plugin's <code>showGUI()</code>.
+                The host skips that hook with <code>--no-gui</code>, so the configured sequence never starts on this path.
+                The plugin reports <code>isAutomationSupported() == true</code>. Calling <code>showGUI()</code> in a
+                headless run would make device execution depend on a presentation callback.</p>
+            <p><strong>Cancellation gap.</strong> The CPU worker and stop command already belong to
+                <code>EmulationController</code>. In GUI automation, <code>Automation</code> enables Stop before showing
+                device windows and calling <code>start()</code>. A Stop request in that interval can move the paused CPU to
+                <code>STATE_STOPPED_NORMAL</code> and cause the subsequent start to fail with “Reset CPU first”.
+                The progress dialog ignores the Stop future. In headless automation, the command supplies no operator
+                control that translates terminal cancellation into the same stop request.</p>
+            <p><strong>Completion gap.</strong> The host waits for CPU execution to return. Devices still own their own
+                background work, and artifact production has no completion result. The SSEM CPU publishes its context
+                state and writes <code>ssem.out</code> in a callback driven by those plugin events. On a cooperative
+                interrupt, SSEM's context reports a breakpoint while the host can resolve the same return as a normal
+                stop. The two streams answer different questions, so the plugin's state cannot serve as the run result.</p>
+            <p><strong>Change.</strong> Give the session a single start, cancel, and finish path for desktop and terminal
+                callers. Start configured device work through a machine lifecycle hook independent of view creation.
+                The host controls when the hook runs relative to reset and the first instruction. A device can arm work
+                before the CPU starts and advance using guest cycles after start. Give each worker a session lifetime,
+                with cooperative cancel and acknowledged completion. Publish the host's final run reason once, collect
+                requested device outputs after execution quiesces, and surface artifact and cleanup failures.</p>
+            <p class="source-links"><a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/audiotape-player/src/main/java/net/emustudio/plugins/device/audiotapeplayer/DeviceImpl.java">Tape device hooks</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/audiotape-player/src/main/java/net/emustudio/plugins/device/audiotapeplayer/AutomationController.java">Tape event executor</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/Automation.java">Progress and CPU start</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/gui/dialogs/AutoDialog.java">Stop button</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/emulation/EmulationController.java">Host execution state</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/cpu/ssem-cpu/src/main/java/net/emustudio/plugins/cpu/ssem/CpuImpl.java">SSEM context state</a> ·
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/cpu/ssem-cpu/src/main/java/net/emustudio/plugins/cpu/ssem/AutomaticEmulation.java">SSEM output</a></p>
+        </section>
+
+        <section id="session-policy">
+            <h3>Choose the policy once, then supply the interfaces</h3>
+            <p>The application can choose presentation, permission to prompt, and device I/O when it creates a session.
+                Plugins request operations through the supplied interfaces. The host uses its mode flags to select
+                implementations and grants only the capabilities available to each plugin. A windowed run can be
+                unattended. A no-window run can be interactive. Audio, files, and console streams need their own policy.
+                For example, the optional ZX Spectrum AY device opens host audio during initialization without testing
+                <code>EMUSTUDIO_NO_GUI</code> for that operation.
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/plugins/device/audio-ay3_8910-chip/src/main/java/net/emustudio/plugins/device/ay38910/DeviceImpl.java">AY audio initialization</a></p>
+
+            <figure id="ownership-view">
+                <div class="diagram-frame">
+                    <svg class="diagram" viewBox="0 0 960 330" role="group" aria-labelledby="ownership-title ownership-desc">
+                        <title id="ownership-title">Proposed C4 component view of application-owned automation</title>
+                        <desc id="ownership-desc">Plugins request presentation and interaction through the application.
+                            The application owns machine control and chooses a desktop, terminal, or batch implementation.</desc>
+                        <defs>
+                            <marker id="ownership-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                                <path class="arrow" d="M0 0 10 5 0 10Z"/>
+                            </marker>
+                        </defs>
+                        <rect class="boundary" x="16" y="18" width="928" height="294" rx="9"/>
+                        <text class="title" x="35" y="47">emuStudio JVM · proposed application ownership</text>
+                        <g class="edge" marker-end="url(#ownership-arrow)">
+                            <path d="M260 112H368"/><path d="M592 112H700"/>
+                            <path d="M480 150V180H148V218"/><path d="M480 150V218"/><path d="M480 180H812V218"/>
+                        </g>
+                        <g class="label" text-anchor="middle">
+                            <text x="314" y="101">Requests</text>
+                            <text x="646" y="101">Controls</text>
+                            <text x="597" y="203">Selects interaction policy</text>
+                        </g>
+                        <a href="#window-ownership" aria-label="Plugins. Open window ownership and plugin responsibilities.">
+                            <rect class="box plugin" x="36" y="74" width="224" height="76" rx="6"/>
+                            <text x="52" y="105" class="title">Plugins</text>
+                            <text x="52" y="129" class="label">Machine behavior and views</text>
+                        </a>
+                        <a href="#session-policy" aria-label="Application session. Open the session policy.">
+                            <rect class="box" x="368" y="74" width="224" height="76" rx="6"/>
+                            <text x="384" y="105" class="title">Application session</text>
+                            <text x="384" y="129" class="label">Run policy and capabilities</text>
+                        </a>
+                        <a href="#lifecycle-ownership" aria-label="Machine lifecycle. Open lifecycle ownership.">
+                            <rect class="box" x="700" y="74" width="224" height="76" rx="6"/>
+                            <text x="716" y="105" class="title">Machine lifecycle</text>
+                            <text x="716" y="129" class="label">Start, stop and collect results</text>
+                        </a>
+                        <a href="#window-ownership" aria-label="Desktop. Open desktop window ownership.">
+                            <rect class="box" x="36" y="218" width="224" height="76" rx="6"/>
+                            <text x="52" y="249" class="title">Desktop</text>
+                            <text x="52" y="273" class="label">Managed Swing windows</text>
+                        </a>
+                        <a href="#operator-interaction" aria-label="Terminal. Open terminal operator interaction.">
+                            <rect class="box" x="368" y="218" width="224" height="76" rx="6"/>
+                            <text x="384" y="249" class="title">Terminal</text>
+                            <text x="384" y="273" class="label">Dialogs backed by a terminal</text>
+                        </a>
+                        <a href="#interaction-modes" aria-label="Batch. Open the proposed interaction modes.">
+                            <rect class="box" x="700" y="218" width="224" height="76" rx="6"/>
+                            <text x="716" y="249" class="title">Batch</text>
+                            <text x="716" y="273" class="label">Configured input and results</text>
+                        </a>
+                    </svg>
+                </div>
+                <figcaption>Proposed component view. Select a box to inspect the responsibilities or policy it represents.</figcaption>
+            </figure>
+
+            <table class="interaction-modes" id="interaction-modes">
+                <caption>Examples of application-selected policies</caption>
+                <thead><tr><th scope="col">Session</th><th scope="col">Windows</th><th scope="col">Operator prompts</th></tr></thead>
+                <tbody>
+                    <tr><th scope="row">Desktop or windowed automation</th><td>Host opens approved views</td><td>Swing dialogs when interaction is allowed</td></tr>
+                    <tr><th scope="row">Interactive headless automation</th><td>None</td><td>Terminal dialogs when a terminal is available</td></tr>
+                    <tr><th scope="row">Unattended automation</th><td>As configured by the host</td><td>Use configured answers or report a required prompt</td></tr>
+                </tbody>
+            </table>
+            <p>Replace the unconsulted <code>isAutomationSupported()</code> boolean with declared requirements the host
+                can validate before execution. Check context bindings, device backends, operator availability, and output
+                destinations for the selected machine. Give plugins the configured I/O and artifact destinations so the
+                host can tell whether requested output was produced. Dispatch window operations on the EDT and keep it
+                free to process Stop and close. Resolve prompts that block a machine operation before the operation where
+                possible. If interactive prompts can occur during execution, route them through the session with
+                cancellation and avoid making the EDT and machine worker wait for each other.</p>
+        </section>
+
+        <section id="enforcement">
+            <h3>Enforce the interface at the level required</h3>
+            <p><strong>Bundled plugins.</strong> Permit Swing content construction in desktop view code. Require all
+                plugin code to route top-level windows, prompts, and terminal reads through the host. Check module
+                dependencies and call sites in the build. Use contract tests with a host that denies presentation,
+                responds to prompts, records device startup, and requests cancellation. Run assembled-machine smoke tests in a no-display process with
+                scripted input and a separate terminal-interaction test. Verify outcomes and artifacts, including
+                headless tape events, VT100 EOF, and SSEM snapshots.</p>
+            <p><strong>Runtime enforcement.</strong> The application can enforce policy for operations that reach its
+                interfaces. The current loader runs plugin JARs in the host JVM, where arbitrary plugin code can reach
+                Swing and other JDK APIs directly. Capability declarations, build checks, and a headless JVM are useful for
+                supported plugins. If emuStudio needs to enforce a hard run deadline against uncooperative code, the host
+                needs a worker process it can terminate. Restricting what untrusted plugins can access also requires
+                OS controls for display, terminal, and host resources. Process isolation changes the direct-reference
+                context model, so treat it as a separate architectural decision.
+                <a href="https://github.com/emustudio/emuStudio/blob/a1a2d63806209d8e0780d0354d984721de6ffc6d/application/src/main/java/net/emustudio/application/virtualcomputer/PluginLoader.java">Current plugin loader</a></p>
+        </section>
+    </section>
+
+    <section id="review-priorities">
+        <h2>Review priorities</h2>
+        <ol>
+            <li><strong>Separate device lifecycle from presentation.</strong> Give the host an explicit device startup
+                hook and independent window ownership. Prove a configured tape sequence starts in both windowed and
+                headless automation, and that early cancellation never becomes a startup error.</li>
+            <li><strong>Put operator interaction behind Dialogs.</strong> Add terminal and batch policies. Exercise the
+                same plugin prompt through Swing, a terminal, and unattended execution. Check that guest I/O and result
+                streams stay distinct from operator traffic.</li>
+            <li><strong>Make readiness and outcomes explicit.</strong> Verify the program image, target memory, entry
+                point, device capabilities, and I/O configuration. Report termination, deadline expiry, artifacts, and
+                cleanup separately in the run result. Test a CPU blocked in guest I/O and a CPU that ignores interruption.</li>
+        </ol>
+        <p><a href="#component-view">Return to the component view</a></p>
+    </section>
+</main>
+</body>
+</html>

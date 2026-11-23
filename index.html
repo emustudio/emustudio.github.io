@@ -1,73 +1,106 @@
 ---
 layout: default
 homepage: true
-description: "emuStudio — free, cross-platform computer emulation platform and framework. Emulate MITS Altair 8800 (Intel 8080, Zilog Z80), ZX Spectrum 48K, SSEM Manchester Baby, and abstract machines (RAM, RASP, BrainDuck). Ideal for education and retro computing."
+description: "Write, run, and debug programs on vintage and teaching computers with emuStudio. Run an Intel 8080 Hello world! program on a MITS Altair 8800."
 ---
 
 {% include analytics.html category="root" %}
 
+{% assign quickstart = '/documentation/user/first-experiment/' | relative_url %}
+
 <section class="jumbotron home-intro" aria-labelledby="home-title">
     <div class="row align-items-center">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <img class="home-logo" src="{{ base }}files/images/logo-1.svg" alt="emuStudio logo"
                  width="295" height="287"/>
-            <h1 id="home-title">Learn how computers work.</h1>
-            <p class="lead">
-                Write, run, and debug programs on vintage and abstract computers with emuStudio.
-            </p>
-            <p>Free, cross-platform computer emulation platform and framework.</p>
-            <a class="btn btn-primary btn-lg" href="{{ base }}download/">Download emuStudio</a>
+            <h1 id="home-title">Learn how computers work</h1>
+            <p class="lead">Write, run, and debug programs on vintage and teaching computers with emuStudio.</p>
+            <div class="home-actions">
+                <a class="btn btn-primary" href="{{ base }}download/">Download emuStudio</a>
+                <a class="btn btn-outline-primary" href="{{ quickstart }}">Quickstart</a>
+            </div>
         </div>
-        <figure class="col-lg-7 home-preview">
-            <img src="{{ site.baseurl }}/documentation/user/assets/application/source-code-editor.png"
-                 alt="emuStudio source editor showing an Intel 8080 assembly program and successful compilation"
-                 width="1104" height="809"/>
-            <figcaption>
-                Source editor in the development version.
-                <a href="{{ base }}screenshots/">See more screenshots</a>
-            </figcaption>
+        <figure class="col-lg-6 home-preview">
+            <div class="home-terminal">
+                <img src="{{ site.baseurl }}/documentation/user/assets/altair8800/quickstart/hello-world.png"
+                     alt="ADM-3A terminal displaying Hello world! in a message box" width="1024" height="836"/>
+            </div>
+            <figcaption>MITS Altair 8800 with an ADM-3A terminal</figcaption>
         </figure>
     </div>
 </section>
 
-<section class="home-section" aria-labelledby="guides-title">
-    <h2 id="guides-title">Documentation</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Use emuStudio</h3>
-            <p>Run a bundled Hello, World! example, then inspect one instruction at a time.</p>
-            <a href="{{ base }}documentation/user/first-experiment/">Run your first program</a>
-        </div>
-        <div class="col-md-6">
-            <h3>Build an emulator</h3>
-            <p>Developers and enthusiasts can use the framework to create a custom emulator.</p>
-            <a href="{{ base }}documentation/developer/introduction">See Developer documentation</a>
-        </div>
-    </div>
-</section>
+<nav class="home-section" aria-labelledby="getting-started-title">
+    <h2 id="getting-started-title">Getting started</h2>
+    <ul class="home-start-links list-unstyled">
+        <li><a class="home-start-primary" href="{{ base }}download/">Download &amp; install</a></li>
+        <li><a class="home-start-primary" href="{{ quickstart }}">Quickstart</a></li>
+        <li><a href="{{ base }}screenshots/">See screenshots</a></li>
+        <li><a href="{{ base }}documentation/user/introduction/">User guide</a></li>
+        <li><a href="{{ base }}documentation/developer/introduction/">Developer docs</a></li>
+    </ul>
+</nav>
 
-<section class="home-section" aria-labelledby="explore-title">
-    <h2 id="explore-title">Explore emuStudio</h2>
-    <p>
-        <strong>Platform</strong>, because it supports full computer emulation "life-cycle".
-        From writing and compiling programs for the emulated machine, to running and debugging.
-        Examples of real computer emulators are <a href="{{ base }}documentation/user/altair8800">MITS
-        Altair8800</a>,
-        <a href="{{ base }}documentation/user/zxspectrum48k">ZX Spectrum 48K</a>,
-        <a href="{{ base }}documentation/user/spaceinvaders">Space Invaders</a> and
-        <a href="{{ base }}documentation/user/ssem">SSEM (a.k.a. "Baby")</a>. Abstract computers include:
-        <a href="{{ base }}documentation/user/ram">RAM</a>, <a href="{{ base }}documentation/user/rasp">RASP</a>,
-        and
-        <a href="{{ base }}documentation/user/brainduck">BrainDuck</a>.
-    </p>
-    <p>
-        <strong>Framework</strong>, because it includes API and supporting back-end enabling developing new
-        computer emulators.
-        Good <a href="{{ base }}documentation/developer/introduction">developer documentation</a> is a matter
-        of course.
-        As in real computers, emuStudio allows reusing existing components resulting in different computer
-        configurations.
-    </p>
+<section class="home-section" aria-labelledby="workflows-title">
+    <h2 id="workflows-title">Why emuStudio</h2>
+    <ul class="home-workflows list-unstyled">
+        <li>
+            <a href="{{ quickstart }}#5-inspect-one-instruction" aria-labelledby="workflow-step">
+                <div class="home-workflow-image home-workflow-instructions">
+                    <img src="{{ site.baseurl }}/documentation/user/assets/application/debugger-demo-instructions.png"
+                         alt="Highlighted Intel 8080 instruction in the debugger" width="1280" height="900" loading="lazy"/>
+                </div>
+                <h3 id="workflow-step">Step through instructions</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{{ base }}documentation/user/altair8800/software" aria-labelledby="workflow-software">
+                <div class="home-workflow-image home-workflow-terminal">
+                    <img src="{{ site.baseurl }}/documentation/user/assets/altair8800/software-cpm3.png"
+                         alt="CP/M 3 directory listing at the Altair terminal" width="900" height="728" loading="lazy"/>
+                </div>
+                <h3 id="workflow-software">Run real software</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{{ base }}documentation/user/application/computer-schema" aria-labelledby="workflow-build">
+                <div class="home-workflow-image">
+                    <img src="{{ site.baseurl }}/documentation/user/assets/brainduck/brainduck-schema.png"
+                         alt="BrainDuck schema connecting a compiler, CPU, memory, and terminal" width="426" height="308"
+                         loading="lazy"/>
+                </div>
+                <h3 id="workflow-build">Build a virtual computer</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{{ base }}documentation/user/application/main-window#source-code-editor" aria-labelledby="workflow-write">
+                <div class="home-workflow-image home-workflow-source">
+                    <img src="{{ site.baseurl }}/documentation/user/assets/application/source-code-editor.png"
+                         alt="Intel 8080 assembly code in the source editor" width="1280" height="900" loading="lazy"/>
+                </div>
+                <h3 id="workflow-write">Write and assemble programs</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{{ base }}documentation/user/ssem/software#store-display-example" aria-labelledby="workflow-memory">
+                <div class="home-workflow-image home-workflow-display">
+                    <img src="{{ site.baseurl }}/documentation/user/assets/ssem/ssem-display.png"
+                         alt="Manchester Baby’s display showing an animation drawn in memory" width="456" height="440"
+                         loading="lazy"/>
+                </div>
+                <h3 id="workflow-memory">See memory in action</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{{ base }}documentation/user/application/automation" aria-labelledby="workflow-automate">
+                <div class="home-workflow-image">
+                    <img src="{{ base }}files/images/automation-preview.png"
+                         alt="Headless emulation command and its compiler log" width="660" height="348" loading="lazy"/>
+                </div>
+                <h3 id="workflow-automate">Automate emulation</h3>
+            </a>
+        </li>
+    </ul>
 </section>
 
 <section class="home-section" aria-labelledby="support-title">

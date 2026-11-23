@@ -25,6 +25,7 @@ exclude:
   - Gemfile.lock
   - _documentation
   - artwork
+  - automation.html
 keep_files: [ documentation, images, .git, files, artwork ]
 encoding: "utf-8"
 markdown_ext: "markdown,md"

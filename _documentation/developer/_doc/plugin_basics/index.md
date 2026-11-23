@@ -77,12 +77,16 @@ public class SamplePlugin extends AbstractPlugin implements Device {
 ```
 
 [AbstractPlugin][abstractPlugin]{:target="_blank"} stores the constructor arguments in the protected fields
-`pluginID`, `applicationApi` and `settings`. `getTitle()` and `getDescription()` return the `PluginRoot` values.
-The lifecycle methods `initialize()`, `reset()`, `destroy()` and `showSettings(parent)` are no-ops by default, and
-`isShowSettingsSupported()` returns `false`. Override only what the plugin needs.
+`pluginID`, `applicationApi` and `settings`. They have the following meaning:
+
+- `pluginID` is a unique plugin identification, assigned by emuStudio. Some operations require it as an input argument.
+- `applicationApi` is a runtime API implementation, provided by emuStudio application, to be used by plugins.
+- `settings` are plugin's settings. A plugin can use it for reading/writing its custom or emuStudio settings.
+  Updated settings are saved immediately in the configuration file, in the same thread.
 
 If more classes implement some plugin interface, just one of them has to be annotated with `PluginRoot`.
 If there are more classes like this, the plugin might not work correctly.
+
 
 ### Version and copyright metadata
 
@@ -98,13 +102,6 @@ copyright=Copyright 2026 Example Author
 The default methods load `<plugin package>.version` through the concrete plugin's classloader, so resources are found in
 the plugin JAR. A missing bundle or key returns `(unknown)`. Override the methods only when metadata cannot be represented by
 that bundle; duplicating the standard resource lookup in every plugin is unnecessary.
-
-The constructor parameters have the following meaning:
-
-- `pluginId` is a unique plugin identification, assigned by emuStudio. Some operations require it as an input argument.
-- `emustudio` is a runtime API implementation, provided by emuStudio application, to be used by plugins.
-- `settings` are plugin's settings. A plugin can use it for reading/writing its custom or emuStudio settings.
-  Updated settings are saved immediately in the configuration file, in the same thread.
 
 ### Settings
 

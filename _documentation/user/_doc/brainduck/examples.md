@@ -21,7 +21,7 @@ collections below. BrainDuck runs brainfuck programs through its compiler, CPU, 
 4. Open the VT100 terminal window, switch to **Debugger**, and click **Run**.
 
 The terminal displays `Hello, World!`. This program needs no input. Use **Step forward** to follow individual
-instructions, or see [First experiment]({{ site.baseurl }}/first-experiment) for a guided walkthrough.
+instructions.
 
 The [bundled source directory][bundled]{:target="_blank"} contains these examples:
 
