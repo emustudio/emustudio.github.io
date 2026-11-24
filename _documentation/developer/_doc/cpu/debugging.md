@@ -12,13 +12,14 @@ A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their 
 watches, history, recording and execution control. Real processors can show registers; abstract machines can show tapes
 and symbolic values. The shared CPU interface defines neither representation.
 
-## Two operations
+## Debugging interface
 
 ```java
 public interface Debugging {
     enum Capture { INSTRUCTION, ACCESSES, FULL }
 
     Expression compile(String source);
+    String getExpressionsHelp();
     AutoCloseable observe(Observer observer, Capture capture);
 
     interface Expression {
@@ -44,6 +45,10 @@ public interface Debugging {
 Implement the interface directly on the plugin root and delegate to a plugin-owned adapter. `DebuggingSupport` can
 share observer mechanics, and `ExpressionParser` can share expression syntax with plugin-defined name/function resolvers.
 Resolve names during compilation without reading guest state; evaluation and display happen at the execution seam.
+
+Return plain text from `getExpressionsHelp()` covering the syntax, names, and functions that `compile()` accepts.
+emuStudio shows this reference in the Watches panel. Plugins using the shared parser can include
+`ExpressionParser.syntaxHelp()` for the common syntax.
 
 | Capture mode | Requested work |
 |---|---|
