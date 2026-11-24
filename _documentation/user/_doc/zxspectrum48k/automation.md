@@ -82,7 +82,8 @@ automationEvents = [
 ]
 ```
 
-Start the sequence with the **Play** button in the tape player's **Events** tab.
+The `auto` command starts the configured sequence in both windowed and headless runs. In a regular emulation session,
+start the sequence with the **Play** button in the tape player's **Events** tab.
 The `PLAY` event waits until tape playback finishes before the
 next event runs. The CPU must be running for tape pulses to advance; loading a tape does not type `LOAD ""` into BASIC.
 

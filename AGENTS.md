@@ -23,3 +23,15 @@
 - Every change must have an existing GitHub ticket.
 - Every commit subject must start with the ticket prefix: `[#123] Short summary`.
 - If one task touches multiple emuStudio repositories, use the same ticket prefix in each related commit.
+
+## How to write documentation
+
+Use signposting and parallel structure style of writing. Use structural / overview signposts in the beginning of each heading section (but not necessarily in subsections). In subsections (and when concluding something) use Backward signposting or Summary signposts. However, match density to length. Short paragraphs or pages need light/no signposting, longer texts benefit from clearer structural roadmaps.  
+
+When introducing two or more alternatives, start with a brief sentence that names them and frames the comparison. Then explain each alternative in a separate paragraph or section, using parallel structure so readers can compare them easily. Keep the descriptions balanced and concrete.
+
+Cut fluff: Prefer direct phrasing over wordy fillers like "It is important to note that...".
+
+When explaining algorithms or recipes on anything, write it in Step-by-Step Progression: use numbered lists, sequential cues ("Next, select...", "After saving..."), and outcome statements ("The dashboard updates to show...") anchor users so they know where they are in a workflow and how to verify success.
+
+In user documentation mainly, use Visual & Structural Signposts heavily: Cross-references, Action-oriented headings (e.g. "Reset your API key" instead of "API key management") and Callout boxes / Admonitions: Note, Tip, Warning, or Caution labels flag critical risks or shortcuts.

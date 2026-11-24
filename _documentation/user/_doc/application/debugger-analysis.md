@@ -10,20 +10,27 @@ permalink: /application/debugger-analysis
 
 ![8080 program paused at 0100, with instruction labels, CPU registers and memory watches]({{ site.baseurl }}/assets/application/debugger-demo-instructions.png)
 
-Open **Debugger** after compiling or loading a program. Pause to inspect or edit state. Selecting an instruction changes
-the inspected address; the PC stays put. Drag dividers to resize the workspace.
-All bundled CPUs support instruction recording. Register sets and guest memory-access detail depend on the CPU: RAM
-records typed instructions and its instruction pointer, while device/tape state is outside instruction history.
+Compile or load a program, open **Debugger**, and pause to inspect or edit state. Drag the dividers to resize panes.
+Selecting an instruction changes the inspected address and leaves the program counter (PC) in place.
 
-### Instruction flow
+## Instruction listing
 
-**Run**, timed steps and single steps always observe executed instructions and transitions for the debugger listing. Instruction recording adds detailed state capture; pausing or stopping recording keeps instruction
-flow observation active. A completed **Keep first** buffer also releases detailed capture unless file recording is
-still active. Folding changes presentation only. Existing flow history remains available until the CPU is reset.
+The debugger tracks executed instructions and transitions during **Run**, timed steps, and single steps, even with
+recording off. The listing uses this history for flow arrows and folding. Resetting the CPU clears the history.
 
-BrainDuck keeps safe instruction grouping and copy/clear/scan-loop optimizations during normal **Run**, while
-reporting every executed instruction and transition for listing arrows and folding. Breakpoints and detailed recording use
-individual instruction execution. Single steps and timed steps also keep their original instruction boundaries.
+### Fold repeated instructions
+
+Turn on **Fold identical repeats** below the listing. It groups adjacent instructions with identical text, bytes, and
+length only after the debugger sees the CPU execute them in order. For each pair, the first instruction must lead
+only to the second, and the second must be reached only from the first. Unexecuted instructions stay on separate rows,
+even when every row shows `nop` and `00`.
+
+For example, after the CPU executes three consecutive `nop` instructions at `0100`–`0102`, the listing can show
+`0100–0102  nop × 3`. The current PC, inspected address, enabled breakpoints, labels, current symbols, and user
+annotation edges split runs. Click the marker beside the address range to expand it.
+
+During **Run**, BrainDuck reports each instruction and transition even when it groups instructions or optimizes
+copy, clear, and scan loops. Breakpoints, detailed recording, and stepping retain individual instruction boundaries.
 
 <details markdown="1">
 <summary>8080 example used in these screenshots</summary>
@@ -51,56 +58,45 @@ db 'HELLO DEBUGGER',0
 
 ## Inspect an address
 
-Pause the CPU, open **Memory**, enter `0x8000` in **Address**. Click **Inspect address** or press
-Enter in the address field. Addresses accept decimal or hexadecimal notation. Browsing changes neither the program
-counter and creates no breakpoint.
+While paused, open **Memory**, enter `0x8000` in **Address**, and press Enter or click **Inspect address**.
+Use decimal or `0x`-prefixed hexadecimal addresses.
 
-Choose **Set breakpoint...** to configure a breakpoint. **Set** adds an execution breakpoint at the CPU-visible address,
-using the CPU-visible instruction address;
-**Unset** removes it. Setting or unsetting a breakpoint does not change the inspection view. When a breakpoint stops
-execution, the status shows `Breakpoint: XXXX` and the debugger opens **Memory** at its address; later steps follow
-the CPU normally unless the view was manually pinned. Instruction-table breakpoint controls toggle enabled/disabled.
+In **Set breakpoint...**, choose **Set** to add a breakpoint at the CPU-visible address or **Unset** to remove it.
+When a breakpoint stops the CPU, the debugger shows `Breakpoint: XXXX` and opens **Memory** at that address.
+Later steps follow the PC unless you pinned the view. Toggle breakpoints in the listing to enable or disable them.
 
 ## Memory and annotations
 
 ### Find bytes, integers or text
 
-Pause, select **Bytes**, enter `41 42`, then **Find**. Wildcards work too:
-`3E ?? 32` or `A? ?F`. **Integer** supports widths of 1, 2, 4 or 8 bytes and either byte order; **Text** uses UTF-8.
-Use **Previous** and **Next** to navigate matches, or **Show all addresses** to return to the full address list.
+While paused, choose **Bytes**, enter `41 42`, and click **Find**. Use `?` as a wildcard, as in `3E ?? 32` or `A? ?F`.
+**Integer** supports 1, 2, 4, or 8 bytes in either byte order. **Text** uses UTF-8.
+Use **Previous** and **Next** to navigate matches. **Show all addresses** restores the full list.
 
-Search reads live memory while paused. Results retain matching addresses; displayed bytes come from current memory.
-Execution, memory edits and metadata changes clear outdated results. Background searches check the session and memory
-revisions before publishing their results.
+Results show live bytes at matching addresses. Execution, memory edits, and metadata changes clear stale results.
 
 ### Find readable strings
 
-Choose **Find strings** to find printable ASCII runs of at least four bytes, including `HELLO DEBUGGER` at `8100`
-in the example. **String column** shows or hides the text found by that scan. Run the search again after changing memory.
+**Find strings** finds printable ASCII runs of at least four bytes, such as `HELLO DEBUGGER` at `8100`.
+Toggle **String column** to show or hide those strings. Search again after changing memory.
 
 ### Label and comment on addresses
 
-Inspect `0x8000`, open **Annotations**, then **Annotate inspected address**. Enter `output`, choose **Data**, then
-**Save annotation**. Annotations belong to CPU-visible addresses and ranges. Choose **Code** (the default) or **Data**.
-Use **Search annotations** and select an entry to revisit it. **Manage…** provides import, export and clear operations
-for this configured machine and layout.
+Inspect `0x8000` and choose **Annotations → Annotate inspected address**. Enter `output`, choose **Data**, and click
+**Save annotation**. Annotations mark CPU-visible addresses or ranges as **Code** (default) or **Data**.
+Use **Search annotations** to jump to an entry. Use **Manage…** to import, export, or clear annotations for this computer.
 
-emuStudio loads annotations, watches, breakpoints and memory watches together when opening a computer. For
-`/path/computer.toml`, the automatic debugger settings file is `/path/computer.toml.debugger`. Each save writes them
-together atomically. Computers without a saved configuration keep these settings in memory. Only user annotations are
-saved; compiler-provided annotations are not. Saved settings are always restored, regardless of the loaded program.
-Keep labels appropriate to the program you load.
+emuStudio saves user annotations, watches, breakpoints, and memory watches together. For `/path/computer.toml`, it
+writes `/path/computer.toml.debugger` atomically and reloads it when you open the computer, regardless of the program.
+Computers without a saved configuration keep settings in memory. Compiler annotations use captured source revisions.
 
-If the settings file cannot be read, emuStudio deletes it and shows a warning. Invalid entries are skipped with a
-warning (`Skipped N invalid debugger setting(s) …`). Settings saved by older versions are migrated: execution rules
-become breakpoints and read/write rules become memory watches. Breakpoint conditions are removed with a warning
-(`Removed N unsupported breakpoint condition(s) …`) and hit counts are dropped.
+emuStudio warns when it skips invalid entries or deletes an unreadable settings file. On migration,
+execution rules become breakpoints, and read/write rules become memory watches. emuStudio drops legacy hit counts
+and warns when it removes unsupported breakpoint conditions.
 
-Explicit annotation import and export remain available through **Manage…**. Each annotation is stored as
-`annotation.N.address`, `annotation.N.end`, `annotation.N.label` and `annotation.N.kind`. Import appends annotations and skips exact
-duplicates (same range, kind and label); invalid entries are skipped with a warning. Annotation colors are derived from
-the annotated range, so they stay the same across sessions. Compiler source mappings stay separate and require their
-captured source revisions.
+Annotation files use `annotation.N.address`, `annotation.N.end`, `annotation.N.label`, and `annotation.N.kind`.
+Import skips duplicates with the same range, kind, and label, and warns about invalid entries. Colors come from the
+range and stay consistent across sessions.
 
 ## Watches and breakpoints
 
@@ -114,13 +110,12 @@ captured source revisions.
 | <span class="circle">1</span> | **Expression**. Enter a register or memory expression. |
 | <span class="circle">2</span> | **Add watch**. Add the expression to the watch list. |
 | <span class="circle">3</span> | **Format**. Choose how watch values are displayed. |
-| <span class="circle">4</span> | **Watch list**. Inspect values through the CPU memory wiring; changed values remain marked until the next stop. |
+| <span class="circle">4</span> | **Watch list**. Read values through CPU memory mappings. Change markers last until the next stop. |
 
-Enter an **Expression** and choose **Add**. Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary** or **ASCII**;
-changed values receive a marker. **Follow value** opens the evaluated address. **Edit register** reveals **Write register**.
+Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary**, or **ASCII**. **Follow value** opens the
+evaluated address. **Edit register** reveals **Write register**.
 
-Watch expressions are not evaluated while emulation is running. They refresh when execution stops (after a step,
-breakpoint, pause or the end of a timed run) and when you edit a watch while stopped.
+Watches refresh when execution stops or when you edit one while paused.
 
 | Expression | Meaning |
 |---|---|
@@ -132,32 +127,31 @@ breakpoint, pause or the end of a timed run) and when you edit a watch while sto
 
 ### Monitor memory access
 
-Open **Memory access** in **Watches**, enter `0x8001` in **Memory watch address** and choose **Add**. Memory watches
-only monitor accesses; they never stop execution. Each row shows the current value and the last read and last write,
-with the PC of the accessing instruction and the value, for example `= 62 · last read @0000 (62) · last write —`.
-A new memory watch shows **Pending** until it is first evaluated, and **Unavailable** when the CPU does not support
-debugging. Select a row and choose **Remove** to delete it.
+In **Watches → Memory access**, enter `0x8001` in **Memory watch address** and choose **Add**. Each row shows the
+current value plus the PC and value of the last read and write. Memory watches let execution continue.
+A new watch shows **Pending** until its first evaluation, or **Unavailable** if the CPU lacks debugger support.
+Select a row and choose **Remove** to delete it.
 
 ### Breakpoints
 
-Breakpoints in **Breakpoints** stop before the CPU-visible instruction address. A breakpoint has only an address and an
-enabled state. Resuming skips the stopped breakpoint once.
+An enabled breakpoint stops the CPU before it executes the instruction at that address. Resume to pass that breakpoint once.
 
-Running or editing memory makes source mappings historical. Recompile to restore current source following. Source
-navigation uses explicit mapped cells; unmapped operand cells and gaps have no source match. Unsupported compiler
-coordinates appear in the source-mapping status.
+Running or editing memory makes source mappings historical. Recompile to restore source following. Source navigation uses
+explicitly mapped cells. Check the source-mapping status for unsupported compiler coordinates.
 
-Use **Enable / disable** or **Remove** to manage breakpoints. **Save settings** saves watches, breakpoints and memory
-watches together with user annotations in the computer's `.debugger` file.
+In **Breakpoints**, use **Enable / disable** or **Remove**. Use **Save settings** to write the computer's `.debugger` file.
 
 ## Execution history
 
 ### Instruction recording
 
-Open **History** while paused. Set **Recent limit** and enable **Record recent instructions**, then run or step.
-The default limit is 1,024 instructions; choose up to 1,000,000. Recent history retains only the newest events within
-that limit. Choose **Record to file** for a continuous recording that can outlast the recent buffer, then
-**Stop file recording** to flush and finish the file. Use `.emutrace` for structured recording files.
+Open **History** while paused. Enable **Record recent instructions**, then run or step. **Recent limit** defaults to
+1,024 and accepts up to 1,000,000 events. **Record to file** can outlast the recent buffer. Use `.emutrace` files and
+choose **Stop file recording** to flush and finish them.
+
+All bundled CPUs support recording. Register and memory-access details vary by CPU. RAM records typed instructions
+and its instruction pointer. Device and tape state lie outside instruction history. Pausing or stopping recent recording,
+or filling a **Keep first** buffer, ends detailed capture unless file recording is active.
 
 | Control | Behavior |
 |---|---|
@@ -171,24 +165,18 @@ that limit. Choose **Record to file** for a continuous recording that can outlas
 | **Live history** | Return to the current computer's recent history. |
 | **Show unchanged registers** | Include unchanged values in the selected instruction's detail view. |
 
-The table shows sequence numbers, CPU-visible instruction addresses, captured instruction encoding and disassembly,
-changed registers and memory writes. Select an event to inspect all recorded before/after register values,
-raw flags, memory accesses and completion status. For the example above, the instruction at `010D` records
-`WRITE 8001 = 42`. Instruction text is captured before execution, so later memory edits or mapping changes
-cannot change a recorded instruction. Opened recordings use their own captured values rather than the current
-computer's memory or labels.
+Each row shows the sequence number, CPU-visible address, captured bytes and disassembly, changed registers, and writes.
+Select a row for before and after register values, raw flags, memory accesses, and completion status. For example,
+`010D` records `WRITE 8001 = 42`. Saved recordings use their captured instruction text and values.
 
-Use **PC from** / **PC through** to select an instruction-address range, **Changed register** to find changes to a
-named register, or **Memory address** with **Any access**, **Read** or **Write** to find memory accesses. Address
-fields accept decimal or `0x`-prefixed hexadecimal values. Filters apply to the current recording page or retained
-recent buffer; sequence numbers make gaps visible. **Previous recorded write** searches before the selected row for
-a write to **Memory address** within that same page or buffer. It cannot recover events outside that range.
+Filter by **PC from** / **PC through**, **Changed register**, or **Memory address** with **Any access**, **Read**, or
+**Write**. Use decimal or `0x`-prefixed hexadecimal addresses. Filters cover the current page or recent buffer.
+Sequence gaps show omitted events. **Previous recorded write** searches backward from the selected row in that same
+page or buffer for a write to **Memory address**.
 
-**Fold identical repeats** shortens repeated display rows. It preserves the underlying events; turn it off to inspect
-individual executions. Saving a recording keeps all events, including repeated execution.
+In **History**, **Fold identical repeats** groups matching recorded events. Turn it off to inspect each execution.
+Saving a recording keeps every event.
 
-Recording starts disabled and can reduce throughput. File output uses bounded buffering, so slow storage can slow
-execution rather than silently dropping instructions. Cleanly stopped recordings include a completion marker;
-interrupted or truncated files are reported as incomplete. A recording's completeness is verified when its end is read.
-Historical inspection leaves the live machine unchanged. **Move PC Back** changes only the PC; recording does not
-restore registers, memory, devices or external inputs.
+Recording starts disabled and can slow execution, including when file output waits on storage. emuStudio checks the
+completion marker when it reads the end of a file and flags interrupted or truncated recordings as incomplete.
+Browsing history leaves the live machine as it was. **Move PC Back** sets the PC to the selected instruction address.

@@ -10,45 +10,123 @@ permalink: /application/automation
 
 # Automation
 
-Automation loads a computer, optionally compiles a source file, and runs the CPU without using the main window.
-It is useful for batch runs, assignments, and programs whose device output is the main result.
+Automation runs an emulated computer without the main window. emuStudio loads a computer, optionally compiles a source
+file, and runs the CPU until it stops. Use it for batch runs, checking school assignments, and programs whose device
+output is the main result.
 
-In interactive mode, device GUIs are shown automatically when supported. You can interact with them, but the source
-editor and debugger are unavailable.
+This page explains the two automation modes, where input comes from, and how to start, limit, and evaluate a run.
+The documentation of each emulated computer describes its automation specifics.
 
-Non-interactive mode (`--no-gui`) opens no GUI windows. Device output and access to host resources depend on each plugin.
+## Modes
 
-Source code supplied with `--input-file` is compiled and loaded before the CPU runs. This option is optional: omit it
-to run code already loaded by the computer configuration, such as a ROM image.
+Automation runs in one of two modes: interactive and non-interactive. They differ in whether device windows appear.
 
-More specific information about automation can be found in any section devoted to an emulated computer.
+In **interactive mode**, emuStudio shows device GUIs automatically when the devices support them. You can interact with
+them, but the source editor and debugger are unavailable.
 
-## Example
+In **non-interactive mode** (`--no-gui` option), emuStudio opens no GUI windows. Devices read input from files and write
+output to files instead, as described in [Device input](#device-input) and [Device output](#device-output). Other
+devices run silently or may still require host resources, such as audio output. See the documentation of the involved
+plugins.
 
-The example of running automatic emulation is as follows:
+## Input
+
+A run takes input from two sources: the program the CPU executes and the files that devices read. The command line
+supplies only the program; devices read files named in their settings.
+
+### Program source
+
+The CPU runs either a source file you supply or code already loaded by the computer configuration.
+
+With `--input-file` option, emuStudio compiles the source file and loads it into memory before the CPU runs. The file is
+compiled only when automation runs.
+
+Without `--input-file` option, the CPU runs code loaded by the computer configuration, such as a ROM image.
+
+### Device input
+
+Where device input comes from depends on the mode. In interactive mode, you type into device windows and attach files
+there. In non-interactive mode, devices read input only from files named in their settings, so prepare these files
+before the run.
+
+Relative file names resolve against the current working directory, as for [device output](#device-output).
+
+The bundled devices read the following files:
+
+|---
+| Device | Input | Source | Mode
+|-|-|-|-
+| [ADM-3A terminal]({{ site.baseurl }}/altair8800/adm3a-terminal) | Keyboard input | `adm3A-terminal.in`, configurable with `inputFileName` | Non-interactive
+| [VT100 terminal]({{ site.baseurl }}/altair8800/vt100-terminal) | Keyboard input | `vt100-terminal.in`, configurable with `inputFileName` | Non-interactive
+| [Byte memory]({{ site.baseurl }}/altair8800/byte-mem) | Memory images | `imageName`(i) settings | Both
+| [88-DCDD]({{ site.baseurl }}/altair8800/88-dcdd) | Floppy disk images | `image0` … `image15` with `imageMounted0` … `imageMounted15` | Both
+| [88-HDSK]({{ site.baseurl }}/altair8800/88-hdsk) | Hard disk images | `image0` … `image15` | Both
+| Abstract tape ([RAM]({{ site.baseurl }}/ram/ramc-ram), [RASP]({{ site.baseurl }}/rasp/raspc-rasp)) | Input tape content | `<input>` lines in the source file | Both
+|---
+
+Some devices accept input only through their windows, so they receive none in non-interactive mode. The
+[88-PTR/PTP]({{ site.baseurl }}/altair8800/88-ptr-ptp) reader can still attach a tape when guest software issues
+[SIMH pseudo-device commands]({{ site.baseurl }}/altair8800/simh-pseudo). The ZX Spectrum
+[Audio Tape Player]({{ site.baseurl }}/zxspectrum48k/audiotape-player) does not start stored tape events.
+
+## Running automation
+
+A single command selects the computer, the program, and the mode. The following example runs a program on the MITS
+Altair8800 in non-interactive mode and waits at most 5 seconds:
 
     ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui --waitmax 5000
 
-The `-cf` (or `--computer-file`) argument loads specific computer configuration instead of asking the user to open a
-computer.
+The arguments work as follows:
 
-Argument `--input-file` provides the source code to be compiled and loaded into memory before the emulation is executed.
-It compiles the file only in case automated emulation is executed (see below).
+- `-cf` (or `--computer-file`) loads the computer configuration instead of asking the user to open a computer.
+- `--input-file` supplies the source file to compile and load.
+- `auto` starts automation. It requires a computer selected with `-cf`, `-cn`, or `-ci`.
+- `--no-gui` selects non-interactive mode. Without it, automation opens the device GUIs and starts the CPU.
+- `--waitmax 5000` limits how long the session waits for the CPU, as described below.
 
-Command `auto` executes automatic emulation. Select a computer with `-cf`, `-cn`, or `-ci`. If an input file is provided,
-it is compiled into memory. Interactive automation opens the device GUIs and starts the CPU.
+## Controlling the run
 
-The `--no-gui` argument sets the non-interactive mode. In this case, emuStudio won't show any GUI windows and
-each device determines its headless behavior. Terminals can use files; other devices may run silently or require host
-resources (see the involved plugins' documentation).
+Options placed after `auto` control where the CPU starts and how long the session waits. You can also cancel a session
+at any time.
 
-Argument `--waitmax 5000` waits at most 5 seconds for the running CPU to stop. When the deadline expires, the CPU is
-stopped when the virtual computer is closed. A CPU still running at the deadline is logged as `Invalid state (running)`.
-This limit does not include compilation or device initialization. Omit it to wait without a deadline.
+`-p ADDRESS` (or `--program-location ADDRESS`) overrides the starting instruction address. Addresses can use decimal or
+a radix prefix such as `0x8000`. Without it, the CPU uses its reset or compiled-program location.
 
-Use `-p ADDRESS` (or `--program-location ADDRESS`) after `auto` to override the starting instruction address. Addresses
-can use decimal or a radix prefix such as `0x8000`. Without an override, the CPU uses its reset/compiled-program location.
-Check `logs/automation.log` and the device output to determine whether the run completed normally. Compilation failures
-return a nonzero exit status.
-Other run outcomes, including normal execution timeouts, are recorded in the logs.
+`--waitmax MILLISECONDS` sets a deadline for CPU execution. When the deadline expires, emuStudio asks the CPU to stop and
+the session reports `TIMED_OUT`. Without it, the session waits with no deadline.
 
+To cancel a session, click **Stop** in the progress dialog in interactive mode, or press **Ctrl+C** in non-interactive
+mode.
+
+## Results
+
+A run leaves its results in three places: device output, the exit status, and the automation log. When the CPU stops,
+the session waits for participating devices to stop and then collects their output.
+
+### Device output
+
+Where device output goes depends on the mode. In interactive mode, devices show output in their windows. In
+non-interactive mode, devices write output to files.
+
+Relative file names resolve against the current working directory: the directory from which you start emuStudio, not
+the installation directory. Each run overwrites existing output files.
+
+For example, these bundled devices write the following files in non-interactive mode:
+
+|---
+| Device | Output | Default file
+|-|-|-
+| [ADM-3A terminal]({{ site.baseurl }}/altair8800/adm3a-terminal) | Terminal output | `adm3A-terminal.out`, configurable with `outputFileName`
+| [VT100 terminal]({{ site.baseurl }}/altair8800/vt100-terminal) | Terminal output | `vt100-terminal.out`, configurable with `outputFileName`
+| [Abstract tape]({{ site.baseurl }}/ram/abstract-tape) | Log of symbol writes, one file per tape | Derived from the tape title, with the `.out` extension
+| [SSEM CPU]({{ site.baseurl }}/ssem/automation) | Final memory dump and register values | `ssem.out`
+|---
+
+Devices not listed here write no automation output. For files that devices read, see [Device input](#device-input).
+
+### Exit status and log
+
+The exit status tells whether the run succeeded; the log explains why it ended.
+
+A failed run returns a nonzero exit status. `logs/automation.log`, relative to the current working directory, records
+the final run reason and any output or cleanup failures.
