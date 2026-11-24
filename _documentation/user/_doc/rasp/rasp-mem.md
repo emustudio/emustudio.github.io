@@ -10,19 +10,21 @@ permalink: /rasp/rasp-mem
 
 # Memory "rasp-mem"
 
-The `rasp-mem` plugin stores both program and data, following RASP's von Neumann architecture.
+Inspect the shared program and data words in the RASP memory window. Load a compiled program, select a word to edit it, or clear memory before an experiment.
 
 Compilation loads the program into RASP memory. During execution, the CPU reads instructions and operands from this
 memory and writes results back to it. Inputs and outputs use the separate tapes.
 
-## Graphical user interface (GUI)
+## Edit a memory word
 
-Open the memory window from the **Debugger** tab in emuStudio. Use **Load image file...** to load a compiled program
-or **Erase memory** to clear it. Double-click an editable memory-table cell to change its value, then press Enter
-to confirm.
+Open **Emulator → Show memory…**. Use **Load image file…** to load a compiled program or **Erase memory** to clear it.
 
-NOTE: By editing an opcode cell (a cell that contains an instruction opcode), the instruction is changed. It is also possible
-to set invalid opcode values, which stop emulation with "instruction fallout".
+![RASP memory showing addresses and numeric words]({{ site.baseurl }}/assets/rasp/rasp-memory.png)
 
-For example, if a cell contains the `ADD =` instruction (operation code 7), which is then changed to 9 (`SUB =`), 
-the instruction on that location will be now changed and emuStudio will interpret it as such.
+1. Stop or pause execution, then find the address to change.
+2. Double-click its numeric value, enter the new word, and press Enter.
+3. Check the updated value before resuming.
+
+{: .warning}
+Editing an opcode changes the instruction. For example, changing `7` to `9` replaces `ADD =` with `SUB =`.
+An invalid opcode can stop execution with **instruction fallout**.

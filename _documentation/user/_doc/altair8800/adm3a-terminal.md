@@ -10,6 +10,8 @@ permalink: /altair8800/adm3a-terminal
 
 # Terminal LSI ADM-3A
 
+The ADM-3A is the display and keyboard in the bundled Altair configurations. Open it from the peripheral list to type into Altair software, read output, and try the terminal's control codes.
+
 This device emulates the Lear Siegler ADM-3A, introduced in 1976 and marketed as the "Dumb Terminal". Its low price
 made it popular with universities and early microcomputer users, including owners of the MITS Altair 8800.
 It provided a keyboard and text display connected to a host computer over a serial link; the host ran the programs.

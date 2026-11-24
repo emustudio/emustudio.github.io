@@ -10,6 +10,8 @@ permalink: /altair8800/byte-mem
 
 # Operating memory "byte-mem"
 
+Use byte memory to inspect and edit bytes, load images, and configure banks or ROM ranges. The debugger shows CPU-visible instructions, and the memory window lets you select which bank to inspect.
+
 This plugin emulates an operating memory with various features. It can be used for any virtual computer which can
 benefit from the following basic properties:
 
@@ -34,9 +36,19 @@ This operating memory is used in the [MITS Altair8800]({{ site.baseurl }}/altair
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) emulators. However, it is possible to develop
 other emulators that can benefit from it.
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, click **Show operating memory** in the toolbar to open the memory window:
+Open **Emulator → Show memory…** to browse bytes, inspect banks, and load images.
+
+![Byte memory window with the toolbar, byte table, page and bank controls, and selected value]({{ site.baseurl }}/assets/altair8800/byte-mem.png)
+
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Toolbar**. Load an image, go to an address, find data, switch to ASCII, erase memory, or open settings. |
+| <span class="circle">2</span> | **Byte table**. Select an address or edit a writable byte. |
+| <span class="circle">3</span> | **Page and bank controls**. Browse memory or inspect a different physical bank. |
+| <span class="circle">4</span> | **Selected byte**. Read the address, numeric values, symbol, and label for the selected cell. |
 
 Use **Load image file...** to load binary or Intel HEX data, **Go to address** to select a cell, and **Find sequence**
 to search for text or bytes. **Find next** and **Find previous** move between matches. **ASCII mode** switches between
@@ -46,9 +58,9 @@ settings.
 The memory table supports page navigation and shows the selected cell's address, byte value and character.
 The **Bank** selector changes the inspection bank without switching the CPU's active bank.
 
-Generally, it is possible to move around the cells using keystrokes (arrows). If the user presses some other
-letter/number key, a small text field appears allowing to edit the current value. When editing
-is finished, the user can press <kbd>ENTER</kbd> key to confirm it, or <kbd>ESC</kbd> key to discard the editing.
+1. Select a cell or move to it with the arrow keys.
+2. Type the new value to begin editing.
+3. Press <kbd>Enter</kbd> to apply the change or <kbd>Esc</kbd> to cancel.
 
 ### Finding repeated matches
 
@@ -285,45 +297,6 @@ public interface ByteMemoryContext extends MemoryContext<Byte> {
 [developerDoc]: /documentation/developer/introduction/
 [memoryBanks]: {{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching
 
-
-## Software memory profiles
-
-For CP/M 2.2 and the 8080 software examples, use 65536 bytes and one bank. For CP/M 3 and Z3PLUS, use 65536 bytes, eight banks and common boundary `0xC000`. MP/M II uses common boundary `0xB000`. Select bank zero before loading a bootloader after reset.
-
-![CP/M 2.2 memory banks and boot image settings]({{ site.baseurl }}/assets/altair8800/software-byte-mem-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
-| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
-| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
-| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
-| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
-| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
-| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
-| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
-| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
-| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
-| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
-
-![CP/M 3 memory banks and common boundary settings]({{ site.baseurl }}/assets/altair8800/software-cpm3-memory-settings.png){: style="max-width: 854px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Banks count**. Set the number of memory banks. |
-| <span class="circle">2</span> | **Common boundary**. Set the first address shared through bank 0. |
-| <span class="circle">3</span> | **ROM ranges**. Review read-only address ranges. |
-| <span class="circle">4</span> | **Remove ROM range**. Remove the selected read-only range. |
-| <span class="circle">5</span> | **Add ROM range**. Enter the first and last protected addresses. |
-| <span class="circle">6</span> | **Apply at startup**. Save ROM ranges in the configuration for the next start. |
-| <span class="circle">7</span> | **Startup images**. Review each image’s path, load address, and bank. |
-| <span class="circle">8</span> | **Add image**. Add an image to the startup list. |
-| <span class="circle">9</span> | **Remove image**. Remove the selected startup image. |
-| <span class="circle">10</span> | **Load now**. Load the selected image immediately. |
-| <span class="circle">11</span> | **Save**. Save the memory settings. Bank changes take effect after reopening the computer. |
-
 ## SIMH memory control
 
 Command 11 reads the active bank index, command 12 selects the bank given by its next output byte, command 13 reads
@@ -331,5 +304,3 @@ the two-byte common boundary, and command 18 reads the bank count. Bank indices 
 `banksCount`; one bank is the normal unbanked configuration. Configure banks and the common region in
 [byte-mem]({{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching). Commands 11, 13, and 18 do not select a bank.
 The count is returned in one byte, so configurations of 256 or more banks cannot report their full count this way.
-
-For Space Invaders, use `memorySize = 65536`, `banksCount = 1`, `commonBoundary = 0`, and `imageBank0` through `imageBank3` set to `0`. The Spectrum startup ROM also uses `imageBank0 = 0`.

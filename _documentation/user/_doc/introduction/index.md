@@ -12,8 +12,7 @@ permalink: /introduction/
 
 # Introduction
 
-New to emuStudio? [Run your first program]({{ site.baseurl }}/first-experiment/) for a guided path from installation
-to running and inspecting a bundled example.
+Start with [Run your first program]({{ site.baseurl }}/first-experiment/) to compile, run, and step through an 8080 example. Then choose a computer guide for that machine's hardware, software, and programming reference.
 
 emuStudio is a toy-computer emulation platform and framework for teaching, programming, and experimentation.
 It supports the full workflow: write a program, compile it, load it into an emulated computer, then run and debug it.

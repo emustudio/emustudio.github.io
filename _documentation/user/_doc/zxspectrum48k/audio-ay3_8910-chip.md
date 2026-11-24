@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/audio-ay3_8910-chip
 
 # AY-3-8910 Programmable Sound Generator
 
+Use the AY-3-8910 plugin for three-channel programmable sound in the **ZX Spectrum 48K + AY** configuration. Check the port and register reference before programming a channel.
+
 ## Introduction
 
 The General Instrument **AY-3-8910** is a Programmable Sound Generator (PSG) that
@@ -167,3 +169,83 @@ Tone, noise, and envelope generators use the CPU clock in hertz and keep their d
 Register reads return data through the register-select address (`FFFDh`) and its decoded aliases; reads of the
 data-write address return `FFh`. Writing R13 restarts all envelope shapes with their documented continue, attack,
 alternate, and hold behavior.
+
+## Configuration file
+
+The bundled `config/ZxSpectrum48K.toml` already connects the AY device to the
+[ZX Spectrum bus]({{ site.baseurl }}/zxspectrum48k/zxspectrum-bus). In a custom configuration based on that file,
+use the following entries. Set the connection's `to` value to your bus plugin's ID if it differs from the bundled ID.
+
+```toml
+[[DEVICE]]
+schemaPoint = "500,400"
+path = "audio-ay3_8910-chip.jar"
+settings = {}
+name = "audio-ay3_8910-chip"
+id = "060662e2-17d8-4dbc-9bde-98797ecd4e76"
+type = "DEVICE"
+
+[[connections]]
+bidirectional = true
+from = "060662e2-17d8-4dbc-9bde-98797ecd4e76"
+to = "c16f6ea4-c26f-4dbf-972b-893c22a0d92c"
+points = ["500,320", "320,320"]
+```
+
+Leave `settings` empty. Use **AY output volume** in the waveform monitor to adjust playback for the current session.
+
+## Programming example
+
+Play a short note on channel A. The program combines R0 and R1 into a tone period of 249, which gives about 439 Hz
+at the bundled 3.5 MHz CPU clock. R7 enables channel A's tone and disables the other tone and noise sources.
+
+```asm
+org 8000h
+
+AY_SELECT equ 0FFFDh
+AY_DATA   equ 0BFFDh
+
+    di
+    ld sp, 0FF00h
+
+    ld a, 0             ; R0: low byte of the period
+    ld e, 0F9h
+    call write_ay
+    ld a, 1             ; R1: high bits of the period
+    ld e, 0
+    call write_ay
+
+    ld a, 7             ; R7: enable channel A tone only
+    ld e, 3Eh
+    call write_ay
+    ld a, 8             ; R8: channel A fixed volume
+    ld e, 10
+    call write_ay
+
+    ld hl, 0FFFFh
+wait_note:
+    dec hl
+    ld a, h
+    or l
+    jr nz, wait_note
+
+    ld a, 8             ; Mute channel A before halting
+    ld e, 0
+    call write_ay
+    halt
+
+write_ay:              ; A = register, E = value
+    ld bc, AY_SELECT
+    out (c), a
+    ld bc, AY_DATA
+    out (c), e
+    ret
+```
+
+1. Open **ZX Spectrum 48K + AY**. Save the example as `ay-tone.asm` and open it in the editor.
+2. Choose **Save & Compile source file** to load the program at `0x8000`.
+3. On **Emulator**, select **Audio AY-3-8910 Chip** in **Peripheral devices** and choose **Show device…**.
+4. Choose **Run**. The note plays for about half a second, then goes quiet and the CPU stops.
+
+The bundled [Ode to Joy example]({{ site.baseurl }}/zxspectrum48k/software#ay_ode_to_joyasm) shows how to play
+three voices at once.

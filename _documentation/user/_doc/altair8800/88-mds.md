@@ -10,6 +10,8 @@ permalink: /altair8800/88-mds
 
 # MITS 88-MDS minidisk controller
 
+Use the 88-MDS to connect Altair minidisk images. The drive selector and image controls operate on the selected drive, while the CPU accesses the controller through its disk ports.
+
 ## Introduction
 
 The **88-MDS** was MITS' 5.25-inch minidisk system for the Altair. It combined an external floppy drive with
@@ -93,9 +95,9 @@ written buffer; write full sectors to avoid retaining stale buffer bytes.
 The implementation models the original 88-MDS geometry and protocol. It does not use the unrelated SIMH HDSK
 extension; use the `88-hdsk` plugin for that interface.
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, double-click `88-mds` in the device list:
+In **Emulator → Peripheral devices**, select `88-mds` and choose **Show device…**:
 
 ![88-MDS minidisk window with numbered drive, image and position, attach and detach controls]({{ site.baseurl }}/assets/altair8800/88-mds-gui.png){: style="max-width: 214px; width: 100%; height: auto;" }
 

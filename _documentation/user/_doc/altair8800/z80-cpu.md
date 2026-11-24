@@ -10,6 +10,8 @@ permalink: /altair8800/z80-cpu
 
 # Zilog Z80 CPU emulator
 
+Use the Z80 status panel to inspect main and alternate registers, flags, interrupts, and execution state. Set the clock in the computer configuration and read the recording for earlier instructions.
+
 The `z80-cpu` plugin emulates an 8-bit Zilog Z80 with a 16-bit address space (64 KiB). Its features include:
 
 - Documented and undocumented instructions, including DD/FD prefix chains.
@@ -49,10 +51,10 @@ contains `settings = { }`, remove that inline table before adding `[CPU.settings
 
 ## Recording executed instructions
 
-Use **History** in the shared debugger to record recent instructions or continuously save execution to a file.
+Open **Emulator → Recording** to capture recent instructions or prepare a recording that writes to a file.
 Recorded instructions include their sequence, opcode bytes and disassembly captured before execution, before/after
 register values, raw flags, memory accesses and completion status. Z80 register snapshots include
-alternate registers. See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#instruction-recording).
+alternate registers. See [Instruction recording]({{ site.baseurl }}/application/debugger-analysis#record-executed-instructions).
 
 ## Testing the CPU
 

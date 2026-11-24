@@ -10,6 +10,8 @@ permalink: /brainduck/terminal
 
 # Terminal `vt100-terminal`
 
+Open the VT100 peripheral to enter text, read a program's output, or examine control sequences. Its settings also let BrainDuck read input and write output through host files.
+
 DEC introduced the VT100 terminal in 1978. Its cursor movement, screen controls and other functions use ASCII control
 sequences, many of which are also supported by modern terminals.
 
@@ -40,7 +42,7 @@ NOTE: The plugin can also be used with MITS Altair8800. See [VT100 terminal for 
 describes keyboard operation, setup, and host control sequences. Chapter 3 contains the programmer's reference.
 The tables below describe the sequences and extensions supported by the emuStudio plugin.
 
-## Graphical User Interface (GUI)
+## Open the display
 
 In the following screenshot, VT100-terminal window is shown:
 

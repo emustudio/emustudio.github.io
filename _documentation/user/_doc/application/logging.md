@@ -10,6 +10,8 @@ permalink: /application/logging
 
 # Logging
 
+Check emuStudio's logs for startup, plugin, and execution messages. Save the relevant lines alongside the computer configuration and steps when reporting a problem.
+
 emuStudio logs startup, plugin, and execution messages. When reporting a problem, include the relevant log messages,
 the computer configuration, and the steps needed to reproduce it. The supplied configuration writes general messages
 to the console; enable file logging to retain them.

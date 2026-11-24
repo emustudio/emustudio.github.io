@@ -10,9 +10,11 @@ permalink: /zxspectrum48k/byte-mem
 
 # Operating memory "byte-mem"
 
+Use the shared byte-memory plugin for the Spectrum's ROM, screen memory, and program RAM. Check the memory map before setting an assembly origin or loading an image.
+
 The ZX Spectrum 48K uses the same operating memory plugin as the [MITS Altair8800]({{ site.baseurl }}/altair8800/byte-mem).
 Please refer to the [byte-mem documentation]({{ site.baseurl }}/altair8800/byte-mem) for the complete memory reference,
-including GUI overview, memory settings, ROM areas, bank switching, and the configuration file format.
+including Open and use the device, memory settings, ROM areas, bank switching, and the configuration file format.
 
 ## ZX Spectrum memory map
 

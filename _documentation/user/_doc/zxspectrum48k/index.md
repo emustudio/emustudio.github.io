@@ -11,6 +11,8 @@ permalink: /zxspectrum48k/
 
 # ZX Spectrum 48K
 
+Open **ZX Spectrum 48K + AY** to run Sinclair BASIC, load cassette programs, or test Z80 code. Supply a compatible 16 KiB ROM. Use the tape, display, and audio guides for the corresponding peripherals.
+
 The [ZX Spectrum][zxspectrum]{:target="_blank"} is an 8-bit home computer developed by [Sinclair Research][sinclair]{:target="_blank"}
 and released in the United Kingdom in 1982. Designed by Rick Dickinson with electronics by Richard Altwasser and
 software by Steve Vickers, the Spectrum was one of the most popular home computers in the UK and many other countries
@@ -71,7 +73,7 @@ The abstract schema for emuStudio:
    and protects `0x0000`–`0x3FFF` as ROM.
 3. Start the configured computer from the installation directory with
    `./emuStudio -cf config/ZxSpectrum48K.toml`.
-4. In **Debugger → Peripheral devices**, select `zxspectrum-ula` and click **Show device** to open its display and
+4. In **Emulator → Peripheral devices**, select `zxspectrum-ula` and click **Show device** to open its display and
    keyboard. Click **Run** to boot BASIC. To load cassette software, open `audiotape-player` and select a TAP or TZX file.
 
 The bundled configuration includes AY sound and opens a host audio output during initialization. If initialization

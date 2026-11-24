@@ -10,16 +10,14 @@ permalink: /ssem/software
 
 # Software for SSEM
 
-Start with the examples supplied with emuStudio, then explore the historical programs and competition entries below.
-SSEM programs share just 32 words of memory between instructions and data. Some calculate a result; others turn the
-store's bit patterns into pictures or animations on the [SSEM display]({{ site.baseurl }}/ssem/ssem-display).
+Start with the programs bundled with emuStudio. Step through a calculation to inspect the store, or run a graphical example in the CRT display. Historical programs and competition entries follow.
 
 ## Run a bundled example
 
 1. Open the **SSEM (Baby)** virtual computer.
 2. Open a `.ssem` file from `examples/as-ssem/` in your emuStudio installation.
 3. Click **Save & Compile source file**. Compilation loads the program into memory and resets the CPU.
-4. Switch to **Debugger** and use **Step forward** to follow individual instructions, or **Run** to execute continuously.
+4. Switch to **Emulator** and use **Step forward** to follow individual instructions, or **Run** to execute continuously.
 5. Inspect numerical results in the [memory window]({{ site.baseurl }}/ssem/ssem-mem). For graphical examples, open the
    `ssem-display` device window.
 
@@ -74,6 +72,13 @@ The bundled [ssem.ssem][ssem-ssem]{:target="_blank"} animates the text â€œSSEMâ€
 | Mark | Explanation |
 |:--:|:--|
 | <span class="circle">1</span> | **Store display**. Each row represents a store line; lit dots show set bits in the 32-bit words. |
+
+<details markdown="1">
+<summary>Play the SSEM store animation</summary>
+
+![The bundled SSEM program changes the store words to animate the letters SSEM]({{ site.baseurl }}/assets/ssem/ssem-ssem.gif)
+
+</details>
 
 ## More program sources
 

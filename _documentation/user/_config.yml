@@ -26,6 +26,17 @@ theme: "just-the-docs"
 sass:
   silence_deprecations: [import, global-builtin, color-functions]
 
+callouts:
+  note:
+    title: Note
+    color: blue
+  tip:
+    title: Tip
+    color: green
+  warning:
+    title: Warning
+    color: yellow
+
 destination: ../../documentation/user/
 
 search_enabled: true

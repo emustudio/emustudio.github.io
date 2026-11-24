@@ -10,6 +10,8 @@ permalink: /altair8800/vt100-terminal
 
 # VT100 Terminal for Altair8800
 
+Add a VT100 when an Altair program expects ANSI cursor and screen commands. The terminal connects through 88-SIO. Use it for screen-oriented CP/M applications or to test escape sequences.
+
 Besides the [LSI ADM-3A terminal]({{ site.baseurl }}/altair8800/adm3a-terminal), it is also possible to use the
 **VT100 terminal** (`vt100-terminal`) with the Altair8800 computer. The VT100 terminal offers a richer set of features
 compared to the ADM-3A, most notably ANSI color support, text attributes (bold, italic, underline, and more), and
@@ -27,9 +29,9 @@ Abstract schema for emuStudio (with VT100 terminal):
 
 ![Abstract schema of MITS Altair8800 (with VT100 terminal)]({{ site.baseurl }}/assets/altair8800/altair-vt100-schema.png)
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, double-click `vt100-terminal` in the device list:
+On the **Emulator** tab, double-click `vt100-terminal` in the device list:
 
 ![Altair VT100 terminal with numbered display, input indicator and ASCII input button]({{ site.baseurl }}/assets/altair8800/vt100-terminal-gui.png){: style="max-width: 900px; width: 100%; height: auto;" }
 

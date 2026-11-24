@@ -10,8 +10,7 @@ permalink: /brainduck/automation
 
 # Automation
 
-BrainDuck computer is capable of running automatic emulation. Automation can operate in the
-interactive or non-interactive mode.
+Run BrainDuck interactively to use the VT100 window, or run it headlessly with terminal files. The same compiler loads both runs.
 
 ## Non-interactive mode
 

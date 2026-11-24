@@ -10,6 +10,8 @@ permalink: /ram/ram-cpu
 
 # CPU "ram-cpu"
 
+Use the CPU status panel to read the instruction pointer and follow tape activity as a RAM program executes. The program listing and the storage tape show the code and register contents.
+
 The `ram-cpu` plugin executes RAM instructions. Although RAM is an abstract machine, emuStudio uses the same CPU plugin
 interface as it does for physical processors.
 

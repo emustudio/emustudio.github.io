@@ -10,8 +10,7 @@ permalink: /application/opening-computer
 
 # Opening a computer
 
-Before emulation starts, select a virtual computer. Each computer has a TOML configuration describing its plugins,
-their settings, and their connections.
+Choose a bundled computer or open a configuration you created. Each computer's TOML identifies its plugins, settings, and connections. The chooser previews its schema before you open it.
 
 Available virtual computers include [MITS Altair8800]({{ site.baseurl }}/altair8800/),
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/),
@@ -35,7 +34,7 @@ the command line, use `-cn NAME`, `-cf FILE`, or `-ci INDEX`; `-cl` lists the av
 | <span class="circle">4</span> | **Rename computer**. Change the selected configuration’s name. |
 | <span class="circle">5</span> | **Save schema image**. Export the selected computer’s schema as a PNG image. |
 | <span class="circle">6</span> | **Virtual computers**. Select a configuration to preview it; double-click it or press Enter to open it. |
-| <span class="circle">7</span> | **Show plugin configuration**. Expand the plugin paths and settings below the schema preview. |
+| <span class="circle">7</span> | **Plugin configuration**. Review plugin paths and settings below the schema preview. |
 | <span class="circle">8</span> | **Open computer**. Load the selected virtual computer. |
 | <span class="circle">9</span> | **Exit**. Close the chooser. |
 

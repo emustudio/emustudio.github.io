@@ -10,6 +10,8 @@ permalink: /application/configuration-file
 
 # Configuration file
 
+Use `emuStudio.toml` for application-wide preferences and the files in `config/` for individual computers. Set the configuration and plugin roots when you need a separate profile or plugin installation.
+
 emuStudio reads application settings from `emuStudio.toml` at startup. By default it uses the current working directory;
 run the launcher from the extracted installation directory to use its settings. The schema and source editors write
 their preferences back to this file while emuStudio is running.
@@ -58,3 +60,7 @@ its editing menus to change them. See [Source editing]({{ site.baseurl }}/applic
 Computer configurations are separate TOML files in `config/`. Use the
 [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and
 [schema editor]({{ site.baseurl }}/application/computer-schema) to manage their plugins and connections.
+
+The computer TOML also stores watch expressions, breakpoints, and annotations under `[debugger]`. See
+[Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
+for the controls that update these settings.

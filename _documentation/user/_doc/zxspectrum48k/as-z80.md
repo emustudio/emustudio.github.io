@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/as-z80
 
 # Assembler "as-z80"
 
+Use the shared Z80 assembler to write programs for the Spectrum. Place code in RAM and use the example below to write to the screen or ULA ports.
+
 The ZX Spectrum 48K uses the same Z80 assembler plugin as the [MITS Altair8800]({{ site.baseurl }}/altair8800/as-z80).
 Please refer to the [as-z80 documentation]({{ site.baseurl }}/altair8800/as-z80) for the complete assembler reference,
 including:
@@ -25,7 +27,7 @@ including:
 - Macros (`MACRO`/`ENDM`)
 - `END` pseudo-instruction
 
-## Running from the command line
+## Compile from the command line
 
 The assembler can be run independently:
 

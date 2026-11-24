@@ -11,6 +11,8 @@ permalink: /ssem/
 
 # Small Scale Experimental Machine (SSEM)
 
+Open **SSEM (Baby)** to explore the Manchester Baby's stored-program design. Compile a bundled example, then inspect the 32-word store and open the CRT to watch its bit patterns.
+
 Small Scale Experimental Machine, also known as [SSEM][ssem]{:target="_blank"}, was the world's very first
 stored-program computer, nicknamed "Baby". It was a predecessor of [Manchester Mark 1][mark1]{:target="_blank"} which
 led to [Ferranti Mark 1][fmark1]{:target="_blank"}, the world's first commercially available general-purpose computer.

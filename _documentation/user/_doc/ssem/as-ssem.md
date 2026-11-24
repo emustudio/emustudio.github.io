@@ -10,6 +10,8 @@ permalink: /ssem/as-ssem
 
 # Assembler "as-ssem"
 
+Assemble a `.ssem` source file in emuStudio to load it into SSEM, or use the command-line assembler to produce a `.bssem` binary. Use the opcode and directive reference to place instructions and data.
+
 The `as-ssem` assembler compiles SSEM source into binary files and, when used in emuStudio, loads the result into memory.
 Source files use the `.ssem` extension; compiled files use `.bssem`.
 
@@ -44,7 +46,7 @@ The instruction format is as follows:
 where bits `LLLLL` denote a "line", which is basically the memory address - index of a memory cell. It can be understood
 as an instruction operand. Bits `III` specify the instruction opcode (3 bits are enough for 7 instructions).
 
-## Running from the command line
+## Compile from the command line
 
 Run the supplied launcher from the emuStudio installation directory:
 

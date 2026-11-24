@@ -10,13 +10,15 @@ permalink: /brainduck/compiler
 
 # Compiler "brainc-brainduck"
 
+Compile a brainfuck source file to load it into BrainDuck or produce a binary from the command line. The compiler also provides syntax highlighting in emuStudio.
+
 The BrainDuck compiler translates brainfuck source into machine code for the BrainDuck CPU. It also supplies tokens
 for syntax highlighting in the source editor.
 
 Click **Save & Compile source file** to compile the current program. The compiler loads the result into memory and
 saves it beside the source as a `.hex` file in [Intel HEX][intelhex]{:target="_blank"} format.
 
-## Running from the command line
+## Compile from the command line
 
 From the emuStudio installation directory, compile a source file without starting emulation:
 

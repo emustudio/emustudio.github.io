@@ -10,7 +10,7 @@ permalink: /zxspectrum48k/automation
 
 # Automation
 
-ZX Spectrum 48K supports interactive and non-interactive automation.
+Run the ZX Spectrum with device windows for an interactive session or use headless automation for a configured tape or assembly program. Provide the ROM and any tape images before starting.
 
 In the interactive mode, the ZX Spectrum display window and audio tape player are shown automatically, allowing the
 user to interact with the emulated computer. Start tape automation from the tape player's **Events** tab.

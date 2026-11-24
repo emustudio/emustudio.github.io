@@ -11,37 +11,19 @@ permalink: /application/
 
 # emuStudio Application
 
-emuStudio is a desktop application for emulating computers. Its source code editor lets you write and compile programs
-for the selected computer. A virtual computer combines compiler, CPU, memory, and device plugins in a configuration
-that you select at startup.
+Install emuStudio, open a virtual computer, and use its source editor and emulator. Each computer supplies its own compiler, CPU, memory, and peripheral devices.
 
-The command-line interface can load, compile, and run programs, with or without device windows. This workflow is called
-**automatic emulation**; each computer guide describes its device behavior.
+Use [Automation]({{ '/application/automation' | relative_url }}) to load, compile, and run from the command line.
+See [Logging]({{ '/application/logging' | relative_url }}) for startup and plugin diagnostics.
 
-Logs help diagnose application and plugin problems; see [Logging]({{ site.baseurl }}/application/logging).
+## Install and launch emuStudio
 
-## Installation and run
-
-Download and unpack the complete `emuStudio-[VERSION].tar` or `emuStudio-[VERSION].zip` distribution. On Linux,
-prefer TAR because it preserves execution permissions. Run the launcher from the unpacked directory.
-
-Before running, [Java 11][java11]{:target="_blank"} or later must be installed. Then, emuStudio can be run by executing
-the following script:
-
-- On Linux:
-
-```
-> ./emuStudio
-```
-
-- On Windows:
-
-```
-> emuStudio.bat
-```
-
-The distributed launchers support Linux and Windows. macOS operation has not been verified for this development version.
-Individual plugins can require additional host resources, such as audio or network access.
+1. Download and unpack the complete distribution. Prefer TAR on Linux to preserve execution permissions.
+2. Install the Java version required by your build. The 0.41 release needs Java 11 or later. Current development
+   builds need Java 21 or later.
+3. Run the launcher from the unpacked directory. Run `./emuStudio` on Linux or `emuStudio.bat` on Windows.
+4. Select a computer when the chooser opens. The [first experiment]({{ '/first-experiment/' | relative_url }}) walks
+   through compiling and running a program.
 
 ## Command-line arguments
 
@@ -87,5 +69,3 @@ Automation command has its own usage:
 The wait limit applies to CPU execution and closes the virtual computer when it expires. Compilation and device
 initialization are outside this limit. See [automation]({{ site.baseurl }}/application/automation) for timeout behavior,
 program start addresses, and interpreting the logs.
-
-[java11]: https://jdk.java.net/archive/

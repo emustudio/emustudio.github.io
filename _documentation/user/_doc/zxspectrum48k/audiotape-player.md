@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/audiotape-player
 
 # Audio Tape Player
 
+Open the tape player to load TAP or TZX files into the Spectrum. Boot BASIC first, then start the loader and play the tape. The Events tab shows the signal and block activity.
+
 The `audiotape-player` plugin emulates a cassette tape deck connected to the ZX Spectrum. It allows loading tape image
 files in TAP and TZX formats and playing them back into the emulated ZX Spectrum, as if the user were loading software
 from a real cassette tape.
@@ -26,9 +28,9 @@ The tape player connects to the ZX Spectrum bus and writes data signals that the
 | `.tzx` | TZX format — a more advanced format that can describe various tape encoding schemes. Most block types are supported (see [Supported TZX blocks](#supported-tzx-blocks) below).
 |---
 
-## GUI overview
+## Open and use the device
 
-Open the tape player from **Debugger → Peripheral devices → Show device**. The window can be opened while stopped;
+Open the tape player from **Emulator → Peripheral devices → Show device**. The window can be opened while stopped;
 start the CPU before playing tape pulses:
 
 ![Audio Tape Player]({{ site.baseurl }}/assets/zxspectrum48k/audiotape-player.png){: style="max-width: 800px; width: 100%; height: auto;" }

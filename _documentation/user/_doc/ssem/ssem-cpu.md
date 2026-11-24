@@ -10,6 +10,8 @@ permalink: /ssem/ssem-cpu
 
 # SSEM CPU emulator
 
+Use the CPU status panel to read the accumulator, control instruction register, and store words while stepping through an SSEM program.
+
 SSEM is one of the first implementations of the von-Neumann design of a computer. It contained a control unit,
 arithmetic-logic unit (ALU), and memory (which actually is a CRT display too).
 

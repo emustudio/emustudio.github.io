@@ -10,24 +10,9 @@ permalink: /application/find-replace
 
 # Find and replace
 
-Use the inline search bar to find or replace text in the active source view. Press **Ctrl+F** to find or **Ctrl+R** to show the replacement controls. If text is selected when you open the bar, it becomes the search query.
+Search the active source view with **Ctrl+F**. Open replacement controls with **Ctrl+R**. The bar starts with selected text when you open it from a selection.
 
-<div class="screenshot-key" style="position: relative; max-width: 1100px;">
-  <img src="{{ site.baseurl }}/assets/application/find-replace-current.png" alt="Inline find and replace bar above a source file, with numbered controls" style="display: block; width: 100%;">
-  <span class="circle" style="position:absolute; left:1%; top:0%;">1</span>
-  <span class="circle" style="position:absolute; left:30%; top:0%;">2</span>
-  <span class="circle" style="position:absolute; left:61%; top:0%;">3</span>
-  <span class="circle" style="position:absolute; left:65%; top:0%;">4</span>
-  <span class="circle" style="position:absolute; left:69%; top:0%;">5</span>
-  <span class="circle" style="position:absolute; left:73%; top:0%;">6</span>
-  <span class="circle" style="position:absolute; left:79%; top:0%;">7</span>
-  <span class="circle" style="position:absolute; left:85%; top:0%;">8</span>
-  <span class="circle" style="position:absolute; left:94%; top:0%;">9</span>
-  <span class="circle" style="position:absolute; left:30%; top:13%;">10</span>
-  <span class="circle" style="position:absolute; left:61%; top:13%;">11</span>
-  <span class="circle" style="position:absolute; left:81%; top:13%;">12</span>
-  <span class="circle" style="position:absolute; left:94%; top:13%;">13</span>
-</div>
+![Inline find and replace bar with numbered controls]({{ site.baseurl }}/assets/application/find-replace-current.png)
 
 {: .list .control-list .screenshot-controls .screenshot-key}
 | Mark | Control |

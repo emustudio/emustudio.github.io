@@ -10,8 +10,7 @@ permalink: /ram/automation
 
 # Automation
 
-In headless automatic emulation (`auto --no-gui`), each abstract tape logs symbol writes to a file. The format is described in
-[abstract tape documentation]({{site.baseurl}}/ram/abstract-tape).
+Run a RAM program from the launcher and supply its input tape through the computer configuration. In headless runs, each abstract tape writes its output symbols to a file.
 
 ## Example
 

@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/zxspectrum-bus
 
 # ZX Spectrum Bus
 
+The Spectrum bus connects the Z80, byte memory, and peripheral devices. Use this reference to understand memory and I/O contention, floating bus reads, and interrupt timing.
+
 The `zxspectrum-bus` plugin acts as a proxy between the Z80 CPU, operating memory, and all ZX Spectrum peripheral
 devices. It wraps the `byte-mem` memory plugin and the `z80-cpu` plugin, adding the timing behaviors that make the
 ZX Spectrum unique:

@@ -10,15 +10,14 @@ permalink: /brainduck/examples
 
 # Example code
 
-Start with the programs in `examples/brainc-brainduck/` in your emuStudio installation, then explore the external
-collections below. BrainDuck runs brainfuck programs through its compiler, CPU, memory, and VT100 terminal.
+Start with a bundled brainfuck program to see how the compiler, CPU, memory, and VT100 work together. Run a short example first, then step through its pointer and cell changes.
 
 ## Run a bundled example
 
 1. Open the **BrainDuck** virtual computer.
 2. Open `examples/brainc-brainduck/hello1.b` in the source editor.
 3. Click **Save & Compile source file** to load the program into memory and reset the CPU.
-4. Open the VT100 terminal window, switch to **Debugger**, and click **Run**.
+4. Open the VT100 terminal window, switch to **Emulator**, and click **Run**.
 
 The terminal displays `Hello, World!`. This program needs no input. Use **Step forward** to follow individual
 instructions.

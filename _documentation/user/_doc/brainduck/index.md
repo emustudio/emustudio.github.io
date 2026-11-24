@@ -11,6 +11,8 @@ permalink: /brainduck/
 
 # BrainDuck
 
+Open **BrainDuck** to run brainfuck programs. The machine combines a compiler, a byte-addressed tape and a VT100 terminal. Start with the bundled greeting, then step through its eight instruction types.
+
 BrainDuck is an abstract computer for running [brainfuck][brainfuck]{:target="_blank"} programs in emuStudio.
 [Urban Müller][miller]{:target="_blank"} designed brainfuck around eight instructions and a data pointer. BrainDuck
 compiles those instructions into machine code and adds `;` as an explicit halt instruction.

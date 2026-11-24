@@ -10,6 +10,8 @@ permalink: /application/automation
 
 # Automation
 
+Run a computer from the command line when you want to compile an example, provide reproducible inputs, or collect results without the main window. Choose interactive mode for device windows or headless mode for file-based runs.
+
 Automation runs an emulated computer without the main window. emuStudio loads a computer, optionally compiles a source
 file, and runs the CPU until it stops. Use it for batch runs, checking school assignments, and programs whose device
 output is the main result.

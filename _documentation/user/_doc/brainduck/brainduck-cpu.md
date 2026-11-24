@@ -10,15 +10,14 @@ permalink: /brainduck/cpu
 
 # CPU "brainduck-cpu"
 
-The BrainDuck CPU interprets the compiled instructions of the BrainDuck computer, which correspond to the brainfuck
-language.
+Use the CPU status panel to follow BrainDuck's instruction pointer, data pointer, and active cell. Step through a short program to see how each instruction changes the tape.
 
 The program which is going to be executed is read from the operating memory, so the CPU must be connected with
 memory (`byte-mem`) to work properly.
 
 Connect one I/O device, normally `vt100-terminal`, to run programs that read input or write output.
 
-The CPU status panel appears on the **Debugger** tab in the main window.
+The CPU status panel appears on the **Emulator** tab in the main window.
 
 The CPU supports breakpoints and jumping to a specific address. Jumping into the middle of a program can leave its
 data pointer and loop state inconsistent.

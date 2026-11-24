@@ -10,142 +10,76 @@ permalink: /application/main-window
 
 # Main window
 
-After opening a computer, the main window provides a source code editor and a **Debugger** tab. The editor tab shows
-the active source filename, or **Source code editor** when no file is selected.
+Use **Source code editor** to write and compile a program. Use **Emulator** to run it, inspect the CPU and memory, or
+open the computer's peripheral devices.
 
-The **File** and **Edit** menus provide file and text operations. **Project** contains compilation, a view of the
-computer schema, and compiler settings. **Help** contains information about emuStudio. The application's
-[theme setting]({{ site.baseurl }}/application/configuration-file) controls the appearance of windows and controls.
+## Write and compile a program
 
-## Source code editor
+The editor keeps each open file in its own tab. The toolbar provides file, undo, search, and compilation commands.
+Use **File** and **Edit** for the full command lists, and **Project** to view the computer schema or compiler settings.
 
-![Source editor showing reverse.asm and successful compilation output for the Intel 8080 assembler]({{ site.baseurl }}/assets/application/source-code-editor.png){: style="max-width: 1094px; width: 100%;" }
+![Source editor with a compiled 8080 program and its compiler output]({{ site.baseurl }}/assets/application/source-code-editor.png)
 
-Write programs in the editor and compile them with the computer's compiler plugin. The compiler determines the input
-language and must produce code compatible with the selected CPU.
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Editor toolbar**. Open and save files, find text, compile the active file, and adjust font zoom. |
+| <span class="circle">2</span> | **File tabs**. Switch between open files. An asterisk marks an unsaved change. |
+| <span class="circle">3</span> | **Source view**. Edit the active file with syntax highlighting and line numbers. |
+| <span class="circle">4</span> | **Compiler output**. Check messages after compilation. Drag the divider to resize this pane. |
 
-The toolbar provides **New**, **Open**, **Save**, undo/redo, cut/copy/paste, find, replace, and **Save & Compile source file**.
-Compilation messages appear in the pane below the editor. Drag the divider to adjust its height.
+1. Open a file that the selected computer's compiler supports.
+2. Save modified include files so the compiler reads their current contents from disk. Stop the emulator if it is running.
+3. Choose **Save & Compile source file**. Check the output pane for the result and any reported source locations.
+4. On success, switch to **Emulator**. The compiler has loaded its output and emuStudio has reset the CPU.
 
-The source code editor supports the following features:
+The 8080 and Z80 assemblers write the addresses they generate. The BrainDuck, RAM, RASP and SSEM compilers clear
+their program memory before loading successful output. The compiler may also produce a file on disk.
 
-- bundled **JetBrains Mono NL** font
-- line numbering and syntax highlighting
-- undo/redo
-- inline search/replace, selection search, and find/replace across files
-- cut/copy/paste text
-- multiple carets, rectangular editing, folding, and split views
-- text transformations, editing macros, navigation history, and compiler-supported rename and extraction
-- whitespace and indentation settings and token colors
-- <kbd>Ctrl</kbd> + mouse wheel changes font size
+See [Source editing]({{ '/application/source-editing' | relative_url }}) for tabs, shortcuts and refactoring.
 
-See [Source editing]({{ site.baseurl }}/application/source-editing) for commands, shortcuts, and compiler-supported
-refactoring.
+## Run and inspect the computer
 
-### Working with multiple files
+The **Emulator** tab puts execution controls above the workspace. **Debugger** shows live instructions and
+**Recording** shows captured execution. CPU status, **Watches**, and **Peripheral devices** sit to the right.
 
-Each source file opens in its own tab. **New** creates an untitled tab; **Open** selects an already open file or opens
-another tab. A `*` after the tab name marks unsaved changes. Click the small **×** on a file's tab to close it, or use
-**File → Close tab** / **Ctrl+W** for the active tab. Save, Save As, search, and compilation act on the focused source
-view, including in a split. Closing a modified tab or leaving the computer prompts you to save or discard its changes,
-or cancel closing. Closing the last tab creates a fresh untitled tab.
-Saved files that remain open are restored when you reopen that virtual computer.
+![Emulator workspace with the execution toolbar, instruction listing, status, watches, and devices]({{ site.baseurl }}/assets/application/debugger-workspace.png)
 
-Hold <kbd>Ctrl</kbd> and click an include filename identified by the compiler to open it in a tab. The 8080 and Z80
-assemblers support quoted include paths. Save the containing source file first: relative include paths are resolved
-from its directory. Hovering over a missing file shows its path in a tooltip.
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Execution toolbar**. Reset, run, pause, step, set the PC or a breakpoint, and open operating memory. |
+| <span class="circle">2</span> | **Debugger and Recording**. Switch between live disassembly and captured execution. |
+| <span class="circle">3</span> | **Instruction listing**. Inspect instructions, breakpoints, labels, and observed branches. |
+| <span class="circle">4</span> | **CPU status**. Read registers, flags, and execution state. Each CPU supplies its own panel. |
+| <span class="circle">5</span> | **Watches**. Evaluate expressions when execution stops or pauses. |
+| <span class="circle">6</span> | **Peripheral devices**. Select a device, then choose **Show device…** or **Show settings…** when available. |
 
-### Compilation
+Drag the dividers to give a panel more room. See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }})
+for breakpoints, annotations, watches, and recordings.
 
-Click **Save & Compile source file** to save and compile the selected source file. Save other modified tabs first so included files
-are read from their current contents on disk. The compiler output pane shows compilation messages and points to source
-positions supplied by the compiler. Stop running emulation before compiling.
+### Use the execution toolbar
 
-Compiled code can produce a binary file (for example a HEX file) and is loaded into operating memory by the compiler.
-**Save & Compile source file** does not reset memory before compiling. It resets the CPU only when compilation
-reports no errors. Memory contents depend on the compiler: the 8080 and Z80 assemblers write generated
-addresses, while BrainDuck, RAM, RASP and SSEM compilers clear their program memory before loading successful output.
-Other compilers may use different loading behavior.
+Choose **Run** for continuous execution, **Run timed…** to advance at a set interval, or **Step** to execute one
+instruction. Pause execution to inspect the next instruction and the current CPU state.
 
-## Debugger tab
+![Execution toolbar with numbered controls]({{ site.baseurl }}/assets/application/emulator-debugger-toolbar.png)
 
-![Debugger workspace with Instructions selected and CPU status, watches, and devices on the right]({{ site.baseurl }}/assets/application/debugger-workspace.png){: style="max-width: 1280px; width: 100%;" }
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Reset**. Reset the CPU, memory, and devices. |
+| <span class="circle">2</span> | **Jump to beginning**. Set the program counter to address zero. |
+| <span class="circle">3</span> | **Move PC Back**. Set the PC to the debugger's estimated previous instruction. Registers and memory retain their current values. |
+| <span class="circle">4</span> | **Stop**. End the current run. |
+| <span class="circle">5</span> | **Pause**. Suspend a continuous or timed run. |
+| <span class="circle">6</span> | **Run**. Start or resume execution from the current PC. |
+| <span class="circle">7</span> | **Run timed…**. Enter the interval between instructions in milliseconds. |
+| <span class="circle">8</span> | **Step**. Execute one instruction. |
+| <span class="circle">9</span> | **Jump…**. Enter the address of the next instruction to execute. |
+| <span class="circle">10</span> | **Set breakpoint…**. Set or unset a breakpoint at an address. |
+| <span class="circle">11</span> | **Show memory…**. Open the memory plugin's window. |
 
-The left workspace has **Instructions**, **Memory**, **Annotations**, **Breakpoints**, **References** and **History**
-tabs. **Instructions** disassembles memory using the CPU plugin; switch tabs to search or compare bytes, annotate
-addresses, manage breakpoints, follow references, or inspect recorded instructions.
-
-The right column holds the CPU plugin's status/register panel, expression watches, and **Peripheral devices**, in that
-order. Select a device and click **Show device**, or double-click it, to open its GUI when supported. **Show settings**
-opens that device's settings when available. Drag the dividers to resize the workspace and sections of the right column.
-Each CPU supplies its own registers, flags, execution-state display and other status controls.
-
-### Debugger window
-
-Use the debugger toolbar to run, pause, and step through a program while inspecting instructions and CPU state.
-The instruction table and page controls are hidden during continuous execution and become available when it pauses
-or stops.
-
-Double-click an instruction with source information to open its source file at the corresponding line. The 8080 and
-Z80 assemblers attach this information when compiling into memory. The file opens in an editor tab, including when it
-is an included source file. Writing to an annotated address invalidates its source information, even while running;
-annotations at other addresses remain available. Erasing memory removes all source positions. A raw image without
-source annotations cannot provide this navigation.
-
-#### Debugger toolbar
-
-The toolbar controls are numbered from left to right. Hover over a button to see its tooltip. Controls are enabled
-according to the CPU's execution state and the plugins' capabilities.
-
-{: .list .control-list}
-| <span class="circle">1</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=0 y=0 %} | **Run**. Start or resume execution from the current instruction address.
-| <span class="circle">2</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=32 y=0 %} | **Pause**. Pause continuous or timed execution.
-| <span class="circle">3</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=64 y=0 %} | **Stop**. Stop running or paused emulation.
-| <span class="circle">4</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=96 y=0 %} | **Timed run**. Enter the interval between instructions, in milliseconds, then run one instruction at each interval.
-| <span class="circle">5</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=128 y=0 %} | **Step forward**. Execute one instruction.
-| <span class="circle">6</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=166 y=0 %} | **Reset**. Reset the CPU, memory, and devices.
-| <span class="circle">7</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=198 y=0 %} | **Jump to beginning**. Set the next instruction address to `0`; this does not reset CPU registers or memory.
-| <span class="circle">8</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=230 y=0 %} | **Move PC Back**. Move the instruction pointer to the debugger’s estimated previous instruction. This does not undo execution or restore registers, memory, or devices.
-| <span class="circle">9</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=262 y=0 %} | **Jump to address**. Enter the address of the next instruction to execute.
-| <span class="circle">10</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=300 y=0 %} | **Set breakpoint...**. Set or unset a CPU-address breakpoint. Use **Breakpoints** to manage breakpoints and **Watches** for memory-access watches. Pause before editing.
-| <span class="circle">11</span> {% include control-icon.html image="/assets/application/emulator-debugger-toolbar.png" x=332 y=0 %} | **Show operating memory**. Open the memory plugin’s window when available.
-
-#### Inspection pane
-
-Pause the CPU to inspect live memory, search for bytes, integers or text, find strings, and edit labels, comments
-or breakpoints. Select **References** for static flow and incoming references, or **History** for recorded
-instructions. Watches remain beside CPU status while switching between inspection tabs. Available features depend on
-the CPU and memory plugins. All bundled CPUs provide recording; exposed registers and memory-access detail vary by CPU.
-
-Selecting an instruction updates the inspection address. Browsing does not change the program counter. When a breakpoint stops execution, the status shows `Breakpoint: XXXX` and the debugger inspects its address; later steps follow the CPU unless the view was
-manually pinned. History records recent execution, saves continuous recordings, and opens saved recordings
-for inspection without restoring the live machine.
-Use the configured memory plugin window to inspect or edit memory.
-See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }}) for workflows, persistence and metadata export.
-
-#### List of instructions
-
-The instruction table shows a page of disassembled memory. Its columns come from the CPU plugin. In the 8080 example,
-they show a breakpoint control, address, instruction, and opcode bytes, followed by user labels and comments. The red
-row marks the next instruction. Click the breakpoint control to toggle the execution breakpoint on or off.
-Hover over the control to see its current state. Manual view pinning does not configure breakpoints.
-
-The number of visible rows follows the space available in the window. To change memory contents, use the memory
-plugin's window or compile another program; the instruction and opcode cells are read-only.
-
-For CPUs with instructions of different lengths, decoding from the middle of an instruction can produce misleading
-results. Memory can also contain data rather than code. The debugger estimates preceding instruction boundaries;
-use a known program address when a listing looks incorrect.
-
-#### Browsing instructions
-
-The page controls below the table browse memory without changing the CPU's instruction pointer. Use **Current page**
-to return to the next instruction after browsing elsewhere.
-
-{: .list .control-list}
-| <span class="circle">1</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=0 y=0 %} | **First page**. Start the listing at address `0`.
-| <span class="circle">2</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=28 y=0 %} | **Seek backward**. Enter the number of pages to move back.
-| <span class="circle">3</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=56 y=0 %} | **Previous page**. Move back one page.
-| <span class="circle">4</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=84 y=0 %} | **Current page**. Show the CPU's current instruction location.
-| <span class="circle">5</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=112 y=0 %} | **Next page**. Move forward one page.
-| <span class="circle">6</span> {% include control-icon.html image="/assets/application/debugger-pages.png" x=140 y=0 %} | **Seek forward**. Enter the number of pages to move forward.
+{: .warning}
+Load boot images and apply memory patches after **Reset**. A subsequent reset can replace memory contents according to
+the computer configuration.

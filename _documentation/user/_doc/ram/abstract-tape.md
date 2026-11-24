@@ -10,8 +10,7 @@ permalink: /ram/abstract-tape
 
 # Abstract tape
 
-Abstract tapes, in general, are used in various abstract machines. Probably the best known are Turing machine, RAM
-machine, and RASP machine. The plugin of the abstract tape for emuStudio is called `abstract-tape`.
+Use the input tape to supply a sequence of symbols, the output tape to read the program's results, and the storage tape to inspect registers on the RAM machine.
 
 There are several properties which an abstract tape might have:
 
@@ -32,9 +31,9 @@ Currently, there are just two virtual computers utilizing this plugin:
 RAM assigns three tapes to storage, input, and output; RASP assigns two tapes to input and output. All are left-bounded.
 The input tape is editable in the GUI, while the output tape is controlled by the CPU. RAM's storage tape is also editable.
 
-## Graphical user interface (GUI)
+## Load and edit tape symbols
 
-To open a tape, select it in the peripheral device list on the **Debugger** tab and click **Show device...**.
+To open a tape, select it in the peripheral device list on the **Emulator** tab and click **Show device...**.
 
 ![Abstract tape window (Input tape of the RAM machine)]({{ site.baseurl }}/assets/ram/ram-input.png){: style="max-width: 172px; width: 100%; height: auto;" }
 
@@ -48,8 +47,9 @@ To open a tape, select it in the peripheral device list on the **Debugger** tab 
 | <span class="circle">5</span> | **Edit symbol**. Change the selected symbol. |
 | <span class="circle">6</span> | **Clear tape**. Remove all tape symbols. |
 
-The red symbol marks the current head position. Click a symbol to select it for editing or removal. The selected symbol
-has a blue background in the following image:
+1. Choose the lower **Add symbol** button and enter a symbol to append.
+2. Click an entry to select it. The blue selection identifies the symbol that **Edit symbol** or **Remove symbol** targets.
+3. Edit or remove the selected entry. The red entry still identifies the tape head.
 
 ![Selected symbol in the abstract tape]({{ site.baseurl }}/assets/ram/ram-input-selection.png){: style="max-width: 172px; width: 100%; height: auto;" }
 
@@ -65,7 +65,7 @@ has a blue background in the following image:
 
 ## Settings
 
-To open the tape settings, select the tape in the peripheral device list on the **Debugger** tab and click
+To open the tape settings, select the tape in the peripheral device list on the **Emulator** tab and click
 **Show settings...**:
 
 ![Abstract tape settings]({{ site.baseurl }}/assets/ram/ram-input-settings.png){: style="max-width: 170px; width: 100%; height: auto;" }

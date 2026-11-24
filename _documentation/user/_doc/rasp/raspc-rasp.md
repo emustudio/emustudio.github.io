@@ -10,12 +10,11 @@ permalink: /rasp/raspc-rasp
 
 # Compiler "raspc-rasp"
 
-The RASP language provides direct register access, input/output operations, and three jump instructions. Its syntax
-resembles RAM's, but it does not support indirect addressing.
+Write RASP programs with direct register access, tape input and output, and conditional jumps. Compile them in emuStudio or run the compiler from the command line.
 
 Source code files end with `.rasp` extension; compiler output uses extension `.brasp`.
 
-## Running from the command line
+## Compile from the command line
 
 Run the compiler from the emuStudio installation directory:
 

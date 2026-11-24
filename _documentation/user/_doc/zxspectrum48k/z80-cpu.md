@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/z80-cpu
 
 # Zilog Z80 CPU emulator
 
+The Spectrum uses the shared Z80 CPU. Its clock and bus connections provide Spectrum timing, and its snapshot loader restores state from a supported image.
+
 The ZX Spectrum 48K uses the same Z80 CPU plugin as the [MITS Altair8800]({{ site.baseurl }}/altair8800/z80-cpu).
 Please refer to the [z80-cpu documentation]({{ site.baseurl }}/altair8800/z80-cpu) for the complete CPU reference,
 including instruction recording, configuration, and testing.

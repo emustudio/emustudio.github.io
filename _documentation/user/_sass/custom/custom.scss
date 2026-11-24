@@ -31,11 +31,6 @@ table.list, table.list th, table.list tr, table.list td, table.list caption, tab
     text-align: center;
 }
 
-table.control-list.screenshot-controls td:first-child,
-table.control-list.screenshot-controls th:first-child {
-    width: 52px;
-}
-
 .control-icon {
     display: inline-block;
     width: 32px;
@@ -65,5 +60,28 @@ table.control-list {
         padding: 0;
         line-height: 22px;
         vertical-align: middle;
+    }
+}
+
+table.control-list.screenshot-controls {
+    width: 100%;
+    table-layout: fixed;
+
+    th,
+    td {
+        overflow-wrap: anywhere;
+    }
+
+    th:first-child,
+    td:first-child {
+        width: 4.5rem;
+        min-width: 4.5rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow-wrap: normal;
+    }
+
+    .circle {
+        margin-right: 0;
     }
 }

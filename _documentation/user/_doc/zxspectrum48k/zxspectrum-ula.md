@@ -10,6 +10,8 @@ permalink: /zxspectrum48k/zxspectrum-ula
 
 # ZX Spectrum ULA
 
+Open the ULA window to view the Spectrum screen, use the keyboard, or record video. The port and screen-memory reference explains how a program controls the display, keyboard scan, and beeper.
+
 The `zxspectrum-ula` plugin emulates the Uncommitted Logic Array (ULA) chip, which is the central mediator of the
 ZX Spectrum's host-to-emulator interaction. The ULA handles:
 

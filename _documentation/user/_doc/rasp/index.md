@@ -11,6 +11,8 @@ permalink: /rasp/
 
 # Random-Access Stored Program (RASP)
 
+Open **Random-Access Stored Program (RASP)** to study programs that share memory with their data. Step through an example and compare the memory changes with the input and output tapes.
+
 A Random Access Stored Program machine (RASP) is an abstract computer used to study
 [von Neumann architecture][von-neumann]{:target="_blank"} without the details of a particular manufacturer's hardware.
 

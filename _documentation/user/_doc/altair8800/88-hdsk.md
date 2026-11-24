@@ -10,14 +10,16 @@ permalink: /altair8800/88-hdsk
 
 # Altair hard-disk controllers
 
+Choose SIMH HDSK for the SIMH block-device interface or MITS 88-HDSK for the controller connected through an 88-4PIO. The controller determines the wiring, image layout, and commands.
+
 The `88-hdsk` plugin supports the SIMH Altair HDSK extension (default) and a MITS controller behind 88-4PIO.
 The following port protocol describes SIMH mode. HDSK is a synthetic host-backed block device for SIMH
 software, not a physical MITS multi-port controller. It uses port `FDh` and transfers sector data directly between a
 disk image and guest memory.
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, double-click `88-hdsk` in the device list. In SIMH mode, the window shows sixteen drives:
+In **Emulator → Peripheral devices**, select `88-hdsk` and choose **Show device…**. In SIMH mode, the window shows sixteen drives:
 
 ![SIMH HDSK window with numbered disk selection, status, geometry and mounted image]({{ site.baseurl }}/assets/altair8800/88-hdsk-gui.png){: style="max-width: 611px; width: 100%; height: auto;" }
 

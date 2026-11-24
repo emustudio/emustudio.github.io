@@ -10,10 +10,7 @@ permalink: /altair8800/software
 
 # Original software for Altair8800
 
-Since Altair8800 virtual computer emulates a real machine, it's possible to use real software written for the computer.
-Several operating systems, applications and programming languages can be run on Altair. This page covers original
-Altair software and Peter Schorn's collections for the Altair with an 8080 or Z80 CPU. Software for other S-100
-computers sometimes needs a different disk controller, terminal or processor.
+Choose a setup by CPU, disk controller, and guest software. Set up the matching Altair configuration, boot the disk or load the program image, then run the guest commands from its terminal.
 
 The following sites provide disk images, memory images, source code and manuals:
 
@@ -23,8 +20,9 @@ The following sites provide disk images, memory images, source code and manuals:
 - [Altair clone downloads][aclone]{:target="_blank"}.
 - [DeRamp Altair software archive][deramp]{:target="_blank"} and [manuals][manuals]{:target="_blank"}.
 
-Choose the setup family below for the software you want to run. Stop emulation before changing settings or
-loading images; reset before loading a bootloader or applying a memory patch.
+Choose the setup for the software you want to run. The 8080 setups use one 64 KiB bank with a common boundary of
+`0x0000`. Stop emulation before changing settings or loading images. After changing bank settings, save and reopen
+the computer. Reset before loading a bootloader or applying a memory patch. Select bank 0 for a manual bootloader load.
 
 ## Z80 CP/M 2.2 with 88-DCDD
 
@@ -32,7 +30,9 @@ loading images; reset before loading a bootloader or applying a memory patch.
 
 Use this setup for CP/M 2.2, related CP/M systems and the applications in this section:
 
-1. Open **MITS Altair8800 (Z80)** and apply the [CP/M 2.2 memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles). Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
+1. Open **MITS Altair8800 (Z80)**. In [Memory settings]({{ site.baseurl }}/altair8800/byte-mem#memory-settings),
+   set **Banks count** to **1** and **Common boundary** to `0x0000`. Use 64 KiB of memory and keep SIMH pseudo
+   connected to CPU, memory, and PTR/PTP.
 2. In 88-SIO, pair status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
 3. Use VT100 for the applications below: in a copy of the computer configuration, replace `adm3A-terminal`
    with `vt100-terminal` and connect it to 88-SIO in both directions. Save and reopen the computer, then open
@@ -82,11 +82,12 @@ The following image shows `DIR` at the CP/M command prompt:
 
 ![Operating system CP/M 2.2]({{ site.baseurl }}/assets/altair8800/software-cpm22.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+<details markdown="1">
+<summary>Watch CP/M 2.2 list a disk</summary>
+
+![The DIR command displays files on the CP/M 2.2 disk]({{ site.baseurl }}/assets/altair8800/cpm22.gif)
+
+</details>
 
 Commands are followed by Enter. `DIR B:` lists another drive without changing the current drive. `USER 1` selects
 user area 1; use `USER 0` to return. `TYPE filename` displays text, and `PIP` copies files. More information can be
@@ -200,19 +201,14 @@ For Microsoft BASIC, run `MBASIC`, then try `PRINT 2+2`; supplied programs start
 
 ![Microsoft BASIC running a program under CP/M in emuStudio]({{ site.baseurl }}/assets/altair8800/software-cpm-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+<details markdown="1">
+<summary>Watch Microsoft BASIC evaluate an expression</summary>
 
-![Turbo Pascal command menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-turbo-pascal.png){: style="max-width: 900px; width: 100%; height: auto;" }
+![Microsoft BASIC prints the result of an expression]({{ site.baseurl }}/assets/altair8800/mbasic.gif)
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+</details>
+
+![Turbo Pascal startup prompt in the VT100 terminal]({{ site.baseurl }}/assets/altair8800/software-turbo-pascal.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
 BASIC compiler outputs need their runtimes: `CBASIC BLACKJAK` produces `.INT` for `CRUN2 BLACKJAK`; Digital
 Research uses `CBASE2`/`CRUN`; and `CB80` output needs `LINK` or `LK80`. For BASCOM, copy `DO.COM` and `L80.COM`
@@ -236,12 +232,6 @@ disk in `B:`, then run from `0xFF00`. At `A>`, type `B:`, then the package comma
 
 ![WordStar opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-wordstar.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
-
 #### Games
 
 Mount [Games][pkg-games]{:target="_blank"} `games.dsk` in `B:` and boot `cpm2.dsk` from `A:`. Select VT100 for
@@ -261,12 +251,6 @@ at `0xFF00` and run from `0xFF00`. At `A>`, type `B:`, then a game command below
 |---
 
 ![Ladder opening menu in emuStudio VT100]({{ site.baseurl }}/assets/altair8800/software-ladder.png){: style="max-width: 900px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
 
 Othello is on `cpm2.dsk` (`OTHELLO` at `A>`). ELIZA, Star Trek, Hamurabi and Mastermind use `MBASIC name`.
 [DeRamp CP/M games][deramp-cpm]{:target="_blank"} include Zork and a Creative Computing disk (`MBASIC MENU`).
@@ -329,7 +313,9 @@ packages that include it. See the [SIMH pseudo-device page][simh-device]{:target
 
 Use this setup for CP/M 3, Z3PLUS and the RCL Z3PLUS collection:
 
-1. Open **MITS Altair8800 (Z80)** and apply the [CP/M 3 memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles). Keep SIMH pseudo connected to CPU, memory and PTR/PTP.
+1. Open **MITS Altair8800 (Z80)**. In [Memory settings]({{ site.baseurl }}/altair8800/byte-mem#memory-settings),
+   set **Banks count** to **8** and **Common boundary** to `0xC000`. Use 64 KiB per bank and keep SIMH pseudo
+   connected to CPU, memory, and PTR/PTP.
 2. Pair 88-SIO status ports `0x10, 0x14, 0x16, 0x18` with data ports `0x11, 0x15, 0x17, 0x19`.
    Open the connected terminal with half-duplex disabled; use VT100 for screen applications.
 3. Set 88-DCDD to **32 sectors per track** and **137 bytes per sector**.
@@ -345,11 +331,12 @@ It needs the SIMH pseudo device and `mdbl.bin`.
 
 ![Operating system CP/M 3]({{ site.baseurl }}/assets/altair8800/software-cpm3.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+<details markdown="1">
+<summary>Watch CP/M 3 respond in the terminal</summary>
+
+![The ADM-3A terminal displays CP/M 3 output]({{ site.baseurl }}/assets/altair8800/cpm30.gif)
+
+</details>
 
 The applications in the CP/M 2.2 section use CP/M 2.2. See the [CP/M 3 manual][cpm3manual]{:target="_blank"}
 and [SIMH AltairZ80 manual][simhmanual]{:target="_blank"} for the BIOS and additional disk formats.
@@ -410,11 +397,12 @@ can wrap around and report `INSUFFICIENT MEMORY`. The explicit answer above avoi
 
 ![Operating system Altair DOS 1.0]({{ site.baseurl }}/assets/altair8800/software-altairdos.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+<details markdown="1">
+<summary>Watch the Altair DOS terminal</summary>
+
+![The ADM-3A terminal displays output from Altair DOS]({{ site.baseurl }}/assets/altair8800/altairdos.gif)
+
+</details>
 
 ### MITS Disk BASIC
 
@@ -451,13 +439,7 @@ programs. `LOAD "STARTREK"` loads without running; `LIST` displays the source, a
 programs include INVEST, 3DTTT, DAYOWEEK, DAYSPAN, DIAMOND, RUSROU, BOXING, MAP, ANNUITY, LOAN and BOMBER.
 Use the name printed by `FILES`. The [BASIC 4.1 reference manual][basic]{:target="_blank"} describes the disk commands.
 
-![Altair 8800 Basic 4.1]({{ site.baseurl }}/assets/altair8800/software-disk-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
+![Altair Disk BASIC 4.1 startup prompts and the first OK prompt]({{ site.baseurl }}/assets/altair8800/software-disk-basic.png)
 
 The same steps apply to the following native 8-inch floppy versions:
 
@@ -597,12 +579,6 @@ for its disk layout.
 
 ![Minidisk BASIC disk directory in emuStudio]({{ site.baseurl }}/assets/altair8800/software-minidisk-basic.png){: style="max-width: 900px; width: 100%; height: auto;" }
 
-{: .list .control-list .screenshot-controls}
-| Mark | Explanation |
-|:--:|:--|
-| <span class="circle">1</span> | **Terminal output**. The displayed program runs in emuStudio and writes through the emulated serial terminal. |
-| <span class="circle">2</span> | **ASCII input**. Enter byte values when the guest requests input. |
-
 ## 8080 with MITS hard disks
 
 ![Computer schema for 8080 Hard Disk BASIC with 88-4PIO, MITS 88-HDSK and ADM-3A]({{ site.baseurl }}/assets/altair8800/software-schema-mits-hard-disk.png){:style="max-width:569px; width:100%"}
@@ -641,7 +617,7 @@ cannot replace a missing controller or simulator service.
 | Download or family | Requirement and execution route
 |-|-
 | [Burcon CP/M][pkg-burcon]{:target="_blank"} | `DIR` returns `Bdos Err On A: Bad Sector` in emuStudio. Its BIOS requires additional sector validation.
-| [MP/M II][pkg-mpm]{:target="_blank"} | Requires the [MP/M memory profile]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles), `mpm.dsk`, SIMH `i.dsk` and four telnet terminals. The standard schema lacks its multi-terminal SIO setup.
+| [MP/M II][pkg-mpm]{:target="_blank"} | Requires a common boundary of `0xB000`, `mpm.dsk`, SIMH `i.dsk`, and four telnet terminals. The standard schema lacks its multi-terminal SIO setup.
 | [CP/NET and CPNOS][pkg-cpnet]{:target="_blank"} | Require SIMH's NET socket device; ordinary emuStudio SIO does not provide it.
 | [CompuPro CP/M Plus][pkg-cpmplus]{:target="_blank"} | Requires I8272, DISK1A/DISK2, SystemSupport1 serial devices and IMD media; distinct from runnable Schorn Altair `cpm3.dsk`.
 | [UCSD Pascal II.0][pkg-ucsd]{:target="_blank"} and [additional source disks][pkg-ucsddsk]{:target="_blank"} | Needs its special drive mapping: `ucsd.dsk` in floppy 4, `dsk0.dsk`/`dsk1.dsk` as SIMH hard disks, then `PASCAL`. Raw `.gz` source disks are not CP/M floppies.

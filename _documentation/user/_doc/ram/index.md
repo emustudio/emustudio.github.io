@@ -11,6 +11,8 @@ permalink: /ram/
 
 # Random Access Machine (RAM)
 
+Open **Random Access Machine (RAM)** to study a program and its registers separately. Use the input and output tapes to follow how an algorithm consumes data and produces results.
+
 A Random Access Machine (RAM) is an abstract machine used to study the algorithmic complexity of programs on
 register-based computers. It is equivalent to a Turing machine. Like
 [Harvard computer architecture][harvard]{:target="_blank"}, it separates program storage from data storage. Instructions

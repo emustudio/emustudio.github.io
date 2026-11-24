@@ -10,6 +10,8 @@ permalink: /altair8800/88-pio
 
 # MITS 88-PIO and 88-4PIO parallel interfaces
 
+Choose 88-PIO for the original parallel latches or 88-4PIO for the multi-channel PIA board. Use the device window to observe registers and test handshakes on the selected board.
+
 ## Introduction
 
 The MITS **88-PIO** and **88-4PIO** were S-100 expansion boards for connecting an Altair to parallel peripherals.
@@ -80,9 +82,9 @@ The board publishes `PioContext` at index 0. A connected peripheral can drive in
 output and handshake changes. The [MITS hard-disk controller]({{ site.baseurl }}/altair8800/88-hdsk#mits-hard-disk-mode)
 requires this context with at least two PIAs; connect `88-hdsk` to `88-pio` in the computer schema.
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, double-click `88-pio` in the device list. The 88-4PIO window is shown below:
+In **Emulator → Peripheral devices**, select `88-pio` and choose **Show device…**. The 88-4PIO window is shown below:
 
 ![88-4PIO window with numbered attached device, channel, registers and input controls]({{ site.baseurl }}/assets/altair8800/88-pio-gui.png){: style="max-width: 555px; width: 100%; height: auto;" }
 

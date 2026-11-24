@@ -10,8 +10,7 @@ permalink: /altair8800/automation
 
 # Automation
 
-MITS Altair8800 computer is capable of running automatic emulation. Automation can operate in the
-interactive or non-interactive mode.
+Automate the Altair to compile and run a program from the launcher. Choose interactive mode for a terminal window or headless mode to supply input and collect output through files.
 
 In case of the non-interactive mode (`--no-gui` flag set in the command line), the input and output of the terminal
 ADM-3A will be redirected to files, instead of terminal GUI. The input/output file names are configurable, please refer

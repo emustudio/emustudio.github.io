@@ -10,6 +10,8 @@ permalink: /spaceinvaders/
 
 # Space Invaders
 
+Open **Space Invaders** to run the 8080 arcade computer with its display peripheral. Supply your own ROM files, then open the display and start the CPU. The settings control scale, color overlay, and sound.
+
 The `Space Invaders` virtual computer emulates the arcade machine using the
 [Intel 8080 CPU]({{ site.baseurl }}/altair8800/8080-cpu),
 [byte memory]({{ site.baseurl }}/altair8800/byte-mem), and the `spaceinvaders-display` device.
@@ -20,7 +22,7 @@ needed by the game. The bundled `as-8080` assembler also lets you experiment wit
 
 The bundled `SpaceInvaders.toml` configuration uses the following schema:
 
-![Space Invaders computer schema with numbered plugins]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-schema.png)
+![Space Invaders computer schema with numbered plugins]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-schema.png){: style="width: 100%; max-width: 350px; height: auto;" }
 
 {: .list}
 | <span class="circle">1</span> | `as-8080` assembler. Compiles your own 8080 programs into memory; it is not needed to run the arcade ROMs. |
@@ -45,11 +47,11 @@ emuStudio does not distribute the copyrighted arcade ROMs. Supply legally obtain
 ### Configure the ROMs
 
 1. Close the virtual computer before editing `config/SpaceInvaders.toml`.
-2. In `[MEMORY.settings]`, set `memorySize = 65536` (64 KiB).
+2. In `[MEMORY.settings]`, use one 64 KiB bank with `memorySize = 65536`, `banksCount = 1`, and `commonBoundary = 0`.
    The game needs the full 8080 address space, including addresses beyond the framebuffer.
 3. Uncomment the `imageName` and `imageAddress` lines by removing their leading `#`.
    Set each `imageName` to the path of its ROM file. Absolute paths avoid dependence on the launch directory.
-   Keep the addresses shown below. Additional memory settings are described with [byte-mem]({{ site.baseurl }}/altair8800/byte-mem#software-memory-profiles).
+   Keep the addresses shown below and leave the four images assigned to bank 0.
 
 The image settings belong inside the existing `[MEMORY.settings]` section; do not add a second section with that name:
 
@@ -73,15 +75,15 @@ Keep the template's `ROMfrom` and `ROMto` settings, which protect ROM from write
 1. Launch emuStudio and choose **Space Invaders** in the
    [computer chooser]({{ site.baseurl }}/application/opening-computer), or run
    `./emuStudio -cf config/SpaceInvaders.toml` from the installation directory.
-2. Select the **Debugger** tab and double-click `spaceinvaders-display` in the device list to open the game window.
-3. Click **Reset**, then **Run** in the [debugger toolbar]({{ site.baseurl }}/application/main-window#debugger-toolbar).
+2. Select the **Emulator** tab and double-click `spaceinvaders-display` in the device list to open the game window.
+3. Choose **Reset**, then **Run** in the [execution toolbar]({{ site.baseurl }}/application/main-window#use-the-execution-toolbar).
    The ROMs are already loaded; no source compilation is needed to play.
 4. Focus the game window, press and release **C** to insert a coin, then press **1** to start a one-player game.
 5. Use the arrow keys to move and **Space** to fire. Use **Pause** and **Run** in the main window to pause and resume.
 
-## GUI overview
+## Open and use the device
 
-To open the display, double-click `spaceinvaders-display` in the device list on the **Debugger** tab.
+To open the display, double-click `spaceinvaders-display` in the device list on the **Emulator** tab.
 The following screenshot shows a one-player game with `scale = 2` and `colorOverlay = true`:
 
 ![Space Invaders game screen with numbered score, invaders, player area, and lives and credits]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-screen.png){: style="max-width: 448px; width: 100%; height: auto;" }
@@ -115,7 +117,7 @@ so use one-player mode for normal play.
 
 ## Display settings
 
-On the **Debugger** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
+On the **Emulator** tab, select `spaceinvaders-display` in the peripheral device list and click **Show settings...**.
 The settings panel is shown below:
 
 ![Space Invaders display settings]({{ site.baseurl }}/assets/spaceinvaders/spaceinvaders-settings.png){: style="max-width: 492px; width: 100%; height: auto;" }

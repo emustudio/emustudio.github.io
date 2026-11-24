@@ -1,182 +1,144 @@
 ---
 layout: default
 title: Debugger inspection
-nav_order: 8
+nav_order: 7
 parent: emuStudio Application
 permalink: /application/debugger-analysis
 ---
 
+{% include analytics.html category="Application" %}
+
 # Debugger inspection
 
-![8080 program paused at 0100, with instruction labels, CPU registers and memory watches]({{ site.baseurl }}/assets/application/debugger-demo-instructions.png)
+Open **Emulator → Debugger** to inspect live instructions, set breakpoints, and label addresses. Open
+**Emulator → Recording** to capture execution and inspect earlier instructions. Both views share CPU status and watches.
 
-Compile or load a program, open **Debugger**, and pause to inspect or edit state. Drag the dividers to resize panes.
-Selecting an instruction changes the inspected address and leaves the program counter (PC) in place.
+## Browse the instruction listing
 
-## Instruction listing
+Compile or load a program, then stop or pause execution. The listing marks the next instruction and shows disassembly,
+opcode bytes, and labels. The CPU plugin determines the columns.
 
-The debugger tracks executed instructions and transitions during **Run**, timed steps, and single steps, even with
-recording off. The listing uses this history for flow arrows and folding. Resetting the CPU clears the history.
+![8080 instruction listing with a breakpoint and numbered navigation controls]({{ site.baseurl }}/assets/application/debugger-demo-instructions.png)
 
-### Fold repeated instructions
-
-Turn on **Fold identical repeats** below the listing. It groups adjacent instructions with identical text, bytes, and
-length only after the debugger sees the CPU execute them in order. For each pair, the first instruction must lead
-only to the second, and the second must be reached only from the first. Unexecuted instructions stay on separate rows,
-even when every row shows `nop` and `00`.
-
-For example, after the CPU executes three consecutive `nop` instructions at `0100`–`0102`, the listing can show
-`0100–0102  nop × 3`. The current PC, inspected address, enabled breakpoints, labels, current symbols, and user
-annotation edges split runs. Click the marker beside the address range to expand it.
-
-During **Run**, BrainDuck reports each instruction and transition even when it groups instructions or optimizes
-copy, clear, and scan loops. Breakpoints, detailed recording, and stepping retain individual instruction boundaries.
-
-<details markdown="1">
-<summary>8080 example used in these screenshots</summary>
-
-Compile this program with **MITS Altair8800**. It writes `41 42` at `8000` and calls a subroutine.
-Screenshot addresses and bytes are hexadecimal.
-
-```text
-org 100h
-lxi sp,9000h
-mvi a,41h
-sta 8000h
-call increment
-hlt
-increment: inr a
-sta 8001h
-ret
-org 8000h
-db 0,0
-org 8100h
-db 'HELLO DEBUGGER',0
-```
-
-</details>
-
-## Inspect an address
-
-While paused, open **Memory**, enter `0x8000` in **Address**, and press Enter or click **Inspect address**.
-Use decimal or `0x`-prefixed hexadecimal addresses.
-
-In **Set breakpoint...**, choose **Set** to add a breakpoint at the CPU-visible address or **Unset** to remove it.
-When a breakpoint stops the CPU, the debugger shows `Breakpoint: XXXX` and opens **Memory** at that address.
-Later steps follow the PC unless you pinned the view. Toggle breakpoints in the listing to enable or disable them.
-
-## Memory and annotations
-
-### Find bytes, integers or text
-
-While paused, choose **Bytes**, enter `41 42`, and click **Find**. Use `?` as a wildcard, as in `3E ?? 32` or `A? ?F`.
-**Integer** supports 1, 2, 4, or 8 bytes in either byte order. **Text** uses UTF-8.
-Use **Previous** and **Next** to navigate matches. **Show all addresses** restores the full list.
-
-Results show live bytes at matching addresses. Execution, memory edits, and metadata changes clear stale results.
-
-### Find readable strings
-
-**Find strings** finds printable ASCII runs of at least four bytes, such as `HELLO DEBUGGER` at `8100`.
-Toggle **String column** to show or hide those strings. Search again after changing memory.
-
-### Label and comment on addresses
-
-Inspect `0x8000` and choose **Annotations → Annotate inspected address**. Enter `output`, choose **Data**, and click
-**Save annotation**. Annotations mark CPU-visible addresses or ranges as **Code** (default) or **Data**.
-Use **Search annotations** to jump to an entry. Use **Manage…** to import, export, or clear annotations for this computer.
-
-emuStudio saves user annotations, watches, breakpoints, and memory watches together. For `/path/computer.toml`, it
-writes `/path/computer.toml.debugger` atomically and reloads it when you open the computer, regardless of the program.
-Computers without a saved configuration keep settings in memory. Compiler annotations use captured source revisions.
-
-emuStudio warns when it skips invalid entries or deletes an unreadable settings file. On migration,
-execution rules become breakpoints, and read/write rules become memory watches. emuStudio drops legacy hit counts
-and warns when it removes unsupported breakpoint conditions.
-
-Annotation files use `annotation.N.address`, `annotation.N.end`, `annotation.N.label`, and `annotation.N.kind`.
-Import skips duplicates with the same range, kind, and label, and warns about invalid entries. Colors come from the
-range and stay consistent across sessions.
-
-## Watches and breakpoints
-
-### Watch registers and memory
-
-![Watches show A as 0x42, SP as 0x9000, bytes 0x41 and 0x42, and their little-endian word 0x4241]({{ site.baseurl }}/assets/application/debugger-demo-watches.png){: style="max-width: 355px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
+{: .control-list .screenshot-controls}
 | Mark | Explanation |
 |:--:|:--|
-| <span class="circle">1</span> | **Expression**. Enter a register or memory expression. |
-| <span class="circle">2</span> | **Add watch**. Add the expression to the watch list. |
-| <span class="circle">3</span> | **Format**. Choose how watch values are displayed. |
-| <span class="circle">4</span> | **Watch list**. Read values through CPU memory mappings. Change markers last until the next stop. |
+| <span class="circle">1</span> | **Breakpoint row**. Bold text marks an instruction with a breakpoint. |
+| <span class="circle">2</span> | **Instruction listing**. Select an address to inspect it. |
+| <span class="circle">3</span> | **Page controls**. Browse memory or return to the page containing the PC. |
+| <span class="circle">4</span> | **Annotation controls**. Find, add, edit, delete, import, or export labels and ranges. |
 
-Watches use CPU-visible addresses. Choose **Hex + decimal**, **Binary**, or **ASCII**. **Follow value** opens the
-evaluated address. **Edit register** reveals **Write register**.
+1. Select an instruction or use the page controls to move through the listing. The PC stays at the current instruction.
+2. Use **Go to the current page** to return to the PC. Use **Jump…** in the execution toolbar when you want to change the PC.
+3. When source mappings are available, double-click an instruction or right-click and choose **Go to source**.
 
-Watches refresh when execution stops or when you edit one while paused.
+The 8080 and Z80 assemblers can map compiled instructions to source lines, including lines in included files. Recompile
+if the source or loaded code has changed. A raw binary image provides disassembly without compiler source mappings.
 
-| Expression | Meaning |
-|---|---|
-| `A` or `reg(A)` | Accumulator. |
-| `mem[0x8000]` | Byte: `0x41` after execution. |
-| `mem16[0x8000]` | Little-endian word: `0x4241`. |
-| `mem16be[0x8000]` | Big-endian word: `0x4142`; `mem32`/`mem32be` read four bytes. |
-| `(mem[0x8000] & 1) != 0` | Test bit 0. Arithmetic, shifts, comparisons and short-circuit `&&`/`||` are supported. |
+Use **Fold identical repeats** to collapse consecutive identical instructions. Expand a folded row to inspect its
+individual addresses. Labels and breakpoints help preserve boundaries in the listing. Follow observed branch arrows to
+explore execution paths as they appear.
 
-### Monitor memory access
+See [the memory window]({{ '/altair8800/byte-mem' | relative_url }}) for byte-memory search, bank selection, and editing.
 
-In **Watches → Memory access**, enter `0x8001` in **Memory watch address** and choose **Add**. Each row shows the
-current value plus the PC and value of the last read and write. Memory watches let execution continue.
-A new watch shows **Pending** until its first evaluation, or **Unavailable** if the CPU lacks debugger support.
-Select a row and choose **Remove** to delete it.
+## Set and clear breakpoints
 
-### Breakpoints
+A breakpoint stops the CPU before the instruction at its address. Resume with **Run** to pass that breakpoint once.
 
-An enabled breakpoint stops the CPU before it executes the instruction at that address. Resume to pass that breakpoint once.
+1. Pause the CPU and find the instruction.
+2. Right-click the row and choose **Set breakpoint**. To enter an address directly, choose **Set breakpoint…** in the
+   execution toolbar and then choose **Set**.
+3. Run the program. When execution reaches the address, inspect the instruction and CPU status.
+4. Right-click the row and choose **Unset breakpoint**, or enter its address in **Set breakpoint…** and choose **Unset**.
 
-Running or editing memory makes source mappings historical. Recompile to restore source following. Source navigation uses
-explicitly mapped cells. Check the source-mapping status for unsupported compiler coordinates.
+For scripted breakpoint checks, see [Automation]({{ '/application/automation' | relative_url }}).
 
-In **Breakpoints**, use **Enable / disable** or **Remove**. Use **Save settings** to write the computer's `.debugger` file.
+## Label instructions and data
 
-## Execution history
+Annotations attach a label and type to a single address or inclusive range. **Code** marks instructions and **Data**
+marks bytes to treat as data in the listing.
 
-### Instruction recording
+1. Select the instruction or address you want to label.
+2. Choose **Annotate inspected address**. Set **From**, **To**, **Label**, and **Type**, then choose **Save**.
+3. Use the annotation search field to find a label. Select a result to return to its address.
 
-Open **History** while paused. Enable **Record recent instructions**, then run or step. **Recent limit** defaults to
-1,024 and accepts up to 1,000,000 events. **Record to file** can outlast the recent buffer. Use `.emutrace` files and
-choose **Stop file recording** to flush and finish them.
+Use **Edit selected annotation** or **Delete selected annotation** to update a range. **Open annotations** imports
+a properties file and skips duplicates. **Save annotations** exports ranges, labels, and types for sharing.
+Export files use `annotation.N.address`, `annotation.N.end`, `annotation.N.label`, and `annotation.N.kind`.
 
-All bundled CPUs support recording. Register and memory-access details vary by CPU. RAM records typed instructions
-and its instruction pointer. Device and tape state lie outside instruction history. Pausing or stopping recent recording,
-or filling a **Keep first** buffer, ends detailed capture unless file recording is active.
+## Watch registers and memory
 
-| Control | Behavior |
-|---|---|
-| **Record recent instructions** / **Recent limit** | Enable bounded recent capture and set how many instructions to retain. |
-| **Record to file** / **Stop file recording** | Start or finish continuous recording independently of recent history. |
-| **Save recent recording** | Save the retained recent events as a structured recording. |
-| **Export displayed history as text** | Export the displayed recent history or recording page in readable form. |
-| **Export entire recording as text** | Stream the opened recording to readable text, including its completeness status, with bounded memory. |
-| **Open recording** | Inspect a saved recording without changing the live machine. |
-| **First page** / **Next page** | Read a recording in pages of up to 1,024 events. |
-| **Live history** | Return to the current computer's recent history. |
-| **Show unchanged registers** | Include unchanged values in the selected instruction's detail view. |
+Add expressions to **Watches** for values you need while stepping. The panel evaluates them using the selected CPU
+and its memory mapping.
 
-Each row shows the sequence number, CPU-visible address, captured bytes and disassembly, changed registers, and writes.
-Select a row for before and after register values, raw flags, memory accesses, and completion status. For example,
-`010D` records `WRITE 8001 = 42`. Saved recordings use their captured instruction text and values.
+![Watches toolbar and table with register and memory expressions]({{ site.baseurl }}/assets/application/debugger-demo-watches.png)
 
-Filter by **PC from** / **PC through**, **Changed register**, or **Memory address** with **Any access**, **Read**, or
-**Write**. Use decimal or `0x`-prefixed hexadecimal addresses. Filters cover the current page or recent buffer.
-Sequence gaps show omitted events. **Previous recorded write** searches backward from the selected row in that same
-page or buffer for a write to **Memory address**.
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Add watch**. Open the dialog and enter an expression. |
+| <span class="circle">2</span> | **Remove watch**. Delete the selected expression. |
+| <span class="circle">3</span> | **Refresh**. Re-evaluate watches at the current stop. |
+| <span class="circle">4</span> | **Show watch help**. Check the expression syntax and the CPU's register names. |
+| <span class="circle">5</span> | **Expressions and values**. Double-click an expression to edit it. Right-click a value to choose its format. |
 
-In **History**, **Fold identical repeats** groups matching recorded events. Turn it off to inspect each execution.
-Saving a recording keeps every event.
+1. Choose **Add watch**, enter an expression such as `A`, and choose **Add**.
+2. Step the CPU. Check the value and the **changed** indicator.
+3. Right-click the value to choose an available format. Hexadecimal is the default. Options can include decimal, octal,
+   binary, and ASCII.
 
-Recording starts disabled and can slow execution, including when file output waits on storage. emuStudio checks the
-completion marker when it reads the end of a file and flags interrupted or truncated recordings as incomplete.
-Browsing history leaves the live machine as it was. **Move PC Back** sets the PC to the selected instruction address.
+| Expression | Example on the 8080 |
+|:--|:--|
+| `A` or `reg(A)` | Read the accumulator. |
+| `mem[0x8000]` | Read one byte at CPU address `0x8000`. |
+| `mem16[0x8000]` or `mem16be[0x8000]` | Read a little-endian or big-endian word. |
+| `(mem[0x8000] & 1) != 0` | Test whether bit 0 is set. |
+
+Watches refresh on steps and stops, or when you refresh a paused CPU. An invalid expression shows **Inactive** with a reason.
+
+### Keep debugger settings with the computer
+
+emuStudio saves watch expressions, breakpoints, and annotations in the computer configuration under `[debugger]`.
+Reopen the same configuration to restore them. Keep a copy of its TOML file if you want to carry those settings
+to another installation.
+
+## Record executed instructions
+
+Record a run when you need to see what already happened. The recording contains the instructions captured by the CPU
+and any register and memory-access details it provides.
+
+### Capture a run
+
+Use **Start recording** for a recent buffer. Use **New recording** to set a range, choose a different retention policy,
+or write the capture to a file.
+
+1. Open **Emulator → Recording**. For a custom capture, choose **New recording** and prepare its settings.
+2. Select the prepared recording and choose **Start recording**. With no prepared recording selected, the button
+   starts a buffer for the last 1,024 instructions.
+3. Use the execution toolbar to run or step. The recording table fills as instructions execute.
+4. Choose **Stop recording** to finish the capture. Choose **Save recording** to export a completed capture as
+   an `.emutrace` file, or **Open recording** to inspect an existing file.
+
+**Keep first** stops capture when the limit is reached. **Keep last** replaces the oldest events once the buffer fills.
+A file capture can continue until stopped. **Pause recording** suspends capture while leaving the CPU's execution
+controls available.
+
+### Inspect recorded state
+
+![Recording with the capture toolbar, recording selector, instruction list, and recorded state]({{ site.baseurl }}/assets/application/debugger-demo-history.png)
+
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Recording actions**. Create, open, save, start, pause, or stop a recording. |
+| <span class="circle">2</span> | **Recording selector**. Switch between prepared, captured, and opened recordings. |
+| <span class="circle">3</span> | **Recorded instructions**. Select an instruction or page through the recording. |
+| <span class="circle">4</span> | **Recorded state**. Read captured values and follow memory navigation links. |
+
+1. Select a recording, then select an instruction in its table.
+2. Read the recorded state and memory accesses below the table. Use **Show unchanged values** to include unchanged
+   registers when the recording provides them.
+3. Select a memory navigation link and use **Find previous write** to trace an earlier write to that address. Use
+   the page controls to browse longer recordings.
+
+Viewing a recording leaves the live emulator state in place. CPU and memory details vary by computer.

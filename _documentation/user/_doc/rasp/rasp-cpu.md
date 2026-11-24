@@ -10,6 +10,8 @@ permalink: /rasp/rasp-cpu
 
 # CPU "rasp-cpu"
 
+Use the CPU status panel to follow the next instruction while you step through a RASP program. Inspect the memory window for the numeric words that hold both code and data.
+
 The `rasp-cpu` plugin executes RASP instructions. Although RASP is an abstract machine, emuStudio uses the same CPU plugin
 interface as it does for physical processors.
 

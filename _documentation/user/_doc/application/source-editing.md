@@ -10,6 +10,8 @@ permalink: /application/source-editing
 
 # Source editing
 
+Use **File** to manage source tabs and **Edit** to work in the focused source view. Choose a command for the current selection, or use the line and navigation commands at the caret.
+
 The **Edit** menu provides selection, text transformation, navigation, display, refactoring, and split-view commands.
 Commands act on the focused source view. With no selection, line transformations such as sorting and whitespace cleanup
 act on the whole file; duplicate acts on the current line.
@@ -86,7 +88,7 @@ Display and indentation preferences are saved in application settings.
 file…** places two open files side by side. **Close split** restores the tab views. File operations use the focused
 source view. Closing a file or opening another file also restores the tab views.
 
-![Two views of the same source with compiler-defined folds and visible whitespace]({{ site.baseurl }}/assets/application/source-split-view.png){: style="max-width: 1100px; width: 100%;" }
+![Two views of hello-world-8080.asm in the split source editor]({{ site.baseurl }}/assets/application/source-split-view.png){: style="max-width: 1100px; width: 100%;" }
 
 ## Rename and extraction
 

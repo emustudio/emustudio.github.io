@@ -10,8 +10,7 @@ permalink: /ssem/automation
 
 # Automation
 
-In headless automatic emulation (`auto --no-gui`), SSEM writes the final memory dump and register values to `ssem.out`
-in the current working directory.
+Run SSEM from the launcher when you want to automate a program or save its final state. Headless runs write the memory dump and registers to `ssem.out` in the working directory.
 
 The file is overwritten after each emulation "stop".
 

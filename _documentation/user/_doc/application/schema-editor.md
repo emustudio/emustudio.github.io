@@ -10,6 +10,8 @@ permalink: /application/computer-schema
 
 # Computer schema
 
+Use the schema editor to choose a computer's compiler, CPU, memory, and devices. Connect the plugins that need to exchange data or access each other's contexts.
+
 A computer schema describes the plugins in a virtual computer and the connections between them. Each box represents
 a compiler, CPU, memory, or device plugin. Arrows show which plugins can access each other's contexts.
 
@@ -34,7 +36,7 @@ In the [Open virtual computer dialog]({{ site.baseurl }}/application/opening-com
 | <span class="circle">11</span> | **Grid spacing**. Adjust the distance between grid points. |
 | <span class="circle">12</span> | **Canvas**. Place, move, and connect the computer’s plugins. |
 
-## Editor controls
+## Place and move plugins
 
 A computer can have one compiler, one CPU, one memory plugin, and multiple devices. The configurations supplied with
 emuStudio combine a CPU and memory with the compiler and devices required by that computer.
@@ -49,19 +51,20 @@ to remove selected items. Press <kbd>Esc</kbd> to cancel the current drawing ope
 Use **Save & Close** to keep schema changes. Closing the editor with the window's close button discards unsaved schema
 changes; grid preferences are application settings and take effect immediately.
 
-## Connection lines
+## Connect plugins
 
 A connection grants the source plugin access to contexts published by the destination plugin. The arrow points from
 the plugin requesting access to the plugin providing it. A bidirectional connection permits access in both directions.
 
-![A one-way connection from the 8080 CPU to byte memory]({{ site.baseurl }}/assets/application/cpu-memory-connection.png)
+![A bidirectional connection between the 8080 CPU and byte memory]({{ site.baseurl }}/assets/application/cpu-memory-connection.png)
 
-Here the CPU can obtain the memory context to read and write memory. The reverse direction is not enabled. The plugin
-implementations determine which contexts and connection directions a particular computer needs.
+The two arrowheads show that either plugin can request the other's context. The CPU uses the memory context to read
+and write bytes. Check each plugin's documentation for the connections it requires.
 
-To draw a line, select **Add connection** and click an existing box. Move the pointer toward the destination box;
-a temporary line follows it. Click empty canvas positions to add intermediate points, then click the destination box
-to finish. Use clicks rather than dragging, and press <kbd>Esc</kbd> to cancel an unfinished line.
+1. Choose **Add connection**. Turn on **Bidirectional connection** if both plugins need access.
+2. Click the first plugin. A temporary line follows the pointer.
+3. Click any intermediate points, then click the destination plugin. The connection appears in the schema.
+4. Choose **Save & Close** to keep the connection. Press <kbd>Esc</kbd> to cancel an unfinished line.
 
 With no drawing tool active, drag an intermediate point to move it. Drag a line segment to add another point, or
 right-click an existing point to remove it.

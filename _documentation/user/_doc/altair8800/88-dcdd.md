@@ -9,6 +9,8 @@ permalink: /altair8800/88-dcdd
 
 # Altair Floppy Disk (88-DCDD)
 
+Use the 88-DCDD to boot Altair DOS, Disk BASIC, or CP/M from floppy images. This guide covers mounting, drive geometry, and the controller's CPU-port protocol.
+
 [Altair floppy disk][disk]{:target="_blank"} (88-DCDD) offered the advantage of permanent store including relatively
 fast access to data. The speed of data transfer was 250 Kbit/s (The plugin does not emulate this). Data transfer was
 serial, byte after byte.
@@ -63,9 +65,9 @@ Feature highlights are:
 - [x] GUI showing disk activity in runtime
 - [x] Interrupts are supported
 
-## GUI overview
+## Open and use the device
 
-On the **Debugger** tab, double-click `88-dcdd` in the device list:
+In **Emulator → Peripheral devices**, select `88-dcdd` and choose **Show device…**:
 
 ![88-DCDD runtime window with numbered drive selection, flags, position and mounted image]({{ site.baseurl }}/assets/altair8800/88-dcdd-gui.png){: style="max-width: 604px; width: 100%; height: auto;" }
 

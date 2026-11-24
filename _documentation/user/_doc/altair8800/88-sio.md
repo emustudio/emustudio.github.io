@@ -9,6 +9,8 @@ permalink: /altair8800/88-sio
 
 # Serial board 88-SIO
 
+Use 88-SIO to connect the Altair CPU to a serial terminal. Configure the CPU port aliases first, then choose character conversions and interrupt settings for the software you intend to run.
+
 Altair 8800 computer was equipped with serial board called [88-SIO][sio]{:target="_blank"}, or 88-2SIO. It was a device
 which allowed connecting other devices using RS-232 interface. From one side it was attached to CPU on at least two
 ports (most commonly `0x10` and `0x11` for terminal). The other side ended with one physical port allowing to
@@ -88,9 +90,8 @@ The bundled Altair configurations use these CPU ports:
 - Control channel (or "status port"): `0x10`, `0x14`, `0x16`, `0x18` (most commonly used: `0x10` for terminal)
 - Data channel (or "data port"): `0x11`, `0x15`, `0x17`, `0x19` (most commonly used: `0x11` for terminal)
 
-A side note: there existed various additional boards which supported RS-232 communication besides 88-SIO (or 88-2SIO).
-These boards were compatible with S100 system board, thus they were usable for original Altair8800 computers as well
-as its clones. For example: [CompuPro Support Board][compupro-1]{:target="_blank"} (status port `0x5C`, data
+Other S-100 serial boards served the Altair and its compatible computers. Examples include the
+[CompuPro Support Board][compupro-1]{:target="_blank"} (status port `0x5C`, data
 port `0x5D`),
 [CompuPro Interfacer][compupro-if4]{:target="_blank"} (manual [here][compupro-if4-manual]{:target="_blank"}, consuming 8
 CPU ports),
@@ -98,7 +99,7 @@ CPU ports),
 [IMS I/O board][ims-io-board]{:target="_blank"}, [IMSAI SIO Board][imsai-sio]{:target="_blank"},
 [Intersystems 6-SIO][intersystems-6-sio]{:target="_blank"}, etc.
 
-But back to 88-sio. The port numbers allocation can be changed in the Settings window:
+Open **Show settings… → Connection with CPU** to change the emulated 88-SIO's port aliases.
 
 ![88-SIO CPU ports settings]({{ site.baseurl }}/assets/altair8800/88-sio-settings2.png){: style="max-width: 484px; width: 100%; height: auto;" }
 
@@ -134,8 +135,8 @@ support and the input and output vectors:
 
 ## Programming
 
-In order to show something useful, let's assume that a terminal LSI ADM-3A is attached to the board. Remember, the board
-only mediates the communication, it does not interpret any of the sent/received characters.
+Use the following port reference when the 88-SIO connects an ADM-3A to the CPU. The board transfers bytes, and the
+terminal interprets cursor and display commands.
 
 ### CPU Ports
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Device "88-ptr-ptp"
+title: Paper tape reader and punch
 nav_order: 12
 parent: MITS Altair8800
 permalink: /altair8800/88-ptr-ptp
@@ -10,83 +10,94 @@ permalink: /altair8800/88-ptr-ptp
 
 # Paper tape reader and punch
 
-The `88-ptr-ptp` plugin provides a paper tape reader (PTR) and paper tape punch (PTP) through the Altair serial-style
-paper tape ports. It streams files byte for byte; Intel HEX, binary, and other paper tape formats are not interpreted by
-the device.
+Use **Reader** to feed a file from your computer to an Altair program. Use **Punch** to save bytes that the program
+writes. Both tabs are in the **Altair PTR/PTP** window. Open it from **Emulator → Peripheral devices** by selecting
+**Altair PTR/PTP** and choosing **Show device…**.
 
-## CPU ports
+The `88-ptr-ptp` plugin transfers bytes as stored. A `.hex` file reaches the guest as Intel HEX text, ready for a
+guest program that understands that format.
 
-|---
-| Address | Read | Write
-|-|-|-
-|`12h` | Status bits | Write `03h` to clear the reader end-of-file state
-|`13h` | Next reader byte | Append one byte to the punch file
-|---
+## Feed a file to the reader
 
-Status bit 0 is set while a reader is attached and its EOF state has not yet been set. It remains set after the last
-file byte until the next data read returns the EOF marker. Status bit 1 is always set because the punch
-can accept a byte. The first read after the reader reaches the end of its file returns CP/M end-of-file byte `1Ah`;
-later reads return `00h` until the tape is rewound, replaced, or its end-of-file state is cleared.
+Load the tape before starting the guest program that reads it. The reader tracks how many bytes the guest has consumed.
 
-Attaching a punch file creates or **truncates** it. Each output byte is written and flushed immediately. Status bit 1
-is also set with no punch attached; in that case, output bytes are discarded. A reader with no file attached returns
-`00h`.
+![Reader tab with numbered file selection, status, and tape controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-reader.png)
 
-## GUI overview
-
-On the **Debugger** tab, double-click `88-ptr-ptp` in the device list. The **Reader** tab is shown below:
-
-![Paper tape reader window with numbered directory, file list, load action, status, progress and reader controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-reader.png){: style="max-width: 800px; width: 100%; height: auto;" }
-
-{: .list .control-list .screenshot-controls}
+{: .control-list .screenshot-controls}
 | Mark | Explanation |
 |:--:|:--|
-| <span class="circle">1</span> | **Directory**. Choose the directory to list. |
-| <span class="circle">2</span> | **Browse directory**. Select a paper-tape directory. |
-| <span class="circle">3</span> | **Tape files**. Select the file to load. |
-| <span class="circle">4</span> | **Refresh**. Reload the directory listing. |
-| <span class="circle">5</span> | **Load**. Load the selected file into the reader. |
-| <span class="circle">6</span> | **Reader status**. Inspect the loaded file and read position. |
-| <span class="circle">7</span> | **Rewind**. Return to the beginning of the loaded tape. |
-| <span class="circle">8</span> | **Eject**. Unload the reader’s tape. |
+| <span class="circle">1</span> | **Directory**. Shows the folder currently listed. |
+| <span class="circle">2</span> | **Select directory**. Browse to the folder containing the tape file. |
+| <span class="circle">3</span> | **Available tapes**. Lists readable `.pt`, `.bin`, and `.hex` files in that folder. |
+| <span class="circle">4</span> | **Refresh**. Reread the folder after adding or renaming a file. |
+| <span class="circle">5</span> | **Load**. Attach the selected file and start at its first byte. |
+| <span class="circle">6</span> | **Reader status**. Shows the attached file and its state. The progress bar below counts bytes read. |
+| <span class="circle">7</span> | **Rewind**. Return to the start of the attached tape. |
+| <span class="circle">8</span> | **Eject**. Detach the tape. |
 
-Select the **Punch** tab to manage the output tape:
+1. On **Reader**, choose **Select directory** and open the folder that contains your file.
+2. Select the file and choose **Load**. For a nonempty tape, the reader shows **Ready** and starts at zero bytes read.
+3. Run the guest program. The byte count advances as it reads. The reader shows **Read complete** when the program has
+   consumed the last file byte.
 
-![Paper tape punch window with numbered output status, Save tape and Close output controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-punch.png){: style="max-width: 800px; width: 100%; height: auto;" }
+To read the same tape again, choose **Rewind** or reset the virtual computer. Choose **Load** again to pick up changes
+to the host file, since rewinding reuses the bytes already loaded. To remove a tape, choose **Eject**.
 
-{: .list .control-list .screenshot-controls}
+## Capture a file with the punch
+
+Choose the output file before running the guest program. The punch writes each byte to that file as it arrives.
+
+{: .warning}
+Choosing an existing file in **Save tape** erases its contents immediately. Use a new filename for each capture.
+
+![Punch tab with numbered output status and file controls]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-gui-punch.png)
+
+{: .control-list .screenshot-controls}
 | Mark | Explanation |
 |:--:|:--|
-| <span class="circle">1</span> | **Punch status**. Inspect the output file and punched-byte count. |
-| <span class="circle">2</span> | **Save tape**. Choose an output file for punched bytes. |
-| <span class="circle">3</span> | **Close output**. Finish writing and close the punch output. |
+| <span class="circle">1</span> | **Punch status**. Shows the output path and whether the punch is ready. |
+| <span class="circle">2</span> | **Save tape**. Create the output file or replace its existing contents. |
+| <span class="circle">3</span> | **Close output**. Close the file and stop capturing bytes. |
 
-## Settings dialog
+1. Switch to **Punch**, choose **Save tape**, and select the output path. Check that the punch shows **Ready**.
+2. Run the guest program that writes to the punch.
+3. When the program finishes, choose **Close output**. The punch shows **No output tape**, and the captured file is
+   available at the path you chose.
 
-Select `88-ptr-ptp` in the device list and click **Show settings...**:
+Resetting the virtual computer rewinds the reader and leaves the punch file open. Close the output before starting a
+new capture if you want each run in its own file.
 
-![Paper tape settings with numbered startup checkbox, fixed CPU ports and Save button]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-settings.png){: style="max-width: 223px; width: 100%; height: auto;" }
+## Open the window at startup
 
-{: .list .control-list .screenshot-controls}
+In **Emulator → Peripheral devices**, select **Altair PTR/PTP** and choose **Show settings…**. Enable
+**Show GUI at startup**, then choose **Save**. The window opens the next time the computer starts with a GUI.
+
+![Paper tape settings with numbered startup preference, fixed CPU ports, and Save button]({{ site.baseurl }}/assets/altair8800/88-ptr-ptp-settings.png)
+
+{: .control-list .screenshot-controls}
 | Mark | Explanation |
 |:--:|:--|
-| <span class="circle">1</span> | **Show GUI at startup**. Open the reader/punch window when the computer opens. |
-| <span class="circle">2</span> | **CPU ports**. The reader/punch uses fixed status port `12h` and data port `13h`. |
-| <span class="circle">3</span> | **Save**. Save the startup preference. |
+| <span class="circle">1</span> | **Show GUI at startup**. Open the reader and punch window when the computer starts with a GUI. |
+| <span class="circle">2</span> | **CPU ports**. Shows the fixed status and data port addresses. |
+| <span class="circle">3</span> | **Save**. Apply the startup preference. |
 
-## Reset and configuration
+The corresponding TOML setting is `showGuiAtStartup`. It defaults to `false`.
 
-The plugin also publishes a paper tape context so `simh-pseudo` can attach, detach and rewind tapes.
+## Program the CPU ports
 
-Reset rewinds an attached reader and clears its EOF state; it does not detach either file or truncate the punch again.
-Writing `03h` to the status port clears EOF without rewinding, so a reader still at the end returns `1Ah` again.
+The reader and punch share a fixed port pair. On a custom Altair, connect `88-ptr-ptp` to the CPU and reserve both ports.
 
-Attach files in the device window, or from guest
-software through [SIMH pseudo-device commands]({{ site.baseurl }}/altair8800/simh-pseudo#paper-tape-commands-3-5-16-17).
-In a custom computer, `simh-pseudo` requires a connection to this device's paper tape context, as well as CPU and memory.
+| Port | Read with `IN` | Write with `OUT` |
+|:--|:--|:--|
+| `12h` | Bit 0 indicates an attached reader whose end-of-tape state is clear. Bit 1 is always set. | Write `03h` to clear the reader's end-of-tape state while keeping its current position. |
+| `13h` | Read the next reader byte. | Write one byte to the attached punch file. With no output file attached, the byte is discarded. |
 
-## Configuration file
+After the guest consumes the last file byte, status bit 0 stays set until the next read from `13h`. That read returns
+`1Ah` and clears bit 0. Later reads return `00h`. A reader with no tape attached also returns `00h`.
+If the reader is already at the end, writing `03h` to `12h` makes the next data read return `1Ah` again.
+Rewind or reset the computer to return to the first byte.
 
-| Key | Default | Description |
-|:----|:--------|:------------|
-| `showGuiAtStartup` | `false` | Open the device window when the computer is initialized in GUI mode. |
+For guest-controlled attachment or headless runs, connect `simh-pseudo` to the reader and punch as well as to
+the CPU and memory. See [SIMH paper tape commands]({{ site.baseurl }}/altair8800/simh-pseudo#paper-tape-commands-3-5-16-17)
+for the attach, detach, and rewind operations. The [Original software guide]({{ site.baseurl }}/altair8800/software)
+explains how CP/M programs use them to transfer files.

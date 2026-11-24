@@ -10,12 +10,14 @@ permalink: /ssem/ssem-display
 
 # SSEM Display
 
+Open the SSEM CRT display to see the machine's 32 words as rows of lit and unlit bits. Use it alongside memory to connect each store word with its visible pattern.
+
 SSEM used CRT memory (see [ssem-mem][ssem-mem]), whose patterns were visible on the phosphor screen. In emuStudio,
 separate plugins provide memory and display.
  
 [At this link][crt]{:target="_blank"} can be seen the original computer.
 
-## Graphical User Interface (GUI)
+## Open the display
 
 GUI window of the SSEM display in emuStudio is depicted below:
 

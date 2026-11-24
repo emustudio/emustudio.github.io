@@ -11,6 +11,8 @@ permalink: /altair8800/
 
 # MITS Altair8800
 
+Choose **MITS Altair8800** for the Intel 8080 or **MITS Altair8800 (Z80)** for the Zilog Z80. Both use a serial terminal and disk devices. Start with a short assembly program, then configure the hardware needed by the original software you want to run.
+
 The MITS Altair 8800 was introduced in 1975 with an Intel 8080 CPU, 256 bytes of memory, and no display or keyboard.
 Designed by Ed Roberts, it helped make the personal computer accessible to enthusiasts. As Wikipedia states:
 

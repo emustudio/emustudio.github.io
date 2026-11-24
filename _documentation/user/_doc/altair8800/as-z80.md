@@ -10,6 +10,8 @@ permalink: /altair8800/as-z80
 
 # Assembler "as-z80"
 
+Assemble Z80 source in emuStudio or from the command line. The same syntax and directives apply to the Altair and ZX Spectrum configurations.
+
 NOTE: This assembler plugin is shared across multiple virtual computers. It is used in both
 [MITS Altair8800]({{ site.baseurl }}/altair8800/) (with Z80 CPU) and
 [ZX Spectrum 48K]({{ site.baseurl }}/zxspectrum48k/) computers.
@@ -26,7 +28,7 @@ instructions. The assembler supports:
 - literals and expressions in various radixes (bin, dec, hex, oct)
 - output is in [Intel HEX][intelhex]{:target="_blank"} format
 
-## Running from the command line
+## Compile from the command line
 
 The assembler runs from the source editor or the command line. Run these commands from the emuStudio installation
 directory:

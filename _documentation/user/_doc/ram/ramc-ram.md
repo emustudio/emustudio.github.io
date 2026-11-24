@@ -10,11 +10,11 @@ permalink: /ram/ramc-ram
 
 # Compiler "ramc-ram"
 
-The RAM language provides direct and indirect register access, input/output operations, and three jump instructions.
+Write RAM programs with direct and indirect register access, tape input and output, and conditional jumps. Compile them in emuStudio or run the compiler from the command line.
 
 Source code files end with `.ram` extension; compiler output uses extension `.bram`.
 
-## Running from the command line
+## Compile from the command line
 
 Run the compiler from the emuStudio installation directory:
 

@@ -10,6 +10,8 @@ permalink: /altair8800/simh-pseudo
 
 # Pseudo-device "simh-pseudo"
 
+Connect the SIMH pseudo device when a guest needs SIMH host services. This guide covers the required plugin connections, CPU commands, and guest-to-host file transfers.
+
 This device is originally implemented as permanently connected to 88-SIO device in [simh][simh]{:target="_blank"} emulator.
 It listens to custom, non-standard commands from operating system thus simplifies communication between emulator (host) and
 running guest system. This device is required if you want to run CP/M operating system images made for simh emulator.
@@ -20,7 +22,7 @@ Connect the plugin to an `8080-cpu` or `z80-cpu` context, `byte-mem`, and `88-pt
 required at initialization, including the paper tape device when the guest does not use tape commands. The CPU port
 is fixed at `FEh`. There are no plugin-specific configuration keys.
 
-## GUI and settings
+## Open the device and its settings
 
 This device has no GUI or settings dialog. Guest software controls it through CPU port `FEh`.
 

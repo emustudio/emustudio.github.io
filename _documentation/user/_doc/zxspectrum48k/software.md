@@ -10,8 +10,7 @@ permalink: /zxspectrum48k/software
 
 # Software and examples
 
-The ZX Spectrum 48K has an enormous library of software, much of which is available online in TAP and TZX tape image
-formats. These files can be loaded into emuStudio using the [Audio Tape Player]({{ site.baseurl }}/zxspectrum48k/audiotape-player).
+Choose a bundled assembly example to test the emulator, or boot Sinclair BASIC and load external software from tape. Prepare a ROM and the files each route needs.
 
 ZX Spectrum software in TAP and TZX format can be found at various online archives:
 
