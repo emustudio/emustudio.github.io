@@ -49,6 +49,10 @@ there is no separate load step.
 
 ![hello-world-8080.asm open in the editor with Compile was successful in the output pane]({{ site.baseurl }}/assets/altair8800/quickstart/compile.png){:width="960" height="660" loading="lazy" style="max-width: 100%; height: auto;"}
 
+The program starts at address `0000` and uses the `HL` register pair to read a zero-terminated message byte by byte.
+It sends each byte to output port `11h`, which the default 88-SIO routes to the ADM-3A terminal; the message bytes
+form the box and greeting. When the program reaches the terminating zero, it halts.
+
 If emuStudio asks you to stop emulation, use **Stop emulation** on the **Emulator** tab before compiling again.
 
 ## 4. Run and see the result

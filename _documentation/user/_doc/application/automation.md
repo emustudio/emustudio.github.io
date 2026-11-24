@@ -29,6 +29,9 @@ output to files instead, as described in [Device input](#device-input) and [Devi
 devices run silently or may still require host resources, such as audio output. See the documentation of the involved
 plugins.
 
+Non-interactive runs ignore breakpoints and log this in `logs/automation.log` when the CPU starts. Saved breakpoints
+remain available for interactive runs.
+
 ## Input
 
 A run takes input from two sources: the program the CPU executes and the files that devices read. The command line
