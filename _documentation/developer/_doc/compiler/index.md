@@ -148,7 +148,7 @@ After successfully loading generated code, publish all source positions through 
 replacement preserves user annotations and other owners' entries. See
 [annotations]({{ site.baseurl }}/memory/#cell-type-size-and-annotations) for the API and address semantics.
 
-### Source-position coordinates
+## Source-position coordinates
 
 Compilers that emit source annotations declare their column unit through `getSourcePositionColumnUnit()`:
 

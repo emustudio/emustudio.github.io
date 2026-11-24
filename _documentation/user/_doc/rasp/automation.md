@@ -41,16 +41,16 @@ The console reports progress similar to the following (plugin details and paths 
 [INFO] Compiler started working.
 [INFO] Compilation finished.
 [INFO] Resetting CPU...
+[INFO] Running emulation...
 [INFO] Starting logging symbols changes to a file: input_tape.out
 [INFO] Starting logging symbols changes to a file: output_tape.out
-[INFO] Running emulation...
 [INFO] Normal stop
 [INFO] Emulation completed
 ```
 
 The run creates two files in the current working directory:
 
-- `input_tape.out`: records input symbols loaded during reset
+- `input_tape.out`: starts with the input symbols loaded during reset
 - `output_tape.out`: records output symbols written by the program
 
 With input `5`, `output_tape.out` contains `5! = 120` at position 0:

@@ -109,17 +109,23 @@ that bundle; duplicating the standard resource lookup in every plugin is unneces
 settings. Unprefixed keys belong to the plugin's TOML settings table. `set` persists changes immediately; setting
 `null` removes the key.
 
-Keys beginning with `emustudio.` read application settings and are read-only to plugins. In particular,
-`PluginSettings.EMUSTUDIO_NO_GUI` and `PluginSettings.EMUSTUDIO_AUTO` report the active launch mode. These values come
-from the running application, so writing `nogui` or `auto` into TOML does not select that mode. Create Swing windows only
-when GUI mode is enabled, and close resources acquired by the plugin during destruction.
+Keys beginning with `emustudio.` read application settings and are read-only to plugins.
+`PluginSettings.EMUSTUDIO_NO_GUI` reports whether the running application is headless. Create Swing windows only when
+GUI mode is enabled, and close resources acquired by the plugin during destruction.
 
 ```java
 boolean headless = settings.getBoolean(PluginSettings.EMUSTUDIO_NO_GUI).orElse(false);
-boolean automated = settings.getBoolean(PluginSettings.EMUSTUDIO_AUTO).orElse(false);
 int scale = settings.getInt("scale").orElse(2);
 settings.set("scale", scale);
 ```
+
+### Automatic emulation
+
+During automatic emulation, emuStudio calls `Plugin.startAutomation()` after reset in both windowed and headless runs.
+Complete its future when the plugin is ready for the first guest instruction. At the end of the run, emuStudio calls
+`Plugin.stopAutomation()` and waits for its future before destroying the machine. Return promptly from this hook and
+complete the future after the plugin's workers have stopped accessing the machine. The stop hook can also be called
+after failed or skipped startup. Both default implementations complete immediately.
 
 ### Shared Swing helpers
 
