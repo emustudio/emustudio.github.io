@@ -140,8 +140,8 @@ For testing the Z80 CPU accuracy, see the [Z80 CPU documentation]({{ site.baseur
 which describes how to run various Z80 test suites (Patrik Rak's z80test, ZXSpectrumNextTests, ZEXALL) in emuStudio.
 
 The following suites exercise CPU behavior, interrupts, memory protection, floating bus, and Spectrum timing.
-The results below were measured on **2026-10-11**, using rebuilt **emuStudio 0.50-SNAPSHOT** plugins after the [test-suite fixes][suite-fixes]{:target="_blank"},
-the 48K ROM, a 3.5 MHz Z80, and a 69,888 T-state frame. The setup has AY sound and **no Kempston joystick**.
+The results below were measured on **2026-10-11** after the [test-suite fixes][suite-fixes]{:target="_blank"}.
+The setup used the 48K ROM, a 3.5 MHz Z80, a 69,888 T-state frame, and AY sound. The harness had no Kempston joystick.
 
 Tests ran in a headless harness with the CPU, Spectrum bus, ULA, and AY plugins. ROM tape loading was
 accelerated by copying tape blocks; these results check execution after loading, **not TAP/TZX playback**.

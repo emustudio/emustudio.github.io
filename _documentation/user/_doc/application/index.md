@@ -19,8 +19,7 @@ See [Logging]({{ '/application/logging' | relative_url }}) for startup and plugi
 ## Install and launch emuStudio
 
 1. Download and unpack the complete distribution. Prefer TAR on Linux to preserve execution permissions.
-2. Install the Java version required by your build. The 0.41 release needs Java 11 or later. Current development
-   builds need Java 21 or later.
+2. Install Java.
 3. Run the launcher from the unpacked directory. Run `./emuStudio` on Linux or `emuStudio.bat` on Windows.
 4. Select a computer when the chooser opens. The [first experiment]({{ '/first-experiment/' | relative_url }}) walks
    through compiling and running a program.

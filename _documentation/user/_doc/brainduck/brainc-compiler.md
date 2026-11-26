@@ -61,9 +61,8 @@ The compiler is supplied with many example programs written in brainfuck.
 
 ## Additional details
 
-Specification of brainfuck language or interpreter implementation is not complete. There are left some details which
-might be solved differently in different implementations. In this version of BrainDuck implementation in emuStudio, the
-details are hardcoded, as described below.
+Brainfuck leaves some behavior up to the implementation. The following sections describe BrainDuck’s rules for
+comments, memory, and I/O.
 
 ### Comments
 
@@ -86,8 +85,7 @@ Memory size is configurable in `byte-mem`. The bundled BrainDuck computer uses 6
 
 ### End-of-line code
 
-EOL is defined in `vt100-terminal` plugin. In the current version of emuStudio, it is a Newline character with ASCII
-code 10.
+The `vt100-terminal` plugin uses line feed (ASCII 10) as the end-of-line character.
 
 ### End-of-file behavior
 

@@ -19,15 +19,11 @@ Already installed emuStudio? [Start with opening the Altair](#2-open-the-altair)
 ## 1. Install and launch
 
 1. [Download emuStudio](/download/) and unpack the full distribution into a folder you can write to.
-2. Install the Java version required by your build. The 0.41 release needs Java 11 or later. Current development builds
-   need Java 21 or later.
+2. Install Java.
 3. Start emuStudio from the extracted folder. Run `./emuStudio` on Linux or `emuStudio.bat` on Windows.
 
 When the **Open virtual computer** dialog appears, continue to the next step. If the launcher does not start, check the Java installation and
 the [installation instructions](/download/#installation--run) before continuing.
-
-{: .note}
-The screenshots use the current development build. The same example runs on the 0.41 release.
 
 ## 2. Open the Altair
 
