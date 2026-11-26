@@ -26,7 +26,7 @@ Use **File** and **Edit** for the full command lists, and **Project** to view th
 | <span class="circle">1</span> | **Editor toolbar**. Open and save files, find text, compile the active file, and adjust font zoom. |
 | <span class="circle">2</span> | **File tabs**. Switch between open files. An asterisk marks an unsaved change. |
 | <span class="circle">3</span> | **Source view**. Edit the active file with syntax highlighting and line numbers. |
-| <span class="circle">4</span> | **Compiler output**. Check messages after compilation. Drag the divider to resize this pane. |
+| <span class="circle">4</span> | **Compiler output**. Check messages after compilation. Drag the divider to resize this pane, or click a divider arrow to collapse or restore it. |
 
 1. Open a file that the selected computer's compiler supports.
 2. Save modified include files so the compiler reads their current contents from disk. Stop the emulator if it is running.
@@ -55,7 +55,8 @@ The **Emulator** tab puts execution controls above the workspace. **Debugger** s
 | <span class="circle">5</span> | **Watches**. Evaluate expressions when execution stops or pauses. |
 | <span class="circle">6</span> | **Peripheral devices**. Select a device, then choose **Show device…** or **Show settings…** when available. |
 
-Drag the dividers to give a panel more room. See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }})
+Drag a divider to resize the panels on either side. Click a divider arrow to collapse the panel it points toward.
+Click the remaining arrow to restore the panel. See [Debugger inspection]({{ '/application/debugger-analysis' | relative_url }})
 for breakpoints, annotations, watches, and recordings.
 
 ### Use the execution toolbar

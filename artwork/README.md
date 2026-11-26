@@ -26,7 +26,7 @@ Alternatively, render the existing asciinema recording with `agg --theme asciine
 
 ## Thumbnails of screenshots
 
-Capture emuStudio windows at their normal size with the application's default IntelliJ theme. Include only the window
+Capture emuStudio windows at their normal size with the default `LIGHT` theme. Include only the window
 or panel being explained. On Wayland, capture the window region with `grim`; Java Robot can return a black image for
 XWayland windows. Move the mouse pointer outside the capture area before taking each screenshot. Keep terminal text
 and display canvases in the capture.

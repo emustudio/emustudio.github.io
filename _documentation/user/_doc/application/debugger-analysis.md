@@ -125,21 +125,21 @@ within an inclusive range. **Pause recording** suspends capture while leaving th
 
 ### Inspect recorded state
 
-![Recording with the capture toolbar, recording selector, instruction list, and recorded state]({{ site.baseurl }}/assets/application/debugger-demo-history.png)
+![Recording with numbered controls, an instruction table, the page address range, and recorded state]({{ site.baseurl }}/assets/application/debugger-demo-history.png)
 
 {: .control-list .screenshot-controls}
 | Mark | Explanation |
 |:--:|:--|
 | <span class="circle">1</span> | **Recording actions**. Create, open, save, start, pause, or stop a recording. |
 | <span class="circle">2</span> | **Recording selector and actions**. Select, rename, or remove a recording from the list. |
-| <span class="circle">3</span> | **Recorded instructions**. Select an instruction or page through the recording. |
-| <span class="circle">4</span> | **Recorded state**. Read captured values and follow memory navigation links. |
+| <span class="circle">3</span> | **Recorded instructions**. The table shows the address, step, and changes for each recorded instruction. |
+| <span class="circle">4</span> | **Recording page**. Use the buttons on the left to browse longer recordings. The right side shows the first and last instruction addresses on the current page. |
+| <span class="circle">5</span> | **Recorded state**. Read captured values and follow memory navigation links. |
 
 1. Select a recording, then select an instruction in its table.
 2. Read the recorded state and memory accesses below the table. Use **Show unchanged values** to include unchanged
    registers when the recording provides them.
-3. Select a memory navigation link and use **Find previous write** to trace an earlier write to that address. Use
-   the page controls to browse longer recordings.
+3. Select a memory navigation link and use **Find previous write** to trace an earlier write to that address.
 
 Viewing a recording leaves the live emulator state in place. CPU and memory details vary by computer.
 **Edit recording** changes the selected entry's display name. **Delete recording** removes the entry from the list
