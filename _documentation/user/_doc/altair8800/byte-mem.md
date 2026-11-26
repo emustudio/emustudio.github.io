@@ -293,7 +293,7 @@ public interface ByteMemoryContext extends MemoryContext<Byte> {
 }
 ```
 
-[pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
+[pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#initialize()
 [developerDoc]: /documentation/developer/introduction/
 [memoryBanks]: {{ site.baseurl }}/altair8800/byte-mem#memory-bank-switching
 

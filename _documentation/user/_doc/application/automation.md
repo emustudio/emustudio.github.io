@@ -87,7 +87,7 @@ See [SIMH pseudo-device commands]({{ site.baseurl }}/altair8800/simh-pseudo) for
 ## Running automation
 
 A single command selects the computer, the program, and the mode. The following example runs a program on the MITS
-Altair8800 in non-interactive mode and waits at most 5 seconds:
+Altair8800 in non-interactive mode with a 5-second CPU execution limit:
 
     ./emuStudio -cf config/MITSAltair8800.toml --input-file examples/as-8080/reverse.asm auto --no-gui --waitmax 5000
 
@@ -95,28 +95,28 @@ The arguments work as follows:
 
 - `-cf` (or `--computer-file`) loads the computer configuration instead of asking the user to open a computer.
 - `--input-file` supplies the source file to compile and load.
-- `auto` starts automation. It requires a computer selected with `-cf`, `-cn`, or `-ci`.
+- `auto` starts automation. Select a computer with `-cf`, `-cn`, or `-ci`. In interactive mode, you can omit these options and use the chooser.
 - `--no-gui` selects non-interactive mode. Without it, automation opens the device GUIs and starts the CPU.
 - `--waitmax 5000` limits how long the session waits for the CPU, as described below.
 
 ## Controlling the run
 
-Options placed after `auto` control where the CPU starts and how long the session waits. You can also cancel a session
-at any time.
+Options placed after `auto` control where the CPU starts and how long it runs.
 
 `-p ADDRESS` (or `--program-location ADDRESS`) overrides the starting instruction address. Addresses can use decimal or
 a radix prefix such as `0x8000`. Without it, the CPU uses its reset or compiled-program location.
 
-`--waitmax MILLISECONDS` sets a deadline for CPU execution. When the deadline expires, emuStudio asks the CPU to stop and
-the session reports `TIMED_OUT`. Without it, the session waits with no deadline.
+`--waitmax MILLISECONDS` limits the wait for the CPU to stop after it starts. Compilation, plugin startup, and cleanup
+take place outside this limit. When the limit expires, emuStudio stops the CPU and reports `TIMED_OUT`. Omit the option
+to wait indefinitely.
 
-To cancel a session, click **Stop** in the progress dialog in interactive mode, or press **Ctrl+C** in non-interactive
-mode.
+In interactive mode, click **Stop** once the progress dialog reaches **Running emulation…**. The button is disabled
+during compilation and reset. In non-interactive mode, press **Ctrl+C**.
 
 ## Results
 
-A run leaves its results in three places: device output, the exit status, and the automation log. When the CPU stops,
-the session waits for participating devices to stop and then collects their output.
+A run leaves device output, an exit status, and an automation log. After execution, emuStudio waits for the CPU and
+plugins to finish their shutdown work before closing the computer.
 
 ### Device output
 
@@ -141,7 +141,7 @@ Devices not listed here write no automation output. For files that devices read,
 
 ### Exit status and log
 
-The exit status tells whether the run succeeded; the log explains why it ended.
-
-A failed run returns a nonzero exit status. `logs/automation.log`, relative to the current working directory, records
-the final run reason and any output or cleanup failures.
+Exit status `0` covers `NORMAL_STOP`, an interactive `BREAKPOINT`, and `TIMED_OUT` when cleanup succeeds.
+Execution or cleanup failures return a nonzero status. Scripts that require a normal stop should also check the
+`Run result:` entry in `logs/automation.log`, relative to the current working directory. The log records cleanup
+failures as well.

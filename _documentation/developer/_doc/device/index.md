@@ -84,6 +84,6 @@ encoding off the CPU thread. Use `AudioSink.NULL` for a silent headless device; 
 an unavailable host audio device. Flush pending audio on reset, remove CPU cycle listeners on destruction, and close
 playback and recording resources. Saving a recording must run outside Swing's event-dispatch thread.
 
-[device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/Device.html
-[deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/DeviceContext.html
-[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/AbstractPlugin.html
+[device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/device/Device.html
+[deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/device/DeviceContext.html
+[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/AbstractPlugin.html

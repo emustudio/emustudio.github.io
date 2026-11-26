@@ -12,40 +12,49 @@ permalink: /application/source-editing
 
 Use **File** to manage source tabs and **Edit** to work in the focused source view. Choose a command for the current selection, or use the line and navigation commands at the caret.
 
-The **Edit** menu provides selection, text transformation, navigation, display, refactoring, and split-view commands.
+The **Edit** menu provides column selection, text transformation, go-to-line, display, refactoring, and split-view commands.
 Commands act on the focused source view. With no selection, line transformations such as sorting and whitespace cleanup
 act on the whole file; duplicate acts on the current line.
 
-![Edit menu with text, selection, navigation, macros, display, refactoring, and split-view commands]({{ site.baseurl }}/assets/application/source-edit-menu.png){: style="max-width: 1100px; width: 100%;" }
+![Edit menu with numbered controls for text editing, column selection, navigation, and editor views]({{ site.baseurl }}/assets/application/source-edit-menu.png){: style="max-width: 1100px; width: 100%;" }
+
+{: .control-list .screenshot-controls}
+| Mark | Explanation |
+|:--:|:--|
+| <span class="circle">1</span> | **Text**. Duplicate, reorder, or transform source lines. |
+| <span class="circle">2</span> | **Column Selection Mode**. Toggle rectangular selection in the active view. |
+| <span class="circle">3</span> | **Go to line / column**. Move the caret to a source position. |
+| <span class="circle">4</span> | **Indentation...**. Set indent width, tabs or spaces, and alignment columns. |
+| <span class="circle">5</span> | **Editor display**. Toggle visible whitespace, indentation guides, and soft wrap. |
+| <span class="circle">6</span> | **Refactor** and **Split view**. Rename or extract code, or open a second view. |
 
 ## Files and tabs
 
-**File → New** creates an untitled tab. **File → Open** opens another file or selects its existing tab. Click the small
-**×** beside a tab's name to close that file, even when another tab is selected. **Ctrl+W** and **File → Close tab**
-close the active file. Unsaved changes are marked with `*`; closing offers save, discard, or cancel. Closing the last
-file leaves a fresh untitled tab. Saved open files are restored when you reopen that virtual computer.
+The editor opens with an untitled tab. **File → New** creates a tab. **File → Open** opens a file or selects its
+existing tab. Click **×** beside any tab's name to close that file. Use **File → Close tab** to close the active
+file. An asterisk marks unsaved changes. Closing a modified tab offers save, discard, or cancel. Closing the last
+file leaves a fresh untitled tab.
 
 Save, Save As, and compilation use the focused source view. In a split, click the view you want to work on first.
 Save other modified files before compiling a source that includes them. Ctrl-click a compiler-identified include path
 to open it in a tab; save the containing file first so relative paths can be resolved.
 
-The editor uses JetBrains Mono NL. The toolbar's **Font zoom** slider and **Ctrl+mouse wheel** change the active view's
+The editor uses JetBrains Mono NL. The toolbar's **Font zoom** control and **Ctrl+mouse wheel** change the active view's
 font size; **Ctrl++** and **Ctrl+-** also zoom. Line numbers and compiler-provided syntax highlighting help identify
 source positions. Undo/redo and cut/copy/paste are available in **Edit** and the toolbar; **Edit → Select All** selects
 the entire document.
 
 ## Multiple selections and columns
 
-Hold **Alt** and click to add carets. **Alt+D** selects the next occurrence of selected text; **Ctrl+Shift+L** selects
-all occurrences. Typing, deletion, cut, and paste act on all selections in one undo step. Arrow keys move all carets;
-**Escape** clears additional selections. Copy joins selections with newlines. When pasted text contains one row per
-selection, each selection receives its corresponding row; otherwise every selection receives the full text.
+Hold **Alt** and click to add carets. Typing, deletion, cut, and paste act on all selections in one undo step.
+Arrow keys move all carets. **Escape** clears additional selections. Copy joins selections with newlines. When the
+clipboard has one row per selection, paste inserts the corresponding row into each selection. Otherwise, paste
+inserts the full clipboard text into each selection.
 
-Hold **Alt+Shift** and drag for a rectangular selection. **Edit → Selection → Column selection** also converts an
-ordinary selection's endpoints into a rectangle. Insertion pads short lines to the selected column.
-
-Use **Alt+Shift+Right** to expand a selection through a word, enclosing brackets, lines, a detected fold, and the file.
-**Alt+Shift+Left** restores the previous selection.
+Choose **Edit → Column Selection Mode** to toggle the mode in the active editor view.
+While the menu item is checked, drag or use **Shift+arrow keys** to create and extend a rectangle.
+Toggle the mode off to return to regular selection. For a single rectangular selection, hold **Alt+Shift** and drag.
+Typing into a column selection pads short lines to the selected column.
 
 ## Find and replace
 
@@ -53,36 +62,27 @@ Use the inline search bar to find or replace text in the active source view. See
 
 ## Text and indentation
 
-**Ctrl+Shift+D** duplicates a line or selection. **Edit → Text** also provides sorting, reversing, removing duplicate
+**Edit → Text → Duplicate line / selection** duplicates the current line or selection. **Text** also provides sorting, reversing, removing duplicate
 lines, trailing-whitespace cleanup, tab/space conversion, reindentation, and column alignment.
 **Uppercase**, **Lowercase**, and **Invert case** transform selected text, including multiple selections, in one undo
 step. With no selection, these case commands leave the text unchanged.
 
-**Ctrl+/** toggles comments using the active syntax's comment delimiter. **Edit → Editor display → Indentation settings**
-controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
-uses generic block markers supplied by the compiler.
+**Edit → Text → Toggle comment** uses the active syntax's comment delimiter. **Edit → Indentation...** controls
+indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries. Reindentation uses
+generic block markers supplied by the compiler.
 
 ## Navigation
 
-**Ctrl+G** opens go-to-line/column, using `line:column` with both numbers starting at 1. **Edit → Navigate → Back**,
-**Forward**, and **Previous edit** revisit source locations.
+Choose **Edit → Go to line / column** and enter `line:column`, with both numbers starting at 1.
 
-## Folding, display, macros, and splits
+## Display and splits
 
-Use the fold gutter or **Edit → Editor display → Collapse all / Expand all** to fold compiler-provided blocks, multiline comments, and indented
-regions. A comment ending in `region` (optionally followed by a name) and a comment ending in `endregion` mark a custom
-region. Plain text supports `#region` and `#endregion` lines. Fold detection does not recognize assembler keywords in
-the editor.
+**Edit → Editor display** controls visible whitespace, indentation guides, and soft wrap.
+Choose **Edit → Token colors...**, select a token type on the left, and pick its color on the right. Choose **OK** to save changes
+to all edited types or **Cancel** to discard them.
 
-**Edit → Editor display** controls visible whitespace, end-of-line markers, indentation guides, soft wrap, and token colors.
-Choose **Syntax highlighting** to select the syntax for the focused file: **Default (selected compiler)**,
-**Plain text**, or one of the bundled language modes. This choice also selects that mode's comment and folding rules;
-compilation and compiler-assisted refactoring still use the virtual computer's compiler. Both views of the same file
-share its syntax choice. Choices for saved files are restored on reopening; untitled files keep their choice when saved.
+The virtual computer's compiler provides syntax highlighting and comment delimiters.
 Display and indentation preferences are saved in application settings.
-
-**Edit → Editing macros → Start recording / Stop recording** records the editor library's typing and editing actions.
-**Ctrl+Shift+M** replays the last recording. Recording is shared across source views for the current application session.
 
 **Edit → Split view → Split current file** opens two views of one document; edits appear in both. **Split with another
 file…** places two open files side by side. **Close split** restores the tab views. File operations use the focused
@@ -124,19 +124,19 @@ subroutine extraction because the generated call, jump, and return change the pr
 
 ## Keyboard shortcuts
 
-| Shortcut | Action |
-| --- | --- |
-| **Ctrl+W** | Close active file |
-| **Ctrl+F / Ctrl+R** | Show inline find / replace |
-| **F3 / Shift+F3** | Next / previous search match |
-| **Ctrl+Shift+D** | Duplicate line or selection |
-| **Ctrl+/** | Toggle comment |
-| **Alt+D** | Add next occurrence to the selection |
-| **Ctrl+Shift+L** | Select all occurrences |
-| **Alt+click** | Add a caret |
-| **Alt+Shift+drag** | Make a rectangular selection |
-| **Alt+Shift+Right / Left** | Expand / shrink selection |
-| **Ctrl+G** | Go to line / column |
-| **Ctrl+Shift+M** | Replay editing macro |
-| **Ctrl+mouse wheel / Ctrl++ / Ctrl+-** | Change font size |
-| **Escape** | Clear additional carets and marked occurrences |
+| Action | Linux and Windows | macOS |
+| --- | --- | --- |
+| Close active file | **Ctrl+F4** | **Cmd+W** |
+| Show inline Find / Replace | **Ctrl+F** / **Ctrl+R** | **Cmd+F** / **Cmd+R** |
+| Next / previous match | **F3** / **Shift+F3** | **F3** / **Shift+F3** |
+| Duplicate line or selection | **Ctrl+D** | **Cmd+D** |
+| Redo | **Ctrl+Shift+Z** | **Cmd+Shift+Z** |
+| Delete current line | **Ctrl+Y** | **Cmd+Backspace** |
+| Toggle comment | **Ctrl+/** | **Cmd+/** |
+| Toggle Column Selection Mode | **Alt+Shift+Insert** | **Cmd+Shift+8** |
+| Go to line / column | **Ctrl+G** | **Cmd+L** |
+| Rename symbol | **Shift+F6** | **Shift+F6** |
+
+Hold **Alt** (Option on macOS) and click to add a caret, or hold **Alt+Shift** and drag to select a rectangle.
+Press **Escape** to clear additional carets and marked occurrences. Use **Ctrl+mouse wheel**, **Ctrl++**, or **Ctrl+-**
+to change the font size.

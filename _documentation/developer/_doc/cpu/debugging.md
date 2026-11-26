@@ -8,9 +8,8 @@ permalink: /cpu/debugging
 
 # Optional machine debugging
 
-A CPU plugin can implement `Debugging` alongside `CPU`. Plugins interpret their machines; emuStudio owns breakpoints,
-watches, history, recording and execution control. Real processors can show registers; abstract machines can show tapes
-and symbolic values. The shared CPU interface defines neither representation.
+A CPU plugin can implement `Debugging` alongside `CPU`. emuStudio owns breakpoints, watches, recording, and execution
+control. The plugin supplies its machine's values, such as processor registers or symbolic tape cells.
 
 ## Debugging interface
 
@@ -46,7 +45,8 @@ Implement the interface directly on the plugin root and delegate to a plugin-own
 share observer mechanics, and `ExpressionParser` can share expression syntax with plugin-defined name/function resolvers.
 Resolve names during compilation without reading guest state; evaluation and display happen at the execution seam.
 
-Return plain text from `getExpressionsHelp()` covering the syntax, names, and functions that `compile()` accepts.
+Return plain text from [`getExpressionsHelp()`]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/debugger/Debugging.html#getExpressionsHelp%28%29)
+covering the syntax, names, and functions that `compile()` accepts.
 emuStudio shows this reference in the Watches panel. Plugins using the shared parser can include
 `ExpressionParser.syntaxHelp()` for the common syntax.
 
@@ -56,8 +56,8 @@ emuStudio shows this reference in the Watches panel. Plugins using the shared pa
 | `ACCESSES` | Instruction/next-address facts plus guest-access tracking; no full `StepView` |
 | `FULL` | Instruction/next-address facts, guest-access tracking, and full recorded `StepView` |
 
-Use `INSTRUCTION` for the default observed graph, `ACCESSES` when memory watches need guest accesses, and `FULL` only
-for history or recording. Closing the observer handle removes its capture request.
+emuStudio requests `INSTRUCTION` to follow executed branches and `FULL` during instruction recording.
+Closing the observer handle removes its capture request.
 
 Plugin editors apply register and memory changes directly, including while the CPU runs. The host does not queue
 edits or coordinate them with execution steps. Keep Swing work on its event thread. `Debugging` adds no update protocol.
@@ -69,18 +69,16 @@ edit queue before executing instructions.
 
 Call the observer before guest effects; true requests an intentional stop. After an attempted step, deliver its completed
 or failed outcome, captured instruction when available, and truthful actual next address. Full recorded presentation
-belongs only to `Capture.FULL`. Memory watches are passive and never stop
-execution. A refused before-step produces no executed row.
+belongs only to `Capture.FULL`. Watch expressions read current state when execution pauses or stops.
+A refused before-step produces no executed row.
 
 The host owns breakpoints, persistence and one-step continuation. It skips breakpoints once for Manual
 Step or direct Continue from a breakpoint, then rearms them. Host reset and jump commands clear continuation. Plugins
 must not implement a second breakpoint store or independent skip policy.
 
-At computer open, `DebuggerSession` loads user annotations, watches, breakpoints and memory watches once from the
-configuration's `.debugger` file: `/path/computer.toml` uses `/path/computer.toml.debugger`. One atomic save writes them
-together. Computers without a saved configuration keep this metadata in memory. Compiler annotations, mappings and
-temporary diagnostics are not saved. Explicit annotation import/export remains separate and appends annotations,
-skipping exact duplicates.
+At computer open, `DebuggerSession` loads watch expressions, breakpoint addresses, and user annotations from
+`[debugger]` in the computer TOML. The host saves those values when they change. Compiler annotations, source mappings,
+and diagnostics are session state. Annotation import merges entries from a properties file and skips exact duplicates.
 
 Preserve actual guest-step granularity when stopping or detailed capture requires it. BrainDuck grouping cannot hide observed operations; nested interrupt dispatch
 must not invent extra operations or attach unrelated program locations. Inspection must use side-effect-free reads and
@@ -113,8 +111,7 @@ Accept and save invalid expressions, but deactivate only the affected watch. Rep
 clear them when corrected. Runtime evaluation and presentation failures never request an emulation pause.
 
 Recording open/write/close failure stops only the recorder, preserves any incomplete file and reports the problem.
-Other debugging and emulation continue. There is no automatic restart or file-repair logic; a later recording starts
-a fresh file. Recorder failures do not change the headless emulation result. A false script `ASSERT` still fails the script.
+Other debugging and emulation continue. Starting another file recording creates a new capture.
 
 Active capture may slow execution through bounded synchronous writing. It must not silently drop requested events.
 With observation inactive, retain original execution memory and avoid presentation allocations.
@@ -129,7 +126,7 @@ The host accumulates observed instruction transitions until a successful CPU res
 Memory edits, source changes, annotations, and resuming execution do not clear observations. Unexecuted alternatives
 are not predicted. Mnemonic/opcode classification, static target declarations, and `.eds` flow syntax are absent.
 
-Runtime flow capture uses lightweight instruction observation; enabling the graph does not enable full recording.
+Runtime flow capture uses lightweight instruction observation during normal execution.
 Source mappings and labels remain separate from captured machine-state presentation.
 
 ### Optimized execution
@@ -158,6 +155,6 @@ instructions and potentially failing steps retain individual callbacks.
 
 ## Reference
 
-See [Debugging]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/debugger/Debugging.html),
-[StepView]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/debugger/StepView.html), and
-[DecodedInstruction]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/DecodedInstruction.html).
+See [Debugging]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/debugger/Debugging.html),
+[StepView]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/debugger/StepView.html), and
+[DecodedInstruction]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/DecodedInstruction.html).

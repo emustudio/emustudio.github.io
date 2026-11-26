@@ -18,17 +18,25 @@ their preferences back to this file while emuStudio is running.
 
 ## Configuration and plugin roots
 
-The configuration and plugin trees can have separate base directories. This is useful for read-only installations,
-portable profiles, and development builds.
+Set separate roots for application settings and plugins to use portable profiles or read-only installations.
 
-| Command-line option | Environment variable | Resolved content |
-|---|---|---|
-| `--config-dir DIR` | `EMUSTUDIO_CONFIG_DIR` | `emuStudio.toml` and the `config/` virtual-computer directory |
-| `--plugins-dir DIR` | `EMUSTUDIO_PLUGINS_DIR` | `compiler/`, `cpu/`, `memory/`, and `device/` plugin directories |
+| Root | Command-line option | Environment variable | Contents |
+|---|---|---|---|
+| Configuration | `--config-dir DIR` | `EMUSTUDIO_CONFIG_DIR` | `emuStudio.toml` and computer files in `config/` |
+| Plugins | `--plugins-dir DIR` | `EMUSTUDIO_PLUGINS_DIR` | `compiler/`, `cpu/`, `memory/`, and `device/` plugin directories |
 
-For each root, the command-line option has priority over its environment variable. If neither is set, emuStudio uses
-the current working directory. Relative plugin paths in a computer configuration are resolved below the selected
-plugin root; absolute plugin paths remain unchanged. These options also work after the `automation` subcommand.
+For each root, the command-line option takes precedence over its environment variable. If neither is set, emuStudio
+uses the current working directory. Relative plugin paths in a computer configuration resolve below the plugin root;
+absolute paths remain unchanged. You can also use these options after the `automation` subcommand.
+
+Each computer configuration is a separate TOML file in `config/`. Manage its plugins and connections with the
+[Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) or the
+[schema editor]({{ site.baseurl }}/application/computer-schema).
+
+Computer files also store watch expressions, breakpoints, and user annotations in `[debugger]`. Copy a computer's
+TOML file to carry these settings to another installation. See
+[Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
+to learn which controls update them.
 
 ## Application settings
 
@@ -36,31 +44,38 @@ plugin root; absolute plugin paths remain unchanged. These options also work aft
 |---|---|---|---|
 | `useSchemaGrid` | `true` / `false` | `true` | Show the grid and snap placement and movement to it in the schema editor. |
 | `schemaGridGap` | positive integer | `20` | Grid spacing in pixels; the editor's slider offers values from `5` to `100`. |
-| `theme` | `"LIGHT"`, `"DARK"`, `"INTELLIJ"` | `"INTELLIJ"` | Window and control appearance. Change the file and restart emuStudio. |
-| `flowAnalysisLimit` | positive integer | `1000` | Maximum number of instructions visited by debugger flow analysis. Invalid values use `1000`. |
+| `theme` | `"LIGHT"`, `"DARK"` | `"LIGHT"` | Window and control appearance. Unsupported values use `"LIGHT"`.   |
 
 ### Source editor preferences
 
-Use **Edit → Editor display** to change these settings. New source views and later sessions use the saved preferences;
-changing a display option affects the focused view immediately. The other open views keep their current display.
+Use **Edit → Indentation...** to set tab width, choose tabs or spaces, and set alignment columns. Use **Edit → Editor
+display** for the display settings. New source views and later sessions use the saved preferences. Changing a display
+option affects the focused view immediately. The other open views keep their current display.
 
 | Configuration key | Possible values | Default value | Description |
 |---|---|---|---|
-| `editorTabSize` | integer from `1` to `16` | `4` | Indentation width and displayed tab width. |
+| `editorTabSize` | from `1` to `16` | `4` | Indentation width and displayed tab width. |
 | `editorSpaces` | `true` / `false` | `true` | Insert spaces instead of tab characters when indenting. |
 | `editorWhitespace` | `true` / `false` | `false` | Show space and tab markers. |
-| `editorEndOfLine` | `true` / `false` | `false` | Show end-of-line markers. |
 | `editorIndentGuides` | `true` / `false` | `false` | Show indentation guides. |
 | `editorWrap` | `true` / `false` | `false` | Wrap long lines in the source view. |
-| `editorFolding` | `true` / `false` | `true` | Enable source folding. |
 
-Column alignment, token colors, and per-file syntax choices are also stored by the editor. Use
-its editing menus to change them. See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
+See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
 
-Computer configurations are separate TOML files in `config/`. Use the
-[Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and
-[schema editor]({{ site.baseurl }}/application/computer-schema) to manage their plugins and connections.
+#### Token colors
 
-The computer TOML also stores watch expressions, breakpoints, and annotations under `[debugger]`. See
-[Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
-for the controls that update these settings.
+**Edit → Editor display → Token colors** saves changed colors to top-level keys in `emuStudio.toml` when you choose
+**OK**. Values are signed 32-bit ARGB integers. Omit a key to use the default color shown in the table as RGB hex.
+
+| Token category | Configuration key | Default color |
+|---|---|---|
+| Reserved words | `tokenColorReserved` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Identifiers | `tokenColorIdentifier` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Labels / definitions | `tokenColorLabel` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #008080">&nbsp;</span> (`#008080`) |
+| Directives / blocks | `tokenColorPreprocessor` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #505050">&nbsp;</span> (`#505050`) |
+| Comments | `tokenColorComment` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #008000">&nbsp;</span> (`#008000`) |
+| Literals | `tokenColorLiteral` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000080">&nbsp;</span> (`#000080`) |
+| Registers | `tokenColorRegister` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #800000">&nbsp;</span> (`#800000`) |
+| Operators | `tokenColorOperator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000080">&nbsp;</span> (`#000080`) |
+| Separators | `tokenColorSeparator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Errors | `tokenColorError` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #FF0000">&nbsp;</span> (`#FF0000`) |

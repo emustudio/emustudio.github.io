@@ -209,9 +209,9 @@ machine-specific contention handling. The CPU already accounts for the base cycl
 so audio playback, file encoding, and Swing updates must not block that thread.
 
 
-[cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html
-[abstractCPU]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/AbstractCPU.html
-[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
+[cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPU.html
+[abstractCPU]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/AbstractCPU.html
+[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/MemoryContext.html
 [edigen]: https://github.com/emustudio/edigen
-[initializationException]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/PluginInitializationException.html
+[initializationException]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugin/PluginInitializationException.html
 [swingthread]: https://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html

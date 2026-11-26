@@ -87,8 +87,8 @@ combination of multiple sister projects:
 [antlr-runtime]: https://www.antlr.org/
 [slf4j]: https://www.slf4j.org/
 [picoli]: https://picocli.info/
-[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
-[applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
+[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/settings/PluginSettings.html
+[applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/ApplicationApi.html
 [vonNeumann]: https://en.wikipedia.org/wiki/Von_Neumann_architecture
 
 [emulib-maven]: https://central.sonatype.com/artifact/net.emustudio/emulib

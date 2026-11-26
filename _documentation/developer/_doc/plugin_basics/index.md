@@ -121,9 +121,12 @@ settings.set("scale", scale);
 
 ### Automatic emulation
 
-During automatic emulation, emuStudio calls `Plugin.startAutomation()` after reset in both windowed and headless runs.
+During automatic emulation, emuStudio calls
+[`Plugin.startAutomation()`]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#startAutomation%28%29)
+after reset in both windowed and headless runs.
 Complete its future when the plugin is ready for the first guest instruction. At the end of the run, emuStudio calls
-`Plugin.stopAutomation()` and waits for its future before destroying the machine. Return promptly from this hook and
+[`Plugin.stopAutomation()`]({{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#stopAutomation%28%29)
+and waits for its future before destroying the machine. Return promptly from this hook and
 complete the future after the plugin's workers have stopped accessing the machine. The stop hook can also be called
 after failed or skipped startup. Both default implementations complete immediately.
 
@@ -219,12 +222,12 @@ when a tool depends on another plugin. Application libraries under `lib/` are ad
 [slf4j]: https://www.slf4j.org/
 [picoli]: https://picocli.info/
 
-[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/settings/PluginSettings.html
-[applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ApplicationApi.html
-[cpu]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html
-[device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/Device.html
-[memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
-[compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
-[pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/annotations/PluginRoot.html  
-[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/AbstractPlugin.html
+[pluginSettings]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/settings/PluginSettings.html
+[applicationApi]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/ApplicationApi.html
+[cpu]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPU.html
+[device]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/device/Device.html
+[memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/Memory.html
+[compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/compiler/Compiler.html
+[pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/annotations/PluginRoot.html
+[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/AbstractPlugin.html
 [toml]: https://toml.io/en/v0.5.0

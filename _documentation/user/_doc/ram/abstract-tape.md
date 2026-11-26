@@ -318,4 +318,4 @@ The following table shows all the possible settings of Abstract tape plugin:
 |`alwaysOnTop`     | false | true, false | Whether the tape GUI should not allow to fall behind other windows
 |---
 
-[pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
+[pluginInitialize]: /documentation/developer/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#initialize()

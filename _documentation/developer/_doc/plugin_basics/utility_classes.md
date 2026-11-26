@@ -16,7 +16,7 @@ emuLib provides shared utilities for plugin developers. This page covers common 
 ## Intel HEX file generator
 
 Class name
-: [net.emustudio.emulib.runtime.io.IntelHEX][emulib_intelhex]{:target="_blank"}
+: [net.emustudio.emulib.io.IntelHEX][emulib_intelhex]{:target="_blank"}
 
 Usage
 : Generates ASCII [Intel HEX][intelhex]{:target="_blank"} output, typically for compiler plugins.
@@ -39,7 +39,7 @@ address-to-byte view and `findProgramLocation()` returns the lowest address.
 
 ## Audio playback
 
-`net.emustudio.emulib.runtime.audio` provides two small playback utilities in emuLib 12.1.0-SNAPSHOT.
+`net.emustudio.emulib.audio` provides two small playback utilities in emuLib 12.1.0-SNAPSHOT.
 Plugins own their output resources and close them when the device is destroyed.
 
 `AudioSink` accepts interleaved signed 16-bit little-endian PCM, with a configurable sample rate and channel count:
@@ -77,7 +77,7 @@ the plugin. Playback uses only the JDK, with no additional dependency.
 
 ## Video and audio recording
 
-`net.emustudio.emulib.runtime.recording.RecordingSession` records MP4 video with stereo PCM audio. It owns H.264
+`net.emustudio.emulib.recording.RecordingSession` records MP4 video with stereo PCM audio. It owns H.264
 encoding, audio buffering, the bounded worker queue and temporary file cleanup. Plugins supply native frames,
 their timing, and already mixed signed 16-bit little-endian stereo PCM. JCodec is an emuLib runtime dependency;
 plugins use only the emuLib API.
@@ -98,7 +98,7 @@ error dialogs, frame pacing and audio generation remain in the plugin.
 ## Bits utilities
 
 Class name
-: [net.emustudio.emulib.runtime.helpers.Bits][emulib_bits]{:target="_blank"}
+: [net.emustudio.emulib.Bits][emulib_bits]{:target="_blank"}
 
 Usage
 : Wraps `int` number and allows various bit-like operations on it (`int` has 4 bytes)
@@ -149,7 +149,7 @@ Formatting never truncates longer values.
 ## Sleep utilities
 
 Class name
-: [net.emustudio.emulib.runtime.helpers.SleepUtils][emulib_sleeputils]{:target="_blank"}
+: [net.emustudio.emulib.SleepUtils][emulib_sleeputils]{:target="_blank"}
 
 Usage
 : Provides a timed wait that combines sleeping and spinning, using measured host sleep precision.
@@ -159,7 +159,7 @@ Use `SleepUtils.preciseSleepNanos` when a worker needs a short timed wait. Do no
 
 ## CPU timing
 
-`net.emustudio.emulib.plugins.cpu.AccurateFrequencyRunner` paces CPU execution against a target frequency in kHz.
+`net.emustudio.emulib.plugin.cpu.AccurateFrequencyRunner` paces CPU execution against a target frequency in kHz.
 Supply the frequency and instruction-execution callbacks to `run()`, and call `addExecutedCycles()` for the cycles
 executed by each instruction. See the [engine example]({{ site.baseurl }}/cpu/engine#emulating-accurate-timing).
 
@@ -169,10 +169,10 @@ through the CPU context as described in [cycle listeners]({{ site.baseurl }}/cpu
 
 
 [emulib]: {{ site.baseurl }}/emulib_javadoc/
-[emulib_intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/io/IntelHEX.html
+[emulib_intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/io/IntelHEX.html
 [intelhex]: https://en.wikipedia.org/wiki/Intel_HEX
 
-[emulib_bits]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/Bits.html
+[emulib_bits]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/Bits.html
 [edigen]: https://github.com/emustudio/edigen
 
-[emulib_sleeputils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/helpers/SleepUtils.html
+[emulib_sleeputils]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/SleepUtils.html

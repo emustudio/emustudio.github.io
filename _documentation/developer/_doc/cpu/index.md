@@ -63,7 +63,7 @@ contract accurately rather than assuming every CPU has a 64 KiB address space.
 [interpretation]: http://cse.unl.edu/~witty/class/embedded/material/note/emulation.pdf
 [instantiation]: {{ site.baseurl }}/plugin_basics/loading.html#plugin-instantiation
 [initialization]: {{ site.baseurl }}/plugin_basics/loading.html#plugin-initialization
-[getStatusPanel]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html#getStatusPanel()
+[getStatusPanel]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPU.html#getStatusPanel()
 [swingthread]: https://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
 [edigen]: https://github.com/emustudio/edigen
 [edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin

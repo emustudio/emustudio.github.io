@@ -65,6 +65,6 @@ Automation command has its own usage:
       -V, --version          Print version information and exit.
       -w, --waitmax=MILLIS   wait at most MILLIS for the running CPU to stop
 
-The wait limit applies to CPU execution and closes the virtual computer when it expires. Compilation and device
-initialization are outside this limit. See [automation]({{ site.baseurl }}/application/automation) for timeout behavior,
+The wait limit applies to CPU execution. When it expires, emuStudio stops the CPU, waits for plugin cleanup, and closes
+the computer. See [automation]({{ site.baseurl }}/application/automation) for timeout behavior,
 program start addresses, and interpreting the logs.
