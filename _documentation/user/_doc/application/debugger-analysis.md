@@ -26,10 +26,10 @@ opcode bytes, and labels. The CPU plugin determines the columns.
 | <span class="circle">1</span> | **Breakpoint row**. Bold text marks an instruction with a breakpoint. |
 | <span class="circle">2</span> | **Instruction listing**. Select an address to inspect it. |
 | <span class="circle">3</span> | **Page controls**. Browse memory or return to the page containing the PC. |
-| <span class="circle">4</span> | **Annotation controls**. Find, add, edit, delete, import, or export labels and ranges. |
+| <span class="circle">4</span> | **Annotation controls**. Use the search field and toolbar to find, add, edit, delete, import, or export labels and ranges. |
 
 1. Select an instruction or use the page controls to move through the listing. The PC stays at the current instruction.
-2. Use **Go to the current page** to return to the PC. Use **Jump…** in the execution toolbar when you want to change the PC.
+2. Use **Go to the current page** to return to the PC. Use **Jump to address** in the execution toolbar to change the PC.
 3. When source mappings are available, double-click an instruction or right-click and choose **Go to source**.
 
 The 8080 and Z80 assemblers can map compiled instructions to source lines, including lines in included files. Recompile
@@ -51,7 +51,7 @@ A breakpoint stops the CPU before the instruction at its address. Resume with **
 3. Run the program. When execution reaches the address, inspect the instruction and CPU status.
 4. Right-click the row and choose **Unset breakpoint**, or enter its address in **Set breakpoint…** and choose **Unset**.
 
-For scripted breakpoint checks, see [Automation]({{ '/application/automation' | relative_url }}).
+For breakpoint behavior in command-line runs, see [Automation]({{ '/application/automation#modes' | relative_url }}).
 
 ## Label instructions and data
 
@@ -114,14 +114,14 @@ or write the capture to a file.
 
 1. Open **Emulator → Recording**. For a custom capture, choose **New recording** and prepare its settings.
 2. Select the prepared recording and choose **Start recording**. With no prepared recording selected, the button
-   starts a buffer for the last 1,024 instructions.
+   starts a buffer for the last 1,000 instructions.
 3. Use the execution toolbar to run or step. The recording table fills as instructions execute.
 4. Choose **Stop recording** to finish the capture. Choose **Save recording** to export a completed capture as
    an `.emutrace` file, or **Open recording** to inspect an existing file.
 
-**Keep first** stops capture when the limit is reached. **Keep last** replaces the oldest events once the buffer fills.
-A file capture can continue until stopped. **Pause recording** suspends capture while leaving the CPU's execution
-controls available.
+In **New recording**, choose **First** to stop capture at the limit, **Last** to keep the most recent instructions,
+or **Until stopped (to file)** to stream to an `.emutrace` file. Enable **Specific address range** to capture instructions
+within an inclusive range. **Pause recording** suspends capture while leaving the CPU controls available.
 
 ### Inspect recorded state
 
@@ -131,7 +131,7 @@ controls available.
 | Mark | Explanation |
 |:--:|:--|
 | <span class="circle">1</span> | **Recording actions**. Create, open, save, start, pause, or stop a recording. |
-| <span class="circle">2</span> | **Recording selector**. Switch between prepared, captured, and opened recordings. |
+| <span class="circle">2</span> | **Recording selector and actions**. Select, rename, or remove a recording from the list. |
 | <span class="circle">3</span> | **Recorded instructions**. Select an instruction or page through the recording. |
 | <span class="circle">4</span> | **Recorded state**. Read captured values and follow memory navigation links. |
 
@@ -142,3 +142,5 @@ controls available.
    the page controls to browse longer recordings.
 
 Viewing a recording leaves the live emulator state in place. CPU and memory details vary by computer.
+**Edit recording** changes the selected entry's display name. **Delete recording** removes the entry from the list
+and keeps any saved file on disk.

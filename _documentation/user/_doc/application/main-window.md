@@ -70,15 +70,15 @@ instruction. Pause execution to inspect the next instruction and the current CPU
 |:--:|:--|
 | <span class="circle">1</span> | **Reset**. Reset the CPU, memory, and devices. |
 | <span class="circle">2</span> | **Jump to beginning**. Set the program counter to address zero. |
-| <span class="circle">3</span> | **Move PC Back**. Set the PC to the debugger's estimated previous instruction. Registers and memory retain their current values. |
+| <span class="circle">3</span> | **Move program counter backward**. Set the PC to the debugger's estimated previous instruction. Registers and memory retain their current values. |
 | <span class="circle">4</span> | **Stop**. End the current run. |
 | <span class="circle">5</span> | **Pause**. Suspend a continuous or timed run. |
 | <span class="circle">6</span> | **Run**. Start or resume execution from the current PC. |
 | <span class="circle">7</span> | **Run timed…**. Enter the interval between instructions in milliseconds. |
 | <span class="circle">8</span> | **Step**. Execute one instruction. |
-| <span class="circle">9</span> | **Jump…**. Enter the address of the next instruction to execute. |
+| <span class="circle">9</span> | **Jump to address**. Enter the address of the next instruction to execute. |
 | <span class="circle">10</span> | **Set breakpoint…**. Set or unset a breakpoint at an address. |
-| <span class="circle">11</span> | **Show memory…**. Open the memory plugin's window. |
+| <span class="circle">11</span> | **Show operating memory**. Open the memory plugin's window. |
 
 {: .warning}
 Load boot images and apply memory patches after **Reset**. A subsequent reset can replace memory contents according to

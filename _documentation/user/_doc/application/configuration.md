@@ -36,8 +36,7 @@ plugin root; absolute plugin paths remain unchanged. These options also work aft
 |---|---|---|---|
 | `useSchemaGrid` | `true` / `false` | `true` | Show the grid and snap placement and movement to it in the schema editor. |
 | `schemaGridGap` | positive integer | `20` | Grid spacing in pixels; the editor's slider offers values from `5` to `100`. |
-| `theme` | `"LIGHT"`, `"DARK"`, `"INTELLIJ"` | `"INTELLIJ"` | Window and control appearance. Change the file and restart emuStudio. |
-| `flowAnalysisLimit` | positive integer | `1000` | Maximum number of instructions visited by debugger flow analysis. Invalid values use `1000`. |
+| `theme` | `"LIGHT"`, `"DARK"` | `"LIGHT"` | Window and control appearance. Unsupported values use `"LIGHT"`. Change the file and restart emuStudio. |
 
 ### Source editor preferences
 
@@ -49,7 +48,6 @@ changing a display option affects the focused view immediately. The other open v
 | `editorTabSize` | integer from `1` to `16` | `4` | Indentation width and displayed tab width. |
 | `editorSpaces` | `true` / `false` | `true` | Insert spaces instead of tab characters when indenting. |
 | `editorWhitespace` | `true` / `false` | `false` | Show space and tab markers. |
-| `editorEndOfLine` | `true` / `false` | `false` | Show end-of-line markers. |
 | `editorIndentGuides` | `true` / `false` | `false` | Show indentation guides. |
 | `editorWrap` | `true` / `false` | `false` | Wrap long lines in the source view. |
 | `editorFolding` | `true` / `false` | `true` | Enable source folding. |
@@ -61,6 +59,7 @@ Computer configurations are separate TOML files in `config/`. Use the
 [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and
 [schema editor]({{ site.baseurl }}/application/computer-schema) to manage their plugins and connections.
 
-The computer TOML also stores watch expressions, breakpoints, and annotations under `[debugger]`. See
+The computer TOML also stores watch expressions, breakpoints, and user annotations under `[debugger]`.
+Copy the TOML file to carry them to another installation. See
 [Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
 for the controls that update these settings.

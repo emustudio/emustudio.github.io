@@ -77,6 +77,6 @@ For CPUs that measure executed frequency, `CPUContext.getCpuFrequencyKhz()` read
 Status panels refresh the display with a Swing timer; reads must be short and non-blocking. `FrequencyCalculator` owns no scheduler; instruction timing remains in the worker's
 `AccurateFrequencyRunner` loop.
 
-[runstate]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.RunState.html
-[cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPU.html
-[abstractCPU]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/AbstractCPU.html
+[runstate]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPU.RunState.html
+[cpu]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPU.html
+[abstractCPU]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/AbstractCPU.html

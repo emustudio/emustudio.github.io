@@ -268,4 +268,4 @@ for `%X` just do `%%X`.
 [eds-language]: https://github.com/emustudio/edigen/blob/development/docs/_eds-language.adoc
 [edigen-gradle]: https://github.com/emustudio/edigen-gradle-plugin
 [ssem]: https://en.wikipedia.org/wiki/Manchester_Baby
-[decoder]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/Decoder.html
+[decoder]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/Decoder.html

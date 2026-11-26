@@ -114,9 +114,9 @@ required. For an optional context, catch the exception and disable the correspon
 
 [instantiation]: {{ site.baseurl }}/plugin_basics/loading#plugin-instantiation
 [initialization]: {{ site.baseurl }}/plugin_basics/loading#plugin-initialization
-[contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ContextPool.html
-[pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
-[context]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Context.html
-[deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/device/DeviceContext.html
-[cpuContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/cpu/CPUContext.html
-[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
+[contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/ContextPool.html
+[pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#initialize()
+[context]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/Context.html
+[deviceContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/device/DeviceContext.html
+[cpuContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/cpu/CPUContext.html
+[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/MemoryContext.html

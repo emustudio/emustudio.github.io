@@ -83,8 +83,8 @@ Memory plugins with Swing interfaces should run file and other blocking work out
 
 Each memory plugin keeps its own clear-and-refresh (erase memory) action and format-specific program-image loader.
 
-[memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/Memory.html
-[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.html
-[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/AbstractPlugin.html
-[abstractMemoryContext]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugins/memory/AbstractMemoryContext.html
-[memoryListener]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/memory/MemoryContext.MemoryListener.html
+[memory]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/Memory.html
+[memoryContext]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/MemoryContext.html
+[abstractPlugin]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/AbstractPlugin.html
+[abstractMemoryContext]: {{ site.baseurl}}/emulib_javadoc/net/emustudio/emulib/plugin/memory/AbstractMemoryContext.html
+[memoryListener]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/memory/MemoryContext.MemoryListener.html

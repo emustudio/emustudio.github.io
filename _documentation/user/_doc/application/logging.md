@@ -33,11 +33,11 @@ For other logging options, see the [Logback configuration manual][logback]{:targ
 
 ## Automation logger
 
-The supplied configuration also creates `logs/automation.log`. This plain-text file records automation progress,
-compiler messages, the CPU's final state, and instruction address. It is overwritten when a new emuStudio process starts,
-so copy it before another run if you need to retain a result.
+The supplied configuration also creates `logs/automation.log`. It records progress, compiler messages, the final
+instruction address when available, and a `Run result:` entry with the stop reason. Copy the file before starting
+another emuStudio process to retain the result.
 
 Check this file and the devices' output when evaluating [automatic emulation]({{ site.baseurl }}/application/automation).
-An automation failure is not always reflected in the process exit status.
+Check the stop reason as well as the exit status. A clean timeout can return exit status `0`.
 
 [logback]: http://logback.qos.ch/manual/configuration.html

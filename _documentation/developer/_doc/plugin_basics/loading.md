@@ -57,5 +57,5 @@ It closes the shared plugin classloader and computer configuration after plugin 
 release its listeners, worker threads, audio resources, and windows. Plugins must leave closing the shared classloader
 to the application. Loading or construction failures also close the loader.
 
-[contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/ContextPool.html
-[pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/Plugin.html#initialize()
+[contextPool]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/application/ContextPool.html
+[pluginInitialize]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/Plugin.html#initialize()

@@ -10,7 +10,7 @@ permalink: /plugin_basics/file_loaders
 
 # File loaders
 
-emuLib's [FileLoader][fileloader]{:target="_blank"} (`net.emustudio.emulib.runtime.io.FileLoader`) decodes BIN, Intel HEX (I8HEX), TAP and TZX
+emuLib's [FileLoader][fileloader]{:target="_blank"} (`net.emustudio.emulib.io.FileLoader`) decodes BIN, Intel HEX (I8HEX), TAP and TZX
 through one synchronous `FileLoader.Listener` contract in emuLib 12.1.0-SNAPSHOT.
 The loader emits immutable blocks. The caller decides how to use them.
 
@@ -73,4 +73,4 @@ The plugin owns CPU scheduling, device output and cassette state.
 Interrupting the loading thread cancels loading with an `InterruptedIOException`. Create separate stateful listeners
 for concurrent loads.
 
-[fileloader]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/io/FileLoader.html
+[fileloader]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/io/FileLoader.html

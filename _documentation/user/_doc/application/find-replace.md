@@ -10,7 +10,8 @@ permalink: /application/find-replace
 
 # Find and replace
 
-Search the active source view with **Ctrl+F**. Open replacement controls with **Ctrl+R**. The bar starts with selected text when you open it from a selection.
+Search the active source view with **Ctrl+F** (**Cmd+F** on macOS). Open replacement controls with **Ctrl+R**
+(**Cmd+R** on macOS). The bar starts with selected text when you open it from a selection.
 
 ![Inline find and replace bar with numbered controls]({{ site.baseurl }}/assets/application/find-replace-current.png)
 

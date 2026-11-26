@@ -233,7 +233,7 @@ public class LexicalAnalyzerImpl extends AntlrLexicalAnalyzer {
 }
 ```
 
-The `net.emustudio.emulib.plugins.compiler.antlr` package provides further ANTLR helpers. `CharArrayCharStream` reads
+The `net.emustudio.emulib.plugin.compiler.antlr` package provides further ANTLR helpers. `CharArrayCharStream` reads
 the specified slice without copying it, so keep that array unchanged while lexing. `ParserErrorListener(fileName)`
 turns syntax errors into a `CompileException` with the source position. `ParsingUtils` provides number parsing
 (`parseNumber`, using `Numbers.parseRadix` syntax), quoted-string parsing, label extraction, and identifier
@@ -275,10 +275,10 @@ global labels. Brainc supplies loop block markers. Folding also supports generic
 explicit editor regions, independent of compiler keywords.
 
 
-[compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/Compiler.html
-[abstractCompiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/compiler/AbstractCompiler.html
-[intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/runtime/io/IntelHEX.html
+[compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/compiler/Compiler.html
+[abstractCompiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/compiler/AbstractCompiler.html
+[intelhex]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/io/IntelHEX.html
 [antlr]: https://www.antlr.org/
 [antlr-tutorial]: https://tomassetti.me/antlr-mega-tutorial/
 [visitor]: https://refactoring.guru/design-patterns/visitor
-[pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugins/annotations/PluginRoot.html
+[pluginRoot]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/annotations/PluginRoot.html
