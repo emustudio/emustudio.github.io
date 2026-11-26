@@ -18,17 +18,25 @@ their preferences back to this file while emuStudio is running.
 
 ## Configuration and plugin roots
 
-The configuration and plugin trees can have separate base directories. This is useful for read-only installations,
-portable profiles, and development builds.
+Set separate roots for application settings and plugins to use portable profiles or read-only installations.
 
-| Command-line option | Environment variable | Resolved content |
-|---|---|---|
-| `--config-dir DIR` | `EMUSTUDIO_CONFIG_DIR` | `emuStudio.toml` and the `config/` virtual-computer directory |
-| `--plugins-dir DIR` | `EMUSTUDIO_PLUGINS_DIR` | `compiler/`, `cpu/`, `memory/`, and `device/` plugin directories |
+| Root | Command-line option | Environment variable | Contents |
+|---|---|---|---|
+| Configuration | `--config-dir DIR` | `EMUSTUDIO_CONFIG_DIR` | `emuStudio.toml` and computer files in `config/` |
+| Plugins | `--plugins-dir DIR` | `EMUSTUDIO_PLUGINS_DIR` | `compiler/`, `cpu/`, `memory/`, and `device/` plugin directories |
 
-For each root, the command-line option has priority over its environment variable. If neither is set, emuStudio uses
-the current working directory. Relative plugin paths in a computer configuration are resolved below the selected
-plugin root; absolute plugin paths remain unchanged. These options also work after the `automation` subcommand.
+For each root, the command-line option takes precedence over its environment variable. If neither is set, emuStudio
+uses the current working directory. Relative plugin paths in a computer configuration resolve below the plugin root;
+absolute paths remain unchanged. You can also use these options after the `automation` subcommand.
+
+Each computer configuration is a separate TOML file in `config/`. Manage its plugins and connections with the
+[Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) or the
+[schema editor]({{ site.baseurl }}/application/computer-schema).
+
+Computer files also store watch expressions, breakpoints, and user annotations in `[debugger]`. Copy a computer's
+TOML file to carry these settings to another installation. See
+[Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
+to learn which controls update them.
 
 ## Application settings
 
@@ -71,16 +79,3 @@ See [Source editing]({{ site.baseurl }}/application/source-editing) for the full
 | Operators | `tokenColorOperator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000080">&nbsp;</span> (`#000080`) |
 | Separators | `tokenColorSeparator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
 | Errors | `tokenColorError` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #FF0000">&nbsp;</span> (`#FF0000`) |
-
-```toml
-tokenColorComment = -16736256 # Opaque green (ARGB FF00A000)
-```
-
-Computer configurations are separate TOML files in `config/`. Use the
-[Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and
-[schema editor]({{ site.baseurl }}/application/computer-schema) to manage their plugins and connections.
-
-The computer TOML also stores watch expressions, breakpoints, and user annotations under `[debugger]`.
-Copy the TOML file to carry them to another installation. See
-[Debugger inspection]({{ '/application/debugger-analysis#keep-debugger-settings-with-the-computer' | relative_url }})
-for the controls that update these settings.
