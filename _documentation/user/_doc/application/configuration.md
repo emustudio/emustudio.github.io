@@ -36,24 +36,45 @@ plugin root; absolute plugin paths remain unchanged. These options also work aft
 |---|---|---|---|
 | `useSchemaGrid` | `true` / `false` | `true` | Show the grid and snap placement and movement to it in the schema editor. |
 | `schemaGridGap` | positive integer | `20` | Grid spacing in pixels; the editor's slider offers values from `5` to `100`. |
-| `theme` | `"LIGHT"`, `"DARK"` | `"LIGHT"` | Window and control appearance. Unsupported values use `"LIGHT"`. Change the file and restart emuStudio. |
+| `theme` | `"LIGHT"`, `"DARK"` | `"LIGHT"` | Window and control appearance. Unsupported values use `"LIGHT"`.   |
 
 ### Source editor preferences
 
-Use **Edit → Editor display** to change these settings. New source views and later sessions use the saved preferences;
-changing a display option affects the focused view immediately. The other open views keep their current display.
+Use **Edit → Indentation...** to set tab width, choose tabs or spaces, and set alignment columns. Use **Edit → Editor
+display** for the display settings. New source views and later sessions use the saved preferences. Changing a display
+option affects the focused view immediately. The other open views keep their current display.
 
 | Configuration key | Possible values | Default value | Description |
 |---|---|---|---|
-| `editorTabSize` | integer from `1` to `16` | `4` | Indentation width and displayed tab width. |
+| `editorTabSize` | from `1` to `16` | `4` | Indentation width and displayed tab width. |
 | `editorSpaces` | `true` / `false` | `true` | Insert spaces instead of tab characters when indenting. |
 | `editorWhitespace` | `true` / `false` | `false` | Show space and tab markers. |
 | `editorIndentGuides` | `true` / `false` | `false` | Show indentation guides. |
 | `editorWrap` | `true` / `false` | `false` | Wrap long lines in the source view. |
-| `editorFolding` | `true` / `false` | `true` | Enable source folding. |
 
-Column alignment, token colors, and per-file syntax choices are also stored by the editor. Use
-its editing menus to change them. See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
+See [Source editing]({{ site.baseurl }}/application/source-editing) for the full command guide.
+
+#### Token colors
+
+**Edit → Editor display → Token colors** saves changed colors to top-level keys in `emuStudio.toml` when you choose
+**OK**. Values are signed 32-bit ARGB integers. Omit a key to use the default color shown in the table as RGB hex.
+
+| Token category | Configuration key | Default color |
+|---|---|---|
+| Reserved words | `tokenColorReserved` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Identifiers | `tokenColorIdentifier` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Labels / definitions | `tokenColorLabel` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #008080">&nbsp;</span> (`#008080`) |
+| Directives / blocks | `tokenColorPreprocessor` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #505050">&nbsp;</span> (`#505050`) |
+| Comments | `tokenColorComment` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #008000">&nbsp;</span> (`#008000`) |
+| Literals | `tokenColorLiteral` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000080">&nbsp;</span> (`#000080`) |
+| Registers | `tokenColorRegister` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #800000">&nbsp;</span> (`#800000`) |
+| Operators | `tokenColorOperator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000080">&nbsp;</span> (`#000080`) |
+| Separators | `tokenColorSeparator` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #000000">&nbsp;</span> (`#000000`) |
+| Errors | `tokenColorError` | <span aria-hidden="true" style="display: inline-block; width: 1em; height: 1em; box-sizing: border-box; border: 1px solid currentColor; vertical-align: middle; background-color: #FF0000">&nbsp;</span> (`#FF0000`) |
+
+```toml
+tokenColorComment = -16736256 # Opaque green (ARGB FF00A000)
+```
 
 Computer configurations are separate TOML files in `config/`. Use the
 [Open virtual computer dialog]({{ site.baseurl }}/application/opening-computer) and

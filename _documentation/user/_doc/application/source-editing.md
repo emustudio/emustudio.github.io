@@ -24,8 +24,9 @@ act on the whole file; duplicate acts on the current line.
 | <span class="circle">1</span> | **Text**. Duplicate, reorder, or transform source lines. |
 | <span class="circle">2</span> | **Column Selection Mode**. Toggle rectangular selection in the active view. |
 | <span class="circle">3</span> | **Go to line / column**. Move the caret to a source position. |
-| <span class="circle">4</span> | **Editor display**. Change folding, indentation, and display settings. |
-| <span class="circle">5</span> | **Refactor** and **Split view**. Rename or extract code, or open a second view. |
+| <span class="circle">4</span> | **Indentation...**. Set indent width, tabs or spaces, and alignment columns. |
+| <span class="circle">5</span> | **Editor display**. Toggle visible whitespace, indentation guides, and soft wrap. |
+| <span class="circle">6</span> | **Refactor** and **Split view**. Rename or extract code, or open a second view. |
 
 ## Files and tabs
 
@@ -66,26 +67,21 @@ lines, trailing-whitespace cleanup, tab/space conversion, reindentation, and col
 **Uppercase**, **Lowercase**, and **Invert case** transform selected text, including multiple selections, in one undo
 step. With no selection, these case commands leave the text unchanged.
 
-**Edit → Text → Toggle comment** uses the active syntax's comment delimiter. **Edit → Editor display → Indentation settings**
-controls indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries; reindentation
-uses generic block markers supplied by the compiler.
+**Edit → Text → Toggle comment** uses the active syntax's comment delimiter. **Edit → Indentation...** controls
+indent width, tabs versus spaces, and columns used by alignment. Alignment uses token boundaries. Reindentation uses
+generic block markers supplied by the compiler.
 
 ## Navigation
 
 Choose **Edit → Go to line / column** and enter `line:column`, with both numbers starting at 1.
 
-## Folding, display, and splits
+## Display and splits
 
-Use the fold gutter or **Edit → Editor display → Collapse all / Expand all** to fold compiler-provided blocks, multiline comments, and indented
-regions. A comment ending in `region` (optionally followed by a name) and a comment ending in `endregion` mark a custom
-region. Plain text supports `#region` and `#endregion` lines. Fold detection does not recognize assembler keywords in
-the editor.
+**Edit → Editor display** controls visible whitespace, indentation guides, and soft wrap.
+Choose **Edit → Token colors...**, select a token type on the left, and pick its color on the right. Choose **OK** to save changes
+to all edited types or **Cancel** to discard them.
 
-**Edit → Editor display** controls visible whitespace, indentation guides, soft wrap, and token colors.
-Choose **Syntax highlighting** to select the syntax for the focused file: **Default (selected compiler)**,
-**Plain text**, or one of the bundled language modes. This choice also selects that mode's comment and folding rules;
-compilation and compiler-assisted refactoring still use the virtual computer's compiler. Both views of the same file
-share its syntax choice. Choices for saved files are restored on reopening; untitled files keep their choice when saved.
+The virtual computer's compiler provides syntax highlighting and comment delimiters.
 Display and indentation preferences are saved in application settings.
 
 **Edit → Split view → Split current file** opens two views of one document; edits appear in both. **Split with another

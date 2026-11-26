@@ -250,7 +250,7 @@ default methods and need not support semantic editing.
 
 | Contract | Meaning |
 | --- | --- |
-| `Token.BLOCK_START`, `Token.BLOCK_END` | Properly nested block boundaries used by folding and reindentation. |
+| `Token.BLOCK_START`, `Token.BLOCK_END` | Properly nested block boundaries used by reindentation. |
 | `Token.SYMBOL_DEFINITION`, `Token.SYMBOL_REFERENCE` | Declaration and use of a named symbol in a source-analysis snapshot. |
 | `Token.INCLUDE_PATH`, `getReferencedFile()` | A token identifying another source file, resolved relative to the containing file. |
 | `getSymbolName()` | Spelling beginning at the token offset, without punctuation such as a label's trailing colon. |
@@ -271,8 +271,7 @@ includes, and local-scope includes. Symbols whose scope is unknown cannot be ren
 compile into memory, write output files, or depend on the desktop GUI.
 
 The 8080 and Z80 plugins supply macro/global/local symbol metadata and macro/subroutine extraction. RAM and RASP supply
-global labels. Brainc supplies loop block markers. Folding also supports generic indentation, multiline comments, and
-explicit editor regions, independent of compiler keywords.
+global labels. Brainc supplies loop block markers.
 
 
 [compiler]: {{ site.baseurl }}/emulib_javadoc/net/emustudio/emulib/plugin/compiler/Compiler.html
