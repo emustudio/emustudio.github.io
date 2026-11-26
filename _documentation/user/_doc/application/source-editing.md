@@ -36,16 +36,15 @@ the entire document.
 
 ## Multiple selections and columns
 
-Hold **Alt** and click to add carets. **Alt+D** selects the next occurrence of selected text; **Ctrl+Shift+L** selects
-all occurrences. Typing, deletion, cut, and paste act on all selections in one undo step. Arrow keys move all carets;
-**Escape** clears additional selections. Copy joins selections with newlines. When pasted text contains one row per
-selection, each selection receives its corresponding row; otherwise every selection receives the full text.
+Hold **Alt** and click to add carets. Typing, deletion, cut, and paste act on all selections in one undo step.
+Arrow keys move all carets. **Escape** clears additional selections. Copy joins selections with newlines. When the
+clipboard has one row per selection, paste inserts the corresponding row into each selection. Otherwise, paste
+inserts the full clipboard text into each selection.
 
-Hold **Alt+Shift** and drag for a rectangular selection. **Edit → Selection → Column selection** also converts an
-ordinary selection's endpoints into a rectangle. Insertion pads short lines to the selected column.
-
-Use **Alt+Shift+Right** to expand a selection through a word, enclosing brackets, lines, a detected fold, and the file.
-**Alt+Shift+Left** restores the previous selection.
+Choose **Edit → Column Selection Mode** or press **Alt+Shift+Insert** to toggle the mode in the active editor view.
+While the menu item is checked, drag or use **Shift+arrow keys** to create and extend a rectangle.
+Toggle the mode off to return to regular selection. For a single rectangular selection, hold **Alt+Shift** and drag.
+Typing into a column selection pads short lines to the selected column.
 
 ## Find and replace
 
@@ -64,8 +63,7 @@ uses generic block markers supplied by the compiler.
 
 ## Navigation
 
-**Ctrl+G** opens go-to-line/column, using `line:column` with both numbers starting at 1. **Edit → Navigate → Back**,
-**Forward**, and **Previous edit** revisit source locations.
+**Ctrl+G** opens go-to-line/column, using `line:column` with both numbers starting at 1.
 
 ## Folding, display, macros, and splits
 
@@ -126,16 +124,14 @@ subroutine extraction because the generated call, jump, and return change the pr
 
 | Shortcut | Action |
 | --- | --- |
-| **Ctrl+W** | Close active file |
+| **Ctrl+F4** | Close active file |
 | **Ctrl+F / Ctrl+R** | Show inline find / replace |
 | **F3 / Shift+F3** | Next / previous search match |
 | **Ctrl+Shift+D** | Duplicate line or selection |
 | **Ctrl+/** | Toggle comment |
-| **Alt+D** | Add next occurrence to the selection |
-| **Ctrl+Shift+L** | Select all occurrences |
 | **Alt+click** | Add a caret |
 | **Alt+Shift+drag** | Make a rectangular selection |
-| **Alt+Shift+Right / Left** | Expand / shrink selection |
+| **Alt+Shift+Insert** | Toggle Column Selection Mode |
 | **Ctrl+G** | Go to line / column |
 | **Ctrl+Shift+M** | Replay editing macro |
 | **Ctrl+mouse wheel / Ctrl++ / Ctrl+-** | Change font size |
